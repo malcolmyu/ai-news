@@ -23,7 +23,7 @@ Automatically fetches content from RSS feeds and HTML pages, generates AI-powere
 
 1. **Copy the ai-news project** to your workspace:
 ```bash
-git clone <repository-url>
+git clone https://github.com/malcolmyu/ai-news.git
 cd ai-news
 ```
 

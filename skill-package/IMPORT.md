@@ -8,10 +8,10 @@ Run this command to automatically install the skill:
 
 ```bash
 # Using curl
-curl -fsSL https://raw.githubusercontent.com/your-repo/ai-news/main/skill-package/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/malcolmyu/ai-news/main/skill-package/install.sh | bash
 
 # Or clone and install
-git clone <repository-url>
+git clone https://github.com/malcolmyu/ai-news.git
 cd ai-news
 ./skill-package/install.sh
 ```
