@@ -251,6 +251,12 @@ class HTMLGenerator:
             gap: 16px;
         }
 
+        .news-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .news-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -263,6 +269,10 @@ class HTMLGenerator:
         .news-card:hover {
             box-shadow: var(--shadow-hover);
             transform: translateY(-2px);
+        }
+
+        .news-card:hover .news-title {
+            color: var(--accent);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -284,6 +294,7 @@ class HTMLGenerator:
         .news-source {
             color: var(--accent);
             font-weight: 600;
+            text-decoration: none;
         }
 
         .news-title {
@@ -298,26 +309,6 @@ class HTMLGenerator:
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.7;
-            margin-bottom: 14px;
-        }
-
-        .news-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--accent);
-            text-decoration: none;
-            padding: 8px 16px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .news-link:hover {
-            background: var(--accent);
-            color: white;
         }
 
         .empty-state {
@@ -472,22 +463,21 @@ class HTMLGenerator:
                         </div>
                         <div class="news-list">
                             {% for article in category_articles %}
-                                <article class="news-card">
-                                    <div class="news-meta">
-                                        <span class="news-source">{{ article.source_name }}</span>
-                                        <span>·</span>
-                                        {% if article.published_at %}
-                                            <span>{{ article.published_at[:10] }}</span>
-                                        {% else %}
-                                            <span>近期</span>
-                                        {% endif %}
-                                    </div>
-                                    <h3 class="news-title">{{ article.title }}</h3>
-                                    <p class="news-summary">{{ article.summary }}</p>
-                                    <a href="{{ article.link }}" class="news-link" target="_blank" rel="noopener noreferrer">
-                                        阅读原文 →
-                                    </a>
-                                </article>
+                                <a href="{{ article.link }}" class="news-card-link" target="_blank" rel="noopener noreferrer">
+                                    <article class="news-card">
+                                        <div class="news-meta">
+                                            <span class="news-source">{{ article.source_name }}</span>
+                                            <span>·</span>
+                                            {% if article.published_at %}
+                                                <span>{{ article.published_at[:10] }}</span>
+                                            {% else %}
+                                                <span>近期</span>
+                                            {% endif %}
+                                        </div>
+                                        <h3 class="news-title">{{ article.title }}</h3>
+                                        <p class="news-summary">{{ article.summary }}</p>
+                                    </article>
+                                </a>
                             {% endfor %}
                         </div>
                     </section>

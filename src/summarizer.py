@@ -7,6 +7,7 @@ OpenRouter API 摘要生成模块
 import logging
 import os
 import time
+import re
 from typing import List, Dict, Optional, Union
 from datetime import datetime
 import openai
@@ -163,7 +164,12 @@ class ArticleSummarizer:
             )
 
             # 提取摘要
-            summary = response.choices[0].message.content.strip()
+            content = response.choices[0].message.content
+            if content is None:
+                logger.warning("API 响应内容为空")
+                return None
+
+            summary = content.strip()
 
             # 清理摘要（移除可能的多余内容）
             summary = self._clean_summary(summary)
@@ -194,13 +200,14 @@ class ArticleSummarizer:
         if len(content) > max_content_length:
             content = content[:max_content_length] + "..."
 
-        prompt = f"""请用中文总结以下文章内容，提取核心要点，要求：
+        prompt = f"""请用中文总结以下文章内容，提取核心要点。重要要求：
 
-1. 准确理解文章的核心主题和关键信息
-2. 用简洁、清晰的语言概括主要内容
-3. 摘要长度控制在 150-200 字之间
-4. 不要添加原文没有的信息或个人观点
-5. 保持客观、中立的语气
+1. 如果文章标题是英文，请翻译成中文
+2. 如果文章内容是英文，请理解后翻译成中文进行总结
+3. 用简洁、清晰的语言概括主要内容
+4. 摘要长度控制在 150-200 字之间
+5. 不要添加原文没有的信息或个人观点
+6. 保持客观、中立的语气
 
 文章标题：{title}
 
@@ -221,6 +228,22 @@ class ArticleSummarizer:
         Returns:
             清理后的摘要
         """
+        # 移除HTML标签
+        summary = re.sub(r'<[^>]+>', '', summary)
+
+        # 移除markdown加粗格式
+        summary = re.sub(r'\*\*', '', summary)
+        summary = re.sub(r'__', '', summary)
+
+        # 移除markdown标题格式（如 ## 标题）
+        summary = re.sub(r'^#+\s*', '', summary, flags=re.MULTILINE)
+
+        # 移除常见的标题/摘要前缀标记
+        summary = re.sub(r'^标题译文[:：]\s*', '', summary, flags=re.MULTILINE)
+        summary = re.sub(r'^标题翻译[:：]\s*', '', summary, flags=re.MULTILINE)
+        summary = re.sub(r'^标题[:：]\s*', '', summary, flags=re.MULTILINE)
+        summary = re.sub(r'^摘要[:：]\s*', '', summary, flags=re.MULTILINE)
+
         # 移除常见的前缀
         prefixes_to_remove = [
             "中文摘要：",
@@ -245,6 +268,13 @@ class ArticleSummarizer:
         for suffix in suffixes_to_remove:
             if summary.endswith(suffix):
                 summary = summary[:-len(suffix)].strip()
+
+        # 移除特殊空格字符（如不间断空格）
+        summary = re.sub(r'[\xa0\u200b\u3000]+', ' ', summary)
+
+        # 去除多余的空白字符
+        summary = re.sub(r'\s+', ' ', summary)
+        summary = summary.strip()
 
         # 确保摘要以句号结尾（如果不是以句号、问号或感叹号结尾）
         if summary and not summary[-1] in '。？！':
