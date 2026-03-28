@@ -11,13 +11,17 @@ Automatically fetches content from RSS feeds and HTML pages, generates AI-powere
 
 - 📰 **RSS/Atom Feed Support**: Fetches articles from RSS/Atom feeds with date filtering
 - 🌐 **HTML Page Scraping**: Extracts articles from HTML pages using CSS selectors
-- 🤖 **AI Summarization**: Uses OpenRouter API to generate concise Chinese summaries
+- 🤖 **AI Summarization**: Uses OpenRouter API to generate concise Chinese summaries from full content
+- 🌐 **Full Translation**: Automatically translates English titles and content into Chinese
+- 🎨 **Beautiful UI**: Modern, clean design with card-based layout
+- ✨ **Enhanced Summaries**: Rich formatting with HTML lists (ul/ol) and emphasized keywords
+- 🔗 **Clickable Cards**: Entire article cards are clickable (no "Read more" button needed)
 - 📊 **Formatted Reports**: Generates beautiful HTML reports organized by category
 - ⚙️ **Configurable Sources**: Manage sources via YAML configuration
 - 📝 **Category Support**: Automatically categorizes and groups articles
-- 🔗 **Source Links**: Preserves original article links for easy access
 - 📅 **Date Filtering**: Fetches only recent articles (configurable days range)
-- 🔢 **Volume Control**: Limits articles per source to control output size
+- 🔢 **Volume Control**: Limits articles per source (max 3 for RSS, 2 for HTML)
+- 🌓 **Dark Mode**: Automatic dark mode based on system preference
 
 ## Installation
 
@@ -118,7 +122,7 @@ html_sources:
     enabled: true              # Enable/disable
     max_articles: 2            # Max articles to fetch (per source)
     selectors:                 # CSS selectors
-      link: "a[href*='/blog/']"   # Link selector (required)
+      link: "a[href*='/blog/']"   # Link selector (recommended)
       # Or use detailed selectors:
       container: "main"           # Container element
       article: "article"          # Article elements
@@ -141,16 +145,23 @@ The generated HTML report includes:
 
 Example article card:
 ```html
-<div class="news-card">
-    <div class="news-header">
-        <h3 class="news-title">Article Title</h3>
-        <span class="news-source">Source Name</span>
-    </div>
-    <p class="news-summary">AI-generated summary of the article...</p>
-    <a href="https://original-article.com" class="news-link" target="_blank">
-        Read Original →
-    </a>
-</div>
+<a href="https://original-article.com" class="news-card-link" target="_blank">
+    <article class="news-card">
+        <div class="news-meta">
+            <span class="news-source">Source Name</span>
+            <span>·</span>
+            <span>2026-03-27</span>
+        </div>
+        <h3 class="news-title">文章标题</h3>
+        <p class="news-summary">
+            <p>文章介绍了TurboQuant压缩技术...</p>
+            <ul>
+                <li><strong>核心优势：</strong>6倍无损压缩</li>
+                <li><strong>性能提升：</strong>最高8倍速度提升</li>
+            </ul>
+        </p>
+    </article>
+</a>
 ```
 
 ## Supported HTML Source Patterns
