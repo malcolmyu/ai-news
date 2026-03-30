@@ -1,188 +1,378 @@
-# AI 日报生成系统
+# Growth Website System - 个人自主成长网站系统
 
-自动抓取 RSS 订阅源和 HTML 页面，使用 OpenRouter API 生成摘要，并生成格式化的 HTML 日报。
+## 项目概述
 
-## 功能特性
+基于 Agent-Team 架构的个人自主成长网站系统，集成 AI 日报生成、深度调研报告管理、思考模型沉淀和主页展示四大核心功能。
 
-- 📰 支持 RSS/Atom 订阅源抓取
-- 🌐 支持 HTML 页面内容抓取
-- 🤖 使用 OpenRouter AI 生成文章摘要
-- 📊 自动生成格式化的 HTML 日报
-- ⚙️ 通过 YAML 配置文件管理信源
-- 📝 支持文章分类和统计
-- 🔗 保留原文链接方便查阅
+![Architecture](docs/architecture-diagram.png)
 
-## 安装
+## 🚀 快速开始
 
-1. 克隆项目：
+### 1. 安装
+
 ```bash
+# 克隆项目
 git clone <repository-url>
-cd ai-news
-```
+cd auckland
 
-2. 安装依赖：
-```bash
+# 安装依赖
 pip install -r requirements.txt
-```
 
-3. 配置环境变量：
-```bash
+# 配置环境变量
 cp .env.example .env
+# 编辑 .env 文件，添加 OpenRouter API Key
 ```
 
-4. 编辑 `.env` 文件，添加你的 OpenRouter API Key：
-```env
-OPENROUTER_API_KEY=your_api_key_here
-```
+### 2. 基础配置
 
-## 配置信源
+编辑 `config/sources.yaml` 配置 RSS/HTML 源：
 
-编辑 `config/sources.yaml` 文件来管理订阅源：
-
-### RSS 源配置
 ```yaml
 rss_sources:
-  - name: "信源名称"
+  - name: "Example RSS"
     url: "https://example.com/feed.xml"
-    category: "分类名称"
+    category: "tech"
     enabled: true
-```
 
-### HTML 源配置
-```yaml
 html_sources:
-  - name: "网站名称"
+  - name: "Example Website"
     url: "https://example.com/blog"
-    selector: ".article-list"  # 文章列表容器选择器
-    article_selector: ".article-item"  # 文章元素选择器
-    title_selector: "h2"  # 标题选择器
-    link_selector: "a"  # 链接选择器
-    date_selector: ".pub-date"  # 日期选择器（可选）
-    category: "分类名称"
+    selector: ".articles"
+    title_selector: "h2"
+    link_selector: "a"
     enabled: true
 ```
 
-## 使用
-
-### 生成日报
-
-运行主程序生成当天的 AI 日报：
+### 3. 首次运行
 
 ```bash
-python src/main.py
+# 生成今日日报
+python run.py daily
+
+# 更新首页
+python run.py homepage build
+
+# 查看统计信息
+python run.py stats
 ```
 
-生成的 HTML 文件将保存在 `output/` 目录下，文件名格式为 `ai-news-YYYY-MM-DD.html`。
+## 🏗️ 系统架构
 
-### 查看生成的日报
+### Agent Team 组成
 
-在浏览器中打开生成的 HTML 文件：
+```
+Growth Website System
+├── Team Coordinator (中央协调器)
+├── Daily Reporter Agent (AI日报生成)
+├── Research Manager Agent (调研报告管理)
+├── Thinking System Agent (思考模型沉淀)
+├── Homepage Builder Agent (主页构建)
+└── Harness Controller (约束控制层)
+```
+
+### 各 Agent 职责
+
+| Agent | 职责 | 主要接口 |
+|-------|------|----------|
+| **Daily Reporter** | RSS/HTML 抓取、AI 摘要、日报 HTML 生成 | `daily --date YYYY-MM-DD` |
+| **Research Manager** | 报告元数据提取、分类归档、索引管理 | `research add --file report.html` |
+| **Thinking System** | 思考模型创建、关系分析、图谱生成 | `thinking create --topic "主题" --file content.md` |
+| **Homepage Builder** | 内容聚合、统计生成、SEO 优化 | `homepage build` |
+| **Harness Controller** | 样式约束、内容验证、质量控制 | `harness check --file output.html` |
+
+## 💻 命令行接口
+
+### 日报操作
 
 ```bash
-open output/ai-news-2026-03-25.html
+# 生成今日日报
+python run.py daily
+
+# 生成指定日期日报
+python run.py daily --date 2026-03-30
+
+# 跳过 AI 摘要（快速模式）
+python run.py daily --no-summarize
+
+# 生成后自动推送到 git
+python run.py daily --push
 ```
 
-## 定时任务
+### 调研报告管理
 
-### 使用 cron（Linux/macOS）
-
-编辑 crontab：
 ```bash
-crontab -e
+# 添加调研报告
+python run.py research add --file report.html --category tech
+
+# 查看调研统计
+python run.py research stats
+
+**支持的分类：** tech, product, business, methodology, ai, data, design, strategy
 ```
 
-添加定时任务（每天上午 9 点执行）：
-```cron
-0 9 * * * cd /path/to/ai-news && python src/main.py
+### 思考模型管理
+
+```bash
+# 创建思考模型
+python run.py thinking create --topic "决策框架" --file content.md
+
+# 支持模型类型：framework, methodology, pattern, concept
+python run.py thinking create --topic "AI 伦理" --file content.md --model-type methodology
+
+# 创建带标签的模型
+python run.py thinking create --topic "决策框架" --file content.md --tags "decision-making,business,strategy"
 ```
 
-### 使用系统服务
+### 首页管理
 
-也可以配置为系统服务或使用定时任务管理工具如 systemd timer、launchd 等。
+```bash
+# 构建首页
+python run.py homepage build
 
-## 环境变量说明
+# 启用性能优化
+python run.py homepage build --optimize
+```
+
+### 系统操作
+
+```bash
+# 执行所有 Agent
+python run.py all
+
+# 执行后推送更新
+python run.py all --push
+
+# 查看系统统计
+python run.py stats
+
+# 查看 JSON 格式统计
+python run.py stats --json
+
+# 查看特定 Agent 状态
+python run.py stats --agent daily
+
+# 检查文件质量
+python run.py harness check --file output/index.html
+
+# 查看 Harness 信息
+python run.py harness info
+```
+
+### Git 操作
+
+```bash
+# 推送更改
+python run.py git push -m "更新内容"
+
+# 生成默认消息
+python run.py git push
+```
+
+### 帮助信息
+
+```bash
+# 查看所有命令
+python run.py --help
+
+# 查看特定命令帮助
+python run.py daily --help
+python run.py research --help
+python run.py thinking --help
+```
+
+## 📁 数据目录结构
+
+```
+data/
+├── daily/                     # 日报数据
+│   ├── archives.json         # 日报归档索引
+│   └── stats.json            # 日报统计
+├── research/                  # 调研报告数据
+│   ├── index.json            # 报告元数据索引
+│   └── categories/           # 分类存储
+├── thinking/                  # 思考模型数据
+│   ├── models.json           # 模型索引
+│   ├── relationships/        # 概念关系
+│   └── versions/            # 模型版本历史
+└── homepage/
+    └── feed.json            # 聚合内容提要
+
+output/                        # 输出文件
+├── ai-daily-YYYY-MM-DD.html # 生成的日报
+└── index.html              # 首页
+
+docs/                         # 静态站点输出
+└── index.html             # 发布的首页
+
+config/
+├── sources.yaml            # RSS/HTML 源配置
+└── harness.yaml           # 约束配置
+```
+
+## 🔧 配置说明
+
+### 环境变量
 
 | 变量名 | 说明 | 默认值 |
 |--------|------|--------|
 | `OPENROUTER_API_KEY` | OpenRouter API 密钥 | 必填 |
-| `OPENROUTER_BASE_URL` | OpenRouter API 基础 URL | `https://openrouter.ai/api/v1` |
-| `OPENROUTER_MODEL` | 使用的 AI 模型 | `anthropic/claude-3-sonnet` |
-| `API_TIMEOUT` | API 请求超时时间（秒） | `60` |
-| `MAX_ARTICLES_PER_SOURCE` | 每个源最多处理的文章数 | `20` |
-| `OUTPUT_DIR` | 输出目录 | `output` |
+| `OPENROUTER_BASE_URL` | API 基础 URL | `https://openrouter.ai/api/v1` |
+| `OPENROUTER_MODEL` | AI 模型 | `anthropic/claude-3-sonnet` |
 
-## 项目结构
+### 约束配置 (config/harness.yaml)
 
+```yaml
+styles:
+  colors:
+    primary: "#3b82f6"
+    secondary: "#f8fafc"
+  fonts:
+    heading: "'Inter', sans-serif"
+    body: "'Inter', sans-serif"
+
+constraints:
+  summary:
+    min_length: 50
+    max_length: 300
+    quality_threshold: 0.7
+
+  report:
+    required_sections: ["summary", "insights", "references"]
+
+  thinking_model:
+    required_elements: ["concepts", "relationships", "examples"]
 ```
-ai-news/
-├── config/
-│   └── sources.yaml          # 信源配置文件
-├── src/
-│   ├── fetchers/
-│   │   ├── __init__.py
-│   │   ├── rss_fetcher.py    # RSS 抓取模块
-│   │   └── html_fetcher.py   # HTML 抓取模块
-│   ├── summarizer.py         # OpenRouter 摘要模块
-│   ├── generator.py          # HTML 生成模块
-│   └── main.py               # 主程序入口
-├── output/                   # 生成的 HTML 输出目录
-├── requirements.txt          # Python 依赖
-├── .env.example             # 环境变量示例
-└── README.md                # 使用说明（本文件）
+
+## 🧪 测试与验证
+
+### 基础功能测试
+
+```bash
+# 测试 Daily Reporter
+python run.py daily --no-summarize --verbose
+
+# 测试 Research Manager
+echo "<html><head><title>Test</title></head><body><h1>Test Report</h1></body></html>" > test-report.html
+python run.py research add --file test-report.html --category test
+rm test-report.html
+
+# 测试 Thinking System
+echo "## Test Model\n\n**Core Concept**: Test content here.\n\n### Example\nThis is an example." > test-model.md
+python run.py thinking create --topic "Test" --file test-model.md
+rm test-model.md
+
+# 测试 Homepage Builder
+python run.py homepage build
+
+# 运行测试套件
+python test_harness.py
 ```
 
-## 支持的 RSS 源
+## 🚀 自动化部署
 
-系统支持大多数标准的 RSS 和 Atom 订阅源，包括但不限于：
-- WordPress RSS
-- Medium RSS
-- GitHub Releases
-- Atom Feed
-- 自定义 RSS
+### 使用 Cron (Linux/macOS)
 
-## 故障排查
+```bash
+# 编辑 crontab
+crontab -e
 
-### 1. RSS 源无法访问
+# 每天 9:00 AM 生成日报并推送
+0 9 * * * cd /path/to/auckland && python run.py daily --push
 
-- 检查 RSS 源 URL 是否正确
-- 验证网络连接
-- 检查是否为有效的 RSS/Atom 格式
+# 每小时检查调研报告
+0 * * * * cd /path/to/auckland && python run.py research stats
+```
 
-### 2. HTML 抓取失败
+### 使用 GitHub Actions
 
-- 验证 CSS 选择器是否正确
-- 检查网站是否有反爬虫机制
-- 尝试使用不同的选择器
+```yaml
+# .github/workflows/daily-update.yml
+name: Daily Update
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 每天 UTC 9:00
 
-### 3. OpenRouter API 错误
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: pip install -r requirements.txt
+      - run: python run.py all --push
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+```
 
-- 检查 API Key 是否正确
-- 验证账户余额是否充足
-- 检查 API 速率限制
-- 查看错误日志获取详细信息
+## 📊 监控与日志
 
-### 4. 生成的摘要不准确
+### 操作日志
 
-- 尝试更换 AI 模型
-- 调整摘要 prompt 模板
-- 检查文章内容提取是否完整
+```bash
+# 查看操作日志
+cat data/system/operation_log.json | python -m json.tool
+```
 
-## 注意事项
+### 性能监控
 
-1. **API 费用**: 使用 OpenRouter API 会产生费用，请注意监控使用量
-2. **知识产权**: 请遵守各信源网站的内容使用规则
-3. **频率限制**: 建议每天运行一次，避免对信源服务器造成过大压力
-4. **错误处理**: 程序会跳过失效的信源，但建议定期检查并更新配置
+```bash
+# 查看处理时间统计
+python run.py stats | grep "duration"
 
-## 贡献
+# 监控 Agent 性能
+python run.py stats --agent daily
+```
 
-欢迎提交 Issue 和 Pull Request！
+## 🔍 故障排查
 
-## 许可证
+### 常见问题
+
+| 问题 | 解决方案 |
+|------|----------|
+| API Key 错误 | 检查 `.env` 文件和 OPENROUTER_API_KEY |
+| RSS 源无法访问 | 验证 URL 和网络连接，检查配置格式 |
+| HTML 抓取失败 | 检查 CSS 选择器，查看网站反爬虫措施 |
+| 生成摘要不准确 | 考虑更换 AI 模型或调整 prompt |
+| 首页样式错乱 | 检查 Harness 约束配置文件 |
+
+### 调试模式
+
+```bash
+# 启用详细日志
+python run.py daily --verbose
+
+# 测试 Harness 验证
+python run.py harness check --file output/index.html
+
+# 查看系统信息
+python run.py harness info
+```
+
+## 🤝 贡献指南
+
+1. Fork 项目
+2. 创建特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m 'Add amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 创建 Pull Request
+
+## 📄 许可证
 
 MIT License
 
-## 致谢
+## 🙏 致谢
 
-- 使用 [OpenRouter](https://openrouter.ai/) 提供 AI 摘要服务
-- 参考示例样式设计
+- [OpenRouter](https://openrouter.ai/) - AI 摘要服务
+- [Anthropic Claude](https://anthropic.com/) - 核心 AI 模型
+- [Growth Website System](https://github.com/your-username/auckland) - 项目架构
+
+## 📞 联系信息
+
+- 项目管理: [GitHub Issues](https://github.com/your-username/auckland/issues)
+- 问题反馈: 创建 Issue 或联系维护者
+
+---
+
+**Happy Coding!** 🎉
