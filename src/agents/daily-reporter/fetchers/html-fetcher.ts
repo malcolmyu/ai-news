@@ -9,6 +9,7 @@ export interface HtmlSource {
   title_selector?: string;
   link_selector?: string;
   content_selector?: string;
+  date_selector?: string;
   category?: string;
 }
 

@@ -77,6 +77,16 @@ export class RSSFetcher {
 
       const summary = item.description?.[0] || item.summary?.[0] || '';
 
+      // Parse categories from RSS item
+      const categories: string[] = [];
+      if (item.category) {
+        if (Array.isArray(item.category)) {
+          categories.push(...item.category.map((cat: any) => cat.toString()));
+        } else {
+          categories.push(item.category.toString());
+        }
+      }
+
       return {
         title: title.toString(),
         link: link.toString(),
@@ -84,6 +94,7 @@ export class RSSFetcher {
         published,
         content: summary,
         category,
+        categories: categories.length > 0 ? categories : undefined,
         source: sourceName,
       };
     } catch (error) {
@@ -111,6 +122,16 @@ export class RSSFetcher {
 
       const summary = entry.summary?.[0] || entry.content?.[0] || '';
 
+      // Parse categories from Atom entry
+      const categories: string[] = [];
+      if (entry.category) {
+        if (Array.isArray(entry.category)) {
+          categories.push(...entry.category.map((cat: any) => cat.$.term || cat.toString()));
+        } else {
+          categories.push(entry.category.$.term || entry.category.toString());
+        }
+      }
+
       return {
         title: title.toString(),
         link: link.toString(),
@@ -118,6 +139,7 @@ export class RSSFetcher {
         published,
         content: summary,
         category,
+        categories: categories.length > 0 ? categories : undefined,
         source: sourceName,
       };
     } catch (error) {

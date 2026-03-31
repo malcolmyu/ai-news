@@ -17,6 +17,7 @@ export interface Article {
   published?: Date;
   content?: string;
   category?: string;
+  categories?: string[];
   source?: string;
 }
 
