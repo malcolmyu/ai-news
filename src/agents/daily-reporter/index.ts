@@ -115,9 +115,6 @@ export class DailyReporter {
       const homepageBuilder = new HomepageBuilder();
       await homepageBuilder.buildHomepage();
 
-      // Close Playwright browser (shared instance, close after all fetching done)
-      await this.htmlFetcher.close();
-
       const duration = Date.now() - startTime;
       this.logger.log(`Daily report generated in ${duration}ms: ${reportFile}`);
 
@@ -125,6 +122,9 @@ export class DailyReporter {
     } catch (error) {
       this.logger.error('Failed to generate daily report:', error as Error);
       throw error;
+    } finally {
+      // Always close Playwright browser (avoid zombie Chromium processes)
+      await this.htmlFetcher.close();
     }
   }
 
