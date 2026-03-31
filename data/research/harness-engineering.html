@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Harness Engineering 深度调研：如何通过约束层提升 Agent 鲁棒性</title>
+</head>
+<body>
+<h1>Harness Engineering 深度调研：如何通过约束层提升 Agent 鲁棒性</h1>
+<p>在复杂的 AI Agent 工程实践中，"Harness Engineering"（测试演练环境工程）日益成为系统鲁棒性的核心。本文深入调研了如何构建统一的 Quality Gate 体系，并介绍了基于规则引擎与动态检查点的多跳容错模式。</p>
+<h2>核心发现</h2>
+<ul>
+<li><strong>隔离性</strong>：系统执行层与审计层应该严格分离</li>
+<li><strong>前向恢复</strong>：当检测到约束被破坏时，更倾向于纠正重试而非直接崩溃</li>
+<li><strong>强类型契约</strong>：Agent的输出必须有严格的形式化保障</li>
+</ul>
+<p>我们提议在本地系统（第二号分身）中引入 Harness 层来进行 Daily reporter 的摘要质量与 HTML 输出检查，从而杜绝格式崩溃的问题。</p>
+</body>
+</html>

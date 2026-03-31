@@ -2,17 +2,12 @@
 
 import { Command } from 'commander';
 import { format, subDays } from 'date-fns';
-import * as child_process from 'child_process';
-import { TeamCoordinator } from './team/coordinator.js';
-import { HarnessController } from './harness/controller.js';
-import { DailyReporter } from './agents/daily-reporter.js';
-import { ResearchManager } from './agents/research-manager.js';
-import { ThinkingSystem } from './agents/thinking-system.js';
-import { HomepageBuilder } from './agents/homepage-builder.js';
-import { Logger } from './utils/config.js';
+import { DailyReporter } from './agents/daily-reporter/index.js';
+import { ResearchManager } from './agents/research-manager/index.js';
+import { ThinkingSystem } from './agents/thinking-system/index.js';
+import { HomepageBuilder } from './agents/homepage-builder/index.js';
 
 const program = new Command();
-const logger = new Logger('CLI');
 
 program
   .name('growth-website')
@@ -32,16 +27,13 @@ dailyCmd
   .action(async (options) => {
     try {
       console.log('🤖 Starting Daily Reporter...');
-      const stdout = child_process.execSync('npm run build', { stdio: 'inherit' });
-
-      const coordinator = new TeamCoordinator();
+      const reporter = new DailyReporter();
       const relativeDate = options.date === 'yesterday' ? subDays(new Date(), 1) : new Date(options.date);
-      const filePath = await coordinator.executeDaily({
-        date: relativeDate,
+      const filePath = await reporter.generateDailyReport(relativeDate, {
         noSummarize: options.noSummarize,
+        outputPath: options.output,
         verbose: options.verbose,
       });
-
       console.log('✅ Daily report generated:', filePath);
     } catch (error) {
       console.error('❌ Error:', error);
@@ -63,13 +55,10 @@ researchCmd
   .action(async (options) => {
     try {
       console.log('📊 Adding research report...');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.executeResearch('add', {
-        file: options.file,
-        category: options.category,
+      const manager = new ResearchManager();
+      const result = await manager.addReport(options.file, options.category, {
         tags: options.tags ? options.tags.split(',') : [],
       });
-
       if (result.success) {
         console.log('✅ Report added:', result.message);
       } else {
@@ -88,9 +77,8 @@ researchCmd
   .action(async (options) => {
     try {
       console.log('📈 Research stats:');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.executeResearch('stats', { category: options.category });
-
+      const manager = new ResearchManager();
+      const result = await manager.getStats(options.category);
       if (result.success && result.data) {
         console.log('✅ Stats:', result.data);
       } else {
@@ -117,14 +105,13 @@ thinkingCmd
   .action(async (options) => {
     try {
       console.log('💭 Creating thinking model...');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.executeThinking('create', {
+      const system = new ThinkingSystem();
+      const result = await system.createModel({
         topic: options.topic,
         file: options.file,
         modelType: options.modelType,
         tags: options.tags ? options.tags.split(',') : [],
       });
-
       if (result.success) {
         console.log('✅ Model created:', result.message);
       } else {
@@ -145,12 +132,11 @@ homepageCmd
   .command('build')
   .description('Build homepage')
   .option('--optimize', 'Enable optimization')
-  .action(async (options) => {
+  .action(async () => {
     try {
       console.log('🏠 Building homepage...');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.executeHomepage({ optimize: options.optimize });
-
+      const builder = new HomepageBuilder();
+      const result = await builder.buildHomepage();
       if (result.success) {
         console.log('✅ Homepage built:', result.message);
       } else {
@@ -167,18 +153,14 @@ program
   .command('stats')
   .description('Show system statistics')
   .option('--json', 'Output as JSON')
-  .option('--agent <agent>', 'Show specific agent stats')
   .action(async (options) => {
     try {
       console.log('📊 Collecting stats...');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.getStats();
-
+      const builder = new HomepageBuilder();
+      const result = await builder.getStats();
       if (result.success && result.data) {
         if (options.json) {
           console.log(JSON.stringify(result.data, null, 2));
-        } else if (options.agent) {
-          console.log(`✅ ${options.agent} stats:`, result.data[options.agent]);
         } else {
           console.log('✅ System stats:');
           console.log(JSON.stringify(result.data, null, 2));
@@ -192,73 +174,32 @@ program
     }
   });
 
-// Harness commands
-const harnessCmd = program
-  .command('harness')
-  .description('Content quality control');
-
-harnessCmd
-  .command('check')
-  .description('Check file quality')
-  .requiredOption('-f, --file <path>', 'File to check')
-  .action(async (options) => {
-    try {
-      console.log('🔍 Checking file quality...');
-      const coordinator = new TeamCoordinator();
-      const result = coordinator.executeHarnessCheck(options.file);
-
-      if (result.success) {
-        console.log('✅ File passed validation');
-      } else {
-        console.error('❌ File failed validation:', result.message);
-      }
-
-      if (result.data) {
-        console.log('📋 Validation details:', result.data);
-      }
-    } catch (error) {
-      console.error('❌ Error:', error);
-      process.exit(1);
-    }
-  });
-
-harnessCmd
-  .command('info')
-  .description('Show harness information')
-  .action(async () => {
-    try {
-      const harness = HarnessController.getInstance();
-      await harness.initialize();
-      const info = harness.getInfo();
-      console.log('🔧 Harness Info:', info);
-    } catch (error) {
-      console.error('❌ Error:', error);
-      process.exit(1);
-    }
-  });
-
-// All command
+// All command - run all agents in sequence
 program
   .command('all')
-  .description('Execute all agents')
+  .description('Execute all agents in sequence')
   .option('--push', 'Push changes to git after execution')
   .action(async (options) => {
     try {
-      console.log('🚀 Running all agents...');
-      const coordinator = new TeamCoordinator();
-      const result = await coordinator.executeAll();
+      const reporter = new DailyReporter();
+      const builder = new HomepageBuilder();
 
-      if (result.success) {
-        console.log('✅ All agents completed successfully');
+      console.log('\n📰 Daily Report:');
+      const dailyPath = await reporter.generateDailyReport();
+      console.log(`  ✅ Generated: ${dailyPath}`);
 
-        if (options.push) {
-          console.log('🔄 Pushing changes...');
-          // Execute npm run git-push
-          const { execSync } = await import('child_process');
-          execSync('npm run git-push', { stdio: 'inherit' });
-        }
+      console.log('\n🏠 Homepage:');
+      const homepageResult = await builder.buildHomepage();
+      if (homepageResult.success) {
+        console.log('  ✅ Homepage built');
       } else {
-        console.error('⚠️  Some agents completed with warnings:', result.message);
+        console.log(`  ❌ Homepage failed: ${homepageResult.message}`);
+      }
+
+      if (options.push) {
+        console.log('\n🔄 Pushing changes...');
+        const { execSync } = await import('child_process');
+        execSync('npm run git-push', { stdio: 'inherit' });
       }
     } catch (error) {
       console.error('❌ Error:', error);
@@ -279,9 +220,7 @@ gitCmd
     try {
       console.log('🔄 Pushing to git...');
       const { execSync } = await import('child_process');
-
       const commitMessage = message || `Update: ${new Date().toISOString()}`;
-
       execSync('git add .', { stdio: 'inherit' });
       try {
         execSync(`git commit -m "${commitMessage}"`, { stdio: 'inherit' });

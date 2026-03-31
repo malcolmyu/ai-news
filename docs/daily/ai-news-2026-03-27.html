@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 - 2026-03-27 - 第二号</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --accent: #3b82f6;
+    --accent-light: #60a5fa;
+    --accent-dark: #2563eb;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.container-sm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+        
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+}
+
+.nav { display: flex; gap: 32px; }
+
+.nav-link {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--accent); }
+
+        
+      .section { margin-bottom: 40px; }
+      .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+      .section-title { font-size: 20px; font-weight: 600; }
+      .section-count { margin-left: auto; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-secondary); }
+      .news-list { display: flex; flex-direction: column; gap: 16px; }
+      .news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; }
+      .news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+      .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
+      .news-source { color: var(--accent); font-weight: 600; }
+      .news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; }
+      .news-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+      .news-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; padding: 8px 16px; background: rgba(59,130,246,0.1); border-radius: 6px; transition: all 0.2s; }
+      .news-link:hover { background: var(--accent); color: white; }
+      .daily-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+      .daily-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white; }
+      .daily-header .subtitle { font-size: 14px; opacity: 0.8; }
+      .stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
+      .stats-label { font-size: 12px; opacity: 0.7; }
+      @media (max-width: 640px) {
+        .header-content { flex-direction: column; gap: 16px; text-align: center; }
+        h1 { font-size: 24px; } .news-card { padding: 16px; }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border: #374151; }
+        .daily-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+      }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <div class="logo-icon">🤖</div>
+          <span class="logo-text">第二号</span>
+        </a>
+        <a href="../index.html" class="nav-link">← 返回首页</a>
+      </div>
+    </div>
+  </header>
+    <div class="daily-header">
+      <div class="container-sm">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h1>🤖 AI 日报</h1>
+            <p class="subtitle">2026-03-27</p>
+          </div>
+          <div style="text-align:right;">
+            <div class="stats-value">5</div>
+            <div class="stats-label">条资讯</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="container-sm" style="padding-top: 32px;">
+      
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">AI框架</h2>
+            <span class="section-count">1 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">LangChain Blog</span>
+        <span>·</span>
+        <span>2026-03-27</span>
+      </div>
+      <h3 class="news-title">Agent Evaluation Readiness Checklist</h3>
+      <p class="news-summary">**摘要**  
+本文提供了一套面向智能体（Agent）评估的实用检查清单，涵盖从错误分析到上线部署的全流程。核心要点包括：①系统化的错误分析方法，用于定位模型薄弱环节；②构建覆盖多样场景的评估数据集，确保评估的代表性和公平性；③设计可靠的评分器（grader），实现自动、可解释的评分；④离线评估与在线A/B测试相结合，验证模型在真实环境中的表现；⑤评估结果的可视化与报告，帮助团队快速迭代；⑥生产就绪检查，确保模型可监控、可回滚、符合安全合规要求。  
+**重要发现**：仅靠离线指标难以捕捉真实交互中的错误，必须引入在线评估并结合细粒度错误分析。  
+**实践意义**：遵循该清单可显著提升智能体评估的完整性和可靠性，加速</p>
+      <a href="https://blog.langchain.com/agent-evaluation-readiness-checklist/" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">开源项目</h2>
+            <span class="section-count">2 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">GitHub Trending Daily</span>
+        <span>·</span>
+        <span>近期</span>
+      </div>
+      <h3 class="news-title">microsoft/VibeVoice</h3>
+      <p class="news-summary">**VibeVoice** 是微软开源的前沿语音人工智能项目，涵盖文本‑语音（TTS）与语音‑文本（ASR）两大能力。近期重点包括：
+
+- **VibeVoice‑ASR** 已在 2026‑01‑21 开源，能够一次性处理 60 分钟的长音频，输出结构化转录（说话人、时间戳、内容），并支持用户自定义上下文。模型原生多语言，覆盖 50+ 语言，提供完整的微调代码和基于 **vLLM** 的高速推理方案。  
+- 2026‑03‑06 将 ASR 模型纳入 Hugging Face Transformers v5.3.0，用户可直接通过 Transformers 调用，实现无缝集成。  
+- 2026‑03‑29 社区基于 Vibe</p>
+      <a href="https://github.com/microsoft/VibeVoice" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+<article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">GitHub Trending Daily</span>
+        <span>·</span>
+        <span>近期</span>
+      </div>
+      <h3 class="news-title">luongnv89/claude-howto</h3>
+      <p class="news-summary">这篇文章介绍了 Claude Code，从基本概念到高级代理，提供了可以直接应用价值的示例代码模板。文章提供了一本视觉、实例驱动的指南，帮助读者从输入 "claude" 到编排代理、钩子、技能和 MCP 服务器。文章提供了三个问题的解答：官方文档描述功能但没有展示如何组合它们，没有明确学习路径，例子过于基本。Claude How To 解决了这些问题，提供了可视化教程、可复制粘贴的模板和有序学习路径，帮助读者充分利用 Claude Code 的 90% 的功能。文章还提供了表目、问答和贡献指南等内容。</p>
+      <a href="https://github.com/luongnv89/claude-howto" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">综合资讯</h2>
+            <span class="section-count">2 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">WeChat 2</span>
+        <span>·</span>
+        <span>2026-03-27</span>
+      </div>
+      <h3 class="news-title">堆推理链全错了！林俊旸离职首曝：曾在阿里 Qwen 踩中一个“致命”技术误区</h3>
+      <p class="news-summary">**摘要**  
+本文聚焦前阿里巴巴研发人员林俊旸的离职披露，指出其在阿里内部大模型 Qwen 项目中踩到的“致命”技术误区——即在推理链设计上忽视了全链路错误传播与纠正机制，导致模型在复杂任务中的推理结果系统性偏差。林俊旸进一步提出“Harness Engineer”概念，主张工程师不仅要构建强大的模型，还要主动“驾驭”模型行为，实现自我调节与目标导向的“Agentic Thinking”。文章认为，这种思维方式是未来 AI 开发的关键方向，能够提升模型可靠性、可解释性，并在实际应用中降低因</p>
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247659928&idx=1&sn=4a1c2fb1adf80b072550dfab2d370642" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+<article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">WeChat 2</span>
+        <span>·</span>
+        <span>2026-03-27</span>
+      </div>
+      <h3 class="news-title">用得越多、失业越快？GitHub 大改 Copilot 规则：默认拿个人代码训练 AI，还搬出 Anthropic 挡枪！</h3>
+      <p class="news-summary">**摘要（约150字）**  
+
+GitHub 于 3 月 26 日宣布，自 4 月 24 日起，除非用户主动选择退出，否则 Copilot Free、Pro 与 Pro+ 用户的交互数据将默认用于训练和改进 Copilot 的 AI 模型。这意味着个人在 GitHub 上编写的代码、接受的建议以及编辑行为，都可能被收集并用于大规模模型的训练。为缓解隐私争议，GitHub 同时引入了 Anthropic 的 Claude 作为“安全防护层”，在模型生成代码前进行审查，以降低泄露敏感信息或产生有害代码的风险。  
+
+**关键要点**  
+1. 数据收集默认开启，需用户自行退出。  
+2. 适用于所有付费与免费版 Copilot。  
+3. 引入 Anthropic 的审查机制，提升安全合规性。  
+
+**洞察**  
+- 此举加速了 AI 编码助手的迭代速度，但也引发了对个人代码所有权和隐私的担忧。  
+- Anthropic 的加入显示 GitHub 正在寻求第三方安全审计，以平衡模型性能与风险控制</p>
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247659928&idx=2&sn=cea25bc31c1b793443b72c2540e881a1" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+    </main>
+    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
+    <div class="container">
+      <p style="font-size: 14px; color: var(--text-muted);">
+        🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

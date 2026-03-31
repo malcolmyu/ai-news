@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 - 2026-03-29 - 第二号</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --accent: #3b82f6;
+    --accent-light: #60a5fa;
+    --accent-dark: #2563eb;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.container-sm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+        
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+}
+
+.nav { display: flex; gap: 32px; }
+
+.nav-link {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--accent); }
+
+        
+      .section { margin-bottom: 40px; }
+      .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+      .section-title { font-size: 20px; font-weight: 600; }
+      .section-count { margin-left: auto; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-secondary); }
+      .news-list { display: flex; flex-direction: column; gap: 16px; }
+      .news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; }
+      .news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+      .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
+      .news-source { color: var(--accent); font-weight: 600; }
+      .news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; }
+      .news-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+      .news-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; padding: 8px 16px; background: rgba(59,130,246,0.1); border-radius: 6px; transition: all 0.2s; }
+      .news-link:hover { background: var(--accent); color: white; }
+      .daily-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+      .daily-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white; }
+      .daily-header .subtitle { font-size: 14px; opacity: 0.8; }
+      .stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
+      .stats-label { font-size: 12px; opacity: 0.7; }
+      @media (max-width: 640px) {
+        .header-content { flex-direction: column; gap: 16px; text-align: center; }
+        h1 { font-size: 24px; } .news-card { padding: 16px; }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border: #374151; }
+        .daily-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+      }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <div class="logo-icon">🤖</div>
+          <span class="logo-text">第二号</span>
+        </a>
+        <a href="../index.html" class="nav-link">← 返回首页</a>
+      </div>
+    </div>
+  </header>
+    <div class="daily-header">
+      <div class="container-sm">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h1>🤖 AI 日报</h1>
+            <p class="subtitle">2026-03-29</p>
+          </div>
+          <div style="text-align:right;">
+            <div class="stats-value">5</div>
+            <div class="stats-label">条资讯</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="container-sm" style="padding-top: 32px;">
+      
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">AI新闻</h2>
+            <span class="section-count">1 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">AIGC Weekly</span>
+        <span>·</span>
+        <span>2026-03-29</span>
+      </div>
+      <h3 class="news-title">Agili 的 AIGC 周刊（Y26W12）</h3>
+      <p class="news-summary">**Agili AIGC 周刊（Y26W12）概览**
+
+本期聚焦本周 AI 生成内容（AIGC）领域的三大热点。Google 连续发布 Gemini 3.1 Flash Live 与 Lyria 3 Pro，显著提升多模态（文本‑图像‑音频）生成的速度与质量，标志着大模型在实时交互场景的突破。Anthropic 为 Claude Code 引入 Auto Mode 机制，支持代码自动补全与调试，并公开了其在长时序应用中的架构经验，展示了大模型在软件开发助理方面的成熟度。LiteLLM 曝出严重的供应链投毒事件，提醒业界对开源模型分发渠道的安全审计必须加强；与此同时，OpenAI 的视频生成模型 Sora 因推理成本居高不下，引发对其商业化可行性的深度讨论。
+
+**关键洞察**  
+- 多模态大模型正向实时、低延迟方向演进。  
+- 自动化编程</p>
+      <a href="https://aigc-weekly.agi.li/weekly/Y26W12" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">开源项目</h2>
+            <span class="section-count">2 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">GitHub Trending Daily</span>
+        <span>·</span>
+        <span>近期</span>
+      </div>
+      <h3 class="news-title">microsoft/VibeVoice</h3>
+      <p class="news-summary">**VibeVoice** 是微软开源的前沿语音 AI 项目，涵盖高质量文本‑语音（TTS）与统一的语音识别（ASR）模型。近期更新包括：
+
+- **VibeVoice‑ASR** 已开源，可一次性处理 60 分钟长音频，输出包含说话人、时间戳和内容的结构化转录，并支持用户自定义上下文。模型原生支持 50+ 语言，提供微调代码和基于 **vLLM** 的高速推理方案。  
+- 2026‑01‑21 将模型接入 Hugging Face Transformers（v5.3.0），实现“一键”调用；同日发布技术报告（arXiv:260</p>
+      <a href="https://github.com/microsoft/VibeVoice" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+<article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">GitHub Trending Daily</span>
+        <span>·</span>
+        <span>近期</span>
+      </div>
+      <h3 class="news-title">luongnv89/claude-howto</h3>
+      <p class="news-summary">这篇文章介绍了 Claude Code，从基本概念到高级代理，提供了可以直接应用价值的示例代码模板。文章提供了一本可视化、实例驱动的指南，帮助读者从输入 "claude" 到编排代理、钩子、技能和 MCP 服务器。文章提供了三个问题的解答：官方文档描述了功能但没有展示如何组合它们，学习路径不清晰，例子过简单。Claude How To 解决了这些问题，提供了可以帮助读者在短时间内开始使用 Claude Code 并构建复杂工作流的视觉教程和可复制代码模板。文章还提供了表目、问题、解决方案、工作原理等部分，供读者参考。
+
+主题和关键点：Claude Code 是什么，如何使用，从基本概念到高级代理，提供可复制代码模板。
+
+重要见解或发现：官方文档描述了功能但没有展</p>
+      <a href="https://github.com/luongnv89/claude-howto" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">综合资讯</h2>
+            <span class="section-count">2 条</span>
+          </div>
+          <div class="news-list">
+            <article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">WeChat 2</span>
+        <span>·</span>
+        <span>2026-03-29</span>
+      </div>
+      <h3 class="news-title">1.9万行 Claude Code“AI垃圾”杀入 Node.js：全球顶流开源项目，快守不住了</h3>
+      <p class="news-summary">**摘要**  
+Node.js 这一全球最受关注的开源项目近期面临前所未有的抉择：Claude Code（被部分开发者称为“AI垃圾”）的代码生成模型正被引入核心代码库。文章指出，AI 生成的代码虽能提升开发效率，却带来代码质量、可维护性和安全性的潜在风险；社区对是否接受该技术出现明显分歧，部分维护者担心失去对项目方向的控制，甚至可能导致项目被“抢占”。作者建议在引入 AI 代码前设立严格审查流程、明确责任归属，并</p>
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=1&sn=122d6b78bba8d2edf4cc9f5fe8a03b2c" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+<article class="news-card">
+      <div class="news-meta">
+        <span class="news-source">WeChat 2</span>
+        <span>·</span>
+        <span>2026-03-29</span>
+      </div>
+      <h3 class="news-title">从写文案到盯数据、算 ROI，流量见顶后，AI Agent 正在杀进核心业务</h3>
+      <p class="news-summary">**摘要**  
+过去几年，生成式 AI 在企业中的应用大多停留在“工具层”，如文案撰写、图片生成、问答、检索辅助和客服支持等。随着流量增长趋于饱和，企业开始把 AI 从表层工具向核心业务渗透，重点转向数据监控、ROI 计算以及业务决策支持。AI Agent 通过实时盯数据、自动化分析和预测模型，帮助企业精准评估营销效果、优化资源配置，并在产品研发、供应链管理等关键环节实现流程自动化和成本下降。  
+**关键洞察**：AI 正从“助力工具”升级为“业务中枢”，其价值体现在提升运营效率、降低决策成本和实现利润最大化。  
+**实践意义**：企业应加快 AI Agent 在数据治理、绩效评估和业务流程中的落地，构建以数据驱动的闭环体系，以在流量见顶的环境中保持竞争优势。</p>
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=2&sn=64bdb79e39af057b5d884a7af2b0fb66" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    </article>
+          </div>
+        </section>
+    </main>
+    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
+    <div class="container">
+      <p style="font-size: 14px; color: var(--text-muted);">
+        🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

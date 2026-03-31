@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News System - 个人自主成长网站系统</title>
+    <meta name="description" content="Personal Growth Website System powered by AI News">
+    <meta name="keywords" content="AI News, Growth, Research, Thinking Models">
+    <meta name="author" content="AI News System">
+    <meta name="robots" content="index, follow">
+
+    
+    <meta property="og:title" content="AI News System - Personal Growth Website">
+    <meta property="og:description" content="Comprehensive AI-powered news and research platform">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:image" content="/assets/images/hero.jpg">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI News System">
+    <meta name="twitter:description" content="AI News and Research Platform">
+    <meta name="twitter:image" content="/assets/images/hero.jpg">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    
+    <style>
+    {
+        /* Critical CSS for homepage */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        }
+    </style>
+
+    
+    <link rel="stylesheet" href="/assets/css/main.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+
+    
+    <script type="application/ld+json">
+    {{
+  "@context": "https://schema.org",
+  "@type": "website",
+  "name": "AI News System - Personal Growth Website",
+  "description": "Comprehensive AI-powered news and research platform",
+  "url": "https://example.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://example.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "mainEntity": {
+    "@type": "CollectionPage",
+    "name": "AI News and Research Aggregator",
+    "articleSection": [
+      {
+        "@type": "Report",
+        "name": "AI Daily Reports",
+        "numberOfItems": 3
+      },
+      {
+        "@type": "Report",
+        "name": "Research Reports",
+        "numberOfItems": 5
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Thinking Models",
+        "numberOfItems": 4
+      }
+    ]
+  },
+  "dateModified": "2026-03-30T14:20:24.052687"
+}}
+    </script>
+  <link rel="canonical" href="https://example.com" />
+</head>
+<body>
+    
+    <header class="header glass-effect">
+        <nav class="nav container">
+            <div class="logo">
+                <a href="/" class="text-gradient font-bold text-xl">Growth System</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#daily" class="nav-link">日报</a></li>
+                <li><a href="#research" class="nav-link">调研</a></li>
+                <li><a href="#thinking" class="nav-link">思考</a></li>
+                <li><a href="#stats" class="nav-link">统计</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="hero-title text-gradient">个人自主成长网站系统</h1>
+                <p class="hero-subtitle">基于AI日报生成、深度调研、思考模型沉淀的统一平台</p>
+                <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">日报总数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">调研报告</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">思考模型</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">今日新增</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="daily" class="section">
+        <div class="container">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-gradient">最新日报</h2>
+                <p class="section-subtitle">AI生成的最新技术资讯</p>
+            </div>
+            {
+        <div class="daily-section">
+            <div class="daily-latest card">
+                <div class="card-header">
+                    <h3 class="card-title">AI日报 - 2026年3月30日</h3>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <p class="mb-4">今日AI领域重要资讯：Claude Code性能优化、Agent架构更新、Web开发新趋势</p>
+        <a href="/output/daily/ai-news-2026-03-30.html" class="btn btn-primary mt-4">查看完整日报</a></div></div></div>}
+        </div>
+    </section>
+
+    
+    <section id="research" class="section bg-neutral-50">
+        <div class="container">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-gradient">调研报告</h2>
+                <p class="section-subtitle">深度调研分析</p>
+            </div>
+            {<div class="research-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="research-card card">
+                <div class="card-header">
+                    <span class="category-badge category-mobile">mobile</span>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">移动端应用趋势分析 - 2026年Q1</h3>
+                    <p class="text-neutral-600">深入分析移动端应用发展趋势，包括AI原生应用、跨平台解决方案、性能优化趋势等</p>
+                    <div class="card-footer mt-4">
+                        <a href="/output/research/mobile-app-trends-2026-q1.html" class="text-primary-600 font-semibold">阅读报告 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card card">
+                <div class="card-header">
+                    <span class="category-badge category-architecture">architecture</span>
+                    <span class="text-sm text-neutral-600">2026-03-29</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Harness约束控制层架构设计</h3>
+                    <p class="text-neutral-600">个人自主成长网站系统的Harness约束控制层设计与实现，包括样式约束、内容验证、质量检查等</p>
+                    <div class="card-footer mt-4">
+                        <a href="/output/research/harness-architecture-design.html" class="text-primary-600 font-semibold">阅读报告 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card card">
+                <div class="card-header">
+                    <span class="category-badge category-knowledge">knowledge</span>
+                    <span class="text-sm text-neutral-600">2026-03-28</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Thinking System知识体系构建</h3>
+                    <p class="text-neutral-600">系统性思考模型的构建方法论，包括概念定义、关系图谱、版本管理等</p>
+                    <div class="card-footer mt-4">
+                        <a href="/output/research/thinking-system-knowledge.html" class="text-primary-600 font-semibold">阅读报告 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card card">
+                <div class="card-header">
+                    <span class="category-badge category-developer-experience">developer-experience</span>
+                    <span class="text-sm text-neutral-600">2026-03-27</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Web开发者体验优化策略</h3>
+                    <p class="text-neutral-600">基于现代Web技术栈的开发者体验优化实践，包括工具链、开发流程、协作模式等</p>
+                    <div class="card-footer mt-4">
+                        <a href="/output/research/web-developer-experience.html" class="text-primary-600 font-semibold">阅读报告 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card card">
+                <div class="card-header">
+                    <span class="category-badge category-automation">automation</span>
+                    <span class="text-sm text-neutral-600">2026-03-26</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">AI新闻自动化生成系统评估</h3>
+                    <p class="text-neutral-600">AI驱动的日报生成系统的技术架构、效果评估和未来发展方向</p>
+                    <div class="card-footer mt-4">
+                        <a href="/output/research/ai-news-automation.html" class="text-primary-600 font-semibold">阅读报告 →</a>
+                    </div>
+                </div>
+            </div>
+            </div>}
+        </div>
+    </section>
+
+    
+    <section id="thinking" class="section">
+        <div class="container">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-gradient">思考模型</h2>
+                <p class="section-subtitle">体系化思考沉淀</p>
+            </div>
+            {<div class="thinking-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="thinking-card card">
+                <div class="card-header">
+                    <span class="version-badge">v1.0</span>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">决策框架模型 v1.0</h3>
+                    <p class="text-neutral-600">一个系统性的决策框架，包含问题定义、方案生成、评估标准和决策执行四个阶段</p>
+                    <div class="concepts mt-4">
+                        <div class="flex flex-wrap gap-2">
+            <span class="concept-tag">框架</span><span class="concept-tag">系统</span><span class="concept-tag">评价</span><span class="concept-more">+1</span>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-4">
+                        <a href="/output/thinking/decision_framework_5ea77dcd.html" class="text-primary-600 font-semibold">查看模型 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="thinking-card card">
+                <div class="card-header">
+                    <span class="version-badge">v1.0</span>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">决策框架优化版</h3>
+                    <p class="text-neutral-600">基于反馈优化的决策框架，增加了风险评估和备选方案分析</p>
+                    <div class="concepts mt-4">
+                        <div class="flex flex-wrap gap-2">
+            <span class="concept-tag">优化</span><span class="concept-tag">迭代</span><span class="concept-tag">风险评估</span><span class="concept-more">+1</span>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-4">
+                        <a href="/output/thinking/decision_framework_e79dab56.html" class="text-primary-600 font-semibold">查看模型 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="thinking-card card">
+                <div class="card-header">
+                    <span class="version-badge">v1.0</span>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">决策框架最终版</h3>
+                    <p class="text-neutral-600">完整的决策框架，整合了前期所有优化，形成统一的决策方法论</p>
+                    <div class="concepts mt-4">
+                        <div class="flex flex-wrap gap-2">
+            <span class="concept-tag">方法论</span><span class="concept-tag">完善</span><span class="concept-tag">系统化</span><span class="concept-more">+1</span>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-4">
+                        <a href="/output/thinking/decision_framework_26fd20bb.html" class="text-primary-600 font-semibold">查看模型 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="thinking-card card">
+                <div class="card-header">
+                    <span class="version-badge">v1.0</span>
+                    <span class="text-sm text-neutral-600">2026-03-30</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">项目管理思考模型</h3>
+                    <p class="text-neutral-600">项目管理领域的系统思考模型，涵盖项目全生命周期的关键要素和决策点</p>
+                    <div class="concepts mt-4">
+                        <div class="flex flex-wrap gap-2">
+            <span class="concept-tag">项目管理</span><span class="concept-tag">生命周期</span><span class="concept-tag">规划</span><span class="concept-more">+2</span>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-4">
+                        <a href="/output/thinking/project_management_03826283.html" class="text-primary-600 font-semibold">查看模型 →</a>
+                    </div>
+                </div>
+            </div>
+            </div>}
+        </div>
+    </section>
+
+    
+    <section id="stats" class="section bg-neutral-50">
+        <div class="container">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-gradient">数据统计</h2>
+                <p class="section-subtitle">系统运行状况一览</p>
+            </div>
+            {<div class="stats-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="stat-card card">
+            <div class="card-header">
+                <h3 class="card-title">日报统计</h3>
+                <span class="stat-icon">📰</span>
+            </div>
+            <div class="card-content">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">历史总数</div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mt-4">
+                    <div class="stat-mini">
+                        <div class="stat-mini-number">1</div>
+                        <div class="stat-mini-label">今日</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-number">3</div>
+                        <div class="stat-mini-label">本周</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-number">3</div>
+                        <div class="stat-mini-label">本月</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stat-card card">
+            <div class="card-header">
+                <h3 class="card-title">调研统计</h3>
+                <span class="stat-icon">🔬</span>
+            </div>
+            <div class="card-content">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">报告总数</div>
+                </div>
+                <div class="mt-4">
+        <div class="flex justify-between items-center py-1"><span class="capitalize">mobile</span><span class="font-semibold">1</span></div><div class="flex justify-between items-center py-1"><span class="capitalize">architecture</span><span class="font-semibold">1</span></div><div class="flex justify-between items-center py-1"><span class="capitalize">knowledge</span><span class="font-semibold">1</span></div><div class="flex justify-between items-center py-1"><span class="capitalize">developer-experience</span><span class="font-semibold">1</span></div><div class="flex justify-between items-center py-1"><span class="capitalize">automation</span><span class="font-semibold">1</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stat-card card">
+            <div class="card-header">
+                <h3 class="card-title">思考模型</h3>
+                <span class="stat-icon">🤔</span>
+            </div>
+            <div class="card-content">
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">模型总数</div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between items-center py-1">
+                        <span>活跃模型</span>
+                        <span class="font-semibold">4</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span>归档模型</span>
+                        <span class="font-semibold">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="chart-card card">
+                    <div class="card-header">
+                        <h3 class="card-title">30天趋势</h3>
+                        <span class="stat-icon">📊</span>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="trends-chart" data-trends='[{"date": "2026-03-01", "count": 0}, {"date": "2026-03-02", "count": 0}, {"date": "2026-03-03", "count": 0}, {"date": "2026-03-04", "count": 0}, {"date": "2026-03-05", "count": 0}, {"date": "2026-03-06", "count": 0}, {"date": "2026-03-07", "count": 0}, {"date": "2026-03-08", "count": 0}, {"date": "2026-03-09", "count": 0}, {"date": "2026-03-10", "count": 0}, {"date": "2026-03-11", "count": 0}, {"date": "2026-03-12", "count": 0}, {"date": "2026-03-13", "count": 0}, {"date": "2026-03-14", "count": 0}, {"date": "2026-03-15", "count": 0}, {"date": "2026-03-16", "count": 0}, {"date": "2026-03-17", "count": 0}, {"date": "2026-03-18", "count": 0}, {"date": "2026-03-19", "count": 0}, {"date": "2026-03-20", "count": 0}, {"date": "2026-03-21", "count": 0}, {"date": "2026-03-22", "count": 0}, {"date": "2026-03-23", "count": 0}, {"date": "2026-03-24", "count": 0}, {"date": "2026-03-25", "count": 0}, {"date": "2026-03-26", "count": 0}, {"date": "2026-03-27", "count": 0}, {"date": "2026-03-28", "count": 9}, {"date": "2026-03-29", "count": 6}, {"date": "2026-03-30", "count": 8}]'></canvas>
+                    </div>
+                </div>
+                
+                <div class="cloud-card card">
+                    <div class="card-header">
+                        <h3 class="card-title">关键词云</h3>
+                        <span class="stat-icon">🏷️</span>
+                    </div>
+                    <div class="card-content">
+                        <div id="keywords-cloud" data-keywords='[{"text": "Agent", "size": 2, "count": 2}, {"text": "Claude Code", "size": 1, "count": 1}, {"text": "Web\u5f00\u53d1", "size": 1, "count": 1}, {"text": "React", "size": 1, "count": 1}, {"text": "AI\u7cfb\u7edf", "size": 1, "count": 1}, {"text": "\u67b6\u6784", "size": 1, "count": 1}, {"text": "\u91cd\u6784", "size": 1, "count": 1}, {"text": "Harness", "size": 1, "count": 1}, {"text": "\u7cfb\u7edf\u8bbe\u8ba1", "size": 1, "count": 1}, {"text": "Thinking System", "size": 1, "count": 1}, {"text": "\u6210\u957f\u7cfb\u7edf", "size": 1, "count": 1}, {"text": "AI", "size": 1, "count": 1}, {"text": "\u77e5\u8bc6\u7ba1\u7406", "size": 1, "count": 1}, {"text": "\u6a21\u578b", "size": 1, "count": 1}]'></div>
+                    </div>
+                </div>
+                </div>}
+        </div>
+    </section>
+
+    
+    <footer class="footer glass-effect">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 AI News System. Generated at 2026-03-30T14:20:24.052687</p>
+                <p class="text-sm text-neutral-500">Powered by Growth Website System</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

@@ -130,6 +130,69 @@ export interface AgentResult {
   duration?: number;
 }
 
+export interface TaskPlan {
+  id: string;
+  taskType: 'daily' | 'research' | 'thinking' | 'homepage';
+  description: string;
+  createdAt: string;
+  tasks: SubTask[];
+  harnessChecks: HarnessCheck[];
+  rollbackSteps: RollbackStep[];
+  outputPath: string;
+}
+
+export interface SubTask {
+  id: string;
+  description: string;
+  agent: string;
+  dependencies: string[];
+  parameters: Record<string, any>;
+  estimatedDuration?: number;
+}
+
+export interface HarnessCheck {
+  ruleId: string;
+  description: string;
+  validator: string;
+  severity: 'error' | 'warning';
+}
+
+export interface RollbackStep {
+  description: string;
+  command?: string;
+  fileActions?: Array<{
+    action: 'delete' | 'restore';
+    path: string;
+  }>;
+}
+
+export interface ValidationResult {
+  passed: boolean;
+  errors: ValidationError[];
+  warnings: ValidationError[];
+  duration?: number;
+}
+
+export interface ValidationError {
+  ruleId: string;
+  severity: 'error' | 'warning';
+  message: string;
+  location: {
+    file: string;
+    line?: number;
+    column?: number;
+  };
+  suggestion?: string;
+}
+
+export interface DraftFile {
+  path: string;
+  agent: string;
+  createdAt: string;
+  status: 'pending' | 'evaluating' | 'approved' | 'rejected';
+  validationResult?: ValidationResult;
+}
+
 export interface Config {
   openRouter: {
     apiKey: string;

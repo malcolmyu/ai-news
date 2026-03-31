@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { ReportGenerator } from './generator.js';
-import { HomepageBuilder } from './agents/homepage-builder.js';
+import { DailyReportGenerator } from './agents/daily-reporter/generator.js';
+import { HomepageBuilder } from './agents/homepage-builder/index.js';
 
 async function wrap() {
   const docsDailyDir = path.join(process.cwd(), 'docs', 'daily');
@@ -10,7 +10,7 @@ async function wrap() {
   if (!fs.existsSync(docsDailyDir)) fs.mkdirSync(docsDailyDir, { recursive: true });
   
   // 1. Generate Daily Reports for 03-26 to 03-30 using ReportGenerator
-  const generator = new ReportGenerator();
+  const generator = new DailyReportGenerator();
   const archives = { reports: {} as any };
   
   // Create dummy articles
