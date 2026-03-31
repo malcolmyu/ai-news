@@ -8,6 +8,8 @@ export interface SourceConfig {
   title_selector?: string;
   link_selector?: string;
   content_selector?: string;
+  max_articles?: number;
+  filter_categories?: string[];
 }
 
 export interface Article {

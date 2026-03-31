@@ -14,7 +14,7 @@ export class RSSFetcher {
     this.timeout = timeout;
   }
 
-  async fetchFromURL(url: string, name: string, category?: string): Promise<Article[]> {
+  async fetchFromURL(url: string, name: string, category?: string, filterCategories?: string[], maxArticles?: number): Promise<Article[]> {
     try {
       console.log(`Fetching RSS: ${url}`);
 
@@ -28,7 +28,7 @@ export class RSSFetcher {
       });
 
       const result: any = await parseXML(response.data);
-      const articles: Article[] = [];
+      let articles: Article[] = [];
 
       if (result.rss && result.rss.channel) {
         const channel = Array.isArray(result.rss.channel) ? result.rss.channel[0] : result.rss.channel;
@@ -49,6 +49,19 @@ export class RSSFetcher {
             articles.push(article);
           }
         }
+      }
+
+      // Apply category filtering if specified
+      if (filterCategories && filterCategories.length > 0) {
+        articles = articles.filter(article =>
+          article.categories &&
+          article.categories.some(cat => filterCategories.includes(cat))
+        );
+      }
+
+      // Apply max articles limit if specified
+      if (maxArticles && maxArticles > 0) {
+        articles = articles.slice(0, maxArticles);
       }
 
       console.log(`Fetched ${articles.length} articles from ${url}`);
