@@ -16,7 +16,7 @@ git clone <repository-url>
 cd auckland
 
 # 安装依赖
-pip install -r requirements.txt
+npm install
 
 # 配置环境变量
 cp .env.example .env
@@ -47,16 +47,46 @@ html_sources:
 
 ```bash
 # 生成今日日报
-python run.py daily
+npm run daily
 
 # 更新首页
-python run.py homepage build
+npm run homepage
 
 # 查看统计信息
-python run.py stats
+npm run stats
 ```
 
 ## 🏗️ 系统架构
+
+### 架构图
+
+```
+┌─────────────────────────────────────────────┐
+│         Growth Website CLI                  │
+│     (run.py - 统一命令入口)                  │
+└─────────────────┬───────────────────────────┘
+                  │
+┌─────────────────▼───────────────────────────┐
+│        Team Coordinator                     │
+│    (任务分发、状态管理、错误处理)              │
+└────────┬─────────────────┬──────────────────┘
+         │                 │
+┌────────▼────┐  ┌────────▼────┐
+│  Daily      │  │  Research   │
+│  Reporter   │  │  Manager    │
+└────────┬────┘  └────────┬────┘
+         │                 │
+┌────────▼─────────────────▼────┐
+│      Auckland Core Libs       │
+│ (fetchers/summarizer/generator)│
+└────────┬─────────────────────┘
+         │
+┌────────▼────────┐
+│ Harness         │
+│ Controller      │
+│ (样式/质量约束)  │
+└─────────────────┘
+```
 
 ### Agent Team 组成
 
@@ -86,26 +116,26 @@ Growth Website System
 
 ```bash
 # 生成今日日报
-python run.py daily
+npm run daily
 
 # 生成指定日期日报
-python run.py daily --date 2026-03-30
+npm run daily -- --date 2026-03-30
 
 # 跳过 AI 摘要（快速模式）
-python run.py daily --no-summarize
+npm run daily -- --no-summarize
 
 # 生成后自动推送到 git
-python run.py daily --push
+npm run daily -- --push
 ```
 
 ### 调研报告管理
 
 ```bash
 # 添加调研报告
-python run.py research add --file report.html --category tech
+npm run research -- add --file report.html --category tech
 
 # 查看调研统计
-python run.py research stats
+npm run research -- stats
 
 **支持的分类：** tech, product, business, methodology, ai, data, design, strategy
 ```
@@ -114,70 +144,81 @@ python run.py research stats
 
 ```bash
 # 创建思考模型
-python run.py thinking create --topic "决策框架" --file content.md
+npm run thinking -- create --topic "决策框架" --file content.md
 
 # 支持模型类型：framework, methodology, pattern, concept
-python run.py thinking create --topic "AI 伦理" --file content.md --model-type methodology
+npm run thinking -- create --topic "AI 伦理" --file content.md --model-type methodology
 
 # 创建带标签的模型
-python run.py thinking create --topic "决策框架" --file content.md --tags "decision-making,business,strategy"
+npm run thinking -- create --topic "决策框架" --file content.md --tags "decision-making,business,strategy"
 ```
 
 ### 首页管理
 
 ```bash
 # 构建首页
-python run.py homepage build
+npm run homepage -- build
 
 # 启用性能优化
-python run.py homepage build --optimize
+npm run homepage -- build --optimize
+```
+
+### TypeScript 开发模式
+
+```bash
+# 监视模式编译
+npm run build -- --watch
+
+# 开发运行
+npm run dev -- <command>
+npm run dev -- daily
 ```
 
 ### 系统操作
 
 ```bash
 # 执行所有 Agent
-python run.py all
+npm run all
 
 # 执行后推送更新
-python run.py all --push
+npm run all -- --push
 
 # 查看系统统计
-python run.py stats
+npm run stats
 
 # 查看 JSON 格式统计
-python run.py stats --json
+npm run stats -- --json
 
 # 查看特定 Agent 状态
-python run.py stats --agent daily
+npm run stats -- --agent daily
 
 # 检查文件质量
-python run.py harness check --file output/index.html
+npm run harness -- check --file output/index.html
 
 # 查看 Harness 信息
-python run.py harness info
+npm run harness -- info
 ```
 
 ### Git 操作
 
 ```bash
 # 推送更改
-python run.py git push -m "更新内容"
+npm run git-push
 
-# 生成默认消息
-python run.py git push
+# 或自定义消息
+npm run git-push -- "更新内容"
 ```
 
 ### 帮助信息
 
 ```bash
 # 查看所有命令
-python run.py --help
+node dist/main.js --help
 
 # 查看特定命令帮助
-python run.py daily --help
-python run.py research --help
-python run.py thinking --help
+node dist/main.js daily --help
+node dist/main.js research --help
+node dist/main.js thinking --help
 ```
 
 ## 📁 数据目录结构
