@@ -79,7 +79,13 @@ class SourceChecker {
 
     try {
       this.logger.log(`Checking RSS source: ${source.name}`);
-      const articles = await this.rssFetcher.fetchFromURL(source.url, source.name, source.category);
+      const articles = await this.rssFetcher.fetchFromURL(
+        source.url,
+        source.name,
+        source.category,
+        source.filter_categories,
+        source.max_articles
+      );
 
       result.articles = articles.length;
       result.message = `Successfully fetched ${articles.length} articles`;

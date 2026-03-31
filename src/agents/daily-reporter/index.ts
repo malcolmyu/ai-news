@@ -159,7 +159,13 @@ export class DailyReporter {
     if (this.config.rssSources) {
       for (const source of this.config.rssSources.filter(s => s.enabled)) {
         try {
-          const articles = await this.rssFetcher.fetchFromURL(source.url, source.name, source.category);
+          const articles = await this.rssFetcher.fetchFromURL(
+            source.url,
+            source.name,
+            source.category,
+            source.filter_categories,
+            source.max_articles
+          );
           allArticles.push(...articles);
         } catch (error) {
           this.logger.error(`Failed to fetch from RSS source ${source.name}:`, error as Error);
