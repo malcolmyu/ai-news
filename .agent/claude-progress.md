@@ -4,11 +4,11 @@
 
 ---
 
-## 最新状态（2026-03-31）
+## 最新状态（2026-04-04）
 
-**当前分支：** `malcolmyu/growth-website-harness`  
-**上次会话完成：** Harness 基础设施升级（init.sh、feature_list.json、claude-progress.md、clean-state-checklist.md、AGENTS.md 融合）  
-**验证状态：** `npm run build` ✅ | `bash .agent/init.sh` ✅  
+**当前分支：** `malcolmyu/auckland`  
+**上次会话完成：** 项目单元测试框架搭建（29个测试全部通过）  
+**验证状态：** `npm run build` ✅ | `npm run test` ✅ (29/29 tests passing) | `bash .agent/init.sh` ✅  
 
 **本次开工前需要了解的背景：**
 - 系统已从模板字符串 HTML 迁移到 SolidJS `renderToString` 渲染（见 `src/renderer/`）
@@ -16,6 +16,33 @@
 - `TeamCoordinator` 已删除，`main.ts` 直接调用各 agent
 - `config/sources.yaml` 所有源均 `enabled: true`，其中 ampcode.com 仍返回 0 篇（selector 需微调，低优先级）
 - 5 个 HTML 源抓取状况：Manus(49)、Cognition(28)、Cline(49)、AmpCode(0)、Anthropic(21)
+- 已添加完整的单元测试框架，使用 Node.js 内置 `node:test`
+
+---
+
+## 2026-04-04 — 项目单元测试框架搭建
+
+**做了什么：**
+- 新增 `src/test/` 目录结构（`utils/`、`fetchers/`）
+- 新增 `test/data/` 测试数据目录
+- 新增 `src/test/utils/test-utils.ts`：测试辅助函数（mock数据、console 模拟等）
+- 新增 `src/test/utils/logger.test.ts`：`Logger` 类测试（10个测试）
+- 新增 `src/test/utils/config.test.ts`：配置工具测试（7个测试）
+- 新增 `src/test/fetchers/rss-fetcher.test.ts`：`RSSFetcher` 测试（5个测试）
+- 新增 `src/test/fetchers/html-fetcher.test.ts`：`HTMLFetcher` 测试（5个测试）
+- 新增 `src/test/integration.test.ts`：集成测试（2个测试）
+- 更新 `package.json`：优化 `test` 脚本，新增 `test:watch`
+- 测试总数：29 个，全部通过
+
+**验证证据：**
+- `npm run build` ✅ 零错误
+- `npm run test` ✅ 全部 29 个测试通过
+- `bash .agent/init.sh` ✅ 通过
+
+**未完成 / 已知问题：**
+- ampcode.com selector 需要微调（低优先级）
+- `session-handoff.md` 可以在需要时添加（长会话场景用）
+- 单元测试可以进一步增加覆盖率（如 parser 私有方法测试需要重构为可测试）
 
 ---
 
