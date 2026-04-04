@@ -5,6 +5,7 @@ import { DailyReportGenerator } from './generator.js';
 import { HomepageBuilder } from '../homepage-builder/index.js';
 import { loadConfig, formatDate, writeJSONFile, readJSONFile, Logger } from '../../utils/config.js';
 import { Config, Article, SummarizedArticle, DailyReport, ArchiveEntry } from '../../types/index.js';
+import { DailyChecker, DailyCheckReport } from './daily-checker.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -17,22 +18,23 @@ export class DailyReporter {
   private summarizer?: Summarizer;
   private generator: DailyReportGenerator;
   private config: Config;
+  private dailyChecker: DailyChecker;
 
   constructor(config?: Config) {
     this.logger = new Logger('DailyReporter');
     this.rssFetcher = new RSSFetcher();
     this.htmlFetcher = new HTMLFetcher();
     this.generator = new DailyReportGenerator();
+    this.dailyChecker = new DailyChecker();
     this.config = config || loadConfig();
 
-    // Initialize summarizer if API key is available
-    if (this.config.openRouter?.apiKey) {
-      this.summarizer = new Summarizer(
-        this.config.openRouter.apiKey,
-        this.config.openRouter.baseUrl
-      );
+    // Initialize summarizer if API key is available (ANTHROPIC_* 火山方舟 或 OPENROUTER_*)
+    if (this.config.llm?.apiKey) {
+      this.summarizer = new Summarizer(this.config.llm.apiKey, this.config.llm.baseUrl, {
+        model: this.config.llm.model,
+      });
     } else {
-      this.logger.warn('OpenRouter API key not configured, summaries will not be generated');
+      this.logger.warn('LLM API key not configured (ANTHROPIC_API_KEY or OPENROUTER_API_KEY), summaries will not be generated');
     }
   }
 
@@ -47,16 +49,24 @@ export class DailyReporter {
     this.logger.log(`Generating daily report for ${dateStr}`);
     const startTime = Date.now();
 
+    // Initialize daily check report
+    const checkReport = this.dailyChecker.createEmptyReport(targetDate);
+
     try {
       // Fetch articles
       this.logger.log('Fetching articles from sources...');
-      const allArticles = await this.fetchArticles();
+      const fetchResult = await this.fetchArticlesWithCheck(checkReport, targetDate);
 
+      const allArticles = fetchResult.allArticles;
       this.logger.log(`Fetched ${allArticles.length} raw articles`);
 
       // Filter to only today's articles
       const todayArticles = this.filterByDate(allArticles, targetDate);
       this.logger.log(`Filtered to ${todayArticles.length} articles for ${dateStr}`);
+
+      if (todayArticles.length === 0) {
+        this.dailyChecker.addWarning(checkReport, `No articles found for ${dateStr}`);
+      }
 
       // Limit per source: max MAX_ARTICLES_PER_SOURCE per source
       const limitedArticles = this.limitPerSource(todayArticles, MAX_ARTICLES_PER_SOURCE);
@@ -121,6 +131,11 @@ export class DailyReporter {
       return reportFile;
     } catch (error) {
       this.logger.error('Failed to generate daily report:', error as Error);
+
+      // Still save check report with error information
+      checkReport.warnings.push(`Report generation failed: ${(error as Error).message}`);
+      this.dailyChecker.saveReport(checkReport);
+
       throw error;
     } finally {
       // Always close Playwright browser (avoid zombie Chromium processes)
@@ -152,13 +167,15 @@ export class DailyReporter {
     });
   }
 
-  private async fetchArticles(): Promise<Article[]> {
+  private async fetchArticlesWithCheck(checkReport: DailyCheckReport, targetDate: Date): Promise<{ allArticles: Article[] }> {
     const allArticles: Article[] = [];
 
     // Fetch from RSS sources
     if (this.config.rssSources) {
       for (const source of this.config.rssSources.filter(s => s.enabled)) {
+        const fetchStart = Date.now();
         try {
+          this.logger.log(`Fetching from ${source.name}...`);
           const articles = await this.rssFetcher.fetchFromURL(
             source.url,
             source.name,
@@ -167,7 +184,16 @@ export class DailyReporter {
             source.max_articles
           );
           allArticles.push(...articles);
+
+          const duration = Date.now() - fetchStart;
+          this.dailyChecker.addSourceCheck(checkReport, source, articles, true, undefined, duration);
+
+          if (articles.length === 0) {
+            this.dailyChecker.addWarning(checkReport, `Source ${source.name} returned 0 articles`);
+          }
         } catch (error) {
+          const duration = Date.now() - fetchStart;
+          this.dailyChecker.addSourceCheck(checkReport, source, [], false, (error as Error).message, duration);
           this.logger.error(`Failed to fetch from RSS source ${source.name}:`, error as Error);
         }
       }
@@ -176,7 +202,9 @@ export class DailyReporter {
     // Fetch from HTML sources
     if (this.config.htmlSources) {
       for (const source of this.config.htmlSources.filter(s => s.enabled)) {
+        const fetchStart = Date.now();
         try {
+          this.logger.log(`Fetching from ${source.name}...`);
           const htmlSource = {
             name: source.name,
             url: source.url,
@@ -188,7 +216,16 @@ export class DailyReporter {
           };
           const articles = await this.htmlFetcher.fetchFromSource(htmlSource);
           allArticles.push(...articles);
+
+          const duration = Date.now() - fetchStart;
+          this.dailyChecker.addSourceCheck(checkReport, source, articles, true, undefined, duration);
+
+          if (articles.length === 0) {
+            this.dailyChecker.addWarning(checkReport, `Source ${source.name} returned 0 articles`);
+          }
         } catch (error) {
+          const duration = Date.now() - fetchStart;
+          this.dailyChecker.addSourceCheck(checkReport, source, [], false, (error as Error).message, duration);
           this.logger.error(`Failed to fetch from HTML source ${source.name}:`, error as Error);
         }
       }
@@ -197,7 +234,15 @@ export class DailyReporter {
     // Remove duplicates based on title and link
     const uniqueArticles = this.removeDuplicates(allArticles);
 
-    return uniqueArticles;
+    // Save daily check report
+    const checkReportPath = this.dailyChecker.saveReport(checkReport);
+    this.logger.log(`Daily check report saved to: ${checkReportPath}`);
+
+    // Print summary of daily check
+    this.logger.log(`\n=== Daily Check Summary ===`);
+    console.log(this.dailyChecker.generateSummary(checkReport));
+
+    return { allArticles: uniqueArticles };
   }
 
   private removeDuplicates(articles: Article[]): Article[] {

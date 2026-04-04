@@ -1,6 +1,13 @@
 import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { loadConfig, ensureDir, writeJSONFile, readJSONFile, formatDate } from '../../utils/config.js';
+import {
+  loadConfig,
+  ensureDir,
+  writeJSONFile,
+  readJSONFile,
+  formatDate,
+  normalizeVolcengineCodingBaseUrl,
+} from '../../utils/config.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -76,10 +83,10 @@ describe('Config Utilities', () => {
       const config = loadConfig();
 
       assert.ok(config);
-      assert.ok(config.openRouter);
-      assert.equal(typeof config.openRouter.apiKey, 'string');
-      assert.equal(typeof config.openRouter.baseUrl, 'string');
-      assert.equal(typeof config.openRouter.model, 'string');
+      assert.ok(config.llm);
+      assert.equal(typeof config.llm.apiKey, 'string');
+      assert.equal(typeof config.llm.baseUrl, 'string');
+      assert.equal(typeof config.llm.model, 'string');
 
       assert.ok(Array.isArray(config.rssSources));
       assert.ok(Array.isArray(config.htmlSources));
@@ -107,6 +114,17 @@ describe('Config Utilities', () => {
           assert.ok(source.selector);
         }
       });
+    });
+
+    it('normalizes Volcano coding base URL when /v3 is omitted', () => {
+      assert.equal(
+        normalizeVolcengineCodingBaseUrl('https://ark.cn-beijing.volces.com/api/coding'),
+        'https://ark.cn-beijing.volces.com/api/coding/v3'
+      );
+      assert.equal(
+        normalizeVolcengineCodingBaseUrl('https://ark.cn-beijing.volces.com/api/coding/v3'),
+        'https://ark.cn-beijing.volces.com/api/coding/v3'
+      );
     });
   });
 });

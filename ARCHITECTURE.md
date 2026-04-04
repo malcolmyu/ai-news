@@ -18,10 +18,10 @@ CLI 入口，基于 `commander` 构建。所有子命令（`daily`、`research`�
 
 四个内容生成 agent，每个独立放在自己的目录中：
 
-- **`daily-reporter/`** — 从 RSS 和 HTML 源抓取文章，调用 OpenRouter 进行摘要，生成 `docs/daily/ai-news-YYYY-MM-DD.html`。
+- **`daily-reporter/`** — 从 RSS 和 HTML 源抓取文章，调用火山方舟（OpenAI 兼容）或 OpenRouter 进行摘要，生成 `docs/daily/ai-news-YYYY-MM-DD.html`。
   - `fetchers/rss-fetcher.ts` — RSS/Atom feed 抓取器
   - `fetchers/html-fetcher.ts` — Playwright headless 浏览器抓取器（用于 SPA 页面）
-  - `summarizer.ts` — OpenRouter LLM 摘要调用
+  - `summarizer.ts` — OpenAI 兼容 API（`ANTHROPIC_*` 火山方舟优先，否则 `OPENROUTER_*`）摘要调用
   - `generator.ts` — 调用 `src/renderer/` 渲染 HTML
   - `DailyReportPage.tsx` — SolidJS 日报页面组件
   - `DailyArchivePage.tsx` — SolidJS 日报归档页面组件
@@ -93,7 +93,7 @@ config/sources.yaml
  rss-fetcher + html-fetcher (Playwright headless)
        │
        ▼
- daily-reporter/index.ts  ──→  OpenRouter API (LLM 摘要)
+ daily-reporter/index.ts  ──→  火山方舟 / OpenRouter (LLM 摘要)
        │
        ▼
  src/renderer/renderPage()
@@ -126,7 +126,7 @@ config/sources.yaml
 
 ### 外部 API 调用
 
-所有 LLM 调用都通过 `daily-reporter` 中的 `summarizer.ts` 发出。API Key 从 `.env`（`OPENROUTER_API_KEY`）中读取。Key 缺失时，系统跳过摘要步骤继续运行。其他 agent 不发起任何外部 API 调用。
+所有 LLM 调用都通过 `daily-reporter` 中的 `summarizer.ts` 发出。优先读取 `.env` 中的 `ANTHROPIC_API_KEY` + `ANTHROPIC_BASE_URL`（火山方舟 OpenAI 兼容，Coding 套餐 base 通常为 `https://ark.cn-beijing.volces.com/api/coding/v3`）；未配置时再使用 `OPENROUTER_*`。Key 缺失时，系统跳过摘要步骤继续运行。其他 agent 不发起任何外部 API 调用。
 
 ### HTML 渲染方式
 

@@ -21,7 +21,7 @@ harness/content-harness/SKILL.md
 |------|------|
 | `index.ts` | `DailyReporter` agent 类：抓取、摘要、归档、触发主页重建 |
 | `generator.ts` | `DailyReportGenerator`：将 `DailyReport` 数据渲染为 HTML |
-| `summarizer.ts` | 调用 OpenRouter API 批量摘要文章 |
+| `summarizer.ts` | 调用 OpenAI 兼容 API 批量摘要（`ANTHROPIC_*` 火山方舟优先） |
 | `check-sources.ts` | 验证配置中各 RSS/HTML 来源的可用性 |
 | `fetchers/rss-fetcher.ts` | 抓取 RSS 源 |
 | `fetchers/html-fetcher.ts` | 抓取 HTML 页面并解析文章列表 |

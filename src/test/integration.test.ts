@@ -19,10 +19,10 @@ describe('Integration Tests', () => {
     it('should have valid config structure', async () => {
       const config = loadConfig();
 
-      assert.ok(config.openRouter);
-      assert.equal(typeof config.openRouter.apiKey, 'string');
-      assert.equal(typeof config.openRouter.baseUrl, 'string');
-      assert.equal(typeof config.openRouter.model, 'string');
+      assert.ok(config.llm);
+      assert.equal(typeof config.llm.apiKey, 'string');
+      assert.equal(typeof config.llm.baseUrl, 'string');
+      assert.equal(typeof config.llm.model, 'string');
 
       config.rssSources.forEach((source, index) => {
         assert.ok(source.name, `RSS source ${index} has no name`);
@@ -44,8 +44,9 @@ describe('Integration Tests', () => {
   });
 
   describe('Basic Functionality', () => {
-    it('should handle environment variables correctly', async () => {
-      assert.equal(typeof process.env.OPENROUTER_API_KEY, 'string');
+    it('should expose LLM config from env (keys optional in CI)', async () => {
+      const config = loadConfig();
+      assert.equal(typeof config.llm.apiKey, 'string');
     });
 
     it('should locate configuration files', async () => {

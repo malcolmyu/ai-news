@@ -197,7 +197,8 @@ export interface DraftFile {
 }
 
 export interface Config {
-  openRouter: {
+  /** LLM 摘要：优先 ANTHROPIC_*（火山方舟 OpenAI 兼容），否则 OPENROUTER_* */
+  llm: {
     apiKey: string;
     baseUrl: string;
     model: string;

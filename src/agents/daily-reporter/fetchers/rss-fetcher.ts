@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import * as https from 'https';
 import * as http from 'http';
 import { Article } from '../../../types/index.js';
-import axios from 'axios';
+import * as url from 'url';
 
 const parseXML = promisify(xml2js.parseString);
 
@@ -14,23 +14,17 @@ export class RSSFetcher {
     this.timeout = timeout;
   }
 
-  async fetchFromURL(url: string, name: string, category?: string, filterCategories?: string[], maxArticles?: number): Promise<Article[]> {
+  async fetchFromURL(urlStr: string, name: string, category?: string, filterCategories?: string[], maxArticles?: number): Promise<Article[]> {
     try {
-      console.log(`Fetching RSS: ${url}`);
+      console.log(`Fetching RSS: ${urlStr}`);
 
-      const response = await axios.get(url, {
-        timeout: this.timeout,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; GrowthWebsiteBot/1.0)',
-          'Accept': 'application/rss+xml, application/xml, text/xml',
-        },
-        maxRedirects: 5,
-      });
+      // 使用原生 http/https 来获取内容，避免 axios 的问题
+      const xmlData = await this.fetchURLWithNative(urlStr);
 
-      const result: any = await parseXML(response.data);
+      const result: any = await parseXML(xmlData);
       let articles: Article[] = [];
 
-      if (result.rss && result.rss.channel) {
+      if (result && result.rss && result.rss.channel) {
         const channel = Array.isArray(result.rss.channel) ? result.rss.channel[0] : result.rss.channel;
         const items = channel.item || [];
 
@@ -40,7 +34,7 @@ export class RSSFetcher {
             articles.push(article);
           }
         }
-      } else if (result.feed) {
+      } else if (result && result.feed) {
         // Atom format
         const items = result.feed.entry || [];
         for (const entry of items) {
@@ -64,7 +58,7 @@ export class RSSFetcher {
         articles = articles.slice(0, maxArticles);
       }
 
-      console.log(`Fetched ${articles.length} articles from ${url}`);
+      console.log(`Fetched ${articles.length} articles from ${urlStr}`);
       return articles;
     } catch (error) {
       console.error(`Failed to fetch RSS from ${url}:`, error);
@@ -159,6 +153,43 @@ export class RSSFetcher {
       console.error('Failed to parse Atom entry:', error);
       return null;
     }
+  }
+
+  private async fetchURLWithNative(urlStr: string): Promise<string> {
+    const parsedUrl = new URL(urlStr);
+    const protocol = parsedUrl.protocol === 'https:' ? https : http;
+
+    return new Promise((resolve, reject) => {
+      const req = protocol.request({
+        hostname: parsedUrl.hostname,
+        path: parsedUrl.pathname + (parsedUrl.search || ''),
+        method: 'GET',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; GrowthWebsiteBot/1.0)',
+          'Accept': 'application/rss+xml, application/xml, text/xml',
+        }
+      }, (res) => {
+        let data = '';
+
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        res.on('end', () => {
+          resolve(data);
+        });
+
+        res.on('error', reject);
+      });
+
+      req.setTimeout(this.timeout, () => {
+        req.destroy();
+        reject(new Error(`Request timeout after ${this.timeout}ms`));
+      });
+
+      req.on('error', reject);
+      req.end();
+    });
   }
 
   fetchFromFile(filePath: string, name: string): Promise<Article[]> {

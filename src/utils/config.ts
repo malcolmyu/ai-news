@@ -6,6 +6,35 @@ import type { Config, SourceConfig } from '../types/index.js';
 
 dotenv.config();
 
+/** 火山 Coding 套餐：仅配置到 `/api/coding` 时需补全为 `/api/coding/v3`（OpenAI 兼容路径）。 */
+export function normalizeVolcengineCodingBaseUrl(baseUrl: string): string {
+  const u = baseUrl.trim().replace(/\/$/, '');
+  if (u.endsWith('/api/coding')) {
+    return `${u}/v3`;
+  }
+  return u;
+}
+
+/**
+ * 摘要用 LLM：若设置 ANTHROPIC_API_KEY 则走火山方舟（与 OpenAI SDK 兼容），否则回退 OpenRouter。
+ */
+export function resolveLlmConfig(): { apiKey: string; baseUrl: string; model: string } {
+  const arkKey = process.env.ANTHROPIC_API_KEY?.trim();
+  if (arkKey) {
+    const rawBase =
+      process.env.ANTHROPIC_BASE_URL?.trim() ||
+      'https://ark.cn-beijing.volces.com/api/coding/v3';
+    const baseUrl = normalizeVolcengineCodingBaseUrl(rawBase);
+    const model = process.env.ANTHROPIC_MODEL?.trim() || 'ark-code-latest';
+    return { apiKey: arkKey, baseUrl, model };
+  }
+  return {
+    apiKey: process.env.OPENROUTER_API_KEY?.trim() || '',
+    baseUrl: (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1').trim(),
+    model: (process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4-20250514').trim(),
+  };
+}
+
 const configFile = path.join(process.cwd(), 'config/sources.yaml');
 const harnessFile = path.join(process.cwd(), 'config/harness.yaml');
 
@@ -24,11 +53,7 @@ export function loadConfig(): Config {
   const harnessConfig = loadYamlFile(harnessFile);
 
   return {
-    openRouter: {
-      apiKey: process.env.OPENROUTER_API_KEY || '',
-      baseUrl: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1',
-      model: process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet',
-    },
+    llm: resolveLlmConfig(),
     rssSources: (sourcesConfig.rss_sources || []) as SourceConfig[],
     htmlSources: (sourcesConfig.html_sources || []) as SourceConfig[],
     harness: harnessConfig,

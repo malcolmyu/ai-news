@@ -14,7 +14,11 @@ export class Summarizer {
       apiKey: apiKey,
       baseURL: baseUrl,
     });
-    this.model = config?.model || process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4-20250514';
+    this.model =
+      config?.model ||
+      process.env.ANTHROPIC_MODEL ||
+      process.env.OPENROUTER_MODEL ||
+      'anthropic/claude-sonnet-4-20250514';
     this.maxRetries = config?.maxRetries || 3;
     this.retryDelay = config?.retryDelay || 1000;
   }
