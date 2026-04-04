@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI 日报 - 2026-04-04 - 第二号</title><span><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></span><style>
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --accent: #3b82f6;
+    --accent-light: #60a5fa;
+    --accent-dark: #2563eb;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+.header {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+.logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: var(--shadow-sm); }
+.logo-text { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 32px; }
+.nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent); }
+
+.section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+.featured-card { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s; text-decoration: none; color: inherit; }
+.featured-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.featured-content { display: flex; flex-direction: column; gap: 10px; }
+.featured-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
+.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.featured-title { font-size: 20px; font-weight: 600; }
+.featured-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.featured-arrow { width: 44px; height: 44px; background: white; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); transition: all 0.2s; }
+.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+.archive-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 40px; }
+.archive-item { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
+.archive-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.archive-item.latest { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border-color: var(--accent); }
+.archive-icon { width: 48px; height: 48px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.archive-item.latest .archive-icon { background: var(--accent); }
+.archive-content { flex: 1; }
+.archive-date { font-size: 16px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.badge-latest { padding: 2px 8px; background: #dcfce7; color: #166534; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.archive-meta { font-size: 13px; color: var(--text-secondary); }
+.archive-arrow { font-size: 20px; color: var(--text-muted); transition: all 0.2s; }
+.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+.stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
+.stats-label { font-size: 12px; opacity: 0.7; }
+
+.section { margin-bottom: 40px; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+.section-title { font-size: 20px; font-weight: 600; }
+.section-count { margin-left: auto; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-secondary); }
+.news-list { display: flex; flex-direction: column; gap: 16px; }
+.news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; }
+.news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
+.news-source { color: var(--accent); font-weight: 600; }
+.news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; }
+.news-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+.news-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; padding: 8px 16px; background: rgba(59,130,246,0.1); border-radius: 6px; transition: all 0.2s; }
+.news-link:hover { background: var(--accent); color: white; }
+.daily-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+.daily-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white; }
+.daily-header .subtitle { font-size: 14px; opacity: 0.8; }
+@media (max-width: 640px) { h1 { font-size: 24px; } .news-card { padding: 16px; } }
+@media (prefers-color-scheme: dark) {
+  :root { --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border: #374151; }
+  .daily-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+}</style></head><body><header class="header"><div class="container"><div class="header-inner"><a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><a href="../index.html" class="nav-link">← 返回首页</a></div></div></header><div class="daily-header"><div class="container-sm"><div style="display:flex;justify-content:space-between;align-items:center;"><div><h1>🤖 AI 日报</h1><p class="subtitle">2026-04-04</p></div><div style="text-align:right;"><div class="stats-value">2</div><div class="stats-label">条资讯</div></div></div></div></div><main class="container-sm" style="padding-top:32px;"><section class="section"><div class="section-header"><h2 class="section-title">开源项目</h2><span class="section-count">2 条</span></div><div class="news-list"><article class="news-card"><div class="news-meta"><span class="news-source">GitHub Trending Daily</span><span>·</span><span>近期</span></div><h3 class="news-title">Yeachan-Heo/oh-my-codex</h3><p class="news-summary">&lt;p>OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more.&lt;/p>&lt;hr>&lt;h1>oh-my-codex (OMX)&lt;/h1> 
+&lt;p align="center"> &lt;img src="https://yeachan-heo.github.io/oh-my-codex-website/omx-character-nobg.png" alt="oh-my-codex character" width="280" /> &lt;br /> &lt;em>Start Codex stronger, then let OMX add better prompts, workflows, and runtime help when the work grows.&lt;/em> &lt;/p> 
+&lt;p>&lt;a href="https://www.npmjs.com/package/oh-my-codex">&lt;img src="https://img.shields.io/npm/v/oh-my-codex" alt="npm version" />&lt;/a> &lt;a href="https://opensource.org/licenses/MIT">&lt;img src="https://img.shields.io/badge/License-MIT-yellow.svg?sanitize=true" alt="License: MIT" />&lt;/a> &lt;a href="https://nodejs.org">&lt;img src="https://img.shields.io/badge/node-%3E%3D20-brightgreen" alt="Node.js" />&lt;/a> &lt;a href="https://discord.gg/PUwSMR9XNk">&lt;img src="https://img.shields.io/discord/1452487457085063218?color=5865F2&amp;amp;logo=discord&amp;amp;logoColor=white&amp;amp;label=Discord" alt="Discord" />&lt;/a>&lt;/p> 
+&lt;p>&lt;strong>Website:&lt;/strong> &lt;a href="https://yeachan-heo.github.io/oh-my-codex-website/">https://yeachan-heo.github.io/oh-my-codex-website/&lt;/a>&lt;br /> &lt;strong>Docs:&lt;/strong> &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/getting-started.html">Getting Started&lt;/a> · &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/agents.html">Agents&lt;/a> · &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/skills.html">Skills&lt;/a> · &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/integrations.html">Integrations&lt;/a> · &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/DEMO.md">Demo&lt;/a> · &lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/openclaw-integration.md">OpenClaw guide&lt;/a>&lt;/p> 
+&lt;p>OMX is a workflow layer for &lt;a href="https://github.com/openai/codex">OpenAI Codex CLI&lt;/a>.&lt;/p> 
+&lt;p>It keeps Codex as the execution engine and makes it easier to:&lt;/p> 
+&lt;ul> 
+ &lt;li>start a stronger Codex session by default&lt;/li> 
+ &lt;li>run one consistent workflow from clarification to completion&lt;/li> 
+ &lt;li>invoke the canonical skills with &lt;code>$deep-interview&lt;/code>, &lt;code>$ralplan&lt;/code>, &lt;code>$team&lt;/code>, and &lt;code>$ralph&lt;/code>&lt;/li> 
+ &lt;li>keep project guidance, plans, logs, and state in &lt;code>.omx/&lt;/code>&lt;/li> 
+&lt;/ul> 
+&lt;h2>Core Maintainers&lt;/h2> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Role&lt;/th> 
+   &lt;th>Name&lt;/th> 
+   &lt;th>GitHub&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>Creator &amp;amp; Lead&lt;/td> 
+   &lt;td>Yeachan Heo&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/Yeachan-Heo">@Yeachan-Heo&lt;/a>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Maintainer&lt;/td> 
+   &lt;td>HaD0Yun&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/HaD0Yun">@HaD0Yun&lt;/a>&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Ambassadors&lt;/h2> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Name&lt;/th> 
+   &lt;th>GitHub&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>Sigrid Jin&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/sigridjineth">@sigridjineth&lt;/a>&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Top Collaborators&lt;/h2> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Name&lt;/th> 
+   &lt;th>GitHub&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>HaD0Yun&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/HaD0Yun">@HaD0Yun&lt;/a>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Junho Yeo&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/junhoyeo">@junhoyeo&lt;/a>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>JiHongKim98&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/JiHongKim98">@JiHongKim98&lt;/a>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Lor&lt;/td> 
+   &lt;td>—&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>HyunjunJeon&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/HyunjunJeon">@HyunjunJeon&lt;/a>&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Recommended default flow&lt;/h2> 
+&lt;p>If you want the default OMX experience, start here:&lt;/p> 
+&lt;pre>&lt;code class="language-bash">npm install -g @openai/codex oh-my-codex
+omx setup
+omx --madmax --high
+&lt;/code>&lt;/pre> 
+&lt;p>Then work normally inside Codex:&lt;/p> 
+&lt;pre>&lt;code class="language-text">$deep-interview "clarify the authentication change"
+$ralplan "approve the auth plan and review tradeoffs"
+$ralph "carry the approved plan to completion"
+$team 3:executor "execute the approved plan in parallel"
+&lt;/code>&lt;/pre> 
+&lt;p>That is the main path. Start OMX strongly, clarify first when needed, approve the plan, then choose &lt;code>$team&lt;/code> for coordinated parallel execution or &lt;code>$ralph&lt;/code> for the persistent completion loop.&lt;/p> 
+&lt;h2>What OMX is for&lt;/h2> 
+&lt;p>Use OMX if you already like Codex and want a better day-to-day runtime around it:&lt;/p> 
+&lt;ul> 
+ &lt;li>a standard workflow built around &lt;code>$deep-interview&lt;/code>, &lt;code>$ralplan&lt;/code>, &lt;code>$team&lt;/code>, and &lt;code>$ralph&lt;/code>&lt;/li> 
+ &lt;li>specialist roles and supporting skills when the task needs them&lt;/li> 
+ &lt;li>project guidance through scoped &lt;code>AGENTS.md&lt;/code>&lt;/li> 
+ &lt;li>durable state under &lt;code>.omx/&lt;/code> for plans, logs, memory, and mode tracking&lt;/li> 
+&lt;/ul> 
+&lt;p>If you want plain Codex with no extra workflow layer, you probably do not need OMX.&lt;/p> 
+&lt;h2>Quick start&lt;/h2> 
+&lt;h3>Requirements&lt;/h3> 
+&lt;ul> 
+ &lt;li>Node.js 20+&lt;/li> 
+ &lt;li>Codex CLI installed: &lt;code>npm install -g @openai/codex&lt;/code>&lt;/li> 
+ &lt;li>Codex auth configured&lt;/li> 
+ &lt;li>&lt;code>tmux&lt;/code> on macOS/Linux if you later want the durable team runtime&lt;/li> 
+ &lt;li>&lt;code>psmux&lt;/code> on native Windows if you later want Windows team mode&lt;/li> 
+&lt;/ul> 
+&lt;h3>A good first session&lt;/h3> 
+&lt;p>Launch OMX the recommended way:&lt;/p> 
+&lt;pre>&lt;code class="language-bash">omx --madmax --high
+&lt;/code>&lt;/pre> 
+&lt;p>Then try the canonical workflow:&lt;/p> 
+&lt;pre>&lt;code class="language-text">$deep-interview "clarify the authentication change"
+$ralplan "approve the safest implementation path"
+$ralph "carry the approved plan to completion"
+$team 3:executor "execute the approved plan in parallel"
+&lt;/code>&lt;/pre> 
+&lt;p>Use &lt;code>$team&lt;/code> when the approved plan needs coordinated parallel work, or &lt;code>$ralph&lt;/code> when one persistent owner should keep pushing to completion.&lt;/p> 
+&lt;h2>A simple mental model&lt;/h2> 
+&lt;p>OMX does &lt;strong>not&lt;/strong> replace Codex.&lt;/p> 
+&lt;p>It adds a better working layer around it:&lt;/p> 
+&lt;ul> 
+ &lt;li>&lt;strong>Codex&lt;/strong> does the actual agent work&lt;/li> 
+ &lt;li>&lt;strong>OMX role keywords&lt;/strong> make useful roles reusable&lt;/li> 
+ &lt;li>&lt;strong>OMX skills&lt;/strong> make common workflows reusable&lt;/li> 
+ &lt;li>&lt;strong>&lt;code>.omx/&lt;/code>&lt;/strong> stores plans, logs, memory, and runtime state&lt;/li> 
+&lt;/ul> 
+&lt;p>Most users should think of OMX as &lt;strong>better task routing + better workflow + better runtime&lt;/strong>, not as a command surface to operate manually all day.&lt;/p> 
+&lt;h2>Start here if you are new&lt;/h2> 
+&lt;ol> 
+ &lt;li>Run &lt;code>omx setup&lt;/code>&lt;/li> 
+ &lt;li>Launch with &lt;code>omx --madmax --high&lt;/code>&lt;/li> 
+ &lt;li>Use &lt;code>$deep-interview "..."&lt;/code> when the request or boundaries are still unclear&lt;/li> 
+ &lt;li>Use &lt;code>$ralplan "..."&lt;/code> to approve the plan and review tradeoffs&lt;/li> 
+ &lt;li>Choose &lt;code>$team&lt;/code> for coordinated parallel execution or &lt;code>$ralph&lt;/code> for persistent completion loops&lt;/li> 
+&lt;/ol> 
+&lt;h2>Recommended workflow&lt;/h2> 
+&lt;ol> 
+ &lt;li>&lt;code>$deep-interview&lt;/code> — clarify scope when the request or boundaries are still vague.&lt;/li> 
+ &lt;li>&lt;code>$ralplan&lt;/code> — turn that clarified scope into an approved architecture and implementation plan.&lt;/li> 
+ &lt;li>&lt;code>$team&lt;/code> or &lt;code>$ralph&lt;/code> — use &lt;code>$team&lt;/code> for coordinated parallel execution, or &lt;code>$ralph&lt;/code> when you want a persistent completion loop with one owner.&lt;/li> 
+&lt;/ol> 
+&lt;h2>Common in-session surfaces&lt;/h2> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Surface&lt;/th> 
+   &lt;th>Use it for&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>&lt;code>$deep-interview "..."&lt;/code>&lt;/td> 
+   &lt;td>clarifying intent, boundaries, and non-goals&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>&lt;code>$ralplan "..."&lt;/code>&lt;/td> 
+   &lt;td>approving the implementation plan and tradeoffs&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>&lt;code>$ralph "..."&lt;/code>&lt;/td> 
+   &lt;td>persistent completion and verification loops&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>&lt;code>$team "..."&lt;/code>&lt;/td> 
+   &lt;td>coordinated parallel execution when the work is big enough&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>&lt;code>/skills&lt;/code>&lt;/td> 
+   &lt;td>browsing installed skills and supporting helpers&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Advanced / operator surfaces&lt;/h2> 
+&lt;p>These are useful, but they are not the main onboarding path.&lt;/p> 
+&lt;h3>Team runtime&lt;/h3> 
+&lt;p>Use the team runtime when you specifically need durable tmux/worktree coordination, not as the default way to begin using OMX.&lt;/p> 
+&lt;pre>&lt;code class="language-bash">omx team 3:executor "fix the failing tests with verification"
+omx team status &amp;lt;team-name&amp;gt;
+omx team resume &amp;lt;team-name&amp;gt;
+omx team shutdown &amp;lt;team-name&amp;gt;
+&lt;/code>&lt;/pre> 
+&lt;h3>Setup, doctor, and HUD&lt;/h3> 
+&lt;p>These are operator/support surfaces:&lt;/p> 
+&lt;ul> 
+ &lt;li>&lt;code>omx setup&lt;/code> installs prompts, skills, config, and AGENTS scaffolding&lt;/li> 
+ &lt;li>&lt;code>omx doctor&lt;/code> verifies the install when something seems wrong&lt;/li> 
+ &lt;li>&lt;code>omx hud --watch&lt;/code> is a monitoring/status surface, not the primary user workflow&lt;/li> 
+&lt;/ul> 
+&lt;h3>Explore and sparkshell&lt;/h3> 
+&lt;ul> 
+ &lt;li>&lt;code>omx explore --prompt "..."&lt;/code> is for read-only repository lookup&lt;/li> 
+ &lt;li>&lt;code>omx sparkshell &amp;lt;command&amp;gt;&lt;/code> is for shell-native inspection and bounded verification&lt;/li> 
+&lt;/ul> 
+&lt;p>Examples:&lt;/p> 
+&lt;pre>&lt;code class="language-bash">omx explore --prompt "find where team state is written"
+omx sparkshell git status
+omx sparkshell --tmux-pane %12 --tail-lines 400
+&lt;/code>&lt;/pre> 
+&lt;h3>Platform notes for team mode&lt;/h3> 
+&lt;p>&lt;code>omx team&lt;/code> needs a tmux-compatible backend:&lt;/p> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Platform&lt;/th> 
+   &lt;th>Install&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>macOS&lt;/td> 
+   &lt;td>&lt;code>brew install tmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Ubuntu/Debian&lt;/td> 
+   &lt;td>&lt;code>sudo apt install tmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Fedora&lt;/td> 
+   &lt;td>&lt;code>sudo dnf install tmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Arch&lt;/td> 
+   &lt;td>&lt;code>sudo pacman -S tmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Windows&lt;/td> 
+   &lt;td>&lt;code>winget install psmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Windows (WSL2)&lt;/td> 
+   &lt;td>&lt;code>sudo apt install tmux&lt;/code>&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Known issues&lt;/h2> 
+&lt;h3>Intel Mac: high &lt;code>syspolicyd&lt;/code> / &lt;code>trustd&lt;/code> CPU during startup&lt;/h3> 
+&lt;p>On some Intel Macs, OMX startup — especially with &lt;code>--madmax --high&lt;/code> — can spike &lt;code>syspolicyd&lt;/code> / &lt;code>trustd&lt;/code> CPU usage while macOS Gatekeeper validates many concurrent process launches.&lt;/p> 
+&lt;p>If this happens, try:&lt;/p> 
+&lt;ul> 
+ &lt;li>&lt;code>xattr -dr com.apple.quarantine $(which omx)&lt;/code>&lt;/li> 
+ &lt;li>adding your terminal app to the Developer Tools allowlist in macOS Security settings&lt;/li> 
+ &lt;li>using lower concurrency (for example, avoid &lt;code>--madmax --high&lt;/code>)&lt;/li> 
+&lt;/ul> 
+&lt;h2>Documentation&lt;/h2> 
+&lt;ul> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/getting-started.html">Getting Started&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/DEMO.md">Demo guide&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/agents.html">Agent catalog&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/skills.html">Skills reference&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/integrations.html">Integrations&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/docs/openclaw-integration.md">OpenClaw / notification gateway guide&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/CONTRIBUTING.md">Contributing&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/CHANGELOG.md">Changelog&lt;/a>&lt;/li> 
+&lt;/ul> 
+&lt;h2>Languages&lt;/h2> 
+&lt;ul> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.md">English&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.ko.md">한국어&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.ja.md">日本語&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.zh.md">简体中文&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.zh-TW.md">繁體中文&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.vi.md">Tiếng Việt&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.es.md">Español&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.pt.md">Português&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.ru.md">Русский&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.tr.md">Türkçe&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.de.md">Deutsch&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.fr.md">Français&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.it.md">Italiano&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.el.md">Ελληνικά&lt;/a>&lt;/li> 
+ &lt;li>&lt;a href="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-codex/main/README.pl.md">Polski&lt;/a>&lt;/li> 
+&lt;/ul> 
+&lt;h2>Contributors&lt;/h2> 
+&lt;table> 
+ &lt;thead> 
+  &lt;tr> 
+   &lt;th>Role&lt;/th> 
+   &lt;th>Name&lt;/th> 
+   &lt;th>GitHub&lt;/th> 
+  &lt;/tr> 
+ &lt;/thead> 
+ &lt;tbody> 
+  &lt;tr> 
+   &lt;td>Creator &amp;amp; Lead&lt;/td> 
+   &lt;td>Yeachan Heo&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/Yeachan-Heo">@Yeachan-Heo&lt;/a>&lt;/td> 
+  &lt;/tr> 
+  &lt;tr> 
+   &lt;td>Maintainer&lt;/td> 
+   &lt;td>HaD0Yun&lt;/td> 
+   &lt;td>&lt;a href="https://github.com/HaD0Yun">@HaD0Yun&lt;/a>&lt;/td> 
+  &lt;/tr> 
+ &lt;/tbody> 
+&lt;/table> 
+&lt;h2>Star History&lt;/h2> 
+&lt;p>&lt;a href="https://www.star-history.com/#Yeachan-Heo/oh-my-codex&amp;amp;type=date&amp;amp;legend=top-left">&lt;img src="https://api.star-history.com/svg?repos=Yeachan-Heo/oh-my-codex&amp;amp;type=date&amp;amp;legend=top-left" alt="Star History Chart" />&lt;/a>&lt;/p> 
+&lt;h2>License&lt;/h2> 
+&lt;p>MIT&lt;/p></p><a href="https://github.com/Yeachan-Heo/oh-my-codex" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a></article><article class="news-card"><div class="news-meta"><span class="news-source">GitHub Trending Daily</span><span>·</span><span>近期</span></div><h3 class="news-title">onyx-dot-app/onyx</h3><p class="news-summary">&lt;p>Open Source AI Platform - AI Chat with advanced features that works with every LLM&lt;/p>&lt;hr>&lt;p>&lt;a name="readme-top">&lt;/a>&lt;/p> 
+&lt;h2 align="center"> &lt;a href="https://www.onyx.app/?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme"> &lt;img width="50%" src="https://github.com/onyx-dot-app/onyx/raw/logo/OnyxLogoCropped.jpg?raw=true" />&lt;/a> &lt;/h2> 
+&lt;p align="center"> &lt;a href="https://discord.gg/TDJ59cGV2X" target="_blank"> &lt;img src="https://img.shields.io/badge/discord-join-blue.svg?logo=discord&amp;amp;logoColor=white" alt="Discord" /> &lt;/a> &lt;a href="https://docs.onyx.app/?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme" target="_blank"> &lt;img src="https://img.shields.io/badge/docs-view-blue" alt="Documentation" /> &lt;/a> &lt;a href="https://www.onyx.app/?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme" target="_blank"> &lt;img src="https://img.shields.io/website?url=https://www.onyx.app&amp;amp;up_message=visit&amp;amp;up_color=blue" alt="Documentation" /> &lt;/a> &lt;a href="https://github.com/onyx-dot-app/onyx/raw/main/LICENSE" target="_blank"> &lt;img src="https://img.shields.io/static/v1?label=license&amp;amp;message=MIT&amp;amp;color=blue" alt="License" /> &lt;/a> &lt;/p> 
+&lt;p align="center"> &lt;a href="https://trendshift.io/repositories/12516" target="_blank"> &lt;img src="https://trendshift.io/api/badge/repositories/12516" alt="onyx-dot-app/onyx | Trendshift" style="width: 250px; height: 55px;" /> &lt;/a> &lt;/p> 
+&lt;h1>Onyx - The Open Source AI Platform&lt;/h1> 
+&lt;p>&lt;strong>&lt;a href="https://www.onyx.app/?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme">Onyx&lt;/a>&lt;/strong> is the application layer for LLMs - bringing a feature-rich interface that can be easily hosted by anyone. Onyx enables LLMs through advanced capabilities like RAG, web search, code execution, file creation, deep research and more.&lt;/p> 
+&lt;p>Connect your applications with over 50+ indexing based connectors provided out of the box or via MCP.&lt;/p> 
+&lt;div class="markdown-alert markdown-alert-tip">
+ &lt;p class="markdown-alert-title">
+  &lt;svg class="octicon octicon-light-bulb mr-2" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+   &lt;path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z">&lt;/path>
+  &lt;/svg>Tip&lt;/p>
+ &lt;p>Deploy with a single command:&lt;/p> 
+ &lt;pre>&lt;code>curl -fsSL https://onyx.app/install_onyx.sh | bash
+&lt;/code>&lt;/pre> 
+&lt;/div> 
+&lt;p>&lt;img src="https://github.com/onyx-dot-app/onyx/releases/download/v3.0.0/Onyx.gif" alt="Onyx Chat Silent Demo" />&lt;/p> 
+&lt;hr /> 
+&lt;h2>⭐ Features&lt;/h2> 
+&lt;ul> 
+ &lt;li>&lt;strong>🔍 Agentic RAG:&lt;/strong> Get best in class search and answer quality based on hybrid index + AI Agents for information retrieval 
+  &lt;ul> 
+   &lt;li>Benchmark to release soon!&lt;/li> 
+  &lt;/ul> &lt;/li> 
+ &lt;li>&lt;strong>🔬 Deep Research:&lt;/strong> Get in depth reports with a multi-step research flow. 
+  &lt;ul> 
+   &lt;li>Top of &lt;a href="https://github.com/onyx-dot-app/onyx_deep_research_bench">leaderboard&lt;/a> as of Feb 2026.&lt;/li> 
+  &lt;/ul> &lt;/li> 
+ &lt;li>&lt;strong>🤖 Custom Agents:&lt;/strong> Build AI Agents with unique instructions, knowledge, and actions.&lt;/li> 
+ &lt;li>&lt;strong>🌍 Web Search:&lt;/strong> Browse the web to get up to date information. 
+  &lt;ul> 
+   &lt;li>Supports Serper, Google PSE, Brave, SearXNG, and others.&lt;/li> 
+   &lt;li>Comes with an in house web crawler and support for Firecrawl/Exa.&lt;/li> 
+  &lt;/ul> &lt;/li> 
+ &lt;li>&lt;strong>📄 Artifacts:&lt;/strong> Generate documents, graphics, and other downloadable artifacts.&lt;/li> 
+ &lt;li>&lt;strong>▶️ Actions &amp;amp; MCP:&lt;/strong> Let Onyx agents interact with external applications, comes with flexible Auth options.&lt;/li> 
+ &lt;li>&lt;strong>💻 Code Execution:&lt;/strong> Execute code in a sandbox to analyze data, render graphs, or modify files.&lt;/li> 
+ &lt;li>&lt;strong>🎙️ Voice Mode:&lt;/strong> Chat with Onyx via text-to-speech and speech-to-text.&lt;/li> 
+ &lt;li>&lt;strong>🎨 Image Generation:&lt;/strong> Generate images based on user prompts.&lt;/li> 
+&lt;/ul> 
+&lt;p>Onyx supports all major LLM providers, both self-hosted (like Ollama, LiteLLM, vLLM, etc.) and proprietary (like Anthropic, OpenAI, Gemini, etc.).&lt;/p> 
+&lt;p>To learn more - check out our &lt;a href="https://docs.onyx.app/welcome?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme">docs&lt;/a>!&lt;/p> 
+&lt;hr /> 
+&lt;h2>🚀 Deployment Modes&lt;/h2> 
+&lt;blockquote> 
+ &lt;p>Onyx supports deployments in Docker, Kubernetes, Helm/Terraform and provides guides for major cloud providers. Detailed deployment guides found &lt;a href="https://docs.onyx.app/deployment/overview">here&lt;/a>.&lt;/p> 
+&lt;/blockquote> 
+&lt;p>Onyx supports two separate deployment options: standard and lite.&lt;/p> 
+&lt;h4>Onyx Lite&lt;/h4> 
+&lt;p>The Lite mode can be thought of as a lightweight Chat UI. It requires less resources (under 1GB memory) and runs a less complex stack. It is great for users who want to test out Onyx quickly or for teams who are only interested in the Chat UI and Agents functionalities.&lt;/p> 
+&lt;h4>Standard Onyx&lt;/h4> 
+&lt;p>The complete feature set of Onyx which is recommended for serious users and larger teams. Additional components not included in Lite mode:&lt;/p> 
+&lt;ul> 
+ &lt;li>Vector + Keyword index for RAG.&lt;/li> 
+ &lt;li>Background containers to run job queues and workers for syncing knowledge from connectors.&lt;/li> 
+ &lt;li>AI model inference servers to run deep learning models used during indexing and inference.&lt;/li> 
+ &lt;li>Performance optimizations for large scale use via in memory cache (Redis) and blob store (MinIO).&lt;/li> 
+&lt;/ul> 
+&lt;div class="markdown-alert markdown-alert-tip">
+ &lt;p class="markdown-alert-title">
+  &lt;svg class="octicon octicon-light-bulb mr-2" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+   &lt;path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z">&lt;/path>
+  &lt;/svg>Tip&lt;/p>
+ &lt;p>&lt;strong>To try Onyx for free without deploying, visit &lt;a href="https://cloud.onyx.app/signup?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme">Onyx Cloud&lt;/a>&lt;/strong>.&lt;/p> 
+&lt;/div> 
+&lt;hr /> 
+&lt;h2>🏢 Onyx for Enterprise&lt;/h2> 
+&lt;p>Onyx is built for teams of all sizes, from individual users to the largest global enterprises:&lt;/p> 
+&lt;ul> 
+ &lt;li>👥 Collaboration: Share chats and agents with other members of your organization.&lt;/li> 
+ &lt;li>🔐 Single Sign On: SSO via Google OAuth, OIDC, or SAML. Group syncing and user provisioning via SCIM.&lt;/li> 
+ &lt;li>🛡️ Role Based Access Control: RBAC for sensitive resources like access to agents, actions, etc.&lt;/li> 
+ &lt;li>📊 Analytics: Usage graphs broken down by teams, LLMs, or agents.&lt;/li> 
+ &lt;li>🕵️ Query History: Audit usage to ensure safe adoption of AI in your organization.&lt;/li> 
+ &lt;li>💻 Custom code: Run custom code to remove PII, reject sensitive queries, or to run custom analysis.&lt;/li> 
+ &lt;li>🎨 Whitelabeling: Customize the look and feel of Onyx with custom naming, icons, banners, and more.&lt;/li> 
+&lt;/ul> 
+&lt;h2>📚 Licensing&lt;/h2> 
+&lt;p>There are two editions of Onyx:&lt;/p> 
+&lt;ul> 
+ &lt;li>Onyx Community Edition (CE) is available freely under the MIT license and covers all of the core features for Chat, RAG, Agents, and Actions.&lt;/li> 
+ &lt;li>Onyx Enterprise Edition (EE) includes extra features that are primarily useful for larger organizations.&lt;/li> 
+&lt;/ul> 
+&lt;p>For feature details, check out &lt;a href="https://www.onyx.app/pricing?utm_source=onyx_repo&amp;amp;utm_medium=github&amp;amp;utm_campaign=readme">our website&lt;/a>.&lt;/p> 
+&lt;h2>👪 Community&lt;/h2> 
+&lt;p>Join our open source community on &lt;strong>&lt;a href="https://discord.gg/TDJ59cGV2X">Discord&lt;/a>&lt;/strong>!&lt;/p> 
+&lt;h2>💡 Contributing&lt;/h2> 
+&lt;p>Looking to contribute? Please check out the &lt;a href="https://raw.githubusercontent.com/onyx-dot-app/onyx/main/CONTRIBUTING.md">Contribution Guide&lt;/a> for more details.&lt;/p></p><a href="https://github.com/onyx-dot-app/onyx" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a></article></div></section></main><footer style="padding:40px 0;border-top:1px solid var(--border);text-align:center;"><div class="container"><p style="font-size:14px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
