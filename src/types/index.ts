@@ -8,6 +8,10 @@ export interface SourceConfig {
   title_selector?: string;
   link_selector?: string;
   content_selector?: string;
+  /** HTML 源：相对每条链接元素，用于取发布日期的选择器（如 Anthropic 列表 `div[class*="__date"]`） */
+  date_selector?: string;
+  /** HTML 源：列表项无日期时是否打开文章页解析（如 Featured 卡片） */
+  resolve_missing_article_date?: boolean;
   max_articles?: number;
   filter_categories?: string[];
 }
@@ -23,9 +27,17 @@ export interface Article {
   source?: string;
 }
 
+export interface StructuredSummary {
+  summary: string;
+  keyInsights?: string[];
+  relatedModels?: string[];
+  newModels?: string[];
+}
+
 export interface SummarizedArticle extends Article {
   summarized: boolean;
   summaryQuality?: number;
+  structuredSummary?: StructuredSummary;
 }
 
 export interface DailyReport {

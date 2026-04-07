@@ -1,6 +1,11 @@
 import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { HTMLFetcher } from '../../agents/daily-reporter/fetchers/html-fetcher.js';
+import {
+  HTMLFetcher,
+  parseEnglishDateText,
+  parseAnthropicArticleCreatedAt,
+  extractEnglishDateFromTitle,
+} from '../../agents/daily-reporter/fetchers/html-fetcher.js';
 
 describe('HTMLFetcher', () => {
   describe('constructor', () => {
@@ -28,6 +33,30 @@ describe('HTMLFetcher', () => {
       const browserSpy = mock.method(fetcher as any, 'getBrowser');
 
       assert.ok(fetcher.close);
+    });
+  });
+
+  describe('date parsing helpers', () => {
+    it('parseEnglishDateText handles Mar 25, 2026 (UTC calendar day)', () => {
+      const d = parseEnglishDateText('Mar 25, 2026');
+      assert.ok(d);
+      assert.equal(d!.getUTCFullYear(), 2026);
+      assert.equal(d!.getUTCMonth(), 2);
+      assert.equal(d!.getUTCDate(), 25);
+    });
+
+    it('parseAnthropicArticleCreatedAt reads Sanity _createdAt', () => {
+      const html = 'foo "_createdAt":"2026-02-03T21:37:23Z" bar';
+      const d = parseAnthropicArticleCreatedAt(html);
+      assert.ok(d);
+      assert.equal(d!.toISOString().slice(0, 10), '2026-02-03');
+    });
+
+    it('extractEnglishDateFromTitle strips embedded date', () => {
+      const { title, published } = extractEnglishDateFromTitle('Hello Mar 25, 2026 world');
+      assert.equal(title, 'Hello world');
+      assert.ok(published);
+      assert.equal(published!.getUTCDate(), 25);
     });
   });
 

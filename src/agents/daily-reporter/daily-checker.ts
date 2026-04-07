@@ -1,6 +1,39 @@
+import { createHash } from 'crypto';
 import { Article, SourceConfig } from '../../types/index.js';
-import { writeJSONFile, ensureDir, formatDate } from '../../utils/config.js';
+import { writeJSONFile, ensureDir, formatDate, readJSONFile } from '../../utils/config.js';
 import * as path from 'path';
+
+/** 文件名前缀，避免与 daily 目录下其它文件混淆。 */
+export const SOURCE_PROGRESS_FILE_PREFIX = 'src-';
+
+export function makeSourceSlug(source: { name: string; url: string }): string {
+  const hash = createHash('sha256').update(`${source.name}\n${source.url}`).digest('hex').slice(0, 16);
+  const ascii = source.name
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 48);
+  const prefix = ascii || 'source';
+  return `${prefix}-${hash}`;
+}
+
+/** 用于合并 progress：同一篇文不同 query/hash 视为同一链接 */
+export function normalizeArticleLink(link: string): string {
+  try {
+    const u = new URL(link);
+    u.hash = '';
+    let p = u.pathname;
+    if (p.length > 1 && p.endsWith('/')) {
+      p = p.slice(0, -1);
+    }
+    u.pathname = p;
+    return u.href.toLowerCase();
+  } catch {
+    return link.trim().toLowerCase();
+  }
+}
 
 export interface SourceCheckResult {
   sourceName: string;
@@ -33,11 +66,75 @@ export interface DailyCheckReport {
   warnings: string[];
 }
 
+/** 每源一个文件：聚合观测到的全部文章（按 link 去重） */
+export interface SourceProgressArticle {
+  title: string;
+  link: string;
+  publishedDate: string | null;
+  /** 最近一次在本次日报流程中抓取到该条时的报告日期 */
+  reportDate: string;
+  category?: string;
+  categories?: string[];
+  hasSummary: boolean;
+  summaryLength: number;
+}
+
+export interface SourceProgressFile {
+  _schema: 'ai-news-source-progress/v2';
+  sourceName: string;
+  sourceUrl: string;
+  sourceType: 'rss' | 'html';
+  updatedAt: string;
+  articles: SourceProgressArticle[];
+}
+
+/** v1 遗留（仅用于迁移） */
+interface SourceRunEntry {
+  reportDate: string;
+  articles: SourceCheckResult['articles'];
+}
+
+function migrateFileToArticles(raw: unknown): SourceProgressArticle[] {
+  if (!raw || typeof raw !== 'object') return [];
+  const o = raw as Record<string, unknown>;
+  const schema = o._schema as string | undefined;
+
+  if (schema === 'ai-news-source-progress/v2' && Array.isArray(o.articles)) {
+    return (o.articles as SourceProgressArticle[]).map(a => ({ ...a }));
+  }
+
+  if (schema === 'ai-news-source-progress/v1' && Array.isArray(o.runs)) {
+    const map = new Map<string, SourceProgressArticle>();
+    const runs = [...(o.runs as SourceRunEntry[])].sort((a, b) =>
+      a.reportDate.localeCompare(b.reportDate)
+    );
+    for (const run of runs) {
+      if (!run.articles) continue;
+      for (const a of run.articles) {
+        const key = normalizeArticleLink(a.link);
+        map.set(key, {
+          title: a.title,
+          link: a.link,
+          publishedDate: a.publishedDate,
+          reportDate: run.reportDate,
+          category: a.category,
+          categories: a.categories,
+          hasSummary: a.hasSummary,
+          summaryLength: a.summaryLength,
+        });
+      }
+    }
+    return Array.from(map.values());
+  }
+
+  return [];
+}
+
 export class DailyChecker {
   private progressDir: string;
 
-  constructor() {
-    this.progressDir = path.join(process.cwd(), '.agent', 'progress', 'daily');
+  constructor(progressDirOverride?: string) {
+    this.progressDir = progressDirOverride ?? path.join(process.cwd(), '.agent', 'progress', 'daily');
     ensureDir(this.progressDir);
   }
 
@@ -99,11 +196,59 @@ export class DailyChecker {
     report.warnings.push(warning);
   }
 
-  saveReport(report: DailyCheckReport): string {
-    const fileName = `daily-checker-${report.date}.json`;
-    const filePath = path.join(this.progressDir, fileName);
-    writeJSONFile(filePath, report);
-    return filePath;
+  /**
+   * 将当次运行中各源抓取到的文章合并进 `.agent/progress/daily/src-<slug>.json`（按 link 聚合，无 runs）。
+   */
+  persistSourceProgress(report: DailyCheckReport): string[] {
+    const written: string[] = [];
+    const now = new Date().toISOString();
+
+    for (const src of report.sources) {
+      const slug = makeSourceSlug({ name: src.sourceName, url: src.sourceUrl });
+      const fileName = `${SOURCE_PROGRESS_FILE_PREFIX}${slug}.json`;
+      const filePath = path.join(this.progressDir, fileName);
+
+      const existingRaw = readJSONFile(filePath);
+      const prior = migrateFileToArticles(existingRaw);
+      const byKey = new Map<string, SourceProgressArticle>();
+
+      for (const a of prior) {
+        byKey.set(normalizeArticleLink(a.link), { ...a });
+      }
+
+      for (const a of src.articles) {
+        const key = normalizeArticleLink(a.link);
+        const prev = byKey.get(key);
+        byKey.set(key, {
+          title: a.title,
+          link: a.link,
+          publishedDate: a.publishedDate ?? prev?.publishedDate ?? null,
+          reportDate: report.date,
+          category: a.category ?? prev?.category,
+          categories: a.categories ?? prev?.categories,
+          hasSummary: a.hasSummary,
+          summaryLength: a.summaryLength,
+        });
+      }
+
+      const articles = Array.from(byKey.values()).sort((x, y) =>
+        normalizeArticleLink(x.link).localeCompare(normalizeArticleLink(y.link))
+      );
+
+      const fileDoc: SourceProgressFile = {
+        _schema: 'ai-news-source-progress/v2',
+        sourceName: src.sourceName,
+        sourceUrl: src.sourceUrl,
+        sourceType: src.sourceType,
+        updatedAt: now,
+        articles,
+      };
+
+      writeJSONFile(filePath, fileDoc);
+      written.push(filePath);
+    }
+
+    return written;
   }
 
   generateSummary(report: DailyCheckReport): string {

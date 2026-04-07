@@ -132,9 +132,8 @@ export class DailyReporter {
     } catch (error) {
       this.logger.error('Failed to generate daily report:', error as Error);
 
-      // Still save check report with error information
+      // Fetch-phase progress 已在 fetchArticlesWithCheck 末尾落盘；此处仅记录告警
       checkReport.warnings.push(`Report generation failed: ${(error as Error).message}`);
-      this.dailyChecker.saveReport(checkReport);
 
       throw error;
     } finally {
@@ -170,19 +169,34 @@ export class DailyReporter {
   private async fetchArticlesWithCheck(checkReport: DailyCheckReport, targetDate: Date): Promise<{ allArticles: Article[] }> {
     const allArticles: Article[] = [];
 
+    // Check if target date is today
+    const todayStr = formatDate(new Date());
+    const targetDateStr = formatDate(targetDate);
+    const isToday = todayStr === targetDateStr;
+
     // Fetch from RSS sources
     if (this.config.rssSources) {
       for (const source of this.config.rssSources.filter(s => s.enabled)) {
+        // Skip GitHub Trending if not generating today's report
+        if (source.name === 'GitHub Trending Daily' && !isToday) {
+          this.logger.log(`Skipping ${source.name} (not generating today's report)`);
+          continue;
+        }
+
         const fetchStart = Date.now();
         try {
           this.logger.log(`Fetching from ${source.name}...`);
-          const articles = await this.rssFetcher.fetchFromURL(
+          let articles = await this.rssFetcher.fetchFromURL(
             source.url,
             source.name,
             source.category,
             source.filter_categories,
             source.max_articles
           );
+          if (source.name === 'GitHub Trending Daily') {
+            articles = this.stampArticlesWithReportDay(articles, targetDate);
+          }
+
           allArticles.push(...articles);
 
           const duration = Date.now() - fetchStart;
@@ -212,6 +226,8 @@ export class DailyReporter {
             title_selector: source.title_selector,
             link_selector: source.link_selector,
             content_selector: source.content_selector,
+            date_selector: source.date_selector,
+            resolve_missing_article_date: source.resolve_missing_article_date,
             category: source.category,
           };
           const articles = await this.htmlFetcher.fetchFromSource(htmlSource);
@@ -234,9 +250,10 @@ export class DailyReporter {
     // Remove duplicates based on title and link
     const uniqueArticles = this.removeDuplicates(allArticles);
 
-    // Save daily check report
-    const checkReportPath = this.dailyChecker.saveReport(checkReport);
-    this.logger.log(`Daily check report saved to: ${checkReportPath}`);
+    const progressPaths = this.dailyChecker.persistSourceProgress(checkReport);
+    this.logger.log(
+      `Source progress saved (${progressPaths.length} files) under .agent/progress/daily/`
+    );
 
     // Print summary of daily check
     this.logger.log(`\n=== Daily Check Summary ===`);
@@ -264,14 +281,21 @@ export class DailyReporter {
 
   /**
    * Filter articles to only include those published on the target date.
-   * For articles without a published date, include them (they might be from HTML sources).
+   * 无 `published` 的条目仍保留（兼容旧数据）；HTML 源在配置 `date_selector` / 详情页解析后应与 RSS 同一天规则一致。
    */
+  /** GitHub Trending RSS 无可靠 post 日期：以本次生成日报的目标日作为 published（与 fetch 当天对齐） */
+  private stampArticlesWithReportDay(articles: Article[], targetDate: Date): Article[] {
+    const ymd = formatDate(targetDate);
+    const [y, m, d] = ymd.split('-').map(Number);
+    const published = new Date(Date.UTC(y, m - 1, d));
+    return articles.map(a => ({ ...a, published }));
+  }
+
   private filterByDate(articles: Article[], targetDate: Date): Article[] {
     const targetDateStr = formatDate(targetDate);
 
     return articles.filter(article => {
       if (!article.published) {
-        // HTML sources may not have dates - include them
         return true;
       }
 

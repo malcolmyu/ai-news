@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI 日报 - 2026-04-05 - 第二号</title><span><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></span><style>
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --accent: #3b82f6;
+    --accent-light: #60a5fa;
+    --accent-dark: #2563eb;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+.header {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+.logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: var(--shadow-sm); }
+.logo-text { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 32px; }
+.nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent); }
+
+.section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+.featured-card { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s; text-decoration: none; color: inherit; }
+.featured-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.featured-content { display: flex; flex-direction: column; gap: 10px; }
+.featured-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
+.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.featured-title { font-size: 20px; font-weight: 600; }
+.featured-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.featured-arrow { width: 44px; height: 44px; background: white; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); transition: all 0.2s; }
+.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+.archive-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 40px; }
+.archive-item { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
+.archive-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.archive-item.latest { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border-color: var(--accent); }
+.archive-icon { width: 48px; height: 48px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.archive-item.latest .archive-icon { background: var(--accent); }
+.archive-content { flex: 1; }
+.archive-date { font-size: 16px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.badge-latest { padding: 2px 8px; background: #dcfce7; color: #166534; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.archive-meta { font-size: 13px; color: var(--text-secondary); }
+.archive-arrow { font-size: 20px; color: var(--text-muted); transition: all 0.2s; }
+.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+.stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
+.stats-label { font-size: 12px; opacity: 0.7; }
+
+.section { margin-bottom: 40px; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+.section-title { font-size: 20px; font-weight: 600; }
+.section-count { margin-left: auto; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-secondary); }
+.news-list { display: flex; flex-direction: column; gap: 16px; }
+.news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; display: block; text-decoration: none; color: inherit; }
+.news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--accent); }
+.news-card:hover .news-title { color: var(--accent); }
+.news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
+.news-source { color: var(--accent); font-weight: 600; }
+.news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; transition: color 0.2s; }
+.news-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+.news-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; padding: 8px 16px; background: rgba(59,130,246,0.1); border-radius: 6px; transition: all 0.2s; }
+.news-card:hover .news-link { background: var(--accent); color: white; }
+.daily-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+.daily-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white; }
+.daily-header .subtitle { font-size: 14px; opacity: 0.8; }
+
+/* Structured Summary Styles */
+.structured-summary { margin-bottom: 16px; }
+.summary-section { margin-bottom: 16px; }
+.summary-section:last-child { margin-bottom: 0; }
+.summary-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.summary-section h4::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.summary-section p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+.summary-section ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.summary-section li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.summary-section li:last-child { margin-bottom: 0; }
+
+@media (max-width: 640px) { h1 { font-size: 24px; } .news-card { padding: 16px; } }
+@media (prefers-color-scheme: dark) {
+  :root { --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border: #374151; }
+  .daily-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+}</style></head><body><header class="header"><div class="container"><div class="header-inner"><a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><a href="../index.html" class="nav-link">← 返回首页</a></div></div></header><div class="daily-header"><div class="container-sm"><div style="display:flex;justify-content:space-between;align-items:center;"><div><h1>🤖 AI 日报</h1><p class="subtitle">2026-04-05</p></div><div style="text-align:right;"><div class="stats-value">6</div><div class="stats-label">条资讯</div></div></div></div></div><main class="container-sm" style="padding-top:32px;"><section class="section"><div class="section-header"><h2 class="section-title">综合资讯</h2><span class="section-count">2 条</span></div><div class="news-list"><a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247660457&amp;idx=1&amp;sn=1e77a34aff28ace11e4d92fa738f9f64" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">AI前线</span><span>·</span><span>2026-04-05</span></div><h3 class="news-title">美团内部禁用Qwen；月之暗面将给未毕业实习生发期权；小米要全体研发人员进行AI考试｜AI周报</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>本文是一篇AI行业周报，仅提示可点击查看本周AI相关产业动态，提及了三条待展开的产业动态要闻：美团在内部禁用通义千问大模型、月之暗面将为尚未毕业的实习发放期权、小米要求全体研发人员参加AI相关考试，覆盖了互联网大厂AI布局、AI创业公司人才激励等多个AI领域的产业热点方向。</p></div><div class="summary-section"><h4>核心观点</h4><ul><li>头部互联网企业开始对内部使用的大模型工具进行管控</li><li>AI创业公司通过期权激励的方式提前锁定优秀后备人才</li><li>传统科技企业要求全体研发人员提升AI相关能力以适配业务转型</li><li>AI技术落地推进过程中企业在人才、工具管理层面都在做出调整</li></ul></div></div><div class="news-link">阅读原文 →</div></a><a href="https://baoyu.io/translations/2026-04-04/components-of-a-coding-agent" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">宝玉</span><span>·</span><span>2026-04-05</span></div><h3 class="news-title">编程���能体的核心组件【译】</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>本文是一篇翻译文章，聚焦编程智能体领域，对编程智能体的六大核心组成部分进行了深入拆解分析，分别为代码仓库上下文、提示词缓存、工具调用、上下文瘦身、会话记忆以及子智能体委派。文章在解析核心组件的基础上，进一步阐明了Coding harness对于提升大模型编程能力的关键作用，指出Coding harness是推动大模型编程能力实现跨越式提升的核心要素。</p></div><div class="summary-section"><h4>核心观点</h4><ul><li>编程智能体一共包含六大核心组件，分别为代码仓库上下文、提示词缓存、工具调用、上下文瘦身、会话记忆和子智能体委派</li><li>对编程智能体的各个核心组件进行清晰拆解，能够帮助理解编程智能体的运行逻辑</li><li>Coding harness是让大模型编程能力实现飞跃提升的关键核心</li></ul></div></div><div class="news-link">阅读原文 →</div></a></div></section><section class="section"><div class="section-header"><h2 class="section-title">开源项目</h2><span class="section-count">2 条</span></div><div class="news-list"><a href="https://github.com/Blaizzy/mlx-vlm" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">GitHub Trending Daily</span><span>·</span><span>近期</span></div><h3 class="news-title">Blaizzy/mlx-vlm</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>本文介绍了GitHub项目Blaizzy/mlx-vlm中的MLX-VLM工具包，这是一个基于MLX框架，可在Mac电脑上对视觉语言模型（VLM）及支持音视频的全场景多模态Omni模型做推理与微调开发的工具包。项目文档结构清晰，涵盖安装、多种使用方式、功能特性、模型支持与微调等内容，还为多个适配的多模态模型提供了包含提示词格式、使用示例、最佳实践的专属说明文档。</p></div></div><div class="news-link">阅读原文 →</div></a><a href="https://github.com/onyx-dot-app/onyx" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">GitHub Trending Daily</span><span>·</span><span>近期</span></div><h3 class="news-title">onyx-dot-app/onyx</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>这是GitHub开源仓库onyx-dot-app/onyx的说明文档，介绍了Onyx这一开源人工智能平台。Onyx是适配各类大语言模型的功能层，为所有人提供可轻松自行部署、功能丰富的AI对话界面，内置开箱即用的RAG检索增强生成、深度研究、网页搜索、代码执行等高级能力，还提供超过50种预置连接器，支持通过MCP对接各类自有应用，可通过一行命令快速完成部署。</p></div></div><div class="news-link">阅读原文 →</div></a></div></section><section class="section"><div class="section-header"><h2 class="section-title">AI研究</h2><span class="section-count">2 条</span></div><div class="news-list"><a href="https://www.anthropic.com/engineering/infrastructure-noise" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">Anthropic Engineering</span><span>·</span><span>近期</span></div><h3 class="news-title">专题：智能体编码评估中的基础设施噪声量化——基础设施配置可使智能体编码基准测试结果波动数个百分点，波动幅度有时甚至超过顶级模型间排行榜分差。</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>本文是针对智能体编码评估中基础设施噪声问题的专题讨论，核心关注基础设施配置对智能体编码基准测试结果的影响。文章指出，不同的基础设施配置会让智能体编码的基准测试结果出现数个百分点的波动，这种波动幅度在不少情况下已经超过了当前顶级智能体编码模型之间的排行榜分差，说明现有很多智能体编码基准测试没有排除基础设施带来的干扰，可能导致对模型实际能力的判断出现偏差，需要业内对这类基础设施噪声进行量化评估来优化测试结果的可靠性。</p></div><div class="summary-section"><h4>核心观点</h4><ul><li>基础设施配置差异会给智能体编码的基准测试带来数个百分点的结果波动</li><li>基础设施噪声带来的测试波动幅度，很多时候超过了顶级智能体编码模型之间的排行榜分差</li><li>现有智能体编码评估往往忽略基础设施噪声的干扰，容易造成模型能力评估偏差</li><li>智能体编码评估领域需要对基础设施噪声进行量化，才能提升基准测试结果的可靠性</li></ul></div></div><div class="news-link">阅读原文 →</div></a><a href="https://www.anthropic.com/engineering/claude-code-auto-mode" class="news-card" target="_blank" rel="noopener noreferrer"><div class="news-meta"><span class="news-source">Anthropic Engineering</span><span>·</span><span>近期</span></div><h3 class="news-title">Claude Code自动模式：一种更安全的跳过权限方式 2026年3月25日</h3><div class="structured-summary"><div class="summary-section"><h4>摘要</h4><p>本文围绕Claude Code自动模式展开，探讨了该模式下一种无需修改核心程序、绕过原有权限校验的新方式。该方法相比传统直接修改权限配置或破解校验逻辑的方案，不会对原程序的完整性造成破坏，也降低了操作后程序出现异常、触发安全检测的风险，适合需要在不改动原有Claude Code项目结构的前提下启用自动化全权限运行流程的场景，文章发布于2026年3月25日。</p></div><div class="summary-section"><h4>核心观点</h4><ul><li>Claude Code自动模式可通过非侵入式方案跳过原有权限校验，相比修改源码的方式安全性更高</li><li>该跳过权限的方式不会破坏原程序的完整性，降低了触发安全检测和程序运行异常的概率</li><li>该方案适配需要启用全自动化Claude Code工作流、又保留原项目结构的使用需求</li><li>非侵入式权限绕过是比传统破解、修改权限配置更温和合规的方案</li></ul></div></div><div class="news-link">阅读原文 →</div></a></div></section></main><footer style="padding:40px 0;border-top:1px solid var(--border);text-align:center;"><div class="container"><p style="font-size:14px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>

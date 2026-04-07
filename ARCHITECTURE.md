@@ -20,7 +20,7 @@ CLI 入口，基于 `commander` 构建。所有子命令（`daily`、`research`�
 
 - **`daily-reporter/`** — 从 RSS 和 HTML 源抓取文章，调用火山方舟（OpenAI 兼容）或 OpenRouter 进行摘要，生成 `docs/daily/ai-news-YYYY-MM-DD.html`。
   - `fetchers/rss-fetcher.ts` — RSS/Atom feed 抓取器
-  - `fetchers/html-fetcher.ts` — Playwright headless 浏览器抓取器（用于 SPA 页面）
+  - `fetchers/html-fetcher.ts` — Playwright headless 浏览器抓取器（用于 SPA）；可选 `date_selector` 取列表日期，`resolve_missing_article_date` 对无日期卡片请求文章页解析 Sanity `_createdAt`
   - `summarizer.ts` — OpenAI 兼容 API（`ANTHROPIC_*` 火山方舟优先，否则 `OPENROUTER_*`）摘要调用
   - `generator.ts` — 调用 `src/renderer/` 渲染 HTML
   - `DailyReportPage.tsx` — SolidJS 日报页面组件
@@ -78,6 +78,7 @@ GitHub Pages 的输出目录，完全由构建流水线生成。永远不要手�
 |------|------|
 | `.agent/init.sh` | 环境验证入口：Node 版本 + build + Playwright 健康检查 |
 | `.agent/feature_list.json` | 各 pipeline 的健康状态（唯一事实来源） |
+| `.agent/progress/daily/src-*.json` | 各源抓取进度 **v2**：`articles` 按 link 聚合，含 `publishedDate` 与 `reportDate`（旧 v1 `runs` 会在下次 persist 时迁移） |
 | `.agent/claude-progress.md` | 跨会话进度日志 |
 | `.agent/clean-state-checklist.md` | 会话结束前的自检清单 |
 | `.agent/evaluator/daily-report-harness.md` | 日报生成的质量门禁（来源配额、摘要规范、HTML 结构等） |

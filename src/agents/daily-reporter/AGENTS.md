@@ -24,10 +24,12 @@ harness/content-harness/SKILL.md
 | `summarizer.ts` | 调用 OpenAI 兼容 API 批量摘要（`ANTHROPIC_*` 火山方舟优先） |
 | `check-sources.ts` | 验证配置中各 RSS/HTML 来源的可用性 |
 | `fetchers/rss-fetcher.ts` | 抓取 RSS 源 |
-| `fetchers/html-fetcher.ts` | 抓取 HTML 页面并解析文章列表 |
+| `fetchers/html-fetcher.ts` | 抓取 HTML 页面并解析文章列表；支持 `date_selector` / `resolve_missing_article_date` |
+| `daily-checker.ts` | 单次运行汇总 + 按源写入 `src-<slug>.json`（**v2** `articles` 聚合去重，含 `reportDate`） |
 
 ## 关键常量
 
 - `MAX_ARTICLES_PER_SOURCE = 2`（代码层硬限制，harness 层限制为 3，取严格值）
 - 日报输出目录：`docs/daily/`
 - 归档数据文件：`data/daily/archives.json`
+- 源进度日志：`.agent/progress/daily/src-*.json`（每源一个文件，文章全集 + `reportDate`）

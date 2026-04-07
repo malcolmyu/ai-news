@@ -1,6 +1,6 @@
 import { For } from 'solid-js';
 import { Layout } from '../../renderer/components/Layout.js';
-import { DailyReport, SummarizedArticle } from '../../types/index.js';
+import { DailyReport, SummarizedArticle, StructuredSummary } from '../../types/index.js';
 import { formatDate } from '../../utils/config.js';
 
 const DAILY_CSS = `
@@ -9,17 +9,58 @@ const DAILY_CSS = `
 .section-title { font-size: 20px; font-weight: 600; }
 .section-count { margin-left: auto; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-secondary); }
 .news-list { display: flex; flex-direction: column; gap: 16px; }
-.news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; }
-.news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.news-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; display: block; text-decoration: none; color: inherit; }
+.news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--accent); }
+.news-card:hover .news-title { color: var(--accent); }
 .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
 .news-source { color: var(--accent); font-weight: 600; }
-.news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; }
+.news-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); line-height: 1.4; transition: color 0.2s; }
 .news-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
 .news-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; padding: 8px 16px; background: rgba(59,130,246,0.1); border-radius: 6px; transition: all 0.2s; }
-.news-link:hover { background: var(--accent); color: white; }
+.news-card:hover .news-link { background: var(--accent); color: white; }
 .daily-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
 .daily-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white; }
 .daily-header .subtitle { font-size: 14px; opacity: 0.8; }
+
+/* Structured Summary Styles */
+.structured-summary { margin-bottom: 16px; }
+.summary-section { margin-bottom: 16px; }
+.summary-section:last-child { margin-bottom: 0; }
+.summary-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.summary-section h4::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.summary-section p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+.summary-section ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.summary-section li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.summary-section li:last-child { margin-bottom: 0; }
+
 @media (max-width: 640px) { h1 { font-size: 24px; } .news-card { padding: 16px; } }
 @media (prefers-color-scheme: dark) {
   :root { --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border: #374151; }
@@ -28,17 +69,52 @@ const DAILY_CSS = `
 
 function ArticleCard(props: { article: SummarizedArticle }) {
   const dateDisplay = props.article.published ? formatDate(new Date(props.article.published)) : '近期';
+  const structuredSummary = props.article.structuredSummary;
+  const isGitHubTrending = props.article.source === 'GitHub Trending Daily';
+
   return (
-    <article class="news-card">
+    <a href={props.article.link} class="news-card" target="_blank" rel="noopener noreferrer">
       <div class="news-meta">
         <span class="news-source">{props.article.source || ''}</span>
         <span>·</span>
         <span>{dateDisplay}</span>
       </div>
       <h3 class="news-title">{props.article.title}</h3>
-      <p class="news-summary">{props.article.summary || ''}</p>
-      <a href={props.article.link} class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
+
+      {/* 结构化摘要展示 */}
+      {structuredSummary ? (
+        <div class="structured-summary">
+          {/* 对 GitHub Trending 只显示摘要 */}
+          {isGitHubTrending ? (
+            <div class="summary-section">
+              <h4>摘要</h4>
+              <p>{structuredSummary.summary}</p>
+            </div>
+          ) : (
+            // 其他源显示完整结构化摘要
+            <>
+              <div class="summary-section">
+                <h4>摘要</h4>
+                <p>{structuredSummary.summary}</p>
+              </div>
+
+              {structuredSummary.keyInsights && structuredSummary.keyInsights.length > 0 && (
+                <div class="summary-section">
+                  <h4>核心观点</h4>
+                  <ul>
+                    <For each={structuredSummary.keyInsights}>{(insight) => <li>{insight}</li>}</For>
+                  </ul>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      ) : (
+        <p class="news-summary">{props.article.summary || ''}</p>
+      )}
+
+      <div class="news-link">阅读原文 →</div>
+    </a>
   );
 }
 

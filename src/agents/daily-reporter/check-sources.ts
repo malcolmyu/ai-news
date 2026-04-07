@@ -123,6 +123,8 @@ class SourceChecker {
         title_selector: source.title_selector,
         link_selector: source.link_selector,
         content_selector: source.content_selector,
+        date_selector: source.date_selector,
+        resolve_missing_article_date: source.resolve_missing_article_date,
         category: source.category,
       };
 

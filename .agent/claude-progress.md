@@ -4,6 +4,17 @@
 
 ---
 
+## 最新状态（2026-04-05）
+
+**当前分支：** `malcolmyu/auckland`  
+**上次会话完成：** Daily progress 改为按源滚动日志（`.agent/progress/daily/src-*.json`），删除旧 `daily-checker-*.json`  
+**验证状态：** `npm run build` ✅ | `npm run test` ✅（34/35 通过；`rss-fetcher.test.js` 仍有既有 async 告警失败）  
+
+**本次开工前需要了解的背景：**
+- `.agent/progress/daily/` 下为每源一个 `src-<slug>.json`，每条保留最近约 25 次运行；见 `src/agents/daily-reporter/daily-checker.ts`
+
+---
+
 ## 最新状态（2026-04-04）
 
 **当前分支：** `malcolmyu/auckland`  
@@ -17,6 +28,21 @@
 - `config/sources.yaml` 所有源均 `enabled: true`，其中 ampcode.com 仍返回 0 篇（selector 需微调，低优先级）
 - 5 个 HTML 源抓取状况：Manus(49)、Cognition(28)、Cline(49)、AmpCode(0)、Anthropic(21)
 - 已添加完整的单元测试框架，使用 Node.js 内置 `node:test`
+
+---
+
+## 2026-04-05 — 按信息源 progress 日志
+
+**做了什么：**
+- `daily-checker.ts`：`persistSourceProgress` 写入 **v2** `src-<slug>.json`（`articles` 按 link 合并，记录 `publishedDate` / `reportDate`）；旧 v1 `runs` 首次写入时会迁移
+- 移除按日 `daily-checker-YYYY-MM-DD.json` 写入；删除仓库内既有 5 个旧文件
+- `index.ts`：抓取结束后仅调用 `persistSourceProgress`；失败路径不再重复落盘
+- 新增 `src/test/daily-reporter/daily-checker.test.ts`（4 个测试）
+- 更新 `ARCHITECTURE.md`、`src/agents/daily-reporter/AGENTS.md`；计划归档至 `.agent/plans/complete/2026-04-05-per-source-daily-progress.md`
+
+**验证证据：**
+- `npm run build` ✅
+- `npm run test`：34 pass，1 fail（`rss-fetcher` 既有问题）
 
 ---
 

@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import * as fs from 'fs';
 import * as path from 'path';
-import type { Article, SummarizedArticle } from '../../types/index.js';
+import type { Article, SummarizedArticle, StructuredSummary } from '../../types/index.js';
 
 export class Summarizer {
   private openai: OpenAI;
@@ -73,25 +73,110 @@ export class Summarizer {
     throw lastError || new Error('All summarization attempts failed');
   }
 
+  // 判断标题是否主要包含英文
+  private isEnglishTitle(title: string): boolean {
+    // 统计中文字符数量
+    const chineseCount = (title.match(/[\u4e00-\u9fa5]/g) || []).length;
+    // 统计英文和数字字符数量
+    const englishCount = (title.match(/[a-zA-Z0-9]/g) || []).length;
+
+    // 如果英文数字字符数量远多于中文字符，认为是英文标题
+    return englishCount > chineseCount * 2;
+  }
+
   async summarizeArticle(article: Article): Promise<SummarizedArticle | null> {
     try {
-      const prompt = this.buildSummaryPrompt(article);
+      // 处理英文标题翻译
+      let translatedTitle = article.title;
 
-      const summary = await this.generateSummaryWithRetry(prompt);
+      // 只对非 GitHub Trending 的自然语言标题进行翻译
+      const isGitHubTrending = article.source === 'GitHub Trending Daily';
+      const shouldTranslate = this.isEnglishTitle(article.title) && !isGitHubTrending;
 
-      if (!summary || summary.length < 50) {
+      if (shouldTranslate) {
+        try {
+          console.log(`Translating English title: ${article.title}`);
+          const translatePrompt = `Translate the following article title from English to Chinese. Return only the translated title, no other text: "${article.title}"`;
+          const translateResult = await this.generateSummaryWithRetry(translatePrompt);
+          if (translateResult && translateResult.trim() && translateResult.trim().length > 5) {
+            translatedTitle = translateResult.trim();
+            console.log(`Translated to: ${translatedTitle}`);
+          }
+        } catch (translateError) {
+          console.warn(`Failed to translate title: ${article.title}`, translateError);
+        }
+      }
+
+      const prompt = this.buildSummaryPrompt(article, translatedTitle);
+
+      const summaryResult = await this.generateSummaryWithRetry(prompt);
+
+      let structuredSummary: StructuredSummary | undefined;
+      let plainSummary: string;
+
+      // Try to parse structured JSON summary
+      try {
+        // 提取可能包含在文本中的JSON部分
+        let jsonStr = summaryResult;
+        const startIndex = jsonStr.indexOf('{');
+        const endIndex = jsonStr.lastIndexOf('}');
+        if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+          jsonStr = jsonStr.substring(startIndex, endIndex + 1);
+        }
+
+        // 更简单的方法：只尝试解析，如果失败，手动提取字段
+        let parsed: any = {};
+        try {
+          parsed = JSON.parse(jsonStr);
+        } catch (jsonError) {
+          // JSON解析失败，尝试手动解析摘要
+          console.warn('JSON parsing failed, trying manual extraction');
+          // 尝试提取summary字段
+          const summaryMatch = jsonStr.match(/"summary":\s*"([^"]*)/);
+          if (summaryMatch && summaryMatch[1]) {
+            parsed.summary = summaryMatch[1];
+          }
+        }
+
+        // 检查是否有summary字段
+        if (parsed.summary) {
+          structuredSummary = {
+            summary: parsed.summary || '',
+            keyInsights: Array.isArray(parsed.keyInsights) ? parsed.keyInsights : [],
+            relatedModels: Array.isArray(parsed.relatedModels) ? parsed.relatedModels : [],
+            newModels: Array.isArray(parsed.newModels) ? parsed.newModels : []
+          };
+          plainSummary = structuredSummary.summary;
+        } else {
+          // 没有有效的summary，使用普通文本
+          throw new Error('No valid summary field found');
+        }
+      } catch (parseError) {
+        // If JSON parsing fails, treat as plain text
+        console.warn('Failed to parse structured summary, using plain text');
+        plainSummary = summaryResult;
+      }
+
+      if (!plainSummary || plainSummary.length < 50) {
         console.warn(`Summary too short for: ${article.title.substring(0, 50)}...`);
         return null;
       }
 
-      const qualityScore = this.estimateQuality(summary);
+      const qualityScore = this.estimateQuality(plainSummary);
 
-      return {
+      const result: SummarizedArticle = {
         ...article,
-        summary,
+        title: translatedTitle,  // 使用翻译后的标题
+        summary: plainSummary,
         summarized: true,
         summaryQuality: qualityScore
       };
+
+      if (structuredSummary) {
+        result.structuredSummary = structuredSummary;
+      }
+
+      return result;
 
     } catch (error) {
       console.error('Error summarizing article:', error);
@@ -133,20 +218,22 @@ export class Summarizer {
     return results;
   }
 
-  private buildSummaryPrompt(article: Article): string {
+  private buildSummaryPrompt(article: Article, translatedTitle?: string): string {
     const content = article.content || article.summary || '';
+    const titleToUse = translatedTitle || article.title;
 
     return `Summarize the following article in ${this.getTargetLanguage()}:
 
-Title: ${article.title}
+Title: ${titleToUse}
 Content: ${content.substring(0, 4000)}
 
-Please provide a concise summary that captures:
-1. Main topic and key points
-2. Significant insights or findings
-3. Practical implications if any
+Please provide a structured summary in JSON format with the following fields:
+1. summary: A concise overall summary of the article (80-200 words)
+2. keyInsights: 3-5 core points or key insights from the article
+3. relatedModels: Any existing thinking models, frameworks, or concepts that this article relates to
+4. newModels: Any new thinking models or approaches introduced or suggested in this article
 
-Summary (80-200 words):`;
+Return ONLY valid JSON.`;
   }
 
   private getTargetLanguage(): string {

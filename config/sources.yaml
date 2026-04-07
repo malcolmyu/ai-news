@@ -47,13 +47,13 @@ rss_sources:
     max_articles: 3  # 只取前3篇
 
   # WeChat 公众号源
-  - name: "WeChat 1"
+  - name: "产品沉思录 PMThinking"
     url: "https://wechat2rss-production-0187.up.railway.app/feed/3926358060.xml"
     category: "综合资讯"
     enabled: true
     max_articles: 3
 
-  - name: "WeChat 2"
+  - name: "AI前线"
     url: "https://wechat2rss.bestblogs.dev/feed/25185b01482da0f485418ecb92e208b4416712fb.xml"
     category: "综合资讯"
     enabled: true
@@ -80,6 +80,11 @@ html_sources:
     max_articles: 2
     selector: "a[href*='/engineering/']"
     link_selector: "a[href*='/engineering/']"
+    # 仅取标题节点，避免 a 整体 textContent 混入日期/Featured 文案
+    title_selector: "h2, h3"
+    # 列表卡片内日期；Featured 无日期则打开文章页解析 Sanity 的 _createdAt；仍无则尝试从标题解析英文日期
+    date_selector: 'div[class*="__date"]'
+    resolve_missing_article_date: true
 
 # 配置参数
 settings:

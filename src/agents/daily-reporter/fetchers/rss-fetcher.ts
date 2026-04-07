@@ -14,6 +14,25 @@ export class RSSFetcher {
     this.timeout = timeout;
   }
 
+  private toSafeString(value: any): string {
+    if (typeof value === 'string') return value;
+    if (value == null) return '';
+    if (typeof value === 'object') {
+      // xml2js sometimes yields objects like { _: 'Engineering', $: {...} }
+      if (typeof (value as any)._ === 'string') return (value as any)._;
+      try {
+        return JSON.stringify(value);
+      } catch {
+        // ignore
+      }
+    }
+    try {
+      return String(value);
+    } catch {
+      return '';
+    }
+  }
+
   async fetchFromURL(urlStr: string, name: string, category?: string, filterCategories?: string[], maxArticles?: number): Promise<Article[]> {
     try {
       console.log(`Fetching RSS: ${urlStr}`);
@@ -47,10 +66,14 @@ export class RSSFetcher {
 
       // Apply category filtering if specified
       if (filterCategories && filterCategories.length > 0) {
-        articles = articles.filter(article =>
-          article.categories &&
-          article.categories.some(cat => filterCategories.includes(cat))
-        );
+        const allow = new Set(filterCategories.map(c => this.toSafeString(c)).filter(Boolean));
+        articles = articles.filter(article => {
+          if (!article.categories || article.categories.length === 0) return false;
+          return article.categories
+            .map(cat => this.toSafeString(cat))
+            .filter(Boolean)
+            .some(cat => allow.has(cat));
+        });
       }
 
       // Apply max articles limit if specified
@@ -88,9 +111,10 @@ export class RSSFetcher {
       const categories: string[] = [];
       if (item.category) {
         if (Array.isArray(item.category)) {
-          categories.push(...item.category.map((cat: any) => cat.toString()));
+          categories.push(...item.category.map((cat: any) => this.toSafeString(cat)).filter(Boolean));
         } else {
-          categories.push(item.category.toString());
+          const v = this.toSafeString(item.category);
+          if (v) categories.push(v);
         }
       }
 
@@ -133,9 +157,21 @@ export class RSSFetcher {
       const categories: string[] = [];
       if (entry.category) {
         if (Array.isArray(entry.category)) {
-          categories.push(...entry.category.map((cat: any) => cat.$.term || cat.toString()));
+          categories.push(
+            ...entry.category
+              .map((cat: any) =>
+                cat && typeof cat === 'object' && typeof cat.$?.term === 'string'
+                  ? cat.$.term
+                  : this.toSafeString(cat)
+              )
+              .filter(Boolean)
+          );
         } else {
-          categories.push(entry.category.$.term || entry.category.toString());
+          const v =
+            entry.category && typeof entry.category === 'object' && typeof entry.category.$?.term === 'string'
+              ? entry.category.$.term
+              : this.toSafeString(entry.category);
+          if (v) categories.push(v);
         }
       }
 
