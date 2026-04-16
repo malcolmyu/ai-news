@@ -37,12 +37,14 @@
       "name": "调研报告发布",
       "description": "将 data/research/ 下的 HTML 报告同步到 docs/research/，维护归档索引",
       "status": "healthy",
-      "last_success": "2026-03-31",
+      "last_success": "2026-04-16",
       "last_output": "docs/research/archive.html",
       "verify_cmd": "node dist/main.js research 2>&1 | tail -3",
       "key_files": [
+        "src/agents/research-agent/index.ts",
         "src/agents/research-manager/index.ts",
-        "src/agents/research-manager/ResearchArchivePage.tsx"
+        "src/agents/research-manager/ResearchArchivePage.tsx",
+        "docker-compose.research.yml"
       ]
     },
     {

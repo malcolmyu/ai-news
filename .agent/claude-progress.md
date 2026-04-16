@@ -4,6 +4,19 @@
 
 ---
 
+## 最新状态（2026-04-16）
+
+**当前分支：** `malcolmyu/auckland`  
+**上次会话完成：** GPT-Researcher 深度调研系统 Docker 及 CLI 集成  
+**验证状态：** `npm run build` ✅ | Docker 容器正常启动 ✅ | 深调研 WebSocket 连接正常 ✅
+
+**本次开工前需要了解的背景：**
+- `npm run research -- conduct <query>` 会通过 WebSocket 连向本地 `localhost:8000` (GPT-Researcher)
+- 依赖于正确的 OpenRouter 及 Tavily API Key
+- `research-manager` 在调研完毕后会自动写入 `docs/research/` 并触发网站重建
+
+---
+
 ## 最新状态（2026-04-05）
 
 **当前分支：** `malcolmyu/auckland`  

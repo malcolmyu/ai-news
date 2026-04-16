@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>调研报告归档 - 第二号</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>调研报告归档 - 第二号</title><span><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></span><style>
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
@@ -24,9 +16,7 @@
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg-primary);
@@ -34,209 +24,50 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.container-sm {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-        
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.8);
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.8);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-light);
     z-index: 100;
 }
-
-.header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 64px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--text-primary);
-}
-
-.logo-icon {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: var(--shadow-sm);
-}
-
-.logo-text {
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-}
-
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+.logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: var(--shadow-sm); }
+.logo-text { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
 .nav { display: flex; gap: 32px; }
-
-.nav-link {
-    font-size: 14px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
+.nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
 .nav-link:hover { color: var(--accent); }
 
-        
-      .rch-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
-      .rch-header h1 { font-size: 28px; font-weight: 700; color: white; }
-      .rch-header .subtitle { font-size: 14px; opacity: 0.8; margin-top: 4px; }
-      .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
-      .featured-card { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s; text-decoration: none; color: inherit; }
-      .featured-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-      .featured-content { display: flex; flex-direction: column; gap: 10px; }
-      .featured-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
-      .featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 600; }
-      .featured-title { font-size: 20px; font-weight: 600; }
-      .featured-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-      .featured-arrow { width: 44px; height: 44px; background: white; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); transition: all 0.2s; }
-      .featured-card:hover .featured-arrow { background: var(--accent); color: white; }
-      .archive-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 40px; }
-      .archive-item { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
-      .archive-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-      .archive-icon { width: 48px; height: 48px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-      .archive-arrow { font-size: 20px; color: var(--text-muted); transition: all 0.2s; }
-      .archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
-      .stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
-      .stats-label { font-size: 12px; opacity: 0.7; }
-    </style>
-</head>
-<body>
+.section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+.featured-card { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s; text-decoration: none; color: inherit; }
+.featured-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.featured-content { display: flex; flex-direction: column; gap: 10px; }
+.featured-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
+.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.featured-title { font-size: 20px; font-weight: 600; }
+.featured-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.featured-arrow { width: 44px; height: 44px; background: white; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); transition: all 0.2s; }
+.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+.archive-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 40px; }
+.archive-item { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
+.archive-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.archive-item.latest { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border-color: var(--accent); }
+.archive-icon { width: 48px; height: 48px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.archive-item.latest .archive-icon { background: var(--accent); }
+.archive-content { flex: 1; }
+.archive-date { font-size: 16px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.badge-latest { padding: 2px 8px; background: #dcfce7; color: #166534; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.archive-meta { font-size: 13px; color: var(--text-secondary); }
+.archive-arrow { font-size: 20px; color: var(--text-muted); transition: all 0.2s; }
+.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+.stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
+.stats-label { font-size: 12px; opacity: 0.7; }
 
-    <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="../index.html" class="logo">
-          <div class="logo-icon">🤖</div>
-          <span class="logo-text">第二号</span>
-        </a>
-        <a href="../index.html" class="nav-link">← 返回首页</a>
-      </div>
-    </div>
-  </header>
-    <div class="rch-header">
-      <div class="container-sm">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-          <div>
-            <h1>📊 调研报告归档</h1>
-            <div class="subtitle">Research Reports Archive</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="stats-value">6</div>
-            <div class="stats-label">调研报告</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <main class="container-sm">
-      
-      <div class="section-label">Featured</div>
-      <a href="undefined" class="featured-card">
-        <div class="featured-content">
-          <div class="featured-meta">
-            <span class="featured-badge">最新</span>
-            <span></span>
-          </div>
-          <h3 class="featured-title">移动端应用趋势分析 - 2026年Q1</h3>
-          <p class="featured-desc">深入分析移动端应用发展趋势，包括AI原生应用、跨平台解决方案、性能优化趋势等</p>
-        </div>
-        <div class="featured-arrow">→</div>
-      </a>
-      <div class="section-label">History</div>
-      <div class="archive-list">
-      <a href="undefined" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">移动端应用趋势分析 - 2026年Q1</div>
-          <div style="font-size:13px;color:var(--text-secondary);">mobile</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a>
-
-      <a href="undefined" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Harness约束控制层架构设计</div>
-          <div style="font-size:13px;color:var(--text-secondary);">architecture</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a>
-
-      <a href="undefined" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Thinking System知识体系构建</div>
-          <div style="font-size:13px;color:var(--text-secondary);">knowledge</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a>
-
-      <a href="undefined" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Web开发者体验优化策略</div>
-          <div style="font-size:13px;color:var(--text-secondary);">developer-experience</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a>
-
-      <a href="undefined" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">AI新闻自动化生成系统评估</div>
-          <div style="font-size:13px;color:var(--text-secondary);">automation</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a>
-
-      <a href="harness-engineering.html" class="archive-item">
-        <div class="archive-icon">📊</div>
-        <div class="archive-content">
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">2026/3/31</div>
-          <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Harness Engineering 深度调研：如何通过约束层提升 Agent 鲁棒性</div>
-          <div style="font-size:13px;color:var(--text-secondary);">架构与工程</div>
-        </div>
-        <div class="archive-arrow">→</div>
-      </a></div>
-    </main>
-    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
-    <div class="container">
-      <p style="font-size: 14px; color: var(--text-muted);">
-        🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中
-      </p>
-    </div>
-  </footer>
-</body>
-</html>
+.rch-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+.rch-header h1 { font-size: 28px; font-weight: 700; color: white; }
+.rch-header .subtitle { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+</style></head><body><header class="header"><div class="container"><div class="header-inner"><a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><a href="../index.html" class="nav-link">← 返回首页</a></div></div></header><div class="rch-header"><div class="container-sm"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;"><div><h1>📊 调研报告归档</h1><div class="subtitle">Research Reports Archive</div></div><div style="text-align:right;"><div class="stats-value">6</div><div class="stats-label">调研报告</div></div></div></div></div><main class="container-sm"><div class="section-label">Featured</div><a class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span></span></div><h3 class="featured-title">移动端应用趋势分析 - 2026年Q1</h3><p class="featured-desc">深入分析移动端应用发展趋势，包括AI原生应用、跨平台解决方案、性能优化趋势等</p></div><div class="featured-arrow">→</div></a><div class="section-label">History</div><div class="archive-list"><a class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">移动端应用趋势分析 - 2026年Q1</div><div style="font-size:13px;color:var(--text-secondary);">mobile</div></div><div class="archive-arrow">→</div></a><a class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">Harness约束控制层架构设计</div><div style="font-size:13px;color:var(--text-secondary);">architecture</div></div><div class="archive-arrow">→</div></a><a class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">Thinking System知识体系构建</div><div style="font-size:13px;color:var(--text-secondary);">knowledge</div></div><div class="archive-arrow">→</div></a><a class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">Web开发者体验优化策略</div><div style="font-size:13px;color:var(--text-secondary);">developer-experience</div></div><div class="archive-arrow">→</div></a><a class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;"></div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">AI新闻自动化生成系统评估</div><div style="font-size:13px;color:var(--text-secondary);">automation</div></div><div class="archive-arrow">→</div></a><a href="temp_research.md" class="archive-item"><div class="archive-icon">📊</div><div class="archive-content"><div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">2026/4/16</div><div style="font-size:16px;font-weight:600;margin-bottom:4px;">harness engineering</div><div style="font-size:13px;color:var(--text-secondary);">deep-research</div></div><div class="archive-arrow">→</div></a></div></main><footer style="padding:40px 0;border-top:1px solid var(--border);text-align:center;"><div class="container"><p style="font-size:14px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
