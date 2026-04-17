@@ -102,7 +102,9 @@ researchCmd
       
       const fs = await import('fs');
       const path = await import('path');
-      const tempPath = path.join(process.cwd(), 'data', 'temp_research.md');
+      const slugify = (str: string) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      const fileName = `${slugify(query)}.md`;
+      const tempPath = path.join(process.cwd(), 'data', fileName);
       fs.writeFileSync(tempPath, markdown, 'utf-8');
       
       console.log('✅ Research generated. Adding to Manager...');

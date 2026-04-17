@@ -22,7 +22,7 @@ export class DeepResearchAgent {
         this.logger.log('Connected to backend, initiating task...');
         // gpt-researcher expects a special "start JSON" format on the websocket
         const requestData = {
-          task: query,
+          task: `${query} (必须全篇使用中文撰写报告，包括所有小标题和正文)`,
           report_type: 'research_report',
           report_source: 'web',
           tone: 'Objective',
