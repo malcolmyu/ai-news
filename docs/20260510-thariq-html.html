@@ -94,41 +94,32 @@ body {
 .ab-body strong { color: #f7f8f8; font-weight: 600; }
 .ab-body .accent-text { color: #7170ff; }
 
-/* Page 3 - How-to */
-.ht-title {
-  font-size: 64px; font-weight: 800; color: #f7f8f8;
-  margin-bottom: 24px; line-height: 1.2; flex-shrink: 0;
+/* Pages 3-7: Use Case Pages (large image + single insight) */
+.ucd-container {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden;
 }
-.ht-grid {
-  flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-  align-content: start;
+.ucd-headline {
+  font-size: 52px; font-weight: 800; color: #f7f8f8;
+  margin-bottom: 20px; flex-shrink: 0; line-height: 1.2;
 }
-.ht-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 14px; padding: 18px 22px;
-  display: flex; flex-direction: column; gap: 4px;
+.ucd-img-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; overflow: hidden;
 }
-.ht-num {
-  font-size: 28px; font-weight: 600; color: #7170ff;
-  letter-spacing: 0.05em; margin-bottom: 2px;
+.ucd-img-wrap img {
+  max-height: 100%; max-width: 100%;
+  width: auto; height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  object-fit: contain;
 }
-.ht-name {
-  font-size: 40px; font-weight: 700; color: #f7f8f8;
-  line-height: 1.25; margin-bottom: 2px;
+.ucd-insight {
+  flex-shrink: 0;
+  font-size: 48px; font-weight: 400; color: #a0a5b0;
+  line-height: 1.5;
 }
-.ht-principle {
-  font-size: 30px; font-weight: 400; color: #a0a5b0;
-  line-height: 1.4;
-}
-.ht-ptag {
-  font-size: 22px; font-weight: 400; color: #7170ff;
-  font-family: 'SF Mono', 'Menlo', monospace;
-  line-height: 1.4; margin-top: 4px;
-  background: rgba(113,112,255,0.08);
-  border-radius: 8px; padding: 6px 10px;
-  word-break: break-all;
-}
+.ucd-insight strong { color: #f7f8f8; font-weight: 600; }
 
 /* Footer */
 .card-footer {
@@ -168,11 +159,11 @@ body {
 <body>
 <div class="viewer" id="viewer">
 
-  <!-- Page 1: 名人名言 -->
+  <!-- Page 1: 核心观点 -->
   <div class="card active" id="page0">
     <div class="page-top">
       <span class="label">⚡ 核心观点</span>
-      <span class="page-num">01 / 03</span>
+      <span class="page-num">01 / 07</span>
     </div>
     <div class="pc-headline">
       我越来越倾向于用<br>
@@ -193,11 +184,11 @@ body {
     </div>
   </div>
 
-  <!-- Page 2: 观点解析 -->
+  <!-- Page 2: 为什么 HTML -->
   <div class="card" id="page1">
     <div class="page-top">
       <span class="label">🧠 为什么是 HTML</span>
-      <span class="page-num">02 / 03</span>
+      <span class="page-num">02 / 07</span>
     </div>
     <div class="analysis-title">三个不可替代的优势</div>
     <div class="analysis-body">
@@ -226,37 +217,103 @@ body {
     </div>
   </div>
 
-  <!-- Page 3: 怎么做 -->
+  <!-- Page 3: 方案规划与探索 -->
   <div class="card" id="page2">
     <div class="page-top">
-      <span class="label">⚡ 怎么做</span>
-      <span class="page-num">03 / 03</span>
+      <span class="label">📍 方案规划与探索</span>
+      <span class="page-num">03 / 07</span>
     </div>
-    <div class="ht-title">四条实操法则（附 Prompt）</div>
-    <div class="ht-grid">
-      <div class="ht-card">
-        <div class="ht-num">法则 01</div>
-        <div class="ht-name">直接说「做 HTML」</div>
-        <div class="ht-principle">不需要 skill / 插件，一句 "make a HTML artifact" 即可开始</div>
-        <div class="ht-ptag">"Create a thorough implementation plan in a HTML file with mockups, data flow and code snippets"</div>
+    <div class="ucd-container">
+      <div class="ucd-headline">方案规划与探索</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260510/thariq-specs.jpg" alt="方案规划与探索示例截图">
       </div>
-      <div class="ht-card">
-        <div class="ht-num">法则 02</div>
-        <div class="ht-name">永远加导出按钮</div>
-        <div class="ht-principle">'Copy as prompt' 把 UI 操作转回可粘贴的 prompt，形成闭环</div>
-        <div class="ht-ptag">"Make me a draggable card editor. Add a 'copy as markdown' button that exports the final ordering"</div>
+      <div class="ucd-insight">
+        HTML 能在单页内平铺 6 种方案对比网格，标注每个的取舍。Markdown 做不到这种视觉化对比——你只能在多个文件间来回切换。HTML 把探索过程做成可交互的「方案网络」，从不确定到收敛再到验证，全程可视化。
       </div>
-      <div class="ht-card">
-        <div class="ht-num">法则 03</div>
-        <div class="ht-name">一次一个痛点</div>
-        <div class="ht-principle">每个 HTML 只解决一个问题：审 PR、调参数、排 ticket，用完即弃</div>
-        <div class="ht-ptag">"Build a form editor for our feature flag config. Add a 'copy diff' button that gives me just the changed keys"</div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 4: 代码审查与理解 -->
+  <div class="card" id="page3">
+    <div class="page-top">
+      <span class="label">🔍 代码审查与理解</span>
+      <span class="page-num">04 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">代码审查与理解</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260510/thariq-codereview.png" alt="代码审查示例截图">
       </div>
-      <div class="ht-card">
-        <div class="ht-num">法则 04</div>
-        <div class="ht-name">设计系统即参考</div>
-        <div class="ht-principle">让 Claude 扫你的代码库生成 .design.html，所有后续 HTML 风格统一</div>
-        <div class="ht-ptag">"Create a single design system HTML file by pointing Claude at your codebase"</div>
+      <div class="ucd-insight">
+        HTML 能渲染带边注的 diff、按严重度颜色标记的流程图和模块关系图。Markdown 的代码块只是静态片段，而 HTML 可以把整个 PR 的上下文组织成可浏览的解释页。Thariq 现在每个 PR 都附一个 HTML 解释页，比 GitHub diff 好用得多。
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 5: 设计与原型 -->
+  <div class="card" id="page4">
+    <div class="page-top">
+      <span class="label">🎨 设计与原型</span>
+      <span class="page-num">05 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">设计与原型</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260510/thariq-design.jpg" alt="设计与原型示例截图">
+      </div>
+      <div class="ucd-insight">
+        HTML 可以添加滑块、旋钮实时调参，调好后一键复制参数转成 prompt 贴回 Claude Code。Markdown 无法实现这种双向交互——你只能描述想要的效果，等 AI 重新生成。HTML 让你在视觉上「调」到满意为止，再跨平台实现。
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 6: 报告与研究 -->
+  <div class="card" id="page5">
+    <div class="page-top">
+      <span class="label">📋 报告与研究</span>
+      <span class="page-num">06 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">报告与研究</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260510/thariq-report.jpg" alt="报告与研究示例截图">
+      </div>
+      <div class="ucd-insight">
+        HTML 可以从 Slack、代码、Git 历史、网络多个来源综合信息，产出带 SVG 流程图和交互式图表的长报告甚至幻灯片。Markdown 报告只能靠文字和表格，而 HTML 报告可以分享链接而非附件——阅读率翻倍。
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 7: 自定义编辑面板 -->
+  <div class="card" id="page6">
+    <div class="page-top">
+      <span class="label">🛠️ 自定义编辑面板</span>
+      <span class="page-num">07 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">自定义编辑面板</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260510/thariq-editor.jpg" alt="自定义编辑面板示例截图">
+      </div>
+      <div class="ucd-insight">
+        HTML 可以做一个专为当前数据定制的拖拽面板或配置编辑器，用完即弃。Markdown 无法承载这种交互操作——你只能通过文字描述指挥 AI。HTML 让编辑变得直观，最后用导出按钮把结果转回 prompt 形成闭环。
       </div>
     </div>
     <div class="card-footer">
@@ -272,6 +329,10 @@ body {
       <button class="dot active" onclick="goTo(0)"></button>
       <button class="dot" onclick="goTo(1)"></button>
       <button class="dot" onclick="goTo(2)"></button>
+      <button class="dot" onclick="goTo(3)"></button>
+      <button class="dot" onclick="goTo(4)"></button>
+      <button class="dot" onclick="goTo(5)"></button>
+      <button class="dot" onclick="goTo(6)"></button>
     </div>
     <button class="nav-btn" id="nextBtn" onclick="flip(1)">→</button>
   </div>
@@ -279,7 +340,7 @@ body {
 
 <script>
 let current = 0;
-const total = 3;
+const total = 7;
 function flip(dir) {
   const next = current + dir;
   if (next < 0 || next >= total) return;
