@@ -65,16 +65,14 @@ export class ResearchManager {
       index.reports[metadata.id] = metadata;
       this.saveIndex(indexPath, index);
 
-      // Copy file to docs/research/ for GitHub Pages
-      const docsResearchDir = path.join(process.cwd(), 'docs', 'research');
-      if (!fs.existsSync(docsResearchDir)) {
-        fs.mkdirSync(docsResearchDir, { recursive: true });
-      }
-      fs.copyFileSync(filePath, path.join(docsResearchDir, fileName));
+      const generator = new ResearchGenerator();
+      
+      // Generate individual Report HTML page in docs/research/
+      this.logger.log(`Generating HTML page for report...`);
+      await generator.generateReportPage(metadata, fileContent);
 
       // Generate archive page
       this.logger.log('Generating research archive page...');
-      const generator = new ResearchGenerator();
       generator.generateResearchArchive(this.buildArchiveEntries(index.reports));
 
       // Rebuild homepage
@@ -105,7 +103,7 @@ export class ResearchManager {
       .map(r => ({
         title: r.title,
         date: r.addedDate ? new Date(r.addedDate).toLocaleDateString('zh-CN') : '',
-        file: r.file,
+        file: (r.file || '').replace(/\.md$/, '.html'),
         summary: r.summary || '',
         category: r.category || '调研',
         icon: '📊'

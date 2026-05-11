@@ -90,6 +90,44 @@ researchCmd
     }
   });
 
+researchCmd
+  .command('conduct <query>')
+  .description('Conduct deep research using GPT-Researcher')
+  .action(async (query) => {
+    try {
+      console.log(`🔍 Conducting deep research on: ${query}...`);
+      const { DeepResearchAgent } = await import('./agents/research-agent/index.js');
+      const agent = new DeepResearchAgent();
+      const markdown = await agent.conductResearch(query);
+      
+      const fs = await import('fs');
+      const path = await import('path');
+      const slugify = (str: string) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      const fileName = `${slugify(query)}.md`;
+      const tempPath = path.join(process.cwd(), 'data', fileName);
+      fs.writeFileSync(tempPath, markdown, 'utf-8');
+      
+      console.log('✅ Research generated. Adding to Manager...');
+      const manager = new ResearchManager();
+      const result = await manager.addReport(tempPath, 'deep-research', {
+        tags: ['auto-generated'],
+        title: query
+      });
+      
+      if (result.success) {
+        console.log('✅ Report added:', result.message);
+      } else {
+        console.error('❌ Error:', result.message);
+      }
+      
+      if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
+      
+    } catch (error) {
+      console.error('❌ Error:', error);
+      process.exit(1);
+    }
+  });
+
 // Thinking system commands
 const thinkingCmd = program
   .command('thinking')

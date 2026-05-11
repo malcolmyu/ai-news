@@ -4,6 +4,32 @@
 
 ---
 
+## 最新状态（2026-04-16）
+
+**当前分支：** `malcolmyu/auckland`  
+**上次会话完成：** GPT-Researcher 深度调研系统 Docker 集成及 HTML 归档渲染功能开发  
+**验证状态：** `npm run build` ✅ | Docker 容器正常启动 ✅ | 深调研 WebSocket 连接正常 ✅ | HTML 渲染与历史迁移 ✅
+
+**本次开工前需要了解的背景：**
+- `npm run research -- conduct <query>` 会连接 `localhost:8000` 进行强制中文回答请求
+- 调研完毕后，`generator` 将 `markdown` 借助 `SolidJS ResearchReportPage` 及 `marked` 编译为精美单页面 `.html` 落在 `docs/research/` 中
+- 所有旧 Markdown 文件归档均已被脚本重新通过编译器洗了一遍落地为新版网页
+
+---
+
+## 2026-04-16 — 生成 HTML 版深度调研报告
+
+**做了什么：**
+- 将纯输出 Markdown 逻辑重构成了 SolidJS 的 `ResearchReportPage.tsx`，通过 `marked` 引擎输出标准 HTML 文件。
+- 更新并拦截内部存档指令，强制约束 GPT-Researcher 全程使用中文长文进行汇报。
+- 一次性重塑历史存档，遍历 `data/research/categories/...` 将过去的 Markdown 重新渲染为了前端可读页，彻底打通网站链路。
+
+**验证证据：**
+- `npm run build` ✅
+- 迁移脚本生成 HTML 成功，归档和首页已正确重建关联。
+
+---
+
 ## 最新状态（2026-04-05）
 
 **当前分支：** `malcolmyu/auckland`  
