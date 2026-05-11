@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js';
+import { Show } from 'solid-js';
 import { Layout } from '../../renderer/components/Layout.js';
 import { HomepageData, ResearchEntry } from '../../types/index.js';
 
@@ -76,7 +76,6 @@ export function HomepagePage(props: HomepagePageProps) {
             <div class="hero-stats">
               <div class="hero-stat"><div class="hero-stat-value">{d.stats.totalArticles}+</div><div class="hero-stat-label">追踪文章</div></div>
               <div class="hero-stat"><div class="hero-stat-value">{d.stats.totalReports}</div><div class="hero-stat-label">调研报告</div></div>
-              <div class="hero-stat"><div class="hero-stat-value">{d.stats.totalModels}</div><div class="hero-stat-label">思维模型</div></div>
               <div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div>
             </div>
           </div>
@@ -137,30 +136,6 @@ export function HomepagePage(props: HomepagePageProps) {
           </div>
         </section>
 
-        {/* Thinking */}
-        <section class="hp-section" id="knowledge">
-          <div class="container">
-            <div class="section-header-hp">
-              <div><div class="section-label">Knowledge Base</div><h2 class="section-title-hp">知识武器库</h2></div>
-              <a href="thinking/decision.html" class="section-link">查看全部 →</a>
-            </div>
-            <div class="cards-grid">
-              <For each={d.thinkingCategories}>
-                {(c) => (
-                  <a href={`thinking/${c.file}`} class="card-link">
-                    <div class="card-header">
-                      <span class="card-category">{c.name}</span>
-                      <div class="card-icon" innerHTML={c.icon} />
-                    </div>
-                    <h3 class="card-title">{c.name}思维模型</h3>
-                    <p class="card-desc">{c.description}</p>
-                    <div class="card-meta">{c.modelCount} 个模型</div>
-                  </a>
-                )}
-              </For>
-            </div>
-          </div>
-        </section>
       </main>
     </Layout>
   );
