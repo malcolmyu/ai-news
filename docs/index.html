@@ -2,6 +2,8 @@
 :root {
     --bg-primary: #f5f5f4;
     --bg-secondary: #fafafa;
+    --bg-card: #ffffff;
+    --bg-hover: #f0f0ee;
     --bg-tertiary: #f0f0ee;
     --accent: #5e6ad2;
     --accent-light: #7b85d9;
@@ -45,7 +47,7 @@ body {
     border-radius: var(--radius-md);
     padding: 16px 20px;
     box-shadow: var(--shadow-none);
-    transition: all 0.2s;
+    transition: box-shadow 0.2s;
 }
 .card-sm:hover { box-shadow: var(--shadow-sm); }
 .label-sm {
@@ -59,9 +61,9 @@ body {
 
 .header {
     position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.85);
+    background: rgba(245,245,244,0.85);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border);
     z-index: 100;
 }
 .header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
@@ -72,7 +74,6 @@ body {
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 16px;
-    box-shadow: var(--shadow-none);
 }
 .logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
 .nav { display: flex; gap: 24px; }
@@ -82,13 +83,12 @@ body {
 .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
 .featured-card {
     display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
-    background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
     padding: 24px;
     text-decoration: none; color: inherit;
-    transition: box-shadow 0.2s;
-    box-shadow: var(--shadow-none);
+    transition: border-color 0.2s;
 }
-.featured-card:hover { box-shadow: var(--shadow-sm); }
+.featured-card:hover { border-color: var(--border-light); }
 .featured-content { display: flex; flex-direction: column; gap: 8px; }
 .featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
 .featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
@@ -96,7 +96,7 @@ body {
 .featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 .featured-arrow {
     width: 36px; height: 36px;
-    background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 18px; color: var(--accent);
     transition: background 0.2s, color 0.2s;
@@ -106,21 +106,20 @@ body {
 .archive-item {
     display: flex; align-items: center; gap: 14px;
     padding: 16px 20px;
-    background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md);
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
     text-decoration: none; color: inherit;
-    transition: box-shadow 0.2s;
-    box-shadow: var(--shadow-none);
+    transition: border-color 0.2s;
 }
-.archive-item:hover { box-shadow: var(--shadow-sm); }
+.archive-item:hover { border-color: var(--border-light); }
 .archive-icon {
     width: 40px; height: 40px;
-    background: var(--bg-secondary); border-radius: 8px;
+    background: var(--bg-hover); border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 20px; flex-shrink: 0;
 }
 .archive-content { flex: 1; }
 .archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.badge-latest { padding: 2px 8px; background: #e8f0fe; color: var(--accent); border-radius: 100px; font-size: 10px; font-weight: 600; }
+.badge-latest { padding: 2px 8px; background: var(--accent-dark); color: var(--text-primary); border-radius: 100px; font-size: 10px; font-weight: 600; }
 .archive-meta { font-size: 12px; color: var(--text-secondary); }
 .archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
 .archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
@@ -163,4 +162,4 @@ body {
   .cards-grid { grid-template-columns: 1fr; }
   .section-header-hp { flex-direction: column; align-items: flex-start; gap: 12px; }
   .nav { display: none; }
-}</style></head><body style="background:#f5f5f4;"><header class="header"><div class="container"><div class="header-inner"><a href="index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><nav class="nav"><a href="index.html" class="nav-link">首页</a><a href="daily/archive.html" class="nav-link">AI 日报</a><a href="research/archive.html" class="nav-link">深度调研</a><a href="thinking/decision.html" class="nav-link">知识武器库</a></nav></div></div></header><main><section class="hero"><div class="container"><div class="hero-badge">系统运行中</div><h1 class="hero-title">数字分身<br><span>第二号</span></h1><p class="hero-desc">基于 OpenClaw 构建的专属 AI 助手。每日追踪 AI 行业动态，系统化构建知识体系。</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">66+</div><div class="hero-stat-label">追踪文章</div></div><div class="hero-stat"><div class="hero-stat-value">1</div><div class="hero-stat-label">调研报告</div></div><div class="hero-stat"><div class="hero-stat-value">10</div><div class="hero-stat-label">思维模型</div></div><div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div></div></div></section><section class="hp-section" id="daily"><div class="container"><div class="section-header-hp"><div><div class="section-label">AI Insight</div><h2 class="section-title-hp">每日 AI 日报</h2></div><a href="daily/archive.html" class="section-link">查看全部 →</a></div><div style="display:flex;flex-direction:column;gap:10px;"><a href="daily/ai-daily-latest.html" class="daily-entry"><div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div><div style="font-size:12px;color:var(--text-secondary);">实时更新 · 66 篇文章</div></div><div style="font-size:18px;color:var(--accent);">→</div></a><a href="daily/archive.html" class="daily-entry"><div class="entry-icon">📚</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">历史日报</div><div style="font-size:12px;color:var(--text-muted);">共 13 期归档</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section><section class="hp-section" id="research"><div class="container"><div class="section-header-hp"><div><div class="section-label">Research</div><h2 class="section-title-hp">深度调研报告</h2></div><a href="research/archive.html" class="section-link">查看全部 →</a></div><a href="research/harness-engineering.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">精选</span><span>2026/5/10</span></div><h3 class="featured-title">Harness Engineering — 从理论到落地</h3><p class="featured-desc">如何通过约束层提升 Agent 鲁棒性 — 融合两篇深度视频解读。涵盖上下文工程、架构约束、反馈循环、熵管理四大核心组件及两套落地实战方案。</p></div><div class="featured-arrow">→</div></a></div></section><section class="hp-section" id="knowledge"><div class="container"><div class="section-header-hp"><div><div class="section-label">Knowledge Base</div><h2 class="section-title-hp">知识武器库</h2></div><a href="thinking/decision.html" class="section-link">查看全部 →</a></div><div class="cards-grid"><a href="thinking/decision.html" class="card-link"><div class="card-header"><span class="card-category">决策类</span><div class="card-icon">🎯</div></div><h3 class="card-title">决策类思维模型</h3><p class="card-desc">脑力工作者最重要的工作是减少决策的失败率。10个模型帮助你建立正确的认知框架，做出更明智的决策。</p><div class="card-meta">10 个模型</div></a><a href="thinking/product.html" class="card-link"><div class="card-header"><span class="card-category">产品类</span><div class="card-icon">🚀</div></div><h3 class="card-title">产品类思维模型</h3><p class="card-desc">产品设计的8个核心思维模型</p><div class="card-meta">0 个模型</div></a><a href="thinking/cognition.html" class="card-link"><div class="card-header"><span class="card-category">认知类</span><div class="card-icon">🧠</div></div><h3 class="card-title">认知类思维模型</h3><p class="card-desc">认知与学习的10个核心框架</p><div class="card-meta">0 个模型</div></a><a href="thinking/communication.html" class="card-link"><div class="card-header"><span class="card-category">沟通类</span><div class="card-icon">💬</div></div><h3 class="card-title">沟通类思维模型</h3><p class="card-desc">高效沟通的重要模型</p><div class="card-meta">0 个模型</div></a></div></div></section></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
+}</style></head><body style="background:var(--bg-primary);"><header class="header"><div class="container"><div class="header-inner"><a href="index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><nav class="nav"><a href="index.html" class="nav-link">首页</a><a href="daily/archive.html" class="nav-link">AI 日报</a><a href="research/archive.html" class="nav-link">深度调研</a><a href="thinking/decision.html" class="nav-link">知识武器库</a></nav></div></div></header><main><section class="hero"><div class="container"><div class="hero-badge">系统运行中</div><h1 class="hero-title">数字分身<br><span>第二号</span></h1><p class="hero-desc">基于 OpenClaw 构建的专属 AI 助手。每日追踪 AI 行业动态，系统化构建知识体系。</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">69+</div><div class="hero-stat-label">追踪文章</div></div><div class="hero-stat"><div class="hero-stat-value">1</div><div class="hero-stat-label">调研报告</div></div><div class="hero-stat"><div class="hero-stat-value">10</div><div class="hero-stat-label">思维模型</div></div><div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div></div></div></section><section class="hp-section" id="daily"><div class="container"><div class="section-header-hp"><div><div class="section-label">AI Insight</div><h2 class="section-title-hp">每日 AI 日报</h2></div><a href="daily/archive.html" class="section-link">查看全部 →</a></div><div style="display:flex;flex-direction:column;gap:10px;"><a href="daily/ai-daily-latest.html" class="daily-entry"><div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div><div style="font-size:12px;color:var(--text-secondary);">实时更新 · 69 篇文章</div></div><div style="font-size:18px;color:var(--accent);">→</div></a><a href="daily/archive.html" class="daily-entry"><div class="entry-icon">📚</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">历史日报</div><div style="font-size:12px;color:var(--text-muted);">共 14 期归档</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section><section class="hp-section" id="research"><div class="container"><div class="section-header-hp"><div><div class="section-label">Research</div><h2 class="section-title-hp">深度调研报告</h2></div><a href="research/archive.html" class="section-link">查看全部 →</a></div><a href="research/multi-agent-research.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">精选</span><span>2026/5/11</span></div><h3 class="featured-title">多智能体系统 — 架构、编排与工程实践</h3><p class="featured-desc">Multi-Agent Systems · 2026 多智能体系统 — 架构、编排与工程实践 从分散的单体 Agent 到协同编队的全面演进路线图 4+ 主流多智能体架构范式 100 万行 OpenAI 全 AI 生成代码 42% → 78% Harness 优化后编程成功率 01 · Why 为什么需要多智能体系统？ 一个 Agent 的上下文窗口有限、一次只能聚焦一个任务、出错时没有监控和回收...</p></div><div class="featured-arrow">→</div></a></div></section><section class="hp-section" id="knowledge"><div class="container"><div class="section-header-hp"><div><div class="section-label">Knowledge Base</div><h2 class="section-title-hp">知识武器库</h2></div><a href="thinking/decision.html" class="section-link">查看全部 →</a></div><div class="cards-grid"><a href="thinking/decision.html" class="card-link"><div class="card-header"><span class="card-category">决策类</span><div class="card-icon">🎯</div></div><h3 class="card-title">决策类思维模型</h3><p class="card-desc">脑力工作者最重要的工作是减少决策的失败率。10个模型帮助你建立正确的认知框架，做出更明智的决策。</p><div class="card-meta">10 个模型</div></a><a href="thinking/product.html" class="card-link"><div class="card-header"><span class="card-category">产品类</span><div class="card-icon">🚀</div></div><h3 class="card-title">产品类思维模型</h3><p class="card-desc">产品设计的8个核心思维模型</p><div class="card-meta">0 个模型</div></a><a href="thinking/cognition.html" class="card-link"><div class="card-header"><span class="card-category">认知类</span><div class="card-icon">🧠</div></div><h3 class="card-title">认知类思维模型</h3><p class="card-desc">认知与学习的10个核心框架</p><div class="card-meta">0 个模型</div></a><a href="thinking/communication.html" class="card-link"><div class="card-header"><span class="card-category">沟通类</span><div class="card-icon">💬</div></div><h3 class="card-title">沟通类思维模型</h3><p class="card-desc">高效沟通的重要模型</p><div class="card-meta">0 个模型</div></a></div></div></section></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>

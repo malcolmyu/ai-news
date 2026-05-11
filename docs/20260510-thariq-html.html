@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Digest · HTML 输出时代</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', system-ui, sans-serif;
+  background: #08090a;
+  display: flex; justify-content: center; align-items: center;
+  min-height: 100vh;
+}
+.viewer {
+  position: relative;
+  width: 1080px; height: 1440px;
+  overflow: hidden;
+  background: #08090a;
+}
+.card {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 72px 64px 56px;
+  opacity: 0; transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card.active {
+  opacity: 1; pointer-events: auto;
+}
+
+/* Page top */
+.page-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 32px; flex-shrink: 0;
+}
+.label {
+  font-size: 48px; font-weight: 500; color: #a0a5b0; letter-spacing: 0.05em;
+}
+.page-num {
+  font-size: 48px; font-weight: 400; color: #62666d;
+}
+.brand {
+  color: #7170ff;
+}
+
+/* Page 1 - Cover */
+.pc-headline {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  font-size: 88px; font-weight: 900; line-height: 1.15;
+  color: #f7f8f8; letter-spacing: -0.02em;
+}
+.pc-headline .accent { color: #7170ff; }
+.pc-sub {
+  font-size: 48px; font-weight: 400; line-height: 1.5;
+  color: #a0a5b0; margin-top: 20px; flex-shrink: 0;
+}
+.pc-meta {
+  display: flex; align-items: center; gap: 24px;
+  margin-top: 24px; flex-shrink: 0;
+}
+.pc-meta .tag {
+  font-size: 48px; font-weight: 500; color: #7170ff;
+}
+.pc-meta .source {
+  font-size: 48px; font-weight: 400; color: #62666d;
+}
+
+/* Page 2 - Analysis */
+.analysis-title {
+  font-size: 64px; font-weight: 800; color: #f7f8f8;
+  margin-bottom: 28px; line-height: 1.2; flex-shrink: 0;
+}
+.analysis-body {
+  flex: 1; display: flex; flex-direction: column; gap: 16px;
+  overflow: hidden;
+}
+.analysis-block {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 24px 28px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.ab-title {
+  font-size: 52px; font-weight: 700; color: #f7f8f8;
+  margin-bottom: 8px; line-height: 1.3;
+}
+.ab-title .emoji { margin-right: 12px; }
+.ab-body {
+  font-size: 48px; font-weight: 400; color: #a0a5b0;
+  line-height: 1.5;
+}
+.ab-body strong { color: #f7f8f8; font-weight: 600; }
+.ab-body .accent-text { color: #7170ff; }
+
+/* Page 3 - How-to */
+.ht-title {
+  font-size: 64px; font-weight: 800; color: #f7f8f8;
+  margin-bottom: 24px; line-height: 1.2; flex-shrink: 0;
+}
+.ht-grid {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  align-content: start;
+}
+.ht-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px; padding: 18px 22px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ht-num {
+  font-size: 28px; font-weight: 600; color: #7170ff;
+  letter-spacing: 0.05em; margin-bottom: 2px;
+}
+.ht-name {
+  font-size: 40px; font-weight: 700; color: #f7f8f8;
+  line-height: 1.25; margin-bottom: 2px;
+}
+.ht-principle {
+  font-size: 30px; font-weight: 400; color: #a0a5b0;
+  line-height: 1.4;
+}
+.ht-ptag {
+  font-size: 22px; font-weight: 400; color: #7170ff;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  line-height: 1.4; margin-top: 4px;
+  background: rgba(113,112,255,0.08);
+  border-radius: 8px; padding: 6px 10px;
+  word-break: break-all;
+}
+
+/* Footer */
+.card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 24px; margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.card-footer .brand { font-size: 48px; font-weight: 500; }
+.card-footer .date { font-size: 48px; font-weight: 400; color: #62666d; }
+
+/* Navigation */
+.nav-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; justify-content: center; align-items: center;
+  gap: 20px; padding: 16px 0;
+  z-index: 10;
+}
+.nav-btn {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: #a0a5b0; font-size: 36px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.1); color: #f7f8f8; }
+.nav-btn:disabled { opacity: 0.2; cursor: default; }
+.dots { display: flex; gap: 16px; }
+.dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #62666d; cursor: pointer; transition: all 0.2s;
+  border: none;
+}
+.dot.active { background: #7170ff; width: 40px; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div class="viewer" id="viewer">
+
+  <!-- Page 1: 名人名言 -->
+  <div class="card active" id="page0">
+    <div class="page-top">
+      <span class="label">⚡ 核心观点</span>
+      <span class="page-num">01 / 03</span>
+    </div>
+    <div class="pc-headline">
+      我越来越倾向于用<br>
+      <span class="accent">HTML</span> 替代 Markdown<br>
+      作为 AI 的输出格式
+    </div>
+    <div class="pc-sub">
+      951 万阅读 · 3.1 万转帖 · 2.7 万收藏<br>
+      这是 Claude Code 团队最被低估的范式转换
+    </div>
+    <div class="pc-meta">
+      <span class="tag">Thariq</span>
+      <span class="source">Claude Code 团队 · 2026.5</span>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 2: 观点解析 -->
+  <div class="card" id="page1">
+    <div class="page-top">
+      <span class="label">🧠 为什么是 HTML</span>
+      <span class="page-num">02 / 03</span>
+    </div>
+    <div class="analysis-title">三个不可替代的优势</div>
+    <div class="analysis-body">
+      <div class="analysis-block">
+        <div class="ab-title"><span class="emoji">📊</span>信息密度碾压</div>
+        <div class="ab-body">
+          表格、CSS、SVG 插图、交互组件、<strong>可编辑滑块</strong>。<br>
+          Markdown 做不到的，HTML 天生就会。<br>
+          甚至<span class="accent-text">没有任何</span> Claude 能读的信息<br>
+          是 HTML 不能高效表达的。
+        </div>
+      </div>
+      <div class="analysis-block">
+        <div class="ab-title"><span class="emoji">👀</span>人会读才有用</div>
+        <div class="ab-body">
+          <strong>超过100行的 Markdown 文档没人会读</strong>。<br>
+          但 HTML 可以用 tabs、插画、交互把信息组织成<br>
+          让人愿意看完的样子。<br>
+          组织里的人也会点开链接而非附件。
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Page 3: 怎么做 -->
+  <div class="card" id="page2">
+    <div class="page-top">
+      <span class="label">⚡ 怎么做</span>
+      <span class="page-num">03 / 03</span>
+    </div>
+    <div class="ht-title">四条实操法则（附 Prompt）</div>
+    <div class="ht-grid">
+      <div class="ht-card">
+        <div class="ht-num">法则 01</div>
+        <div class="ht-name">直接说「做 HTML」</div>
+        <div class="ht-principle">不需要 skill / 插件，一句 "make a HTML artifact" 即可开始</div>
+        <div class="ht-ptag">"Create a thorough implementation plan in a HTML file with mockups, data flow and code snippets"</div>
+      </div>
+      <div class="ht-card">
+        <div class="ht-num">法则 02</div>
+        <div class="ht-name">永远加导出按钮</div>
+        <div class="ht-principle">'Copy as prompt' 把 UI 操作转回可粘贴的 prompt，形成闭环</div>
+        <div class="ht-ptag">"Make me a draggable card editor. Add a 'copy as markdown' button that exports the final ordering"</div>
+      </div>
+      <div class="ht-card">
+        <div class="ht-num">法则 03</div>
+        <div class="ht-name">一次一个痛点</div>
+        <div class="ht-principle">每个 HTML 只解决一个问题：审 PR、调参数、排 ticket，用完即弃</div>
+        <div class="ht-ptag">"Build a form editor for our feature flag config. Add a 'copy diff' button that gives me just the changed keys"</div>
+      </div>
+      <div class="ht-card">
+        <div class="ht-num">法则 04</div>
+        <div class="ht-name">设计系统即参考</div>
+        <div class="ht-principle">让 Claude 扫你的代码库生成 .design.html，所有后续 HTML 风格统一</div>
+        <div class="ht-ptag">"Create a single design system HTML file by pointing Claude at your codebase"</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="brand">⚡ AI 每日快讯</span>
+      <span class="date">5月10日</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" onclick="flip(-1)" disabled>←</button>
+    <div class="dots">
+      <button class="dot active" onclick="goTo(0)"></button>
+      <button class="dot" onclick="goTo(1)"></button>
+      <button class="dot" onclick="goTo(2)"></button>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="flip(1)">→</button>
+  </div>
+</div>
+
+<script>
+let current = 0;
+const total = 3;
+function flip(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= total) return;
+  goTo(next);
+}
+function goTo(idx) {
+  document.querySelectorAll('.card').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+  document.getElementById('prevBtn').disabled = idx === 0;
+  document.getElementById('nextBtn').disabled = idx === total - 1;
+  current = idx;
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') flip(-1);
+  if (e.key === 'ArrowRight') flip(1);
+});
+</script>
+</body>
+</html>
