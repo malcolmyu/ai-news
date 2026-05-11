@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>agent-memory-research - 第二号</title><span><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></span><style>
+:root {
+    --bg-primary: #f5f5f4;
+    --bg-secondary: #fafafa;
+    --bg-card: #ffffff;
+    --bg-hover: #f0f0ee;
+    --bg-tertiary: #f0f0ee;
+    --accent: #5e6ad2;
+    --accent-light: #7b85d9;
+    --accent-dark: #4a56c0;
+    --text-primary: #1c1c1c;
+    --text-secondary: #6b6b6b;
+    --text-muted: #8b8b8b;
+    --border: #e8e8e6;
+    --border-light: #f0f0ee;
+    --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.06);
+    --radius-sm: 10px;
+    --radius-md: 12px;
+    --radius-lg: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-none);
+    transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-sm); }
+.card-sm {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-none);
+    transition: box-shadow 0.2s;
+}
+.card-sm:hover { box-shadow: var(--shadow-sm); }
+.label-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+}
+
+.header {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(245,245,244,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
+.logo-icon {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+}
+.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 24px; }
+.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent); }
+
+.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+.featured-card {
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 24px;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s;
+}
+.featured-card:hover { border-color: var(--border-light); }
+.featured-content { display: flex; flex-direction: column; gap: 8px; }
+.featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
+.featured-title { font-size: 18px; font-weight: 500; }
+.featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.featured-arrow {
+    width: 36px; height: 36px;
+    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--accent);
+    transition: background 0.2s, color 0.2s;
+}
+.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+.archive-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; margin-bottom: 40px; }
+.archive-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s;
+}
+.archive-item:hover { border-color: var(--border-light); }
+.archive-icon {
+    width: 40px; height: 40px;
+    background: var(--bg-hover); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+}
+.archive-content { flex: 1; }
+.archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.badge-latest { padding: 2px 8px; background: var(--accent-dark); color: var(--text-primary); border-radius: 100px; font-size: 10px; font-weight: 600; }
+.archive-meta { font-size: 12px; color: var(--text-secondary); }
+.archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
+.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+.stats-value { font-size: 32px; font-weight: 500; color: var(--accent); }
+.stats-label { font-size: 11px; color: var(--text-muted); }
+
+.report-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
+.report-header h1 { font-size: 28px; font-weight: 700; color: white; margin-bottom: 8px; }
+.report-header .metadata { display: flex; gap: 16px; font-size: 14px; opacity: 0.9; }
+.markdown-body { padding: 32px 0; line-height: 1.6; color: var(--text-primary); }
+.markdown-body h2 { margin-top: 2em; margin-bottom: 1em; padding-bottom: 0.3em; border-bottom: 1px solid var(--border-color); }
+.markdown-body h3 { margin-top: 1.5em; margin-bottom: 0.8em; }
+.markdown-body p { margin-bottom: 1em; }
+.markdown-body ul, .markdown-body ol { margin-bottom: 1em; padding-left: 2em; }
+.markdown-body li { margin-bottom: 0.25em; }
+.markdown-body blockquote { margin: 1.5em 0; padding-left: 1em; border-left: 4px solid var(--border-color); color: var(--text-secondary); }
+.markdown-body pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 1em; }
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; background: var(--bg-secondary); padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.markdown-body pre code { padding: 0; background: transparent; }
+.markdown-body a { color: var(--primary-color); text-decoration: none; }
+.markdown-body a:hover { text-decoration: underline; }
+</style></head><body style="background:var(--bg-primary);"><header class="header"><div class="container"><div class="header-inner"><a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><a href="./archive.html" class="nav-link">← 返回首页</a></div></div></header><div class="report-header"><div class="container-sm"><h1>agent-memory-research</h1><div class="metadata"><div class="meta-item"><span class="meta-icon">📅</span>2026/5/12</div><div class="meta-item"><span class="meta-icon">📁</span>深度调研</div></div></div></div><main class="container-sm"><div class="markdown-body"><h1>Agent Memory 全面调研：6 大派系 × 3 种采集策略</h1>
+<h2>背景</h2>
+<p>Agent 记忆（Memory）是让 LLM Agent 跨越单次对话、具备持久化能力的关键基建。本文系统梳理了当前主流的 Agent Memory 实现方案，从<strong>组织方式</strong>和<strong>采集策略</strong>两个维度展开。</p>
+<hr>
+<h2>一、六种记忆组织范式</h2>
+<h3>1. Prompt 注入派（Mem0、Mem9）</h3>
+<p>拦截每次 LLM 调用 → embedding 检索记忆 → 拼进 system prompt。</p>
+<ul>
+<li><strong>Mem0</strong>：embedding 余弦相似度 + <strong>时间衰减重排序</strong> + 重要性权重。写操作 50ms 内完成靠流式 embedding pool 复用和异步向量写</li>
+<li><strong>Mem9</strong>：加知识图谱关系推理，做 <code>(entity A) -[relation]-&gt; (entity B)</code> 路径检索</li>
+</ul>
+<p>本质上是对 RAG 的精细化改造——把文档检索替换为记忆片段检索。</p>
+<h3>2. 状态机派（Letta / MemGPT）</h3>
+<p>虚拟上下文管理。把 LLM 上下文抽象成「主记忆区 + 归档区」：</p>
+<ul>
+<li>主记忆区 = 当前上下文窗口</li>
+<li>归档区 = 外部存储，模型通过 <code>archival_memory_search()</code> tool call <strong>主动拉取</strong></li>
+<li>好处：token 不浪费，只加载当下需要的记忆</li>
+<li>代价：模型必须学会「何时主动检索」，失败就会遗忘</li>
+</ul>
+<h3>3. 经验池 / 决策回放</h3>
+<p><strong>OpenViking</strong> — 最短的路径是 Agent 版的 cache 系统：</p>
+<ul>
+<li>完成任务 → 压缩决策路径 → 写回记忆库</li>
+<li>新任务触发 → 加载相关经验作为参考上下文</li>
+<li>类似 RL 的 <strong>Experience Replay</strong>，只是经验是自然语言不是 Q-values</li>
+</ul>
+<p><strong>Voyager</strong>（NVIDIA/MineDojo）：</p>
+<ul>
+<li>技能库 = 代码 + 执行日志，复用已验证的技能函数</li>
+</ul>
+<p><strong>Reflexion</strong>：</p>
+<ul>
+<li>Actor + Evaluator + Memory 三层</li>
+<li>Evaluator 判错误 → 写入记忆 → 下次 Actor 加载 self-reflection</li>
+<li>让模型从自己的错误中学</li>
+</ul>
+<h3>4. 知识图谱结构化记忆</h3>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>核心</th>
+<th>跨 session</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LangChain Entity Memory</td>
+<td>每次对话提取实体</td>
+<td>❌ 弱（单次）</td>
+</tr>
+<tr>
+<td>Microsoft GraphRAG</td>
+<td>LLM 图谱 + 社区摘要 + 分层检索</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Memgraph / Neo4j</td>
+<td>图数据库存记忆</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>CrewAI LTM</td>
+<td>实体 + 关系图，共享给 Crew 内所有 Agent</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<p><strong>关键区别</strong>：向量检索找「相似」，图检索找「关联」。两者正交。</p>
+<h3>5. 专用记忆中间件</h3>
+<ul>
+<li><strong>Zep</strong> — 最成熟独立记忆服务<ul>
+<li>消息历史自动摘要</li>
+<li>Session + Summary + Entity Extraction 三层</li>
+<li>延迟会话自动摘要（对话结束后异步提炼核心事实写入持久层）</li>
+<li>内置知识图谱</li>
+</ul>
+</li>
+<li><strong>LangMem</strong>（LangChain）— 记忆 service：store / search / update / consolidate</li>
+<li><strong>Google Cloud Memorystore for Agent</strong> — 向量 + 关系 + 对话历史统一管理</li>
+</ul>
+<p><strong>本质</strong>：将记忆抽取为独立微服务，Agent 框架只管调用。</p>
+<h3>6. 系统级 / 隐式记忆</h3>
+<ul>
+<li><strong>OpenAI 内置 Memory</strong>（GPTs / ChatGPT）— 全黑箱，<code>persistent_pointer</code> 隐式注入</li>
+<li><strong>Apple Intelligence / Siri Memory</strong> — 端侧 on-device，隐私优先</li>
+<li><strong>Anthropic Tool Use with Context</strong> — 教模型调用 memory 工具（store / retrieve / forget），不做自动注入</li>
+</ul>
+<hr>
+<h2>二、四种记忆采集策略</h2>
+<h3>1. 原始缓存 + 异步提炼（Zep、LangMem）</h3>
+<pre><code>原始消息流 → 写入消息队列 → 异步 pipeline 并行处理
+├── 文本摘要 → summary 记忆
+├── 实体提取 → Entity Knowledge Graph
+├── 对话分类 → session type / topic
+└── 重要性评分 → 决定保留或丢弃
+</code></pre>
+<p><strong>不阻塞主流程</strong>。Zep 默认延迟 5-10 秒。</p>
+<h3>2. 实时拦截 + 同步处理（Mem0、Mem9）</h3>
+<pre><code>LLM call 被 middleware 拦截
+→ 提取当前轮 user + assistant 消息
+→ embedding 化
+→ 本体抽取（Mem9：实体+关系）
+→ 向量库 + 图库同步写入
+→ 检索最新记忆注入 prompt
+→ 放行 LLM call
+</code></pre>
+<p>代价：每次 LLM 调用多 100-300ms。</p>
+<h3>3. 会话结束批量提炼（MemGPT 早期策略、AutoGen）</h3>
+<ul>
+<li>运行时只记 raw 日志</li>
+<li>对话结束或达到预设长度后一次性批量处理</li>
+<li>对话中的记忆写入延迟一整个 session</li>
+</ul>
+<h3>4. 失败/成就驱动采集（Reflexion、OpenViking、Voyager）</h3>
+<table>
+<thead>
+<tr>
+<th>触发条件</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>❌ 错误/异常</td>
+<td>记录错误 + 上下文 + 修复决策</td>
+</tr>
+<tr>
+<td>🏆 高置信度成功</td>
+<td>记录最佳实践</td>
+</tr>
+<tr>
+<td>🔁 重复失败 3 次</td>
+<td>记录「此路不通」</td>
+</tr>
+<tr>
+<td>🎯 目标完成</td>
+<td>记录「此路可通」</td>
+</tr>
+</tbody></table>
+<p><strong>核心哲学</strong>：99% 的对话是噪声，只存高信息密度的片段。</p>
+<hr>
+<h2>三、方案取舍矩阵</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>方法</th>
+<th>延迟</th>
+<th>信息密度</th>
+<th>实现复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mem0/Mem9</td>
+<td>实时 embedding</td>
+<td>低 (50-300ms)</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Zep</td>
+<td>异步队列提炼</td>
+<td>几乎无感知</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>MemGPT</td>
+<td>会话结束批量</td>
+<td>高</td>
+<td>高</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Reflexion/Voyager</td>
+<td>失败/成就驱动</td>
+<td>不规律</td>
+<td>极高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>LangChain Entity</td>
+<td>实时提取</td>
+<td>低</td>
+<td>低（只存实体）</td>
+<td>低</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>四、推荐组合</h2>
+<pre><code>粗召回 → RAG（向量 + BM25）
+细检索 → GraphRAG / Entity Memory（关系推理）
+温热 → 时间衰减（Mem0）/ 摘要合并（Zep）
+</code></pre>
+<p>最接近完整方案的工具组合：</p>
+<ul>
+<li><strong>Zep</strong>：管 session 层（自动摘要、实体提取）+ 时间衰减温热</li>
+<li><strong>GraphRAG</strong>：管深度关联检索 → 细推理</li>
+<li><strong>Reflexion</strong>：管自我纠错 → 经验积累</li>
+</ul>
+<p><strong>缺的那块</strong>：目前没有工具能优雅处理「多 session 长尾记忆」而不爆炸 token。MemGPT 最接近但生态不成熟。</p>
+<hr>
+<p><em>调研日期：2026-05-12</em></p>
+</div></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
