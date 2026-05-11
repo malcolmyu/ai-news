@@ -19,6 +19,13 @@ export function normalizeVolcengineCodingBaseUrl(baseUrl: string): string {
  * 摘要用 LLM：若设置 ANTHROPIC_API_KEY 则走火山方舟（与 OpenAI SDK 兼容），否则回退 OpenRouter。
  */
 export function resolveLlmConfig(): { apiKey: string; baseUrl: string; model: string } {
+  if (process.env.DEEPSEEK_API_KEY) {
+    return {
+      apiKey: process.env.DEEPSEEK_API_KEY.trim(),
+      baseUrl: (process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com/v1").trim(),
+      model: (process.env.DEEPSEEK_MODEL || "deepseek-chat").trim(),
+    };
+  }
   const arkKey = process.env.ANTHROPIC_API_KEY?.trim();
   if (arkKey) {
     const rawBase =

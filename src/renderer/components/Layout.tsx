@@ -20,7 +20,7 @@ export function Layout(props: LayoutProps) {
         <span innerHTML={FONTS_LINK} />
         <style innerHTML={`${SHARED_CSS}${HEADER_CSS}${ARCHIVE_CSS}${props.extraCss ?? ''}`} />
       </head>
-      <body>
+      <body style="background:var(--bg-primary);">
         <SiteHeader backLink={props.backLink} />
         {props.children}
         <SiteFooter />

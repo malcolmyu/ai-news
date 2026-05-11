@@ -3,9 +3,9 @@ import { Layout } from '../../renderer/components/Layout.js';
 import { ResearchEntry } from '../../types/index.js';
 
 const RESEARCH_CSS = `
-.rch-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
-.rch-header h1 { font-size: 28px; font-weight: 700; color: white; }
-.rch-header .subtitle { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+.rch-header { padding: 100px 0 40px; }
+.rch-header h1 { font-size: 26px; font-weight: 500; letter-spacing: -0.3px; }
+.rch-header .subtitle { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 `;
 
 export interface ResearchArchivePageProps {
@@ -57,9 +57,9 @@ export function ResearchArchivePage(props: ResearchArchivePageProps) {
               <a href={e.file} class="archive-item">
                 <div class="archive-icon" innerHTML={e.icon} />
                 <div class="archive-content">
-                  <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">{e.date}</div>
-                  <div style="font-size:16px;font-weight:600;margin-bottom:4px;">{e.title}</div>
-                  <div style="font-size:13px;color:var(--text-secondary);">{e.category}</div>
+                  <div style="font-size:12px;color:var(--text-muted);margin-bottom:3px;">{e.date}</div>
+                  <div style="font-size:15px;font-weight:500;margin-bottom:3px;">{e.title}</div>
+                  <div style="font-size:12px;color:var(--text-secondary);">{e.category}</div>
                 </div>
                 <div class="archive-arrow">→</div>
               </a>
