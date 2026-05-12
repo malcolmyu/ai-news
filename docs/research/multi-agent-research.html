@@ -1,649 +1,501 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>多智能体系统 — 架构、编排与工程实践</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-feature-settings: "cv01", "ss03";
-    background: #f5f5f4;
-    color: #1c1c1c;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .nav-back {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 24px 0;
-  }
-  .nav-back a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: #6b6b6b;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-back a:hover { color: #5e6ad2; }
-
-  .bento {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 32px 24px 48px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
-
-  .card {
-    background: #fff;
-    border: 1px solid #e8e8e6;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s;
-  }
-  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-
-  .span-2 { grid-column: span 2; }
-  .span-3 { grid-column: span 3; }
-  .span-4 { grid-column: span 4; }
-  .span-row-2 { grid-row: span 2; }
-  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
-  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
-
-  .label-sm {
-    font-size: 11px;
-    font-weight: 600;
-    color: #8b8b8b;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: -0.5px;
-    color: #1c1c1c;
-    margin-bottom: 4px;
-  }
-  .subtitle {
-    font-size: 15px;
-    color: #6b6b6b;
-    font-weight: 400;
-  }
-  h2 {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.2px;
-    margin-bottom: 10px;
-    color: #1c1c1c;
-  }
-  h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1c1c1c;
-    margin-bottom: 6px;
-  }
-  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
-  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
-  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
-
-  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
-  .stat-item { flex: 1; }
-  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; }
-  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
-
-  .divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
-
-  .tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 5px;
-    letter-spacing: 0.02em;
-  }
-
-  .phase-row { display: flex; gap: 10px; margin-top: 8px; }
-  .phase {
-    flex: 1;
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-  }
-  .phase-name { font-size: 11px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
-  .phase-date { font-size: 10px; color: #8b8b8b; margin-bottom: 4px; }
-  .phase-desc { font-size: 11px; color: #6b6b6b; line-height: 1.4; }
-  .phase.active { border-color: #5e6ad2; background: rgba(94,106,210,0.04); }
-  .phase.active .phase-name { color: #5e6ad2; }
-
-  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-  @media (max-width: 520px) { .comp-grid { grid-template-columns: 1fr; } }
-  .comp-item {
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 10px;
-    padding: 12px;
-  }
-  .comp-item h3 { margin-bottom: 4px; }
-
-  .fail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-  .fail-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 10px;
-    padding: 10px 12px;
-  }
-  .fail-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-  .quote {
-    background: #fafafa;
-    border-left: 3px solid #5e6ad2;
-    border-radius: 0 10px 10px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: #4a4a4a;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-  .quote strong { color: #1c1c1c; font-weight: 500; }
-
-  .diagram-wrap {
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 10px;
-    overflow-x: auto;
-  }
-  .diagram-wrap svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
-
-  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-  @media (max-width: 520px) { .tips-grid { grid-template-columns: 1fr; } }
-  .tip-card {
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 10px;
-    padding: 12px;
-  }
-
-  .timeline { margin-top: 8px; }
-  .tl-item { display: flex; gap: 14px; margin-bottom: 12px; }
-  .tl-dot {
-    flex-shrink: 0;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    margin-top: 5px;
-    border: 2px solid #d0d0d0;
-    background: #fff;
-  }
-  .tl-dot.active { border-color: #5e6ad2; background: #5e6ad2; }
-  .tl-year { font-size: 11px; font-weight: 600; color: #8b8b8b; text-transform: uppercase; letter-spacing: 0.04em; }
-  .tl-title { font-size: 13px; font-weight: 500; }
-  .tl-desc { font-size: 11px; color: #6b6b6b; margin-top: 1px; }
-
-  .vs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
-  @media (max-width: 520px) { .vs-row { grid-template-columns: 1fr; } }
-  .vs-card {
-    background: #fafafa;
-    border: 1px solid #e8e8e6;
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-  }
-  .vs-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8b8b8b; margin-bottom: 4px; }
-  .vs-name { font-size: 14px; font-weight: 500; }
-  .vs-affil { font-size: 11px; color: #8b8b8b; margin-bottom: 4px; }
-  .vs-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
-
-  .footer { text-align: center; padding: 20px 0 0; font-size: 12px; color: #8b8b8b; }
-  .footer a { color: #5e6ad2; text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-
-  ul { padding-left: 16px; margin: 4px 0 6px; }
-  li { font-size: 13px; color: #4a4a4a; margin-bottom: 4px; line-height: 1.5; }
-  li strong { color: #1c1c1c; font-weight: 500; }
-
-  code {
-    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
-    background: #eee;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 12px;
-  }
-
-  .tool-list { padding: 0; margin: 6px 0; list-style: none; }
-  .tool-list li {
-    font-size: 12px; color: #4a4a4a; margin-bottom: 4px;
-    display: flex; align-items: flex-start; gap: 6px;
-  }
-  .tool-list li::before { content: "→"; color: #5e6ad2; font-weight: 500; }
-</style>
-</head>
-<body>
-
-<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
-<div class="bento">
-
-  <!-- HERO -->
-  <div class="card span-4">
-    <div class="label-sm">Multi-Agent Systems · 2026</div>
-    <h1>多智能体系统 — 架构、编排与工程实践</h1>
-    <div class="subtitle">从分散的单体 Agent 到协同编队的全面演进路线图</div>
-    <div class="stat-row" style="margin-top:16px;">
-      <div class="stat-item">
-        <div class="stat-num">4+</div>
-        <div class="stat-label">主流多智能体架构范式</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100 万行</div>
-        <div class="stat-label">OpenAI 全 AI 生成代码</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">42% → 78%</div>
-        <div class="stat-label">Harness 优化后编程成功率</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WHY: span-3 -->
-  <div class="card span-3">
-    <h2>为什么需要多智能体系统？</h2>
-    <div class="text-body">
-      一个 Agent 的上下文窗口有限、一次只能聚焦一个任务、出错时没有监控和回收机制。多智能体架构的本质是 <strong>分工 + 约束 + 反馈</strong>：把大问题拆成小任务，每个子 Agent 只有少量工具，用代码而不是 Prompt 做验收。结果是更可靠、可追踪、可迭代的工作流。
-    </div>
-    <div class="quote" style="margin-top:10px;">
-      <strong>「只会写代码的程序员一定会被取代，但会设计 Harness 的工程师会迎来自己的黄金时代。」</strong>
-    </div>
-    <div class="label-sm" style="margin-top:16px;">单 Agent → 多 Agent 演进路径</div>
-    <div class="phase-row">
-      <div class="phase">
-        <div class="phase-name">单体 Agent</div>
-        <div class="phase-date">2023–2024</div>
-        <div class="phase-desc">一个模型处理所有事，上下文膨胀</div>
-      </div>
-      <div class="phase">
-        <div class="phase-name">Agent + 工具</div>
-        <div class="phase-date">2024–2025</div>
-        <div class="phase-desc">工具调用扩展能力边界</div>
-      </div>
-      <div class="phase active">
-        <div class="phase-name">多 Agent 编队</div>
-        <div class="phase-date">2025–至今</div>
-        <div class="phase-desc">主 Agent 协调，子 Agent 各司其职</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- KEY CHALLENGES: span-1 -->
-  <div class="card span-1">
-    <div class="label-sm">核心挑战</div>
-    <div class="fail-grid" style="margin-top:6px;">
-      <div class="fail-item">
-        <div class="fail-icon">🧠</div>
-        <div>
-          <div class="text-body" style="font-weight:500;">上下文管理</div>
-          <div class="text-muted">每个 Agent 只看到自己需要的上下文</div>
-        </div>
-      </div>
-      <div class="fail-item">
-        <div class="fail-icon">🔄</div>
-        <div>
-          <div class="text-body" style="font-weight:500;">反馈循环</div>
-          <div class="text-muted">Agent 之间、Agent 对代码的审查闭环</div>
-        </div>
-      </div>
-      <div class="fail-item">
-        <div class="fail-icon">🧹</div>
-        <div>
-          <div class="text-body" style="font-weight:500;">熵管理</div>
-          <div class="text-muted">架构漂移、代码腐化自动修复</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4 ARCHITECTURE PATTERNS: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">02 · Architecture Patterns</div>
-    <h2>四大架构编排模式</h2>
-    <div class="comp-grid">
-      <div class="comp-item">
-        <h3>🧠 中央协调 (Orchestrator)</h3>
-        <div class="text-muted">主 Agent 不写代码，只分解任务、分配子 Agent、聚合结果。Hermes 的多 Agent 编队、OpenAI Codex CLI 的 Plan → Code → Review 均属此模式。子 Agent 返回文件路径和状态码。</div>
-      </div>
-      <div class="comp-item">
-        <h3>📡 事件驱动 (Event-Driven)</h3>
-        <div class="text-muted">Agent 通过消息队列通信。一个 Agent 的输出触发下一个 Agent 的输入。适合流式处理 pipeline（如 RSS 采集 → 摘要 → 发布）。LangChain 的 graph 运行时是其代表。</div>
-      </div>
-      <div class="comp-item">
-        <h3>🔄 循环迭代 (While Loop)</h3>
-        <div class="text-muted">Rust/Python <code>while</code> 循环启动新 CLI 会话，文件系统传递上下文。代表：Ralph。局限：自己开发自己测试时效果一般，缺少独立视角。</div>
-      </div>
-      <div class="comp-item">
-        <h3>🏛️ 专家编队 (Swarm)</h3>
-        <div class="text-muted">每个 Agent 是领域专家，路由层根据任务类型派发。Stripe 的每个 Agent 只看筛选子集工具。Vercel 将工具从 15 个减到 2 个，准确率从 80% → 100%。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RALPH ARCHITECTURE SVG: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">03 · Reference Architecture</div>
-    <h2>多 Agent 编队实战架构</h2>
-    <div class="text-body">
-      以 Hermes Agent 为代表的中央协调模式，是目前生产环境中最成熟的多 Agent 方案。
-    </div>
-    <div class="diagram-wrap">
-      <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-        <defs>
-          <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/></filter>
-          <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5e6ad2"/>
-          </marker>
-          <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#d0d0d0"/>
-          </marker>
-          <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#c4842f"/>
-          </marker>
-        </defs>
-        <rect width="660" height="400" fill="transparent" rx="8"/>
-
-        <!-- Main orchestrator -->
-        <rect x="230" y="10" width="200" height="34" rx="6" fill="#5e6ad2" filter="url(#s)"/>
-        <text x="330" y="32" fill="#fff" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🧠 主 Agent（协调层）</text>
-
-        <line x1="330" y1="44" x2="330" y2="58" stroke="#d0d0d0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
-
-        <rect x="230" y="62" width="200" height="30" rx="5" fill="#fff" stroke="#d0d0d0" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="81" fill="#4a4a4a" font-size="11" font-weight="400" text-anchor="middle" font-family="Inter, sans-serif">📋 计划 Agent → 任务分解</text>
-
-        <line x1="330" y1="92" x2="330" y2="108" stroke="#d0d0d0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
-
-        <text x="330" y="126" fill="#8b8b8b" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1">逐任务执行循环</text>
-
-        <!-- Dev agent -->
-        <rect x="50" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
-        <text x="135" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">👨‍💻 开发子 Agent</text>
-        <text x="135" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">返回文件路径+状态</text>
-
-        <!-- Review agent -->
-        <rect x="245" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#c4842f" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🔍 审查子 Agent</text>
-        <text x="330" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">代码质量 + 安全扫描</text>
-
-        <!-- Test agent -->
-        <rect x="440" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#c4842f" stroke-width="1" filter="url(#s)"/>
-        <text x="525" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🧪 测试子 Agent</text>
-        <text x="525" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">功能/边界/回归测试</text>
-
-        <!-- Connections from planner to agents -->
-        <path d="M 290 112 L 135 143" stroke="#5e6ad2" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
-        <path d="M 330 112 L 330 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
-        <path d="M 370 112 L 525 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
-
-        <!-- Feedback arrows back to main -->
-        <path d="M 220 163 L 290 163 L 290 150" stroke="#5e6ad2" stroke-width="1" fill="none" marker-end="url(#arrow-blue)"/>
-        <text x="255" y="147" fill="#5e6ad2" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
-
-        <path d="M 415 163 L 380 163 L 380 150" stroke="#c4842f" stroke-width="1" fill="none" marker-end="url(#arrow-orange)"/>
-        <text x="398" y="147" fill="#c4842f" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
-
-        <path d="M 440 163 L 460 163 L 460 150" stroke="#c4842f" stroke-width="1" fill="none" marker-end="url(#arrow-orange)"/>
-
-        <!-- Fail loop -->
-        <line x1="330" y1="181" x2="330" y2="205" stroke="#c4842f" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
-
-        <rect x="200" y="210" width="260" height="30" rx="5" fill="rgba(196,132,47,0.04)" stroke="rgba(196,132,47,0.3)" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="222" fill="#c4842f" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">❌ 审查/测试失败 → 修正循环（≤ 3 次）</text>
-        <text x="330" y="234" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">超出则保留人工介入</text>
-
-        <path d="M 200 225 L 135 181" stroke="#d1453b" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-gray)"/>
-        <text x="168" y="210" fill="#d1453b" font-size="9" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">同一开发修 bug</text>
-
-        <path d="M 460 225 L 525 225 L 525 181" stroke="#d1453b" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#arrow-gray)"/>
-        <text x="493" y="220" fill="#d1453b" font-size="9" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">同一测试验收</text>
-
-        <!-- Pass -->
-        <line x1="330" y1="240" x2="330" y2="258" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-
-        <rect x="240" y="262" width="180" height="30" rx="6" fill="rgba(94,106,210,0.04)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="281" fill="#5e6ad2" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">✅ 全部通过 → 下一任务</text>
-
-        <line x1="330" y1="292" x2="330" y2="312" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-
-        <rect x="260" y="316" width="140" height="26" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="333" fill="#5e6ad2" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🏁 全部任务完成</text>
-
-        <text x="330" y="370" fill="#8b8b8b" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">核心原则：写 Bug 的人修 Bug、提 Bug 的人验收、协调者只看状态码</text>
-      </svg>
-    </div>
-  </div>
-
-  <!-- HERMES MULTI-AGENT: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">04 · Implementation</div>
-    <h2>多 Agent 编队的实现关键</h2>
-    <div class="tips-grid">
-      <div class="tip-card">
-        <h3>🧩 主 Agent 不写代码</h3>
-        <div class="text-muted">协调层只负责：分解任务 → 分发 → 聚合结果。不参与开发、不碰文件。始终从状态码和摘要理解进度，按里程碑输出确认。</div>
-      </div>
-      <div class="tip-card">
-        <h3>📁 文件系统即通信</h3>
-        <div class="text-muted">子 Agent 输出到文件，主 Agent 读取文件。不需要 RPC、消息队列。文件路径 + 状态码 = 足够的生产级通信协议。</div>
-      </div>
-      <div class="tip-card">
-        <h3>✂️ 工具越少越好</h3>
-        <div class="text-muted">每个子 Agent 只看筛选子集工具。Vercel 实验：15→2 个工具，准确率从 80% 跳到 100%。约束比指令有效。</div>
-      </div>
-      <div class="tip-card">
-        <h3>🔄 错误剥离原则</h3>
-        <div class="text-muted">写 Bug 的 Agent 修 Bug，提 Bug 的 Agent 验收。不交叉、不混淆。修正循环最多 3 次，超出则留人工介入。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FRAMEWORK COMPARISON: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">05 · Framework Comparison</div>
-    <h2>主流多 Agent 框架对比</h2>
-    <div class="comp-grid">
-      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
-        <h3>Hermes Agent</h3>
-        <div class="text-muted">
-          基于 <code>delegate_task</code> 的原生多 Agent 支持。支持并行子 Agent（最多 3 并发）、隔离上下文、Acp 协议集成。<br><br>
-          <strong>亮点：</strong>单个会话内自动拆解、多 Agent 并行、结果聚合。
-        </div>
-      </div>
-      <div class="comp-item" style="border-top:2px solid #c4842f;">
-        <h3>Ralph</h3>
-        <div class="text-muted">
-          Rust <code>while</code> 循环驱动 Claude CLI，文件系统传递上下文。轻量但缺乏隔离。<br><br>
-          <strong>亮点：</strong>完全无服务器依赖，纯 CLI 生态。
-        </div>
-      </div>
-      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
-        <h3>OpenAI Codex CLI</h3>
-        <div class="text-muted">
-          Plan → Code → Review 三段式。每个阶段一个 Agent 做一件事。但 review 阶段不是独立第三方。<br><br>
-          <strong>亮点：</strong>官方维护，与 GPT 生态深度整合。
-        </div>
-      </div>
-      <div class="comp-item" style="border-top:2px solid #c4842f;">
-        <h3>Claude Code (CC)</h3>
-        <div class="text-muted">
-          Anthropic 的官方 CLI Agent。非原生多 Agent，但可通过脚本编排多个实例。<br><br>
-          <strong>亮点：</strong>Claude 模型直接驱动，质量上限高。
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COMPLEXITY MAP: span-1 -->
-  <div class="card span-1">
-    <div class="label-sm">Complexity Map</div>
-    <h2>多 Agent 复杂度层级</h2>
-    <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
-      <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:8px 10px;">
-        <div style="font-size:11px;font-weight:600;color:#8b8b8b;">L1 - 单 Agent</div>
-        <div class="text-muted">一个模型，全权处理</div>
-      </div>
-      <div style="background:rgba(94,106,210,0.04);border:1px solid #5e6ad2;border-radius:10px;padding:8px 10px;">
-        <div style="font-size:11px;font-weight:600;color:#5e6ad2;">L2 - 主 + 子 Agent</div>
-        <div class="text-muted">协调 + 专家（Hermes 模式）</div>
-      </div>
-      <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:8px 10px;">
-        <div style="font-size:11px;font-weight:600;color:#8b8b8b;">L3 - Agent 集群</div>
-        <div class="text-muted">多主 + 多子，跨会话调度</div>
-      </div>
-      <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:8px 10px;">
-        <div style="font-size:11px;font-weight:600;color:#8b8b8b;">L4 - 多 Agent 编队</div>
-        <div class="text-muted">事件驱动、动态编排、CRM</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRACTICE TIPS: span-1 -->
-  <div class="card span-1">
-    <div class="label-sm">Practice</div>
-    <h2>实操建议</h2>
-    <ul style="margin-top:6px;">
-      <li>起步从 <strong>主 + 1 个子 Agent</strong> 开始</li>
-      <li>每个子 Agent 只配 <strong>2–3 个必要工具</strong></li>
-      <li>用 <strong>AGENTS.md + file 协议</strong> 代替复杂通信</li>
-      <li>先跑通 <strong>Happy Path</strong>，再补错误处理</li>
-      <li>审查 Agent 必须是 <strong>独立上下文</strong></li>
-      <li>失败超过 3 次 → <strong>人工介入不丢人</strong></li>
-    </ul>
-  </div>
-
-  <!-- TIMELINE: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">06 · Evolution Timeline</div>
-    <h2>多 Agent 系统关键节点</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div>
-          <div class="tl-year">2024 Q3</div>
-          <div class="tl-title">Agent 工具调用标准化</div>
-          <div class="tl-desc">OpenAI Function Calling、Anthropic Tool Use 成为标准协议，为多 Agent 互操作打下基础。</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div>
-          <div class="tl-year">2025 Q1</div>
-          <div class="tl-title">多 Agent 框架涌现</div>
-          <div class="tl-desc">CrewAI、AutoGen、LangGraph 等框架推动多 Agent 概念普及。但多数停留在 Demo 阶段。</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div>
-          <div class="tl-year">2025 Q3</div>
-          <div class="tl-title">Hermes Agent 引入 delegate_task</div>
-          <div class="tl-desc">原生多 Agent 支持，隔离上下文、并行执行、结果聚合贯穿设计。</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot active"></div>
-        <div>
-          <div class="tl-year">2026 H1</div>
-          <div class="tl-title">多 Agent 生产化元年</div>
-          <div class="tl-desc">OpenAI 100 万行全 AI 代码、Stripe Blueprint、Vercel Harness 落地。多 Agent 从概念验证进入工程实践。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VS DEBATE: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">07 · Debate</div>
-    <h2>Big Model vs Big Orchestration</h2>
-    <div class="text-body" style="margin-bottom:8px;">更强的模型是否意味着多 Agent 不再必要？行业顶级实践者给出了截然不同的答案。</div>
-    <div class="vs-row">
-      <div class="vs-card" style="border-top:2px solid #c4842f;">
-        <div class="vs-label" style="color:#c4842f;">Big Model</div>
-        <div class="vs-name">Noam Brown</div>
-        <div class="vs-affil">OpenAI</div>
-        <div class="vs-desc">"Harness 是拐杖，推理模型一来很多基础设施就不需要了。" 一个模型搞定一切，多 Agent 是过渡方案。</div>
-      </div>
-      <div class="vs-card" style="border-top:2px solid #5e6ad2;">
-        <div class="vs-label" style="color:#5e6ad2;">Big Orchestration</div>
-        <div class="vs-name">Jerry Liu</div>
-        <div class="vs-affil">LlamaIndex</div>
-        <div class="vs-desc">"模型是引擎，Harness 是方向盘和刹车。" 多 Agent 不是能力问题，而是工程可靠性问题。</div>
-      </div>
-    </div>
-    <div class="quote" style="background:#fff;">
-      <strong>两者都在理。</strong> 模型越强，Harness 越薄，但不会消失。架构约束、反馈循环、熵管理只会换形态——从 Prompt 约束变成代码约束、从手动审查变成自动验收。就像自动驾驶：L2 需要人盯，L4 不需要盯但需要冗余传感器和 Failover 机制。
-    </div>
-  </div>
-
-  <!-- OPEN SOURCE ECOSYSTEM: span-2 -->
-  <div class="card span-2">
-    <div class="label-sm">08 · Ecosystem</div>
-    <h2>开源生态与关键工具</h2>
-    <div class="comp-grid" style="margin-top:4px;">
-      <div class="comp-item">
-        <h3>🔧 LangGraph</h3>
-        <div class="text-muted">基于图的多 Agent 编排。支持条件分支、循环、人机交互。适用：复杂工作流。</div>
-      </div>
-      <div class="comp-item">
-        <h3>🔧 CrewAI</h3>
-        <div class="text-muted">角色驱动的多 Agent 框架。定义 Agent Role / Goal / Backstory，自由组合。适用：快速原型。</div>
-      </div>
-      <div class="comp-item">
-        <h3>🔧 AutoGen</h3>
-        <div class="text-muted">微软开源，多 Agent 对话框架。支持群聊、子 Agent、代码执行。适用：研究实验。</div>
-      </div>
-      <div class="comp-item">
-        <h3>🔧 ACP 协议</h3>
-        <div class="text-muted">Agent Communication Protocol。标准化 Agent 间通信，Hermes / Copilot 可互操作。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CONCLUSION: span-1 -->
-  <div class="card span-1">
-    <div class="label-sm">Conclusion</div>
-    <div class="quote" style="background:#fff;border-left-color:#5e6ad2;padding:10px 14px;">
-      <strong style="font-size:14px;">多 Agent 的真正价值不是"多个模型一起工作"，而是"让每个模型在自己的约束范围内可靠工作"。</strong>
-    </div>
-    <div style="margin-top:12px;">
-      <div style="font-size:12px;font-weight:500;margin-bottom:6px;">判断多 Agent 系统成熟度的三个问题：</div>
-      <ol style="padding-left:16px;margin:0;">
-        <li style="font-size:12px;color:#6b6b6b;margin-bottom:3px;">一个子 Agent 出错时，整个系统怎么恢复？</li>
-        <li style="font-size:12px;color:#6b6b6b;margin-bottom:3px;">上下文怎么在 Agent 之间传递而不膨胀？</li>
-        <li style="font-size:12px;color:#6b6b6b;margin-bottom:3px;">最终代码质量由谁来把关——模型自己还是独立的审查 Agent？</li>
-      </ol>
-    </div>
-    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e8e8e6;">
-      <div style="font-size:11px;color:#8b8b8b;">工程师的价值转变：从写代码 → 设计让 Agent 可靠工作的系统。多 Agent 编队的时代，最稀缺的不是会写代码的人，是会设计 Harness 的人。</div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="card span-4 footer" style="box-shadow:none;background:transparent;border:none;padding:16px 0;">
-    本文档基于 Hermes Agent 工作流实践、OpenAI Codex CLI 架构分析、Ralph 多 Agent 编队参考架构及行业最新实践编译 · 2026
-  </div>
-
-</div>
-</body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>多智能体系统 — 架构、编排与工程实践</title>
+     7|<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+     8|<style>
+     9|  * { margin: 0; padding: 0; box-sizing: border-box; }
+    10|  body {
+    11|    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    12|    font-feature-settings: "cv01", "ss03";
+    13|    background: #f5f5f4;
+    14|    color: #1c1c1c;
+    15|    line-height: 1.5;
+    16|    -webkit-font-smoothing: antialiased;
+    17|  }
+    18|
+    19|  .nav-back {
+    20|    max-width: 1200px;
+    21|    margin: 0 auto;
+    22|    padding: 16px 24px 0;
+    23|  }
+    24|  .nav-back a {
+    25|    display: inline-flex;
+    26|    align-items: center;
+    27|    gap: 6px;
+    28|    font-size: 13px;
+    29|    color: #6b6b6b;
+    30|    text-decoration: none;
+    31|    font-weight: 500;
+    32|    transition: color 0.2s;
+    33|  }
+    34|  .nav-back a:hover { color: #5e6ad2; }
+    35|
+    36|  .bento {
+    37|    max-width: 1200px;
+    38|    margin: 0 auto;
+    39|    padding: 32px 24px 48px;
+    40|    display: grid;
+    41|    grid-template-columns: repeat(4, 1fr);
+    42|    gap: 16px;
+    43|  }
+    44|  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+    45|  @media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
+    46|
+    47|  .card {
+    48|    background: #fff;
+    49|    border: 1px solid #e8e8e6;
+    50|    border-radius: 14px;
+    51|    padding: 20px;
+    52|    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    53|    transition: box-shadow 0.2s;
+    54|  }
+    55|  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    56|
+    57|  .span-2 { grid-column: span 2; }
+    58|  .span-3 { grid-column: span 3; }
+    59|  .span-4 { grid-column: span 4; }
+    60|  .span-row-2 { grid-row: span 2; }
+    61|  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+    62|  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+    63|
+    64|  .label-sm {
+    65|    font-size: 11px;
+    66|    font-weight: 600;
+    67|    color: #8b8b8b;
+    68|    text-transform: uppercase;
+    69|    letter-spacing: 0.06em;
+    70|    margin-bottom: 8px;
+    71|  }
+    72|  h1 {
+    73|    font-size: 32px;
+    74|    font-weight: 500;
+    75|    letter-spacing: -0.5px;
+    76|    color: #1c1c1c;
+    77|    margin-bottom: 4px;
+    78|  }
+    79|  .subtitle {
+    80|    font-size: 15px;
+    81|    color: #6b6b6b;
+    82|    font-weight: 400;
+    83|  }
+    84|  h2 {
+    85|    font-size: 18px;
+    86|    font-weight: 500;
+    87|    letter-spacing: -0.2px;
+    88|    margin-bottom: 10px;
+    89|    color: #1c1c1c;
+    90|  }
+    91|  h3 {
+    92|    font-size: 14px;
+    93|    font-weight: 600;
+    94|    color: #1c1c1c;
+    95|    margin-bottom: 6px;
+    96|  }
+    97|  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+    98|  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+    99|  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+   100|
+   101|  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
+   102|  .stat-item { flex: 1; }
+   103|  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; }
+   104|  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+   105|
+   106|  .divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
+   107|
+   108|  .tag {
+   109|    display: inline-block;
+   110|    font-size: 10px;
+   111|    font-weight: 600;
+   112|    padding: 2px 7px;
+   113|    border-radius: 5px;
+   114|    letter-spacing: 0.02em;
+   115|  }
+   116|
+   117|  .phase-row { display: flex; gap: 10px; margin-top: 8px; }
+   118|  .phase {
+   119|    flex: 1;
+   120|    background: #fafafa;
+   121|    border: 1px solid #e8e8e6;
+   122|    border-radius: 10px;
+   123|    padding: 12px;
+   124|    text-align: center;
+   125|  }
+   126|  .phase-name { font-size: 11px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
+   127|  .phase-date { font-size: 10px; color: #8b8b8b; margin-bottom: 4px; }
+   128|  .phase-desc { font-size: 11px; color: #6b6b6b; line-height: 1.4; }
+   129|  .phase.active { border-color: #5e6ad2; background: rgba(94,106,210,0.04); }
+   130|  .phase.active .phase-name { color: #5e6ad2; }
+   131|
+   132|  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+   133|  @media (max-width: 520px) { .comp-grid { grid-template-columns: 1fr; } }
+   134|  .comp-item {
+   135|    background: #fafafa;
+   136|    border: 1px solid #e8e8e6;
+   137|    border-radius: 10px;
+   138|    padding: 12px;
+   139|  }
+   140|  .comp-item h3 { margin-bottom: 4px; }
+   141|
+   142|  .fail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+   143|  .fail-item {
+   144|    display: flex; align-items: flex-start; gap: 10px;
+   145|    background: #fafafa;
+   146|    border: 1px solid #e8e8e6;
+   147|    border-radius: 10px;
+   148|    padding: 10px 12px;
+   149|  }
+   150|  .fail-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+   151|
+   152|  .quote {
+   153|    background: #fafafa;
+   154|    border-left: 3px solid #5e6ad2;
+   155|    border-radius: 0 10px 10px 0;
+   156|    padding: 12px 16px;
+   157|    font-size: 13px;
+   158|    color: #4a4a4a;
+   159|    line-height: 1.6;
+   160|    margin-top: 10px;
+   161|  }
+   162|  .quote strong { color: #1c1c1c; font-weight: 500; }
+   163|
+   164|  .diagram-wrap {
+   165|    background: #fafafa;
+   166|    border: 1px solid #e8e8e6;
+   167|    border-radius: 12px;
+   168|    padding: 16px;
+   169|    margin-top: 10px;
+   170|    overflow-x: auto;
+   171|  }
+   172|  .diagram-wrap svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+   173|
+   174|  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+   175|  @media (max-width: 520px) { .tips-grid { grid-template-columns: 1fr; } }
+   176|  .tip-card {
+   177|    background: #fafafa;
+   178|    border: 1px solid #e8e8e6;
+   179|    border-radius: 10px;
+   180|    padding: 12px;
+   181|  }
+   182|
+   183|  .timeline { margin-top: 8px; }
+   184|  .tl-item { display: flex; gap: 14px; margin-bottom: 12px; }
+   185|  .tl-dot {
+   186|    flex-shrink: 0;
+   187|    width: 10px; height: 10px;
+   188|    border-radius: 50%;
+   189|    margin-top: 5px;
+   190|    border: 2px solid #d0d0d0;
+   191|    background: #fff;
+   192|  }
+   193|  .tl-dot.active { border-color: #5e6ad2; background: #5e6ad2; }
+   194|  .tl-year { font-size: 11px; font-weight: 600; color: #8b8b8b; text-transform: uppercase; letter-spacing: 0.04em; }
+   195|  .tl-title { font-size: 13px; font-weight: 500; }
+   196|  .tl-desc { font-size: 11px; color: #6b6b6b; margin-top: 1px; }
+   197|
+   198|  .vs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+   199|  @media (max-width: 520px) { .vs-row { grid-template-columns: 1fr; } }
+   200|  .vs-card {
+   201|    background: #fafafa;
+   202|    border: 1px solid #e8e8e6;
+   203|    border-radius: 10px;
+   204|    padding: 14px;
+   205|    text-align: center;
+   206|  }
+   207|  .vs-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8b8b8b; margin-bottom: 4px; }
+   208|  .vs-name { font-size: 14px; font-weight: 500; }
+   209|  .vs-affil { font-size: 11px; color: #8b8b8b; margin-bottom: 4px; }
+   210|  .vs-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+   211|
+   212|  .footer { text-align: center; padding: 20px 0 0; font-size: 12px; color: #8b8b8b; }
+   213|  .footer a { color: #5e6ad2; text-decoration: none; }
+   214|  .footer a:hover { text-decoration: underline; }
+   215|
+   216|  ul { padding-left: 16px; margin: 4px 0 6px; }
+   217|  li { font-size: 13px; color: #4a4a4a; margin-bottom: 4px; line-height: 1.5; }
+   218|  li strong { color: #1c1c1c; font-weight: 500; }
+   219|
+   220|  code {
+   221|    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+   222|    background: #eee;
+   223|    padding: 1px 5px;
+   224|    border-radius: 4px;
+   225|    font-size: 12px;
+   226|  }
+   227|
+   228|  .tool-list { padding: 0; margin: 6px 0; list-style: none; }
+   229|  .tool-list li {
+   230|    font-size: 12px; color: #4a4a4a; margin-bottom: 4px;
+   231|    display: flex; align-items: flex-start; gap: 6px;
+   232|  }
+   233|  .tool-list li::before { content: "→"; color: #5e6ad2; font-weight: 500; }
+   234|</style>
+   235|</head>
+   236|<body>
+   237|
+   238|<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+   239|<div class="bento">
+   240|
+   241|  <!-- HERO -->
+   242|  <div class="card span-4">
+   243|    <div class="label-sm">Multi-Agent Systems · 2026</div>
+   244|    <h1>多智能体系统 — 架构、编排与工程实践</h1>
+   245|    <div class="subtitle">从分散的单体 Agent 到协同编队的全面演进路线图</div>
+   246|    <div class="stat-row" style="margin-top:16px;">
+   247|      <div class="stat-item">
+   248|        <div class="stat-num">4+</div>
+   249|        <div class="stat-label">主流多智能体架构范式</div>
+   250|      </div>
+   251|      <div class="stat-item">
+   252|        <div class="stat-num">100 万行</div>
+   253|        <div class="stat-label">OpenAI 全 AI 生成代码</div>
+   254|      </div>
+   255|      <div class="stat-item">
+   256|        <div class="stat-num">42% → 78%</div>
+   257|        <div class="stat-label">Harness 优化后编程成功率</div>
+   258|      </div>
+   259|    </div>
+   260|  </div>
+   261|
+   262|  <!-- WHY: span-3 -->
+   263|  <div class="card span-3">
+   264|    <h2>为什么需要多智能体系统？</h2>
+   265|    <div class="text-body">
+   266|      一个 Agent 的上下文窗口有限、一次只能聚焦一个任务、出错时没有监控和回收机制。多智能体架构的本质是 <strong>分工 + 约束 + 反馈</strong>：把大问题拆成小任务，每个子 Agent 只有少量工具，用代码而不是 Prompt 做验收。结果是更可靠、可追踪、可迭代的工作流。
+   267|    </div>
+   268|    <div class="quote" style="margin-top:10px;">
+   269|      <strong>「只会写代码的程序员一定会被取代，但会设计 Harness 的工程师会迎来自己的黄金时代。」</strong>
+   270|    </div>
+   271|    <div class="label-sm" style="margin-top:16px;">单 Agent → 多 Agent 演进路径</div>
+   272|    <div class="phase-row">
+   273|      <div class="phase">
+   274|        <div class="phase-name">单体 Agent</div>
+   275|        <div class="phase-date">2023–2024</div>
+   276|        <div class="phase-desc">一个模型处理所有事，上下文膨胀</div>
+   277|      </div>
+   278|      <div class="phase">
+   279|        <div class="phase-name">Agent + 工具</div>
+   280|        <div class="phase-date">2024–2025</div>
+   281|        <div class="phase-desc">工具调用扩展能力边界</div>
+   282|      </div>
+   283|      <div class="phase active">
+   284|        <div class="phase-name">多 Agent 编队</div>
+   285|        <div class="phase-date">2025–至今</div>
+   286|        <div class="phase-desc">主 Agent 协调，子 Agent 各司其职</div>
+   287|      </div>
+   288|    </div>
+   289|  </div>
+   290|
+   291|  <!-- KEY CHALLENGES: span-1 -->
+   292|  <div class="card span-1">
+   293|    <div class="label-sm">核心挑战</div>
+   294|    <div class="fail-grid" style="margin-top:6px;">
+   295|      <div class="fail-item">
+   296|        <div class="fail-icon">🧠</div>
+   297|        <div>
+   298|          <div class="text-body" style="font-weight:500;">上下文管理</div>
+   299|          <div class="text-muted">每个 Agent 只看到自己需要的上下文</div>
+   300|        </div>
+   301|      </div>
+   302|      <div class="fail-item">
+   303|        <div class="fail-icon">🔄</div>
+   304|        <div>
+   305|          <div class="text-body" style="font-weight:500;">反馈循环</div>
+   306|          <div class="text-muted">Agent 之间、Agent 对代码的审查闭环</div>
+   307|        </div>
+   308|      </div>
+   309|      <div class="fail-item">
+   310|        <div class="fail-icon">🧹</div>
+   311|        <div>
+   312|          <div class="text-body" style="font-weight:500;">熵管理</div>
+   313|          <div class="text-muted">架构漂移、代码腐化自动修复</div>
+   314|        </div>
+   315|      </div>
+   316|    </div>
+   317|  </div>
+   318|
+   319|  <!-- 4 ARCHITECTURE PATTERNS: span-2 -->
+   320|  <div class="card span-2">
+   321|    <div class="label-sm">02 · Architecture Patterns</div>
+   322|    <h2>四大架构编排模式</h2>
+   323|    <div class="comp-grid">
+   324|      <div class="comp-item">
+   325|        <h3>🧠 中央协调 (Orchestrator)</h3>
+   326|        <div class="text-muted">主 Agent 不写代码，只分解任务、分配子 Agent、聚合结果。Hermes 的多 Agent 编队、OpenAI Codex CLI 的 Plan → Code → Review 均属此模式。子 Agent 返回文件路径和状态码。</div>
+   327|      </div>
+   328|      <div class="comp-item">
+   329|        <h3>📡 事件驱动 (Event-Driven)</h3>
+   330|        <div class="text-muted">Agent 通过消息队列通信。一个 Agent 的输出触发下一个 Agent 的输入。适合流式处理 pipeline（如 RSS 采集 → 摘要 → 发布）。LangChain 的 graph 运行时是其代表。</div>
+   331|      </div>
+   332|      <div class="comp-item">
+   333|        <h3>🔄 循环迭代 (While Loop)</h3>
+   334|        <div class="text-muted">Rust/Python <code>while</code> 循环启动新 CLI 会话，文件系统传递上下文。代表：Ralph。局限：自己开发自己测试时效果一般，缺少独立视角。</div>
+   335|      </div>
+   336|      <div class="comp-item">
+   337|        <h3>🏛️ 专家编队 (Swarm)</h3>
+   338|        <div class="text-muted">每个 Agent 是领域专家，路由层根据任务类型派发。Stripe 的每个 Agent 只看筛选子集工具。Vercel 将工具从 15 个减到 2 个，准确率从 80% → 100%。</div>
+   339|      </div>
+   340|    </div>
+   341|  </div>
+   342|
+   343|  <!-- RALPH ARCHITECTURE SVG: span-2 -->
+   344|  <div class="card span-2">
+   345|    <div class="label-sm">03 · Reference Architecture</div>
+   346|    <h2>多 Agent 编队实战架构</h2>
+   347|    <div class="text-body">
+   348|      以 Hermes Agent 为代表的中央协调模式，是目前生产环境中最成熟的多 Agent 方案。
+   349|    </div>
+   350|    <div class="diagram-wrap">
+   351|      <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+   352|        <defs>
+   353|          <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/></filter>
+   354|          <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+   355|            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5e6ad2"/>
+   356|          </marker>
+   357|          <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+   358|            <path d="M 0 0 L 10 5 L 0 10 z" fill="#d0d0d0"/>
+   359|          </marker>
+   360|          <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+   361|            <path d="M 0 0 L 10 5 L 0 10 z" fill="#c4842f"/>
+   362|          </marker>
+   363|        </defs>
+   364|        <rect width="660" height="400" fill="transparent" rx="8"/>
+   365|
+   366|        <!-- Main orchestrator -->
+   367|        <rect x="230" y="10" width="200" height="34" rx="6" fill="#5e6ad2" filter="url(#s)"/>
+   368|        <text x="330" y="32" fill="#fff" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🧠 主 Agent（协调层）</text>
+   369|
+   370|        <line x1="330" y1="44" x2="330" y2="58" stroke="#d0d0d0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+   371|
+   372|        <rect x="230" y="62" width="200" height="30" rx="5" fill="#fff" stroke="#d0d0d0" stroke-width="1" filter="url(#s)"/>
+   373|        <text x="330" y="81" fill="#4a4a4a" font-size="11" font-weight="400" text-anchor="middle" font-family="Inter, sans-serif">📋 计划 Agent → 任务分解</text>
+   374|
+   375|        <line x1="330" y1="92" x2="330" y2="108" stroke="#d0d0d0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+   376|
+   377|        <text x="330" y="126" fill="#8b8b8b" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1">逐任务执行循环</text>
+   378|
+   379|        <!-- Dev agent -->
+   380|        <rect x="50" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
+   381|        <text x="135" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">👨‍💻 开发子 Agent</text>
+   382|        <text x="135" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">返回文件路径+状态</text>
+   383|
+   384|        <!-- Review agent -->
+   385|        <rect x="245" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#c4842f" stroke-width="1" filter="url(#s)"/>
+   386|        <text x="330" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🔍 审查子 Agent</text>
+   387|        <text x="330" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">代码质量 + 安全扫描</text>
+   388|
+   389|        <!-- Test agent -->
+   390|        <rect x="440" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#c4842f" stroke-width="1" filter="url(#s)"/>
+   391|        <text x="525" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🧪 测试子 Agent</text>
+   392|        <text x="525" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">功能/边界/回归测试</text>
+   393|
+   394|        <!-- Connections from planner to agents -->
+   395|        <path d="M 290 112 L 135 143" stroke="#5e6ad2" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
+   396|        <path d="M 330 112 L 330 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
+   397|        <path d="M 370 112 L 525 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
+   398|
+   399|        <!-- Feedback arrows back to main -->
+   400|        <path d="M 220 163 L 290 163 L 290 150" stroke="#5e6ad2" stroke-width="1" fill="none" marker-end="url(#arrow-blue)"/>
+   401|        <text x="255" y="147" fill="#5e6ad2" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
+   402|
+   403|        <path d="M 415 163 L 380 163 L 380 150" stroke="#c4842f" stroke-width="1" fill="none" marker-end="url(#arrow-orange)"/>
+   404|        <text x="398" y="147" fill="#c4842f" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
+   405|
+   406|        <path d="M 440 163 L 460 163 L 460 150" stroke="#c4842f" stroke-width="1" fill="none" marker-end="url(#arrow-orange)"/>
+   407|
+   408|        <!-- Fail loop -->
+   409|        <line x1="330" y1="181" x2="330" y2="205" stroke="#c4842f" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+   410|
+   411|        <rect x="200" y="210" width="260" height="30" rx="5" fill="rgba(196,132,47,0.04)" stroke="rgba(196,132,47,0.3)" stroke-width="1" filter="url(#s)"/>
+   412|        <text x="330" y="222" fill="#c4842f" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">❌ 审查/测试失败 → 修正循环（≤ 3 次）</text>
+   413|        <text x="330" y="234" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">超出则保留人工介入</text>
+   414|
+   415|        <path d="M 200 225 L 135 181" stroke="#d1453b" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-gray)"/>
+   416|        <text x="168" y="210" fill="#d1453b" font-size="9" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">同一开发修 bug</text>
+   417|
+   418|        <path d="M 460 225 L 525 225 L 525 181" stroke="#d1453b" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#arrow-gray)"/>
+   419|        <text x="493" y="220" fill="#d1453b" font-size="9" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">同一测试验收</text>
+   420|
+   421|        <!-- Pass -->
+   422|        <line x1="330" y1="240" x2="330" y2="258" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+   423|
+   424|        <rect x="240" y="262" width="180" height="30" rx="6" fill="rgba(94,106,210,0.04)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
+   425|        <text x="330" y="281" fill="#5e6ad2" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">✅ 全部通过 → 下一任务</text>
+   426|
+   427|        <line x1="330" y1="292" x2="330" y2="312" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+   428|
+   429|        <rect x="260" y="316" width="140" height="26" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
+   430|        <text x="330" y="333" fill="#5e6ad2" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🏁 全部任务完成</text>
+   431|
+   432|        <text x="330" y="370" fill="#8b8b8b" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">核心原则：写 Bug 的人修 Bug、提 Bug 的人验收、协调者只看状态码</text>
+   433|      </svg>
+   434|    </div>
+   435|  </div>
+   436|
+   437|  <!-- HERMES MULTI-AGENT: span-2 -->
+   438|  <div class="card span-2">
+   439|    <div class="label-sm">04 · Implementation</div>
+   440|    <h2>多 Agent 编队的实现关键</h2>
+   441|    <div class="tips-grid">
+   442|      <div class="tip-card">
+   443|        <h3>🧩 主 Agent 不写代码</h3>
+   444|        <div class="text-muted">协调层只负责：分解任务 → 分发 → 聚合结果。不参与开发、不碰文件。始终从状态码和摘要理解进度，按里程碑输出确认。</div>
+   445|      </div>
+   446|      <div class="tip-card">
+   447|        <h3>📁 文件系统即通信</h3>
+   448|        <div class="text-muted">子 Agent 输出到文件，主 Agent 读取文件。不需要 RPC、消息队列。文件路径 + 状态码 = 足够的生产级通信协议。</div>
+   449|      </div>
+   450|      <div class="tip-card">
+   451|        <h3>✂️ 工具越少越好</h3>
+   452|        <div class="text-muted">每个子 Agent 只看筛选子集工具。Vercel 实验：15→2 个工具，准确率从 80% 跳到 100%。约束比指令有效。</div>
+   453|      </div>
+   454|      <div class="tip-card">
+   455|        <h3>🔄 错误剥离原则</h3>
+   456|        <div class="text-muted">写 Bug 的 Agent 修 Bug，提 Bug 的 Agent 验收。不交叉、不混淆。修正循环最多 3 次，超出则留人工介入。</div>
+   457|      </div>
+   458|    </div>
+   459|  </div>
+   460|
+   461|  <!-- FRAMEWORK COMPARISON: span-2 -->
+   462|  <div class="card span-2">
+   463|    <div class="label-sm">05 · Framework Comparison</div>
+   464|    <h2>主流多 Agent 框架对比</h2>
+   465|    <div class="comp-grid">
+   466|      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
+   467|        <h3>Hermes Agent</h3>
+   468|        <div class="text-muted">
+   469|          基于 <code>delegate_task</code> 的原生多 Agent 支持。支持并行子 Agent（最多 3 并发）、隔离上下文、Acp 协议集成。<br><br>
+   470|          <strong>亮点：</strong>单个会话内自动拆解、多 Agent 并行、结果聚合。
+   471|        </div>
+   472|      </div>
+   473|      <div class="comp-item" style="border-top:2px solid #c4842f;">
+   474|        <h3>Ralph</h3>
+   475|        <div class="text-muted">
+   476|          Rust <code>while</code> 循环驱动 Claude CLI，文件系统传递上下文。轻量但缺乏隔离。<br><br>
+   477|          <strong>亮点：</strong>完全无服务器依赖，纯 CLI 生态。
+   478|        </div>
+   479|      </div>
+   480|      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
+   481|        <h3>OpenAI Codex CLI</h3>
+   482|        <div class="text-muted">
+   483|          Plan → Code → Review 三段式。每个阶段一个 Agent 做一件事。但 review 阶段不是独立第三方。<br><br>
+   484|          <strong>亮点：</strong>官方维护，与 GPT 生态深度整合。
+   485|        </div>
+   486|      </div>
+   487|      <div class="comp-item" style="border-top:2px solid #c4842f;">
+   488|        <h3>Claude Code (CC)</h3>
+   489|        <div class="text-muted">
+   490|          Anthropic 的官方 CLI Agent。非原生多 Agent，但可通过脚本编排多个实例。<br><br>
+   491|          <strong>亮点：</strong>Claude 模型直接驱动，质量上限高。
+   492|        </div>
+   493|      </div>
+   494|    </div>
+   495|  </div>
+   496|
+   497|  <!-- COMPLEXITY MAP: span-1 -->
+   498|  <div class="card span-1">
+   499|    <div class="label-sm">Complexity Map</div>
+   500|    <h2>多 Agent 复杂度层级</h2>
+   501|
