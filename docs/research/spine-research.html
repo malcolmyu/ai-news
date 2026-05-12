@@ -4,689 +4,717 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-primary: #f5f5f4;
-  --bg-secondary: #fafafa;
-  --bg-card: #ffffff;
-  --bg-hover: #f0f0ee;
-  --accent: #5e6ad2;
-  --accent-light: #7b85d9;
-  --accent-dark: #4a56c0;
-  --text-primary: #1c1c1c;
-  --text-secondary: #6b6b6b;
-  --text-muted: #8b8b8b;
-  --border: #e8e8e6;
-  --radius-sm: 10px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,0.06);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-feature-settings: "cv01", "ss03";
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.nav-back { max-width: 1200px; margin: 0 auto; padding: 16px 24px 0; }
-.nav-back a {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; color: var(--text-secondary);
-  text-decoration: none; font-weight: 500; transition: color 0.2s;
-}
-.nav-back a:hover { color: var(--accent); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: #f5f5f4;
+    color: #1c1c1c;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .nav-back {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px 0;
+  }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: #5e6ad2; }
+  @media (max-width: 520px) {
+    .nav-back { padding: 12px 16px 0; }
+  }
+  .bento {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+    .stat-num { font-size: 18px; }
+    .stat-row { flex-wrap: wrap; gap: 8px; }
+    .stat-item { flex: 1 1 40%; min-width: 0; }
+    h1 { font-size: 24px; }
+    svg { display: block; }
+    .card { padding: 16px; }
+    .diagram-wrap { padding: 10px; }
+  }
 
-/* Header */
-.header {
-  position: fixed; top: 0; left: 0; right: 0;
-  background: rgba(245,245,244,0.85); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border); z-index: 100;
-}
-.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
-.logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 24px; }
-.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent); }
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e6;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    min-width: 0;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
 
-/* Bento grid */
-.bento {
-  padding: 80px 24px 48px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  .span-row-2 { grid-row: span 2; }
+  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
 
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.2s;
-  min-width: 0;
-}
-.card:hover { box-shadow: var(--shadow-hover); }
+  .label-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b8b8b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #1c1c1c;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #6b6b6b;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin-bottom: 10px;
+    color: #1c1c1c;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+  }
+  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+  .text-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12px; background: #f0f0ee;
+    padding: 2px 6px; border-radius: 4px;
+    color: #1c1c1c;
+  }
 
-.span-2 { grid-column: span 2; }
-.span-3 { grid-column: span 3; }
-.span-4 { grid-column: span 4; }
-.span-row-2 { grid-row: span 2; }
-@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
-@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
+  .stat-item { flex: 1; min-width: 0; }
+  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
 
-/* Typography */
-h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2; }
-h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 12px; }
-h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-.label-sm {
-  font-size: 11px; font-weight: 600; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
-}
-.label-accent {
-  font-size: 11px; font-weight: 600; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
-}
-.meta { font-size: 12px; color: var(--text-muted); }
-.body-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.body-text strong { color: var(--text-primary); font-weight: 600; }
-.body-text code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; background: var(--bg-hover);
-  padding: 2px 6px; border-radius: 4px;
-  color: var(--text-primary);
-}
+  .divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
 
-/* Stat card */
-.stat-row { display: flex; gap: 12px; }
-.stat-item { flex: 1; min-width: 0; }
-.stat-num { font-size: 24px; font-weight: 600; color: var(--accent); line-height: 1.1; }
-.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 5px;
+    letter-spacing: 0.02em;
+  }
 
-/* Tag */
-.tag {
-  display: inline-block;
-  padding: 3px 10px;
-  background: var(--bg-hover);
-  border-radius: 100px;
-  font-size: 11px; color: var(--text-secondary); font-weight: 500;
-  margin-right: 4px; margin-bottom: 4px;
-}
-.tag-accent {
-  display: inline-block;
-  padding: 3px 10px;
-  background: rgba(94,106,210,0.08);
-  border-radius: 100px;
-  font-size: 11px; color: var(--accent); font-weight: 500;
-  margin-right: 4px; margin-bottom: 4px;
-}
-.tag-green {
-  display: inline-block;
-  padding: 3px 10px;
-  background: rgba(16,185,129,0.08);
-  border-radius: 100px;
-  font-size: 11px; color: #10b981; font-weight: 500;
-}
-.tag-amber {
-  display: inline-block;
-  padding: 3px 10px;
-  background: rgba(245,158,11,0.08);
-  border-radius: 100px;
-  font-size: 11px; color: #f59e0b; font-weight: 500;
-}
-.tag-red {
-  display: inline-block;
-  padding: 3px 10px;
-  background: rgba(239,68,68,0.08);
-  border-radius: 100px;
-  font-size: 11px; color: #ef4444; font-weight: 500;
-}
+  .diagram-wrap {
+    background: #fafafa;
+    border: 1px solid #e8e8e6;
+    border-radius: 12px;
+    padding: 16px;
+    overflow-x: auto;
+    margin-top: 10px;
+  }
 
-/* Timeline */
-.timeline { display: flex; flex-direction: column; gap: 12px; }
-.tl-item { display: flex; gap: 12px; }
-.tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
-.tl-content { flex: 1; }
-.tl-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-.tl-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .tip-card {
+    background: #fafafa;
+    border: 1px solid #e8e8e6;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .tip-card h3 { margin-bottom: 4px; font-size: 13px; }
+  .tip-card-wide { grid-column: span 2; }
 
-/* Table */
-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-th { text-align: left; padding: 8px 10px; font-weight: 600; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); }
-td { padding: 8px 10px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); }
-td:first-child { font-weight: 500; color: var(--text-primary); }
-tr:last-child td { border-bottom: none; }
+  /* Vertical list style (replaces timeline / feat-grid / arch-grid) */
+  .vlist { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .vitem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fafafa;
+    border: 1px solid #e8e8e6;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .vitem-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: #f0f0ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+  .vitem-content { flex: 1; }
+  .vitem-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
 
-/* Code block */
-.code-block {
-  background: #1c1c1c;
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: #e0e3e8;
-  line-height: 1.6;
-  overflow-x: auto;
-  white-space: pre;
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 500;
+    color: #8b8b8b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e8e8e6;
+  }
+  td {
+    padding: 8px 10px;
+    color: #4a4a4a;
+    border-bottom: 1px solid #f0f0ee;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 500; color: #1c1c1c; }
 
-/* Architecture diagram */
-.diagram-wrap {
-  background: #fff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  display: flex; align-items: center; justify-content: center;
-}
-.diagram-wrap svg { max-width: 100%; height: auto; }
+  .quote {
+    background: #fafafa;
+    border-left: 3px solid #5e6ad2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+    color: #4a4a4a;
+  }
 
-/* Feature grid */
-.feat-grid { display: flex; flex-direction: column; gap: 10px; }
-.feat-item { display: flex; gap: 10px; align-items: flex-start; }
-.feat-icon { width: 28px; height: 28px; background: var(--bg-hover); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-.feat-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-.feat-text strong { color: var(--text-primary); font-weight: 600; }
+  .code-block {
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12px;
+    color: #e0e3e8;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+    margin-top: 8px;
+  }
 
-/* Architecture layers */
-.layer-stack { display: flex; flex-direction: column; gap: 6px; }
-.layer { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-md); }
-.layer-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0; }
-.layer-label { font-size: 13px; font-weight: 500; flex: 1; }
-.layer-desc { font-size: 11px; color: var(--text-muted); }
-
-/* Architecture rows */
-.arch-grid { display: flex; flex-direction: column; gap: 8px; }
-.arch-row { display: flex; gap: 10px; padding: 12px 14px; border-radius: var(--radius-md); align-items: flex-start; }
-.arch-row:nth-child(1) { background: rgba(94,106,210,0.06); }
-.arch-row:nth-child(2) { background: rgba(16,185,129,0.04); }
-.arch-row:nth-child(3) { background: rgba(245,158,11,0.04); }
-.arch-row:nth-child(4) { background: rgba(239,68,68,0.04); }
-.arch-row-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-.arch-row:nth-child(1) .arch-row-icon { background: rgba(94,106,210,0.12); }
-.arch-row:nth-child(2) .arch-row-icon { background: rgba(16,185,129,0.12); }
-.arch-row:nth-child(3) .arch-row-icon { background: rgba(245,158,11,0.12); }
-.arch-row:nth-child(4) .arch-row-icon { background: rgba(239,68,68,0.12); }
-.arch-row-content { flex: 1; }
-.arch-row-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-.arch-row-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-/* Tool card */
-.tool-grid { display: flex; flex-direction: column; gap: 12px; }
-.tool-item {
-  display: flex; gap: 12px; padding: 12px 14px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  align-items: flex-start;
-}
-.tool-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-.tool-content { flex: 1; }
-.tool-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-.tool-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-/* Callout */
-.callout {
-  background: rgba(94,106,210,0.04);
-  border: 1px solid rgba(94,106,210,0.12);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  margin-bottom: 10px;
-}
-.callout-title { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-.callout-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-.callout-text strong { color: var(--text-primary); font-weight: 600; }
-
-/* Comparison */
-.comp-grid { display: flex; flex-direction: column; gap: 8px; }
-.comp-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-light); }
-.comp-item:last-child { border-bottom: none; }
-.comp-name { font-size: 13px; font-weight: 500; }
-.comp-status { font-size: 11px; padding: 2px 8px; border-radius: 100px; }
-.comp-status.yes { background: rgba(16,185,129,0.08); color: #10b981; font-weight: 500; }
-.comp-status.partial { background: rgba(245,158,11,0.08); color: #f59e0b; font-weight: 500; }
-.comp-status.no { background: rgba(239,68,68,0.08); color: #ef4444; font-weight: 500; }
-
-@media (max-width: 768px) {
-  .bento { padding: 72px 16px 32px; }
-  .nav-back { padding: 12px 16px 0; }
-  .stat-num { font-size: 18px; }
-  .stat-row { flex-wrap: wrap; gap: 8px; }
-  .stat-item { flex: 1 1 40%; min-width: 0; }
-  h1 { font-size: 24px; }
-  .card { padding: 16px; }
-  .nav { display: none; }
-}
+  .dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 </style>
 </head>
 <body>
-<header class="header">
-<div class="container"><div class="header-inner">
-  <a href="../index.html" class="logo"><div class="logo-icon">🦴</div><span class="logo-text">第二号</span></a>
-  <nav class="nav">
-    <a href="../index.html" class="nav-link">首页</a>
-    <a href="../daily/archive.html" class="nav-link">AI 日报</a>
-    <a href="archive.html" class="nav-link">深度调研</a>
-  </nav>
-</div></div>
-</header>
 
-<div class="nav-back">
-  <a href="../index.html">← 返回首页</a>
-</div>
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
 
-<main class="bento">
+<div class="bento">
 
-<!-- Title -->
-<div class="card span-4">
-  <div class="label-sm">Research Report · 2026/5/12</div>
-  <h1>Spine 2D 骨骼动画全面调研</h1>
-  <div style="margin-top: 8px;font-size:15px;color:var(--text-secondary);line-height:1.5;">
-    Spine 原理剖析 + AI 生成 Spine 动画的可行路径：从骨骼、插槽、附件、蒙皮到 IK 约束，5 种 AI 方案逐项评估
-  </div>
-  <div style="margin-top: 14px;display:flex;flex-wrap:wrap;gap:4px;">
-    <span class="tag-accent">Spine</span>
-    <span class="tag-accent">骨骼动画</span>
-    <span class="tag-accent">AI 生成</span>
-    <span class="tag-accent">2D 游戏</span>
-    <span class="tag-accent">渲染引擎</span>
-    <span class="tag-accent">开源工具</span>
-  </div>
-</div>
-
-<!-- Overview: Stats -->
-<div class="card span-2">
-  <div class="label-sm">关键数据</div>
-  <div class="stat-row">
-    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Attachment 类型</div></div>
-    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">约束系统</div></div>
-    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">渲染后端</div></div>
-    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">AI 方案</div></div>
-  </div>
-  <div style="margin-top:14px;">
-    <div class="tag">SIGGRAPH 2025</div>
-    <div class="tag">CVPR 2025</div>
-    <div class="tag">开源 MIT</div>
-    <div class="tag">商业付费</div>
-  </div>
-</div>
-
-<!-- What is Spine -->
-<div class="card span-2">
-  <div class="label-sm">什么是 Spine</div>
-  <div class="body-text">
-    Spine 是 Esoteric Software 开发的<strong>2D 骨骼动画工具</strong>，专为游戏开发设计。设计师在编辑器中绑定骨骼、制作动画，导出 <code>.json</code>/<code>.skel</code> + <code>.atlas</code> + 图集，由运行时库渲染。
-  </div>
-  <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-    <div style="flex:1;min-width:140px;background:var(--bg-hover);border-radius:var(--radius-md);padding:12px;text-align:center;">
-      <div style="font-size:13px;font-weight:600;">GIF</div>
-      <div style="font-size:11px;color:var(--text-muted);">256色 · 灵活差</div>
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research Report · 2026/5/12</div>
+    <h1>Spine 2D 骨骼动画全面调研</h1>
+    <div class="subtitle" style="margin-top:6px;">
+      Spine 原理剖析 + AI 生成 Spine 动画的可行路径：从骨骼、插槽、附件、蒙皮到 IK 约束，5 种 AI 方案逐项评估
     </div>
-    <div style="flex:1;min-width:140px;background:var(--bg-hover);border-radius:var(--radius-md);padding:12px;text-align:center;">
-      <div style="font-size:13px;font-weight:600;">CSS 帧动画</div>
-      <div style="font-size:11px;color:var(--text-muted);">真彩色 · 体量大</div>
-    </div>
-    <div style="flex:1;min-width:140px;background:rgba(94,106,210,0.06);border-radius:var(--radius-md);padding:12px;text-align:center;border:1px solid rgba(94,106,210,0.12);">
-      <div style="font-size:13px;font-weight:600;color:var(--accent);">Spine</div>
-      <div style="font-size:11px;color:var(--text-muted);">骨骼复用 · 最灵活</div>
+    <div class="dots-row">
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Spine</span>
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">骨骼动画</span>
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 生成</span>
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">2D 游戏</span>
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">渲染引擎</span>
+      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">开源工具</span>
     </div>
   </div>
-</div>
 
-<!-- Core Architecture -->
-<div class="card span-4">
-  <div class="label-sm">架构总览</div>
-  <h2>Spine 四层架构 + 渲染后端</h2>
-  <div class="arch-grid">
-    <div class="arch-row">
-      <div class="arch-row-icon">📦</div>
-      <div class="arch-row-content">
-        <div class="arch-row-title">Loading 层</div>
-        <div class="arch-row-desc"><code>SkeletonJson</code>/<code>SkeletonBinary</code> 解析 <code>.json</code>/<code>.skel</code>；<code>AtlasAttachmentLoader</code> 建立纹理区域到 Attachment 的映射。二进制 .skel 比 JSON 小很多。</div>
+  <!-- STATS: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">关键数据</div>
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Attachment 类型</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">约束系统</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">渲染后端</div></div>
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">AI 方案</div></div>
+    </div>
+    <div class="dots-row">
+      <span class="tag">SIGGRAPH 2025</span>
+      <span class="tag">CVPR 2025</span>
+      <span class="tag">开源 MIT</span>
+      <span class="tag">商业付费</span>
+    </div>
+  </div>
+
+  <!-- WHAT IS SPINE: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">什么是 Spine</div>
+    <div class="text-body">
+      Spine 是 Esoteric Software 开发的<strong>2D 骨骼动画工具</strong>，专为游戏开发设计。设计师在编辑器中绑定骨骼、制作动画，导出 <code>.json</code>/<code>.skel</code> + <code>.atlas</code> + 图集，由运行时库渲染。
+    </div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:140px;background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:13px;font-weight:500;">GIF</div>
+        <div style="font-size:11px;color:#8b8b8b;">256色 · 灵活差</div>
       </div>
-    </div>
-    <div class="arch-row">
-      <div class="arch-row-icon">🗺️</div>
-      <div class="arch-row-content">
-        <div class="arch-row-title">Texture Atlas 层</div>
-        <div class="arch-row-desc">一张 Sprite Sheet → <code>TextureAtlasPage</code>。Sheet 中的每个子区域 → <code>TextureAtlasRegion</code>（含位置、旋转、尺寸）。</div>
+      <div style="flex:1;min-width:140px;background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:13px;font-weight:500;">CSS 帧动画</div>
+        <div style="font-size:11px;color:#8b8b8b;">真彩色 · 体量大</div>
       </div>
-    </div>
-    <div class="arch-row">
-      <div class="arch-row-icon">🏗️</div>
-      <div class="arch-row-content">
-        <div class="arch-row-title">SetupPoseData 层（SkeletonData）</div>
-        <div class="arch-row-desc">Data 对象无状态可共享（<code>BoneData</code>、<code>SlotData</code>、<code>SkeletonData</code>）。Instance 对象（<code>Bone</code>、<code>Slot</code>）持有当前姿态。Skin 是 Attachment 的查找表。</div>
-      </div>
-    </div>
-    <div class="arch-row">
-      <div class="arch-row-icon">🎬</div>
-      <div class="arch-row-content">
-        <div class="arch-row-title">Animation 层</div>
-        <div class="arch-row-desc"><code>AnimationState</code> 管理队列、叠加和混合；<code>Timeline</code> 子类处理旋转/缩放/位移等插值。每帧 <code>apply()</code> → <code>updateWorldTransform()</code> → 渲染。</div>
+      <div style="flex:1;min-width:140px;background:rgba(94,106,210,0.04);border:1px solid rgba(94,106,210,0.2);border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:13px;font-weight:500;color:#5e6ad2;">Spine</div>
+        <div style="font-size:11px;color:#8b8b8b;">骨骼复用 · 最灵活</div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Core Concepts: Bones & Slots -->
-<div class="card span-2">
-  <div class="label-sm">核心概念 ①</div>
-  <h2>骨骼 · 插槽 · 附件</h2>
-  <div class="body-text" style="margin-bottom:8px;">
-    <strong>Bones（骨骼）</strong> — 树形层级结构，父骨变换级联到子骨。<br>
-    <strong>Slots（插槽）</strong> — 附着在骨骼上，控制渲染顺序 + 分组。<br>
-    <strong>Attachments（附件）</strong> — 实际渲染的可视资源，6 种类型。
-  </div>
-  <div style="margin-top:6px;">
-    <div class="tag">Region</div>
-    <div class="tag">Mesh</div>
-    <div class="tag">Point</div>
-    <div class="tag">BoundingBox</div>
-    <div class="tag">Clipping</div>
-    <div class="tag">Path</div>
-  </div>
-  <div class="callout" style="margin-top:10px;">
-    <div class="callout-title">💡 关键设计</div>
-    <div class="callout-text">Data vs Instance 分离模式 — Data 对象无状态、可多实例共享；Instance 对象持有当前姿态。<strong>Weights（权重）</strong> 绑定 Mesh 顶点到多根骨骼，实现与骨骼动画一致的网格变形。</div>
-  </div>
-</div>
-
-<!-- Core Concepts: Skins & Animations -->
-<div class="card span-2">
-  <div class="label-sm">核心概念 ②</div>
-  <h2>皮肤 · 动画 · 约束</h2>
-  <div class="feat-grid">
-    <div class="feat-item">
-      <div class="feat-icon">👗</div>
-      <div class="feat-text"><strong>Skins（皮肤）</strong> — Attachment 映射表集合。切换 Skin 即整组换装。一个角色可有多套皮肤，Slot 同一时刻仅显示一个 Attachment。</div>
-    </div>
-    <div class="feat-item">
-      <div class="feat-icon">🎞️</div>
-      <div class="feat-text"><strong>Animations</strong> — 关键帧 + 自动补间。多个动画可叠加（走路 + 挥手），通过 <code>AnimationState</code> 管理队列和交叉淡入淡出。</div>
-    </div>
-    <div class="feat-item">
-      <div class="feat-icon">🔗</div>
-      <div class="feat-text"><strong>3 种约束</strong> — <strong>IK</strong>（逆运动学，子骨固定端点）、<strong>Transform</strong>（复制变换到多骨）、<strong>Path</strong>（骨骼沿路径行进）。</div>
-    </div>
-  </div>
-</div>
-
-<!-- Rendering Pipeline -->
-<div class="card span-2">
-  <div class="label-sm">渲染管线</div>
-  <h2>每帧渲染循环</h2>
-  <div class="timeline">
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-title"><code>AnimationState.update(delta)</code></div><div class="tl-desc">推进动画时间轴</div></div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-title"><code>Animation.apply()</code></div><div class="tl-desc">所有 Timeline 执行插值</div></div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-title"><code>Skeleton.updateWorldTransform()</code></div><div class="tl-desc">重新计算世界坐标</div></div></div>
-    <div class="tl-item"><div class="tl-dot" style="background:var(--accent);"></div><div class="tl-content"><div class="tl-title">Renderer 遍历 drawOrder</div><div class="tl-desc">Canvas / Three.js / WebGL / PixiJS</div></div></div>
-  </div>
-  <div style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap;">
-    <span class="tag">Canvas 2D</span>
-    <span class="tag">WebGL</span>
-    <span class="tag">Three.js</span>
-    <span class="tag">PixiJS 生态</span>
-  </div>
-</div>
-
-<!-- Data Format -->
-<div class="card span-2">
-  <div class="label-sm">数据格式</div>
-  <h2>Spine 导出文件体系</h2>
-  <div class="body-text">
-    编辑器导出 3 类文件，运行时需全部加载：
-  </div>
-  <table style="margin-top:8px;">
-    <tr><th>文件</th><th>内容</th><th>大小</th></tr>
-    <tr><td>.json</td><td>骨骼结构数据（文本）</td><td>较大</td></tr>
-    <tr><td>.skel</td><td>二进制骨骼数据</td><td>显著更小</td></tr>
-    <tr><td>.atlas</td><td>图集描述（纹理区域映射）</td><td>小</td></tr>
-    <tr><td>.png</td><td>Sprite Sheet 图片</td><td>取决于角色</td></tr>
-  </table>
-  <div class="callout" style="margin-top:8px;">
-    <div class="callout-text"><code>.skel</code> 比 <code>.json</code> 小很多 — 推荐发布时用二进制格式。</div>
-  </div>
-</div>
-
-<!-- Limitation -->
-<div class="card span-2">
-  <div class="label-sm">局限性</div>
-  <h2>Spine 的已知短板</h2>
-  <div class="body-text">
-  <ul style="padding-left:16px;display:flex;flex-direction:column;gap:6px;">
-    <li><strong>成本高</strong> — 编辑器需付费许可，商业项目需额外授权</li>
-    <li><strong>资产体量大</strong> — 图集 + 运行时库，比 GIF/APNG 重</li>
-    <li><strong>学习曲线陡</strong> — 绑骨、权重、IK 需要专业美术技能</li>
-    <li><strong>集成依赖</strong> — 每个目标平台需运行时库</li>
-    <li><strong>过杀小需求</strong> — 简单的 UI 动效用 APNG 更合适</li>
-  </ul>
-  </div>
-</div>
-
-<!-- ============ AI Section ============ -->
-
-<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
-  <div class="label-accent">Part II · AI Generated Spine</div>
-  <h1 style="font-size:28px;">AI 能否生成 Spine 动画？</h1>
-  <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-top:6px;">
-    全面评估 5 种现有方案，从开源的 Claude skill 到商业 SaaS，<br>
-    逐项回答：自动绑骨、动画生成、Spine 格式输出、生产可用度
-  </div>
-</div>
-
-<!-- Key Question Matrix -->
-<div class="card span-3">
-  <div class="label-sm">能力矩阵</div>
-  <h2>AI 生成 Spine 的 4 个核心问题</h2>
-  <div class="comp-grid">
-    <div class="comp-item"><span class="comp-name">从角色图自动生成骨骼？</span><span class="comp-status yes">Yes（部分）</span></div>
-    <div class="comp-item"><span class="comp-name">自动生成关键帧动画？</span><span class="comp-status partial">Yes（有限）</span></div>
-    <div class="comp-item"><span class="comp-name">输出 Spine 兼容格式？</span><span class="comp-status yes">Yes</span></div>
-    <div class="comp-item"><span class="comp-name">生产级可用度？</span><span class="comp-status partial">60-80% 需人工清理</span></div>
-    <div class="comp-item"><span class="comp-name">支持 Mesh / IK / 权重？</span><span class="comp-status no">No</span></div>
-    <div class="comp-item"><span class="comp-name">端到端一键出动画？</span><span class="comp-status no">No</span></div>
-  </div>
-</div>
-
-<!-- Tool: Genielabs -->
-<div class="card span-2">
-  <div class="label-accent">方案 ① · 开源</div>
-  <h2>Genielabs spine-animation-ai</h2>
-  <div class="tool-item" style="padding:0;border:none;margin-bottom:8px;">
-    <div style="width:32px;height:32px;background:rgba(94,106,210,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🧪</div>
-    <div class="tool-content"><div class="tool-name" style="color:var(--accent);">github.com/GenielabsOpenSource/spine-animation-ai</div><div class="tool-desc">Claude 技能 · 开源 · 2026 年 2 月</div></div>
-  </div>
-  <div class="body-text">
-    <strong>技术方案：</strong>Claude AI agent 自动生成 Spine 骨骼和动画。SIFT+RANSAC 自动定位身体部位，Gemini 拆分角色图，Bezier 缓动曲线，12 动画原则。
-  </div>
-  <div style="margin-top:8px;">
-    <span class="tag-green">直接输出 Spine JSON</span>
-    <span class="tag-green">交互式 HTML5 预览</span>
-    <span class="tag-amber">人形限定</span>
-    <span class="tag-amber">需手动拆分角色图</span>
-  </div>
-  <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;">
-    <span class="tag">Idle</span>
-    <span class="tag">Walk</span>
-    <span class="tag">Run</span>
-    <span class="tag">Jump</span>
-    <span class="tag">Attack</span>
-    <span class="tag">Wave</span>
-  </div>
-</div>
-
-<!-- Tool: God Mode AI -->
-<div class="card span-2">
-  <div class="label-accent">方案 ② · 商业 SaaS</div>
-  <h2>God Mode AI</h2>
-  <div class="tool-item" style="padding:0;border:none;margin-bottom:8px;">
-    <div style="width:32px;height:32px;background:rgba(245,158,11,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">⚡</div>
-    <div class="tool-content"><div class="tool-name" style="color:#f59e0b;">godmodeai.co</div><div class="tool-desc">商业 beta · 图片→3D→2D 管线</div></div>
-  </div>
-  <div class="body-text">
-    <strong>技术方案：</strong>图片 → 3D 重建 → 2D Spine 转换。2000+ 动画预设可重定向。输出 Spine JSON + Atlas + PNG。
-  </div>
-  <div style="margin-top:8px;">
-    <span class="tag-green">2000+ 动画预设</span>
-    <span class="tag-green">Unity / Godot 导出</span>
-    <span class="tag-amber">Beta 阶段</span>
-    <span class="tag-red">人形限定</span>
-    <span class="tag-red">商业付费</span>
-  </div>
-</div>
-
-<!-- Tool: ComfyUI UniRig -->
-<div class="card span-2">
-  <div class="label-accent">方案 ③ · 开源 Rigging</div>
-  <h2>ComfyUI UniRig</h2>
-  <div class="tool-item" style="padding:0;border:none;margin-bottom:8px;">
-    <div style="width:32px;height:32px;background:rgba(16,185,129,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🔧</div>
-    <div class="tool-content"><div class="tool-name" style="color:#10b981;">ComfyUI 插件 · 开源</div><div class="tool-desc">OpenPose/MediaPipe 姿态估计 → 自动绑骨</div></div>
-  </div>
-  <div class="body-text">
-    <strong>技术方案：</strong>计算机视觉 + 姿态估计提取 2D 骨架 → 自动生成层级骨骼结构 → 自动权重绘制 → 导出 JSON。自动完成 60-80% 基础绑骨。
-  </div>
-  <div style="margin-top:8px;">
-    <span class="tag-green">开源免费</span>
-    <span class="tag-green">导出 Spine/DragonBones JSON</span>
-    <span class="tag-amber">20-40% 需手动清理</span>
-    <span class="tag-amber">人形效果最佳</span>
-  </div>
-</div>
-
-<!-- Tool: Layer AI + Stretchy -->
-<div class="card span-2">
-  <div class="label-accent">方案 ④ · 资产预处理</div>
-  <h2>Layer AI & Stretchy Studio</h2>
-  <div class="body-text">
-    <strong>Layer AI</strong> — AI 驱动的角色部件分割（Gemini 3），自动生成 Spine-Ready 分离组件。聚焦资产准备，不生成动画。<br><br>
-    <strong>Stretchy Studio</strong> — 开源（MIT）2D 骨骼动画工具。PSD 导入、DWPose AI 检测、Mesh 变形、After Effects 风格时间线、IK 支持。非 Spine 专用。
-  </div>
-  <div style="margin-top:8px;">
-    <span class="tag">Layer AI · 商业</span>
-    <span class="tag">Stretchy Studio · MIT</span>
-    <span class="tag-amber">非端到端</span>
-  </div>
-</div>
-
-<!-- Research Papers -->
-<div class="card span-4">
-  <div class="label-sm">学术界进展</div>
-  <h2>2024-2025 自动 Rigging 论文</h2>
-  <table style="margin-top:8px;">
-    <tr><th>论文</th><th>顶会</th><th>核心思路</th><th>关联度</th></tr>
-    <tr><td>UniRig</td><td>SIGGRAPH 2025</td><td>自回归 Transformer 预测骨架 + 权重。Skeleton Tree Tokenization。</td><td><span class="tag-amber">3D → 2D 可适配</span></td></tr>
-    <tr><td>ASMR</td><td>ArXiv 2025</td><td>Diffusion 特征作为语义描述子，自动绑定 Mesh。</td><td><span class="tag-amber">概念相关</span></td></tr>
-    <tr><td>HumanRig</td><td>CVPR 2025</td><td>Coarse-to-fine 关节回归 + 鲁棒权重估计。</td><td><span class="tag-amber">人形 3D</span></td></tr>
-    <tr><td>SkinTokens (UniRig 续)</td><td>—</td><td>自回归权重预测，准确率提升 98-133%。</td><td><span class="tag-green">可迁移到 2D</span></td></tr>
-  </table>
-</div>
-
-<!-- Pipeline Architecture -->
-<div class="card span-4">
-  <div class="label-sm">理想管线</div>
-  <h2>AI + Spine 完整管线设计</h2>
-  <div style="margin-top:8px;display:flex;flex-direction:column;gap:10px;">
-    <div style="background:rgba(94,106,210,0.06);border-radius:var(--radius-md);padding:12px 14px;display:flex;align-items:center;gap:12px;">
-      <span style="width:28px;height:28px;border-radius:6px;background:rgba(94,106,210,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">①</span>
-      <div><span style="font-weight:600;">角色图 → AI 分割</span><br><span style="font-size:12px;color:var(--text-secondary);">Gemini/VLM 识别人物部件，CV 分割输出透明 PNG 组</span></div>
-    </div>
-    <div style="display:flex;gap:10px;">
-      <div style="flex:1;background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:12px 14px;display:flex;align-items:center;gap:12px;">
-        <span style="width:28px;height:28px;border-radius:6px;background:rgba(16,185,129,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">②</span>
-        <div><span style="font-weight:600;">AI 自动绑骨</span><br><span style="font-size:12px;color:var(--text-secondary);">UniRig / OpenPose + SIFT 提取骨架层次</span></div>
+  <!-- ARCHITECTURE OVERVIEW: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">架构总览</div>
+    <h2>Spine 四层架构 + 渲染后端</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-icon">📦</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Loading 层</div>
+          <div class="vitem-desc"><code>SkeletonJson</code>/<code>SkeletonBinary</code> 解析 <code>.json</code>/<code>.skel</code>；<code>AtlasAttachmentLoader</code> 建立纹理区域到 Attachment 的映射。二进制 .skel 比 JSON 小很多。</div>
+        </div>
       </div>
-      <div style="flex:1;background:rgba(245,158,11,0.04);border-radius:var(--radius-md);padding:12px 14px;display:flex;align-items:center;gap:12px;">
-        <span style="width:28px;height:28px;border-radius:6px;background:rgba(245,158,11,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">③</span>
-        <div><span style="font-weight:600;">AI 生成动画</span><br><span style="font-size:12px;color:var(--text-secondary);">VLM 分析运动规律 + procedural 关键帧</span></div>
+      <div class="vitem">
+        <div class="vitem-icon">🗺️</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Texture Atlas 层</div>
+          <div class="vitem-desc">一张 Sprite Sheet → <code>TextureAtlasPage</code>。Sheet 中的每个子区域 → <code>TextureAtlasRegion</code>（含位置、旋转、尺寸）。</div>
+        </div>
       </div>
-    </div>
-    <div style="background:rgba(239,68,68,0.04);border-radius:var(--radius-md);padding:12px 14px;display:flex;align-items:center;gap:12px;">
-      <span style="width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">④</span>
-      <div><span style="font-weight:600;">导出 Spine 兼容格式</span><br><span style="font-size:12px;color:var(--text-secondary);">.json + .atlas + .png 图集，经 Web Player 即时预览验证</span></div>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:10px;">
-    <div class="callout-title">⚠️ 现状</div>
-    <div class="callout-text">步骤 ②-④ 已有独立开源实现，但<strong>尚无端到端管线</strong>将四步串通。最大缺口在 ③（动画生成）— 目前只有 procedural 正弦波运动，缺少 VLMs 对运动质量的视觉理解。</div>
-  </div>
-</div>
-
-<!-- Gap Analysis -->
-<div class="card span-2">
-  <div class="label-sm">Gap 分析</div>
-  <h2>现存 5 大缺口</h2>
-  <div class="body-text" style="display:flex;flex-direction:column;gap:8px;">
-    <div>❌ 无真正的端到端一键方案</div>
-    <div>❌ 无 AI 理解 Spine 特有功能（Mesh 变形、Slot、Skin、IK、权重）</div>
-    <div>❌ 无 VLM 对动画质量的可视化评判能力</div>
-    <div>❌ 无 Mixamo 级别的 2D 骨骼动画库</div>
-    <div>❌ 动画生成仅 procedural，非 learn-based</div>
-  </div>
-</div>
-
-<!-- Future Outlook -->
-<div class="card span-2">
-  <div class="label-sm">展望</div>
-  <h2>未来 1-2 年方向</h2>
-  <div class="body-text" style="display:flex;flex-direction:column;gap:8px;">
-    <div>🔮 <strong>SkinTokens</strong> 自回归权重预测迁移到 2D</div>
-    <div>🧠 多模态大模型（GPT-5o/Gemini 3）直接理解骨骼结构和运动规律</div>
-    <div>🔄 视频 → Spine 动画管线（已有初步探索）</div>
-    <div>🏗️ 开源端到端 AI + Spine 管线（Genielabs + UniRig 整合）</div>
-  </div>
-  <div class="callout" style="margin-top:10px;">
-    <div class="callout-text">核心判断：<strong>AI 可以帮你做 60% 的工作</strong>（绑骨 + 简单动画），但 Mesh 变形、IK 约束、多套皮肤换装等高级功能仍需要人工介入。Mixamo for 2D 尚未出现。</div>
-  </div>
-</div>
-
-<!-- Summary -->
-<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
-  <div class="label-accent">Summary</div>
-  <div style="display:flex;gap:20px;align-items:flex-start;">
-    <div style="flex:1;padding-right:20px;border-right:1px solid var(--border-light);">
-      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Spine 技术本身</div>
-      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
-        成熟、高效、跨平台。骨骼+插槽+皮肤的 Separation of Concerns 设计是其核心优势。4 层架构（Loading→Atlas→SkeletonData→Animation）清晰且扩展性好。3 种约束系统（IK/Transform/Path）为高级动画提供基础设施。
+      <div class="vitem">
+        <div class="vitem-icon">🏗️</div>
+        <div class="vitem-content">
+          <div class="vitem-title">SetupPoseData 层（SkeletonData）</div>
+          <div class="vitem-desc">Data 对象无状态可共享（<code>BoneData</code>、<code>SlotData</code>、<code>SkeletonData</code>）。Instance 对象（<code>Bone</code>、<code>Slot</code>）持有当前姿态。Skin 是 Attachment 的查找表。</div>
+        </div>
       </div>
-    </div>
-    <div style="flex:1;padding-right:20px;border-right:1px solid var(--border-light);">
-      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">AI 生成 Spine</div>
-      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
-        <strong>可行但有限。</strong>自动绑骨（60-80% 准确率）和简单动画（walk/idle）已可实现。输出 Spine 兼容 JSON 的工具已有多个。但 Mesh 变形、IK 约束、高质量自定义动画仍需人工。
-      </div>
-    </div>
-    <div style="flex:1;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">行动建议</div>
-      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
-        短期：用 Genielabs 或 ComfyUI UniRig 加速绑骨流程。中期：等待开源端到端管线整合。长期：对 AI 生成动画的质量保持谨慎预期 — VLM 尚未具备动画审美能力。
+      <div class="vitem">
+        <div class="vitem-icon">🎬</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Animation 层</div>
+          <div class="vitem-desc"><code>AnimationState</code> 管理队列、叠加和混合；<code>Timeline</code> 子类处理旋转/缩放/位移等插值。每帧 <code>apply()</code> → <code>updateWorldTransform()</code> → 渲染。</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Reference -->
-<div class="card span-4">
-  <div class="label-sm">参考来源</div>
-  <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;">
-    <div>📄 <a href="https://segmentfault.com/a/1190000040082417" style="color:var(--accent);text-decoration:none;">Spine 2D 骨骼动画渲染原理解析与源码解读</a> · 曾培森 · SegmentFault</div>
-    <div>🐙 <a href="https://github.com/GenielabsOpenSource/spine-animation-ai" style="color:var(--accent);text-decoration:none;">GenielabsOpenSource/spine-animation-ai</a> · GitHub</div>
-    <div>🌐 <a href="https://godmodeai.co/ai-spine-animation" style="color:var(--accent);text-decoration:none;">God Mode AI Spine Animation</a> · godmodeai.co</div>
-    <div>🌐 <a href="https://apatero.com/blog/comfyui-unirig-automatic-skeleton-rigging-guide-2025" style="color:var(--accent);text-decoration:none;">ComfyUI UniRig Guide</a> · apatero.com</div>
-    <div>📄 <a href="https://stretchy.studio/" style="color:var(--accent);text-decoration:none;">Stretchy Studio</a> · 开源 2D 骨骼动画工具</div>
-    <div>📄 <a href="https://www.layer.ai/tools/layer--create-spine-components" style="color:var(--accent);text-decoration:none;">Layer AI Spine Components</a> · layer.ai</div>
+  <!-- BONES SLOTS ATTACHMENTS: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">核心概念 ①</div>
+    <h2>骨骼 · 插槽 · 附件</h2>
+    <div class="text-body" style="margin-bottom:8px;">
+      <strong>Bones（骨骼）</strong> — 树形层级结构，父骨变换级联到子骨。<br>
+      <strong>Slots（插槽）</strong> — 附着在骨骼上，控制渲染顺序 + 分组。<br>
+      <strong>Attachments（附件）</strong> — 实际渲染的可视资源，6 种类型。
+    </div>
+    <div class="dots-row">
+      <span class="tag">Region</span>
+      <span class="tag">Mesh</span>
+      <span class="tag">Point</span>
+      <span class="tag">BoundingBox</span>
+      <span class="tag">Clipping</span>
+      <span class="tag">Path</span>
+    </div>
+    <div class="quote" style="margin-top:10px;">
+      <strong>关键设计：</strong>Data vs Instance 分离模式 — Data 对象无状态、可多实例共享；Instance 对象持有当前姿态。<strong>Weights（权重）</strong> 绑定 Mesh 顶点到多根骨骼，实现与骨骼动画一致的网格变形。
+    </div>
   </div>
+
+  <!-- SKINS ANIMATIONS CONSTRAINTS: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">核心概念 ②</div>
+    <h2>皮肤 · 动画 · 约束</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-icon">👗</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Skins（皮肤）</div>
+          <div class="vitem-desc">Attachment 映射表集合。切换 Skin 即整组换装。一个角色可有多套皮肤，Slot 同一时刻仅显示一个 Attachment。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🎞️</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Animations</div>
+          <div class="vitem-desc">关键帧 + 自动补间。多个动画可叠加（走路 + 挥手），通过 <code>AnimationState</code> 管理队列和交叉淡入淡出。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🔗</div>
+        <div class="vitem-content">
+          <div class="vitem-title">3 种约束</div>
+          <div class="vitem-desc"><strong>IK</strong>（逆运动学，子骨固定端点）、<strong>Transform</strong>（复制变换到多骨）、<strong>Path</strong>（骨骼沿路径行进）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RENDERING PIPELINE: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">渲染管线</div>
+    <h2>每帧渲染循环</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-content">
+          <div class="vitem-title"><code>AnimationState.update(delta)</code></div>
+          <div class="vitem-desc">推进动画时间轴</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-content">
+          <div class="vitem-title"><code>Animation.apply()</code></div>
+          <div class="vitem-desc">所有 Timeline 执行插值</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-content">
+          <div class="vitem-title"><code>Skeleton.updateWorldTransform()</code></div>
+          <div class="vitem-desc">重新计算世界坐标</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:#5e6ad2;color:#fff;">▶</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Renderer 遍历 drawOrder</div>
+          <div class="vitem-desc">Canvas / Three.js / WebGL / PixiJS</div>
+        </div>
+      </div>
+    </div>
+    <div class="dots-row">
+      <span class="tag">Canvas 2D</span>
+      <span class="tag">WebGL</span>
+      <span class="tag">Three.js</span>
+      <span class="tag">PixiJS 生态</span>
+    </div>
+  </div>
+
+  <!-- DATA FORMAT: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">数据格式</div>
+    <h2>Spine 导出文件体系</h2>
+    <div class="text-body">
+      Spine 编辑器导出 3 类文件，运行时需全部加载：
+    </div>
+    <table>
+      <tr><th>文件</th><th>内容</th><th>大小</th></tr>
+      <tr><td>.json</td><td>骨骼结构数据（文本）</td><td>较大</td></tr>
+      <tr><td>.skel</td><td>二进制骨骼数据</td><td>显著更小</td></tr>
+      <tr><td>.atlas</td><td>图集描述（纹理区域映射）</td><td>小</td></tr>
+      <tr><td>.png</td><td>Sprite Sheet 图片</td><td>取决于角色</td></tr>
+    </table>
+    <div class="quote" style="margin-top:8px;">
+      <code>.skel</code> 比 <code>.json</code> 小很多 — 推荐发布时用二进制格式。
+    </div>
+  </div>
+
+  <!-- LIMITATIONS: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">局限性</div>
+    <h2>Spine 的已知短板</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-icon">💸</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>成本高</strong> — 编辑器需付费许可，商业项目需额外授权</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">📦</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>资产体量大</strong> — 图集 + 运行时库，比 GIF/APNG 重</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">📐</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>学习曲线陡</strong> — 绑骨、权重、IK 需要专业美术技能</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🔌</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>集成依赖</strong> — 每个目标平台需运行时库</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🎯</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>过杀小需求</strong> — 简单的 UI 动效用 APNG 更合适</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PART II ============ -->
+
+  <div class="card span-4 card-highlight">
+    <div class="label-sm">Part II · AI Generated Spine</div>
+    <h1 style="font-size:28px;">AI 能否生成 Spine 动画？</h1>
+    <div class="text-body" style="margin-top:6px;">
+      全面评估 5 种现有方案，从开源的 Claude skill 到商业 SaaS，
+逐项回答：自动绑骨、动画生成、Spine 格式输出、生产可用度
+    </div>
+  </div>
+
+  <!-- CAPABILITY MATRIX: span-3 -->
+  <div class="card span-3">
+    <div class="label-sm">能力矩阵</div>
+    <h2>AI 生成 Spine 的 4 个核心问题</h2>
+    <table>
+      <tr><th>能力</th><th>状态</th></tr>
+      <tr><td>从角色图自动生成骨骼？</td><td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">Yes（部分）</span></td></tr>
+      <tr><td>自动生成关键帧动画？</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">Yes（有限）</span></td></tr>
+      <tr><td>输出 Spine 兼容格式？</td><td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">Yes</span></td></tr>
+      <tr><td>生产级可用度？</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">60-80% 需人工清理</span></td></tr>
+      <tr><td>支持 Mesh / IK / 权重？</td><td><span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">No</span></td></tr>
+      <tr><td>端到端一键出动画？</td><td><span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">No</span></td></tr>
+    </table>
+  </div>
+
+  <!-- SOLUTION ①: Genielabs -->
+  <div class="card span-2">
+    <div class="label-sm">方案 ① · 开源</div>
+    <h2>Genielabs spine-animation-ai</h2>
+    <div class="vitem" style="padding:0;border:none;margin-bottom:8px;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(94,106,210,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">🧪</div>
+      <div class="vitem-content">
+        <div class="vitem-title" style="color:#5e6ad2;">github.com/GenielabsOpenSource/spine-animation-ai</div>
+        <div class="vitem-desc">Claude 技能 · 开源 · 2026 年 2 月</div>
+      </div>
+    </div>
+    <div class="text-body">
+      <strong>技术方案：</strong>Claude AI agent 自动生成 Spine 骨骼和动画。SIFT+RANSAC 自动定位身体部位，Gemini 拆分角色图，Bezier 缓动曲线，12 动画原则。
+    </div>
+    <div class="dots-row">
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">直接输出 Spine JSON</span>
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">交互式 HTML5 预览</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">人形限定</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">需手动拆分角色图</span>
+    </div>
+    <div class="dots-row">
+      <span class="tag">Idle</span>
+      <span class="tag">Walk</span>
+      <span class="tag">Run</span>
+      <span class="tag">Jump</span>
+      <span class="tag">Attack</span>
+      <span class="tag">Wave</span>
+    </div>
+  </div>
+
+  <!-- SOLUTION ②: God Mode AI -->
+  <div class="card span-2">
+    <div class="label-sm">方案 ② · 商业 SaaS</div>
+    <h2>God Mode AI</h2>
+    <div class="vitem" style="padding:0;border:none;margin-bottom:8px;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">⚡</div>
+      <div class="vitem-content">
+        <div class="vitem-title" style="color:#f59e0b;">godmodeai.co</div>
+        <div class="vitem-desc">商业 beta · 图片→3D→2D 管线</div>
+      </div>
+    </div>
+    <div class="text-body">
+      <strong>技术方案：</strong>图片 → 3D 重建 → 2D Spine 转换。2000+ 动画预设可重定向。输出 Spine JSON + Atlas + PNG。
+    </div>
+    <div class="dots-row">
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">2000+ 动画预设</span>
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">Unity / Godot 导出</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">Beta 阶段</span>
+      <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">人形限定</span>
+      <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">商业付费</span>
+    </div>
+  </div>
+
+  <!-- SOLUTION ③: ComfyUI UniRig -->
+  <div class="card span-2">
+    <div class="label-sm">方案 ③ · 开源 Rigging</div>
+    <h2>ComfyUI UniRig</h2>
+    <div class="vitem" style="padding:0;border:none;margin-bottom:8px;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">🔧</div>
+      <div class="vitem-content">
+        <div class="vitem-title" style="color:#10b981;">ComfyUI 插件 · 开源</div>
+        <div class="vitem-desc">OpenPose/MediaPipe 姿态估计 → 自动绑骨</div>
+      </div>
+    </div>
+    <div class="text-body">
+      <strong>技术方案：</strong>计算机视觉 + 姿态估计提取 2D 骨架 → 自动生成层级骨骼结构 → 自动权重绘制 → 导出 JSON。自动完成 60-80% 基础绑骨。
+    </div>
+    <div class="dots-row">
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">开源免费</span>
+      <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">导出 Spine/DragonBones JSON</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">20-40% 需手动清理</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">人形效果最佳</span>
+    </div>
+  </div>
+
+  <!-- SOLUTION ④: Layer AI + Stretchy -->
+  <div class="card span-2">
+    <div class="label-sm">方案 ④ · 资产预处理</div>
+    <h2>Layer AI &amp; Stretchy Studio</h2>
+    <div class="text-body">
+      <strong>Layer AI</strong> — AI 驱动的角色部件分割（Gemini 3），自动生成 Spine-Ready 分离组件。聚焦资产准备，不生成动画。<br><br>
+      <strong>Stretchy Studio</strong> — 开源（MIT）2D 骨骼动画工具。PSD 导入、DWPose AI 检测、Mesh 变形、After Effects 风格时间线、IK 支持。非 Spine 专用。
+    </div>
+    <div class="dots-row">
+      <span class="tag">Layer AI · 商业</span>
+      <span class="tag">Stretchy Studio · MIT</span>
+      <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">非端到端</span>
+    </div>
+  </div>
+
+  <!-- RESEARCH PAPERS: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">学术界进展</div>
+    <h2>2024-2025 自动 Rigging 论文</h2>
+    <table>
+      <tr><th>论文</th><th>顶会</th><th>核心思路</th><th>关联度</th></tr>
+      <tr><td>UniRig</td><td>SIGGRAPH 2025</td><td>自回归 Transformer 预测骨架 + 权重。Skeleton Tree Tokenization。</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">3D → 2D 可适配</span></td></tr>
+      <tr><td>ASMR</td><td>ArXiv 2025</td><td>Diffusion 特征作为语义描述子，自动绑定 Mesh。</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">概念相关</span></td></tr>
+      <tr><td>HumanRig</td><td>CVPR 2025</td><td>Coarse-to-fine 关节回归 + 鲁棒权重估计。</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">人形 3D</span></td></tr>
+      <tr><td>SkinTokens (UniRig 续)</td><td>—</td><td>自回归权重预测，准确率提升 98-133%。</td><td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">可迁移到 2D</span></td></tr>
+    </table>
+  </div>
+
+  <!-- IDEAL PIPELINE: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">理想管线</div>
+    <h2>AI + Spine 完整管线设计</h2>
+    <div class="vlist">
+      <div class="vitem" style="background:rgba(94,106,210,0.04);">
+        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">①</div>
+        <div class="vitem-content">
+          <div class="vitem-title">角色图 → AI 分割</div>
+          <div class="vitem-desc">Gemini/VLM 识别人物部件，CV 分割输出透明 PNG 组</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="vitem" style="flex:1;background:rgba(16,185,129,0.04);">
+          <div class="vitem-icon" style="background:rgba(16,185,129,0.12);">②</div>
+          <div class="vitem-content">
+            <div class="vitem-title">AI 自动绑骨</div>
+            <div class="vitem-desc">UniRig / OpenPose + SIFT 提取骨架层次</div>
+          </div>
+        </div>
+        <div class="vitem" style="flex:1;background:rgba(245,158,11,0.04);">
+          <div class="vitem-icon" style="background:rgba(245,158,11,0.12);">③</div>
+          <div class="vitem-content">
+            <div class="vitem-title">AI 生成动画</div>
+            <div class="vitem-desc">VLM 分析运动规律 + procedural 关键帧</div>
+          </div>
+        </div>
+      </div>
+      <div class="vitem" style="background:rgba(239,68,68,0.04);">
+        <div class="vitem-icon" style="background:rgba(239,68,68,0.12);">④</div>
+        <div class="vitem-content">
+          <div class="vitem-title">导出 Spine 兼容格式</div>
+          <div class="vitem-desc">.json + .atlas + .png 图集，经 Web Player 即时预览验证</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:10px;">
+      <strong>现状：</strong>步骤 ②-④ 已有独立开源实现，但<strong>尚无端到端管线</strong>将四步串通。最大缺口在 ③（动画生成）— 目前只有 procedural 正弦波运动，缺少 VLMs 对运动质量的视觉理解。
+    </div>
+  </div>
+
+  <!-- GAP ANALYSIS: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">Gap 分析</div>
+    <h2>现存 5 大缺口</h2>
+    <div class="vlist">
+      <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="vitem-content"><div class="vitem-desc">无真正的端到端一键方案</div></div></div>
+      <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="vitem-content"><div class="vitem-desc">无 AI 理解 Spine 特有功能（Mesh 变形、Slot、Skin、IK、权重）</div></div></div>
+      <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="vitem-content"><div class="vitem-desc">无 VLM 对动画质量的可视化评判能力</div></div></div>
+      <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="vitem-content"><div class="vitem-desc">无 Mixamo 级别的 2D 骨骼动画库</div></div></div>
+      <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="vitem-content"><div class="vitem-desc">动画生成仅 procedural，非 learn-based</div></div></div>
+    </div>
+  </div>
+
+  <!-- FUTURE OUTLOOK: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">展望</div>
+    <h2>未来 1-2 年方向</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-icon">🔮</div>
+        <div class="vitem-content"><div class="vitem-desc"><strong>SkinTokens</strong> 自回归权重预测迁移到 2D</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🧠</div>
+        <div class="vitem-content"><div class="vitem-desc">多模态大模型（GPT-5o/Gemini 3）直接理解骨骼结构和运动规律</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🔄</div>
+        <div class="vitem-content"><div class="vitem-desc">视频 → Spine 动画管线（已有初步探索）</div></div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon">🏗️</div>
+        <div class="vitem-content"><div class="vitem-desc">开源端到端 AI + Spine 管线（Genielabs + UniRig 整合）</div></div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:10px;">
+      核心判断：<strong>AI 可以帮你做 60% 的工作</strong>（绑骨 + 简单动画），但 Mesh 变形、IK 约束、多套皮肤换装等高级功能仍需要人工介入。Mixamo for 2D 尚未出现。
+    </div>
+  </div>
+
+  <!-- SUMMARY: span-4 -->
+  <div class="card span-4 card-highlight">
+    <div class="label-sm">Summary</div>
+    <div class="tips-grid">
+      <div class="tip-card tip-card-wide" style="grid-column:span 2;">
+        <h3>Spine 技术本身</h3>
+        <div class="text-muted">
+          成熟、高效、跨平台。骨骼+插槽+皮肤的 Separation of Concerns 设计是其核心优势。4 层架构（Loading→Atlas→SkeletonData→Animation）清晰且扩展性好。3 种约束系统（IK/Transform/Path）为高级动画提供基础设施。
+        </div>
+      </div>
+      <div class="tip-card">
+        <h3>AI 生成 Spine</h3>
+        <div class="text-muted">
+          <strong>可行但有限。</strong>自动绑骨（60-80% 准确率）和简单动画（walk/idle）已可实现。输出 Spine 兼容 JSON 的工具已有多个。但 Mesh 变形、IK 约束、高质量自定义动画仍需人工。
+        </div>
+      </div>
+      <div class="tip-card">
+        <h3>行动建议</h3>
+        <div class="text-muted">
+          短期：用 Genielabs 或 ComfyUI UniRig 加速绑骨流程。中期：等待开源端到端管线整合。长期：对 AI 生成动画的质量保持谨慎预期 — VLM 尚未具备动画审美能力。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCES: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">参考来源</div>
+    <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+      <div>📄 <a href="https://segmentfault.com/a/1190000040082417" style="color:#5e6ad2;text-decoration:none;">Spine 2D 骨骼动画渲染原理解析与源码解读</a> · 曾培森 · SegmentFault</div>
+      <div>🐙 <a href="https://github.com/GenielabsOpenSource/spine-animation-ai" style="color:#5e6ad2;text-decoration:none;">GenielabsOpenSource/spine-animation-ai</a> · GitHub</div>
+      <div>🌐 <a href="https://godmodeai.co/ai-spine-animation" style="color:#5e6ad2;text-decoration:none;">God Mode AI Spine Animation</a> · godmodeai.co</div>
+      <div>🌐 <a href="https://apatero.com/blog/comfyui-unirig-automatic-skeleton-rigging-guide-2025" style="color:#5e6ad2;text-decoration:none;">ComfyUI UniRig Guide</a> · apatero.com</div>
+      <div>📄 <a href="https://stretchy.studio/" style="color:#5e6ad2;text-decoration:none;">Stretchy Studio</a> · 开源 2D 骨骼动画工具</div>
+      <div>📄 <a href="https://www.layer.ai/tools/layer--create-spine-components" style="color:#5e6ad2;text-decoration:none;">Layer AI Spine Components</a> · layer.ai</div>
+    </div>
+  </div>
+
 </div>
 
-</main>
 </body>
 </html>
