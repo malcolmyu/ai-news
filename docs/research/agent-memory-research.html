@@ -33,6 +33,7 @@
     padding: 20px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     transition: box-shadow 0.2s;
+    min-width: 0;
   }
   .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 
@@ -41,7 +42,17 @@
   .span-4 { grid-column: span 4; }
   .span-row-2 { grid-row: span 2; }
   @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
-  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+  @media (max-width: 520px) {
+    .span-2, .span-3, .span-4 { grid-column: span 1; }
+    .bento { padding: 20px 16px 32px; }
+    .stat-num { font-size: 18px; }
+    .stat-row { flex-wrap: wrap; gap: 8px; }
+    .stat-item { flex: 1 1 40%; min-width: 0; }
+    h1 { font-size: 24px; }
+    svg { display: block; }
+    .card { padding: 16px; }
+    .diagram-wrap { padding: 10px; }
+  }
 
   .label-sm {
     font-size: 11px;
@@ -82,8 +93,8 @@
   .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
 
   .stat-row { display: flex; gap: 12px; margin-top: 6px; }
-  .stat-item { flex: 1; }
-  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; }
+  .stat-item { flex: 1; min-width: 0; }
+  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
 
   .divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
