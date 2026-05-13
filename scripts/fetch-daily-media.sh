@@ -233,8 +233,6 @@ process_x_url() {
 
   local prefix="${username}-${tweet_id}"
   local downloaded_paths=""
-  local video_paths=""
-  local video_thumb_path=""
   local error_msg=""
 
   # Fetch vxtwitter JSON directly for richer data
@@ -265,28 +263,6 @@ process_x_url() {
     if [[ -n "$(echo "$all_img_urls" | tr -d '[:space:]')" ]]; then
       downloaded_paths=$(echo "$all_img_urls" | download_images "$prefix" "$output_dir")
     fi
-
-    # Extract video info
-    local video_url
-    local video_thumb
-    video_url=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .url // empty' 2>/dev/null | head -1) || true
-    video_thumb=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .thumbnail_url // empty' 2>/dev/null | head -1) || true
-
-    if [[ -n "$video_thumb" ]]; then
-      # Download video thumbnail as an image
-      local thumb_dest="${output_dir}/${prefix}-video-thumb.jpg"
-      if curl -sL --max-time 20 -o "$thumb_dest" "$video_thumb" 2>/dev/null && [[ -s "$thumb_dest" ]]; then
-        video_thumb_path="$thumb_dest"
-        # Also include in images array
-        if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" ]]; then
-          downloaded_paths="$thumb_dest"
-        fi
-      fi
-    fi
-
-    if [[ -n "$video_url" ]]; then
-      video_paths="$video_url"
-    fi
   fi
 
   # Fallback to fxtwitter if nothing found
@@ -308,28 +284,16 @@ process_x_url() {
 
   # Build the result JSON object
   local result
-  if [[ -n "$video_paths" ]]; then
-    result=$(jq -n \
-      --arg type "x" \
-      --arg url "$url" \
-      --arg username "$username" \
-      --arg tweet_id "$tweet_id" \
-      --argjson images "$images_json" \
-      --arg video_url "$video_paths" \
-      --arg video_thumb "$video_thumb_path" \
-      '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images, video_url: $video_url, video_thumb: $video_thumb}')
-  else
-    result=$(jq -n \
-      --arg type "x" \
-      --arg url "$url" \
-      --arg username "$username" \
-      --arg tweet_id "$tweet_id" \
-      --argjson images "$images_json" \
-      '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images}')
-  fi
+  result=$(jq -n \
+    --arg type "x" \
+    --arg url "$url" \
+    --arg username "$username" \
+    --arg tweet_id "$tweet_id" \
+    --argjson images "$images_json" \
+    '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images}')
 
   # If nothing at all found, add error field
-  if [[ "$images_json" == "[]" && -z "$video_paths" ]]; then
+  if [[ "$images_json" == "[]" ]]; then
     echo "  [warn] No media for ${url}" >&2
     result=$(echo "$result" | jq '. + {error: "no media found"}')
   fi
