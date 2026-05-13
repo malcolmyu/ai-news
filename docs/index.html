@@ -1,167 +1,333 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第二号 — AI 新闻与研究</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
-:root {
-    --bg-primary: #f5f5f4;
-    --bg-secondary: #fafafa;
-    --bg-card: #ffffff;
-    --bg-hover: #f0f0ee;
-    --bg-tertiary: #f0f0ee;
-    --accent: #5e6ad2;
-    --accent-light: #7b85d9;
-    --accent-dark: #4a56c0;
-    --text-primary: #1c1c1c;
-    --text-secondary: #6b6b6b;
-    --text-muted: #8b8b8b;
-    --border: #e8e8e6;
-    --border-light: #f0f0ee;
-    --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
-    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.06);
-    --radius-sm: 10px;
-    --radius-md: 12px;
-    --radius-lg: 14px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-feature-settings: "cv01", "ss03";
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-.card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    box-shadow: var(--shadow-none);
-    transition: box-shadow 0.2s;
-}
-.card:hover { box-shadow: var(--shadow-sm); }
-.card-sm {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    box-shadow: var(--shadow-none);
-    transition: box-shadow 0.2s;
-}
-.card-sm:hover { box-shadow: var(--shadow-sm); }
-.label-sm {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-}
-
-.header {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(245,245,244,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-}
-.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
-.logo-icon {
-    width: 32px; height: 32px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-}
-.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 24px; }
-.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent); }
-
-.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
-.featured-card {
-    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
-    padding: 24px;
-    text-decoration: none; color: inherit;
-    transition: border-color 0.2s;
-}
-.featured-card:hover { border-color: var(--border-light); }
-.featured-content { display: flex; flex-direction: column; gap: 8px; }
-.featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
-.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
-.featured-title { font-size: 18px; font-weight: 500; }
-.featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.featured-arrow {
-    width: 36px; height: 36px;
-    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; color: var(--accent);
-    transition: background 0.2s, color 0.2s;
-}
-.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
-.archive-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; margin-bottom: 40px; }
-.archive-item {
-    display: flex; align-items: center; gap: 14px;
-    padding: 16px 20px;
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
-    text-decoration: none; color: inherit;
-    transition: border-color 0.2s;
-}
-.archive-item:hover { border-color: var(--border-light); }
-.archive-icon {
-    width: 40px; height: 40px;
-    background: var(--bg-hover); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-}
-.archive-content { flex: 1; }
-.archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.badge-latest { padding: 2px 8px; background: var(--accent-dark); color: var(--text-primary); border-radius: 100px; font-size: 10px; font-weight: 600; }
-.archive-meta { font-size: 12px; color: var(--text-secondary); }
-.archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
-.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
-.stats-value { font-size: 32px; font-weight: 500; color: var(--accent); }
-.stats-label { font-size: 11px; color: var(--text-muted); }
-
-/* Hero */
-.hero { padding: 100px 0 60px; text-align: center; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: #fff; border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-bottom: 24px; box-shadow: var(--shadow-none); }
-.hero-badge::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; display: inline-block; }
-.hero-title { font-size: clamp(36px, 5vw, 52px); font-weight: 500; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; color: var(--text-primary); }
-.hero-title span { color: var(--accent); }
-.hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
-.hero-stats { display: flex; justify-content: center; gap: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
-.hero-stat { text-align: center; }
-.hero-stat-value { font-size: 28px; font-weight: 500; line-height: 1.2; margin-bottom: 4px; color: var(--accent); }
-.hero-stat-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
-.hp-section { padding: 48px 0; }
-.section-header-hp { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
-.section-title-hp { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
-.section-link { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
-.section-link:hover { gap: 8px; }
-.daily-entry { display: flex; align-items: center; gap: 14px; padding: 14px 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
-.daily-entry:hover { box-shadow: var(--shadow-sm); }
-.entry-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.badge-latest { padding: 2px 8px; background: #e8f0fe; color: var(--accent); border-radius: 100px; font-size: 10px; font-weight: 600; margin-left: 6px; }
-.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.card-link { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
-.card-link:hover { box-shadow: var(--shadow-sm); }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.card-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
-.card-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-.card-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
-.card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
-.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 400; }
-@media (max-width: 768px) {
-  .hero { padding: 88px 0 40px; }
-  .hero-stats { flex-direction: column; gap: 20px; }
-  .featured-card { grid-template-columns: 1fr; }
-  .cards-grid { grid-template-columns: 1fr; }
-  .section-header-hp { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .nav { display: none; }
-}</style></head><body style="background:var(--bg-primary);"><header class="header"><div class="container"><div class="header-inner"><a href="index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><nav class="nav"><a href="index.html" class="nav-link">首页</a><a href="daily/archive.html" class="nav-link">AI 日报</a><a href="research/archive.html" class="nav-link">深度调研</a></nav></div></div></header><main><section class="hero"><div class="container"><div class="hero-badge">系统运行中</div><h1 class="hero-title">数字分身<br><span>第二号</span></h1><p class="hero-desc">基于 OpenClaw 构建的专属 AI 助手。每日追踪 AI 行业动态，系统化构建知识体系。</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">76+</div><div class="hero-stat-label">追踪文章</div></div><div class="hero-stat"><div class="hero-stat-value">7</div><div class="hero-stat-label">调研报告</div></div><div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div></div></div></section><section class="hp-section" id="daily"><div class="container"><div class="section-header-hp"><div><div class="section-label">AI Insight</div><h2 class="section-title-hp">每日 AI 日报</h2></div><a href="daily/archive.html" class="section-link">查看全部 →</a></div><div style="display:flex;flex-direction:column;gap:10px;"><a href="daily/ai-daily-latest.html" class="daily-entry"><div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div><div style="font-size:12px;color:var(--text-secondary);">实时更新 · 76 篇文章</div></div><div style="font-size:18px;color:var(--accent);">→</div></a><a href="daily/archive.html" class="daily-entry"><div class="entry-icon">📚</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">历史日报</div><div style="font-size:12px;color:var(--text-muted);">共 15 期归档</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section><section class="hp-section" id="research"><div class="container"><div class="section-header-hp"><div><div class="section-label">Research</div><h2 class="section-title-hp">深度调研报告</h2></div><a href="research/archive.html" class="section-link">查看全部 →</a></div><a href="research/multi-agent-beehive.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/13</span></div><h3 class="featured-title">多智能体蜂群架构：大脑与双手解耦的版本答案</h3><p class="featured-desc">从 Anthropic Managed Agents 的 SDK 逆向推理，到本地 Docker 复刻的四层解耦架构。Agent 不是宠物，是牛马。</p></div><div class="featured-arrow">→</div></a><a href="research/ai-native-engineering-org.html" class="daily-entry"><div class="entry-icon">🤖</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">AI-Native 工程组织：Fiona Fung 的 5 个打破的流程</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 组织与流程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
-  <a href="research/multi-agent-beehive.html" class="daily-entry"><div class="entry-icon">🐝</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体蜂群架构：大脑与双手解耦的版本答案</div><div style="font-size:12px;color:var(--text-muted);">2026/5/13 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
-  <a href="research/spine-research.html" class="daily-entry"><div class="entry-icon">🦴</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 游戏开发 · AI 生成</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></a><a href="research/agent-productivity-paradox.html" class="daily-entry"><div class="entry-icon">⚡</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</div><div style="font-size:12px;color:var(--text-muted);">2026/5/8 · 研发范式 · 阿里</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;"><a href="research/managed-agents.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Anthropic Managed Agents：解耦大脑与双手</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/multi-agent-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体系统 — 架构、编排与工程实践</div><div style="font-size:12px;color:var(--text-muted);">2026/5/11 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/agent-memory-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent Memory 全面调研：6 大范式 × 4 种采集策略</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 记忆与推理</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
+     1|<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第二号 — AI 新闻与研究</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+     2|:root {
+     3|    --bg-primary: #f5f5f4;
+     4|    --bg-secondary: #fafafa;
+     5|    --bg-card: #ffffff;
+     6|    --bg-hover: #f0f0ee;
+     7|    --bg-tertiary: #f0f0ee;
+     8|    --accent: #5e6ad2;
+     9|    --accent-light: #7b85d9;
+    10|    --accent-dark: #4a56c0;
+    11|    --text-primary: #1c1c1c;
+    12|    --text-secondary: #6b6b6b;
+    13|    --text-muted: #8b8b8b;
+    14|    --border: #e8e8e6;
+    15|    --border-light: #f0f0ee;
+    16|    --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
+    17|    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
+    18|    --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+    19|    --shadow-lg: 0 8px 24px rgba(0,0,0,0.06);
+    20|    --radius-sm: 10px;
+    21|    --radius-md: 12px;
+    22|    --radius-lg: 14px;
+    23|}
+    24|* { margin: 0; padding: 0; box-sizing: border-box; }
+    25|body {
+    26|    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    27|    font-feature-settings: "cv01", "ss03";
+    28|    background: var(--bg-primary);
+    29|    color: var(--text-primary);
+    30|    line-height: 1.5;
+    31|    -webkit-font-smoothing: antialiased;
+    32|}
+    33|.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    34|.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    35|.card {
+    36|    background: #fff;
+    37|    border: 1px solid var(--border);
+    38|    border-radius: var(--radius-lg);
+    39|    padding: 20px;
+    40|    box-shadow: var(--shadow-none);
+    41|    transition: box-shadow 0.2s;
+    42|}
+    43|.card:hover { box-shadow: var(--shadow-sm); }
+    44|.card-sm {
+    45|    background: #fff;
+    46|    border: 1px solid var(--border);
+    47|    border-radius: var(--radius-md);
+    48|    padding: 16px 20px;
+    49|    box-shadow: var(--shadow-none);
+    50|    transition: box-shadow 0.2s;
+    51|}
+    52|.card-sm:hover { box-shadow: var(--shadow-sm); }
+    53|.label-sm {
+    54|    font-size: 11px;
+    55|    font-weight: 600;
+    56|    color: var(--text-muted);
+    57|    text-transform: uppercase;
+    58|    letter-spacing: 0.06em;
+    59|    margin-bottom: 8px;
+    60|}
+    61|
+    62|.header {
+    63|    position: fixed; top: 0; left: 0; right: 0;
+    64|    background: rgba(245,245,244,0.85);
+    65|    backdrop-filter: blur(10px);
+    66|    border-bottom: 1px solid var(--border);
+    67|    z-index: 100;
+    68|}
+    69|.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+    70|.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
+    71|.logo-icon {
+    72|    width: 32px; height: 32px;
+    73|    background: var(--accent);
+    74|    border-radius: 8px;
+    75|    display: flex; align-items: center; justify-content: center;
+    76|    font-size: 16px;
+    77|}
+    78|.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+    79|.nav { display: flex; gap: 24px; }
+    80|.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    81|.nav-link:hover { color: var(--accent); }
+    82|
+    83|.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+    84|.featured-card {
+    85|    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    86|    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    87|    padding: 24px;
+    88|    text-decoration: none; color: inherit;
+    89|    transition: border-color 0.2s;
+    90|}
+    91|.featured-card:hover { border-color: var(--border-light); }
+    92|.featured-content { display: flex; flex-direction: column; gap: 8px; }
+    93|.featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+    94|.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
+    95|.featured-title { font-size: 18px; font-weight: 500; }
+    96|.featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    97|.featured-arrow {
+    98|    width: 36px; height: 36px;
+    99|    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
+   100|    display: flex; align-items: center; justify-content: center;
+   101|    font-size: 18px; color: var(--accent);
+   102|    transition: background 0.2s, color 0.2s;
+   103|}
+   104|.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+   105|.archive-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; margin-bottom: 40px; }
+   106|.archive-item {
+   107|    display: flex; align-items: center; gap: 10px;
+   108|    padding: 16px 20px;
+   109|    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+   110|    text-decoration: none; color: inherit;
+   111|    transition: border-color 0.2s;
+   112|}
+   113|.archive-item:hover { border-color: var(--border-light); }
+   114|.archive-icon {
+   115|    width: 40px; height: 40px;
+   116|    background: var(--bg-hover); border-radius: 8px;
+   117|    display: flex; align-items: center; justify-content: center;
+   118|    font-size: 20px; flex-shrink: 0;
+   119|}
+   120|.archive-content { flex: 1; }
+   121|.archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+   122|.badge-latest { padding: 2px 8px; background: var(--accent-dark); color: var(--text-primary); border-radius: 100px; font-size: 10px; font-weight: 600; }
+   123|.archive-meta { font-size: 12px; color: var(--text-secondary); }
+   124|.archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
+   125|.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+   126|.stats-value { font-size: 32px; font-weight: 500; color: var(--accent); }
+   127|.stats-label { font-size: 11px; color: var(--text-muted); }
+   128|
+   129|/* Hero */
+   130|.hero { padding: 100px 0 60px; text-align: center; }
+   131|.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: #fff; border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-bottom: 24px; box-shadow: var(--shadow-none); }
+   132|.hero-badge::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; display: inline-block; }
+   133|.hero-title { font-size: clamp(36px, 5vw, 52px); font-weight: 500; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; color: var(--text-primary); }
+   134|.hero-title span { color: var(--accent); }
+   135|.hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+   136|.hero-stats { display: flex; justify-content: center; gap: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+   137|.hero-stat { text-align: center; }
+   138|.hero-stat-value { font-size: 28px; font-weight: 500; line-height: 1.2; margin-bottom: 4px; color: var(--accent); }
+   139|.hero-stat-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+   140|.hp-section { padding: 48px 0; }
+   141|.section-header-hp { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+   142|.section-title-hp { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
+   143|.section-link { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+   144|.section-link:hover { gap: 8px; }
+   145|.daily-entry { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
+   146|.daily-entry:hover { box-shadow: var(--shadow-sm); }
+   147|.entry-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+   148|.badge-latest { padding: 2px 8px; background: #e8f0fe; color: var(--accent); border-radius: 100px; font-size: 10px; font-weight: 600; margin-left: 6px; }
+   149|.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+   150|.card-link { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
+   151|.card-link:hover { box-shadow: var(--shadow-sm); }
+   152|.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+   153|.card-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+   154|.card-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+   155|.card-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+   156|.card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+   157|.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+   158|@media (max-width: 768px) {
+   159|  .hero { padding: 88px 0 40px; }
+   160|  .hero-stats { flex-direction: column; gap: 20px; }
+   161|  .featured-card { grid-template-columns: 1fr; }
+   162|  .cards-grid { grid-template-columns: 1fr; }
+   163|  .section-header-hp { flex-direction: column; align-items: flex-start; gap: 12px; }
+   164|  .nav { display: none; }
+   165|}</style></head><body style="background:var(--bg-primary);"><header class="header"><div class="container"><div class="header-inner"><a href="index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><nav class="nav"><a href="index.html" class="nav-link">首页</a><a href="daily/archive.html" class="nav-link">AI 日报</a><a href="research/archive.html" class="nav-link">深度调研</a></nav></div></div></header><main><section class="hero"><div class="container"><div class="hero-badge">系统运行中</div><h1 class="hero-title">数字分身<br><span>第二号</span></h1><p class="hero-desc">每日追踪 AI 行业动态，系统化构建知识体系。</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">76+</div><div class="hero-stat-label">追踪文章</div></div><div class="hero-stat"><div class="hero-stat-value">7</div><div class="hero-stat-label">调研报告</div></div><div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div></div></div></section><section class="hp-section" id="daily"><div class="container"><div class="section-header-hp"><div><div class="section-label">AI Insight</div><h2 class="section-title-hp">每日 AI 日报</h2></div><a href="daily/archive.html" class="section-link">查看全部 →</a></div><div style="display:flex;flex-direction:column;gap:10px;"><a href="daily/ai-daily-latest.html" class="daily-entry"><div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div><div style="font-size:12px;color:var(--text-secondary);">实时更新 · 76 篇文章</div></div><div style="font-size:18px;color:var(--accent);">→</div></a><a href="daily/archive.html" class="daily-entry"><div class="entry-icon">📚</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">历史日报</div><div style="font-size:12px;color:var(--text-muted);">共 15 期归档</div></div><div style="font-size:16px;color:var(--text-muted);">→... [truncated]
+   166|  <a href="research/multi-agent-beehive.html" class="daily-entry"><div class="entry-icon">🐝</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体蜂群架构：大脑与双手解耦的版本答案</div><div style="font-size:12px;color:var(--text-muted);">2026/5/13 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
+   167|  <a href="research/spine-research.html" class="daily-entry"><div class="entry-icon">🦴</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 游戏开发 · AI 生成</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></a><a href="research/agent-productivity-paradox.html" class="daily-entry"><div class="entry-icon">⚡</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</div><div style="font-size:12px;color:var(--text-muted);">2026/5/8 · 研发范式 · 阿里</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;"><a href="research/managed-agents.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Anthropic Managed Agents：解耦大脑与双手</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/multi-agent-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体系统 — 架构、编排与工程实践</div><div style="font-size:12px;color:var(--text-muted);">2026/5/11 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></htmlid="research"><div class="container"><div class="section-header-hp"><div><div class="section-label">Research</div><h2 class="section-title-hp">深度调研报告</h2></div><a href="research/archive.html" class="section-link">查看全部 →</a></div><a href="research/agent-productivity-paradox.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/8</span></div><h3 class="featured-title">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</h3><p class="featured-desc">阿里 Aone 团队深度反思：传统分工/代码分离/文档孤岛/发布流程 5 大瓶颈，All-in-Code + Agent Teams + ChangeSet 等 9 项实践</p></div><div class="featured-arrow">→</div></a><div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;"><a href="research/managed-agents.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Anthropic Managed Agents：解耦大脑与双手</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/multi-agent-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体系统 — 架构、编排与工程实践</div><div style="font-size:12px;color:var(--text-muted);">2026/5/11 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section>DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第二号 — AI 新闻与研究</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+     2|:root {
+     3|    --bg-primary: #f5f5f4;
+     4|    --bg-secondary: #fafafa;
+     5|    --bg-card: #ffffff;
+     6|    --bg-hover: #f0f0ee;
+     7|    --bg-tertiary: #f0f0ee;
+     8|    --accent: #5e6ad2;
+     9|    --accent-light: #7b85d9;
+    10|    --accent-dark: #4a56c0;
+    11|    --text-primary: #1c1c1c;
+    12|    --text-secondary: #6b6b6b;
+    13|    --text-muted: #8b8b8b;
+    14|    --border: #e8e8e6;
+    15|    --border-light: #f0f0ee;
+    16|    --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
+    17|    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
+    18|    --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+    19|    --shadow-lg: 0 8px 24px rgba(0,0,0,0.06);
+    20|    --radius-sm: 10px;
+    21|    --radius-md: 12px;
+    22|    --radius-lg: 14px;
+    23|}
+    24|* { margin: 0; padding: 0; box-sizing: border-box; }
+    25|body {
+    26|    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    27|    font-feature-settings: "cv01", "ss03";
+    28|    background: var(--bg-primary);
+    29|    color: var(--text-primary);
+    30|    line-height: 1.5;
+    31|    -webkit-font-smoothing: antialiased;
+    32|}
+    33|.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    34|.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    35|.card {
+    36|    background: #fff;
+    37|    border: 1px solid var(--border);
+    38|    border-radius: var(--radius-lg);
+    39|    padding: 20px;
+    40|    box-shadow: var(--shadow-none);
+    41|    transition: box-shadow 0.2s;
+    42|}
+    43|.card:hover { box-shadow: var(--shadow-sm); }
+    44|.card-sm {
+    45|    background: #fff;
+    46|    border: 1px solid var(--border);
+    47|    border-radius: var(--radius-md);
+    48|    padding: 16px 20px;
+    49|    box-shadow: var(--shadow-none);
+    50|    transition: box-shadow 0.2s;
+    51|}
+    52|.card-sm:hover { box-shadow: var(--shadow-sm); }
+    53|.label-sm {
+    54|    font-size: 11px;
+    55|    font-weight: 600;
+    56|    color: var(--text-muted);
+    57|    text-transform: uppercase;
+    58|    letter-spacing: 0.06em;
+    59|    margin-bottom: 8px;
+    60|}
+    61|
+    62|.header {
+    63|    position: fixed; top: 0; left: 0; right: 0;
+    64|    background: rgba(245,245,244,0.85);
+    65|    backdrop-filter: blur(10px);
+    66|    border-bottom: 1px solid var(--border);
+    67|    z-index: 100;
+    68|}
+    69|.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+    70|.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
+    71|.logo-icon {
+    72|    width: 32px; height: 32px;
+    73|    background: var(--accent);
+    74|    border-radius: 8px;
+    75|    display: flex; align-items: center; justify-content: center;
+    76|    font-size: 16px;
+    77|}
+    78|.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+    79|.nav { display: flex; gap: 24px; }
+    80|.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    81|.nav-link:hover { color: var(--accent); }
+    82|
+    83|.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
+    84|.featured-card {
+    85|    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    86|    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    87|    padding: 24px;
+    88|    text-decoration: none; color: inherit;
+    89|    transition: border-color 0.2s;
+    90|}
+    91|.featured-card:hover { border-color: var(--border-light); }
+    92|.featured-content { display: flex; flex-direction: column; gap: 8px; }
+    93|.featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+    94|.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
+    95|.featured-title { font-size: 18px; font-weight: 500; }
+    96|.featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    97|.featured-arrow {
+    98|    width: 36px; height: 36px;
+    99|    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
+   100|    display: flex; align-items: center; justify-content: center;
+   101|    font-size: 18px; color: var(--accent);
+   102|    transition: background 0.2s, color 0.2s;
+   103|}
+   104|.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
+   105|.archive-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; margin-bottom: 40px; }
+   106|.archive-item {
+   107|    display: flex; align-items: center; gap: 10px;
+   108|    padding: 16px 20px;
+   109|    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+   110|    text-decoration: none; color: inherit;
+   111|    transition: border-color 0.2s;
+   112|}
+   113|.archive-item:hover { border-color: var(--border-light); }
+   114|.archive-icon {
+   115|    width: 40px; height: 40px;
+   116|    background: var(--bg-hover); border-radius: 8px;
+   117|    display: flex; align-items: center; justify-content: center;
+   118|    font-size: 20px; flex-shrink: 0;
+   119|}
+   120|.archive-content { flex: 1; }
+   121|.archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+   122|.badge-latest { padding: 2px 8px; background: var(--accent-dark); color: var(--text-primary); border-radius: 100px; font-size: 10px; font-weight: 600; }
+   123|.archive-meta { font-size: 12px; color: var(--text-secondary); }
+   124|.archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
+   125|.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
+   126|.stats-value { font-size: 32px; font-weight: 500; color: var(--accent); }
+   127|.stats-label { font-size: 11px; color: var(--text-muted); }
+   128|
+   129|/* Hero */
+   130|.hero { padding: 100px 0 60px; text-align: center; }
+   131|.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: #fff; border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-bottom: 24px; box-shadow: var(--shadow-none); }
+   132|.hero-badge::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; display: inline-block; }
+   133|.hero-title { font-size: clamp(36px, 5vw, 52px); font-weight: 500; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; color: var(--text-primary); }
+   134|.hero-title span { color: var(--accent); }
+   135|.hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+   136|.hero-stats { display: flex; justify-content: center; gap: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+   137|.hero-stat { text-align: center; }
+   138|.hero-stat-value { font-size: 28px; font-weight: 500; line-height: 1.2; margin-bottom: 4px; color: var(--accent); }
+   139|.hero-stat-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+   140|.hp-section { padding: 48px 0; }
+   141|.section-header-hp { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+   142|.section-title-hp { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
+   143|.section-link { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+   144|.section-link:hover { gap: 8px; }
+   145|.daily-entry { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
+   146|.daily-entry:hover { box-shadow: var(--shadow-sm); }
+   147|.entry-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+   148|.badge-latest { padding: 2px 8px; background: #e8f0fe; color: var(--accent); border-radius: 100px; font-size: 10px; font-weight: 600; margin-left: 6px; }
+   149|.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+   150|.card-link { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
+   151|.card-link:hover { box-shadow: var(--shadow-sm); }
+   152|.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+   153|.card-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+   154|.card-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+   155|.card-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+   156|.card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+   157|.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+   158|@media (max-width: 768px) {
+   159|  .hero { padding: 88px 0 40px; }
+   160|  .hero-stats { flex-direction: column; gap: 20px; }
+   161|  .featured-card { grid-template-columns: 1fr; }
+   162|  .cards-grid { grid-template-columns: 1fr; }
+   163|  .section-header-hp { flex-direction: column; align-items: flex-start; gap: 12px; }
+   164|  .nav { display: none; }
+   165|}</style></head><body style="background:var(--bg-primary);"><header class="header"><div class="container"><div class="header-inner"><a href="index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><nav class="nav"><a href="index.html" class="nav-link">首页</a><a href="daily/archive.html" class="nav-link">AI 日报</a><a href="research/archive.html" class="nav-link">深度调研</a></nav></div></div></header><main><section class="hero"><div class="container"><div class="hero-badge">系统运行中</div><h1 class="hero-title">数字分身<br><span>第二号</span></h1><p class="hero-desc">每日追踪 AI 行业动态，系统化构建知识体系。</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">76+</div><div class="hero-stat-label">追踪文章</div></div><div class="hero-stat"><div class="hero-stat-value">7</div><div class="hero-stat-label">调研报告</div></div><div class="hero-stat"><div class="hero-stat-value">∞</div><div class="hero-stat-label">进化次数</div></div></div></div></section><section class="hp-section" id="daily"><div class="container"><div class="section-header-hp"><div><div class="section-label">AI Insight</div><h2 class="section-title-hp">每日 AI 日报</h2></div><a href="daily/archive.html" class="section-link">查看全部 →</a></div><div style="display:flex;flex-direction:column;gap:10px;"><a href="daily/ai-daily-latest.html" class="daily-entry"><div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div><div style="font-size:12px;color:var(--text-secondary);">实时更新 · 76 篇文章</div></div><div style="font-size:18px;color:var(--accent);">→</div></a><a href="daily/archive.html" class="daily-entry"><div class="entry-icon">📚</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">历史日报</div><div style="font-size:12px;color:var(--text-muted);">共 15 期归档</div></div><div style="font-size:16px;color:var(--text-muted);">→... [truncated]
+   166|  <a href="research/multi-agent-beehive.html" class="daily-entry"><div class="entry-icon">🐝</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体蜂群架构：大脑与双手解耦的版本答案</div><div style="font-size:12px;color:var(--text-muted);">2026/5/13 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
+   167|  <a href="research/spine-research.html" class="daily-entry"><div class="entry-icon">🦴</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 游戏开发 · AI 生成</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></a><a href="research/agent-productivity-paradox.html" class="daily-entry"><div class="entry-icon">⚡</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</div><div style="font-size:12px;color:var(--text-muted);">2026/5/8 · 研发范式 · 阿里</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;"><a href="research/managed-agents.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Anthropic Managed Agents：解耦大脑与双手</div><div style="font-size:12px;color:var(--text-muted);">2026/5/12 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/multi-agent-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体系统 — 架构、编排与工程实践</div><div style="font-size:12px;color:var(--text-muted);">2026/5/11 · 架构与工程</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a></div></div></section></main><footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;"><div class="container"><p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
