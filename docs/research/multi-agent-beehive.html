@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多智能体蜂群架构：大脑与双手解耦的版本答案</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #f5f5f4;
+  --bg-secondary: #fafafa;
+  --bg-card: #ffffff;
+  --bg-hover: #f0f0ee;
+  --accent: #5e6ad2;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --purple: #8b5cf6;
+  --text-primary: #1c1c1c;
+  --text-secondary: #6b6b6b;
+  --text-muted: #8b8b8b;
+  --border: #e8e8e6;
+  --border-light: #f0f0ee;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.06);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(245,245,244,0.85); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); z-index: 100;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
+.logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 24px; }
+.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent); }
+.bento { padding: 80px 24px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); transition: box-shadow 0.2s; min-width: 0; }
+.card:hover { box-shadow: var(--shadow-hover); }
+.span-2 { grid-column: span 2; }.span-3 { grid-column: span 3; }.span-4 { grid-column: span 4; }
+@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+h1 { font-size: 32px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2; }
+h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 10px; }
+h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.label-sm { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.label-accent { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.body-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.body-text strong { color: var(--text-primary); font-weight: 600; }
+.body-text code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--bg-hover); padding: 2px 6px; border-radius: 4px; color: var(--text-primary); }
+.tag { display: inline-block; padding: 3px 10px; background: var(--bg-hover); border-radius: 100px; font-size: 11px; color: var(--text-secondary); font-weight: 500; margin-right: 4px; margin-bottom: 4px; }
+.tag-accent { display: inline-block; padding: 3px 10px; background: rgba(94,106,210,0.08); border-radius: 100px; font-size: 11px; color: var(--accent); font-weight: 500; margin-right: 4px; margin-bottom: 4px; }
+.quote-box { background: rgba(94,106,210,0.04); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.quote-box .qb-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; font-weight: 500; font-style: italic; }
+.quote-box .qb-src { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+.stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 80px; }
+.stat-num { font-size: 22px; font-weight: 600; color: var(--accent); line-height: 1.1; }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.layer-chain { display: flex; flex-direction: column; gap: 4px; }
+.layer-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; border-radius: var(--radius-sm); }
+.layer-item.l1 { background: rgba(94,106,210,0.04); }
+.layer-item.l2 { background: rgba(16,185,129,0.04); }
+.layer-item.l3 { background: rgba(245,158,11,0.04); }
+.layer-item.l4 { background: rgba(239,68,68,0.04); }
+.layer-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.l1 .layer-num { background: var(--accent); }
+.l2 .layer-num { background: var(--green); }
+.l3 .layer-num { background: var(--amber); }
+.l4 .layer-num { background: var(--red); }
+.layer-title { font-size: 12px; font-weight: 600; }
+.layer-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.pillar { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; }
+.pillar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.pillar-content { flex: 1; }
+.pillar-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.pillar-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.callout { background: rgba(94,106,210,0.04); border: 1px solid rgba(94,106,210,0.12); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 10px; }
+.callout-title { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.callout-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.callout-text strong { color: var(--text-primary); font-weight: 600; }
+@media (max-width: 768px) { .bento { padding: 72px 16px 32px; } h1 { font-size: 22px; } .card { padding: 16px; } .nav { display: none; } }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="container"><div class="header-inner">
+  <a href="../index.html" class="logo"><div class="logo-icon">🐝</div><span class="logo-text">第二号</span></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">首页</a>
+    <a href="../daily/archive.html" class="nav-link">AI 日报</a>
+    <a href="archive.html" class="nav-link">深度调研</a>
+  </nav>
+</div></div>
+</header>
+
+<main class="bento">
+
+<!-- Title -->
+<div class="card span-4">
+  <div class="label-sm">Research Report · 2026/5/13</div>
+  <h1>多智能体蜂群架构：大脑与双手解耦的版本答案</h1>
+  <div style="margin-top:6px;font-size:14px;color:var(--text-secondary);line-height:1.5;">
+    从 Anthropic Managed Agents 的 SDK 逆向推理，到本地 Docker 复刻的四层解耦架构。<br>
+    Agent 不是宠物，是牛马。
+  </div>
+  <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:4px;">
+    <span class="tag-accent">Multi-Agent</span>
+    <span class="tag-accent">Managed Agents</span>
+    <span class="tag-accent">解耦架构</span>
+    <span class="tag-accent">Docker</span>
+    <span class="tag-accent">编排器</span>
+    <span class="tag-accent">Session Store</span>
+  </div>
+</div>
+
+<!-- Key Data -->
+<div class="card span-1">
+  <div class="label-sm">视频信息</div>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div><div class="stat-label" style="margin:0;">UP 主</div><div class="body-text" style="font-size:12px;">费曼学徒冬瓜</div></div>
+    <div><div class="stat-label" style="margin:0;">时长</div><div class="body-text" style="font-size:12px;">11:25</div></div>
+    <div><div class="stat-label" style="margin:0;">BVID</div><div class="body-text" style="font-size:12px;">BV1DB546wEb8</div></div>
+    <div><div class="stat-label" style="margin:0;">来源</div><div class="body-text" style="font-size:12px;">Bilibili</div></div>
+  </div>
+</div>
+
+<!-- Core Thesis -->
+<div class="card span-3">
+  <div class="label-sm">核心论断</div>
+  <h2>「你为模型写的修补代码注定会过时，因为模型进化永远比你重构快。」</h2>
+  <div class="body-text" style="margin-bottom:10px;">
+    作者从 <strong>Anthropic Managed Agents</strong> 的 SDK 中发现了隐藏的 Beta 模块，逆向推理出 Anthropic 的四层解耦架构。本质上是把 Agent 从「宠物」（与环境/记忆死死绑定，脆弱）变成「牛马」（无状态、可销毁、可重建）。
+  </div>
+  <div class="quote-box">
+    <div class="qb-text">"以前大家没解耦，记忆和本地的环境就死死的绑在一起。这等于你把 Agent 当宠物去养。他只要跑错一行配置或者记忆越来越多，系统就会越来越难用，甚至得重装。"</div>
+    <div class="qb-src">— 费曼学徒冬瓜</div>
+  </div>
+  <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;">
+    <span class="tag">宠物 vs 牛马</span>
+    <span class="tag">大脑/双手</span>
+    <span class="tag">Docker 沙盒</span>
+    <span class="tag">Session Store</span>
+  </div>
+</div>
+
+<!-- 4-Layer Architecture -->
+<div class="card span-4">
+  <div class="label-sm">架构拆解</div>
+  <h2>Anthropic 四层解耦架构（从 SDK Beta 模块逆向推理）</h2>
+  <div class="grid-2">
+    <div class="layer-item l1" style="flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:10px;width:100%;"><span class="layer-num">1</span><span class="layer-title">Agent + Sandbox 解耦</span></div>
+      <div class="layer-desc">大脑（模型/规划/决策）与双手（执行沙盒/代码环境）彻底分离。双手崩了直接换一双，不影响大脑状态。</div>
+    </div>
+    <div class="layer-item l2" style="flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:10px;width:100%;"><span class="layer-num">2</span><span class="layer-title">Coordinator 编排</span></div>
+      <div class="layer-desc">一个「不干活的指挥官」，唯一的职责是拆任务、派活、验收。花名册里最多管理 20 个专业 Agent，每个有独立的 prompt/tool/MCP。</div>
+    </div>
+    <div class="layer-item l3" style="flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:10px;width:100%;"><span class="layer-num">3</span><span class="layer-title">Session 管理层</span></div>
+      <div class="layer-desc">Session ≠ Agent。Agent 是静态模板（定义工具/模型/prompt），Session 是动态实例（对话/线程/记忆）。同一 Agent 可以跑十个独立 Session。</div>
+    </div>
+    <div class="layer-item l4" style="flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:10px;width:100%;"><span class="layer-num">4</span><span class="layer-title">Session Store（云端记忆）</span></div>
+      <div class="layer-desc">2026/4/19 被合并的 PR 将记忆从本地搬到 Redis 缓存。上下文不再是 Agent 的一部分，Agent 实现彻底无状态——可 fork、可回滚、可克隆。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pets vs Cattle -->
+<div class="card span-2">
+  <div class="label-sm">心态转变</div>
+  <h2>宠物 vs 牛马</h2>
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div style="background:rgba(239,68,68,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🐕 宠物模式（旧）</div>
+      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">
+        Agent = 模型 + 记忆 + 环境 捆绑。跑错配置就崩、记忆膨胀就崩、环境污染就崩。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🐂 牛马模式（新）</div>
+      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">
+        大脑只管发指令，底层全是无状态独立沙盒。某个沙盒挂了直接干掉，重新拉个干净的接着干。
+      </div>
+    </div>
+    <div class="quote-box">
+      <div class="qb-text">"一个配置就能导致全盘崩溃吗？在这种架构下根本就不可能发生。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- Author's Implementation -->
+<div class="card span-2">
+  <div class="label-sm">本地复刻</div>
+  <h2>Docker 版四层架构实现</h2>
+  <div class="body-text">
+    作者用<strong>一周时间</strong>复刻了完整架构：
+  </div>
+  <div style="margin-top:6px;display:flex;flex-direction:column;gap:4px;">
+    <div style="font-size:11px;padding:4px 0;">📦 Worker = Docker 容器，可随时创建/销毁</div>
+    <div style="font-size:11px;padding:4px 0;">🧠 创建时决定：模型、harness、skill、SSH key、工作目录</div>
+    <div style="font-size:11px;padding:4px 0;">📋 主控服务器通过预定义<strong>任务图</strong>编排 Worker 交互</div>
+  </div>
+  <div class="callout">
+    <div class="callout-title">⚠️ 已知不足</div>
+    <div class="callout-text">作者坦承自己的实现不是完全解耦——Agent harness 还塞在 Worker 节点里。结果评估模块也还没做完。</div>
+  </div>
+</div>
+
+<!-- Task Graph Workflows -->
+<div class="card span-2">
+  <div class="label-sm">任务图编排</div>
+  <h2>两套实战 Workflow</h2>
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div style="background:rgba(94,106,210,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🔄 Code Review Pipeline</div>
+      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">
+        同时并发多个编码 review → 汇总到一个节点 → 统一输出。每个节点独立上下文、独立模型。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🔬 Deep Research Pipeline</div>
+      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">
+        多个节点并发搜索 → 多个并发写作节点整理 → 最后汇总做 PPT。每个阶段用不同的模型组合。
+      </div>
+    </div>
+    <div class="quote-box">
+      <div class="qb-text">"每个节点可以从一个全新的上下文开始，所以每个节点可以是不同的模型。这个就很厉害了。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- Model Diversity -->
+<div class="card span-2">
+  <div class="label-sm">模型编排</div>
+  <h2>大小模型组合的威力</h2>
+  <div class="body-text">
+    每个 Worker 独立指定模型。这意味着：
+  </div>
+  <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+    <div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);">
+      🔍 搜索/爬取 → 小模型（快、便宜）
+    </div>
+    <div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);">
+      🧠 分析/推理 → 大模型（准、深）
+    </div>
+    <div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);">
+      ✍️ 写作/输出 → 中模型（平衡）
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <div class="callout-text"><strong>Claude Code / Hermes 很难实现</strong> — 一个 session 内切换多个模型干不同的事。</div>
+  </div>
+</div>
+
+<!-- Future Vision -->
+<div class="card span-2">
+  <div class="label-sm">未来判断</div>
+  <h2>「一部手机指挥云端的蜂群」</h2>
+  <div class="body-text">
+    作者预见的三个趋势：
+  </div>
+  <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+    <div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);">
+      <strong>1. Tencent Cube Sandbox</strong> — 毫秒级沙盒启动替代 Docker，让 Agent 的「销毁重建」成本接近零
+    </div>
+    <div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);">
+      <strong>2. 云端 Agent 操作系统</strong> — Anthropic 的真正阳谋不是卖 Managed Agents，而是做一个云端的 Agent OS
+    </div>
+    <div style="font-size:12px;padding:6px 0;">
+      <strong>3. 计算资源计价变革</strong> — 从固定容器服务到动态 Agent 容器的创建/销毁周期
+    </div>
+  </div>
+</div>
+
+<!-- Reflection -->
+<div class="card span-2">
+  <div class="label-sm">引起反思</div>
+  <h2>我们在争论什么？</h2>
+  <div class="body-text">
+    作者结尾的发问很有穿透力：
+  </div>
+  <div class="quote-box" style="margin-top:6px;">
+    <div class="qb-text">"海外厂商们已经把对 AI 的理解和如何落地上升到了另一个维度。我们还在研究怎么样在本地养多只小龙虾，还在为用 OpenClaw 还是用 Hermes 争论不休。"</div>
+  </div>
+  <div style="margin-top:6px;font-size:12px;color:var(--text-secondary);line-height:1.5;">
+    提到的已发生事实：<strong>Anthropic Managed Agents</strong>、<strong>Frontier AI Platform</strong>、<strong>OpenAI Frontier</strong>、新兴职业 <strong>FDE</strong>。都在做同一件事——把 Agent 从个人工具变成企业基础设施。
+  </div>
+</div>
+
+<!-- Relevance -->
+<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
+  <div class="label-accent">与你自己的场景</div>
+  <h2>从 Ralph+ 多智能体到「Agent OS」</h2>
+  <div class="grid-2">
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">→</div>
+      <div class="pillar-content">
+        <div class="pillar-title">你已经在跑类似架构</div>
+        <div class="pillar-desc">Ralph Loop 里「主 Agent 只协调不干活 + 子 Agent 分治」= Anthropic 的 Coordinator + Worker 模式。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">→</div>
+      <div class="pillar-content">
+        <div class="pillar-title">Session/Memory 还没解耦</div>
+        <div class="pillar-desc">Hermes 里 session 和 agent 绑在一起，没有独立 Session Store。这正是这篇视频说的「宠物模式」。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">→</div>
+      <div class="pillar-content">
+        <div class="pillar-title">Docker 化子 Agent</div>
+        <div class="pillar-desc">每个 delegate_task 子 agent 不同的工具集/模型，已经接近 Task Graph 的思想。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">→</div>
+      <div class="pillar-content">
+        <div class="pillar-title">升级方向</div>
+        <div class="pillar-desc">Session ↔ Agent 解耦 + 异步 Coordinator + 云端记忆 = 从「养小龙虾」到「放牛马」。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reference -->
+<div class="card span-4">
+  <div class="label-sm">参考文献</div>
+  <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;">
+    <div>🎬 <a href="https://www.bilibili.com/video/BV1DB546wEb8" style="color:var(--accent);text-decoration:none;">比 OpenClaw 更好！多 Agent 协作架构的版本答案 — 费曼学徒冬瓜</a></div>
+    <div>📄 <a href="https://www.anthropic.com/engineering/managed-agents" style="color:var(--accent);text-decoration:none;">Anthropic Managed Agents 官方博客 — 解耦大脑与双手</a></div>
+    <div>🐙 <a href="https://github.com/anthropics/claude-code" style="color:var(--accent);text-decoration:none;">Anthropic Claude Code SDK</a> (含 Beta managed-agents 模块)</div>
+    <div>📄 <a href="https://github.com/tencent/cube-sandbox" style="color:var(--accent);text-decoration:none;">Tencent Cube Sandbox</a> — 毫秒级沙盒启动</div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">
+    视频字幕通过 opencli Bilibili API 获取。架构分析基于视频内容 + 作者对 Anthropic SDK Beta 模块的逆向推理。
+  </div>
+</div>
+
+</main>
+</body>
+</html>
