@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running an AI-native Engineering Org — Fiona Fung @ Code with Claude 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #f5f5f4;
+  --bg-secondary: #fafafa;
+  --bg-card: #ffffff;
+  --bg-hover: #f0f0ee;
+  --accent: #5e6ad2;
+  --accent-light: #7b85d9;
+  --accent-dark: #4a56c0;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --text-primary: #1c1c1c;
+  --text-secondary: #6b6b6b;
+  --text-muted: #8b8b8b;
+  --border: #e8e8e6;
+  --border-light: #f0f0ee;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.06);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(245,245,244,0.85); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); z-index: 100;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
+.logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 24px; }
+.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent); }
+
+/* Bento grid */
+.bento { padding: 80px 24px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2; }
+h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 10px; }
+h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.label-sm {
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.label-accent {
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.meta { font-size: 12px; color: var(--text-muted); }
+.body-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.body-text strong { color: var(--text-primary); font-weight: 600; }
+.body-text code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; background: var(--bg-hover);
+  padding: 2px 6px; border-radius: 4px;
+  color: var(--text-primary);
+}
+
+/* Tag */
+.tag {
+  display: inline-block; padding: 3px 10px;
+  background: var(--bg-hover); border-radius: 100px;
+  font-size: 11px; color: var(--text-secondary); font-weight: 500;
+  margin-right: 4px; margin-bottom: 4px;
+}
+.tag-accent {
+  display: inline-block; padding: 3px 10px;
+  background: rgba(94,106,210,0.08); border-radius: 100px;
+  font-size: 11px; color: var(--accent); font-weight: 500;
+  margin-right: 4px; margin-bottom: 4px;
+}
+
+/* Quote */
+.quote-box {
+  background: rgba(94,106,210,0.04);
+  border-left: 3px solid var(--accent);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.quote-box .qb-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; font-weight: 500; font-style: italic; }
+.quote-box .qb-src { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+/* Stat card */
+.stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 80px; }
+.stat-num { font-size: 22px; font-weight: 600; color: var(--accent); line-height: 1.1; }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Timeline / Process flow */
+.process-chain { display: flex; flex-direction: column; gap: 6px; }
+.proc-step { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
+.proc-num { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #fff; flex-shrink: 0; margin-top: 2px; }
+.proc-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.proc-text strong { color: var(--text-primary); }
+
+/* Divider grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Info block */
+.info-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--border-light); }
+.info-item:last-child { border-bottom: none; }
+.info-icon { width: 20px; flex-shrink: 0; font-size: 12px; }
+.info-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; min-width: 60px; flex-shrink: 0; }
+.info-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.info-text strong { color: var(--text-primary); }
+
+/* Metrics table */
+.metrics { display: flex; flex-direction: column; gap: 8px; }
+.metric-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-secondary); border-radius: var(--radius-sm); }
+.metric-name { font-size: 12px; font-weight: 500; }
+.metric-desc { font-size: 11px; color: var(--text-muted); }
+
+/* Pillar block */
+.pillar { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; }
+.pillar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.pillar-content { flex: 1; }
+.pillar-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.pillar-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* Callout */
+.callout {
+  background: rgba(94,106,210,0.04);
+  border: 1px solid rgba(94,106,210,0.12);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-top: 10px;
+}
+.callout-title { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.callout-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.callout-text strong { color: var(--text-primary); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .bento { padding: 72px 16px 32px; }
+  h1 { font-size: 22px; }
+  .card { padding: 16px; }
+  .nav { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="container"><div class="header-inner">
+  <a href="../index.html" class="logo"><div class="logo-icon">🏗️</div><span class="logo-text">第二号</span></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">首页</a>
+    <a href="../daily/archive.html" class="nav-link">AI 日报</a>
+    <a href="archive.html" class="nav-link">深度调研</a>
+  </nav>
+</div></div>
+</header>
+
+<main class="bento">
+
+<!-- Title -->
+<div class="card span-4">
+  <div class="label-sm">Research Report · 2026/5/12</div>
+  <h1>Running an AI-native Engineering Org</h1>
+  <div style="margin-top:6px;font-size:14px;color:var(--text-secondary);line-height:1.5;">
+    Fiona Fung · Director of Engineering for Claude Code @ Code with Claude 2026<br>
+    当 Agentic Coding 从个人工具变成组织默认，瓶颈不再是写代码 — 而是流程。
+  </div>
+  <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:4px;">
+    <span class="tag-accent">Anthropic</span>
+    <span class="tag-accent">Claude Code</span>
+    <span class="tag-accent">Agentic 工程</span>
+    <span class="tag-accent">组织转型</span>
+    <span class="tag-accent">Code Review</span>
+    <span class="tag-accent">AI 原生</span>
+  </div>
+</div>
+
+<!-- Key Data -->
+<div class="card span-1">
+  <div class="label-sm">演讲信息</div>
+  <div class="info-item"><span class="info-label">时长</span><span class="info-text">28:37</span></div>
+  <div class="info-item"><span class="info-label">日期</span><span class="info-text">2026/5/9</span></div>
+  <div class="info-item"><span class="info-label">播放</span><span class="info-text">37,909</span></div>
+  <div class="info-item"><span class="info-label">点赞</span><span class="info-text">799</span></div>
+  <div class="info-item"><span class="info-label">频道</span><span class="info-text">Claude（官方）</span></div>
+  <div class="info-item"><span class="info-label">活动</span><span class="info-text">Code with Claude 2026</span></div>
+</div>
+
+<!-- Core Thesis -->
+<div class="card span-3">
+  <div class="label-sm">核心论断</div>
+  <h2>「工具不是问题。你的流程才是。」</h2>
+  <div class="body-text" style="margin-bottom:10px;">
+    当「写代码慢且贵」这个假设不再成立，瓶颈转移到新领域：<strong>验证、审查、安全、跨职能协作</strong>。Fiona 分享了 Anthropic 内部 5 个被打破的流程和新的应对方式。
+  </div>
+  <div class="quote-box">
+    <div class="qb-text">"Processes rarely kill themselves. We tend to just layer more and more on top."</div>
+    <div class="qb-src">— Fiona Fung, Director of Engineering for Claude Code</div>
+  </div>
+  <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+    <span class="tag">37K 观看</span>
+    <span class="tag">Claude 官方频道</span>
+    <span class="tag">San Francisco</span>
+  </div>
+</div>
+
+<!-- What Broke -->
+<div class="card span-4">
+  <div class="label-sm">What Broke</div>
+  <h2>当 Agentic Coding 成为组织默认 — 5 个被打破的流程</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">📋 Planning Norms</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        6 个月 roadmap 在 3 个月后作废。从预计算式规划转向 <strong>JIT Planning</strong>（像编译器，不是瀑布）。设计文档被 PR + Prototype 取代。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">👤 Code Ownership</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        「谁写的这段代码？」在每行都有 Claude 辅助的时代变得诡异。新解法：<strong>重新定义问题</strong>——到底想知道什么？谁导致的 regression？谁能回答客户问题？
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔍 Code Review</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        新的规模需要新工具。<strong>Claude Code Review</strong> 处理风格、lint、bug 检测、自动加测试。人类留给自己：法律审查、安全边界、产品品味。
+      </div>
+    </div>
+    <div style="background:rgba(239,68,68,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔀 Team Make-up</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        角色边界模糊——工程师做内容设计、PM 写代码、非技术人员用 AI 构建。Fiona 在招聘上更看重 <strong>创意构建者</strong> 和 <strong>系统专家</strong>，降低对原始编码吞吐的权重。
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">📚 Knowledge Sharing</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        文档不再是真理来源——<strong>代码库本身成了真理来源</strong>。Fiona 说她在 Claude Code 团队连续 4 个月没见过一个非 Claude 辅助的 commit。
+      </div>
+    </div>
+    <div style="background:rgba(236,72,153,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">⚡ Security</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        更多代码 = 更大的攻击面。安全审查需要跟上 AI 的产出速度。Cross-functional 伙伴（法务、设计、合规）也需要跟上节奏。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Org Model -->
+<div class="card span-2">
+  <div class="label-sm">转型模型</div>
+  <h2>二层治理：Forcing Functions + Room to Adapt</h2>
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div style="background:rgba(94,106,210,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--accent);">🔵 Forcing Functions（刚性规则）</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        <div>• 每个工程师必须使用 Claude Code</div>
+        <div>• 「把所有能 Claudify 的都 Claudify」</div>
+        <div>• 明确授权杀死旧流程</div>
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--green);">🟢 Room to Adapt（团队自治）</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+        <div>• 每个团队自己决定 Claude 如何在 triage/standup/on-call 中发挥作用</div>
+        <div>• 哪些工作流优先「Claudify」</div>
+        <div>• 原则统一，执行放权</div>
+      </div>
+    </div>
+    <div class="quote-box">
+      <div class="qb-text">"Mandate the principles. Let teams own the implementation."</div>
+    </div>
+  </div>
+</div>
+
+<!-- Three Numbers -->
+<div class="card span-2">
+  <div class="label-sm">Leaders Should Baseline</div>
+  <h2>每个工程 Leader 必须追踪的 3 个指标</h2>
+  <div class="metrics">
+    <div class="metric-row">
+      <div>
+        <div class="metric-name">🆕 Onboarding 加速</div>
+        <div class="metric-desc">新工程师/设计师/PM 的上手速度</div>
+      </div>
+      <span class="tag-accent" style="margin:0;">指标</span>
+    </div>
+    <div class="metric-row">
+      <div>
+        <div class="metric-name">🔄 PR Cycle Time</div>
+        <div class="metric-desc">从写代码到合并的时间。如果没缩短，瓶颈在 CI/CD</div>
+      </div>
+      <span class="tag-accent" style="margin:0;">指标</span>
+    </div>
+    <div class="metric-row">
+      <div>
+        <div class="metric-name">🤖 Claude-assisted Commits</div>
+      </div>
+      <span class="tag-accent" style="margin:0;">指标</span>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">
+    <div class="callout-text">在 Claude Code 团队：<strong>100%</strong> 的 commit 都有 Claude 辅助。连续 4 个月未见非 Claude commit。</div>
+  </div>
+</div>
+
+<!-- Code Review Changes -->
+<div class="card span-2">
+  <div class="label-sm">Code Review 新范式</div>
+  <h2>AI 处理批量 · 人类保留判断</h2>
+  <div class="body-text" style="margin-bottom:8px;">
+    <strong>AI 管：</strong>风格、lint、bug 检测、自动加测试<br>
+    <strong>人类管：</strong>法律审查、信任边界、安全敏感代码、产品品味
+  </div>
+  <div class="quote-box">
+    <div class="qb-text">"Trust, but verify."</div>
+    <div class="qb-src">— 在全面自动化审查和保留人类判断之间的平衡，Fiona 坦承这仍是开放问题</div>
+  </div>
+</div>
+
+<!-- Hiring Changes -->
+<div class="card span-2">
+  <div class="label-sm">招聘转型</div>
+  <h2>不再看原始编码吞吐</h2>
+  <div class="body-text">
+    Fiona 的招聘新标准：
+  </div>
+  <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+    <div style="padding:8px 12px;background:rgba(94,106,210,0.04);border-radius:var(--radius-sm);">
+      <div style="font-size:12px;font-weight:600;">🔥 创意构建者</div>
+      <div style="font-size:11px;color:var(--text-secondary);">好奇心 · 迭代能力 · 产品品味</div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(16,185,129,0.04);border-radius:var(--radius-sm);">
+      <div style="font-size:12px;font-weight:600;">⚙️ 深度系统专家</div>
+      <div style="font-size:11px;color:var(--text-secondary);">分布式系统 · 基础设施 · 安全</div>
+    </div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--text-secondary);">
+    降低对原始编码吞吐的权重 —— 因为编码不再是稀缺能力。
+  </div>
+</div>
+
+<!-- Open Questions -->
+<div class="card span-2">
+  <div class="label-sm">Fiona 尚未解决的问题</div>
+  <h2>AI-Native 组织的开放问题</h2>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="padding:8px 12px;background:rgba(245,158,11,0.04);border-radius:var(--radius-sm);">
+      <div style="font-size:12px;font-weight:600;">📱 平台团队拆分还有意义吗？</div>
+      <div style="font-size:11px;color:var(--text-secondary);">iOS 和 Android 分开两组，在 AI 跨平台能力提升后还合理吗？</div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(245,158,11,0.04);border-radius:var(--radius-sm);">
+      <div style="font-size:12px;font-weight:600;">🎯 角色边界模糊下的生产力</div>
+      <div style="font-size:11px;color:var(--text-secondary);">当角色多元化，如何确保每个人都同样感受到生产力提升？</div>
+    </div>
+  </div>
+</div>
+
+<!-- Actionable Playbook -->
+<div class="card span-4">
+  <div class="label-sm">Actionable Playbook</div>
+  <h2>组织的可操作建议</h2>
+  <div class="grid-2">
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">1</div>
+      <div class="pillar-content">
+        <div class="pillar-title">基准三个指标</div>
+        <div class="pillar-desc">Onboarding 时间、PR cycle time、AI 辅助 commit 比例。如果 PR cycle 没缩短，说明瓶颈在 CI/CD 而非 AI 采纳。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(16,185,129,0.1);">2</div>
+      <div class="pillar-content">
+        <div class="pillar-title">主动杀死流程</div>
+        <div class="pillar-desc">找出团队最头痛的工作流。问：它还在服务它的目的吗？然后要么自动化它 —— 要么杀了它。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(245,158,11,0.1);">3</div>
+      <div class="pillar-content">
+        <div class="pillar-title">JIT Planning</div>
+        <div class="pillar-desc">像编译器那样规划 —— 在正确的时机做正确量的规划，不多不少。6 个月 roadmap 已死。</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:rgba(239,68,68,0.1);">4</div>
+      <div class="pillar-content">
+        <div class="pillar-title">代码库即真理</div>
+        <div class="pillar-desc">停止维护 wikis。Fiona 回答客户问题的方式：打开 Claude Code 加载本地代码库，而非翻 Confluence。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote-box" style="margin-top:12px;">
+    <div class="qb-text">"Pick your noisiest workflow. Your most expensive one. The one your team dreads. Ask: Is it still serving its purpose? Then either automate it — or kill it."</div>
+    <div class="qb-src">— Fiona Fung</div>
+  </div>
+</div>
+
+<!-- Standup 案例 -->
+<div class="card span-2">
+  <div class="label-sm">Concrete Example</div>
+  <h2>Standup 的演变</h2>
+  <div class="process-chain">
+    <div class="proc-step"><div class="proc-num">1</div><div class="proc-text">传统站会 → 信息效率低</div></div>
+    <div class="proc-step"><div class="proc-num">2</div><div class="proc-text">共享 Excel 表格 → 仍然是手动</div></div>
+    <div class="proc-step"><div class="proc-num">3</div><div class="proc-text"><strong>Claude 驱动的 30 秒脚本</strong> → 自动生成站会内容</div></div>
+  </div>
+  <div class="callout">
+    <div class="callout-text">每个团队都该问：哪个手动流程是 <strong>第一个</strong> 可以被 AI 替代的？</div>
+  </div>
+</div>
+
+<!-- Relevance to Us -->
+<div class="card span-2">
+  <div class="label-sm">Why This Matters</div>
+  <h2>为什么值得你关注</h2>
+  <div class="body-text" style="display:flex;flex-direction:column;gap:6px;">
+    <div><strong>你自己就在跑类似的转型。</strong>你用 Hermes + Claude Code 多 Agent 编队、Ralph Loop、cron 调度 —— 这已经是 AI-native 组织的雏形。</div>
+    <div><strong>Fiona 的反思直接映射到你遇到的问题：</strong></div>
+    <div>• 「Claude Code build passed ≠ runtime 正常」→ 验证是瓶颈</div>
+    <div>• 多 Agent 协调中「主 Agent 只协调不写代码」→ Ownership 重构</div>
+    <div>• 「写 bug 的人修 bug、提 bug 的人验收」→ 责任制闭环</div>
+  </div>
+</div>
+
+<!-- Closing -->
+<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
+  <div class="label-accent">Key Takeaway</div>
+  <h2>「过去为你服务的东西，可能不再为你服务。」</h2>
+  <div class="body-text" style="margin-top:8px;">
+    Fiona Fung 的演讲传递了一个清醒的信号：<strong>工具采纳不是终点，而是组织变革的起点。</strong><br><br>
+    当编码不再是瓶颈，真正的限制变成了你<strong>如何组织人、如何做决策、如何定义卓越</strong>。<br>
+    AI-native 组织的核心竞争力不是用 AI 写更多代码，而是<strong>重新设计那些围绕「写代码慢」建立起来的流程</strong>。
+  </div>
+  <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+    <span class="tag-accent">Anthropic</span>
+    <span class="tag-accent">Claude Code</span>
+    <span class="tag-accent">AI-Native</span>
+    <span class="tag-accent">Process Design</span>
+    <span class="tag-accent">Org Transformation</span>
+  </div>
+</div>
+
+<!-- Reference -->
+<div class="card span-4">
+  <div class="label-sm">参考文献</div>
+  <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;">
+    <div>🎬 <a href="https://www.youtube.com/watch?v=igO8iyca2_g" style="color:var(--accent);text-decoration:none;">Running an AI-native engineering org — Fiona Fung (Claude 官方频道)</a></div>
+    <div>📄 <a href="https://www.linkedin.com/pulse/building-running-ai-native-engineering-org-ganapathy-shankar-izgyc" style="color:var(--accent);text-decoration:none;">Building & Running an AI-Native Engineering Org — Ganapathy Shankar (LinkedIn)</a></div>
+    <div>🌐 <a href="https://chrisebert.net/code-with-claude-2026-recordings-now-available/" style="color:var(--accent);text-decoration:none;">Code with Claude 2026 Recordings Now Available — chrisebert.net</a></div>
+    <div>🌐 <a href="https://claude.com/code-with-claude/session/sf-running-an-ai-native-engineering-org" style="color:var(--accent);text-decoration:none;">Code with Claude 2026 Session Page — claude.com</a></div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">
+    ⚠️ YouTube 字幕需要登录访问。演讲内容基于 LinkedIn 总结文章和现场公开资料整理。
+  </div>
+</div>
+
+</main>
+</body>
+</html>
