@@ -4,134 +4,220 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-primary: #f5f5f4;
-  --bg-secondary: #fafafa;
-  --bg-card: #ffffff;
-  --bg-hover: #f0f0ee;
-  --accent: #5e6ad2;
-  --green: #10b981;
-  --amber: #f59e0b;
-  --red: #ef4444;
-  --text-primary: #1c1c1c;
-  --text-secondary: #6b6b6b;
-  --text-muted: #8b8b8b;
-  --border: #e8e8e6;
-  --border-light: #f0f0ee;
-  --radius-sm: 10px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,0.06);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-feature-settings: "cv01", "ss03";
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.header { position: fixed; top: 0; left: 0; right: 0; background: rgba(245,245,244,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
-.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
-.logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 24px; }
-.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent); }
-.bento { padding: 80px 24px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } }
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); transition: box-shadow 0.2s; min-width: 0; }
-.card:hover { box-shadow: var(--shadow-hover); }
-.span-2 { grid-column: span 2; }.span-3 { grid-column: span 3; }.span-4 { grid-column: span 4; }
-@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
-@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
-h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2; }
-h2 { font-size: 17px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 10px; }
-.label-sm { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-.label-accent { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-.body-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.body-text strong { color: var(--text-primary); font-weight: 600; }
-.tag { display: inline-block; padding: 3px 10px; background: var(--bg-hover); border-radius: 100px; font-size: 11px; color: var(--text-secondary); font-weight: 500; margin-right: 4px; margin-bottom: 4px; }
-.tag-accent { display: inline-block; padding: 3px 10px; background: rgba(94,106,210,0.08); border-radius: 100px; font-size: 11px; color: var(--accent); font-weight: 500; margin-right: 4px; margin-bottom: 4px; }
-.quote-box { background: rgba(94,106,210,0.04); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-.quote-box .qb-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; font-weight: 500; font-style: italic; }
-.quote-box .qb-src { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
-.pillar { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; }
-.pillar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-.pillar-content { flex: 1; }
-.pillar-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
-.pillar-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-.callout { background: rgba(94,106,210,0.04); border: 1px solid rgba(94,106,210,0.12); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 10px; }
-.callout-title { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-.callout-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }.callout-text strong { color: var(--text-primary); }
-@media (max-width: 768px) { .bento { padding: 72px 16px 32px; } h1 { font-size: 22px; } .card { padding: 16px; } .nav { display: none; } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: #f5f5f4;
+    color: #1c1c1c;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .nav-back {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px 0;
+  }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: #5e6ad2; }
+  @media (max-width: 520px) {
+    .nav-back { padding: 12px 16px 0; }
+  }
+  .bento {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+    .stat-num { font-size: 18px; }
+    h1 { font-size: 24px; }
+    .card { padding: 16px; }
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e6;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    min-width: 0;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
+
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+
+  .label-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b8b8b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #1c1c1c;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #6b6b6b;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin-bottom: 10px;
+    color: #1c1c1c;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+  }
+  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+  .text-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12px; background: #f0f0ee;
+    padding: 2px 6px; border-radius: 4px;
+    color: #1c1c1c;
+  }
+
+  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
+  .stat-item { flex: 1; min-width: 0; }
+  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; }
+  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 5px;
+    letter-spacing: 0.02em;
+  }
+
+  .quote {
+    background: #fafafa;
+    border-left: 3px solid #5e6ad2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+    color: #4a4a4a;
+  }
+
+  .dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .pillar { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; }
+  .pillar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .pillar-content { flex: 1; }
+  .pillar-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .pillar-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+
+  .callout {
+    background: rgba(94,106,210,0.04);
+    border: 1px solid rgba(94,106,210,0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .callout-title { font-size: 12px; font-weight: 600; color: #5e6ad2; margin-bottom: 4px; }
+  .callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+  .callout-text strong { color: #1c1c1c; font-weight: 500; }
+
+  .info-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid #f0f0ee; }
+  .info-item:last-child { border-bottom: none; }
+  .info-label { font-size: 11px; font-weight: 600; color: #8b8b8b; text-transform: uppercase; letter-spacing: 0.04em; min-width: 60px; flex-shrink: 0; }
+  .info-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+  .info-text strong { color: #1c1c1c; }
 </style>
 </head>
 <body>
-<header class="header">
-<div class="container"><div class="header-inner">
-  <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span class="logo-text">第二号</span></a>
-  <nav class="nav"><a href="../index.html" class="nav-link">首页</a><a href="../daily/archive.html" class="nav-link">AI 日报</a><a href="archive.html" class="nav-link">深度调研</a></nav>
-</div></div>
-</header>
-<main class="bento">
 
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Title -->
 <div class="card span-4">
   <div class="label-sm">深度译文 · 2026/5/8 · 向邦宇 · 阿里云开发者</div>
   <h1>Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</h1>
-  <div style="margin-top:6px;font-size:14px;color:var(--text-secondary);line-height:1.5;">
+  <div class="subtitle" style="margin-top:6px;">
     约束不再是代码生产的速度，而是软件组织的结构。阿里巴巴 Aone 团队揭秘内部面向 Agent 的研发模式升级实践。
   </div>
-  <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px;">
-    <span class="tag-accent">Aone</span>
-    <span class="tag-accent">阿里云</span>
-    <span class="tag-accent">Agent-native</span>
-    <span class="tag-accent">研发范式</span>
-    <span class="tag-accent">协作瓶颈</span>
-    <span class="tag-accent">Multi-Agent</span>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Aone</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">阿里云</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent-native</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">研发范式</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">协作瓶颈</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Multi-Agent</span>
   </div>
 </div>
 
+<!-- 历史隐喻 -->
 <div class="card span-4">
   <div class="label-sm">核心隐喻</div>
   <h2>「光换引擎不改底盘，就像在牛车上绑火箭」</h2>
-  <div class="body-text" style="margin-bottom:8px;">
-    19 世纪末工厂将蒸汽动力换成电力，头三十年生产力几乎毫无起色。直到 1920 年代企业从车间动线到岗位协同彻底重塑，流水线诞生，效率才质变。
+  <div class="text-body" style="margin-bottom:10px;">
+    19 世纪末工厂将蒸汽动力换成电力，头三十年生产力几乎毫无起色。直到 1920 年代企业从车间动线到岗位协同彻底重塑，流水线诞生，效率才质变。今天 AI 正在重演同样剧本——每个人都装备了 AI 工具，但组织形态纹丝未动。
   </div>
-  <div class="quote-box">
-    <div class="qb-text">"今天同样的剧本正在AI领域上演。企业给每个人都装备了AI工具，底层的组织形态、协作机制、管理逻辑却纹丝未动。每个人都换上了最好的桨，但没有鼓手统一节奏、没有舵手校准航向——桨划得越猛，船反而越乱。"</div>
-    <div class="qb-src">— 向邦宇，阿里代码平台负责人</div>
+  <div class="quote">
+    <strong>"</strong>每个人都换上了最好的桨，但没有鼓手统一节奏、没有舵手校准航向——桨划得越猛，船反而越乱。<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— 向邦宇，阿里代码平台负责人</div>
   </div>
 </div>
 
-<!-- Section 1: Traditional collaboration as bottleneck -->
+<!-- 三大结构性问题 -->
 <div class="card span-2">
   <div class="label-sm">问题 ①</div>
-  <h2>传统分工是 Agent 的「死锁」</h2>
-  <div class="body-text">
-    AI 生成代码质量已不再是问题。痛点前三：
+  <h2>传统分工是 Agent 的死锁</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    AI 生成代码已不是问题。真正的痛点三个：
   </div>
-  <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
-    <div style="padding:8px 12px;background:rgba(239,68,68,0.04);border-radius:var(--radius-sm);">
-      <div style="font-size:12px;font-weight:600;">🧩 上下文碎片化</div>
-      <div style="font-size:11px;color:var(--text-secondary);">Agent 要在多团队、多工具、多仓库、多文档系统间来回切换，每次切换丢失重建上下文</div>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div style="font-size:12px;color:#6b6b6b;line-height:1.5;padding:4px 0;">
+      <strong>上下文碎片化</strong> — Agent 在多团队、多工具、多仓库间切换，每次切换丢失重建上下文
     </div>
-    <div style="padding:8px 12px;background:rgba(245,158,11,0.04);border-radius:var(--radius-sm);">
-      <div style="font-size:12px;font-weight:600;">🔗 接口摩擦</div>
-      <div style="font-size:11px;color:var(--text-secondary);">前后端 API 契约定义、联调、变更管理——AI 完全有能力自动生成一致代码，却被迫人工走流程</div>
+    <div style="font-size:12px;color:#6b6b6b;line-height:1.5;padding:4px 0;border-top:1px solid #f0f0ee;">
+      <strong>接口摩擦</strong> — 前后端 API 契约、联调、变更管理——AI 完全能自动生成一致代码，却被迫走人工流程
     </div>
-    <div style="padding:8px 12px;background:rgba(94,106,210,0.04);border-radius:var(--radius-sm);">
-      <div style="font-size:12px;font-weight:600;">🏝️ 知识孤岛</div>
-      <div style="font-size:11px;color:var(--text-secondary);">每个领域知识被隔离在特定团队或文档中，AI 无法获取全局视角做最优决策</div>
+    <div style="font-size:12px;color:#6b6b6b;line-height:1.5;padding:4px 0;border-top:1px solid #f0f0ee;">
+      <strong>知识孤岛</strong> — 每个领域知识被隔离在特定团队或文档中，Agent 无法获取全局视角
     </div>
   </div>
 </div>
@@ -139,208 +225,192 @@ h2 { font-size: 17px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 1
 <div class="card span-2">
   <div class="label-sm">问题 ②</div>
   <h2>研发阶段的信息断层</h2>
-  <div class="body-text">
+  <div class="text-body">
     需求分析（PM）与代码实现（开发）的分离，基于一个已经过时的假设：需求必须被人理解和翻译后才能进入实现。
   </div>
-  <div style="margin-top:6px;display:flex;flex-direction:column;gap:4px;">
-    <div style="font-size:12px;padding:4px 0;"><strong>自然语言即代码</strong> — AI 可直接理解自然语言需求并生成实现，不再需要人工翻译</div>
-    <div style="font-size:12px;padding:4px 0;"><strong>需求即测试</strong> — 好的需求描述包含验收标准，可直接转化为自动化测试用例</div>
+  <div style="margin-top:8px;font-size:12px;color:#6b6b6b;line-height:1.5;">
+    <div style="padding:4px 0;"><strong>自然语言即代码</strong> — AI 可直接从自然语言需求生成实现，不再需要人工翻译</div>
+    <div style="padding:4px 0;"><strong>需求即测试</strong> — 好的需求包含验收标准，可直接转化为自动化测试用例</div>
   </div>
-  <div class="callout">
+  <div class="callout" style="margin-top:8px;">
     <div class="callout-text">当 AI 可以直接从 Spec 生成代码时，传统分工就是效率的阻碍。</div>
   </div>
 </div>
 
-<!-- Section 2: Info organization problems -->
+<!-- 信息组织问题 -->
 <div class="card span-2">
   <div class="label-sm">问题 ③</div>
-  <h2>代码是分离的，文档是分离的</h2>
-  <div class="body-text">
-    Agent 面对的第一个挑战不是「如何写代码」，而是「代码在哪里」：
+  <h2>代码分离 + 文档孤岛</h2>
+  <div class="text-body">
+    Agent 面对的第一个挑战不是如何写代码，而是<strong>代码在哪里</strong>。
   </div>
-  <div style="margin-top:6px;font-size:12px;color:var(--text-secondary);line-height:1.6;">
-    <div>• 客户端一个仓库，前端一个，后端 N 个微服务仓库，SDK 又独立版本管理</div>
-    <div>• 需求在语雀，API 在 Swagger，讨论在钉钉，Bug 在 Issue 系统，代码注释散落在各处</div>
-    <div>• 这些信息实体之间 <strong>没有关联、没有索引、没有机器可读的元数据</strong></div>
+  <div style="margin-top:6px;font-size:12px;color:#6b6b6b;line-height:1.5;">
+    <div>• 客户端一个仓库、前端一个、后端 N 个微服务、SDK 又独立</div>
+    <div>• 需求在语雀，API 在 Swagger，讨论在钉钉，Bug 在 Issue</div>
+    <div>• 这些信息实体之间没有关联、没有索引、没有机器可读的元数据</div>
   </div>
-  <div class="quote-box" style="margin-top:8px;">
-    <div class="qb-text">"对人类来说，可以搜索、问同事、凭经验定位来拼凑上下文；但对 Agent 来说，这些信息孤岛是无法逾越的鸿沟。"</div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>"</strong>对人类来说可以搜索、问同事拼凑上下文；但对 Agent 来说，这些信息孤岛是无法逾越的鸿沟。<strong>"</strong>
   </div>
 </div>
 
 <div class="card span-2">
   <div class="label-sm">问题 ④</div>
-  <h2>人维护文档 vs Agent 生成文档</h2>
-  <div class="body-text">
-    传统文档的致命问题：
+  <h2>人维护文档的困局</h2>
+  <div class="text-body">
+    传统文档的三个死结：
   </div>
-  <div style="margin-top:6px;font-size:12px;color:var(--text-secondary);line-height:1.5;display:flex;flex-direction:column;gap:4px;">
+  <div style="margin-top:6px;font-size:12px;color:#6b6b6b;line-height:1.5;display:flex;flex-direction:column;gap:4px;">
     <div>📉 文档更新永远滞后于代码变更</div>
-    <div>😰 最了解系统的人最忙，没时间更新文档</div>
-    <div>🤷 有时间更新的人对系统了解不够深入</div>
+    <div>😰 最了解系统的人最忙，没时间更新</div>
+    <div>🤷 有时间更新的人对系统了解不够深</div>
   </div>
   <div class="callout" style="margin-top:8px;">
-    <div class="callout-text">解药：把文档视为「代码」——由 Agent 生成、修改、验证，与代码一起版本控制、一起审查、一起自动化测试。</div>
+    <div class="callout-text">解药：把文档视为「代码」——由 Agent 生成、修改、验证，与代码一起版本控制、审查、自动化测试。</div>
   </div>
 </div>
 
-<!-- Section 3: Agent absent from delivery -->
+<!-- Agent 缺席 -->
 <div class="card span-4">
   <div class="label-sm">问题 ⑤</div>
-  <h2>Agent 在交付和稳定性链路中的缺席</h2>
+  <h2>Agent 在交付链路中的缺席</h2>
   <div class="grid-2">
-    <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">
-      <strong>Agent 会写代码、会跑测试，但——</strong><br>
+    <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+      <strong>Agent 能写代码、跑测试，但——</strong><br>
       ❌ 无法直接触发构建<br>
       ❌ 无法自动部署到预发<br>
       ❌ 无法推进到生产<br>
       ❌ 无法参与灰度决策<br>
       ❌ 无法自动回滚
     </div>
-    <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">
-      <strong>原因：</strong><br>
-      • 权限分散在不同系统和角色手中<br>
+    <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+      <strong>根因：</strong><br>
+      • 权限分散在不同系统和角色<br>
       • CI 日志、测试报告、性能指标散落不同系统，无统一接口<br>
-      • 灰度调整、回滚判断通过站会和即时沟通完成，Agent 无法参与
+      • 灰度调整、回滚判断通过站会和即时沟通完成
     </div>
   </div>
-  <div class="quote-box" style="margin-top:10px;">
-    <div class="qb-text">"任何将 Agent 排除在外的环节，都是 AI 时代研发效率的瓶颈。"</div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>"</strong>任何将 Agent 排除在外的环节，都是 AI 时代研发效率的瓶颈。<strong>"</strong>
   </div>
 </div>
 
-<!-- Section 4: Key elements -->
-<div class="card span-4">
-  <div class="label-accent">解决方案</div>
+<!-- 解法 -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">解决方案</div>
   <h2>让 Agent 更好工作的 5 个关键要素</h2>
   <div class="grid-2">
     <div class="pillar">
       <div class="pillar-icon" style="background:rgba(94,106,210,0.1);">📦</div>
       <div class="pillar-content">
         <div class="pillar-title">All In Code 信息管理</div>
-        <div class="pillar-desc">代码、文档、测试、配置、记忆全部纳入统一 Git 仓库。AI 在完整上下文中工作，无需跨系统切换。</div>
+        <div class="pillar-desc">代码、文档、测试、配置、记忆全部纳入统一 Git 仓库。AI 在完整上下文中工作。</div>
       </div>
     </div>
     <div class="pillar">
       <div class="pillar-icon" style="background:rgba(16,185,129,0.1);">🔒</div>
       <div class="pillar-content">
-        <div class="pillar-title">隔绝外部依赖·版本化一切</div>
-        <div class="pillar-desc">外部文档定期抓取版本化存储、需求库版本化、依赖精确锁定、Mock 服务隔离。构建自包含可复现的研发世界。</div>
+        <div class="pillar-title">版本化一切</div>
+        <div class="pillar-desc">外部文档定期抓取版本化、需求库版本化、依赖锁定、Mock 服务隔离。构建自包含可复现的研发世界。</div>
       </div>
     </div>
     <div class="pillar">
       <div class="pillar-icon" style="background:rgba(245,158,11,0.1);">🔄</div>
       <div class="pillar-content">
         <div class="pillar-title">自学习与自我迭代</div>
-        <div class="pillar-desc">每次产出经过验证 → 结果记录 → 优化后续行为。AI 学习团队编码风格，生成的代码越来越符合团队偏好。</div>
+        <div class="pillar-desc">每次产出验证→记录→优化。AI 学习团队编码风格，生成的代码越来越符合团队偏好。</div>
       </div>
     </div>
     <div class="pillar">
       <div class="pillar-icon" style="background:rgba(239,68,68,0.1);">🛡️</div>
       <div class="pillar-content">
-        <div class="pillar-title">Agent 安全执行能力</div>
+        <div class="pillar-title">Agent 安全执行</div>
         <div class="pillar-desc">沙箱隔离、权限分级、分批执行、审计日志、Dry Run 模式、仿真环境（DB/ES/MQ/Redis 模拟）。</div>
       </div>
     </div>
     <div class="pillar" style="grid-column:span 2;">
       <div class="pillar-icon" style="background:rgba(139,92,246,0.1);">✅</div>
       <div class="pillar-content">
-        <div class="pillar-title">研发后验证能力建设</div>
-        <div class="pillar-desc">E2E 测试环境（解决容器化测试/权限验证/前端配置中心依赖问题）、验证业务语义（CI 只验证编译和测试通过，无法验证业务逻辑正确和用户体验）。</div>
+        <div class="pillar-title">研发后验证能力</div>
+        <div class="pillar-desc">E2E 测试环境（容器化测试/权限验证/配置中心依赖问题）、验证业务语义（CI 只验证编译通过，无法验证业务逻辑正确）。</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Section 5: Aone's practice -->
+<!-- Aone 实践 -->
 <div class="card span-4">
-  <div class="label-accent">Aone 实践</div>
+  <div class="label-sm">Aone 实践</div>
   <h2>阿里巴巴 Aone 的 Agent-native 研发模式升级</h2>
-  <div class="body-text" style="margin-bottom:8px;">
-    作者向邦宇，阿里 10 年+，负责代码平台和多个 AI Coding 工具（含面向小白的「搭叩」）。Aone 团队做了以下探索：
+  <div class="text-body" style="margin-bottom:8px;">
+    作者向邦宇，阿里 10 年+，负责代码平台和多个 AI Coding 工具。Aone 团队的 9 项探索：
   </div>
   <div class="grid-2">
-    <div style="background:rgba(94,106,210,0.04);border-radius:var(--radius-md);padding:12px 14px;">
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🔄 研发模式：阶段合并</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">Coding 阶段同步完成 Code Review + CI 检查。不再按前后端分工，按端到端业务场景组织交付。</div>
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🔄 阶段合并</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">Coding 时同步完成 Code Review + CI。不再按前后端分工，按端到端业务场景交付。</div>
     </div>
-    <div style="background:rgba(16,185,129,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:12px 14px;">
       <div style="font-size:12px;font-weight:600;margin-bottom:4px;">📂 All In Code 大库</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">10+ 个应用全部放一个库：前后端代码、Skills、文档、发布信息、handbook。代码库 = 唯一事实来源。</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">10+ 应用一个库：前后端代码 + Skills + 文档 + 发布信息。代码库 = 唯一事实来源。</div>
     </div>
-    <div style="background:rgba(245,158,11,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:12px 14px;">
       <div style="font-size:12px;font-weight:600;margin-bottom:4px;">👥 Agent Teams</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">人和异构 Agent 始终在同一上下文中讨论。@一个前端 Agent 写前端，人能操作 Agent 军团。</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">人和异构 Agent 在同一上下文中协作。@一个前端 Agent 写前端，人能操作 Agent 军团。</div>
     </div>
-    <div style="background:rgba(239,68,68,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+    <div style="background:rgba(239,68,68,0.04);border-radius:10px;padding:12px 14px;">
       <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🏠 Claw 管家模式</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">Agent 作为「公民」：被动接受指令 + 主动巡检（报警排查、资源优化、死代码清理、文档维护）。</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">Agent 作为「公民」：被动指令 + 主动巡检（报警排查、死代码清理、文档自动维护）。</div>
     </div>
-    <div style="background:rgba(139,92,246,0.04);border-radius:var(--radius-md);padding:12px 14px;">
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:12px 14px;">
       <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🔐 Agentic IAM</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">核心问题：Agent 由谁负责、谁持有、有什么权限。主体从「人」变为「自主执行的软件实体」。</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">核心问题：Agent 由谁负责、谁持有、有什么权限。主体从人变为自主执行软件实体。</div>
     </div>
-    <div style="background:rgba(236,72,153,0.04);border-radius:var(--radius-md);padding:12px 14px;">
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">📋 ChangeSet 理念</div>
-      <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;">存在 Git 版本库中的变更过程记录系统。解决「这次改了哪些文件、需要什么测试、处于什么状态」的承载问题。</div>
+    <div style="background:rgba(236,72,153,0.04);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">📋 ChangeSet</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">存在 Git 中的变更过程记录。解决「改了哪些文件、需要什么测试、处于什么状态」的承载问题。</div>
+    </div>
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🌿 合并策略</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">短生命周期分支 + 合并队列 + 分级质量门禁。自动处理 rebase/冲突，无法处理的退队等人。</div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px;">🧪 仿真验证</div>
+      <div style="font-size:11px;color:#6b6b6b;line-height:1.5;">Sandbox 中原位构建后端+前端，Agent 驱动 E2E 测试，基于 Diff 自动生成测试用例。</div>
     </div>
   </div>
 </div>
 
-<!-- Section: ChangeSet detail -->
-<div class="card span-2">
-  <div class="label-sm">ChangeSet</div>
-  <h2>为什么需要 ChangeSet？</h2>
-  <div class="body-text">
-    分支和 Topic 都不足以表达「一次变更」：
+<!-- 结语 -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">结语</div>
+  <div class="text-body" style="margin-bottom:8px;">
+    AoneCopilot 项目始于 2023 年。那时还在遥想「一句话完成一个需求」的时代——不过短短三年，那曾经遥不可及的未来已近在咫尺。
   </div>
-  <div style="margin-top:6px;font-size:12px;color:var(--text-secondary);line-height:1.5;display:flex;flex-direction:column;gap:4px;">
-    <div>❌ 分支与 Git 强绑定，表达能力有限</div>
-    <div>❌ Topic 与平台强绑定，表达能力同样受限</div>
-    <div>❌ 分支本身动态变化，无法回溯原始变更</div>
-    <div>✅ ChangeSet 记录一次变更从发起到发布的全部上下文，存在 Git 里</div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>"</strong>时间仿佛只翻过了几页日历，却又像悄然跨越了一个世纪。<strong>"</strong>
   </div>
-</div>
-
-<!-- Section: Merge strategy -->
-<div class="card span-2">
-  <div class="label-sm">合并策略</div>
-  <h2>Agent 时代的代码合并</h2>
-  <div class="body-text">
-    <strong>短生命周期分支 + 合并队列 + 分级质量门禁</strong>
-  </div>
-  <div style="margin-top:6px;font-size:12px;color:var(--text-secondary);line-height:1.5;display:flex;flex-direction:column;gap:4px;">
-    <div>• 每个 Agent 任务在独立分支上执行</div>
-    <div>• 完成后进入串行化合并队列，先完成先合并</div>
-    <div>• 合并前通过对应级别质量门禁</div>
-    <div>• 自动处理 rebase 和简单冲突</div>
-    <div>• 无法自动处理的冲突退出队列，等人</div>
-  </div>
-</div>
-
-<!-- Section 6: Conclusion -->
-<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
-  <div class="label-accent">结语</div>
-  <div class="body-text" style="margin-bottom:8px;">
-    AoneCopilot 项目始于 2023 年。那时还在遥想「一句话完成一个需求」的时代是否终将到来。不过短短三年，那曾经遥不可及的未来已近在咫尺。
-  </div>
-  <div class="quote-box">
-    <div class="qb-text">"时间仿佛只翻过了几页日历，却又像悄然跨越了一个世纪。"</div>
+  <div class="dots-row" style="margin-top:10px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Aone</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent-native</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">研发范式</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">阿里</span>
   </div>
 </div>
 
 <!-- Reference -->
 <div class="card span-4">
   <div class="label-sm">参考文献</div>
-  <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;">
-    <div>📄 <a href="https://www.aixq.cc/27739.html" style="color:var(--accent);text-decoration:none;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈 — AI星球</a></div>
-    <div>📄 <a href="https://mp.weixin.qq.com/s/GPoQnFsXnnNpKdefWWiKRw" style="color:var(--accent);text-decoration:none;">原文 — 阿里云开发者公众号</a></div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>📄 <a href="https://www.aixq.cc/27739.html" style="color:#5e6ad2;text-decoration:none;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈 — AI星球</a></div>
+    <div>📄 <a href="https://mp.weixin.qq.com/s/GPoQnFsXnnNpKdefWWiKRw" style="color:#5e6ad2;text-decoration:none;">原文 — 阿里云开发者公众号</a></div>
   </div>
-  <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
     作者：向邦宇，在阿里工作超过 10 年，负责阿里巴巴代码平台，建设了多个 AI Coding 工具。主导开发了一站式 AI 开发产品「搭叩」。
   </div>
 </div>
 
-</main>
+</div>
+
 </body>
 </html>
