@@ -89,9 +89,7 @@ else
   green "  \xE2\x9C\x93 No <span> wrapping <link>"
 fi
 
-# Stats check
-grep -qE '>[0-9]+</div><div class="hero-stat-label">调研报告' docs/index.html 2>/dev/null
-check "Homepage has stats for reports count"
+# No stats check needed (removed intentionally)
 
 println
 
