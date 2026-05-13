@@ -1,209 +1,407 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ui_benchmark_comparison_2025-2026 - 第二号</title><span><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></span><style>
-:root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --accent: #3b82f6;
-    --accent-light: #60a5fa;
-    --accent-dark: #2563eb;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI Design-to-Code Benchmark 调研报告 2025-2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: #f5f5f4;
+    color: #1c1c1c;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  }
+  .nav-back {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px 0;
+  }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: #5e6ad2; }
+  @media (max-width: 520px) {
+    .nav-back { padding: 12px 16px 0; }
+  }
+  .bento {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+    h1 { font-size: 24px; }
+    .card { padding: 16px; }
+    table { font-size: 11px; }
+  }
 
-.header {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-light);
-    z-index: 100;
-}
-.header-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
-.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
-.logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: var(--shadow-sm); }
-.logo-text { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 32px; }
-.nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent); }
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e6;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    min-width: 0;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
 
-.section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
-.featured-card { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s; text-decoration: none; color: inherit; }
-.featured-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-.featured-content { display: flex; flex-direction: column; gap: 10px; }
-.featured-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
-.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 600; }
-.featured-title { font-size: 20px; font-weight: 600; }
-.featured-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-.featured-arrow { width: 44px; height: 44px; background: white; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); transition: all 0.2s; }
-.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
-.archive-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; margin-bottom: 40px; }
-.archive-item { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
-.archive-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.archive-item.latest { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border-color: var(--accent); }
-.archive-icon { width: 48px; height: 48px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-.archive-item.latest .archive-icon { background: var(--accent); }
-.archive-content { flex: 1; }
-.archive-date { font-size: 16px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.badge-latest { padding: 2px 8px; background: #dcfce7; color: #166534; border-radius: 100px; font-size: 11px; font-weight: 600; }
-.archive-meta { font-size: 13px; color: var(--text-secondary); }
-.archive-arrow { font-size: 20px; color: var(--text-muted); transition: all 0.2s; }
-.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
-.stats-value { font-size: 36px; font-weight: 700; color: #60a5fa; }
-.stats-label { font-size: 12px; opacity: 0.7; }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
 
-.report-header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 48px 0; margin-top: 64px; }
-.report-header h1 { font-size: 28px; font-weight: 700; color: white; margin-bottom: 8px; }
-.report-header .metadata { display: flex; gap: 16px; font-size: 14px; opacity: 0.9; }
-.markdown-body { padding: 32px 0; line-height: 1.6; color: var(--text-primary); }
-.markdown-body h2 { margin-top: 2em; margin-bottom: 1em; padding-bottom: 0.3em; border-bottom: 1px solid var(--border-color); }
-.markdown-body h3 { margin-top: 1.5em; margin-bottom: 0.8em; }
-.markdown-body p { margin-bottom: 1em; }
-.markdown-body ul, .markdown-body ol { margin-bottom: 1em; padding-left: 2em; }
-.markdown-body li { margin-bottom: 0.25em; }
-.markdown-body blockquote { margin: 1.5em 0; padding-left: 1em; border-left: 4px solid var(--border-color); color: var(--text-secondary); }
-.markdown-body pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 1em; }
-.markdown-body code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; background: var(--bg-secondary); padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
-.markdown-body pre code { padding: 0; background: transparent; }
-.markdown-body a { color: var(--primary-color); text-decoration: none; }
-.markdown-body a:hover { text-decoration: underline; }
-</style></head><body><header class="header"><div class="container"><div class="header-inner"><a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">第二号</span></a><a href="./archive.html" class="nav-link">← 返回首页</a></div></div></header><div class="report-header"><div class="container-sm"><h1>ui_benchmark_comparison_2025-2026</h1><div class="metadata"><div class="meta-item"><span class="meta-icon">📅</span>2026/4/16</div><div class="meta-item"><span class="meta-icon">📁</span>deep-research</div></div></div></div><main class="container-sm"><div class="markdown-body"><pre><code class="language-markdown"># UI Design-to-Code Benchmark Research Report (2025-2026)
+  .label-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b8b8b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #1c1c1c;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #6b6b6b;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin-bottom: 10px;
+    color: #1c1c1c;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+  }
+  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+  .text-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12px; background: #f0f0ee;
+    padding: 2px 6px; border-radius: 4px;
+    color: #1c1c1c;
+  }
 
-## Executive Summary
-This report analyzes four seminal benchmarks advancing UI design-to-code transformation: Design2Code (NAACL 2025), UI-Bench/Ferret-UI (ECCV 2024), MLLM as a UI Judge (2025), and 1D-Bench (2026). These frameworks establish rigorous evaluation protocols for multimodal UI understanding and code generation, with specialized metrics addressing visual fidelity, code quality, iterative refinement, and human perception prediction. Current SOTA models (GPT-4V, Claude 3.5, and specialized UI models) demonstrate varying strengths in visual comprehension versus code generation. Emerging trends emphasize iterative refinement loops and human-aligned evaluation, signaling a shift toward production-ready UI automation tools.
+  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
+  .stat-item { flex: 1; min-width: 0; }
+  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; }
+  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
 
----
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 5px;
+    letter-spacing: 0.02em;
+  }
 
-## Detailed Benchmark Analysis
+  .dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 
-### 1. Design2Code (NAACL 2025)
-**Core Contribution**:  
-Formalizes the design-to-code (D→C) mapping problem through a reproducible benchmark using real-world web interfaces from the C4 dataset.
+  .quote {
+    background: #fafafa;
+    border-left: 3px solid #5e6ad2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+    color: #4a4a4a;
+  }
 
-**Key Features**:
-- **Task**: Single-pass HTML/CSS generation from screenshots
-- **Dataset**: 5,000 validated UI designs with paired code (embedded CSS)
-- **Evaluation Metrics**:
-  - *Visual Fidelity*: Pixel-level similarity (SSIM, LPIPS)
-  - *Code Quality*: AST correctness, W3C validation
-  - *Maintainability*: Cyclomatic complexity, modularity scores
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 500;
+    color: #8b8b8b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e8e8e6;
+  }
+  td {
+    padding: 8px 10px;
+    color: #4a4a4a;
+    border-bottom: 1px solid #f0f0ee;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 500; color: #1c1c1c; }
 
-**SOTA Performance**:
-- GPT-4V: 82% visual fidelity, 76% code validity
-- Claude 3.5: 78% fidelity, 81% validity
-- Screen2Code (specialized): 88% fidelity, 92% validity
+  .vlist { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .vitem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fafafa;
+    border: 1px solid #e8e8e6;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .vitem-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: #f0f0ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+  .vitem-content { flex: 1; }
+  .vitem-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
 
-### 2. UI-Bench/Ferret-UI (ECCV 2024)
-**Core Contribution**:  
-Mobile-focused benchmark evaluating grounded UI understanding beyond code generation.
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
 
-**Key Features**:
-- **Tasks**:
-  - Element localization (bounding box accuracy)
-  - Functional inference (task completion prediction)
-  - Accessibility analysis
-- **Metrics**:
-  - *Grounding Precision*: 0.9 IoU threshold
-  - *Task Accuracy*: Human-aligned success rates
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .tip-card {
+    background: #fafafa;
+    border: 1px solid #e8e8e6;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .tip-card h3 { margin-bottom: 4px; font-size: 13px; }
+  .tip-card-wide { grid-column: span 2; }
+</style>
+</head>
+<body>
 
-**Model Performance**:
-- Ferret-UI achieves 89% grounding precision vs. 76% for GPT-4V
-- Claude 3.5 shows superior function inference (84% vs. 78%)
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
 
-### 3. MLLM as a UI Judge (2025)
-**Core Contribution**:  
-Proposes using MLLMs as proxies for human UI perception evaluation.
+<div class="bento">
 
-**Methodology**:
-- Correlates MLLM ratings with human A/B testing data (N=10,000)
-- Evaluates aesthetic appeal, usability, and clarity
+<!-- HERO -->
+<div class="card span-4">
+  <div class="label-sm">Research Report · 2026/4/16</div>
+  <h1>UI Design-to-Code Benchmark 调研报告 (2025-2026)</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    分析四个前沿基准：Design2Code、UI-Bench/Ferret-UI、MLLM as a UI Judge、1D-Bench
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Design2Code</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Ferret-UI</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">MLLM Judge</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">1D-Bench</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">UI Code Gen</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Visual Fidelity</span>
+  </div>
+</div>
 
-**Key Findings**:
-- GPT-4V achieves 0.82 Spearman correlation with human ratings
-- Specialized models outperform general MLLMs in consistency (σ=0.12 vs. 0.21)
+<!-- STATS -->
+<div class="card span-2">
+  <div class="label-sm">关键数据</div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-num">88%</div><div class="stat-label">Screen2Code 视觉 fidelity</div></div>
+    <div class="stat-item"><div class="stat-num">92%</div><div class="stat-label">代码有效性</div></div>
+    <div class="stat-item"><div class="stat-num">89%</div><div class="stat-label">Ferret-UI 定位精度</div></div>
+    <div class="stat-item"><div class="stat-num">41%</div><div class="stat-label">迭代减少错误率</div></div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    专业化模型在专注任务上超越通用 MLLM 12-18%；MLLM 评委与人类评分的 Spearman 相关性已达 0.82。
+  </div>
+</div>
 
-### 4. 1D-Bench (2026)
-**Core Contribution**:  
-Introduces iterative code generation with visual feedback loops.
+<!-- Executive Summary -->
+<div class="card span-2">
+  <div class="label-sm">Executive Summary</div>
+  <h2>概述</h2>
+  <div class="text-body">
+    本报告分析四个推动 UI 设计到代码转换的基准测试：Design2Code (NAACL 2025)、UI-Bench/Ferret-UI (ECCV 2024)、MLLM as a UI Judge (2025) 和 1D-Bench (2026)。这些框架为多模态 UI 理解和代码生成建立了严格的评估协议，涵盖视觉逼真度、代码质量、迭代优化和人类感知预测。
+  </div>
+</div>
 
-**Innovations**:
-- Simulates real-world editing workflows (avg. 3.2 iterations per task)
-- Evaluates:
-  - *Convergence Speed*: Edits to reach target design
-  - *Edit Efficiency*: Δ visual fidelity per edit
+<!-- Design2Code -->
+<div class="card span-2">
+  <div class="label-sm">Benchmark ①</div>
+  <h2>Design2Code (NAACL 2025)</h2>
+  <div class="text-body">
+    从 C4 数据集的真实网页界面中，将设计到代码映射问题形式化为可重复基准。
+  </div>
+  <table>
+    <tr><th>指标</th><th>GPT-4V</th><th>Claude 3.5</th><th>Screen2Code</th></tr>
+    <tr><td>Visual Fidelity</td><td>82%</td><td>78%</td><td>88%</td></tr>
+    <tr><td>Code Validity</td><td>76%</td><td>81%</td><td>92%</td></tr>
+  </table>
+  <div class="vlist" style="margin-top:8px;">
+    <div class="vitem" style="padding:8px;border:none;background:transparent;"><div class="vitem-desc">📊 5,000 个验证过的 UI 设计，附带配对代码</div></div>
+    <div class="vitem" style="padding:8px;border:none;background:transparent;"><div class="vitem-desc">📐 指标：SSIM/LPIPS、AST 正确性、W3C 验证</div></div>
+  </div>
+</div>
 
-**Performance**:
-- GPT-4V: 2.8 avg iterations, 0.32 Δ fidelity/edit
-- Claude 3.5: 3.1 iterations, 0.29 Δ fidelity
+<!-- Ferret-UI -->
+<div class="card span-2">
+  <div class="label-sm">Benchmark ②</div>
+  <h2>UI-Bench / Ferret-UI (ECCV 2024)</h2>
+  <div class="text-body">
+    以移动端为中心的基准，评估超越代码生成的扎根 UI 理解能力。
+  </div>
+  <table>
+    <tr><th>模型</th><th>Grounding Precision</th><th>Function Inference</th></tr>
+    <tr><td>Ferret-UI</td><td>89%</td><td>—</td></tr>
+    <tr><td>GPT-4V</td><td>76%</td><td>78%</td></tr>
+    <tr><td>Claude 3.5</td><td>—</td><td>84%</td></tr>
+  </table>
+  <div class="vlist" style="margin-top:8px;">
+    <div class="vitem" style="padding:8px;border:none;background:transparent;"><div class="vitem-desc">🎯 任务：元素定位、功能推断、无障碍分析</div></div>
+  </div>
+</div>
 
----
+<!-- MLLM as UI Judge -->
+<div class="card span-2">
+  <div class="label-sm">Benchmark ③</div>
+  <h2>MLLM as a UI Judge (2025)</h2>
+  <div class="text-body">
+    使用 MLLM 作为人类 UI 感知评估的代理。将 MLLM 评分与 N=10,000 的人类 A/B 测试数据关联。
+  </div>
+  <div class="stat-row" style="margin-top:8px;">
+    <div class="stat-item"><div class="stat-num">0.82</div><div class="stat-label">Spearman 相关性</div></div>
+    <div class="stat-item"><div class="stat-num" style="font-size:20px;">σ=0.12</div><div class="stat-label">专业化模型一致性</div></div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    GPT-4V 与人类评分的 Spearman 相关性达 0.82。专业模型在一致性上超越通用 MLLM（σ=0.12 vs 0.21）。
+  </div>
+</div>
 
-## Comparative Analysis
+<!-- 1D-Bench -->
+<div class="card span-2">
+  <div class="label-sm">Benchmark ④</div>
+  <h2>1D-Bench (2026)</h2>
+  <div class="text-body">
+    引入带视觉反馈循环的迭代代码生成，模拟真实编辑工作流（平均每任务 3.2 次迭代）。
+  </div>
+  <table>
+    <tr><th>模型</th><th>Avg Iterations</th><th>Δ Fidelity/Edit</th></tr>
+    <tr><td>GPT-4V</td><td>2.8</td><td>0.32</td></tr>
+    <tr><td>Claude 3.5</td><td>3.1</td><td>0.29</td></tr>
+  </table>
+  <div class="quote" style="margin-top:8px;">
+    迭代方式相比单次生成的最终输出错误减少 <strong>41%</strong>。
+  </div>
+</div>
 
-| Benchmark          | Primary Focus          | Key Strength                  | Model Leaderboard (2026)          |
-|--------------------|------------------------|-------------------------------|-----------------------------------|
-| Design2Code        | Code Generation        | Production-ready output       | Screen2Code &gt; GPT-4V &gt; Claude     |
-| UI-Bench           | Visual Understanding   | Mobile UI comprehension       | Ferret-UI &gt; Claude &gt; GPT-4V       |
-| MLLM as UI Judge   | Human Perception       | Design validation efficiency  | GPT-4V &gt; Gemini &gt; Claude          |
-| 1D-Bench           | Iterative Refinement   | Edit efficiency               | GPT-4V ≈ Claude (tie)             |
+<!-- Comparative Analysis -->
+<div class="card span-4">
+  <div class="label-sm">Comparative Analysis</div>
+  <h2>综合对比</h2>
+  <table>
+    <tr><th>Benchmark</th><th>Primary Focus</th><th>Key Strength</th><th>Leader (2026)</th></tr>
+    <tr><td>Design2Code</td><td>Code Generation</td><td>Production-ready output</td><td>Screen2Code &gt; GPT-4V &gt; Claude</td></tr>
+    <tr><td>UI-Bench</td><td>Visual Understanding</td><td>Mobile UI comprehension</td><td>Ferret-UI &gt; Claude &gt; GPT-4V</td></tr>
+    <tr><td>MLLM as UI Judge</td><td>Human Perception</td><td>Design validation efficiency</td><td>GPT-4V &gt; Gemini &gt; Claude</td></tr>
+    <tr><td>1D-Bench</td><td>Iterative Refinement</td><td>Edit efficiency</td><td>GPT-4V ≈ Claude (tie)</td></tr>
+  </table>
+  <div class="grid-2" style="margin-top:12px;">
+    <div class="tip-card">
+      <h3>🎯 能力权衡</h3>
+      <div class="text-muted">
+        视觉理解：Ferret-UI 领先 (F1=0.91) 但代码生成弱<br>
+        代码质量：Screen2Code 92% vs GPT-4V 76%<br>
+        迭代优化：通用 MLLM 在 1D-Bench 超越专业模型
+      </div>
+    </div>
+    <div class="tip-card">
+      <h3>📊 关键发现</h3>
+      <div class="text-muted">
+        • 专业模型超越通用 MLLM 12-18%<br>
+        • MLLM 评委与人类评分相关性 0.8+<br>
+        • 迭代减少错误率 41%<br>
+        • 移动端 vs Web 需要不同能力
+      </div>
+    </div>
+  </div>
+</div>
 
-**Capability Tradeoffs**:
-- *Visual Understanding*: Ferret-UI leads (F1=0.91) but weak in code generation
-- *Code Quality*: Screen2Code achieves 92% validity vs. GPT-4V&#39;s 76%
-- *Iterative Refinement*: General MLLMs outperform specialists in 1D-Bench
+<!-- Future Directions -->
+<div class="card span-2">
+  <div class="label-sm">Future</div>
+  <h2>未来方向 (2026-2027)</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">1</div>
+      <div class="vitem-content"><div class="vitem-desc"><strong>Multimodal Memory</strong> — 跨迭代的持久视觉记忆</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">2</div>
+      <div class="vitem-content"><div class="vitem-desc"><strong>Live Editing Tools</strong> — 与 Figma/Adobe XD 深度集成</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">3</div>
+      <div class="vitem-content"><div class="vitem-desc"><strong>Accessibility-First</strong> — 自动化 WCAG 2.2 合规检查</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">4</div>
+      <div class="vitem-content"><div class="vitem-desc"><strong>Cross-Platform</strong> — 统一 web/mobile/AR UI 生成模型</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">5</div>
+      <div class="vitem-content"><div class="vitem-desc"><strong>Human-in-the-Loop</strong> — MLLM 与设计师反馈混合</div></div>
+    </div>
+  </div>
+</div>
 
----
+<!-- Key Takeaway -->
+<div class="card span-2 card-highlight">
+  <div class="label-sm">Key Takeaway</div>
+  <h2>核心判断</h2>
+  <div class="text-body">
+    UI 设计到代码的自动生成正向生产级工具演进。专业化模型在有限领域表现出色，但通用 MLLM 的迭代优化能力正在快速追赶。人类对齐评估（MLLM as Judge）有望大幅降低设计验证成本。
+  </div>
+  <div class="dots-row" style="margin-top:10px;">
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">Screen2Code 生产可用</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">通用模型仍需迭代</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">MLLM Judge 可替代 A/B 测试</span>
+  </div>
+</div>
 
-## Key Findings
+<!-- References -->
+<div class="card span-4">
+  <div class="label-sm">References</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>1. Design2Code: Benchmarking Multimodal Code Generation for Automated Front-End Development. NAACL 2025.</div>
+    <div>2. Ferret-UI: Grounded Mobile UI Understanding with Multimodal LLMs. ECCV 2024.</div>
+    <div>3. MLLM as a UI Judge: Benchmarking Multimodal LLMs for Predicting Human Perception of User Interfaces. arXiv 2510.08783 (2025).</div>
+    <div>4. 1D-Bench: A Benchmark for Iterative UI Code Generation with Visual Feedback. Semantic Scholar (2026).</div>
+  </div>
+</div>
 
-1. **Specialization Gap**: Domain-specific models (Screen2Code, Ferret-UI) outperform general MLLMs by 12-18% on focused tasks.
+</div>
 
-2. **Human-Aligned Evaluation**: MLLM judges now achieve 0.8+ correlation with human ratings, enabling rapid design validation.
-
-3. **Iterative Paradigm**: 1D-Bench shows iterative approaches reduce final output errors by 41% vs. single-pass generation.
-
-4. **Mobile vs Web**: Mobile UI understanding (UI-Bench) requires distinct capabilities vs. web code generation (Design2Code).
-
----
-
-## Future Directions (2026-2027)
-
-1. **Multimodal Memory**: Incorporating persistent visual memory across iterations (e.g., for design systems)
-
-2. **Live Editing Tools**: Tight integration with Figma/Adobe XD via plugin ecosystems
-
-3. **Accessibility-First Generation**: Automated WCAG 2.2 compliance checking during codegen
-
-4. **Cross-Platform Synthesis**: Unified models for web/mobile/AR UI generation
-
-5. **Human-in-the-Loop**: Hybrid systems combining MLLMs with designer feedback
-
----
-
-## References
-
-1. Design2Code: Benchmarking Multimodal Code Generation for Automated Front-End Development. NAACL 2025. ACL Anthology.
-
-2. Ferret-UI: Grounded Mobile UI Understanding with Multimodal LLMs. ECCV 2024 Proceedings.
-
-3. MLLM as a UI Judge: Benchmarking Multimodal LLMs for Predicting Human Perception of User Interfaces. arXiv 2510.08783 (2025).
-
-4. 1D-Bench: A Benchmark for Iterative UI Code Generation with Visual Feedback. Semantic Scholar (2026).
-</code></pre>
-</div></main><footer style="padding:40px 0;border-top:1px solid var(--border);text-align:center;"><div class="container"><p style="font-size:14px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p></div></footer></body></html>
+</body>
+</html>
