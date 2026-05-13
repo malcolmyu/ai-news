@@ -94,9 +94,33 @@ fetch_x_via_vxtwitter() {
     return 1
   fi
 
-  # Extract media URLs from media_extended array (images only, not videos)
-  local media_urls
-  media_urls=$(echo "$json" | jq -r '.media_extended[]?.url // empty' 2>/dev/null) || true
+  # Extract media URLs from media_extended array
+  local media_urls=""
+  local video_urls=""
+  local thumb_urls=""
+
+  # Get all media entries as JSON array, iterate over them
+  local media_count
+  media_count=$(echo "$json" | jq '.media_extended | length' 2>/dev/null) || media_count=0
+  
+  for (( mi=0; mi<media_count; mi++ )); do
+    local mtype murl mthumb
+    mtype=$(echo "$json" | jq -r ".media_extended[$mi].type // \"\"" 2>/dev/null)
+    murl=$(echo "$json" | jq -r ".media_extended[$mi].url // \"\"" 2>/dev/null)
+    mthumb=$(echo "$json" | jq -r ".media_extended[$mi].thumbnail_url // \"\"" 2>/dev/null)
+    
+    if [[ "$mtype" == "image" ]]; then
+      media_urls="${media_urls}"$'\n'"${murl}"
+    elif [[ "$mtype" == "video" || "$mtype" == "animated_gif" ]]; then
+      # For videos, save both the thumbnail and the video URL
+      if [[ -n "$mthumb" ]]; then
+        thumb_urls="${thumb_urls}"$'\n'"${mthumb}"
+      fi
+      if [[ -n "$murl" ]]; then
+        video_urls="${video_urls}"$'\n'"${murl}"
+      fi
+    fi
+  done
 
   # Also try quoted tweet's article card image
   local article_img
@@ -209,26 +233,67 @@ process_x_url() {
 
   local prefix="${username}-${tweet_id}"
   local downloaded_paths=""
+  local video_paths=""
+  local video_thumb_path=""
   local error_msg=""
 
-  # Try vxtwitter API
-  local vx_imgs
-  if vx_imgs=$(fetch_x_via_vxtwitter "$username" "$tweet_id"); then
-    downloaded_paths=$(echo "$vx_imgs" | download_images "$prefix" "$output_dir")
-  else
-    error_msg="vxtwitter unavailable" >&2
+  # Fetch vxtwitter JSON directly for richer data
+  local api_url="https://api.vxtwitter.com/${username}/status/${tweet_id}"
+  local json
+  json=$(curl -sL --max-time 10 "$api_url" 2>/dev/null) || true
+
+  if [[ -n "$json" ]]; then
+    # Extract image URLs
+    local img_urls
+    img_urls=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "image") | .url // empty' 2>/dev/null) || true
+    
+    # Also try quoted tweet images
+    local qrt_urls
+    qrt_urls=$(echo "$json" | jq -r '.qrt.media_extended[]? | select(.type == "image") | .url // empty' 2>/dev/null) || true
+
+    # Article card image from quoted tweet
+    local article_img
+    article_img=$(echo "$json" | jq -r '.qrt.article?.image // empty' 2>/dev/null) || true
+
+    # Combine all image URLs
+    local all_img_urls="${img_urls}"$'\n'"${qrt_urls}"
+    if [[ -n "$article_img" ]]; then
+      all_img_urls="${all_img_urls}"$'\n'"${article_img}"
+    fi
+
+    # Download images
+    if [[ -n "$(echo "$all_img_urls" | tr -d '[:space:]')" ]]; then
+      downloaded_paths=$(echo "$all_img_urls" | download_images "$prefix" "$output_dir")
+    fi
+
+    # Extract video info
+    local video_url
+    local video_thumb
+    video_url=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .url // empty' 2>/dev/null | head -1) || true
+    video_thumb=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .thumbnail_url // empty' 2>/dev/null | head -1) || true
+
+    if [[ -n "$video_thumb" ]]; then
+      # Download video thumbnail as an image
+      local thumb_dest="${output_dir}/${prefix}-video-thumb.jpg"
+      if curl -sL --max-time 20 -o "$thumb_dest" "$video_thumb" 2>/dev/null && [[ -s "$thumb_dest" ]]; then
+        video_thumb_path="$thumb_dest"
+        # Also include in images array
+        if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" ]]; then
+          downloaded_paths="$thumb_dest"
+        fi
+      fi
+    fi
+
+    if [[ -n "$video_url" ]]; then
+      video_paths="$video_url"
+    fi
   fi
 
-  # Fallback to fxtwitter if no images downloaded
-  if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" ]]; then
+  # Fallback to fxtwitter if nothing found
+  if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" && -z "$video_paths" ]]; then
     local fx_imgs
     if fx_imgs=$(fetch_x_via_fxtwitter "$tweet_id"); then
-      # Resume from nitter's index if nitter did download some
-      local count
-      count=$(echo "$downloaded_paths" | grep -c . || echo 0)
-      local more_paths
-      more_paths=$(echo "$fx_imgs" | download_images "$prefix" "$output_dir")
-      downloaded_paths+="$more_paths"
+      downloaded_paths=$(echo "$fx_imgs" | download_images "$prefix" "$output_dir")
     fi
   fi
 
@@ -243,18 +308,30 @@ process_x_url() {
 
   # Build the result JSON object
   local result
-  result=$(jq -n \
-    --arg type "x" \
-    --arg url "$url" \
-    --arg username "$username" \
-    --arg tweet_id "$tweet_id" \
-    --argjson images "$images_json" \
-    '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images}')
+  if [[ -n "$video_paths" ]]; then
+    result=$(jq -n \
+      --arg type "x" \
+      --arg url "$url" \
+      --arg username "$username" \
+      --arg tweet_id "$tweet_id" \
+      --argjson images "$images_json" \
+      --arg video_url "$video_paths" \
+      --arg video_thumb "$video_thumb_path" \
+      '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images, video_url: $video_url, video_thumb: $video_thumb}')
+  else
+    result=$(jq -n \
+      --arg type "x" \
+      --arg url "$url" \
+      --arg username "$username" \
+      --arg tweet_id "$tweet_id" \
+      --argjson images "$images_json" \
+      '{type: $type, url: $url, username: $username, tweet_id: $tweet_id, images: $images}')
+  fi
 
-  # If no images downloaded, add error field
-  if [[ "$images_json" == "[]" ]]; then
-    echo "  [warn] No images for ${url}" >&2
-    result=$(echo "$result" | jq '. + {error: "no images found"}')
+  # If nothing at all found, add error field
+  if [[ "$images_json" == "[]" && -z "$video_paths" ]]; then
+    echo "  [warn] No media for ${url}" >&2
+    result=$(echo "$result" | jq '. + {error: "no media found"}')
   fi
 
   echo "$result"
