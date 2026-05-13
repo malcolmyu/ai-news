@@ -23,6 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Style & Integrity Check
+        run: |
+          chmod +x .github/style-check.sh
+          bash .github/style-check.sh ${{ github.workspace }} || exit 1
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

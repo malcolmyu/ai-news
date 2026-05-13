@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歸藏 PPT Skill 完全解读</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow: hidden; height: 100%; }
+body {
+  overflow: hidden; height: 100%;
+  font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', system-ui, sans-serif;
+  background: #08090a;
+  display: flex; justify-content: center; align-items: center;
+}
+.viewer {
+  position: relative;
+  width: 1080px; height: 1440px;
+  overflow: hidden;
+  background: #08090a;
+}
+.card {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 72px 64px 80px;
+  opacity: 0; transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card.active {
+  opacity: 1; pointer-events: auto;
+}
+
+/* Page meta */
+.page-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 28px; flex-shrink: 0;
+}
+.label {
+  font-size: 48px; font-weight: 500; color: #a0a5b0; letter-spacing: 0.05em;
+}
+.page-num {
+  font-size: 48px; font-weight: 400; color: #62666d;
+}
+.brand { color: #7170ff; }
+
+/* Page 1 - Cover */
+.pc-headline {
+  flex: 0 0 auto;
+  font-size: 88px; font-weight: 900; line-height: 1.15;
+  color: #f7f8f8; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.pc-headline .accent { color: #7170ff; }
+.pc-sub {
+  font-size: 48px; font-weight: 400; line-height: 1.5;
+  color: #a0a5b0; margin-bottom: 20px; flex-shrink: 0;
+}
+.pc-meta {
+  display: flex; align-items: center; gap: 24px;
+  margin-bottom: 24px; flex-shrink: 0;
+}
+.pc-meta .tag {
+  font-size: 48px; font-weight: 500; color: #7170ff;
+}
+.pc-meta .source {
+  font-size: 48px; font-weight: 400; color: #62666d;
+}
+.pc-img-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; min-height: 0;
+}
+.pc-img-wrap img {
+  max-height: 420px; max-width: 100%;
+  width: auto; height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  object-fit: contain;
+}
+
+/* Pages 2-7 */
+.ucd-container {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.ucd-headline {
+  font-size: 64px; font-weight: 800; color: #f7f8f8;
+  margin-bottom: 20px; flex-shrink: 0; line-height: 1.2;
+}
+.ucd-img-wrap {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; overflow: hidden;
+}
+.ucd-img-wrap img {
+  max-height: 420px; max-width: 100%;
+  width: auto; height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  object-fit: contain;
+}
+.ucd-body {
+  flex: 1; overflow: hidden;
+  font-size: 48px; font-weight: 400; color: #a0a5b0;
+  line-height: 1.6;
+}
+.ucd-body strong { color: #f7f8f8; font-weight: 600; }
+.ucd-body .accent { color: #7170ff; }
+.ucd-body .list-item {
+  margin-bottom: 12px; padding-left: 8px;
+}
+.ucd-body .list-item::before {
+  content: "· ";
+  color: #7170ff;
+}
+</style>
+</head>
+<body>
+<div class="viewer" id="viewer">
+
+  <!-- Page 1: Cover -->
+  <div class="card active" id="page0">
+    <div class="page-top">
+      <span class="label">🎯 名人名言</span>
+      <span class="page-num">01 / 07</span>
+    </div>
+    <div class="pc-headline">
+      "压进我十年设计经验的<br>
+      <span class="accent">PPT Skills</span>，迎来大波更新"
+    </div>
+    <div class="pc-sub">
+      歸藏 · guizang.ai | GitHub 6000+ Star | 23 万观看
+    </div>
+    <div class="pc-img-wrap">
+      <img src="../assets/20260512/00-cover.jpg" alt="歸藏 PPT Skill 封面">
+    </div>
+  </div>
+
+  <!-- Page 2: 更新了什么 -->
+  <div class="card" id="page1">
+    <div class="page-top">
+      <span class="label">🔄 更新了什么</span>
+      <span class="page-num">02 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">本次更新三件事</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/01-update.jpg" alt="更新内容示意">
+      </div>
+      <div class="ucd-body">
+        <div class="list-item"><strong>瑞士国际主义风格</strong> — 全程无衬线、单一锚点色、网格至上</div>
+        <div class="list-item"><strong>GPT-Image 2.0 配图</strong> — 自动生成符合调性的配图，胶片质感</div>
+        <div class="list-item"><strong>多平台封面生成</strong> — 小红书 3:4、公众号 21:9、视频号横版</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 3: 六种核心版式 -->
+  <div class="card" id="page2">
+    <div class="page-top">
+      <span class="label">📐 六种核心版式</span>
+      <span class="page-num">03 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">六种开箱即用的版式</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/03-cover-layout.jpg" alt="六种版式一览">
+      </div>
+      <div class="ucd-body">
+        <div class="list-item"><strong>Cover</strong> — IKB底色 + 反白巨字</div>
+        <div class="list-item"><strong>Statement</strong> — 单句话占 9.6vw</div>
+        <div class="list-item"><strong>KPI Tower</strong> — 数据决定柱高</div>
+        <div class="list-item"><strong>Loop Diagram</strong> — 循环/飞轮结构</div>
+        <div class="list-item"><strong>Duo Compare</strong> — Before vs After</div>
+        <div class="list-item"><strong>Closing</strong> — 与封面色彩闭环</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 4: 四套主题色 -->
+  <div class="card" id="page3">
+    <div class="page-top">
+      <span class="label">🎨 四套主题色</span>
+      <span class="page-num">04 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">四套锚点色，不接受自定义 hex</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/02-colors.jpg" alt="四套主题色">
+      </div>
+      <div class="ucd-body">
+        <div class="list-item"><strong>克莱因蓝 IKB</strong> — 通用 / 商业 / 默认推荐</div>
+        <div class="list-item"><strong>柠檬黄</strong> — 年轻 / 运动 / Y2K</div>
+        <div class="list-item"><strong>柠檬绿</strong> — 生态 / Z 世代</div>
+        <div class="list-item"><strong>安全橙</strong> — 警示 / 活力</div>
+        <br>
+        单一锚点色是瑞士风的灵魂。<span class="accent">Less is more.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 5: 七条设计纪律 -->
+  <div class="card" id="page4">
+    <div class="page-top">
+      <span class="label">📏 设计纪律</span>
+      <span class="page-num">05 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">七条设计纪律，一百年前就有了</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/13-rule4.jpg" alt="设计纪律示意">
+      </div>
+      <div class="ucd-body">
+        <div class="list-item"><strong>①</strong> 单一锚点色</div>
+        <div class="list-item"><strong>②</strong> 字号比 ≥ 8:1</div>
+        <div class="list-item"><strong>③</strong> 大字 ExtraLight 200</div>
+        <div class="list-item"><strong>④</strong> 直角纯色</div>
+        <div class="list-item"><strong>⑤</strong> 16 列网格</div>
+        <div class="list-item"><strong>⑥</strong> 无 WebGL</div>
+        <div class="list-item"><strong>⑦</strong> 不接受自定义 hex</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 6: 三个巧妙设计 -->
+  <div class="card" id="page5">
+    <div class="page-top">
+      <span class="label">💡 巧妙设计</span>
+      <span class="page-num">06 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">三个让 PPT 质感飞跃的小巧思</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/16-film-grain.jpg" alt="胶片质感示意">
+      </div>
+      <div class="ucd-body">
+        <div class="list-item"><strong>胶片质感对抗 AI 感</strong> — GPT-Image 2.0 出图带 Fujifilm 质感，看不出塑料感</div>
+        <div class="list-item"><strong>截图重做</strong> — 把奇葩比例的 UI 截图按 16:10 重做，统一视觉</div>
+        <div class="list-item"><strong>PPT 包裹 AI 图</strong> — 单发 AI 图会被检测标记，放进模板再截图就安全了</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 7: 写在最后 -->
+  <div class="card" id="page6">
+    <div class="page-top">
+      <span class="label">✍️ 写在最后</span>
+      <span class="page-num">07 / 07</span>
+    </div>
+    <div class="ucd-container">
+      <div class="ucd-headline">人 x AI 协作做内容的完整链条</div>
+      <div class="ucd-img-wrap">
+        <img src="../assets/20260512/09-style-compare.jpg" alt="风格对比示意">
+      </div>
+      <div class="ucd-body">
+        从写大纲、生成 PPT、配图、导出、到发布到不同平台。<br>
+        以前要打开 5 个软件，现在在一个对话里能走完。<br><br>
+        AI 只能做 70 分，这 <span class="accent">30 分</span>来自把设计经验写进代码。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let current = 0;
+const total = 7;
+function goTo(idx) {
+  document.querySelectorAll('.card').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  current = idx;
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+  if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
+});
+</script>
+</body>
+</html>
