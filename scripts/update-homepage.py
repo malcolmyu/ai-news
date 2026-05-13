@@ -25,7 +25,7 @@ for f in os.listdir(RESEARCH_DIR):
     cat = ''
     with open(os.path.join(RESEARCH_DIR, f)) as rf:
         content = rf.read()
-    cat_m = re.search(r'<meta[^>]*category[^>]*content="([^"]*)"', content)
+    cat_m = re.search(r'<meta[^>]*category[^>]*content="([^\"]*)"', content)
     if cat_m:
         cat = cat_m.group(1)
     reports.append((f, mtime, cat))
@@ -83,7 +83,9 @@ new_section = f'''
 </div>
 <a href="research/archive.html" class="section-link">查看全部 →</a>
 </div>
+<div style="display:flex;flex-direction:column;gap:10px;">
 {entries_html}
+</div>
 </div>
 {MARKER_END}'''
 
