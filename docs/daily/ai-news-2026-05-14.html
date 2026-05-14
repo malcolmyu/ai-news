@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ AI Builders 日报 2026-05-14</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: #f5f5f4;
+  color: #1c1c1c;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.nav-back {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+}
+.nav-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b6b6b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-back a:hover { color: #5e6ad2; }
+@media (max-width: 520px) {
+  .nav-back { padding: 12px 16px 0; }
+}
+.bento {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) {
+  .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+  .stat-num { font-size: 18px; }
+  h1 { font-size: 24px; }
+  .card { padding: 16px; }
+}
+.card {
+  background: #fff;
+  border: 1px solid #e8e8e6;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+.label-sm {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b8b8b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.subtitle {
+  font-size: 15px;
+  color: #6b6b6b;
+  font-weight: 400;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+  color: #1c1c1c;
+}
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1c1c;
+  margin-bottom: 6px;
+}
+.text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+.text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+.text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+.stat-row { display: flex; gap: 12px; margin-top: 6px; }
+.stat-item { flex: 1; min-width: 0; }
+.stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+.divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+.dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.vlist { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.vitem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 12px;
+}
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.quote {
+  background: #fafafa;
+  border-left: 3px solid #5e6ad2;
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 8px;
+  color: #4a4a4a;
+}
+.callout {
+  background: rgba(94,106,210,0.04);
+  border: 1px solid rgba(94,106,210,0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 10px;
+}
+.callout-title { font-size: 12px; font-weight: 600; color: #5e6ad2; margin-bottom: 4px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.callout-text strong { color: #1c1c1c; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Card 1 — Hero -->
+<div class="card span-4">
+  <div class="label-sm">AI Builders Daily · 2026.5.14</div>
+  <h1>🏗️ AI Builders 日报</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    每天追踪 AI 领域真正的 builder——那些在研究、创业和产品一线的人。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Waymo</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">自动驾驶</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Code</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 安全</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Auto Mode</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">今日 Builder</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">播客精选</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">深度文章</div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 — 今日要点 -->
+<div class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        🚗 <strong style="color:#1c1c1c;">Waymo CTO Dmitri Dolgov 深度解析全无人驾驶规模化之路</strong> — 从 DARPA 挑战赛到 2000 万次无人乘车，Waymo 首席技术官亲述端到端模型+结构化表示的架构哲学，以及全球化部署加速的底层逻辑。
+      </div>
+      <div style="margin-top:8px;"><a href="https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">收听播客 →</a></div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        🛡️ <strong style="color:#1c1c1c;">Anthropic 发布 Claude Code Auto Mode</strong> — 介于手动审批和完全放权之间的全新安全范式：两阶段分类器+防注入探针，0.4% 误报率下实现远超人工审批的安全保障，定义 AI 编程工具的安全新标准。
+      </div>
+      <div style="margin-top:8px;"><a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">阅读全文 →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 — 播客精选：Waymo 二十年征途 -->
+<div class="card span-4">
+  <div class="label-sm">🎙️ 播客精选</div>
+  <h2>Training Data — Waymo 的二十年征途：从 DARPA 到 2000 万次无人乘车</h2>
+  <div class="text-body">
+    嘉宾：<strong>Dmitri Dolgov</strong>，Waymo 联合创始人兼 CTO。这是一场跨越自动驾驶 20 年历史（从 DARPA 挑战赛到今天 2000 万次全无人驾驶旅程）的深度对话。Dolgov 全面拆解了 Waymo 的技术架构、产品化路径和全球化战略。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">📈 指数级增长曲线</div>
+        <div class="vitem-desc">达到第一个 100 万英里用了 16 年，而从 100 万到 200 万英里只用了 6 个月。今年早些时候在同一天于 4 个城市同时上线。过去 7 个月内完成了 1000 万次乘车——公司已从"按序拆解风险"进入"快速并行全球化部署"阶段。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🧠 Waymo Foundation Model：Driver + Simulator + Critic</div>
+        <div class="vitem-desc">Dolgov 明确表示 Waymo 架构是端到端模型，但纯端到端不够。关键在于用"结构化的中间表示"（structured materialized intermediate representations）增强学习到的表征，从而实现运行时验证、闭环训练评估和丰富的强化学习奖励函数。这是一个融合视觉、语言、动作的多模态世界模型。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">⚡ "端到端 vs 其他"是虚假二分法</div>
+        <div class="vitem-desc">真正的问题不是"端到端还是别的"，而是"端到端 + 还需要什么"。生产级全无人驾驶需要超越基础端到端的能力：运行时验证安全、闭环评估、可调试的中间表示——这些是 demo 或辅助驾驶系统不需要的。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔧 第六代硬件：Geely Zeekr 平台 + 极致成本简化</div>
+        <div class="vitem-desc">新硬件在性能提升的同时大幅简化了传感器套件并降低了成本。车内空间设计得像客厅，滑门自动开启，体验远超前代。目前已开始在员工中运营，今年晚些时候向公众开放。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🌍 全球化布局加速</div>
+        <div class="vitem-desc">目前已在美国 11 个城市运营，并宣布今年将在伦敦和东京提供服务。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>"</strong>这个问题的早期很容易上手，但把它做到真正的产品级、全无人、超人类表现极其困难。理解这一点，就不会去寻找捷径或银弹。<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Dmitri Dolgov, Waymo CTO</div>
+  </div>
+  <!-- YouTube Playlist Embed -->
+  <div class="video-container" style="position:relative;padding-bottom:56.25%;margin-top:10px;">
+    <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;" allowfullscreen></iframe>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">🎬 观看播客 →</a>
+  </div>
+</div>
+
+<!-- Card 4 — 深度文章：Claude Code Auto Mode -->
+<div class="card span-4">
+  <div class="label-sm">📝 深度文章</div>
+  <h2>Anthropic Engineering — Claude Code Auto Mode：AI 编程的安全新范式</h2>
+  <div class="text-body">
+    Anthropic 发布了一篇深度技术文章，详解 <strong>Claude Code Auto Mode</strong>——一种介于手动审批（每次操作都要用户点头）和完全放权（--dangerously-skip-permissions）之间的全新权限模式，试图解决"审批疲劳"这一核心痛点。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🎯 问题背景</div>
+        <div class="vitem-desc">Claude Code 默认要求用户审批每个操作，但用户实际接受了 93% 的请求——审批疲劳导致人们忽视真正的危险。而 --dangerously-skip-permissions 又完全没有防护。Auto Mode 是两者之间的中间路线。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🛡️ 两层防御架构</div>
+        <div class="vitem-desc"><strong>输入层（Prompt Injection Probe）</strong>：扫描工具输出内容（文件读取、网页抓取、shell 输出），发现疑似注入攻击时向 Agent 上下文注入警告。<strong>输出层（Transcript Classifier）</strong>：基于 Sonnet 4.6，在每个动作执行前评估其安全性。采用两阶段分类——第一级快速单 token 过滤（倾向于阻止），被标记的动作才进入第二级链式推理，降低误报。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">📊 数据表现</div>
+        <div class="vitem-desc">一级过滤：8.5% 误报率（FPR），6.6% 漏报率（FNR）。全流水线（一级+二级）：0.4% FPR，17% FNR。合成数据窃取测试：5.7% FNR。测试集含 10,000 个真实内部调用 + 52 个真实过度积极行为 + 1,000 个合成窃取尝试。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔒 关键设计决策：分类器看不到助手输出</div>
+        <div class="vitem-desc">分类器刻意看不到助手生成的文本和工具结果——这是防止 Agent"说服"分类器放行的关键防御。分类器只读用户消息和工具调用，独立判断。实验证明"Assistant 文本 + 工具结果"的版本表现更差，因为更长的上下文让 Agent 自己的框架影响了判断。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔄 "拒绝并继续"机制</div>
+        <div class="vitem-desc">当分类器阻止一个动作时，Agent 不会停下来等待，而是尝试更安全的替代路径。连续 3 次拒绝或累计 20 次则升级到人工处理。这使得 0.4% 的误报率在用户体验上完全可以接受——一次误报只是让 Agent 换个方式重试，而不是终止会话。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>"</strong>Clean up the PR 这句话是用户说的，但它并没有授权 force-push。一个类似的动作之前被批准过，但一次批准不构成模式。分类器找到了类似"批准"的证据，但没去检查这个批准是否覆盖了动作的实际影响范围。<strong>"</strong>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">📖 阅读全文 →</a>
+  </div>
+</div>
+
+<!-- Card 5 — 今日思考 -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">💭 今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🚗 物理世界的 AI 没有捷径</div>
+      <div class="callout-text">Waymo 用 20 年证明了一个道理——真正难的问题没有捷径，只有持续的结构性创新和耐心。Dolgov 的"端到端 + 结构化中间表示"方法论对所有在复杂物理世界部署 AI 的团队都有启示：不要被端到端的诱惑简化问题，生产系统需要可验证、可调试的分层架构。</div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🛡️ 能力越强，安全越要精细</div>
+      <div class="callout-text">Anthropic 的 Auto Mode 展示了另一个方向：如何在 Agent 能力快速提升的同时，构建与之匹配的安全基础设施。两阶段分类器+防注入探针的组合，以及"拒绝并继续"的失败处理，可能会成为 AI 编程工具的标配设计。0.4% 的误报率配合优雅的重试机制，让安全不再以牺牲用户体验为代价。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>两个故事共同回答同一个问题：</strong>如何让 AI 在真实世界中既强大又可信？一个用二十年的耐心给出了工程架构的答案，另一个用精细的安全设计给出了产品机制的答案。
+  </div>
+</div>
+
+<!-- Card 6 — 参考来源 -->
+<div class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>🎙️ <a href="https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8" target="_blank" style="color:#5e6ad2;text-decoration:none;">Training Data — Waymo CTO Dmitri Dolgov 深度访谈</a></div>
+    <div>📝 <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="color:#5e6ad2;text-decoration:none;">Anthropic Engineering — Claude Code Auto Mode 架构详解</a></div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
+    追踪来源包括 YouTube 播客、技术博客等一线信源。AI Builders Daily 每日更新。
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
