@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ AI Builders 日报 2026-05-15</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: #f5f5f4;
+  color: #1c1c1c;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.nav-back {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+}
+.nav-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b6b6b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-back a:hover { color: #5e6ad2; }
+@media (max-width: 520px) {
+  .nav-back { padding: 12px 16px 0; }
+}
+.bento {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) {
+  .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+  .stat-num { font-size: 18px; }
+  h1 { font-size: 24px; }
+  .card { padding: 16px; }
+}
+.card {
+  background: #fff;
+  border: 1px solid #e8e8e6;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+.label-sm {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b8b8b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.subtitle {
+  font-size: 15px;
+  color: #6b6b6b;
+  font-weight: 400;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+  color: #1c1c1c;
+}
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1c1c;
+  margin-bottom: 6px;
+}
+.text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+.text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+.text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+.stat-row { display: flex; gap: 12px; margin-top: 6px; }
+.stat-item { flex: 1; min-width: 0; }
+.stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+.divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+.dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.vlist { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.vitem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 12px;
+}
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.quote {
+  background: #fafafa;
+  border-left: 3px solid #5e6ad2;
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 8px;
+  color: #4a4a4a;
+}
+.callout {
+  background: rgba(94,106,210,0.04);
+  border: 1px solid rgba(94,106,210,0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 10px;
+}
+.callout-title { font-size: 12px; font-weight: 600; color: #5e6ad2; margin-bottom: 4px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.callout-text strong { color: #1c1c1c; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Card 1 — Hero -->
+<div class="card span-4">
+  <div class="label-sm">AI Builders Daily · 2026.5.15</div>
+  <h1>🏗️ AI Builders 日报</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    每天追踪 AI 领域真正的 builder——那些在研究、创业和产品一线的人。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Suno</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 音乐</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Agent</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Dreaming</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">科技裁员</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">今日 Builder</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">播客精选</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">深度文章</div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 — 今日要点 -->
+<div class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        🎵 <strong style="color:#1c1c1c;">Suno CEO Mikey Shulman：创作本身就是娱乐</strong> — 90% 的用户每天创作音乐，不是为了发布而是为了创作的愉悦。Suno 放弃所有音乐先验知识，把一切建模为声波，释放跨流派融合与微音阶音乐的创造潜力。
+      </div>
+      <div style="margin-top:8px;"><a href="https://www.youtube.com/watch?v=Jq3BIGz4vXQ" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">收听播客 →</a></div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        🧠 <strong style="color:#1c1c1c;">Claude 推出 Managed Agent 三大更新</strong> — Dreaming（梦境回放）、Outcomes（成果评估）、Multiagent Orchestration（多智能体编排）。Harvey 用 dreaming 让 Agent 跨会话学习，completion rate 提升约 6x。
+      </div>
+      <div style="margin-top:8px;"><a href="https://claude.com/blog/new-in-claude-managed-agents" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">阅读全文 →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 — Builder 动态：Peter Yang -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Peter Yang — Product @ Roblox</h3>
+  <div class="text-body">
+    Peter Yang 犀利指出科技公司裁员时甩锅 AI 是一种"方便的借口"。他把裁员通告翻译为：*"Today is a hard day... AI has changed how we work"* → *"我们在零利率时期过度招聘了。"* Q1 超 8 万科技员工被裁，是 2022-23 裁员潮以来的最高点。
+  </div>
+  <div class="quote">
+    <strong>"</strong>科技公司用 AI 作为大规模裁员的借口，但真正的原因是零利率时期的过度招聘。Q1 超 8 万人被裁。<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Peter Yang, Product @ Roblox</div>
+  </div>
+  <img src="assets/2026-05-15/petergyang-2054569893060809151-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Peter Yang tweet about layoffs">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/petergyang/status/2054569893060809151" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 4 — Builder 动态：Garry Tan -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Garry Tan — Y Combinator 总裁</h3>
+  <div class="text-body">
+    Garry Tan 批评旧金山媒体为从"芬太尼旅游"（fentanyl tourism）中获利的人提供话语权。主张停止资助纵容吸毒的非营利组织，转而资助康复和治疗项目。
+  </div>
+  <img src="assets/2026-05-15/garrytan-2054778575988093249-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Garry Tan tweet about fentanyl crisis">
+  <img src="assets/2026-05-15/garrytan-2054778575988093249-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Garry Tan tweet image 2">
+  <img src="assets/2026-05-15/garrytan-2054778575988093249-2.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Garry Tan tweet image 3">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/garrytan/status/2054778575988093249" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 5 — Builder 动态：Nikunj Kothari -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Nikunj Kothari — FPV Ventures 合伙人</h3>
+  <div class="text-body">
+    指 VC 已经成为"共识资本"（consensus capital）。真正对产品痴迷的 founder 会把每次拒绝视为学习机会，而不是"你不该创业"的判决。对狂热创始人来说，被拒绝只是燃料。
+  </div>
+  <div class="quote">
+    <strong>"</strong>VC has become consensus capital. Truly obsessed founders treat rejection as a learning signal, not a verdict on whether they should be building.<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Nikunj Kothari, FPV Ventures</div>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/nikunj/status/2054599845214650442" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 6 — 播客精选：Suno -->
+<div class="card span-4">
+  <div class="label-sm">🎙️ 播客精选</div>
+  <h2>Training Data — Suno CEO Mikey Shulman：人人都能创作音乐的时代</h2>
+  <div class="text-body">
+    嘉宾：<strong>Mikey Shulman</strong>，Suno 创始人兼 CEO。这期是近期最有深度的消费级 AI 对话之一，Mikey 分享了 Suno 背后一系列反直觉的哲学与产品决策。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🎵 音乐不是 scale 游戏</div>
+        <div class="vitem-desc">与 LLM 不同，Suno 的模型很小。Mikey 直言："音乐没有 benchmark，scale 在解决没有标准答案的创造性问题上帮助很小。" 真正驱动进步的是 research 和 human preference data，而人类偏好数据正是 Suno 最大的护城河。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔊 放弃所有音乐先验知识</div>
+        <div class="vitem-desc">Suno 不给模型灌输 12 音阶或 200 种乐器，而是把一切建模为声波。"如果你告诉模型有 12 个音调，它永远只会产出那 12 个音调。" 这释放了模型创造跨流派融合（trap × sitar、乡村 × 808 鼓）和微音阶音乐的能力。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔄 选 autoregression 而非 diffusion</div>
+        <div class="vitem-desc">为了产出完整的 3 分钟歌曲（而非 10 秒的完美音质），他们忍受了早期糟糕的音质。"歌是故事，比完美的背景音乐重要得多。" 这个产品优先的技术选择定义了 Suno 的路线。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">📊 90% 用户每天创作</div>
+        <div class="vitem-desc">不是为了发布或分享，而是为了创作带来的愉悦和成就感。"创作行为本身就是娱乐"——这是 Suno 对音乐文化的根本性改变：从被动消费到主动创造。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🤝 Warner 合作与交互式音乐体验</div>
+        <div class="vitem-desc">Mikey 认为数字音乐体验 25 年没变过了。他期待在未来 12 个月内看到真正的观众参与式演唱会，以及让粉丝与偶像共同创作的社交音乐产品。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>"</strong>Before Suno, basically everybody was a consumer of music. The crazy thing about Suno is that in any given day, 90% of the users are going to create something. The creation is actually the entertaining bit.<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Mikey Shulman, Suno CEO</div>
+  </div>
+  <!-- YouTube Embed -->
+  <div class="video-container" style="position:relative;padding-bottom:56.25%;margin-top:10px;">
+    <iframe src="https://www.youtube-nocookie.com/embed/Jq3BIGz4vXQ" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;" allowfullscreen></iframe>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://www.youtube.com/watch?v=Jq3BIGz4vXQ" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">🎬 观看播客 →</a>
+  </div>
+</div>
+
+<!-- Card 7 — 深度文章：Claude Managed Agents -->
+<div class="card span-4">
+  <div class="label-sm">📝 深度文章</div>
+  <h2>Claude Blog — Managed Agent 三大更新：Dreaming、Outcomes、Multiagent Orchestration</h2>
+  <div class="text-body">
+    Anthropic 推出了三个重要功能，将 Claude Managed Agent 从简单的任务执行者升级为具备自我进化能力的智能体系统。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">💭 Dreaming（梦境）</div>
+        <div class="vitem-desc">Agent 在空闲时回放过去会话，提取重复错误、优化工作流、整理记忆。对长期项目和团队协作特别有用。可以在自动更新记忆或人工审核之间选择控制程度。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">📊 Outcomes（成果评估）</div>
+        <div class="vitem-desc">用 rubric（评分标准）定义"好"的样子，独立 grader 在独立上下文中评估输出质量。内部测试中 task success 提升 10 个百分点，docx 质量 +8.4%，pptx +10.1%。最大提升出现在最困难的问题上。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔄 Multiagent Orchestration（多智能体编排）</div>
+        <div class="vitem-desc">主 Agent 将任务拆解，并行委派给子 Agent（各有独立模型、提示词和工具），共享文件系统。所有步骤可在 Claude Console 中追溯。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>实际案例：</strong> Harvey 用 dreaming 让 Agent 跨会话学习，completion rate 提升约 <strong>6x</strong>；Netflix 用多 Agent 并行分析数百个构建日志找出跨应用的模式；Spiral by Every 用 Haiku 接请求、Opus 起草、outcomes 评分，确保写作质量。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://claude.com/blog/new-in-claude-managed-agents" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">📖 阅读全文 →</a>
+  </div>
+</div>
+
+<!-- Card 8 — 今日思考 -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">💭 今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🎵 "创造"本身就是娱乐</div>
+      <div class="callout-text">Suno 揭示了一个深刻的洞察：当 AI 降低创造门槛到极致，创作行为本身——而不是创作成果——成为最核心的娱乐价值。90% 的用户不是想当音乐人，而是想体验"创造"的感觉。这对所有消费级 AI 产品都有启示：不要把 AI 定位为提升效率的工具，而要定位为解锁新体验的入口。</div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🧠 Agent 自我进化：从执行到反思</div>
+      <div class="callout-text">Claude 的 Dreaming 功能标志着 Agent 从"被动响应者"到"主动学习者"的转变。让 Agent 在空闲时回放过去会话、提取教训、优化行为——这本质上是给 Agent 装上了一个"夜间大脑"。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>两个故事共同指向同一个趋势：</strong>AI 正在同时改变"创造"和"学习"的基本形态——前者属于人类，后者属于机器。接下来被重构的领域，很可能是你从未想过需要"民主化"的东西。
+  </div>
+</div>
+
+<!-- Card 9 — 参考来源 -->
+<div class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>🎙️ <a href="https://www.youtube.com/watch?v=Jq3BIGz4vXQ" target="_blank" style="color:#5e6ad2;text-decoration:none;">Training Data — Suno CEO Mikey Shulman 深度访谈</a></div>
+    <div>📝 <a href="https://claude.com/blog/new-in-claude-managed-agents" target="_blank" style="color:#5e6ad2;text-decoration:none;">Claude Blog — Managed Agent 三大更新详解</a></div>
+    <div>🐦 <a href="https://x.com/petergyang/status/2054569893060809151" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — AI 裁员借口</a></div>
+    <div>🐦 <a href="https://x.com/garrytan/status/2054778575988093249" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 旧金山芬太尼危机</a></div>
+    <div>🐦 <a href="https://x.com/nikunj/status/2054599845214650442" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — VC 作为共识资本</a></div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
+    追踪来源包括 YouTube 播客、技术博客、X/Twitter 等一线信源。AI Builders Daily 每日更新。
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
