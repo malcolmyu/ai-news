@@ -233,229 +233,179 @@
 <div class="card span-4">
   <div class="label-sm">Architecture Overview</div>
   <h2>五层架构全景图</h2>
-  <div class="diagram-wrap" style="background:#020617;border-radius:12px;padding:12px;margin-top:10px;overflow-x:auto;">
-    <svg viewBox="0 0 1400 850" xmlns="http://www.w3.org/2000/svg">
+  <div class="diagram-wrap" style="background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:16px;margin-top:10px;overflow-x:auto;">
+    <svg viewBox="0 0 1400 870" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+
   <defs>
-    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/></filter>
-    <!-- Arrows -->
-    <marker id="aCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22d3ee"/></marker>
-    <marker id="aEm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#34d399"/></marker>
-    <marker id="aVio" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a78bfa"/></marker>
-    <marker id="aAmb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fbbf24"/></marker>
-    <marker id="aOra" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fb923c"/></marker>
-    <marker id="aSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker>
-    <marker id="aRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fb7185"/></marker>
-    <!-- Grid -->
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/></filter>
+    <marker id="aAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5e6ad2"/></marker>
+    <marker id="aOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c4842f"/></marker>
+    <marker id="aRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d1453b"/></marker>
+    <marker id="aGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b8b"/></marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#e8e8e6" stroke-width="0.5"/></pattern>
   </defs>
 
-  <!-- Background -->
-  <rect width="1400" height="850" fill="#020617"/>
-  <rect width="1400" height="850" fill="url(#grid)"/>
+  <rect width="1400" height="870" fill="#fafafa"/>
+  <rect width="1400" height="870" fill="url(#grid)"/>
 
   <!-- Layer labels -->
-  <text x="10" y="32" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600">LAYER 1 — INGRESS</text>
-  <text x="10" y="160" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600">LAYER 2 — CORE ORCHESTRATION</text>
-  <text x="10" y="322" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600">LAYER 3 — TOOLS &amp; CAPABILITIES</text>
-  <text x="10" y="552" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600">LAYER 4 — MEMORY &amp; LEARNING</text>
-  <text x="10" y="762" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600">LAYER 5 — INFRASTRUCTURE</text>
+  <text x="14" y="28" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" font-weight="600" text-anchor="start">第一层 — 入口</text>
+  <text x="14" y="168" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" font-weight="600">第二层 — 核心调度</text>
+  <text x="14" y="330" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" font-weight="600">第三层 — 工具与能力</text>
+  <text x="14" y="560" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" font-weight="600">第四层 — 记忆与学习</text>
+  <text x="14" y="770" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" font-weight="600">第五层 — 基础设施</text>
 
   <!-- Region boxes -->
-  <rect x="95" y="310" width="1170" height="150" rx="12" fill="none" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
-  <text x="115" y="330" fill="#fb923c" font-family="JetBrains Mono,monospace" font-size="9" font-weight="600">TOOLS &amp; SKILLS ECOSYSTEM</text>
-  
-  <rect x="95" y="530" width="1170" height="140" rx="12" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
-  <text x="115" y="550" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="9" font-weight="600">MEMORY &amp; LEARNING LOOP</text>
+  <rect x="95" y="318" width="1170" height="150" rx="12" fill="none" stroke="#c4842f" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <text x="115" y="338" fill="#c4842f" font-family="Inter,sans-serif" font-size="9" font-weight="600">工具与技能生态</text>
+  <rect x="95" y="538" width="1170" height="140" rx="12" fill="none" stroke="#5e6ad2" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <text x="115" y="558" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="9" font-weight="600">记忆与学习回路</text>
 
-  <!-- ============== CONNECTIONS (orthogonal, rounded) ============== -->
+  <!-- ========== CONNECTIONS (rounded orthogonal) ========== -->
   <g stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <!-- L1→L2 -->
+    <path d="M245 112 L245 140 L255 185" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M545 112 L545 185" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M850 117 L850 185" stroke="#8b8b8b" stroke-width="1.5" marker-end="url(#aGray)"/>
 
-    <!-- L1→L2: Claude → Session Manager -->
-    <path d="M225 112 L225 140 L225 185" stroke="#22d3ee" stroke-width="2" marker-end="url(#aCyan)"/>
-    <!-- L1→L2: HTTP API → Config Router -->
-    <path d="M545 112 L545 185" stroke="#22d3ee" stroke-width="2" marker-end="url(#aCyan)"/>
-    <!-- L1→L2: Messaging GW → Prompt Builder -->
-    <path d="M850 117 L850 185" stroke="#94a3b8" stroke-width="2" marker-end="url(#aSlate)"/>
-    <!-- L1→L2: ChatGPT → HTTP API (passive) -->
+    <!-- L2→L3 -->
+    <path d="M255 237 L255 348" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M545 237 L545 348" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M850 237 L850 348" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
 
-    <!-- L2→L3: Session Manager → Tool Registry -->
-    <path d="M255 237 L255 340" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- L2→L3: Config Router → Tool Gateway -->
-    <path d="M545 237 L545 340" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- L2→L3: Prompt Builder → Sub-agent Spawner -->
-    <path d="M850 237 L850 340" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
+    <!-- L3 internal bus -->
+    <path d="M355 374 L430 374" stroke="#c4842f" stroke-width="1.2"/>
+    <path d="M660 374 L740 374" stroke="#c4842f" stroke-width="1.2"/>
+    <path d="M960 374 L1040 374" stroke="#c4842f" stroke-width="1.2"/>
 
-    <!-- L3 internal: Tool Registry → Tool Gateway (horizontal bus) -->
-    <path d="M355 366 L430 366" stroke="#fb923c" stroke-width="1.5"/>
-    <!-- Tool Gateway → Sub-agent Spawner (bus continuation) -->
-    <path d="M660 366 L740 366" stroke="#fb923c" stroke-width="1.5"/>
-    <!-- Sub-agent → MCP Bridge (bus continuation) -->
-    <path d="M960 366 L1040 366" stroke="#fb923c" stroke-width="1.5"/>
+    <!-- Sub-agent → Agent (dashed) -->
+    <path d="M870 400 L870 426 L910 426" stroke="#d1453b" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#aRed)"/>
 
-    <!-- Sub-agent Spawner → Agent Instance (delegation, dashed) -->
-    <path d="M870 392 L870 420 L900 420" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#aRose)"/>
+    <!-- MCP Bridge → MCP Server -->
+    <path d="M1230 374 L1250 374" stroke="#8b8b8b" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#aGray)"/>
 
-    <!-- MCP Bridge → MCP Server (external) -->
-    <path d="M1230 366 L1255 366" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#aSlate)"/>
+    <!-- L3→L4 -->
+    <path d="M255 400 L255 476 L185 563" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M545 400 L545 563" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M850 400 L850 476 L790 563" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M1135 400 L1135 476 L1055 563" stroke="#8b8b8b" stroke-width="1.5" marker-end="url(#aGray)"/>
 
-    <!-- L3→L4: Tool Registry → Session Memory -->
-    <path d="M255 392 L255 470 L185 470 L185 555" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- Tool Gateway → Persistent Memory -->
-    <path d="M545 392 L545 555" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- Sub-agent → Skill Manager -->
-    <path d="M850 392 L850 470 L790 470 L790 555" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- MCP Bridge → Session Search -->
-    <path d="M1135 392 L1135 470 L1055 470 L1055 555" stroke="#94a3b8" stroke-width="2" marker-end="url(#aSlate)"/>
+    <!-- L4→L5 -->
+    <path d="M245 615 L245 686 L255 743" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M515 615 L515 743" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M790 615 L790 686 L810 743" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
+    <path d="M1055 615 L1055 686 L1085 743" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#aAccent)"/>
 
-    <!-- L4→L5: Session Memory → Terminal -->
-    <path d="M245 607 L245 680 L255 680 L255 735" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- Persistent Memory → Browser -->
-    <path d="M515 607 L515 735" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- Skill Manager → File System -->
-    <path d="M790 607 L790 680 L810 680 L810 735" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
-    <!-- Session Search → Cron Scheduler -->
-    <path d="M1055 607 L1055 680 L1085 680 L1085 735" stroke="#34d399" stroke-width="2" marker-end="url(#aEm)"/>
+    <!-- Memory→Core feedback -->
+    <path d="M400 590 L400 506 L340 211 L200 211" stroke="#c4842f" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#aOrange)"/>
+    <text x="302" y="481" fill="#c4842f" font-family="Inter,sans-serif" font-size="8">上下文注入</text>
 
-    <!-- Memory→Core feedback (dashed, violet) -->
-    <path d="M400 582 L400 500 L340 500 L340 211 L155 211" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#aVio)"/>
-    <text x="305" y="493" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="8">context injection</text>
-
-    <!-- Skill Manager → Tool Gateway (learning loop) -->
-    <path d="M680 582 L680 500 L530 500 L530 392" stroke="#fb923c" stroke-width="1.2" stroke-dasharray="4,4" marker-end="url(#aOra)"/>
-    <text x="545" y="493" fill="#fb923c" font-family="JetBrains Mono,monospace" font-size="8">skill inject</text>
+    <!-- Skill → Tool feedback -->
+    <path d="M680 590 L680 506 L530 506 L530 400" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#aGray)"/>
+    <text x="542" y="495" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="8">技能注入</text>
   </g>
 
-  <!-- ============== COMPONENTS ============== -->
-  <!-- Helper: component(x, y, w, h, fill, stroke, label, sublabel) -->
+  <!-- ========== COMPONENTS ========== -->
+  <!-- L1: 入口层 -->
+  <rect x="140" y="60" width="210" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="245" y="82" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">Claude / Cursor IDE</text>
+  <text x="245" y="99" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">人机交互界面</text>
 
-  <!-- L1: Ingress -->
-  <rect x="120" y="60" width="210" height="52" rx="6" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="120" y="60" width="210" height="52" rx="6" fill="rgba(8,51,68,0.4)"/>
-  <text x="225" y="82" fill="#22d3ee" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Claude / Cursor IDE</text>
-  <text x="225" y="99" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Human Interface</text>
+  <rect x="430" y="60" width="230" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="545" y="82" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">HTTP API 服务</text>
+  <text x="545" y="99" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">端口 8642 · OpenAI 兼容</text>
 
-  <rect x="430" y="60" width="230" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="430" y="60" width="230" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="545" y="82" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">HTTP API Server</text>
-  <text x="545" y="99" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Port 8642</text>
+  <rect x="760" y="55" width="230" height="62" rx="8" fill="#fff" stroke="#8b8b8b" stroke-width="1.5" filter="url(#s)"/>
+  <text x="875" y="78" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">消息网关</text>
+  <text x="875" y="95" fill="#9e9e9e" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Telegram · Discord · 飞书 · 20+</text>
 
-  <rect x="760" y="55" width="230" height="62" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="760" y="55" width="230" height="62" rx="6" fill="rgba(30,41,59,0.5)"/>
-  <text x="875" y="78" fill="#94a3b8" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Messaging Gateway</text>
-  <text x="875" y="95" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Telegram · Discord · Feishu · 20+</text>
+  <rect x="1050" y="60" width="180" height="52" rx="8" fill="#fff" stroke="#d0d0d0" stroke-width="1" opacity="0.6"/>
+  <text x="1140" y="88" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">外部 HTTP</text>
 
-  <rect x="1050" y="60" width="180" height="52" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" opacity="0.5"/>
-  <rect x="1050" y="60" width="180" height="52" rx="6" fill="rgba(30,41,59,0.3)"/>
-  <text x="1140" y="86" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">External HTTP</text>
+  <!-- L2: 核心调度 -->
+  <rect x="155" y="185" width="200" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="255" y="207" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">会话管理器</text>
+  <text x="255" y="224" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">SQLite · FTS5 全文搜索</text>
 
-  <!-- L2: Core -->
-  <rect x="155" y="185" width="200" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="155" y="185" width="200" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="255" y="207" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Session Manager</text>
-  <text x="255" y="224" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">SQLite + FTS5</text>
+  <rect x="430" y="185" width="230" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="545" y="207" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">配置与模型路由</text>
+  <text x="545" y="224" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">18+ 模型商 · OpenRouter</text>
 
-  <rect x="430" y="185" width="230" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="430" y="185" width="230" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="545" y="207" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Config &amp; Provider Router</text>
-  <text x="545" y="224" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">18+ Providers · OpenRouter</text>
+  <rect x="740" y="185" width="220" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="850" y="207" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">提示词构建器</text>
+  <text x="850" y="224" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">SOUL · MEMORY · Skills</text>
 
-  <rect x="740" y="185" width="220" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="740" y="185" width="220" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="850" y="207" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Prompt Builder</text>
-  <text x="850" y="224" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">SOUL · MEMORY · Skills</text>
+  <!-- L3: 工具层 -->
+  <rect x="155" y="348" width="200" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="255" y="370" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">工具注册中心</text>
+  <text x="255" y="387" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">70+ 内置 · AST 自动发现</text>
 
-  <!-- L3: Tools -->
-  <rect x="155" y="340" width="200" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="155" y="340" width="200" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="255" y="362" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Tool Registry</text>
-  <text x="255" y="379" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">70+ Built-in · AST Scan</text>
+  <rect x="430" y="348" width="230" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="545" y="370" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">工具网关</text>
+  <text x="545" y="387" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">调度 · 过滤 · 工具组</text>
 
-  <rect x="430" y="340" width="230" height="52" rx="6" fill="#0f172a" stroke="#fb923c" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="430" y="340" width="230" height="52" rx="6" fill="rgba(251,146,60,0.3)"/>
-  <text x="545" y="362" fill="#fb923c" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Tool Gateway</text>
-  <text x="545" y="379" fill="#94a3b8" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Dispatch · Filter · Toolset</text>
+  <rect x="740" y="348" width="220" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="850" y="370" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">子代理生成器</text>
+  <text x="850" y="387" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">delegate_task · Kanban</text>
 
-  <rect x="740" y="340" width="220" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="740" y="340" width="220" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="850" y="362" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Sub-agent Spawner</text>
-  <text x="850" y="379" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">delegate_task · Kanban</text>
+  <rect x="1040" y="348" width="190" height="52" rx="8" fill="#fff" stroke="#8b8b8b" stroke-width="1.5" filter="url(#s)"/>
+  <text x="1135" y="370" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">MCP 桥接器</text>
+  <text x="1135" y="387" fill="#9e9e9e" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">stdio · HTTP · 过滤</text>
 
-  <rect x="1040" y="340" width="190" height="52" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="1040" y="340" width="190" height="52" rx="6" fill="rgba(30,41,59,0.5)"/>
-  <text x="1135" y="362" fill="#94a3b8" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">MCP Bridge</text>
-  <text x="1135" y="379" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">stdio · HTTP · Filter</text>
+  <!-- Agent 实例 -->
+  <rect x="910" y="431" width="90" height="32" rx="6" fill="#fff" stroke="#d1453b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.85"/>
+  <text x="955" y="451" fill="#d1453b" font-family="Inter,sans-serif" font-size="10" font-weight="500" text-anchor="middle">代理实例</text>
 
-  <!-- Agent Instance (dashed box) -->
-  <rect x="900" y="425" width="90" height="36" rx="6" fill="#0f172a" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
-  <text x="945" y="447" fill="#fb7185" font-family="JetBrains Mono,monospace" font-size="9" font-weight="500" text-anchor="middle">Agent</text>
+  <!-- MCP 服务 -->
+  <rect x="1250" y="348" width="100" height="52" rx="8" fill="#fff" stroke="#d0d0d0" stroke-width="1" opacity="0.6"/>
+  <text x="1300" y="378" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">MCP 服务</text>
 
-  <!-- MCP Server (external) -->
-  <rect x="1255" y="340" width="100" height="52" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" opacity="0.6"/>
-  <rect x="1255" y="340" width="100" height="52" rx="6" fill="rgba(30,41,59,0.3)"/>
-  <text x="1305" y="366" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">MCP</text>
+  <!-- L4: 记忆层 -->
+  <rect x="140" y="563" width="210" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="245" y="585" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">会话记忆</text>
+  <text x="245" y="602" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">对话历史 · FTS5 检索</text>
 
-  <!-- L4: Memory -->
-  <rect x="140" y="555" width="210" height="52" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="140" y="555" width="210" height="52" rx="6" fill="rgba(76,29,149,0.4)"/>
-  <text x="245" y="577" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Session Memory</text>
-  <text x="245" y="594" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Conversation · FTS5</text>
+  <rect x="400" y="563" width="230" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="515" y="585" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">持久记忆存储</text>
+  <text x="515" y="602" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">USER.md · MEMORY.md</text>
 
-  <rect x="400" y="555" width="230" height="52" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="400" y="555" width="230" height="52" rx="6" fill="rgba(76,29,149,0.4)"/>
-  <text x="515" y="577" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Persistent Memory</text>
-  <text x="515" y="594" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">USER.md · MEMORY.md</text>
+  <rect x="680" y="563" width="220" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="790" y="585" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">技能管理器</text>
+  <text x="790" y="602" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">108 技能 · Curator 守护</text>
 
-  <rect x="680" y="555" width="220" height="52" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="680" y="555" width="220" height="52" rx="6" fill="rgba(76,29,149,0.4)"/>
-  <text x="790" y="577" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Skill Manager</text>
-  <text x="790" y="594" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">108 Skills · Curator</text>
+  <rect x="950" y="563" width="210" height="52" rx="8" fill="#fff" stroke="#5e6ad2" stroke-width="1.5" filter="url(#s)"/>
+  <text x="1055" y="585" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">会话搜索</text>
+  <text x="1055" y="602" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">FTS5 召回 · LLM 摘要</text>
 
-  <rect x="950" y="555" width="210" height="52" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="950" y="555" width="210" height="52" rx="6" fill="rgba(76,29,149,0.4)"/>
-  <text x="1055" y="577" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Session Search</text>
-  <text x="1055" y="594" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">FTS5 Recall · LLM Sum</text>
+  <!-- L5: 基础层 -->
+  <rect x="155" y="743" width="200" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="255" y="765" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">终端</text>
+  <text x="255" y="782" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Bash · venv · Docker</text>
 
-  <!-- L5: Infra -->
-  <rect x="155" y="735" width="200" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="155" y="735" width="200" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="255" y="757" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Terminal</text>
-  <text x="255" y="774" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Bash · venv · Docker</text>
+  <rect x="430" y="743" width="200" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="530" y="765" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">浏览器</text>
+  <text x="530" y="782" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">无头 · 隐身模式</text>
 
-  <rect x="430" y="735" width="200" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="430" y="735" width="200" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="530" y="757" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Browser</text>
-  <text x="530" y="774" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Headless · Stealth</text>
+  <rect x="710" y="743" width="200" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="810" y="765" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">文件系统</text>
+  <text x="810" y="782" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">读 · 写 · 修补</text>
 
-  <rect x="710" y="735" width="200" height="52" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="710" y="735" width="200" height="52" rx="6" fill="rgba(6,78,59,0.4)"/>
-  <text x="810" y="757" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">File System</text>
-  <text x="810" y="774" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Read · Write · Patch</text>
-
-  <rect x="985" y="735" width="200" height="52" rx="6" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5" filter="url(#s)"/>
-  <rect x="985" y="735" width="200" height="52" rx="6" fill="rgba(120,53,15,0.3)"/>
-  <text x="1085" y="757" fill="#fbbf24" font-family="JetBrains Mono,monospace" font-size="12" font-weight="500" text-anchor="middle">Cron Scheduler</text>
-  <text x="1085" y="774" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle">Script · No-agent · Chained</text>
+  <rect x="985" y="743" width="200" height="52" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5" filter="url(#s)"/>
+  <text x="1085" y="765" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">定时调度器</text>
+  <text x="1085" y="782" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">脚本 · 零 Token · 链式</text>
 
   <!-- Legend -->
-  <rect x="10" y="800" width="520" height="42" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
-  <rect x="18" y="812" width="12" height="12" rx="3" fill="rgba(8,51,68,0.6)" stroke="#22d3ee" stroke-width="1"/>
-  <text x="34" y="822" fill="#22d3ee" font-family="JetBrains Mono,monospace" font-size="9">Frontend</text>
-  <rect x="98" y="812" width="12" height="12" rx="3" fill="rgba(6,78,59,0.6)" stroke="#34d399" stroke-width="1"/>
-  <text x="114" y="822" fill="#34d399" font-family="JetBrains Mono,monospace" font-size="9">Backend</text>
-  <rect x="178" y="812" width="12" height="12" rx="3" fill="rgba(76,29,149,0.6)" stroke="#a78bfa" stroke-width="1"/>
-  <text x="194" y="822" fill="#a78bfa" font-family="JetBrains Mono,monospace" font-size="9">Database</text>
-  <rect x="258" y="812" width="12" height="12" rx="3" fill="rgba(120,53,15,0.5)" stroke="#fbbf24" stroke-width="1"/>
-  <text x="274" y="822" fill="#fbbf24" font-family="JetBrains Mono,monospace" font-size="9">Cloud</text>
-  <rect x="318" y="812" width="12" height="12" rx="3" fill="rgba(136,19,55,0.5)" stroke="#fb7185" stroke-width="1"/>
-  <text x="334" y="822" fill="#fb7185" font-family="JetBrains Mono,monospace" font-size="9">Security</text>
-  <rect x="398" y="812" width="12" height="12" rx="3" fill="rgba(251,146,60,0.5)" stroke="#fb923c" stroke-width="1"/>
-  <text x="414" y="822" fill="#fb923c" font-family="JetBrains Mono,monospace" font-size="9">Msg Bus</text>
-  <rect x="470" y="812" width="12" height="12" rx="3" fill="rgba(30,41,59,0.6)" stroke="#94a3b8" stroke-width="1"/>
-  <text x="486" y="822" fill="#94a3b8" font-family="JetBrains Mono,monospace" font-size="9">External</text>
-
-  <!-- Dashed line legend -->
-  <line x1="540" y1="818" x2="570" y2="818" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5,4"/>
-  <text x="575" y="822" fill="#64748b" font-family="JetBrains Mono,monospace" font-size="9">= Dashed</text>
+  <rect x="10" y="815" width="520" height="46" rx="8" fill="#fff" stroke="#e8e8e6" stroke-width="1"/>
+  <rect x="18" y="826" width="12" height="12" rx="3" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
+  <text x="34" y="836" fill="#5e6ad2" font-family="Inter,sans-serif" font-size="10" font-weight="500">调度 / 记忆</text>
+  <rect x="114" y="826" width="12" height="12" rx="3" fill="rgba(196,132,47,0.06)" stroke="#c4842f" stroke-width="1"/>
+  <text x="130" y="836" fill="#c4842f" font-family="Inter,sans-serif" font-size="10" font-weight="500">工具 / 基础</text>
+  <rect x="206" y="826" width="12" height="12" rx="3" fill="#fff" stroke="#8b8b8b" stroke-width="1"/>
+  <text x="222" y="836" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="10">外部 / 网关</text>
+  <rect x="302" y="826" width="12" height="12" rx="3" fill="#fff" stroke="#d1453b" stroke-width="1"/>
+  <text x="318" y="836" fill="#d1453b" font-family="Inter,sans-serif" font-size="10">安全 / 虚线</text>
+  <line x1="408" y1="832" x2="435" y2="832" stroke="#d1453b" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="440" y="836" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="10">= 委托 / 反馈</text>
 </svg></div>
   <div class="text-muted" style="margin-top:8px;text-align:center;">
     入口层 → 调度层 → 工具能力层 → 记忆学习层 → 基础设施层
