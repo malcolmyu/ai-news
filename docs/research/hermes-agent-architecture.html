@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Agent 深度架构解析 — AI News 深度调研</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: #f5f5f4;
+    color: #1c1c1c;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .nav-back {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px 0;
+  }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: #5e6ad2; }
+  @media (max-width: 520px) {
+    .nav-back { padding: 12px 16px 0; }
+  }
+  .bento {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+    .stat-num { font-size: 18px; }
+    h1 { font-size: 24px; }
+    .card { padding: 16px; }
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e6;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    min-width: 0;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
+
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  @media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+  @media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+
+  .label-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b8b8b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #1c1c1c;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #6b6b6b;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin-bottom: 10px;
+    color: #1c1c1c;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+  }
+  .text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+  .text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+  .text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+  .text-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12px; background: #f0f0ee;
+    padding: 2px 6px; border-radius: 4px;
+    color: #1c1c1c;
+  }
+
+  .stat-row { display: flex; gap: 12px; margin-top: 6px; }
+  .stat-item { flex: 1; min-width: 0; }
+  .stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; }
+  .stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 5px;
+    letter-spacing: 0.02em;
+  }
+
+  .quote {
+    background: #fafafa;
+    border-left: 3px solid #5e6ad2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+    color: #4a4a4a;
+  }
+
+  .dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .pillar { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; }
+  .pillar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .pillar-content { flex: 1; }
+  .pillar-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .pillar-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+
+  .callout {
+    background: rgba(94,106,210,0.04);
+    border: 1px solid rgba(94,106,210,0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .callout-title { font-size: 12px; font-weight: 600; color: #5e6ad2; margin-bottom: 4px; }
+  .callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+  .callout-text strong { color: #1c1c1c; font-weight: 500; }
+
+  .info-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid #f0f0ee; }
+  .info-item:last-child { border-bottom: none; }
+  .info-label { font-size: 11px; font-weight: 600; color: #8b8b8b; text-transform: uppercase; letter-spacing: 0.04em; min-width: 60px; flex-shrink: 0; }
+  .info-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+  .info-text strong { color: #1c1c1c; }
+
+  .metrics { display: flex; flex-direction: column; gap: 8px; }
+  .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #fafafa; border-radius: 10px; }
+
+  .process-chain { display: flex; flex-direction: column; gap: 6px; }
+  .proc-step { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
+  .proc-num { width: 20px; height: 20px; border-radius: 50%; background: #5e6ad2; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #fff; flex-shrink: 0; margin-top: 2px; }
+  .proc-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+  .proc-text strong { color: #1c1c1c; }
+</style>
+</head>
+<body>
+
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">Deep Research · 2026/5/16</div>
+  <h1>Hermes Agent 深度架构解析</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    Nous Research 打造的自我进化型 AI Agent 框架<br>
+    从 Prompt Builder 到 Tool Gateway，从 Memory Compaction 到 Skills Learning Loop — 一次彻底的架构拆解
+  </div>
+  <div class="stat-row" style="margin-top:12px;gap:20px;">
+    <div class="stat-item"><div class="stat-num">31</div><div class="stat-label">核心模块</div></div>
+    <div class="stat-item"><div class="stat-num">109</div><div class="stat-label">内置 Skills</div></div>
+    <div class="stat-item"><div class="stat-num">70+</div><div class="stat-label">内置工具</div></div>
+    <div class="stat-item"><div class="stat-num">18+</div><div class="stat-label">LLM Providers</div></div>
+  </div>
+  <div class="dots-row" style="margin-top:12px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Nous Research</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent Framework</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Self-Improving</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Architecture</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">MCP</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Multi-Agent</span>
+  </div>
+</div>
+
+<!-- Sidebar info card -->
+<div class="card span-1">
+  <div class="label-sm">项目信息</div>
+  <div class="info-item"><span class="info-label">作者</span><span class="info-text">Nous Research</span></div>
+  <div class="info-item"><span class="info-label">许可证</span><span class="info-text">MIT</span></div>
+  <div class="info-item"><span class="info-label">语言</span><span class="info-text">Python 3.11+</span></div>
+  <div class="info-item"><span class="info-label">数据库</span><span class="info-text">SQLite + FTS5</span></div>
+  <div class="info-item"><span class="info-label">TUI</span><span class="info-text">TypeScript / Ink</span></div>
+  <div class="info-item"><span class="info-label">协议</span><span class="info-text">JSON-RPC / MCP</span></div>
+</div>
+
+<!-- Core Philosophy -->
+<div class="card span-3">
+  <div class="label-sm">核心哲学</div>
+  <h2>「不是 coding copilot，是一个会自我进化的自治 Agent」</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    Hermes Agent 不是一个绑在 IDE 上的编程助手，也不是一个围绕单个 API 的聊天包装器。它是一个<strong>自治 Agent</strong>，运行时间越长越聪明 — 你的 VPS、GPU 集群、云 VM 都可以作为宿主。你通过 Telegram/Discord/飞书跟它对话，它在你从不会 SSH 登录的机器上自主工作。
+  </div>
+  <div class="quote">
+    <strong>The only agent with a built-in learning loop</strong> — it creates skills from experience, improves them during use, nudges itself to persist knowledge, and builds a deepening model of who you are across sessions.
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Hermes Agent 官方定义</div>
+  </div>
+</div>
+
+<!-- Architecture Diagram -->
+<div class="card span-4">
+  <div class="label-sm">Architecture Overview</div>
+  <h2>五层架构全景图</h2>
+  <div class="diagram-wrap" style="background:#020617;border-radius:12px;padding:12px;margin-top:10px;overflow-x:auto;">
+    <svg viewBox="0 0 1520 960" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Glow filters -->
+    <filter id="glowCyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowEmerald" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowViolet" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowAmber" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowOrange" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSlate" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowRose" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Arrow markers -->
+    <marker id="arrowCyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrowEmerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrowViolet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb923c"/>
+    </marker>
+    <marker id="arrowRose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowSlate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+
+    <!-- Node gradients -->
+    <linearGradient id="frontendGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891b2" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="backendGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="databaseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="securityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e11d48" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="messageBusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea580c" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="externalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#64748b" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Node border styles -->
+    <filter id="subtleShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1520" height="960" fill="#020617"/>
+
+  <!-- 40px Grid -->
+  <g opacity="0.06">
+    <line x1="0" x2="1520" y1="40" y2="40" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="80" y2="80" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="120" y2="120" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="160" y2="160" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="200" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="240" y2="240" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="280" y2="280" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="320" y2="320" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="360" y2="360" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="400" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="440" y2="440" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="480" y2="480" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="520" y2="520" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="560" y2="560" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="600" y2="600" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="640" y2="640" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="680" y2="680" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="720" y2="720" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="760" y2="760" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="800" y2="800" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="840" y2="840" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="880" y2="880" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="920" y2="920" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" x2="1520" y1="960" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <!-- Vertical -->
+    <line x1="40" x2="40" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="80" x2="80" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="120" x2="120" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="160" x2="160" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" x2="200" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="240" x2="240" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="280" x2="280" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="320" x2="320" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="360" x2="360" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" x2="400" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="440" x2="440" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="480" x2="480" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="520" x2="520" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="560" x2="560" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" x2="600" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="640" x2="640" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="680" x2="680" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="720" x2="720" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="760" x2="760" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="800" x2="800" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="840" x2="840" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="880" x2="880" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="920" x2="920" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="960" x2="960" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1000" x2="1000" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1040" x2="1040" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1080" x2="1080" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1120" x2="1120" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1160" x2="1160" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1200" x2="1200" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1240" x2="1240" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1280" x2="1280" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1320" x2="1320" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1360" x2="1360" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1400" x2="1400" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1440" x2="1440" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1480" x2="1480" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1520" x2="1520" y1="0" y2="960" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="760" y="34" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="700" fill="#e2e8f0" letter-spacing="2">HERMES AGENT ARCHITECTURE</text>
+  <line x1="560" y1="44" x2="960" y2="44" stroke="#334155" stroke-width="1"/>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 1: INGRESS (Y: 55–125) -->
+  <!-- ============================================================ -->
+
+  <!-- Layer label -->
+  <text x="28" y="94" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#475569" transform="rotate(-90, 28, 94)">LAYER 1 · INGRESS</text>
+  <line x1="50" y1="90" x2="70" y2="90" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LA-1: Claude App / Cursor IDE (Frontend - cyan) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="120" y="60" width="210" height="52" rx="6" fill="url(#frontendGrad)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="225" y="81" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#cffafe">Claude App / Cursor IDE</text>
+    <text x="225" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#67e8f9" opacity="0.8">FRONTEND · CYAN</text>
+  </g>
+
+  <!-- LA-2: HTTP API Server (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="430" y="60" width="230" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="545" y="81" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">HTTP API Server</text>
+    <text x="545" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · PORT 8642</text>
+  </g>
+
+  <!-- LA-3: Messaging Gateway (External - slate) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="760" y="55" width="230" height="62" rx="6" fill="url(#externalGrad)" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="875" y="76" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#e2e8f0">Messaging Gateway</text>
+    <text x="875" y="95" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#94a3b8">Telegram · Discord · Slack</text>
+    <text x="875" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#94a3b8">Feishu · WhatsApp</text>
+  </g>
+
+  <!-- LA-4: External Ingress label -->
+  <g>
+    <rect x="1050" y="60" width="180" height="52" rx="6" fill="url(#frontendGrad)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.7" opacity="0.5"/>
+    <text x="1140" y="81" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#cffafe">ChatGPT / Web UI</text>
+    <text x="1140" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#67e8f9" opacity="0.8">FRONTEND · CYAN</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 2: CORE ORCHESTRATION (Y: 175–255) -->
+  <!-- ============================================================ -->
+
+  <text x="28" y="219" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#475569" transform="rotate(-90, 28, 219)">LAYER 2 · CORE</text>
+  <line x1="50" y1="215" x2="70" y2="215" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LB-1: Session Manager (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="155" y="185" width="200" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="255" y="206" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Session Manager</text>
+    <text x="255" y="224" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · EMERALD</text>
+  </g>
+
+  <!-- LB-2: Config & Provider Router (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="430" y="185" width="230" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="545" y="206" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Config &amp; Provider Router</text>
+    <text x="545" y="224" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">DeepSeek · OpenAI · Claude</text>
+  </g>
+
+  <!-- LB-3: Prompt Builder (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="740" y="185" width="220" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="850" y="206" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Prompt Builder</text>
+    <text x="850" y="224" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">config · memory · SOUL.md</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- DASHED BOX: Tools & Skills Ecosystem (Layer 3) -->
+  <!-- ============================================================ -->
+  <rect x="105" y="310" width="1160" height="190" rx="12" fill="none" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="8,4" stroke-opacity="0.4"/>
+  <rect x="115" y="300" width="180" height="22" rx="4" fill="#020617" stroke="none"/>
+  <text x="118" y="316" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#fb923c">Tools &amp; Skills Ecosystem</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 3: TOOLS & CAPABILITIES (Y: 335–465) -->
+  <!-- ============================================================ -->
+
+  <text x="28" y="400" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#475569" transform="rotate(-90, 28, 400)">LAYER 3 · TOOLS</text>
+  <line x1="50" y1="400" x2="70" y2="400" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LC-1: Tool Registry (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="155" y="340" width="200" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="255" y="361" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Tool Registry</text>
+    <text x="255" y="379" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · EMERALD</text>
+  </g>
+
+  <!-- LC-2: Tool Gateway (Message Bus - orange) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="430" y="340" width="230" height="52" rx="6" fill="url(#messageBusGrad)" stroke="#fb923c" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="545" y="361" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#fff7ed">Tool Gateway</text>
+    <text x="545" y="379" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#fdba74" opacity="0.8">MESSAGE BUS · 70+ TOOLS</text>
+  </g>
+
+  <!-- LC-3: Sub-agent Spawner (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="740" y="340" width="220" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="850" y="361" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Sub-agent Spawner</text>
+    <text x="850" y="379" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">delegate_task · cron · kanban</text>
+  </g>
+
+  <!-- LC-4: MCP Bridge (External - slate) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="1040" y="340" width="190" height="52" rx="6" fill="url(#externalGrad)" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="1135" y="361" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#e2e8f0">MCP Bridge</text>
+    <text x="1135" y="379" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#94a3b8">EXTERNAL · SLATE</text>
+  </g>
+
+  <!-- Small MCP server icon (external) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="1255" y="340" width="100" height="52" rx="20" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4,3" stroke-opacity="0.6"/>
+    <text x="1305" y="362" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#f43f5e">MCP</text>
+    <text x="1305" y="378" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="400" fill="#fb7185">Server</text>
+  </g>
+
+  <!-- Sub-agent instance (dashed pill) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="900" y="425" width="90" height="36" rx="18" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4,3" stroke-opacity="0.6"/>
+    <text x="945" y="440" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#34d399">Agent</text>
+    <text x="945" y="453" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="400" fill="#6ee7b7">Instance</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- DASHED BOX: Memory & Learning Loop (Layer 4) -->
+  <!-- ============================================================ -->
+  <rect x="105" y="530" width="1160" height="140" rx="12" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="8,4" stroke-opacity="0.4"/>
+  <rect x="115" y="520" width="200" height="22" rx="4" fill="#020617" stroke="none"/>
+  <text x="118" y="536" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#a78bfa">Memory &amp; Learning Loop</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 4: MEMORY & LEARNING (Y: 550–640) -->
+  <!-- ============================================================ -->
+
+  <text x="28" y="600" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#475569" transform="rotate(-90, 28, 600)">LAYER 4 · MEMORY</text>
+  <line x1="50" y1="600" x2="70" y2="600" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LD-1: Session Memory (Database - violet) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="140" y="555" width="210" height="52" rx="6" fill="url(#databaseGrad)" stroke="#a78bfa" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="245" y="576" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#ede9fe">Session Memory</text>
+    <text x="245" y="594" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#c4b5fd" opacity="0.8">DATABASE · VIOLET</text>
+  </g>
+
+  <!-- LD-2: Persistent Memory Store (Database - violet) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="400" y="555" width="230" height="52" rx="6" fill="url(#databaseGrad)" stroke="#a78bfa" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="515" y="576" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#ede9fe">Persistent Memory Store</text>
+    <text x="515" y="594" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#c4b5fd" opacity="0.8">USER.md · MEMORY.md</text>
+  </g>
+
+  <!-- LD-3: Skill Manager (Database - violet) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="680" y="555" width="220" height="52" rx="6" fill="url(#databaseGrad)" stroke="#a78bfa" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="790" y="576" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#ede9fe">Skill Manager</text>
+    <text x="790" y="594" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#c4b5fd" opacity="0.8">108 skills · custom</text>
+  </g>
+
+  <!-- LD-4: Session Search (Database - violet) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="950" y="555" width="210" height="52" rx="6" fill="url(#databaseGrad)" stroke="#a78bfa" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="1055" y="576" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#ede9fe">Session Search</text>
+    <text x="1055" y="594" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#c4b5fd" opacity="0.8">FTS5 · Recall</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 5: INFRASTRUCTURE (Y: 730–810) -->
+  <!-- ============================================================ -->
+
+  <text x="28" y="774" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#475569" transform="rotate(-90, 28, 774)">LAYER 5 · INFRA</text>
+  <line x1="50" y1="770" x2="70" y2="770" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LE-1: Terminal (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="155" y="735" width="200" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="255" y="756" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Terminal</text>
+    <text x="255" y="774" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · EMERALD</text>
+  </g>
+
+  <!-- LE-2: Browser (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="430" y="735" width="200" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="530" y="756" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">Browser</text>
+    <text x="530" y="774" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · EMERALD</text>
+  </g>
+
+  <!-- LE-3: File System (Backend - emerald) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="710" y="735" width="200" height="52" rx="6" fill="url(#backendGrad)" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="810" y="756" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#d1fae5">File System</text>
+    <text x="810" y="774" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#6ee7b7" opacity="0.8">BACKEND · EMERALD</text>
+  </g>
+
+  <!-- LE-4: Cron Scheduler (Cloud - amber) -->
+  <g filter="url(#subtleShadow)">
+    <rect x="985" y="735" width="200" height="52" rx="6" fill="url(#cloudGrad)" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="1085" y="756" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#fef3c7">Cron Scheduler</text>
+    <text x="1085" y="774" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="400" fill="#fcd34d" opacity="0.8">CLOUD · AMBER</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- ARROWS & DATA FLOWS -->
+  <!-- ============================================================ -->
+
+  <!-- Layer 1 → Layer 2: Ingress → Core Orchestration -->
+  <!-- LA-1 (Claude/Cursor) → LB-1 (Session Manager) -->
+  <line x1="225" y1="112" x2="255" y2="183" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowCyan)"/>
+
+  <!-- LA-2 (HTTP API) → LB-2 (Config & Provider Router) -->
+  <line x1="545" y1="112" x2="545" y2="183" stroke="#34d399" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowEmerald)"/>
+
+  <!-- LA-3 (Messaging Gateway) → LB-3 (Prompt Builder) -->
+  <line x1="875" y1="117" x2="850" y2="183" stroke="#94a3b8" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowSlate)"/>
+
+  <!-- Core → Tools: LB-2 (Config Router) → LC-2 (Tool Gateway) -->
+  <line x1="545" y1="237" x2="545" y2="338" stroke="#34d399" stroke-width="2" stroke-opacity="0.7" marker-end="url(#arrowEmerald)"/>
+
+  <!-- LB-1 (Session Manager) → LC-1 (Tool Registry) -->
+  <line x1="255" y1="237" x2="255" y2="338" stroke="#34d399" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrowEmerald)"/>
+
+  <!-- LB-3 (Prompt Builder) → LC-3 (Sub-agent Spawner) -->
+  <line x1="850" y1="237" x2="850" y2="338" stroke="#34d399" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrowEmerald)"/>
+
+  <!-- Tool Gateway → MCP Bridge (horizontal) -->
+  <line x1="660" y1="366" x2="1038" y2="366" stroke="#fb923c" stroke-width="1.2" stroke-opacity="0.5" stroke-dasharray="5,3" marker-end="url(#arrowOrange)"/>
+
+  <!-- Sub-agent Spawner → Agent Instance (dashed, down-right) -->
+  <line x1="890" y1="392" x2="925" y2="423" stroke="#34d399" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="5,3" marker-end="url(#arrowEmerald)"/>
+
+  <!-- MCP Bridge → MCP Server (dashed, rose, security) -->
+  <line x1="1230" y1="366" x2="1253" y2="366" stroke="#f43f5e" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="5,3" marker-end="url(#arrowRose)"/>
+
+  <!-- Layer 3 → Layer 4: Tools ↔ Memory (bidirectional) -->
+  <!-- Tool Registry → Session Memory -->
+  <line x1="255" y1="392" x2="245" y2="553" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowViolet)"/>
+
+  <!-- Tool Gateway → Persistent Memory Store -->
+  <line x1="545" y1="392" x2="515" y2="553" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowViolet)"/>
+
+  <!-- Sub-agent Spawner → Skill Manager -->
+  <line x1="850" y1="392" x2="790" y2="553" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.6" marker-end="url(#arrowViolet)"/>
+
+  <!-- Tool Gateway → Session Search -->
+  <line x1="620" y1="392" x2="1055" y2="553" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arrowViolet)"/>
+
+  <!-- Layer 4 → Layer 2: Memory → Core (context injection) - upward arrows -->
+  <!-- Session Memory → Session Manager -->
+  <path d="M 200 555 L 200 520 L 220 520 L 220 237" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.5" fill="none" marker-end="url(#arrowViolet)" stroke-dasharray="5,3"/>
+
+  <!-- Persistent Memory Store → Prompt Builder -->
+  <path d="M 470 555 L 470 520 L 880 520 L 880 237" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.5" fill="none" marker-end="url(#arrowViolet)" stroke-dasharray="5,3"/>
+
+  <!-- Skill Manager → Prompt Builder -->
+  <path d="M 750 555 L 750 520 L 820 520 L 820 237" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.4" fill="none" marker-end="url(#arrowViolet)" stroke-dasharray="5,3"/>
+
+  <!-- Tool Gateway → Tool Registry (feedback loop) -->
+  <path d="M 430 360 L 400 360 L 400 355 L 357 355" stroke="#fb923c" stroke-width="1" stroke-opacity="0.4" fill="none" marker-end="url(#arrowOrange)" stroke-dasharray="3,3"/>
+
+  <!-- Core orchestrator ↔ infrastructure bidirectional hints -->
+  <!-- Session Manager → Terminal -->
+  <line x1="255" y1="237" x2="255" y2="733" stroke="#34d399" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="8,6"/>
+
+  <!-- Config Router → Browser -->
+  <line x1="545" y1="237" x2="530" y2="733" stroke="#34d399" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="8,6"/>
+
+  <!-- Prompt Builder → File System -->
+  <line x1="850" y1="237" x2="810" y2="733" stroke="#34d399" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="8,6"/>
+
+  <!-- Sub-agent Spawner → Cron Scheduler -->
+  <line x1="930" y1="392" x2="1085" y2="733" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="6,4"/>
+
+  <!-- ============================================================ -->
+  <!-- LEGEND -->
+  <!-- ============================================================ -->
+  <g transform="translate(1220, 690)">
+    <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#64748b">LEGEND</text>
+    <line x1="0" y1="6" x2="120" y2="6" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Frontend -->
+    <rect x="0" y="16" width="12" height="12" rx="2" fill="url(#frontendGrad)"/>
+    <text x="18" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Frontend</text>
+
+    <!-- Backend -->
+    <rect x="100" y="16" width="12" height="12" rx="2" fill="url(#backendGrad)"/>
+    <text x="118" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Backend</text>
+
+    <!-- Database -->
+    <rect x="0" y="36" width="12" height="12" rx="2" fill="url(#databaseGrad)"/>
+    <text x="18" y="47" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Database</text>
+
+    <!-- Cloud -->
+    <rect x="100" y="36" width="12" height="12" rx="2" fill="url(#cloudGrad)"/>
+    <text x="118" y="47" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Cloud</text>
+
+    <!-- Security -->
+    <rect x="0" y="56" width="12" height="12" rx="2" fill="url(#securityGrad)"/>
+    <text x="18" y="67" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Security</text>
+
+    <!-- Message Bus -->
+    <rect x="100" y="56" width="12" height="12" rx="2" fill="url(#messageBusGrad)"/>
+    <text x="118" y="67" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Msg Bus</text>
+
+    <!-- External -->
+    <rect x="0" y="76" width="12" height="12" rx="2" fill="url(#externalGrad)"/>
+    <text x="18" y="87" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">External</text>
+
+    <!-- Dashed line legend -->
+    <line x1="100" y1="92" x2="130" y2="92" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <text x="135" y="96" font-family="'JetBrains Mono', monospace" font-size="8" fill="#64748b">dashed = async</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="760" y="945" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#334155">Hermes Agent · Architecture Diagram · v2.0 · Nous Research</text>
+</svg>
+  </div>
+  <div class="text-muted" style="margin-top:8px;text-align:center;">
+    入口层 → 调度层 → 工具能力层 → 记忆学习层 → 基础设施层
+  </div>
+</div>
+
+<!-- Top 6 Architecture Highlights -->
+<div class="card span-4">
+  <div class="label-sm">六大架构亮点</div>
+  <h2>Hermes 最独特的设计选择</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔁 Self-Improving Loop</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        唯一拥有内置学习循环的 Agent：从对话中<strong>自动提取 skill</strong>，持续改进，自动持久化知识。Curator 守护进程管理 skill 生命周期 — 追踪使用率、归档过期 skill、防止记忆库污染。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔧 Tool Gateway 模式</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        70+ 工具通过 AST 自动发现和注册。plugin 架构实现<strong>热插拔</strong>，每个工具自带 `check_fn` 可用性检测。Toolset 机制支持按平台/场景<strong>按需加载</strong>，避免 token 浪费。
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🧠 Progressive Disclosure</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Skills 遵循<strong>渐进式信息披露</strong>模式：第一次调用只显示名称+描述，再调用才展开完整内容。最大化节省上下文。100+ skills 可同时存在而不炸 token 预算。
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">📐 Architecture Patterns</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Gateway、Registry、Factory/Plugin、Strategy、Observer/Hook、Chain of Responsibility、Progressive Disclosure、Adapter — <strong>11 种经典架构模式</strong>的现代融合实现。
+      </div>
+    </div>
+    <div style="background:rgba(239,68,68,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">⚡ Prompt Caching</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        铁律：<strong>system prompt 绝不中途改变</strong>。以此保证 Anthropic 的 prefix caching 持续命中。Skills 注入通过 slash commands 实现，不破坏缓存断点。
+      </div>
+    </div>
+    <div style="background:rgba(236,72,153,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🌐 20+ Messaging Gateway</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        统一 Gateway 进程调度 Telegram、Discord、飞书、微信等 20+ 平台。两阶段 guard 机制：platform adapter → gateway runner，确保消息安全和 session 隔离。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Module Deep-Dive -->
+<div class="card span-4">
+  <div class="label-sm">模块深度解析</div>
+  <h2>核心模块一览</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">AIAgent Core</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">12k LOC 核心循环 — provider 选择、prompt 构建、工具执行、重试、回退、callback、压缩、持久化。支持 chat_completions / codex_responses / anthropic_messages 三种 API 模式。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Prompt Builder</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">从 SOUL.md、MEMORY.md/USER.md、Skills、AGENTS.md 拼接 system prompt。模型级指令特化 + Tool-Use 指南注入。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Context Compressor</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">默认压缩引擎 — 长对话中段 lossy 摘要。保留 prompt caching 断点。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Messaging Gateway</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">长驻进程统一调度 20+ 消息平台。授权、session 路由、slash command 分发、cron ticking。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Memory System</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">有界持久记忆：MEMORY.md(2200chars) + USER.md(1375chars)。session 启动时注入冻结快照。agent 通过 memory 工具自主管理。session_search 使用 FTS5+LLM 摘要。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Skills System</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">agentskills.io 开放标准。渐进式加载：skills_list→skill_view→skill_view(name,path)。platform-gating、条件激活。agent 自主创建 skill。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Tool Registry</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">70+工具通过 AST 扫描自动发现。模块级 self-register。按需加载 toolset。文件级依赖链：registry→tools→model_tools→run_agent。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Delegation System</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">delegate_task 支持最多 3 并发子 agent。独立上下文隔离。Kanban 多 agent 协调。深度限制防递归爆炸。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">MCP Bridge</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">stdio/HTTP MCP Server 连接。工具名自动加 mcp_前缀。per-server过滤。资源/prompt 能力感知。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:12px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Cron Scheduler</div><div style="font-size:11px;color:#6b6b6b;line-height:1.5;">内置 cron 引擎支持 recurring/one-shot 作业。context_from 链式依赖。Profile 隔离。Script-only (no_agent) 模式零 token 消耗。</div></div>
+  </div>
+</div>
+
+<!-- Delegation + Multi-Agent -->
+<div class="card span-3">
+  <div class="label-sm">Multi-Agent 架构</div>
+  <h2>Delegate → Kanban → Cron：三层调度体系</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    从单次任务到持续编排，Hermes 构建了完整的多 Agent 调度栈。每一层解决不同的并发/持续时间/隔离需求。
+  </div>
+  <div class="vlist" style="display:flex;flex-direction:column;gap:8px;">
+    <div class="vitem" style="background:rgba(94,106,210,0.04);">
+      <div class="vitem-content">
+        <div class="vitem-title">Layer 1: delegate_task — 同步并行</div>
+        <div class="vitem-desc">主 Agent 拆解任务，最多<strong>3 个 Flash 子 agent</strong>并行执行。独立上下文，隔离 workspace。完成后向上汇总。适合 1-3 小时的中等复杂度任务。</div>
+      </div>
+    </div>
+    <div class="vitem" style="background:rgba(16,185,129,0.04);">
+      <div class="vitem-content">
+        <div class="vitem-title">Layer 2: Kanban — 异步看板协作</div>
+        <div class="vitem-desc"><strong>多 Profile 多模型</strong>长期协作。Planner (Pro) 拆任务 → Executor (Flash) 认领执行 → Validator 验收。SQLite-backed 看板持久化状态。适合持续数天的项目开发。</div>
+      </div>
+    </div>
+    <div class="vitem" style="background:rgba(245,158,11,0.04);">
+      <div class="vitem-content">
+        <div class="vitem-title">Layer 3: Cron Scheduler — 定时自治</div>
+        <div class="vitem-desc">系统级 cron 支持 <strong>script-only (no_agent) 零 token 模式</strong>。context_from 链式依赖。Profile 隔离。适合日报生成、数据监控、定时部署。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Provider Routing -->
+<div class="card span-1">
+  <div class="label-sm">Provider 路由</div>
+  <h2>多模型策略</h2>
+  <table style="width:100%;">
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">主模型</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">deepseek, anthropic, openai, minimax…</td></tr>
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">Aux 模型</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">vision→Qwen-VL / web→Flash / compress→auto</td></tr>
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">OpenRouter</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">sort_by_price, 白/黑名单, data_policy</td></tr>
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">缓存策略</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">system prompt 冻结 + prefix caching</td></tr>
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">OAuth</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">Qwen OAuth 等 provider 认证流支持</td></tr>
+<tr><td style="font-size:11px;color:#8b8b8b;text-transform:uppercase;padding:4px 0;">自定义</td><td style="font-size:12px;color:#4a4a4a;text-align:right;">custom provider 支持任意 OpenAI 兼容 API</td></tr>
+</table></div>
+
+<!-- Memory Architecture -->
+<div class="card span-2">
+  <div class="label-sm">Memory Architecture</div>
+  <h2>四层记忆系统</h2>
+  <div class="vlist" style="display:flex;flex-direction:column;gap:8px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">L1: Session Memory</div>
+        <div class="vitem-desc">当前对话上下文。超过阈值自动压缩 — 中间轮次 lossy 摘要，保留首尾。通过 FTS5 可跨 session 搜索。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">L2: Persistent Memory</div>
+        <div class="vitem-desc"><strong>MEMORY.md (2200 chars)</strong> 存 agent 笔记。 <strong>USER.md (1375 chars)</strong> 存用户画像。session 启动时冻结注入。两者容量固定，迫使精炼。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">L3: Skills Knowledge</div>
+        <div class="vitem-desc">108 bundled skills + 自定义 + 可选。渐进式加载，仅展开使用中的 skill。Curator 守护进程管理生命周期。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">L4: External Providers</div>
+        <div class="vitem-desc">8 种可选 memory backend：Honcho, Mem0, Supermemory, ByteRover, Hindsight, Holographic, OpenViking, RetainDB。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cost Analysis -->
+<div class="card span-2">
+  <div class="label-sm">成本架构</div>
+  <h2>闭合源大脑 + 开源手脚</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    Hermes 的 Provider 路由是降本增效的核心。wjjAGI 的实践证实：「一天消耗不超过周额度 15%」。
+  </div>
+  <div class="metric-row"><span style="font-size:12px;color:#4a4a4a;">🧠 Pro 规划 (每任务)</span><span style="font-size:12px;font-weight:500;">~5K tokens</span></div>
+  <div class="metric-row"><span style="font-size:12px;color:#4a4a4a;">🤖 Flash 执行 (每任务)</span><span style="font-size:12px;font-weight:500;">~50-100K tokens</span></div>
+  <div class="metric-row"><span style="font-size:12px;color:#4a4a4a;">💰 成本比 (Pro:Flash)</span><span style="font-size:12px;font-weight:500;color:#5e6ad2;">≈10:1</span></div>
+  <div class="metric-row"><span style="font-size:12px;color:#4a4a4a;">📉 总成本 vs 纯 Pro</span><span style="font-size:12px;font-weight:500;color:#10b981;">↓40-50%</span></div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>额度焦虑的本质不是「钱不够」，是「钱花在错的地方」。</strong>把账算清楚，架构分清楚，Agent 就从玩具变成工具。
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— wjjAGI, 知乎专栏</div>
+  </div>
+</div>
+
+<!-- Design Decisions -->
+<div class="card span-4">
+  <div class="label-sm">关键设计决策</div>
+  <h2>12 个值得关注的设计选择</h2>
+  <div class="grid-2">
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Prompt Caching 铁律</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">system prompt 绝不中途改变。skill slash commands 作为 user message 注入，不破坏缓存断点。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">有界记忆 (Bounded Memory)</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">MEMORY.md 2200 chars / USER.md 1375 chars — 容量上限迫使 agent 做信息精炼，防止记忆库变成垃圾堆。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">模块级 Tool 注册</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">每个 tool 文件在 import 时 self-register，避免中心化配置文件烂掉。AST 自动发现。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Toolset 按需加载</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">cron 作业可只加载 file+terminal+web，delegation 可只加载 terminal+file — 显著减少 token 开销。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Curator 守护进程</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">自动追踪 agent 自建 skill 使用率，归档过期 skill。Pinned skill 免于自动过渡。从不删除，只归档。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">两阶段 Message Guard</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">Gateway 的消息安全：base adapter queues → gateway runner 拦截控制命令 → agent call。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Profile 完全隔离</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">Config + SOUL + AGENTS 完全独立。Kanban worker crash 不影响其他 worker 和主 profile。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Context Compression</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">中间轮次 lossy 摘要，保留首尾。Preserve prompt caching 断点。支持 replace/wrap/summarize 三种模式。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">delegate_task 深度限制</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">max_spawn_depth=1 防止递归爆炸。子 agent 不可再 delegate。可配置提升。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Skill Progressive Disclosure</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">首次调用 skills_list() 只看 name+desc，再次 skill_view(name) 才展开内容。100+ skills 共存不炸 token。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">OAuth Provider 支持</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">Qwen OAuth、GitHub OAuth 等 provider 认证流，解决 token 过期自动刷新。</div></div>
+<div style="background:#fafafa;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Script-only Cron</div><div style="font-size:12px;color:#6b6b6b;line-height:1.5;">no_agent=True 模式 — 纯脚本周期执行，stdout 作为消息发送。零 token 消耗，适合 watchdog 监控。</div></div>
+  </div>
+</div>
+
+<!-- Closing -->
+<div class="card span-4" style="background:rgba(94,106,210,0.02);border-color:rgba(94,106,210,0.12);">
+  <div class="label-sm">Why This Matters</div>
+  <h2>与你的场景</h2>
+  <div class="text-body" style="margin-bottom:12px;">
+    Hermes Agent 不是你「用」的工具 — 它是你「搭建」的平台。理解它的架构，就是理解如何组装自己的 AI 工程流水线。
+  </div>
+  <div class="grid-2">
+    <div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8e6;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🧠 你的 Pro-Flash 调度</div>
+      <div style="font-size:12px;color:#6b6b6b;">DS V4 Pro 规划 → Flash 执行 → delegate_task 并行 — 这正是 Provider Router + Delegation System 的最佳实践。</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8e6;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔄 你的技能体系</div>
+      <div style="font-size:12px;color:#6b6b6b;">已建 10+ 自定义 skill：follow-builders、github-trending、arch-diagram 等。Skills System 是你持续累积能力的基础设施。</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8e6;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">📋 你的 Cron 日报链</div>
+      <div style="font-size:12px;color:#6b6b6b;">10:00 AI Builders+GitHub Trending → 10:15 ai-news HTML 报告。context_from 链式依赖 + script toolsets 限制 — Cron Scheduler 的标准用法。</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8e6;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🚀 下一步</div>
+      <div style="font-size:12px;color:#6b6b6b;">wjjAGI 的 Harness+辩论模式可以移植到你的架构上。Next: 建 debate-engine skill 和 production-workflow skill。</div>
+    </div>
+  </div>
+</div>
+
+<!-- References -->
+<div class="card span-4">
+  <div class="label-sm" style="text-align:center;">📚 参考来源</div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <a href="https://github.com/NousResearch/hermes-agent" target="_blank" style="color:#5e6ad2;text-decoration:none;">Hermes Agent GitHub 仓库</a> · Nous Research · MIT
+    <br>
+    <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" style="color:#5e6ad2;text-decoration:none;">Hermes Agent 官方文档</a> · Architecture / Features / Reference
+    <br>
+    <a href="https://zhuanlan.zhihu.com/p/2038294109237073828" target="_blank" style="color:#5e6ad2;text-decoration:none;">Hermes-Agent 生产级实战：闭源大脑驾驭开源手脚的深度架构解析</a> · wjjAGI · 知乎
+    <br>
+    <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing" target="_blank" style="color:#5e6ad2;text-decoration:none;">Provider Routing 文档</a> · OpenRouter 精细控制
+    <br>
+    <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory" target="_blank" style="color:#5e6ad2;text-decoration:none;">Memory System 文档</a> · Bounded Memory + Session Search
+    <br>
+    <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills" target="_blank" style="color:#5e6ad2;text-decoration:none;">Skills System 文档</a> · agentskills.io 标准
+    <br>
+    {report_date} · AI News 深度调研
+  </div>
+</div>
+
+</div><!-- .bento -->
+</body>
+</html>
