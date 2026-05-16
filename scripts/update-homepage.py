@@ -13,6 +13,7 @@ from datetime import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX = os.path.join(ROOT, 'docs', 'index.html')
+LOG_FILE = os.path.join(ROOT, '.agent', 'homepage-update.log')
 
 # ── Build report registry from actual files ──────────────────────────
 RESEARCH_DIR = os.path.join(ROOT, 'docs', 'research')
@@ -33,7 +34,15 @@ for f in os.listdir(RESEARCH_DIR):
 # Sort newest first
 reports.sort(key=lambda x: -x[1])
 
+def log(msg):
+    """Append timestamped line to the usage log."""
+    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+    ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    with open(LOG_FILE, 'a') as lf:
+        lf.write(f'[{ts}] {msg}\n')
+
 print(f"Found {len(reports)} reports, sorted by mtime")
+log(f'START — {len(reports)} reports found')
 
 # ── Read and update index.html ───────────────────────────────────────
 with open(INDEX) as f:
@@ -97,6 +106,11 @@ with open(INDEX, 'w') as f:
 print("✅ Homepage research section updated!")
 if reports:
     print(f"   Featured: {reports[0][0]}")
+    log(f'DONE — featured: {reports[0][0]}')
     for i, (fname, _, _) in enumerate(reports[1:3], 1):
         print(f"   Entry {i}: {fname}")
+        log(f'  entry {i}: {fname}')
     print(f"   Others ({len(reports)-3}): only in archive")
+    log(f'  others: {len(reports)-3} in archive only')
+else:
+    log('DONE — no reports found')

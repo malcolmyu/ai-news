@@ -6,166 +6,8 @@
 <title>第二号 — AI 新闻与研究</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-    --bg-primary: #f5f5f4;
-    --bg-secondary: #fafafa;
-    --bg-card: #ffffff;
-    --bg-hover: #f0f0ee;
-    --bg-tertiary: #f0f0ee;
-    --accent: #5e6ad2;
-    --accent-light: #7b85d9;
-    --accent-dark: #4a56c0;
-    --text-primary: #1c1c1c;
-    --text-secondary: #6b6b6b;
-    --text-muted: #8b8b8b;
-    --border: #e8e8e6;
-    --border-light: #f0f0ee;
-    --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
-    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.06);
-    --radius-sm: 10px;
-    --radius-md: 12px;
-    --radius-lg: 14px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-feature-settings: "cv01", "ss03";
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.container-sm { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-.card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    box-shadow: var(--shadow-none);
-    transition: box-shadow 0.2s;
-}
-.card:hover { box-shadow: var(--shadow-sm); }
-.card-sm {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    box-shadow: var(--shadow-none);
-    transition: box-shadow 0.2s;
-}
-.card-sm:hover { box-shadow: var(--shadow-sm); }
-.label-sm {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-}
+<link rel="stylesheet" href="styles.css">
 
-.header {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(245,245,244,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-}
-.header-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }
-.logo-icon {
-    width: 32px; height: 32px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-}
-.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 24px; }
-.nav-link { font-size: 13px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent); }
-
-.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 16px; margin-top: 32px; }
-.featured-card {
-    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
-    padding: 24px;
-    text-decoration: none; color: inherit;
-    transition: border-color 0.2s;
-}
-.featured-card:hover { border-color: var(--border-light); }
-.featured-content { display: flex; flex-direction: column; gap: 8px; }
-.featured-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
-.featured-badge { padding: 3px 10px; background: var(--accent); color: white; border-radius: 100px; font-size: 11px; font-weight: 500; }
-.featured-title { font-size: 18px; font-weight: 500; }
-.featured-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.featured-arrow {
-    width: 36px; height: 36px;
-    background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; color: var(--accent);
-    transition: background 0.2s, color 0.2s;
-}
-.featured-card:hover .featured-arrow { background: var(--accent); color: white; }
-.archive-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; margin-bottom: 40px; }
-.archive-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 16px 20px;
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
-    text-decoration: none; color: inherit;
-    transition: border-color 0.2s;
-}
-.archive-item:hover { border-color: var(--border-light); }
-.archive-icon {
-    width: 40px; height: 40px;
-    background: var(--bg-hover); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-}
-.archive-content { flex: 1; }
-.archive-date { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.badge-latest { padding: 2px 8px; background: #e8f0fe; color: var(--accent); border-radius: 100px; font-size: 10px; font-weight: 600; margin-left: 6px; }
-.archive-meta { font-size: 12px; color: var(--text-secondary); }
-.archive-arrow { font-size: 18px; color: var(--text-muted); transition: all 0.2s; }
-.archive-item:hover .archive-arrow { color: var(--accent); transform: translateX(4px); }
-.stats-value { font-size: 32px; font-weight: 500; color: var(--accent); }
-.stats-label { font-size: 11px; color: var(--text-muted); }
-
-/* Hero */
-.hero { padding-top: 100px; text-align: center; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: #fff; border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-bottom: 24px; box-shadow: var(--shadow-none); }
-.hero-badge::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; display: inline-block; }
-.hero-title { font-size: clamp(36px, 5vw, 52px); font-weight: 500; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; color: var(--text-primary); }
-.hero-title span { color: var(--accent); }
-.hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
-.hp-section { padding: 0; }
-.section-header-hp { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
-.section-title-hp { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
-.section-link { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
-.section-link:hover { gap: 8px; }
-.daily-entry { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
-.daily-entry:hover { box-shadow: var(--shadow-sm); }
-.entry-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.card-link { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; box-shadow: var(--shadow-none); }
-.card-link:hover { box-shadow: var(--shadow-sm); }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.card-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
-.card-icon { width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-.card-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
-.card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
-.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 400; }
-@media (max-width: 768px) {
-  .hero { padding-top: 88px; }
-  .featured-card { grid-template-columns: 1fr; }
-  .cards-grid { grid-template-columns: 1fr; }
-  .section-header-hp { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .nav { display: none; }
-}
-</style>
 </head>
 <body style="background:var(--bg-primary);">
 
@@ -237,10 +79,10 @@ body {
 <a href="research/archive.html" class="section-link">查看全部 →</a>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;">
-<a href="research/hermes-agent-architecture.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/16</span></div><h3 class="featured-title">Hermes Agent 深度架构解析</h3><p class="featured-desc">查看完整调研报告</p></div><div class="featured-arrow">→</div></a><a href="research/agent-productivity-paradox.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent 时代的生产力悖论：当协作本身成为最大的瓶颈</div><div style="font-size:12px;color:var(--text-muted);">2026/5/13</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/ai-native-engineering-org.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Running an AI-native Engineering Org</div><div style="font-size:12px;color:var(--text-muted);">2026/5/13</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
+<a href="research/spine-research.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/16</span></div><h3 class="featured-title">Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</h3><p class="featured-desc">查看完整调研报告</p></div><div class="featured-arrow">→</div></a><a href="research/multi-agent-research.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体系统</div><div style="font-size:12px;color:var(--text-muted);">2026/5/16</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/multi-agent-beehive.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">多智能体蜂群架构：大脑与双手解耦的版本答案</div><div style="font-size:12px;color:var(--text-muted);">2026/5/16</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
 </div>
 </div>
-<!-- HOMEPAGE-RESEARCH-END --><!-- HOMEPAGE-RESEARCH-END --><!-- HOMEPAGE-RESEARCH-END --><!-- HOMEPAGE-RESEARCH-END -->
+<!-- HOMEPAGE-RESEARCH-END --><!-- HOMEPAGE-RESEARCH-END -->
 </section>
 
 </main>

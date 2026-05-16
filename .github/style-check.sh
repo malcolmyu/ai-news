@@ -65,6 +65,35 @@ check "All HTML files are complete (no truncation)"
 
 println
 
+# ── Part 0.5: Shared Stylesheet Integrity ─────────────────────────────
+bold "【Design System (docs/styles.css)】"
+
+if [ -f docs/styles.css ]; then
+  # Verify key design tokens are present
+  grep -q '#5e6ad2' docs/styles.css 2>/dev/null
+  check "Accent color #5e6ad2 defined"
+
+  grep -q '#f5f5f4' docs/styles.css 2>/dev/null
+  check "Background color #f5f5f4 defined"
+
+  grep -q '#1c1c1c' docs/styles.css 2>/dev/null
+  check "Text primary #1c1c1c defined"
+
+  grep -q '#e8e8e6' docs/styles.css 2>/dev/null
+  check "Border color #e8e8e6 defined"
+
+  grep -q 'border-radius.*14px' docs/styles.css 2>/dev/null
+  check "Card border-radius 14px defined"
+
+  grep -q 'font-family.*Inter' docs/styles.css 2>/dev/null
+  check "Inter font family set"
+else
+  red "  \xE2\x9C\x97 docs/styles.css not found!"
+  ERRORS=$((ERRORS + 1))
+fi
+
+println
+
 # ── Part 1: Homepage ───────────────────────────────────────────────
 bold "【Homepage (docs/index.html)】"
 
@@ -108,11 +137,11 @@ else
 
     printf "  Checking: %s\n" "$BASENAME"
 
-    # 2a. CSS Variables — reports must NOT use :root { -- }
+    # 2a. CSS Variables — design tokens belong in shared styles.css
     if grep -q ':root' "$REPORT" 2>/dev/null; then
-      warn "$BASENAME uses :root CSS variables — should use hardcoded color values per bento convention"
+      warn "$BASENAME uses :root CSS variables — use shared styles.css instead"
     else
-      green "    \xE2\x9C\x93 No CSS variables"
+      green "    \xE2\x9C\x93 No local :root (using shared styles.css)"
     fi
 
     # 2b. Extra web fonts (only Inter allowed)
@@ -132,17 +161,21 @@ else
       warn "$BASENAME has no '\xE2\x86\x90 \xE8\xBF\x94\xE5\x9B\x9E\xE9\xA6\x96\xE9\xA1\xB5' navigation (.nav-back)"
     fi
 
-    # 2d. Correct color palette
-    if grep -q '#f5f5f4' "$REPORT" 2>/dev/null; then
-      :
+    # 2d. Shared stylesheet ensures correct palette & border-radius
+    if grep -q 'styles.css' "$REPORT" 2>/dev/null; then
+      green "    â Uses shared styles.css"
     else
-      warn "$BASENAME: background color does not match #f5f5f4"
-    fi
-
-    if grep -q 'border-radius.*14px' "$REPORT" 2>/dev/null; then
-      :
-    else
-      warn "$BASENAME: card border-radius not 14px"
+      # Legacy: hardcoded value checks for files without shared stylesheet
+      if grep -q '#f5f5f4' "$REPORT" 2>/dev/null; then
+        :
+      else
+        warn "$BASENAME: background color does not match #f5f5f4"
+      fi
+      if grep -q 'border-radius.*14px' "$REPORT" 2>/dev/null; then
+        :
+      else
+        warn "$BASENAME: card border-radius not 14px"
+      fi
     fi
 
     printf "\n"
