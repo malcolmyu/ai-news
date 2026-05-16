@@ -8,12 +8,30 @@ Regenerates the research section on the homepage to show:
 
 Uses HTML comment markers as anchors to avoid matching id="research" in broken HTML.
 """
-import re, os, json
+import re, os, subprocess
 from datetime import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX = os.path.join(ROOT, 'docs', 'index.html')
 LOG_FILE = os.path.join(ROOT, '.agent', 'homepage-update.log')
+
+def git_first_commit_ts(filepath):
+    """Return UNIX timestamp of the first commit that added this file."""
+    try:
+        out = subprocess.check_output(
+            ['git', '-C', ROOT, 'log', '--diff-filter=A', '--format=%ct', '--', filepath],
+            text=True, stderr=subprocess.DEVNULL
+        )
+        return int(out.strip().split('\n')[-1])
+    except (subprocess.CalledProcessError, ValueError):
+        return 0
+
+def parse_date_meta(content):
+    """Extract date from <meta name="date" content="YYYY-MM-DD">, return datetime or None."""
+    m = re.search(r'<meta[^>]*name="date"[^>]*content="(\d{4}-\d{2}-\d{2})"', content)
+    if m:
+        return datetime.strptime(m.group(1), '%Y-%m-%d')
+    return None
 
 # ── Build report registry from actual files ──────────────────────────
 RESEARCH_DIR = os.path.join(ROOT, 'docs', 'research')
@@ -21,15 +39,23 @@ reports = []
 for f in os.listdir(RESEARCH_DIR):
     if not f.endswith('.html') or f == 'archive.html':
         continue
-    mtime = os.path.getmtime(os.path.join(RESEARCH_DIR, f))
-    # Extract category from file content (first <meta name="category"> or fallback)
-    cat = ''
-    with open(os.path.join(RESEARCH_DIR, f)) as rf:
+    fpath = os.path.join(RESEARCH_DIR, f)
+    with open(fpath) as rf:
         content = rf.read()
+
+    # Date: prefer <meta name="date">, fall back to git first-commit, then mtime
+    dt = parse_date_meta(content)
+    if dt:
+        ts = dt.timestamp()
+    else:
+        ts = git_first_commit_ts(fpath) or os.path.getmtime(fpath)
+
+    # Extract category from file content
+    cat = ''
     cat_m = re.search(r'<meta[^>]*category[^>]*content="([^\"]*)"', content)
     if cat_m:
         cat = cat_m.group(1)
-    reports.append((f, mtime, cat))
+    reports.append((f, ts, cat))
 
 # Sort newest first
 reports.sort(key=lambda x: -x[1])
@@ -41,7 +67,7 @@ def log(msg):
     with open(LOG_FILE, 'a') as lf:
         lf.write(f'[{ts}] {msg}\n')
 
-print(f"Found {len(reports)} reports, sorted by mtime")
+print(f"Found {len(reports)} reports, sorted by date meta")
 log(f'START — {len(reports)} reports found')
 
 # ── Read and update index.html ───────────────────────────────────────
@@ -57,8 +83,8 @@ start_pos = html.find(MARKER_START)
 end_pos = html.find(MARKER_END)
 
 if start_pos >= 0 and end_pos >= 0:
-    before = html[:start_pos + len(MARKER_START)]
-    after = html[end_pos:]
+    before = html[:start_pos]
+    after = html[end_pos + len(MARKER_END):]
 else:
     # Legacy fallback — keep working even without markers
     before = html[:html.find('id="research"')]
@@ -66,13 +92,13 @@ else:
 
 # Build new research section
 entries_html = ''
-for i, (fname, mtime, cat) in enumerate(reports[:3]):
+for i, (fname, ts, cat) in enumerate(reports[:3]):
     # Extract title from file
     with open(os.path.join(RESEARCH_DIR, fname)) as rf:
         content = rf.read()
     title_m = re.search(r'<title>(.*?)</title>', content)
     title = title_m.group(1).split('—')[0].strip() if title_m else fname.replace('.html','')
-    date = datetime.fromtimestamp(mtime).strftime('%Y/%-m/%-d')
+    date = datetime.fromtimestamp(ts).strftime('%Y/%-m/%-d')
 
     if i == 0:
         # Featured card
