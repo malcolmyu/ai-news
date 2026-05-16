@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ AI Builders 日报 2026-05-16</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: #f5f5f4;
+  color: #1c1c1c;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.nav-back {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+}
+.nav-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b6b6b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-back a:hover { color: #5e6ad2; }
+@media (max-width: 520px) {
+  .nav-back { padding: 12px 16px 0; }
+}
+.bento {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) {
+  .bento { grid-template-columns: 1fr; padding: 20px 16px 32px; }
+  .stat-num { font-size: 18px; }
+  h1 { font-size: 24px; }
+  .card { padding: 16px; }
+}
+.card {
+  background: #fff;
+  border: 1px solid #e8e8e6;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.card-highlight { background: rgba(94,106,210,0.02); border-color: rgba(94,106,210,0.12); }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+@media (max-width: 860px) { .span-2, .span-3 { grid-column: span 2; } }
+@media (max-width: 520px) { .span-2, .span-3, .span-4 { grid-column: span 1; } }
+.label-sm {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b8b8b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.subtitle {
+  font-size: 15px;
+  color: #6b6b6b;
+  font-weight: 400;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+  color: #1c1c1c;
+}
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1c1c;
+  margin-bottom: 6px;
+}
+.text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+.text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+.text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+.stat-row { display: flex; gap: 12px; margin-top: 6px; }
+.stat-item { flex: 1; min-width: 0; }
+.stat-num { font-size: 26px; font-weight: 500; letter-spacing: -0.5px; color: #1c1c1c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+.divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+.dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.vlist { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.vitem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 12px;
+}
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.quote {
+  background: #fafafa;
+  border-left: 3px solid #5e6ad2;
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 8px;
+  color: #4a4a4a;
+}
+.callout {
+  background: rgba(94,106,210,0.04);
+  border: 1px solid rgba(94,106,210,0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 10px;
+}
+.callout-title { font-size: 12px; font-weight: 600; color: #5e6ad2; margin-bottom: 4px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.callout-text strong { color: #1c1c1c; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Card 1 — Hero -->
+<div class="card span-4">
+  <div class="label-sm">AI Builders Daily · 2026.5.16</div>
+  <h1>🏗️ AI Builders 日报</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    每天追踪 AI 领域真正的 builder——那些在研究、创业和产品一线的人。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Codex</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 基础设施</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Sandbox</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 角色变革</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item">
+      <div class="stat-num">11</div>
+      <div class="stat-label">今日 Builder</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">播客精选</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">GitHub 热门</div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 — 今日要点 -->
+<div class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        📱 <strong style="color:#1c1c1c;">Sam Altman 宣布 Codex 登陆 ChatGPT 移动端</strong> — AI 编程工具首次进入移动场景。Aaron Levie 同时抛出深刻命题：AI 正在模糊所有岗位边界，但大洗牌后专业化将重新胜出，AI 不是消灭专家，而是把专家的杠杆拉到极致。
+      </div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        🖥️ <strong style="color:#1c1c1c;">为何每个 AI Agent 都需要自己的"电脑"</strong> — Daytona CEO Ivan Burazin 在 MAD Podcast 深度解读 Agent Sandbox 基础设施：安全隔离是刚需，CPU 正在成为 AI 部署的新瓶颈，Sandbox 不是容器而是为 Agent 量身打造的"可组合计算机"。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 — Sam Altman -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Sam Altman — OpenAI CEO</h3>
+  <div class="text-body">
+    Codex 正式进入 ChatGPT 移动端 App，这是 AI 编程工具向移动场景的重要跳跃。同时转发了一篇关于"为什么 CEO 应该亲自用 AI coding tools"的长文，强调领导者必须在一线使用 AI 工具才能真正理解其变革力量。
+  </div>
+  <div class="quote">
+    <strong>"</strong>AI 编程不应该只停留在桌面端。让数十亿移动用户也能用上 Codex，这才是真正的民主化。<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Sam Altman, OpenAI CEO</div>
+  </div>
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/sama/status/2055034461591588916" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/sama/status/2055034714231345475" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 4 — Aaron Levie -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Aaron Levie — Box CEO</h3>
+  <div class="text-body">
+    发表 AI 时代角色重构的深度思考：当前每个人都可以借助 AI 探索相邻职能边界，PM 能写代码、工程师能做设计。但这种"全能"是暂时的——当规模化需求到来时，专业化会重新胜出。另一条推文辛辣吐槽：花一年搭 agent 脚手架，结果新模型一个更新全废了。
+  </div>
+  <div class="quote">
+    <strong>"</strong>We're in a period where every role is getting scrambled. But some constants will re-emerge. AI won't kill specialists — it will make specialists unreachable.<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Aaron Levie, Box CEO</div>
+  </div>
+  <img src="assets/2026-05-16/levie-2055136119969529993-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Aaron Levie tweet">
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/levie/status/2055143231625818554" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/levie/status/2055136119969529993" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 5 — Amjad Masad -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Amjad Masad — Replit CEO</h3>
+  <div class="text-body">
+    Replit iOS App 在与 Apple 和解后终于重新上架（时隔 4 个月）。同时推出重磅功能：任何网站都可以导入 Replit 并一键生成免费移动端 App。这是"人人可编程"愿景的又一里程碑。
+  </div>
+  <img src="assets/2026-05-16/amasad-2055185058282226146-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Amjad Masad Replit iOS">
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/amasad/status/2055185058282226146" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/amasad/status/2055097107758076254" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 6 — Guillermo Rauch -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Guillermo Rauch — Vercel CEO</h3>
+  <div class="text-body">
+    演示 <strong>ai-cli</strong>：在终端里直接渲染 AI 生成图片。运行一条命令即可通过 Vercel AI Gateway 调用所有图像、视频和文本模型。将 AI 能力无缝嵌入开发者最熟悉的终端环境。
+  </div>
+  <img src="assets/2026-05-16/rauchg-2054989456189648918-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Vercel ai-cli demo">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/rauchg/status/2054989456189648918" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 7 — Dan Shipper -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Dan Shipper — Every CEO</h3>
+  <div class="text-body">
+    在理发店听到理发师用 Claude 跑加密货币交易策略、用 Gemini + nano banana 学柔术招式，旁边顾客插话说他们公司刚买了 1,300 个 Claude 席位。"2026 年太疯狂了。"另一条指出：判断组织是否真正"agent 觉醒"的核心指标是领导层是否亲自用 Codex / Claude Code / Cowork。
+  </div>
+  <img src="assets/2026-05-16/danshipper-2055015466054410400-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Dan Shipper agent awakening">
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/danshipper/status/2055030691180503152" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/danshipper/status/2055015466054410400" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 8 — Swyx -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Swyx — AI Engineer</h3>
+  <div class="text-body">
+    两条精彩锐评：① Geoff 在 AIE Miami 大会上当众嘲笑 SAP Concur 是"死软件"，结果台下正好坐着 SAP 的人，反被邀请指导 SAP 6,800 名员工的 AI 转型——"他吐槽了 SAP，SAP……同意了"。② 企业博客署名变成"XX团队"而不是具体个人时，博客就死了。
+  </div>
+  <div class="quote">
+    <strong>"</strong>When the byline on an enterprise blog changes from a person's name to 'The XYZ Team,' the blog is dead. Big ownership comes with big accountability.<strong>"</strong>
+    <div style="margin-top:4px;font-size:11px;color:#8b8b8b;">— Swyx</div>
+  </div>
+  <img src="assets/2026-05-16/swyx-2055113979857703350-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Swyx SAP story">
+  <img src="assets/2026-05-16/swyx-2055113979857703350-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Swyx screenshot 2">
+  <img src="assets/2026-05-16/swyx-2055113979857703350-2.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Swyx screenshot 3">
+  <img src="assets/2026-05-16/swyx-2055113979857703350-3.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Swyx screenshot 4">
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/swyx/status/2055113979857703350" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/swyx/status/2055079344632926603" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 9 — Garry Tan -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Garry Tan — Y Combinator 总裁</h3>
+  <div class="text-body">
+    就数据中心 NIMBY 争议发声，引用长文驳斥"数据中心耗能/耗水/吵/破坏就业"的偏见。直呼"你们听过'市场'这个东西吗？"——AI 基础设施的建设面临越来越大的地方阻力。
+  </div>
+  <img src="assets/2026-05-16/garrytan-2055155189766865028-0.png" style="width:100%;border-radius:8px;margin-top:10px;" alt="Garry Tan data center">
+  <img src="assets/2026-05-16/garrytan-2055093087660286413-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="Garry Tan NIMBY">
+  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+    <a href="https://x.com/garrytan/status/2055155189766865028" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ① →</a>
+    <a href="https://x.com/garrytan/status/2055093087660286413" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 ② →</a>
+  </div>
+</div>
+
+<!-- Card 10 — More Builders (Nikunj, Matt Turck, Peter Yang, Steinberger, Zara) -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>更多 Builder 观点</h3>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Nikunj Kothari · FPV Ventures 合伙人</div>
+        <div class="vitem-desc">每个有数据壁垒的大公司都将被迫"无头化"（headless），因为 agent 的市场将是人类的 100 倍。如果你只为人类保留系统入口，你的价值将缩水 100 倍。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Matt Turck · FirstMark VC</div>
+        <div class="vitem-desc">成立仅 9 个月的 <strong>GradiumAI</strong> 在第三方 TTS 基准测试中全面碾压 OpenAI、ElevenLabs、Cartesia 和 Deepgram。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Peter Yang · Roblox 产品经理</div>
+        <div class="vitem-desc">吐槽 AI Hackathon："现在参加 AI 黑客松不就是坐着等 agent 跑完一半时间吗？"没设计系统就直接让 AI 出界面是通往"AI 垃圾"的捷径。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Peter Steinberger · OpenClaw 创始人</div>
+        <div class="vitem-desc">继续迭代 discrawl，分享 agent 写代码 + agent 审代码的闭环 workflow。让 Codex 写代码，再用自己的 Codex review skill 审查。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Zara Zhang · AI 社区组织者</div>
+        <div class="vitem-desc">5/23 旧金山 Agent Context 线下活动，联合 Notion 和 Radical VC。只接受真实 workflow 投屏，不接受 PPT。</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;">
+    <a href="https://x.com/nikunj/status/2054924517135540320" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Nikunj 原文 →</a>
+    <a href="https://x.com/mattturck/status/2055029555455222199" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Matt Turck 原文 →</a>
+    <a href="https://x.com/petergyang/status/2055093015304396986" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Peter Yang 原文 ① →</a>
+    <a href="https://x.com/petergyang/status/2055091746036716026" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Peter Yang 原文 ② →</a>
+    <a href="https://x.com/steipete/status/2055203470941061600" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Steinberger 原文 →</a>
+    <a href="https://x.com/zarazhangrui/status/2054981832408760782" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">Zara 原文 →</a>
+  </div>
+</div>
+
+<!-- Card 11 — 播客精选 -->
+<div class="card span-4">
+  <div class="label-sm">🎙️ 播客精选</div>
+  <h2>The MAD Podcast：为什么每个 AI Agent 都需要自己的"电脑"</h2>
+  <div class="text-body">
+    嘉宾：<strong>Ivan Burazin</strong>（Daytona CEO）| 主持人：Matt Turck。这期深度解析了 Agent 基础设施中被忽视的关键层——Sandbox。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔒 安全隔离是刚需</div>
+        <div class="vitem-desc">Ivan 亲自演示风险：让 Claude 帮忙拉银行数据，Claude 说"给我登录权限就行"。解决方案：给 Agent 独立机器、独立账户、独立手机号（用于 2FA），权限受限，随时可销毁。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🏎️ Sandbox 不是容器</div>
+        <div class="vitem-desc">现有云基础设施为无状态应用设计（像卡车，稳但慢），Sandbox 需要状态化、快启快灭（像跑车）。Daytona 为此放弃 Kubernetes 自研调度器。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">📊 两类核心场景</div>
+        <div class="vitem-desc">① 后台长期运行的 Agent（Harvey、Perplexity、Lovable）；② 研究侧 RL/评估/基准测试——都需要大规模 CPU，而非 GPU。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🧩 Agent 全栈视角</div>
+        <div class="vitem-desc">模型（大脑）→ 工具/Sandbox（手）→ 记忆 → 编排（管理）→ 可观测性。其中记忆和身份认证是当前最不成熟的环节。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">⚠️ CPU 短缺预警</div>
+        <div class="vitem-desc">Dylan Patel（SemiAnalysis）预测 2025 年 10 月起全球 CPU 将出现短缺。Agent 规模化 + RL 训练都需要海量 CPU。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>关键洞察：</strong>如果说 GPU 是 AI 训练的引擎，CPU 正在成为 AI 部署和 agent 运行的新瓶颈。Sandbox 基础设施的争夺已经悄然开始。
+  </div>
+  <div class="video-container" style="position:relative;padding-bottom:56.25%;margin-top:10px;">
+    <iframe src="https://www.youtube-nocookie.com/embed/kMXJrzAa5fM" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;" allowfullscreen></iframe>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://www.youtube.com/watch?v=kMXJrzAa5fM" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">🎬 观看播客 →</a>
+  </div>
+</div>
+
+<!-- Card 12 — 今日思考 -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">💭 今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🔄 AI 时代的大洗牌与重新专业化</div>
+      <div class="callout-text">Aaron Levie 的洞见值得每位知识工作者深思：当前每个人都能借助 AI 跨界探索，但这种"全能"是暂时的。当 AI 让每个人的产出翻了 10 倍，真正拉开差距的不是"你能做几种工作"，而是"你在某个领域能做多深"。AI 不是消灭专家，是让专家的护城河更深。</div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">🖥️ Agent 基础设施的隐形势力版图</div>
+      <div class="callout-text">Daytona 的 Sandbox 哲学揭示了一条暗线：虽然所有人都在关注 GPU 和模型竞赛，但 CPU 和 Sandbox 层正在成为 Agent 时代真正的瓶颈。安全隔离、快启快灭、独立身份——这些"无聊"的基础设施问题，可能决定 Agent 能走多远。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>两条主线共同指向一个趋势：</strong>AI 正在同时改变"人的专业化路径"和"机器的基础设施需求"。前者的答案是"更深"，后者的答案是"更快"。在 Agent 时代，最稀缺的不是智能，而是让智能安全落地的工程能力。
+  </div>
+</div>
+
+<!-- Card 13 — GitHub Trending -->
+<div class="card span-4">
+  <div class="label-sm">📈 GitHub Trending · 2026.5.16</div>
+  <h2>今日 GitHub 热门项目 TOP 9</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">1</div>
+      <div class="vitem-content">
+        <div class="vitem-title">ruvnet/RuView ⭐ 1,859 · Rust</div>
+        <div class="vitem-desc">将普通 WiFi 信号转化为实时空间感知、生命体征监测和人体存在检测——无需任何摄像头</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">2</div>
+      <div class="vitem-content">
+        <div class="vitem-title">tinyhumansai/openhuman ⭐ 1,271 · Rust</div>
+        <div class="vitem-desc">你的个人 AI 超级智能。私密、简洁、极其强大</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">3</div>
+      <div class="vitem-content">
+        <div class="vitem-title">supertone-inc/supertonic ⭐ 719 · Swift</div>
+        <div class="vitem-desc">闪电般快速的端侧多语言 TTS，基于 ONNX 原生运行</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;just-content:center;font-size:16px;flex-shrink:0;">4</div>
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/skills ⭐ 689 · Python</div>
+        <div class="vitem-desc">Anthropic 公开的 Agent Skills 仓库</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">5</div>
+      <div class="vitem-content">
+        <div class="vitem-title">K-Dense-AI/scientific-agent-skills ⭐ 646 · Python</div>
+        <div class="vitem-desc">一套开箱即用的 AI Agent 技能包，覆盖科研、工程、分析、金融和写作</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">6</div>
+      <div class="vitem-content">
+        <div class="vitem-title">oven-sh/bun ⭐ 448 · Rust</div>
+        <div class="vitem-desc">极速 JavaScript 运行时、打包器、测试运行器和包管理器——全能一体</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">7</div>
+      <div class="vitem-content">
+        <div class="vitem-title">joeseesun/qiaomu-anything-to-notebooklm ⭐ 438 · Python</div>
+        <div class="vitem-desc">Claude Skill：多源内容处理器，支持微信公众号、网页、YouTube、PDF、Markdown → 转化为 NotebookLM 播客/PPT/思维导图/测验</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">8</div>
+      <div class="vitem-content">
+        <div class="vitem-title">NVIDIA-AI-Blueprints/video-search-and-summarization ⭐ 308 · Python</div>
+        <div class="vitem-desc">GPU 加速视觉 Agent 和 AI 视频分析的参考架构套件</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">9</div>
+      <div class="vitem-content">
+        <div class="vitem-title">influxdata/telegraf ⭐ 212 · Go</div>
+        <div class="vitem-desc">用于采集、处理、聚合和写入指标、日志及其他数据的 Agent</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 — 参考来源 -->
+<div class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>🐦 <a href="https://x.com/sama/status/2055034461591588916" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — Codex 登陆移动端</a></div>
+    <div>🐦 <a href="https://x.com/sama/status/2055034714231345475" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — CEO 应该用 AI coding</a></div>
+    <div>🐦 <a href="https://x.com/levie/status/2055143231625818554" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — AI 时代角色重构</a></div>
+    <div>🐦 <a href="https://x.com/levie/status/2055136119969529993" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — Agent 脚手架吐槽</a></div>
+    <div>🐦 <a href="https://x.com/amasad/status/2055185058282226146" target="_blank" style="color:#5e6ad2;text-decoration:none;">Amjad Masad — Replit iOS 重新上架</a></div>
+    <div>🐦 <a href="https://x.com/rauchg/status/2054989456189648918" target="_blank" style="color:#5e6ad2;text-decoration:none;">Guillermo Rauch — ai-cli 终端 AI 图片</a></div>
+    <div>🐦 <a href="https://x.com/danshipper/status/2055030691180503152" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — 理发店的 Claude</a></div>
+    <div>🐦 <a href="https://x.com/danshipper/status/2055015466054410400" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — Agent 觉醒指标</a></div>
+    <div>🐦 <a href="https://x.com/swyx/status/2055113979857703350" target="_blank" style="color:#5e6ad2;text-decoration:none;">Swyx — SAP Concur 故事</a></div>
+    <div>🐦 <a href="https://x.com/garrytan/status/2055155189766865028" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 数据中心 NIMBY</a></div>
+    <div>🐦 <a href="https://x.com/nikunj/status/2054924517135540320" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — 无头化公司</a></div>
+    <div>🐦 <a href="https://x.com/mattturck/status/2055029555455222199" target="_blank" style="color:#5e6ad2;text-decoration:none;">Matt Turck — GradiumAI TTS 基准</a></div>
+    <div>🐦 <a href="https://x.com/petergyang/status/2055093015304396986" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — AI 黑客松吐槽</a></div>
+    <div>🐦 <a href="https://x.com/steipete/status/2055203470941061600" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — Agent review 闭环</a></div>
+    <div>🐦 <a href="https://x.com/zarazhangrui/status/2054981832408760782" target="_blank" style="color:#5e6ad2;text-decoration:none;">Zara Zhang — SF Agent Context 活动</a></div>
+    <div>🎙️ <a href="https://www.youtube.com/watch?v=kMXJrzAa5fM" target="_blank" style="color:#5e6ad2;text-decoration:none;">The MAD Podcast — Daytona CEO Ivan Burazin</a></div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
+    追踪来源包括 YouTube 播客、GitHub Trending、X/Twitter 等一线信源。AI Builders Daily 每日更新。
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
