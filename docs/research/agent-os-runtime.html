@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-19">
+<meta name="category" content="架构与工程">
+<title>Agent 系统正在重新走一遍 OS 和 Cloud Runtime 的老路</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.quote { background: #fafafa; border-left: 3px solid #5e6ad2; border-radius: 0 10px 10px 0; padding: 10px 14px; font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tip-card { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px 16px; }
+.tip-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #1c1c1c; }
+.subtitle { font-size: 13px; color: #6b6b6b; line-height: 1.6; }
+.info-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0ee; font-size: 12px; }
+.info-item:last-child { border-bottom: none; }
+.info-label { color: #8b8b8b; }
+.info-text { color: #1c1c1c; font-weight: 500; }
+</style>
+
+</head>
+<body>
+
+<div class="nav-back"><a href="../index.html">← 返回首页</a></div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">Research Report · 2026/5/19</div>
+  <h1>Agent 系统正在重新走一遍 OS 和 Cloud Runtime 的老路</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    acodespace @ 知乎 · 2026/5/11 · 802 赞<br>
+    读完 Anthropic 的 Managed Agents 之后，从系统工程层面把想法摊开：Agent infra 已经不是 prompt engineering 的问题了——它在重新发明 OS 和分布式系统的每一层。
+  </div>
+  <div class="stat-row" style="margin-top:16px;">
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">核心命题</div></div>
+    <div class="stat-item"><div class="stat-num">32</div><div class="stat-label">C++ 源码 Patch</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">收束趋势</div></div>
+    <div class="stat-item"><div class="stat-num">802</div><div class="stat-label">社区认可</div></div>
+  </div>
+  <div class="dots-row" style="margin-top:12px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AgentOS</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Runtime 抽象</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Control Plane</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Event Sourcing</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">系统工程</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Anthropic</span>
+  </div>
+</div>
+
+<!-- Source card -->
+<div class="card span-1">
+  <div class="label-sm">文章来源</div>
+  <div class="info-item"><span class="info-label">平台</span><span class="info-text">知乎专栏</span></div>
+  <div class="info-item"><span class="info-label">日期</span><span class="info-text">2026/5/11</span></div>
+  <div class="info-item"><span class="info-label">作者</span><span class="info-text">acodespace</span></div>
+  <div class="info-item"><span class="info-label">赞同</span><span class="info-text">802</span></div>
+  <div class="info-item"><span class="info-label">类型</span><span class="info-text">读后感 / 系统工程视角</span></div>
+  <div class="info-item"><span class="info-label">触发</span><span class="info-text">Anthropic Managed Agents</span></div>
+</div>
+
+<!-- Core Thesis -->
+<div class="card span-3">
+  <div class="label-sm">核心论断</div>
+  <h2>当问题形状变了，答案就不能还是 prompt</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    作者追溯了一条清晰的认知升级路径，最终指向一个结论：<strong>Agent 系统的核心问题，正在从「怎么让模型更聪明」转向「长期任务如何可靠执行」</strong>——这不是 prompt engineering 的范畴，而是 OS / Runtime / 分布式系统的问题。
+  </div>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">1</div>
+      <div class="vitem-content">
+        <div class="vitem-title">第一层：Prompt 为王</div>
+        <div class="vitem-desc">早期以为核心在 prompt —— 怎么让模型更会拆任务、更稳地调工具、遇到错误还能往前走。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">2</div>
+      <div class="vitem-content">
+        <div class="vitem-title">第二层：Workflow 才是麻烦</div>
+        <div class="vitem-desc">复杂任务有文件读写、命令执行、API、状态和重试。于是有了 harness、tool loop、memory、planner。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">3</div>
+      <div class="vitem-content">
+        <div class="vitem-title">第三层：Runtime 才是地基</div>
+        <div class="vitem-desc">Workflow 跑在哪里？状态放哪里？失败怎么恢复？凭证属于谁？上下文满了什么能丢？—— 这时候事情开始像 <strong>Operating System</strong>。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Harness Rot: span-4 highlight -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">01 · 最危险的架构问题</div>
+  <h2>Harness 会腐化 —— 过期的正确性比 bug 更可怕</h2>
+  <div class="grid-2" style="margin-top:10px;">
+    <div>
+      <div class="text-body">
+        <strong>什么是 Harness 腐化？</strong> 不是代码写烂，而是慢慢堆满某一代模型、某一代工具、某一种部署环境的假设——模型快顶满窗口加 context reset，模型不会从错误恢复加 retry prompt，sandbox 偶尔卡死加 watchdog。每个补丁加的时候都合理。
+      </div>
+    </div>
+    <div>
+      <div class="text-body">
+        <strong>为什么比 bug 更危险？</strong> 模型进步太快——今天像缺陷的行为三个月后可能不是了，今天好用的 prompt trick 下一代可能反而被干扰。Harness 里最危险的是 <strong>过期的正确性</strong>：它曾经对过、救过线上，所以没人敢删；等底层模型变了，它就变成看不见的阻力。
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>类比：</strong>这和 kernel workaround、某代 NIC 行为、某版 GPU scheduler、某云厂商限制很像——先是补丁，再变成 ABI 的一部分，最后谁都不敢动。Agent harness 也会这样。
+  </div>
+</div>
+
+<!-- Context → Runtime + Append-only Log -->
+<div class="card span-2">
+  <div class="label-sm">02 · 关键洞察</div>
+  <h2>Context Window is NOT Runtime</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    当任务长时间跑起来，context engineering 不只是「怎么喂模型」，而是<strong>状态管理</strong>。上下文窗口只是当前调用能看到的一小块工作集——它不是 runtime，不是 session，更不是 source of truth。
+  </div>
+  <div class="quote">
+    <strong>类比：</strong>模型上下文更像 CPU cache 或进程当前映射进来的页——影响很大，但不能承担持久状态。如果系统把 context 当 session，恢复能力基本是假的——恢复的往往是被压缩、被转述、可能已经偏掉的故事版本。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">03 · 解决方案</div>
+  <h2>Append-Only Session Log ≈ Event Sourcing</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    把完整 session 当成 <strong>append-only log</strong>：发生过什么就记下来，模型当前需要什么再从 log 构造 view。这和分布式系统里的 event sourcing 一模一样——存事件序列而非当前状态，状态可重放，不同视图可从同一份 log materialize。
+  </div>
+  <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:10px 14px;font-size:12px;color:#6b6b6b;line-height:1.6;">
+    <strong>隐含红利：</strong>把「记忆」从模型里拿出来——runtime 存事实，模型在某个 view 上推理。边界很像数据库与查询引擎：数据别塞进查询计划，计划可以变，数据不能丢。
+  </div>
+</div>
+
+<!-- Brain vs Hands + SVG architecture diagram -->
+<div class="card span-2">
+  <div class="label-sm">04 · 架构分离</div>
+  <h2>Brain vs Hands = Control Plane / Data Plane</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    「把大脑和手拆开」的直觉很直观，作者把它映射为 <strong>control plane 与 data plane 的分离</strong>——这是云基础设施走了二十年的路。
+  </div>
+  <table style="margin-top:6px;">
+    <tr><th>角色</th><th>类比</th><th>职责</th></tr>
+    <tr><td>Brain（模型 + harness）</td><td>Control Plane</td><td>决策、编排、选工具、定下一步</td></tr>
+    <tr><td>Hands（sandbox/tool/MCP）</td><td>Data Plane</td><td>真执行、跑命令、访问资源、产生副作用</td></tr>
+  </table>
+  <div class="quote" style="margin-top:8px;">
+    <strong>生命周期不同：</strong>Control plane 要可恢复可升级；Data plane 要隔离可丢可按需起；Session state 要比二者更持久；Credentials 又应在另一道边界。全塞一个盒子里，短期省事，长期全是耦合。
+  </div>
+</div>
+
+<!-- SVG Architecture Diagram -->
+<div class="card span-2">
+  <div class="label-sm">AgentOS 分层架构</div>
+  <h2>从模型到 Runtime 的重新分层</h2>
+  <div class="diagram-wrap" style="margin-top:8px;overflow-x:auto;">
+<svg viewBox="0 0 420 340" width="100%" style="max-width:420px;font-family:Inter,sans-serif;">
+  <defs>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/></filter>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5e6ad2"/></marker>
+  </defs>
+  <!-- Background -->
+  <rect width="420" height="340" rx="14" fill="#fafafa"/>
+  <!-- Control Plane Layer -->
+  <rect x="15" y="10" width="390" height="75" rx="10" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="25" y="30" font-size="11" fill="#5e6ad2" font-weight="600">Control Plane（Brain）</text>
+  <rect x="25" y="38" width="110" height="36" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="80" y="60" font-size="12" fill="#1c1c1c" font-weight="500" text-anchor="middle">Harness</text>
+  <rect x="145" y="38" width="110" height="36" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="200" y="60" font-size="12" fill="#1c1c1c" font-weight="500" text-anchor="middle">Orchestrator</text>
+  <rect x="265" y="38" width="130" height="36" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="330" y="60" font-size="12" fill="#1c1c1c" font-weight="500" text-anchor="middle">Scheduler</text>
+  <!-- Session Log middle layer -->
+  <rect x="15" y="95" width="390" height="40" rx="8" fill="rgba(16,185,129,0.06)" stroke="#10b981" stroke-width="1"/>
+  <text x="30" y="113" font-size="10" fill="#10b981" font-weight="600">SESSION LOG（Append-Only / Event Sourcing）</text>
+  <text x="30" y="128" font-size="9" fill="#8b8b8b">事件流 · 可回放 · 可审计 · 状态可重建</text>
+  <!-- Interface Boundary -->
+  <rect x="15" y="145" width="390" height="20" rx="4" fill="rgba(245,158,11,0.08)"/>
+  <text x="210" y="158" font-size="9" fill="#c4842f" font-weight="600" text-anchor="middle">STABLE INTERFACE（execute / provision / wake / session）</text>
+  <!-- Data Plane Layer -->
+  <rect x="15" y="175" width="390" height="100" rx="10" fill="rgba(139,92,246,0.04)" stroke="#c4842f" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="25" y="195" font-size="11" fill="#c4842f" font-weight="600">Data Plane（Hands）</text>
+  <rect x="25" y="205" width="85" height="55" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="67" y="228" font-size="11" fill="#1c1c1c" font-weight="500" text-anchor="middle">Sandbox</text>
+  <text x="67" y="248" font-size="9" fill="#8b8b8b" text-anchor="middle">Disposable</text>
+  <rect x="120" y="205" width="85" height="55" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="162" y="228" font-size="11" fill="#1c1c1c" font-weight="500" text-anchor="middle">Tools</text>
+  <text x="162" y="248" font-size="9" fill="#8b8b8b" text-anchor="middle">MCP / API</text>
+  <rect x="215" y="205" width="85" height="55" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="257" y="228" font-size="11" fill="#1c1c1c" font-weight="500" text-anchor="middle">Browser</text>
+  <text x="257" y="248" font-size="9" fill="#8b8b8b" text-anchor="middle">CDP</text>
+  <rect x="310" y="205" width="85" height="55" rx="8" fill="#fff" stroke="#e8e8e6" filter="url(#s)"/>
+  <text x="352" y="228" font-size="11" fill="#1c1c1c" font-weight="500" text-anchor="middle">Customer</text>
+  <text x="352" y="248" font-size="9" fill="#8b8b8b" text-anchor="middle">VPC / Env</text>
+  <!-- External boundary -->
+  <rect x="15" y="285" width="390" height="40" rx="8" fill="rgba(239,68,68,0.04)" stroke="rgba(239,68,68,0.15)"/>
+  <text x="25" y="303" font-size="10" fill="#d1453b" font-weight="600">Credential Boundary</text>
+  <text x="25" y="318" font-size="9" fill="#8b8b8b">凭证不进入 Sandbox · 能力授权 · 审计追踪</text>
+  <!-- Arrows -->
+  <line x1="210" y1="85" x2="210" y2="95" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <line x1="210" y1="135" x2="210" y2="145" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <line x1="210" y1="165" x2="210" y2="175" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <!-- Legend -->
+  <rect x="18" y="332" width="8" height="8" rx="2" fill="rgba(94,106,210,0.3)"/>
+  <text x="30" y="339" font-size="8" fill="#8b8b8b">Control</text>
+  <rect x="80" y="332" width="8" height="8" rx="2" fill="rgba(16,185,129,0.3)"/>
+  <text x="92" y="339" font-size="8" fill="#8b8b8b">State</text>
+  <rect x="130" y="332" width="8" height="8" rx="2" fill="rgba(245,158,11,0.3)"/>
+  <text x="142" y="339" font-size="8" fill="#8b8b8b">Interface</text>
+  <rect x="195" y="332" width="8" height="8" rx="2" fill="rgba(139,92,246,0.3)"/>
+  <text x="207" y="339" font-size="8" fill="#8b8b8b">Execution</text>
+  <rect x="270" y="332" width="8" height="8" rx="2" fill="rgba(239,68,68,0.3)"/>
+  <text x="282" y="339" font-size="8" fill="#8b8b8b">Security</text>
+</svg>
+  </div>
+  <div style="font-size:10px;color:#8b8b8b;margin-top:4px;text-align:center;">AgentOS 分层架构：Control Plane / Session Log / Stable Interface / Data Plane / Credential Boundary</div>
+</div>
+
+<!-- Disposable Runtime + Interface -->
+<div class="card span-2">
+  <div class="label-sm">05 · 执行环境</div>
+  <h2>Tools & Sandbox → Disposable Runtime</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    Sandbox 不是家、不是记忆、不是长期状态——它是某次执行的工位。需要时 provision，坏了就丢，污了就换。设计目标应是 <strong>靠 runtime 恢复任务，而不是抢救某个容器</strong>。
+  </div>
+  <div class="quote">
+    <strong>连锁效应：</strong>一旦 tools/sandbox 都是 disposable，orchestration 自然更像 control plane——不关心某个 sandbox 的「感受」，而关心任务需要什么执行能力、有没有健康实例、失败后如何重试、副作用是否已发生。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">06 · 架构原则</div>
+  <h2>Interface 比 Implementation 更重要</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    文章反复强调的不是某段 harness 怎么写、某个 sandbox 怎么实现——而是 <strong>session、execute、wake、provision</strong> 这类边界。很像 OS 的 syscall：harness 调 execute，不必知道背后是容器、VM、MCP 还是未来设备。
+  </div>
+  <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:10px 14px;font-size:12px;color:#6b6b6b;line-height:1.6;">
+    <strong>接口稳定，实现才能乱换。</strong>关键不是抽象癖，而是未来真的会乱换——模型、harness、工具协议、sandbox 类型、部署形态都会换。押注具体实现，很快被拖住；押注稳定接口，下层可以演进。
+  </div>
+</div>
+
+<!-- Open Problems -->
+<div class="card span-4">
+  <div class="label-sm">07 · 未解决的问题</div>
+  <h2>Long-Running 的可靠性、观测和评价 —— 都还没被吃透</h2>
+  <div class="grid-2" style="margin-top:10px;">
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">⚠️ Long-Running Reliability</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Demo 很顺，但真正难的是长期可靠性——模型失败、工具超时、sandbox 崩、网络抖、权限过期、用户插话都会发生。动作有没有副作用？重试会不会双提交？改文件与调 API 之间有没有一致性？两个 Agent 同时改同一 repo 谁仲裁？<strong>这些问题全是老派分布式系统的问题，只是入口换成了 Agent。</strong>
+      </div>
+    </div>
+    <div style="background:rgba(239,68,68,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🔴 Observability Gap</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        传统服务有 logs、metrics、traces。Agent 系统要看 token、tool calls、session events、中间决策、compaction 前后丢了什么。评价也不能只看最终答案——是否走了危险路径、是否滥用权限、是否在不确定时装确定。<strong>这需要 runtime 层面的观测，不是最后扔给另一个模型打个分了事。</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 Key Insights -->
+<div class="card span-4">
+  <div class="label-sm">08 · 收束</div>
+  <h2>Mental Model 转变：从模型出发 → 从 Runtime 出发</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    以前习惯从模型能力出发——模型越强，Agent 越强。现在更愿意从 <strong>Runtime</strong> 出发：模型是 brain，但 brain 需要运行时——手、记忆、权限边界、恢复、观测、调度。这些不能与某一代 brain 绑死，否则每次模型升级都是一次痛苦迁移。
+  </div>
+  <div class="quote" style="margin-bottom:12px;">
+    <strong>当 Agent infra 进入系统工程阶段，核心问题会慢慢从「怎么让模型更聪明」转向更不性感但决定能不能长大的那一类：状态模型是什么？控制面与执行面怎么分？失败恢复靠什么？哪些接口要长期稳定？什么绝不能只活在上下文窗口里？</strong>
+  </div>
+  
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div style="font-size:13px;font-weight:600;color:#5e6ad2;margin-bottom:6px;">📌 6 条收束趋势（作者判断）</div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">1. Context Window 不是 Runtime</div>
+      <div class="vitem-desc">上下文只是 CPU cache，不能承担持久状态。模型需要什么就从 event log 构造 view。</div>
+    </div></div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">2. Harness 不该变成历史补丁博物馆</div>
+      <div class="vitem-desc">过期的正确性比 bug 更危险。Harness 是策略层，不是地基。</div>
+    </div></div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">3. Session Log 会越来越像系统事实源</div>
+      <div class="vitem-desc">Append-only event stream，可 replay、可 diff、可审计、可 materialize 不同视图。</div>
+    </div></div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">4. Tools & Sandbox 会越来越 Disposable</div>
+      <div class="vitem-desc">不是家、不是记忆——是工位。Provision → Use → Destroy，靠 runtime 恢复而非抢救容器。</div>
+    </div></div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">5. Orchestration 会越来越像 Control Plane</div>
+      <div class="vitem-desc">Brain（Control Plane）与 Hands（Data Plane）分离，生命周期独立管理。</div>
+    </div></div>
+    <div class="vitem"><div class="vitem-content">
+      <div class="vitem-title">6. Interface 会比 Implementation 更值钱</div>
+      <div class="vitem-desc">定义稳定接口（execute / provision / wake / session），实现可以乱换。</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- Why This Matters -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">Why This Matters</div>
+  <h2>Hermes Agent 已经在走这条路</h2>
+  <div class="text-body" style="margin-bottom:12px;">
+    这篇文章不是在讲未来——它描述的方向在 Hermes 的架构里已经有对应物。不是在追趋势，而是在<strong>验证架构决策的正确性</strong>。
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h3>📝 Append-Only Session Log</h3>
+      <div class="text-muted">Hermes 的 <code>session_search</code> 就是 append-only event stream 的雏形——记录每一次对话、每一次工具调用、每一次决策。可检索、可回放、可审计。<br><br><strong>差距：</strong>目前是 search-only，还没有变成 runtime 的 source of truth——compaction 策略、上下文 materialization 仍需手动干预。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🔧 Skills = Replaceable Harness</h3>
+      <div class="text-muted">Hermes 的 skill 体系天生就是「harness 不是地基」的实现——每个 skill 是可插拔的策略层，模型升级时 skill 可以独立更新，不会和底层模型绑定。<br><br><strong>差距：</strong>Skill 的相互影响、冲突检测、过期自动标记还不够系统化。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🎛️ Control Plane / Data Plane</h3>
+      <div class="text-muted">你的「主 Agent 只协调不写代码」规则，就是 control plane 和 data plane 分离的实践。delegate_task 和 kanban 体系让 Brain（规划/编排）和 Hands（执行/写代码）在不同上下文运行。<br><br><strong>差距：</strong>Data plane 还不够 disposable——sandbox 挂了需要人工介入。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🔌 Stable Interface</h3>
+      <div class="text-muted">Hermes 的 tool abstraction layer（terminal、browser、file、search）定义了统一接口——底层是本地、远程还是容器，对 harness 透明。<br><br><strong>差距：</strong>Tool 的 availability 和 capability 目前靠静态声明，缺少运行时 negotiation。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Key Takeaway -->
+<div class="card span-4">
+  <div class="label-sm">Key Takeaway</div>
+  <h2>真正值钱的不是某一个 Agent，而是承载 Agent 的 Runtime</h2>
+  <div class="text-body" style="margin-top:10px;">
+    单个进程重要，但 OS 更重要。单个服务重要，但 Cloud Runtime 更重要。单个模型当然重要，但当模型够多、任务够长、工具够复杂时，<strong>谁能定义那层稳定的运行时抽象，谁才可能在搭下一代基础设施的地基。</strong><br><br>
+    Agent infra 的争论，会从 prompt、memory、tool use，慢慢滑回更老派的一组词：<strong>调度、隔离、一致性、恢复、观测、权限、评估</strong>。听起来一点都不新——系统工程常常就是这样：新 workload 先兴奋于能力，能力进生产后，老问题全回来。只是这次，执行主体从人写的程序，换成了会推理、会调工具、也会犯奇怪错误的模型。
+  </div>
+  <div class="dots-row" style="margin-top:12px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AgentOS</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Runtime</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Event Sourcing</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Control Plane</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Hermes</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">系统工程</span>
+  </div>
+</div>
+
+<!-- Reference -->
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+    <a href="https://zhuanlan.zhihu.com/p/2037479092090622773" target="_blank" style="color:#5e6ad2;text-decoration:none;">Agent 系统正在重新走一遍 OS 和 Cloud Runtime 的老路</a>
+    <br>
+    acodespace · 知乎专栏「agent 系统工程观-随笔」· 2026/5/11
+    <br><br>
+    <span style="color:#8b8b8b;">延伸阅读：</span>
+    <a href="https://www.anthropic.com/engineering/scaling-managed-agents" target="_blank" style="color:#5e6ad2;text-decoration:none;">Scaling Managed Agents: Decoupling the brain from the hands — Anthropic</a>
+    <br>
+    <a href="managed-agents.html" style="color:#5e6ad2;text-decoration:none;">Managed Agents 调研报告（本站）</a>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
