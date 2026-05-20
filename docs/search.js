@@ -72,20 +72,6 @@
       excerptLength: 30,
       resetStyles: false,
       processResult: function (result) {
-        if (result.url && result.url.charAt(0) === "/") {
-          result.url = result.url.slice(1);
-        }
-        if (result.meta && result.meta.url && result.meta.url.charAt(0) === "/") {
-          result.meta.url = result.meta.url.slice(1);
-        }
-        if (Array.isArray(result.sub_results)) {
-          result.sub_results = result.sub_results.map(function (subResult) {
-            if (subResult.url && subResult.url.charAt(0) === "/") {
-              subResult.url = subResult.url.slice(1);
-            }
-            return subResult;
-          });
-        }
         return result;
       },
       translations: {
