@@ -6,12 +6,15 @@
 <title>第二号 — AI 新闻与研究</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pagefind/pagefind-ui.css">
 <link rel="stylesheet" href="styles.css">
+<script src="pagefind/pagefind-ui.js" defer></script>
+<script src="search.js" defer></script>
 
 </head>
 <body style="background:var(--bg-primary);">
 
-<header class="header">
+<header class="header" data-pagefind-ignore>
 <div class="container">
 <div class="header-inner">
 <a href="index.html" class="logo">
@@ -23,9 +26,34 @@
 <a href="daily/archive.html" class="nav-link">AI 日报</a>
 <a href="research/archive.html" class="nav-link">深度调研</a>
 </nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
 </div>
 </div>
 </header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
 
 <main>
 
@@ -47,11 +75,11 @@
 <a href="daily/archive.html" class="section-link">查看全部 →</a>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;">
-<a href="daily/ai-news-2026-05-19.html" class="daily-entry">
+<a href="daily/ai-news-2026-05-20.html" class="daily-entry">
 <div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div>
 <div style="flex:1;">
 <div style="font-weight:500;font-size:14px;margin-bottom:3px;">今日日报 <span class="badge-latest">最新</span></div>
-<div style="font-size:12px;color:var(--text-secondary);">今日 · 8 位 Builder + 1 篇播客 + 14 GitHub 热门</div>
+<div style="font-size:12px;color:var(--text-secondary);">今日 · 10 GitHub 热门 + 深度分析</div>
 </div>
 <div style="font-size:18px;color:var(--accent);">→</div>
 </a>
@@ -92,7 +120,7 @@
 
 </main>
 
-<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;">
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
 <div class="container">
 <p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
 </div>
