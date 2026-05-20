@@ -87,16 +87,6 @@
         alt_search: "没有找到 [SEARCH_TERM]，改搜 [DIFFERENT_TERM]"
       }
     });
-
-    // 点击搜索结果任意位置跳转
-    document.addEventListener("click", function (event) {
-      var result = event.target.closest(".pagefind-ui__result");
-      if (!result) return;
-      // 不拦截链接本身的点击
-      if (event.target.closest("a")) return;
-      var link = result.querySelector(".pagefind-ui__result-link");
-      if (link) window.location.href = link.getAttribute("href");
-    });
   }
 
   function init() {

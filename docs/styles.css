@@ -795,6 +795,7 @@ body.search-modal-open { overflow: hidden; }
 }
 
 .site-search .pagefind-ui__result {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -859,6 +860,11 @@ body.search-modal-open { overflow: hidden; }
   display: inline;
   color: var(--text-primary);
   text-decoration: none;
+}
+.site-search .pagefind-ui__result-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .site-search .pagefind-ui__result-link:hover {
