@@ -68,7 +68,8 @@
     new window.PagefindUI({
       element: "#site-search",
       showImages: false,
-      showSubResults: false,
+      showSubResults: true,
+      excerptLength: 30,
       resetStyles: false,
       processResult: function (result) {
         if (result.url && result.url.charAt(0) === "/") {
