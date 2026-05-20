@@ -89,15 +89,17 @@
     });
 
     // 点击搜索结果任意位置跳转
-    root.addEventListener("click", function (event) {
-      var result = event.target.closest(".pagefind-ui__result");
-      if (!result) return;
-      var link = result.querySelector(".pagefind-ui__result-link");
-      if (link) {
-        event.preventDefault();
-        window.location.href = link.getAttribute("href");
-      }
+    var observer = new MutationObserver(function () {
+      root.querySelectorAll(".pagefind-ui__result").forEach(function (result) {
+        if (result.dataset.clickBound) return;
+        result.dataset.clickBound = "1";
+        result.addEventListener("click", function () {
+          var link = result.querySelector(".pagefind-ui__result-link");
+          if (link) window.location.href = link.getAttribute("href");
+        });
+      });
     });
+    observer.observe(root, { childList: true, subtree: true });
   }
 
   function init() {
