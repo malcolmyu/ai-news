@@ -1,142 +1,175 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 日报 - 2026-03-29 - 第二号</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
-    
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|    <meta charset="UTF-8">
+     5|    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|    <title>2026-03-29 日报 — 第二号</title>
+     7|    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+     8|<link rel="stylesheet" href="../styles.css">
+     9|    
+    10|<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
 </head>
-<body>
+    11|<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
 
-    <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="../index.html" class="logo">
-          <div class="logo-icon">🤖</div>
-          <span class="logo-text">第二号</span>
-        </a>
-        <a href="../index.html" class="nav-link">← 返回首页</a>
-      </div>
-    </div>
-  </header>
-    <div class="daily-header">
-      <div class="container-sm">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <h1>🤖 AI 日报</h1>
-            <p class="subtitle">2026-03-29</p>
-          </div>
-          <div style="text-align:right;">
-            <div class="stats-value">5</div>
-            <div class="stats-label">条资讯</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <main class="container-sm" style="padding-top: 32px;">
-      
-        <section class="section">
-          <div class="section-header">
-            <h2 class="section-title">AI新闻</h2>
-            <span class="section-count">1 条</span>
-          </div>
-          <div class="news-list">
-            <article class="news-card">
-      <div class="news-meta">
-        <span class="news-source">AIGC Weekly</span>
-        <span>·</span>
-        <span>2026-03-29</span>
-      </div>
-      <h3 class="news-title">Agili 的 AIGC 周刊（Y26W12）</h3>
-      <p class="news-summary">**Agili AIGC 周刊（Y26W12）概览**
-
-本期聚焦本周 AI 生成内容（AIGC）领域的三大热点。Google 连续发布 Gemini 3.1 Flash Live 与 Lyria 3 Pro，显著提升多模态（文本‑图像‑音频）生成的速度与质量，标志着大模型在实时交互场景的突破。Anthropic 为 Claude Code 引入 Auto Mode 机制，支持代码自动补全与调试，并公开了其在长时序应用中的架构经验，展示了大模型在软件开发助理方面的成熟度。LiteLLM 曝出严重的供应链投毒事件，提醒业界对开源模型分发渠道的安全审计必须加强；与此同时，OpenAI 的视频生成模型 Sora 因推理成本居高不下，引发对其商业化可行性的深度讨论。
-
-**关键洞察**  
-- 多模态大模型正向实时、低延迟方向演进。  
-- 自动化编程</p>
-      <a href="https://aigc-weekly.agi.li/weekly/Y26W12" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-header">
-            <h2 class="section-title">开源项目</h2>
-            <span class="section-count">2 条</span>
-          </div>
-          <div class="news-list">
-            <article class="news-card">
-      <div class="news-meta">
-        <span class="news-source">GitHub Trending Daily</span>
-        <span>·</span>
-        <span>近期</span>
-      </div>
-      <h3 class="news-title">microsoft/VibeVoice</h3>
-      <p class="news-summary">**VibeVoice** 是微软开源的前沿语音 AI 项目，涵盖高质量文本‑语音（TTS）与统一的语音识别（ASR）模型。近期更新包括：
-
-- **VibeVoice‑ASR** 已开源，可一次性处理 60 分钟长音频，输出包含说话人、时间戳和内容的结构化转录，并支持用户自定义上下文。模型原生支持 50+ 语言，提供微调代码和基于 **vLLM** 的高速推理方案。  
-- 2026‑01‑21 将模型接入 Hugging Face Transformers（v5.3.0），实现“一键”调用；同日发布技术报告（arXiv:260</p>
-      <a href="https://github.com/microsoft/VibeVoice" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
-<article class="news-card">
-      <div class="news-meta">
-        <span class="news-source">GitHub Trending Daily</span>
-        <span>·</span>
-        <span>近期</span>
-      </div>
-      <h3 class="news-title">luongnv89/claude-howto</h3>
-      <p class="news-summary">这篇文章介绍了 Claude Code，从基本概念到高级代理，提供了可以直接应用价值的示例代码模板。文章提供了一本可视化、实例驱动的指南，帮助读者从输入 "claude" 到编排代理、钩子、技能和 MCP 服务器。文章提供了三个问题的解答：官方文档描述了功能但没有展示如何组合它们，学习路径不清晰，例子过简单。Claude How To 解决了这些问题，提供了可以帮助读者在短时间内开始使用 Claude Code 并构建复杂工作流的视觉教程和可复制代码模板。文章还提供了表目、问题、解决方案、工作原理等部分，供读者参考。
-
-主题和关键点：Claude Code 是什么，如何使用，从基本概念到高级代理，提供可复制代码模板。
-
-重要见解或发现：官方文档描述了功能但没有展</p>
-      <a href="https://github.com/luongnv89/claude-howto" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-header">
-            <h2 class="section-title">综合资讯</h2>
-            <span class="section-count">2 条</span>
-          </div>
-          <div class="news-list">
-            <article class="news-card">
-      <div class="news-meta">
-        <span class="news-source">WeChat 2</span>
-        <span>·</span>
-        <span>2026-03-29</span>
-      </div>
-      <h3 class="news-title">1.9万行 Claude Code“AI垃圾”杀入 Node.js：全球顶流开源项目，快守不住了</h3>
-      <p class="news-summary">**摘要**  
-Node.js 这一全球最受关注的开源项目近期面临前所未有的抉择：Claude Code（被部分开发者称为“AI垃圾”）的代码生成模型正被引入核心代码库。文章指出，AI 生成的代码虽能提升开发效率，却带来代码质量、可维护性和安全性的潜在风险；社区对是否接受该技术出现明显分歧，部分维护者担心失去对项目方向的控制，甚至可能导致项目被“抢占”。作者建议在引入 AI 代码前设立严格审查流程、明确责任归属，并</p>
-      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=1&sn=122d6b78bba8d2edf4cc9f5fe8a03b2c" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
-<article class="news-card">
-      <div class="news-meta">
-        <span class="news-source">WeChat 2</span>
-        <span>·</span>
-        <span>2026-03-29</span>
-      </div>
-      <h3 class="news-title">从写文案到盯数据、算 ROI，流量见顶后，AI Agent 正在杀进核心业务</h3>
-      <p class="news-summary">**摘要**  
-过去几年，生成式 AI 在企业中的应用大多停留在“工具层”，如文案撰写、图片生成、问答、检索辅助和客服支持等。随着流量增长趋于饱和，企业开始把 AI 从表层工具向核心业务渗透，重点转向数据监控、ROI 计算以及业务决策支持。AI Agent 通过实时盯数据、自动化分析和预测模型，帮助企业精准评估营销效果、优化资源配置，并在产品研发、供应链管理等关键环节实现流程自动化和成本下降。  
-**关键洞察**：AI 正从“助力工具”升级为“业务中枢”，其价值体现在提升运营效率、降低决策成本和实现利润最大化。  
-**实践意义**：企业应加快 AI Agent 在数据治理、绩效评估和业务流程中的落地，构建以数据驱动的闭环体系，以在流量见顶的环境中保持竞争优势。</p>
-      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=2&sn=64bdb79e39af057b5d884a7af2b0fb66" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
-    </article>
-          </div>
-        </section>
-    </main>
-    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
-    <div class="container">
-      <p style="font-size: 14px; color: var(--text-muted);">
-        🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中
-      </p>
-    </div>
-  </footer>
-</body>
-</html>
+    12|
+    13|    <header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+    24|    <div class="daily-header">
+    25|      <div class="container-sm">
+    26|        <div style="display:flex;justify-content:space-between;align-items:center;">
+    27|          <div>
+    28|            <h1>🤖 AI 日报</h1>
+    29|            <p class="subtitle">2026-03-29</p>
+    30|          </div>
+    31|          <div style="text-align:right;">
+    32|            <div class="stats-value">5</div>
+    33|            <div class="stats-label">条资讯</div>
+    34|          </div>
+    35|        </div>
+    36|      </div>
+    37|    </div>
+    38|    <main class="container-sm" style="padding-top: 32px;">
+    39|      
+    40|        <section class="section">
+    41|          <div class="section-header">
+    42|            <h2 class="section-title">AI新闻</h2>
+    43|            <span class="section-count">1 条</span>
+    44|          </div>
+    45|          <div class="news-list">
+    46|            <article class="news-card">
+    47|      <div class="news-meta">
+    48|        <span class="news-source">AIGC Weekly</span>
+    49|        <span>·</span>
+    50|        <span>2026-03-29</span>
+    51|      </div>
+    52|      <h3 class="news-title">Agili 的 AIGC 周刊（Y26W12）</h3>
+    53|      <p class="news-summary">**Agili AIGC 周刊（Y26W12）概览**
+    54|
+    55|本期聚焦本周 AI 生成内容（AIGC）领域的三大热点。Google 连续发布 Gemini 3.1 Flash Live 与 Lyria 3 Pro，显著提升多模态（文本‑图像‑音频）生成的速度与质量，标志着大模型在实时交互场景的突破。Anthropic 为 Claude Code 引入 Auto Mode 机制，支持代码自动补全与调试，并公开了其在长时序应用中的架构经验，展示了大模型在软件开发助理方面的成熟度。LiteLLM 曝出严重的供应链投毒事件，提醒业界对开源模型分发渠道的安全审计必须加强；与此同时，OpenAI 的视频生成模型 Sora 因推理成本居高不下，引发对其商业化可行性的深度讨论。
+    56|
+    57|**关键洞察**  
+    58|- 多模态大模型正向实时、低延迟方向演进。  
+    59|- 自动化编程</p>
+    60|      <a href="https://aigc-weekly.agi.li/weekly/Y26W12" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    61|    </article>
+    62|          </div>
+    63|        </section>
+    64|
+    65|        <section class="section">
+    66|          <div class="section-header">
+    67|            <h2 class="section-title">开源项目</h2>
+    68|            <span class="section-count">2 条</span>
+    69|          </div>
+    70|          <div class="news-list">
+    71|            <article class="news-card">
+    72|      <div class="news-meta">
+    73|        <span class="news-source">GitHub Trending Daily</span>
+    74|        <span>·</span>
+    75|        <span>近期</span>
+    76|      </div>
+    77|      <h3 class="news-title">microsoft/VibeVoice</h3>
+    78|      <p class="news-summary">**VibeVoice** 是微软开源的前沿语音 AI 项目，涵盖高质量文本‑语音（TTS）与统一的语音识别（ASR）模型。近期更新包括：
+    79|
+    80|- **VibeVoice‑ASR** 已开源，可一次性处理 60 分钟长音频，输出包含说话人、时间戳和内容的结构化转录，并支持用户自定义上下文。模型原生支持 50+ 语言，提供微调代码和基于 **vLLM** 的高速推理方案。  
+    81|- 2026‑01‑21 将模型接入 Hugging Face Transformers（v5.3.0），实现“一键”调用；同日发布技术报告（arXiv:260</p>
+    82|      <a href="https://github.com/microsoft/VibeVoice" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    83|    </article>
+    84|<article class="news-card">
+    85|      <div class="news-meta">
+    86|        <span class="news-source">GitHub Trending Daily</span>
+    87|        <span>·</span>
+    88|        <span>近期</span>
+    89|      </div>
+    90|      <h3 class="news-title">luongnv89/claude-howto</h3>
+    91|      <p class="news-summary">这篇文章介绍了 Claude Code，从基本概念到高级代理，提供了可以直接应用价值的示例代码模板。文章提供了一本可视化、实例驱动的指南，帮助读者从输入 "claude" 到编排代理、钩子、技能和 MCP 服务器。文章提供了三个问题的解答：官方文档描述了功能但没有展示如何组合它们，学习路径不清晰，例子过简单。Claude How To 解决了这些问题，提供了可以帮助读者在短时间内开始使用 Claude Code 并构建复杂工作流的视觉教程和可复制代码模板。文章还提供了表目、问题、解决方案、工作原理等部分，供读者参考。
+    92|
+    93|主题和关键点：Claude Code 是什么，如何使用，从基本概念到高级代理，提供可复制代码模板。
+    94|
+    95|重要见解或发现：官方文档描述了功能但没有展</p>
+    96|      <a href="https://github.com/luongnv89/claude-howto" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+    97|    </article>
+    98|          </div>
+    99|        </section>
+   100|
+   101|        <section class="section">
+   102|          <div class="section-header">
+   103|            <h2 class="section-title">综合资讯</h2>
+   104|            <span class="section-count">2 条</span>
+   105|          </div>
+   106|          <div class="news-list">
+   107|            <article class="news-card">
+   108|      <div class="news-meta">
+   109|        <span class="news-source">WeChat 2</span>
+   110|        <span>·</span>
+   111|        <span>2026-03-29</span>
+   112|      </div>
+   113|      <h3 class="news-title">1.9万行 Claude Code“AI垃圾”杀入 Node.js：全球顶流开源项目，快守不住了</h3>
+   114|      <p class="news-summary">**摘要**  
+   115|Node.js 这一全球最受关注的开源项目近期面临前所未有的抉择：Claude Code（被部分开发者称为“AI垃圾”）的代码生成模型正被引入核心代码库。文章指出，AI 生成的代码虽能提升开发效率，却带来代码质量、可维护性和安全性的潜在风险；社区对是否接受该技术出现明显分歧，部分维护者担心失去对项目方向的控制，甚至可能导致项目被“抢占”。作者建议在引入 AI 代码前设立严格审查流程、明确责任归属，并</p>
+   116|      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=1&sn=122d6b78bba8d2edf4cc9f5fe8a03b2c" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+   117|    </article>
+   118|<article class="news-card">
+   119|      <div class="news-meta">
+   120|        <span class="news-source">WeChat 2</span>
+   121|        <span>·</span>
+   122|        <span>2026-03-29</span>
+   123|      </div>
+   124|      <h3 class="news-title">从写文案到盯数据、算 ROI，流量见顶后，AI Agent 正在杀进核心业务</h3>
+   125|      <p class="news-summary">**摘要**  
+   126|过去几年，生成式 AI 在企业中的应用大多停留在“工具层”，如文案撰写、图片生成、问答、检索辅助和客服支持等。随着流量增长趋于饱和，企业开始把 AI 从表层工具向核心业务渗透，重点转向数据监控、ROI 计算以及业务决策支持。AI Agent 通过实时盯数据、自动化分析和预测模型，帮助企业精准评估营销效果、优化资源配置，并在产品研发、供应链管理等关键环节实现流程自动化和成本下降。  
+   127|**关键洞察**：AI 正从“助力工具”升级为“业务中枢”，其价值体现在提升运营效率、降低决策成本和实现利润最大化。  
+   128|**实践意义**：企业应加快 AI Agent 在数据治理、绩效评估和业务流程中的落地，构建以数据驱动的闭环体系，以在流量见顶的环境中保持竞争优势。</p>
+   129|      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247660034&idx=2&sn=64bdb79e39af057b5d884a7af2b0fb66" class="news-link" target="_blank" rel="noopener noreferrer">阅读原文 →</a>
+   130|    </article>
+   131|          </div>
+   132|        </section>
+   133|    </main>
+   134|    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
+   135|    <div class="container">
+   136|      <p style="font-size: 14px; color: var(--text-muted);">
+   137|        🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中
+   138|      </p>
+   139|    </div>
+   140|  </footer>
+   141|</body>
+   142|</html>
