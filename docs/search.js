@@ -67,6 +67,7 @@
 
     new window.PagefindUI({
       element: "#site-search",
+      baseUrl: "/",
       showImages: false,
       showSubResults: true,
       excerptLength: 30,
