@@ -154,11 +154,11 @@ else
       warn "$BASENAME uses non-Inter web font"
     fi
 
-    # 2c. nav-back navigation outside bento
-    if grep -q 'nav-back\|nav_back' "$REPORT" 2>/dev/null; then
+    # 2c. Unified header navigation (replaced nav-back)
+    if grep -q 'data-pagefind-ignore' "$REPORT" 2>/dev/null; then
       :
     else
-      warn "$BASENAME has no '\xE2\x86\x90 \xE8\xBF\x94\xE5\x9B\x9E\xE9\xA6\x96\xE9\xA1\xB5' navigation (.nav-back)"
+      warn "$BASENAME has no unified header (data-pagefind-ignore)"
     fi
 
     # 2d. Shared stylesheet ensures correct palette & border-radius
