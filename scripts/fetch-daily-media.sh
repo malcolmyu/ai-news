@@ -266,7 +266,7 @@ process_x_url() {
   fi
 
   # Fallback to fxtwitter if nothing found
-  if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" && -z "$video_paths" ]]; then
+  if [[ -z "$(echo "$downloaded_paths" | tr -d '[:space:]')" ]]; then
     local fx_imgs
     if fx_imgs=$(fetch_x_via_fxtwitter "$tweet_id"); then
       downloaded_paths=$(echo "$fx_imgs" | download_images "$prefix" "$output_dir")
