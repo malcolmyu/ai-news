@@ -19,20 +19,24 @@
   <div class="label-sm">AI Builders Daily · 2026.5.20</div>
   <h1>🔮 AI Builders 日报</h1>
   <div class="subtitle" style="margin-top:6px;">
-    Anthropic 罕见发布 Claude Code 质量事故完整尸检——三个独立 Bug 叠加，揭示「模型能力 ≠ 产品体验」的残酷真相。同时 Claude 平台路线图深度曝光：Harness 工程正在成为核心壁垒。
+    Anthropic 罕见发布 Claude Code 质量事故完整尸检——三个独立 Bug 叠加，揭示「模型能力 ≠ 产品体验」。Claude 平台路线图深度曝光：Harness 工程正在成为核心壁垒。Managed Agents 推出文件系统级记忆，连接器扩展至 15+ 生活场景。
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Code</span>
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Postmortem</span>
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Harness 工程</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Managed Agents</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Code</span>
     <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">Agent Memory</span>
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Connectors</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Builder 动态</span>
   </div>
   <div class="stat-row" style="margin-top:12px;">
     <div class="stat-item">
       <div class="stat-num">1</div>
       <div class="stat-label">重大事故报告</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">播客深度解析</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">6</div>
@@ -51,7 +55,7 @@
   <div class="grid-2">
     <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
       <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
-        🩺 <strong style="color:#1c1c1c;">Anthropic 发布 Claude Code 质量事故完整尸检</strong> — 三个独立 Bug 叠加（推理 effort 下调 + 推理历史被清 + 输出长度限制），让用户在过去一个月经历了「变笨」「失忆」「啰嗦」。不是模型退化，而是 Harness 层连环失误。Anthropic 承诺完整 eval suite + 渐进灰度发布 + 全员使用公开版。一个警醒案例：顶尖 AI lab 把模型「装进盒子」交付仍然充满坑。
+        🩺 <strong style="color:#1c1c1c;">Anthropic 发布 Claude Code 质量事故完整尸检</strong> — 三个独立 Bug 叠加（推理 effort 下调 + 推理历史被清 + 输出长度限制），让用户在过去一个月经历了「变笨」「失忆」「啰嗦」。不是模型退化，而是 Harness 层连环失误。Anthropic 承诺完整 eval suite + 渐进灰度发布 + 全员使用公开版。
       </div>
       <div style="margin-top:8px;">
         <a href="https://www.anthropic.com/engineering/april-23-postmortem" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">📄 查看完整报告 →</a>
@@ -59,7 +63,7 @@
     </div>
     <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
       <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
-        🧠 <strong style="color:#1c1c1c;">Claude Managed Agents 推出文件系统级内置记忆</strong> — 记忆以文件形式存储，Claude 用 bash/文件读写管理记忆。Netflix 用于跨会话上下文携带，Rakuten 首次通过错误率降低 97%，Wisedocs 验证速度提升 30%。支持多 Agent 共享、权限隔离、审计日志和版本回滚。
+        🧠 <strong style="color:#1c1c1c;">Claude Managed Agents 推出文件系统级内置记忆</strong> — 记忆以文件存储，Claude 用 bash/文件读写管理。Netflix 跨会话携带上下文，Rakuten 首次通过错误率降低 97%，Wisedocs 验证速度提升 30%。支持多 Agent 共享、权限隔离、审计日志。
       </div>
       <div style="margin-top:8px;">
         <a href="https://claude.com/blog/claude-managed-agents-memory" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">📄 查看原文 →</a>
@@ -68,26 +72,61 @@
   </div>
 </div>
 
-<!-- Card 3 — Anthropic 质量事故全复盘 -->
+<!-- Card 3 — Claude 平台路线图 + YouTube -->
+<div class="card span-4">
+  <div class="label-sm">🎙️ 播客深度解析</div>
+  <h2>Claude 平台路线图：Harness 与模型正在深度绑定</h2>
+  <div class="text-body">
+    嘉宾：Angela（Claude 平台产品负责人）和 Caitlin（工程负责人）| 主持：Dan Shipper。AI & I by Every 播客 40 分钟深度对话，揭示了 Anthropic 的平台演进底层逻辑。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🧩 Harness 工程 = 新一代竞争壁垒</div>
+        <div class="vitem-desc">Caitlin 直言：每个 lab 技术路线不同，通用框架越来越走不通。「同一个模型，不同 Harness 跑出来的 eval 结果天差地别」——Managed Agents 的 Memory 开发中验证了这一点。Harness 和模型需要深度配对才能榨干每个模型的最佳表现。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🏗️ 从「给你 API」到「帮你搞定结果」</div>
+        <div class="vitem-desc">Angela 解释为什么做 Managed Agents：团队内部反复写「让 Claude 在云上跑 Loop」的代码，每次搭服务器/文件系统/沙箱——「被折磨够了，做成产品给大家用」。设计原则：强约束文件系统 + skills + 开放 MCP 连接器。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">🔮 未来：Claude 自我理解 → 自我重构</div>
+        <div class="vitem-desc">让 Claude 自动判断「用什么模型」「怎么编排子 agent」「用什么架构」——「运行时写出自己需要的 Agent 结构」。如果这个愿景成真，平台需要支撑的并发规模和复杂度将是指数级的。</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:12px;">
+    <iframe width="100%" height="400" src="https://www.youtube-nocookie.com/embed/lLypHkIVLqc" frameborder="0" allowfullscreen style="border-radius:10px;"></iframe>
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://www.youtube.com/watch?v=lLypHkIVLqc" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">🎧 完整播客 →</a>
+  </div>
+</div>
+
+<!-- Card 4 — Anthropic 质量事故全复盘 -->
 <div class="card span-4">
   <div class="label-sm">🔧 深度分析</div>
   <h2>Anthropic Claude Code 质量事故全复盘</h2>
   <div class="text-body" style="margin-bottom:10px;">
-    Anthropic Engineering 发布了一份罕见的完整 postmortem，解释了过去一个月 Claude Code 体验下降的三个根因。这是一份值得所有 AI 产品团队逐字阅读的文档——不是模型能力的锅，而是产品工程层的连环失误。
+    Anthropic Engineering 发布了一份罕见的完整 postmortem，解释了过去一个月 Claude Code 体验下降的三个根因。一份值得所有 AI 产品团队逐字阅读的文档。
   </div>
   <div class="vlist">
     <div class="vitem">
       <div style="width:32px;height:32px;background:rgba(239,68,68,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#ef4444;">1</div>
       <div class="vitem-content">
         <div class="vitem-title">推理强度默认值被下调 <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;font-size:9px;">3/4 → 4/7</span></div>
-        <div class="vitem-desc">Claude Code 默认推理 effort 从 <code>high</code> 降到 <code>medium</code>，避免 Opus 4.6 思考过久导致 UI 卡死。副作用：用户普遍感觉「变笨了」。在用户反馈后恢复，Opus 4.7 默认为 <code>xhigh</code>。</div>
+        <div class="vitem-desc">默认推理 effort 从 <code>high</code> 降到 <code>medium</code>，避免 Opus 4.6 思考过久导致 UI 卡死。副作用：用户普遍感觉「变笨了」。在用户反馈后恢复，Opus 4.7 默认为 <code>xhigh</code>。</div>
       </div>
     </div>
     <div class="vitem">
       <div style="width:32px;height:32px;background:rgba(239,68,68,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#ef4444;">2</div>
       <div class="vitem-content">
         <div class="vitem-title">推理历史被持续清除 <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;font-size:9px;">3/26 → 4/10</span></div>
-        <div class="vitem-desc">本意是闲置 >1h 后清旧推理以减少延迟，但因 Bug 变成<strong>每次对话都清掉所有推理</strong>。Claude 不断「失忆」——重复操作、不合逻辑的 tool call、消耗更多 token。最难排查的一个 Bug，被两个无关内部实验掩盖。</div>
+        <div class="vitem-desc">本意是闲置 >1h 后清旧推理以减少延迟，但因 Bug 变成<strong>每次对话都清掉所有推理</strong>。Claude 不断「失忆」——重复操作、不合逻辑的 tool call、消耗更多 token。最难排查的 Bug，被两个无关内部实验掩盖。</div>
       </div>
     </div>
     <div class="vitem">
@@ -99,79 +138,76 @@
     </div>
   </div>
   <div class="quote" style="margin-top:10px;">
-    <strong>教训与改进：</strong>Anthropic 承诺让更多内部员工使用公开版 Claude Code（而非内测版），对系统提示词每次修改跑完整的 per-model eval suite，重大变更采用渐进式灰度发布。同时给所有订阅用户重置了用量限额。
+    <strong>教训与改进：</strong>Anthropic 承诺让更多内部员工使用公开版 Claude Code（非内测版），系统提示词每次修改跑完整 per-model eval suite，重大变更渐进式灰度发布。同时为所有订阅用户重置了用量限额。
   </div>
 </div>
 
-<!-- Card 4 — Claude 平台路线图 + Managed Agents Memory -->
+<!-- Card 5 — Claude 官方 -->
 <div class="card span-2">
-  <div class="label-sm">🎙️ 播客深度解析</div>
-  <h3>Claude 平台路线图：Harness 与模型深度绑定</h3>
-  <div class="text-body">
-    AI & I by Every 播客邀请 Anthropic Claude 平台产品负责人 <strong>Angela</strong> 和工程负责人 <strong>Caitlin</strong>，聊了 40 分钟平台演进逻辑。
-  </div>
-  <div class="vlist" style="margin-top:8px;">
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Harness 工程 = 竞争壁垒</div>
-        <div class="vitem-desc">Caitlin 直言：每个 lab 技术路线不同，通用框架越来越走不通。「同一个模型，不同 Harness 跑出来的 eval 结果天差地别」——Managed Agents 的 Memory 开发中验证了这一点。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">从「给你 API」到「帮你搞定结果」</div>
-        <div class="vitem-desc">Angela 解释：团队内部反复写「让 Claude 在云上跑 Loop」的代码，搭服务器/文件系统/沙箱——「被折磨够了，做成产品给大家用」。强约束文件系统 + skills，开放 MCP 连接器。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">未来：Claude 自我理解 → 自我重构</div>
-        <div class="vitem-desc">让 Claude 自动判断「用什么模型」「怎么编排子 agent」「用什么架构」——「运行时写出自己需要的 Agent 结构」。</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:10px;">
-    <a href="https://www.youtube.com/watch?v=lLypHkIVLqc" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">🎧 完整播客 →</a>
-  </div>
-</div>
-
-<div class="card span-2">
-  <div class="label-sm">🔌 新功能</div>
-  <h3>Claude 连接器大扩展：从工作延伸到生活</h3>
-  <div class="text-body">
-    Claude 连接器目录从 200+ 扩展至生活场景：<strong>AllTrails、Instacart、Audible、Tripadvisor、TurboTax、Uber/Uber Eats、Spotify、Resy</strong> 等 15+ 新服务。
-  </div>
-  <div class="vlist" style="margin-top:8px;">
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">🔮 动态建议连接器</div>
-        <div class="vitem-desc">Claude 根据对话上下文判断你需要哪个 App，不需要手动翻目录。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">🛡️ 隐私承诺</div>
-        <div class="vitem-desc">没有付费推荐位、连接器数据不用于训练、任何操作执行前确认。</div>
-      </div>
-    </div>
-  </div>
-  <div class="quote" style="margin-top:8px;">
-    <strong>信号：</strong>Claude 正在从「开发者工具」变成「生活助手」。当你的 AI 能帮你点外卖、订餐厅、规划徒步路线，它就不是一个 coding tool 了——它是一个 <strong>operating system for life</strong>。
-  </div>
-  <div style="margin-top:10px;">
-    <a href="https://claude.com/blog/connectors-for-everyday-life" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">📄 查看原文 →</a>
-  </div>
-</div>
-
-<!-- Card 5 — Builder 动态 -->
-<div class="card span-4">
   <div class="label-sm">👷 Builder 动态</div>
-  <h3>今日建造者们</h3>
+  <h3>Claude — Anthropic 官方</h3>
+  <div class="text-body">
+    Claude Design 的 token 限额在所有 Plan 上翻倍。同时宣布伦敦线下活动，包含 deep dive、demo 和与 Claude 团队的直接对话。这条推文获得了 1.4 万赞。
+  </div>
+  <img src="assets/2026-05-20/claudeai-2056460045756309820-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Claude Design token doubled">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/claudeai/status/2056460045756309820" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 6 — Dan Shipper -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Dan Shipper — Every CEO</h3>
+  <div class="text-body">
+    即将在 Every 发布一份完整的 Codex 使用指南。同时为 Stamp 的发布感到兴奋，称自己是早期小额投资人。他还直批 AI 类书籍九成是「slop」，呼吁要有更好的书。
+  </div>
+  <img src="assets/2026-05-20/danshipper-2056431972138815842-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Dan Shipper Codex guide">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/danshipper/status/2056431972138815842" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 7 — Garry Tan -->
+<div class="card span-2">
+  <div class="label-sm">👷 Builder 动态</div>
+  <h3>Garry Tan — Y Combinator 总裁</h3>
+  <div class="text-body">
+    GBrain 在高速迭代中，发布了包含 22 个社区 PR 和修复 14 个 issue 的版本。同时开源了完整的 eval 报告和测试套件，邀请任何 Memory 系统来跑分对比。
+  </div>
+  <img src="assets/2026-05-20/garrytan-2056588601216168168-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="Garry Tan GBrain eval">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/garrytan/status/2056588601216168168" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 8 — Claude Managed Agents Memory -->
+<div class="card span-2">
+  <div class="label-sm">🧠 新功能</div>
+  <h3>Claude Managed Agents 推出内置记忆</h3>
+  <div class="text-body">
+    记忆以文件形式存储在 Agent 文件系统，Claude 用 bash、文件读写、代码执行管理记忆。「最新模型在文件系统记忆上表现更好——更全面、更有组织、对什么该记不该记有更好判断力。」
+  </div>
+  <table style="margin-top:8px;">
+    <tr><th>企业</th><th>效果</th></tr>
+    <tr><td>Netflix</td><td>跨会话携带上下文 + 人工纠正</td></tr>
+    <tr><td>Rakuten</td><td>首次通过错误率降低 97%</td></tr>
+    <tr><td>Wisedocs</td><td>验证速度提升 30%</td></tr>
+  </table>
+  <div style="margin-top:10px;">
+    <a href="https://claude.com/blog/claude-managed-agents-memory" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+
+<!-- Card 9 — 其他 Builder 速览 + Connectors -->
+<div class="card span-4">
+  <div class="label-sm">👷 Builder 速览 + 🔌 Claude Connectors</div>
+  <h3>更多建造者动态</h3>
   <div class="vlist">
     <div class="vitem">
       <div class="vitem-content">
         <div class="vitem-title">Sam Altman — OpenAI CEO：「ChatGPT 好了太多太多」</div>
-        <div class="vitem-desc">ChatGPT 最新更新后 Altman 公开表示非常满意，对团队自豪。这条推文收到 1.3 万赞和 2000+ 回复。</div>
+        <div class="vitem-desc">ChatGPT 最新更新后 Altman 公开表示非常满意，对团队自豪。获 1.3 万赞和 2000+ 回复。</div>
       </div>
       <div style="flex-shrink:0;">
         <a href="https://x.com/sama/status/2056435834333934051" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
@@ -179,38 +215,11 @@
     </div>
     <div class="vitem">
       <div class="vitem-content">
-        <div class="vitem-title">Claude（Anthropic 官方）— Claude Design token 限额翻倍 + 伦敦活动</div>
-        <div class="vitem-desc">Claude Design 的 token 限额在所有 Plan 上翻倍。同时宣布伦敦线下活动（deep dive + demo + 团队对话），获 1.4 万赞。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/claudeai/status/2056460045756309820" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Dan Shipper — Every CEO：Codex 指南发布 + 「AI 类书籍九成是 slop」</div>
-        <div class="vitem-desc">即将在 Every 发布完整 Codex 使用指南，同时为 Stamp 发布感到兴奋。直批 AI 类书籍九成是 slop，呼吁要有更好的书。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/danshipper/status/2056431972138815842" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Zara Zhang — Claude Code Socket 报错 + Bay Area 线下交流</div>
-        <div class="vitem-desc">多次遇到 Claude Code socket 连接报错，在社区询问。同时组织 Agent 上下文管理（Gbrain/LLM Wiki）线下交流，联合 Notion 和 Radical Ventures。</div>
+        <div class="vitem-title">Zara Zhang — Claude Code Socket 报错 + Bay Area Agent 上下文线下交流</div>
+        <div class="vitem-desc">多次遇到 Claude Code socket 连接报错，在社区询问。同时组织 Gbrain/LLM Wiki 等 Agent 上下文管理线下交流，联合 Notion 和 Radical Ventures。</div>
       </div>
       <div style="flex-shrink:0;">
         <a href="https://x.com/zarazhangrui/status/2056527354772722127" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Garry Tan — Y Combinator 总裁：GBrain 高速迭代 + 开源 eval 测试套件</div>
-        <div class="vitem-desc">GBrain 发布包含 22 个社区 PR、修复 14 个 issue 的新版本。同时开源完整 eval 报告和测试套件，邀请任何 Memory 系统来跑分对比。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/garrytan/status/2056588601216168168" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
       </div>
     </div>
     <div class="vitem">
@@ -223,9 +232,17 @@
       </div>
     </div>
   </div>
+  <div class="divider" style="margin:14px 0;"></div>
+  <div class="label-sm">🔌 Claude Connectors 扩展至生活场景</div>
+  <div class="text-body" style="margin-bottom:6px;">
+    连接器目录从 200+ 扩展至：<strong>AllTrails、Instacart、Audible、Tripadvisor、TurboTax、Uber/Uber Eats、Spotify、Resy</strong> 等 15+ 新服务。Claude 动态建议连接器，无付费推荐位，隐私数据不用于训练。
+  </div>
+  <div style="margin-top:8px;">
+    <a href="https://claude.com/blog/connectors-for-everyday-life" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
 </div>
 
-<!-- Card 6 — GitHub Trending -->
+<!-- Card 10 — GitHub Trending -->
 <div class="card span-4">
   <div class="label-sm">📈 GitHub Trending · 2026.5.20</div>
   <h2>今日 GitHub 热门项目 TOP 15</h2>
@@ -248,21 +265,21 @@
       <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">3</div>
       <div class="vitem-content">
         <div class="vitem-title"><a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" style="color:#5e6ad2;text-decoration:none;">multica-ai/andrej-karpathy-skills</a> ⭐ 1,955</div>
-        <div class="vitem-desc">一份基于 Andrej Karpathy 对 LLM 编程缺陷观察的 CLAUDE.md，用于改善 Claude Code 行为。</div>
+        <div class="vitem-desc">基于 Andrej Karpathy 对 LLM 编程缺陷观察的 CLAUDE.md，改善 Claude Code 行为。</div>
       </div>
     </div>
     <div class="vitem">
       <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">4</div>
       <div class="vitem-content">
         <div class="vitem-title"><a href="https://github.com/colbymchenry/codegraph" target="_blank" style="color:#5e6ad2;text-decoration:none;">colbymchenry/codegraph</a> ⭐ 1,850 · TypeScript</div>
-        <div class="vitem-desc">代码预索引知识图谱——为 Claude Code、Codex、Cursor、OpenCode 提供上下文，减少 token 和 tool call 消耗，100% 本地运行。</div>
+        <div class="vitem-desc">代码预索引知识图谱——为 Claude Code、Codex、Cursor、OpenCode 提供上下文，100% 本地运行。</div>
       </div>
     </div>
     <div class="vitem">
       <div style="width:36px;height:36px;background:#f0f0ee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">5</div>
       <div class="vitem-content">
         <div class="vitem-title"><a href="https://github.com/CloakHQ/CloakBrowser" target="_blank" style="color:#5e6ad2;text-decoration:none;">CloakHQ/CloakBrowser</a> ⭐ 1,463 · Python</div>
-        <div class="vitem-desc">隐形 Chromium——通过所有 bot 检测测试。Playwright 的直接替代品，带源码级指纹补丁。30/30 测试通过。</div>
+        <div class="vitem-desc">隐形 Chromium——通过所有 bot 检测测试。Playwright 替代品，源码级指纹补丁，30/30 测试通过。</div>
       </div>
     </div>
     <div class="vitem">
@@ -341,38 +358,38 @@
   </div>
 </div>
 
-<!-- Card 7 — Why This Matters + 一天一问 -->
+<!-- Card 11 — Why This Matters -->
 <div class="card span-4 card-highlight">
   <div class="label-sm" style="color:#5e6ad2;">💭 Why This Matters</div>
   <div class="grid-2">
     <div class="callout" style="margin-top:0;">
       <div class="callout-title">🩺 模型能力 ≠ 产品体验 — Harness 工程成为新壁垒</div>
-      <div class="callout-text">Anthropic 的 postmortem 揭示了一个被低估的现实：三个微小的产品层决策——调一个 effort 参数、加一行系统提示词、做一个缓存优化——叠加在一起就能让用户觉得「模型变笨了」。Caitlin 在播客中也验证了这一点：「同一个模型，不同 Harness 跑出来的 eval 结果天差地别」。当「训出更好的模型」的边际收益递减，<strong>「把模型装进更好的产品」正在成为新的竞争壁垒</strong>。</div>
+      <div class="callout-text">Anthropic 的 postmortem 揭示：三个微小的产品层决策——调一个 effort 参数、加一行系统提示词、做一个缓存优化——叠加就能让用户觉得「模型变笨了」。Caitlin 在播客中也验证：「同一个模型，不同 Harness 跑出来的 eval 结果天差地别」。当「训出更好的模型」边际收益递减，<strong>「把模型装进更好的产品」正在成为新的竞争壁垒</strong>。</div>
     </div>
     <div class="callout" style="margin-top:0;">
-      <div class="callout-title">🧠 Agent Memory 的范式转移：文件系统 > 向量数据库</div>
-      <div class="callout-text">Claude Managed Agents 选择「文件系统记忆」而非向量数据库方案，这是一个有意的设计选择——让 Claude 用自己最擅长的方式（bash、文件读写、代码执行）管理记忆。Netflix/Rakuten/Wisedocs 的实际效果证明这条路是可行的。这与 Hermes Agent 的 memory 工具和 GBrain 的迭代方向一致：<strong>让 Agent 像人一样「记笔记」，而不是像搜索引擎一样「检索文档」</strong>。</div>
+      <div class="callout-title">🧠 Agent Memory：文件系统 > 向量数据库</div>
+      <div class="callout-text">Claude Managed Agents 选择「文件系统记忆」而非向量数据库——让 Claude 用自己最擅长的方式（bash、文件读写、代码执行）管理记忆。Netflix/Rakuten/Wisedocs 的实际效果证明可行。与 Hermes Agent 的 memory 工具和 GBrain 的迭代方向一致：<strong>让 Agent 像人一样「记笔记」，而不是像搜索引擎一样「检索文档」</strong>。</div>
     </div>
   </div>
   <div class="divider"></div>
   <div class="text-body" style="text-align:center;font-size:13px;">
-    <strong>💭 一天一问：</strong>当越来越多的 AI 公司把重点从「训出更好的模型」转向「把模型装进更好的产品」，这些 Harness 层的能力会不会成为下一个核心竞争壁垒？Anthropic 的 postmortem 和 Caitlin 的访谈给出了同一个答案：<strong>会的，而且壁垒比模型本身更深</strong>。模型可以通过 scaling law 追赶，但 Harness 工程的坑——那些 Bug 2 被两个无关内部实验掩盖、Bug 3 内测两周才暴露在广泛 eval 中——这些坑需要时间、经验和组织文化来填。
+    <strong>💭 一天一问：</strong>当越来越多的 AI 公司把重点从「训出更好的模型」转向「把模型装进更好的产品」，这些 Harness 层的能力会不会成为下一个核心竞争壁垒？Anthropic 的 postmortem 和 Caitlin 的访谈给出了同一个答案：<strong>会的，而且壁垒比模型本身更深</strong>。模型可以通过 scaling law 追赶，但 Harness 工程的坑——那些需要时间、经验和组织文化来填的坑——才是真正难以复制的护城河。
   </div>
 </div>
 
-<!-- Card 8 — 参考来源 -->
+<!-- Card 12 — 参考来源 -->
 <div class="card span-4">
   <div class="label-sm">参考来源</div>
   <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
     <div>📄 <a href="https://www.anthropic.com/engineering/april-23-postmortem" target="_blank" style="color:#5e6ad2;text-decoration:none;">Anthropic Engineering — Claude Code 质量事故完整 Postmortem</a></div>
-    <div>🎧 <a href="https://www.youtube.com/watch?v=lLypHkIVLqc" target="_blank" style="color:#5e6ad2;text-decoration:none;">AI & I by Every — Claude 平台路线图深度解析</a></div>
+    <div>🎧 <a href="https://www.youtube.com/watch?v=lLypHkIVLqc" target="_blank" style="color:#5e6ad2;text-decoration:none;">AI & I by Every — Claude 平台路线图深度解析（Angela + Caitlin）</a></div>
     <div>📄 <a href="https://claude.com/blog/claude-managed-agents-memory" target="_blank" style="color:#5e6ad2;text-decoration:none;">Claude — Managed Agents 推出内置记忆</a></div>
     <div>📄 <a href="https://claude.com/blog/connectors-for-everyday-life" target="_blank" style="color:#5e6ad2;text-decoration:none;">Claude — 连接器扩展至生活场景</a></div>
-    <div>🐦 <a href="https://x.com/sama/status/2056435834333934051" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — ChatGPT 更新反馈</a></div>
     <div>🐦 <a href="https://x.com/claudeai/status/2056460045756309820" target="_blank" style="color:#5e6ad2;text-decoration:none;">Claude 官方 — Design token 翻倍 + 伦敦活动</a></div>
     <div>🐦 <a href="https://x.com/danshipper/status/2056431972138815842" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — Codex 指南 + AI 书籍批评</a></div>
+    <div>🐦 <a href="https://x.com/garrytan/status/2056588601216168168" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — GBrain 更新 + 开源 eval 测试套件</a></div>
+    <div>🐦 <a href="https://x.com/sama/status/2056435834333934051" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — ChatGPT 更新反馈</a></div>
     <div>🐦 <a href="https://x.com/zarazhangrui/status/2056527354772722127" target="_blank" style="color:#5e6ad2;text-decoration:none;">Zara Zhang — Claude Code socket 报错 + 线下交流</a></div>
-    <div>🐦 <a href="https://x.com/garrytan/status/2056588601216168168" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — GBrain 更新 + 开源 eval</a></div>
     <div>🐦 <a href="https://x.com/nikunj/status/2056363681798410592" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — 精彩推文糟糕董事</a></div>
   </div>
   <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
