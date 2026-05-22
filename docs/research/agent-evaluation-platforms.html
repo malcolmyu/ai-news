@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-22">
+<title>Agent 评测平台深度对比 · 9 平台 × 5 范式 · T3 综合报告</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Global Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: "cv01", "ss03";
+  background: #f5f5f4;
+  color: #1c1c1c;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(245,245,244,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e8e8e6;
+  z-index: 100;
+}
+.header-inner {
+  display: flex; align-items: center; gap: 24px; height: 56px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: #1c1c1c;
+}
+.logo-icon {
+  width: 32px; height: 32px;
+  background: #5e6ad2; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #fff;
+}
+.logo-text { font-weight: 500; font-size: 14px; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 24px; margin-left: auto; }
+.nav-link {
+  font-size: 13px; color: #6b6b6b;
+  text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: #5e6ad2; }
+
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 8px 0 10px;
+  border: 1px solid #e8e8e6;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #6b6b6b;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.search-trigger:hover {
+  background: #fafafa;
+  border-color: #f0f0ee;
+  color: #5e6ad2;
+}
+.search-trigger-icon {
+  font-size: 16px;
+  line-height: 1;
+  color: #5e6ad2;
+}
+.search-trigger kbd {
+  min-width: 34px;
+  padding: 2px 6px;
+  border: 1px solid #e8e8e6;
+  border-radius: 6px;
+  background: #fafafa;
+  color: #8b8b8b;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* ── Search Modal ─────────────────────────────────────────────────────── */
+.search-modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 200; display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 80px; visibility: hidden; opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+.search-modal[aria-hidden="false"] { visibility: visible; opacity: 1; }
+.search-modal-backdrop {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+}
+.search-dialog {
+  position: relative; width: 100%; max-width: 520px;
+  background: #ffffff; border-radius: 14px;
+  border: 1px solid #e8e8e6;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 20px;
+}
+.search-dialog-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 12px;
+}
+.search-dialog-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #8b8b8b; margin-bottom: 2px;
+}
+.search-dialog-head h2 {
+  font-size: 18px; font-weight: 500; color: #1c1c1c; margin: 0;
+}
+.search-close {
+  width: 28px; height: 28px; border: 1px solid #e8e8e6;
+  border-radius: 8px; background: #fafafa;
+  font-size: 16px; color: #6b6b6b; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.search-dialog-meta {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.search-dialog-meta span {
+  font-size: 11px; color: #8b8b8b; padding: 2px 8px;
+  background: #f5f5f4; border-radius: 4px;
+}
+.search-shortcut {
+  margin-left: auto; font-size: 11px; color: #8b8b8b;
+}
+.site-search {
+  padding: 8px 0;
+}
+
+/* ── Bento Grid ───────────────────────────────────────────────────────── */
+.bento {
+  max-width: 1200px;
+  margin: 56px auto 0;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border: 1px solid #e8e8e6;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.card-highlight {
+  background: rgba(94,106,210,0.02);
+  border-color: rgba(94,106,210,0.12);
+}
+
+/* ── Grid Spans ───────────────────────────────────────────────────────── */
+.span-1 { grid-column: span 1; }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+
+/* ── Typography ───────────────────────────────────────────────────────── */
+.label-sm {
+  font-size: 11px; font-weight: 600;
+  color: #8b8b8b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 32px; font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.subtitle { font-size: 15px; color: #6b6b6b; font-weight: 400; }
+h2 {
+  font-size: 18px; font-weight: 500;
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+  color: #1c1c1c;
+}
+h3 {
+  font-size: 14px; font-weight: 600;
+  color: #1c1c1c;
+  margin-bottom: 6px;
+}
+.text-body { font-size: 13px; color: #4a4a4a; line-height: 1.6; }
+.text-muted { font-size: 12px; color: #8b8b8b; line-height: 1.5; }
+.text-body strong, .text-muted strong { color: #1c1c1c; font-weight: 500; }
+
+/* ── Tags ─────────────────────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+.dots-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ── Stat Items ───────────────────────────────────────────────────────── */
+.stat-row { display: flex; gap: 12px; margin-top: 6px; }
+.stat-item { flex: 1; min-width: 0; }
+.stat-num {
+  font-size: 26px; font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.stat-label { font-size: 11px; color: #8b8b8b; margin-top: 1px; }
+
+/* ── Grid 2 ──────────────────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tip-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.tip-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #1c1c1c; }
+
+/* ── Vertical List ────────────────────────────────────────────────────── */
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem {
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.vitem-icon {
+  width: 24px; height: 24px; background: #f0f0ee;
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: #5e6ad2; flex-shrink: 0;
+}
+
+/* ── Quote ────────────────────────────────────────────────────────────── */
+.quote {
+  background: #fafafa;
+  border-left: 3px solid #5e6ad2;
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 12px; line-height: 1.6;
+  margin-top: 8px;
+  color: #4a4a4a;
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────── */
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px; margin-top: 6px;
+}
+th {
+  font-size: 11px; font-weight: 600; color: #8b8b8b;
+  text-align: left; padding: 8px 10px 6px;
+  border-bottom: 1px solid #e8e8e6;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+td {
+  font-size: 12px; color: #4a4a4a;
+  padding: 7px 10px;
+  border-bottom: 1px solid #f0f0ee;
+}
+td:first-child { font-weight: 500; color: #1c1c1c; }
+tr:last-child td { border-bottom: none; }
+
+/* ── Callout ──────────────────────────────────────────────────────────── */
+.callout {
+  background: rgba(94,106,210,0.04);
+  border: 1px solid rgba(94,106,210,0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 10px;
+}
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.callout-text strong { color: #1c1c1c; font-weight: 500; }
+
+/* ── Info Item ────────────────────────────────────────────────────────── */
+.info-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0ee;
+}
+.info-item:last-child { border-bottom: none; }
+.info-label {
+  font-size: 11px; font-weight: 600;
+  color: #8b8b8b;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  min-width: 60px; flex-shrink: 0;
+}
+.info-text { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+
+/* ── Metric Row ───────────────────────────────────────────────────────── */
+.metrics { display: flex; flex-direction: column; gap: 8px; }
+.metric-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 10px;
+  background: #fafafa;
+  border-radius: 10px;
+}
+
+/* ── Mini utility ─────────────────────────────────────────────────────── */
+.divider { height: 1px; background: #e8e8e6; margin: 12px 0; }
+
+/* ── Paradigm Card (范式卡片) ────────────────────────────────────────── */
+.paradigm-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.paradigm-card:last-child { margin-bottom: 0; }
+.paradigm-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.paradigm-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.paradigm-platforms { font-size: 11px; color: #5e6ad2; margin-top: 4px; font-weight: 500; }
+
+/* ── Coverage Badge ──────────────────────────────────────────────────── */
+.cov-full { color: #10b981; }
+.cov-part { color: #f59e0b; }
+.cov-none { color: #ef4444; }
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid-2, .tips-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-wrap: wrap; }
+  .stat-item { flex: 1 1 40%; }
+}
+@media (max-width: 720px) {
+  .bento { grid-template-columns: 1fr; padding: 20px 16px 40px; }
+  .span-1, .span-2, .span-3, .span-4 { grid-column: span 1; }
+  .header-inner { gap: 12px; }
+  .nav { gap: 12px; }
+  .search-trigger kbd { display: none; }
+}
+
+/* ── Platform tag in mapping table ───────────────────────────────────── */
+.ptag {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.ptag-deep { background: rgba(16,185,129,0.12); color: #10b981; }
+.ptag-base { background: rgba(94,106,210,0.08); color: #5e6ad2; }
+.ptag-none { background: #f5f5f4; color: #ccc; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<!-- ═══ SEARCH MODAL ═══ -->
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<!-- ═══ BENTO CONTENT ═══ -->
+<div class="bento">
+
+<!-- ─── HERO CARD ─── -->
+<div class="card span-4">
+  <div class="label-sm">Research Report · 2026/5/22</div>
+  <h1>Agent 评测平台深度对比</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    9 平台 × 5 范式 · 横向对比、场景选型、空白地带与市场格局<br>
+    基于 T1 评测分类学 + T2 十平台深扒 + T3 综合对比分析
+  </div>
+  <div class="stat-row" style="margin-top:16px;">
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">活跃评测平台</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">评测范式分类</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">关键空白地带</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">场景选型推荐</div>
+    </div>
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 评测</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLMOps</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Benchmark</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">评价体系</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">平台对比</span>
+  </div>
+</div>
+
+<!-- ─── 评测范式分类 (左: 3 范式) ─── -->
+<div class="card span-2">
+  <div class="label-sm">评测范式分类</div>
+  <h2>五大评测范式 · 评判主体与自动化程度</h2>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="paradigm-card">
+      <div class="paradigm-title">🤖 LLM-as-Judge（LLM 作为裁判）</div>
+      <div class="paradigm-desc">用另一个 LLM 对 Agent 输出进行打分。当前最主流的范式，核心问题：偏见（Position/Verbosity/Self-enhancement）和推理成本。</div>
+      <div class="paradigm-platforms">代表：DeepEval G-Eval · Galileo Luna-2 · Braintrust Loop AI · LangSmith Polly AI</div>
+    </div>
+    <div class="paradigm-card">
+      <div class="paradigm-title">⚙️ Code-based / Deterministic（确定性代码评测）</div>
+      <div class="paradigm-desc">通过代码规则（正则匹配、JSON Schema 校验、DAG 流程）进行确定性评判。零随机性、零 API 成本。最大局限：无法理解语义。</div>
+      <div class="paradigm-platforms">代表：DeepEval DAG 指标管道（最强）· Braintrust Scorer 原语 · LangSmith 自定义函数</div>
+    </div>
+    <div class="paradigm-card">
+      <div class="paradigm-title">👤 Human Eval（人工评测）</div>
+      <div class="paradigm-desc">人类专家对 Agent 输出进行判定。精度最高但成本最高、扩展性最差。所有平台都支持，但深度差异大。</div>
+      <div class="paradigm-platforms">代表：Braintrust 人工队列 · Galileo Enterprise 工作流 · Langfuse UI 标注队列</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 评测范式分类 (右: 2 范式) ─── -->
+<div class="card span-2">
+  <div class="label-sm" style="visibility:hidden;">_</div>
+  <h2 style="visibility:hidden;">_</h2>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:26px;">
+    <div class="paradigm-card">
+      <div class="paradigm-title">🕵️ Agent-as-Judge（Agent 作为裁判）</div>
+      <div class="paradigm-desc">用专用 Agent 对目标 Agent 的全链路行为（规划、工具调用、中间决策）进行评估。最大空白——6/9 平台完全缺失。Braintrust Loop AI 是唯一完整闭环实现。</div>
+      <div class="paradigm-platforms" style="color:#ef4444;">代表：Braintrust Loop AI（完整）· DeepEval（部分）· Galileo Insights Engine（部分）</div>
+    </div>
+    <div class="paradigm-card">
+      <div class="paradigm-title">🔒 Sandbox Eval（沙箱环境评测）</div>
+      <div class="paradigm-desc">在隔离环境中执行 Agent 操作（写文件、发请求、操作数据库）并评估结果。LangSmith 唯一提供完整 Docker 沙箱的评测平台——其独家护城河。</div>
+      <div class="paradigm-platforms" style="color:#ef4444;">代表：LangSmith Sandbox（唯一）· Maxim AI 仿真引擎（近似）</div>
+    </div>
+    <div class="callout" style="margin-top:6px;">
+      <div class="callout-text"><strong>关键发现</strong>：无平台覆盖全部 5 范式。Braintrust 和 DeepEval 最完整（4/5），两者均缺失沙箱。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 范式×平台映射矩阵 ─── -->
+<div class="card span-4">
+  <div class="label-sm">范式覆盖矩阵</div>
+  <h2>9 平台 × 5 范式映射</h2>
+  <div class="text-body" style="margin-bottom:8px;">范式深度评级：<span class="ptag ptag-deep">⭐⭐⭐ 深入</span> <span class="ptag ptag-base">⭐⭐ 标准</span> <span class="ptag ptag-base">⭐ 基础</span> <span class="ptag ptag-none">✗ 不支持</span></div>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th style="min-width:100px;">平台</th>
+        <th>LLM-as-Judge</th>
+        <th>Code-based</th>
+        <th>Human Eval</th>
+        <th>Agent-as-Judge</th>
+        <th>Sandbox</th>
+        <th>覆盖</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>W&B Weave</td>
+        <td><span class="ptag ptag-base">⭐ 基础</span></td>
+        <td><span class="ptag ptag-base">⭐ 基础</span></td>
+        <td><span class="ptag ptag-base">⭐ 基础</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+      <tr>
+        <td>Braintrust</td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ Loop AI</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ 自定义</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ 人工队列</span></td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ 完整闭环</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>4/5</strong> <span style="color:#10b981;">★</span></td>
+      </tr>
+      <tr>
+        <td>Arize Phoenix</td>
+        <td><span class="ptag ptag-base">⭐⭐ 多维度</span></td>
+        <td><span class="ptag ptag-base">⭐ 自定义</span></td>
+        <td><span class="ptag ptag-base">⭐ 标注队列</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+      <tr>
+        <td>LangSmith</td>
+        <td><span class="ptag ptag-base">⭐⭐ Polly AI</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ 自定义函数</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ 数据集标注</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ 唯一沙箱</span></td>
+        <td><strong>4/5</strong> <span style="color:#10b981;">★</span></td>
+      </tr>
+      <tr>
+        <td>Comet Opik</td>
+        <td><span class="ptag ptag-base">⭐⭐ 内置 Judge</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ ROUGE/BLEU</span></td>
+        <td><span class="ptag ptag-base">⭐ UI 手动标注</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+      <tr>
+        <td>DeepEval / Confident</td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ 40+ 指标 + G-Eval</span></td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ DAG 指标管道</span></td>
+        <td><span class="ptag ptag-base">⭐ CA 平台标注</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ TaskCompletion</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>4/5</strong> <span style="color:#10b981;">★</span></td>
+      </tr>
+      <tr>
+        <td>Maxim AI</td>
+        <td><span class="ptag ptag-base">⭐⭐ 预构建+自定义</span></td>
+        <td><span class="ptag ptag-base">⭐ 自定义评估器</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ 人工队列</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+      <tr>
+        <td>Langfuse</td>
+        <td><span class="ptag ptag-base">⭐⭐ 内置+自定义</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ Python 评分函数</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ UI 标注队列</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+      <tr>
+        <td>Galileo</td>
+        <td><span class="ptag ptag-deep">⭐⭐⭐ Luna-2 SLM</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><span class="ptag ptag-base">⭐ Enterprise 工作流</span></td>
+        <td><span class="ptag ptag-base">⭐⭐ Insights Engine</span></td>
+        <td><span class="ptag ptag-none">✗</span></td>
+        <td><strong>3/5</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <div><strong>🔍 五大关键发现：</strong></div>
+    <div>① 无平台覆盖全部 5 范式 — Braintrust 和 DeepEval 最完整（4/5），均缺 Sandbox</div>
+    <div>② Agent-as-Judge 最大空白 — 6/9 平台完全缺失，仅 Braintrust 有完整闭环</div>
+    <div>③ Sandbox 是 LangSmith 独有护城河 — 唯一 Docker 沙箱评测平台</div>
+    <div>④ Galileo 走差异化路线 — Luna-2 专有模型（GPT-4 精度，$0.02/1M tokens，152ms 延迟）</div>
+    <div>⑤ 开源阵营分化 — 通用可观测（Arize/Opik/Langfuse）vs 评估专精（DeepEval）</div>
+  </div>
+</div>
+
+<!-- ─── 横向对比总表 ─── -->
+<div class="card span-4">
+  <div class="label-sm">数据对比</div>
+  <h2>九平台横向对比 — 部署 · 开源 · 定价 · 特色</h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th style="min-width:88px;">平台</th>
+        <th>开源</th>
+        <th>许可</th>
+        <th>OTel</th>
+        <th>自托管</th>
+        <th>免费层</th>
+        <th>SaaS 起价</th>
+        <th>核心差异化</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>W&B Weave</td>
+        <td><span style="color:#ef4444;">❌</span></td>
+        <td>闭源</td>
+        <td>✅</td>
+        <td>Enterprise</td>
+        <td>100GB 免费</td>
+        <td>~$50/用户/月</td>
+        <td>传统 ML → LLM 延伸</td>
+      </tr>
+      <tr>
+        <td>Braintrust</td>
+        <td><span style="color:#ef4444;">❌</span></td>
+        <td>闭源</td>
+        <td>Partial</td>
+        <td>Enterprise</td>
+        <td>1GB + 10k scores</td>
+        <td>$249/月</td>
+        <td>唯一完整 Agent-as-Judge</td>
+      </tr>
+      <tr>
+        <td>Arize Phoenix</td>
+        <td><span style="color:#10b981;">✅</span></td>
+        <td>Apache 2.0</td>
+        <td><strong>原生</strong></td>
+        <td>✅ Phoenix 免费</td>
+        <td>Phoenix 完全免费</td>
+        <td>AX 按量计</td>
+        <td>OTel 可观测 + Drift/Embedding</td>
+      </tr>
+      <tr>
+        <td>LangSmith</td>
+        <td><span style="color:#ef4444;">❌</span></td>
+        <td>闭源</td>
+        <td>Partial</td>
+        <td>Enterprise</td>
+        <td>开发者免费</td>
+        <td>~$99/月</td>
+        <td>LangChain 生态 + 唯一沙箱</td>
+      </tr>
+      <tr>
+        <td>Comet Opik</td>
+        <td><span style="color:#10b981;">✅</span></td>
+        <td>Apache 2.0</td>
+        <td>✅</td>
+        <td>✅ Docker/K8s</td>
+        <td>10M traces/月</td>
+        <td>~$999/月</td>
+        <td>开源高吞吐 (40M trace/day)</td>
+      </tr>
+      <tr>
+        <td>DeepEval</td>
+        <td><span style="color:#10b981;">✅</span></td>
+        <td>Apache 2.0</td>
+        <td>可扩展</td>
+        <td>✅ (DE 免费)</td>
+        <td>DE 免费 + CA 有限</td>
+        <td>~$299/月 (CA)</td>
+        <td>评估即代码 — DAG 管道 + 40+ 指标</td>
+      </tr>
+      <tr>
+        <td>Maxim AI</td>
+        <td><span style="color:#ef4444;">❌</span></td>
+        <td>闭源</td>
+        <td>✅</td>
+        <td>In-VPC</td>
+        <td>免费入门</td>
+        <td>按座位/用量</td>
+        <td>唯一 Simulation 引擎</td>
+      </tr>
+      <tr>
+        <td>Langfuse</td>
+        <td><span style="color:#10b981;">✅</span></td>
+        <td>MIT/EE</td>
+        <td>✅</td>
+        <td>✅ 完全免费</td>
+        <td>有限免费</td>
+        <td>~$59/月</td>
+        <td>极致性价比</td>
+      </tr>
+      <tr>
+        <td>Galileo</td>
+        <td><span style="color:#ef4444;">❌</span></td>
+        <td>闭源</td>
+        <td>Partial</td>
+        <td>Enterprise</td>
+        <td>有限免费</td>
+        <td>按 token 计费</td>
+        <td>Luna-2 专有 SLM + Protect</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:10px 14px;flex:1;">
+      <div style="font-size:11px;font-weight:600;color:#8b8b8b;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">开源阵营</div>
+      <div style="font-size:12px;color:#6b6b6b;">Arize Phoenix · Comet Opik · DeepEval · Langfuse — 4 个活跃开源平台，许可 Apache 2.0 / MIT</div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:10px 14px;flex:1;">
+      <div style="font-size:11px;font-weight:600;color:#8b8b8b;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">闭源阵营</div>
+      <div style="font-size:12px;color:#6b6b6b;">W&B · Braintrust · LangSmith · Maxim AI · Galileo — 差异化优势在独特范式深度</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 场景选型推荐 ─── -->
+<div class="card span-4">
+  <div class="label-sm">场景选型</div>
+  <h2>9 大场景 · 首选 + 备选 + 核心理由</h2>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h3>🐍 Python CI/CD + 大量指标</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：DeepEval</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">40+ 预构建指标 + DAG 管道 + Pytest 风格天然适配 CI/CD。Apache 2.0 开源零成本集成。备选：Braintrust。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🔗 LangChain 重度用户</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：LangSmith</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">原生 LangChain/LangGraph 集成 + 步骤级评分 + 唯一 Docker 沙箱。Agent-as-Judge 空白需 Braintrust 补充。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🏠 自托管 + 数据主权 + 免费</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Langfuse</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">MIT 开源，自托管完全免费，SaaS 仅 $59/月。OTel 原生 + Trace/评估/成本追踪四合一。备选：Comet Opik（40M trace/day）。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🔄 CI/CD 闭环 + 高产出团队</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Braintrust</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">唯一完整 Agent-as-Judge（Loop AI）。自动从生产 trace 生成测试集 → 评估 → 分析 → 修复闭环。$249/月。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🛡️ 幻觉检测 + 生产安全</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Galileo</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">Luna-2 蒸馏 SLM（$0.02/1M tokens, 152ms 延迟）+ Galileo Protect 运行时拦截。Code-based 空白。</div>
+    </div>
+    <div class="tip-card">
+      <h3>🎭 AI Agent 仿真测试</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Maxim AI</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">唯一 Simulation 引擎，在安全环境模拟 Agent 行为后再投产。In-VPC 部署满足数据敏感场景。</div>
+    </div>
+    <div class="tip-card">
+      <h3>📊 已有 W&B 基础设施</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：W&B Weave</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">传统 ML + LLM 统一管理。基础 LLM-Judge + Code + Human 三范式覆盖。适合「够用就好」。迁移成本最低。</div>
+    </div>
+    <div class="tip-card">
+      <h3>📈 OTel 生态 + Embedding/Drift</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Arize Phoenix</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">OTel 原生 ML 可观测。Embedding 分析 + Drift 检测全市场最强。Phoenix 开源免费。适合成熟 ML Ops 组织。</div>
+    </div>
+    <div class="tip-card">
+      <h3>💰 预算敏感 + 完整方案</h3>
+      <div style="font-size:11px;color:#5e6ad2;font-weight:600;margin-bottom:6px;">首选：Langfuse 自托管</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">自托管 $0 / SaaS $59/月。Trace + LLM-Judge 评估 + Human 标注 + 成本追踪四合一。备选：DeepEval（完全免费）。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 空白地带分析 (左: 空白 ①-③) ─── -->
+<div class="card span-2">
+  <div class="label-sm">空白地带</div>
+  <h2>五大关键空白 — 市场潜力与填补难度</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">①</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Agent-as-Judge × 通用平台</div>
+        <div class="vitem-desc">6/9 平台（67%）完全空白。仅 Braintrust 有完整闭环。市场潜力 🔴 高，填补难度 中，预期 1-2 年填补。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">②</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Sandbox × 大众平台（垄断空白）</div>
+        <div class="vitem-desc">仅 LangSmith 提供 Docker 沙箱。类比早期 CI 在裸机运行测试 → 后来容器化成为标配。市场潜力 🔴 高，填补难度 高，预期 2-3 年。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">③</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Code-based 缺失（Galileo 专有路线）</div>
+        <div class="vitem-desc">Galileo 是唯一不支持 Code-based 的平台。用 Luna-2 低成本弥补，但在精确匹配等场景仍有缺陷。市场潜力 🟢 低，填补难度 低。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 空白地带分析 (右: 空白 ④-⑤) ─── -->
+<div class="card span-2">
+  <div class="label-sm" style="visibility:hidden;">_</div>
+  <h2 style="visibility:hidden;">_</h2>
+  <div class="vlist" style="margin-top:26px;">
+    <div class="vitem">
+      <div class="vitem-icon">④</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Simulation + Sandbox 组合（交汇空白）</div>
+        <div class="vitem-desc">Maxim 有 Simulation 无沙箱，LangSmith 有沙箱无 Simulation。黄金组合：隔离沙箱中运行仿真测试。市场潜力 🟡 中，填补难度 高，预期 2-3 年。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">⑤</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Agent-as-Judge + OTel 原生集成</div>
+        <div class="vitem-desc">OTel 原生平台（Arize/Opik/Langfuse）均无 Agent-as-Judge。理想方案：Agent trace → OTel Collector → Agent-Judge 评估 span tree。市场潜力 🟡 中，填补难度 中。</div>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <div class="callout-text"><strong>格局洞察</strong>：开源阵营分化为「通用可观测」（Arize/Opik/Langfuse）和「评估专精」（DeepEval）两条路线。闭源专精玩家各有不可替代性。</div>
+  </div>
+</div>
+
+<!-- ─── Why This Matters ─── -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">Why This Matters</div>
+  <h2>为什么每个 AI 团队都该关注 Agent 评测</h2>
+  <div class="text-body" style="display:flex;flex-direction:column;gap:6px;">
+    <div><strong>Agent 正在从「对话机器人」进化为「自主执行者」。</strong>当 Agent 开始操作数据库、发 HTTP 请求、写文件、调用内部 API，评估就不能再只看最终输出——你需要全过程验证。</div>
+    <div><strong>评测不再是「跑个 benchmark」的事，而是生产基础设施。</strong>就像 CI/CD 测试从可选变成标配，Agent 评测也将成为每个 AI 工程团队的基本能力。</div>
+    <div><strong>对中国 AI 团队尤其关键：</strong></div>
+    <div>• 国内 Agent 生态缺少 LangSmith 级别的沙箱平台——这是基础设施级空缺</div>
+    <div>• 开源方案（Langfuse/DeepEval）可零成本自托管，规避数据出境的合规风险</div>
+    <div>• Agent-as-Judge 空白意味着巨大创新空间——比做第 10 个 LLM 更有价值</div>
+    <div>• 选对平台不只看范式数量，更要看「独特范式深度」——沙箱、Agent-Judge、专有评估模型</div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>核心判断：</strong>无平台覆盖全部 5 范式，意味着当前市场仍处于早期。未来 1-2 年最可能发生的变化：(1) 可观测平台收购评估专精团队；(2) Sandbox 从 LangSmith 的护城河变成全行业标配；(3) Agent-as-Judge 从稀缺能力变成必备功能。
+  </div>
+</div>
+
+<!-- ─── 参考来源 ─── -->
+<div class="card span-4">
+  <div class="label-sm">参考文献</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>📄 <strong>T1 范式分类</strong> — <code>t_eval_t1/paradigms.md</code> — 5 范式定义、偏见问题、平台映射</div>
+    <div>📄 <strong>T1 维度矩阵</strong> — <code>t_eval_t1/dimensions.md</code> — 4 维度（单步/多步、结果/轨迹、功能/安全/效率/成本、离线/在线）</div>
+    <div>📄 <strong>T1 沙箱分析</strong> — <code>t_eval_t1/sandbox.md</code> — 3 层级隔离机制、LangSmith/Anthropic/OSWorld 方案</div>
+    <div>📄 <strong>T1 平台-范式映射</strong> — <code>t_eval_t1/platforms-paradigm-mapping.md</code> — 9 平台 × 5 范式映射 + 差距分析</div>
+    <div>📄 <strong>T2 对比总表</strong> — <code>t_a192f203/comparison-table.md</code> — 10 平台横向对比全维度</div>
+    <div>📄 <strong>T2 平台详析</strong> — <code>t_a192f203/platforms/</code> — 10 平台每平台详细分析文件</div>
+    <div>📄 <strong>T3 综合对比分析</strong> — <code>t_eval_t3/comprehensive-analysis.md</code> — 本报告完整数据源</div>
+  </div>
+  <div style="margin-top:8px;">
+    <div style="font-size:11px;font-weight:600;color:#8b8b8b;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">关键论文</div>
+    <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+      <div>📚 <a href="https://arxiv.org/abs/2306.05685" style="color:#5e6ad2;text-decoration:none;">Zheng et al., "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena", NeurIPS 2023</a></div>
+      <div>📚 <a href="https://arxiv.org/abs/2303.16634" style="color:#5e6ad2;text-decoration:none;">Liu et al., "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment", EMNLP 2023</a></div>
+      <div>📚 <a href="https://arxiv.org/abs/2310.03611" style="color:#5e6ad2;text-decoration:none;">AgentBench: Evaluating LLMs as Agents, ICLR 2024</a></div>
+      <div>📚 <a href="https://arxiv.org/abs/2305.16291" style="color:#5e6ad2;text-decoration:none;">GAIA: A General AI Assistant Benchmark</a></div>
+      <div>📚 <a href="https://arxiv.org/abs/2305.18181" style="color:#5e6ad2;text-decoration:none;">WebArena: A Realistic Web Environment for Building Autonomous Agents</a></div>
+    </div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
+    ⚠️ 所有数据基于 T1-T3 调研产出（截至 2026-05-22）。定价可能随各平台政策变化。
+  </div>
+</div>
+
+</div><!-- /bento -->
+
+</body>
+</html>
