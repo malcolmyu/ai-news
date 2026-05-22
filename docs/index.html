@@ -10,6 +10,91 @@
 <link rel="stylesheet" href="styles.css">
 <script src="pagefind/pagefind-ui.js" defer></script>
 <script src="search.js" defer></script>
+<script>
+// Calendar — report dates from daily/ file listing
+const REPORTS = [
+  '2026-03-26','2026-03-27','2026-03-28','2026-03-29','2026-03-30','2026-03-31',
+  '2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06',
+  '2026-04-09','2026-04-15',
+  '2026-05-11','2026-05-13','2026-05-14','2026-05-15','2026-05-16','2026-05-17',
+  '2026-05-18','2026-05-19','2026-05-20','2026-05-21','2026-05-22'
+];
+const REPORT_SET = new Set(REPORTS);
+const DAY_NAMES = ['一','二','三','四','五','六','日'];
+
+function fmtDate(y,m,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
+const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+(function(){
+  let curYear, curMonth;
+  const today = new Date();
+  
+  function renderCal() {
+    const grid = document.getElementById('cal-grid');
+    const label = document.getElementById('cal-month-label');
+    const count = document.getElementById('cal-count');
+    if (!grid) return;
+    
+    label.textContent = curYear + '年 ' + MONTH_LABELS[curMonth];
+    
+    // count reports this month
+    let monthCount = 0;
+    for (const d of REPORTS) {
+      const p = d.split('-');
+      if (+p[0] === curYear && +p[1] === curMonth+1) monthCount++;
+    }
+    count.textContent = monthCount + ' 篇日报';
+    
+    const firstDay = new Date(curYear, curMonth, 1).getDay(); // 0=Sun
+    const daysInMonth = new Date(curYear, curMonth+1, 0).getDate();
+    // convert Sun=0 to Mon=0
+    const startOffset = firstDay === 0 ? 6 : firstDay - 1;
+    
+    let html = '';
+    // empty cells before 1st
+    for (let i = 0; i < startOffset; i++) {
+      html += '<span class="cal-day empty"></span>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const ds = fmtDate(curYear, curMonth, d);
+      const has = REPORT_SET.has(ds);
+      const isToday = ds === fmtDate(today.getFullYear(), today.getMonth(), today.getDate());
+      let cls = 'cal-day';
+      if (has) cls += ' has-report';
+      if (isToday) cls += ' today';
+      if (has) {
+        html += '<a class="'+cls+'" href="daily/ai-news-'+ds+'.html" title="'+ds+'">'+d+'</a>';
+      } else {
+        html += '<span class="'+cls+'">'+d+'</span>';
+      }
+    }
+    grid.innerHTML = html;
+  }
+  
+  window.calPrev = function() {
+    curMonth--;
+    if (curMonth < 0) { curMonth = 11; curYear--; }
+    renderCal();
+  };
+  window.calNext = function() {
+    curMonth++;
+    if (curMonth > 11) { curMonth = 0; curYear++; }
+    renderCal();
+  };
+  
+  // init on DOM ready
+  function init() {
+    curYear = today.getFullYear();
+    curMonth = today.getMonth();
+    renderCal();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 </head>
 <body style="background:var(--bg-primary);">
@@ -74,7 +159,8 @@
 </div>
 <a href="daily/archive.html" class="section-link">查看全部 →</a>
 </div>
-<div style="display:flex;flex-direction:column;gap:10px;">
+<div class="daily-layout">
+<div class="daily-left">
 <a href="daily/ai-news-2026-05-22.html" class="daily-entry">
 <div class="entry-icon" style="background:var(--accent);color:#fff;">📰</div>
 <div style="flex:1;">
@@ -92,14 +178,35 @@
 <div style="font-size:16px;color:var(--text-muted);">→</div>
 </a>
 </div>
+<div class="daily-right">
+<div class="calendar-card">
+<div class="cal-header">
+<button class="cal-nav-btn" onclick="calPrev()" title="上个月">◀</button>
+<span class="cal-month-label" id="cal-month-label">2026年 5月</span>
+<button class="cal-nav-btn" onclick="calNext()" title="下个月">▶</button>
+</div>
+<div class="cal-day-names">
+<span class="cal-day-name" title="周一">一</span>
+<span class="cal-day-name" title="周二">二</span>
+<span class="cal-day-name" title="周三">三</span>
+<span class="cal-day-name" title="周四">四</span>
+<span class="cal-day-name" title="周五">五</span>
+<span class="cal-day-name" title="周六">六</span>
+<span class="cal-day-name" title="周日">日</span>
+</div>
+<div class="cal-grid" id="cal-grid"></div>
+<div class="cal-legend">
+<span class="cal-legend-dot has"></span>有日报
+<span class="cal-legend-dot today"></span>今天
+<span class="cal-count" id="cal-count">0 篇日报</span>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 
 <section class="hp-section" id="research">
-
-
-
-
 
 
 
