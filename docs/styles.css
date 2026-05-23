@@ -968,7 +968,7 @@ body.search-modal-open { overflow: hidden; }
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 @media (max-width: 860px) {
   .daily-layout {
@@ -979,6 +979,15 @@ body.search-modal-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.daily-entry-today {
+  flex: 2.2;
+  padding: 18px 20px;
+}
+.daily-entry-archive {
+  flex: 0.8;
+  padding: 10px 20px;
+  border: 1px dashed var(--border) !important;
 }
 .daily-right {
   position: sticky;
