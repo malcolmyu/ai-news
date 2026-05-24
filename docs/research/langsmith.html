@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-24">
+<title>LangSmith 深度调研 — LLM Agent 可观测性与评估平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+.metric-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+.metric-row:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span><span>深度调研</span><span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">深度调研 · 2026/5/24</div>
+  <h1>LangSmith：LLM Agent 可观测性与评估平台的领跑者</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    LangChain 公司出品 · 估值 12.5 亿美元独角兽 · 日均处理超 10 亿事件<br>
+    服务 35% Fortune 500 企业，开源下载量超 10 亿次 — 从 Tracing 到 Deployment 的完整 Agent 工程闭环
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LangChain</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 可观测性</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLM 评估</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">部署平台</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">竞品对比</span>
+  </div>
+</div>
+
+<!-- Quick Facts -->
+<div class="card span-1">
+  <div class="label-sm">公司档案</div>
+  <div class="info-item"><span class="info-label">创立</span><span class="info-text">2023 年初</span></div>
+  <div class="info-item"><span class="info-label">创始人</span><span class="info-text">Harrison Chase & Ankush Gola</span></div>
+  <div class="info-item"><span class="info-label">估值</span><span class="info-text">12.5 亿美元</span></div>
+  <div class="info-item"><span class="info-label">融资</span><span class="info-text">1.25 亿美元 (2025/10)</span></div>
+  <div class="info-item"><span class="info-label">日处理</span><span class="info-text">10 亿+ 事件</span></div>
+  <div class="info-item"><span class="info-label">总部</span><span class="info-text">旧金山</span></div>
+</div>
+
+<!-- What is LangSmith -->
+<div class="card span-3">
+  <div class="label-sm">平台定位</div>
+  <h2>框架无关的 Agent 工程平台</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    LangSmith 由 <strong>LangChain 公司</strong>打造，Harrison Chase（LangChain 作者）和 Ankush Gola 于 2023 年初联合创立。最初是 LangChain 的单 Python 包副业项目，ChatGPT 发布后爆发式增长，迅速演变为覆盖 <strong>Tracing → Evaluation → Monitoring → Deployment</strong> 全链路的 Agent 工程平台。
+  </div>
+  <div class="quote">
+    <strong>核心定位：</strong>「代理工程平台」（Agent Engineering Platform）— 不仅追踪和评估，还提供一键部署、沙盒执行、无代码 Agent 构建等完整闭环。框架无关设计意味着不限于 LangChain/LangGraph 用户，OpenAI SDK、Anthropic SDK、LlamaIndex 均可接入。
+  </div>
+  <div class="dots-row" style="margin-top:10px;">
+    <span class="tag">Klarna</span>
+    <span class="tag">Lyft</span>
+    <span class="tag">Cloudflare</span>
+    <span class="tag">Nvidia</span>
+    <span class="tag">LinkedIn</span>
+    <span class="tag">Coinbase</span>
+    <span class="tag">Home Depot</span>
+  </div>
+</div>
+
+<!-- Architecture -->
+<div class="card span-4">
+  <div class="label-sm">架构概览</div>
+  <h2>Control Plane + Data Plane 双层架构</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎛️ Control Plane（控制平面）</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        前端 Nginx → 后端 CRUD API → 业务逻辑层 → Playground（转发 LLM 请求）→ ACE（安全代码执行）
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">💾 Data Plane（数据平面）</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Agent Server pods（运行时）→ Distributed Collector → Queue → ClickHouse（OLAP traces）+ PostgreSQL（事务操作）+ Redis 队列缓存
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">⚡ SmithDB（专有存储引擎）</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        专为 Agent trace 构建的高性能数据库。Trace 查询 <strong>12x</strong> 加速（860ms→71ms）、全文搜索 <strong>15x</strong> 加速（6.2s→400ms）、支持 VPC 内自托管
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🔌 四种集成方式</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        ① Python/TS/Go/Java SDK 直接发送 trace · ② OpenTelemetry 兼容现有管道 · ③ 框架原生集成（OpenAI/Anthropic/LlamaIndex）· ④ LangGraph 一键部署
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Core Features: Tracing -->
+<div class="card span-2">
+  <div class="label-sm">核心功能</div>
+  <h2>🔍 Tracing（端到端追踪）</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">📊</div>
+      <div class="vitem-content">
+        <div class="vitem-title">多轮对话 Threading</div>
+        <div class="vitem-desc">支持 Agent 多轮对话的 message threading，完整记录每一步 reasoning、tool call、LLM 响应</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">⚡</div>
+      <div class="vitem-content">
+        <div class="vitem-title">异步低延迟</div>
+        <div class="vitem-desc">SDK 使用异步回调处理器，即使 LangSmith 服务故障，Agent 正常运行不受影响</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🔎</div>
+      <div class="vitem-content">
+        <div class="vitem-title">SmithDB 查询能力</div>
+        <div class="vitem-desc">随机访问单个 run · 全文搜索 · JSON key-path 过滤 · 轨迹查询 · 15x 全文搜索加速</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Core Features: Evaluation -->
+<div class="card span-2">
+  <div class="label-sm">核心功能</div>
+  <h2>📋 Evaluation（评估体系）</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">🤖</div>
+      <div class="vitem-content">
+        <div class="vitem-title">LLM-as-Judge</div>
+        <div class="vitem-desc">用 LLM 评判 LLM 输出质量，覆盖生成质量、忠实度、上下文精度</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🔬</div>
+      <div class="vitem-content">
+        <div class="vitem-title">离线 + 在线双模式</div>
+        <div class="vitem-desc">离线：基于数据集运行评估，类似"单元测试"。在线：生产环境实时评分，检测质量漂移</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">👤</div>
+      <div class="vitem-content">
+        <div class="vitem-title">人工标注队列</div>
+        <div class="vitem-desc">Annotation Queue + Pairwise Comparison，支持并排比较 Agent 输出</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Prompt Hub + Playground -->
+<div class="card span-2">
+  <div class="label-sm">核心功能</div>
+  <h2>🎨 Prompt Hub + Playground</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">📝</div>
+      <div class="vitem-content">
+        <div class="vitem-title">团队协作 Prompt 管理</div>
+        <div class="vitem-desc">版本化提示词管理，AI Agent "Polly" 自动优化提示词，跨模型提供商对比输出</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🎮</div>
+      <div class="vitem-content">
+        <div class="vitem-title">交互式 Playground</div>
+        <div class="vitem-desc">非技术人员可直接编辑系统输出排查问题（Podium 案例：技术支持团队无需工程师介入）</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">📈</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Experiments 对比</div>
+        <div class="vitem-desc">基线固定 + Side-by-side 对比仪表盘，跨版本/模型/Agent 可视化比较</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Monitoring + Deployment -->
+<div class="card span-2">
+  <div class="label-sm">核心功能</div>
+  <h2>🚀 Monitoring + Deployment</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">📡</div>
+      <div class="vitem-content">
+        <div class="vitem-title">实时监控仪表盘</div>
+        <div class="vitem-desc">Token 用量 · 延迟 P50/P99 · 错误率 · 成本分解 · 在线 LLM-as-Judge 评分 · Webhook/PagerDuty 告警</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🌐</div>
+      <div class="vitem-content">
+        <div class="vitem-title">一键部署</div>
+        <div class="vitem-desc">LangSmith Deployment：水平扩展 · Assistants API · 30+ 端点 · Cron 调度 · Sandboxes 安全隔离执行</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🤖</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Fleet（无代码 Agent 构建）</div>
+        <div class="vitem-desc">自然语言创建 Agent · MCP 工具支持 · API 触发 · 预置模板</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Case Studies -->
+<div class="card span-4">
+  <div class="label-sm">客户案例</div>
+  <h2>量化收益：Podium · Monday.com · Trellix</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🏆 Podium — 工程干预减少 90%</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        技术支持团队通过 LangSmith trace 直接排查问题，无需工程师参与。<strong>F1 分数从 91.7% 提升到 98.6%</strong>，模型蒸馏全流程自动化。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">⚡ Monday.com — 反馈循环 9x 加速</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        使用 LangSmith 运行评估，将 Agent 迭代反馈周期从数天缩短到数小时，快速验证提示词和模型变更。
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔬 Trellix — 日志解析从天到分钟</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        安全日志解析时间从 <strong>数天缩短到数分钟</strong>，通过 LangSmith 的 tracing 和评估体系快速迭代 Agent。
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">💾 SmithDB 性能基准</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Trace 查询 12x · Thread 查询 9x · 全文搜索 15x · 过滤 6x 加速。专为 Agent trace 负载设计。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Competitor Comparison -->
+<div class="card span-4">
+  <div class="label-sm">竞品对比</div>
+  <h2>LangSmith vs 6 个主要竞品</h2>
+  <table>
+    <tr><th>平台</th><th>定位</th><th>开源</th><th>优势</th><th>劣势 vs LangSmith</th></tr>
+    <tr>
+      <td>W&B Weave</td>
+      <td>ML 实验跟踪 + LLM 监控</td>
+      <td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">部分</span></td>
+      <td>传统 ML 生态强</td>
+      <td>LLM 追踪功能较新，缺乏完整部署闭环</td>
+    </tr>
+    <tr>
+      <td>Arize Phoenix</td>
+      <td>LLM 可观测性</td>
+      <td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">开源</span></td>
+      <td>开源友好，本地可运行</td>
+      <td>缺少 Prompt Hub、Deployment、Fleet 等完整生态</td>
+    </tr>
+    <tr>
+      <td>Braintrust</td>
+      <td>AI 评估平台</td>
+      <td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">部分</span></td>
+      <td>轻量级，定价简单</td>
+      <td>聚焦评估，非完整 Agent 工程平台</td>
+    </tr>
+    <tr>
+      <td>MLflow</td>
+      <td>开源 ML 平台</td>
+      <td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">开源</span></td>
+      <td>免费，Databricks 生态</td>
+      <td>Agent 支持深度不足，功能覆盖面窄</td>
+    </tr>
+    <tr>
+      <td>LangFuse</td>
+      <td>开源 LLM 可观测性</td>
+      <td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">开源</span></td>
+      <td>部署简单</td>
+      <td>社区规模小，功能深度不如 LangSmith</td>
+    </tr>
+    <tr>
+      <td>Helicone</td>
+      <td>LLM API 代理/监控</td>
+      <td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">部分</span></td>
+      <td>API 层监控轻量</td>
+      <td>仅 API 代理层，无评估/部署能力</td>
+    </tr>
+  </table>
+  <div style="margin-top:10px;font-size:12px;color:#6b6b6b;line-height:1.5;">
+    <strong>LangSmith 的独特优势：</strong>完整开发→生产生命周期覆盖 + Agent 专用设计 + SmithDB 性能优化 + Fleet/Deployment/Sandboxes 形成其他竞品不具备的闭环。对使用 LangChain/LangGraph 的团队几乎是"默认选择"。
+  </div>
+</div>
+
+<!-- Pricing -->
+<div class="card span-2">
+  <div class="label-sm">定价分析</div>
+  <h2>📊 三档套餐对比</h2>
+  <table>
+    <tr><th>项目</th><th>Developer（免费）</th><th>Plus ($39/席/月)</th></tr>
+    <tr><td>席位</td><td>1</td><td>无限</td></tr>
+    <tr><td>Base Traces</td><td>5k/月</td><td>10k/月</td></tr>
+    <tr><td>部署</td><td>—</td><td>1 个 Dev</td></tr>
+    <tr><td>Fleet</td><td>1 Agent / 50 runs</td><td>无限 / 500 runs</td></tr>
+    <tr><td>托管选项</td><td>Cloud</td><td>Cloud</td></tr>
+    <tr><td>SSO</td><td>Google/GitHub</td><td>自定义 SSO</td></tr>
+  </table>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;">
+    Enterprise：定制价格 · Cloud/Hybrid/自托管 · SSO + RBAC · SLA 支持 · 培训
+  </div>
+</div>
+
+<!-- Trace Pricing Detail -->
+<div class="card span-2">
+  <div class="label-sm">用量计费</div>
+  <h2>💰 Trace 单价 & 其他计费</h2>
+  <div class="metric-row">
+    <div>
+      <div class="info-text" style="font-weight:500;">Base Trace</div>
+      <div class="text-muted" style="font-size:11px;">14 天保留</div>
+    </div>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">$2.50/千条</span>
+  </div>
+  <div class="metric-row">
+    <div>
+      <div class="info-text" style="font-weight:500;">Extended Trace</div>
+      <div class="text-muted" style="font-size:11px;">400 天保留</div>
+    </div>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">$5.00/千条</span>
+  </div>
+  <div class="metric-row">
+    <div>
+      <div class="info-text" style="font-weight:500;">Fleet Runs</div>
+      <div class="text-muted" style="font-size:11px;">超额后</div>
+    </div>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">$0.05/run</span>
+  </div>
+  <div class="metric-row">
+    <div>
+      <div class="info-text" style="font-weight:500;">Deployment Production</div>
+      <div class="text-muted" style="font-size:11px;">uptime 计费</div>
+    </div>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">$0.0036/分钟</span>
+  </div>
+  <div class="text-muted" style="margin-top:8px;font-size:11px;">
+    ⚠️ 高流量场景成本可能快速上升。对比 LangFuse/MLflow（开源免费），LangSmith 在竞品中定价偏高。小团队推荐 Developer 免费层或 Startup 计划。
+  </div>
+</div>
+
+<!-- Reviews: Pros -->
+<div class="card span-2">
+  <div class="label-sm">行业评价</div>
+  <h2>👍 用户好评（7 大亮点）</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">1</div>
+      <div class="vitem-content"><div class="vitem-title">LangChain/LangGraph 开箱即用</div><div class="vitem-desc">深度集成，自动 tracing，几乎零配置</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div>
+      <div class="vitem-content"><div class="vitem-title">框架无关</div><div class="vitem-desc">OpenAI/Anthropic/LlamaIndex/Vercel AI SDK 均可接入</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">3</div>
+      <div class="vitem-content"><div class="vitem-title">Playground 降低门槛</div><div class="vitem-desc">非技术团队成员（PM/技术支持）也能使用</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">4</div>
+      <div class="vitem-content"><div class="vitem-title">评估 + 追踪一体化</div><div class="vitem-desc">不需要在多个工具之间切换</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Reviews: Cons -->
+<div class="card span-2">
+  <div class="label-sm">行业评价</div>
+  <h2>👎 用户批评（6 个痛点）</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">1</div>
+      <div class="vitem-content"><div class="vitem-title">按 trace 计费，高流量成本高</div><div class="vitem-desc">大规模场景下月费可能迅速膨胀</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">2</div>
+      <div class="vitem-content"><div class="vitem-title">LangChain 绑定感</div><div class="vitem-desc">虽称框架无关，但核心体验仍深度围绕 LangChain 生态</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">3</div>
+      <div class="vitem-content"><div class="vitem-title">自托管仅限企业版</div><div class="vitem-desc">小团队无法自托管，云依赖较重</div></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">4</div>
+      <div class="vitem-content"><div class="vitem-title">自托管复杂度高</div><div class="vitem-desc">需要 K8s + ClickHouse + PostgreSQL + Redis 多组件</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Updates Timeline -->
+<div class="card span-4">
+  <div class="label-sm">产品演进</div>
+  <h2>2024-2026 重大更新时间线</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">2024</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+        · 平台正式推出：Tracing + Evaluation + Hub<br>
+        · SmithDB 发布<br>
+        · Deployment 一键部署上线<br>
+        · 在线评估：生产环境实时评分
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">2025 H2</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+        · Pairwise Annotation Queues<br>
+        · LangSmith Fetch CLI 终端调试<br>
+        · Insights Agent 自动分析 trace<br>
+        · Self-Hosted v0.13 功能大幅提升
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">2026 Q1</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+        · 定时报告（每日/每周/cron）<br>
+        · Pin Baseline Experiment<br>
+        · 全线成本追踪（不再限于 LLM 调用）<br>
+        · Fleet（原 Agent Builder 改名增强）
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">2026/5 最新</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.6;">
+        · LangSmith Engine 核心引擎更新<br>
+        · Sandboxes Auth Proxy 安全增强<br>
+        · 可定制 trace 预览（v0.13.10）
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:12px;">
+    <strong>迭代节奏：</strong>几乎每周都有新功能发布。LangSmith 是目前 LLM Agent 工具中更新最活跃的平台之一。
+  </div>
+</div>
+
+<!-- Use Cases Across Stages -->
+<div class="card span-2">
+  <div class="label-sm">应用阶段</div>
+  <h2>Dev → Staging → Production</h2>
+  <div class="vlist">
+    <div class="vitem" style="border-left:3px solid #5e6ad2;">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">🛠</div>
+      <div class="vitem-content">
+        <div class="vitem-title">开发阶段</div>
+        <div class="vitem-desc">Tracing 调试每一步 · Playground 实验提示词 · 离线评估 · Studio 测试 Graph</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #f59e0b;">
+      <div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">🧪</div>
+      <div class="vitem-content">
+        <div class="vitem-title">预发布阶段</div>
+        <div class="vitem-desc">CI/CD 集成自动评估 · 阈值 fail pipeline · 基线对比实验</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #10b981;">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">🚀</div>
+      <div class="vitem-content">
+        <div class="vitem-title">生产阶段</div>
+        <div class="vitem-desc">实时监控仪表盘 · 在线评估 · Insights 自动分析 · 告警 · 人工反馈队列</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Why This Matters -->
+<div class="card span-2">
+  <div class="label-sm">Why This Matters</div>
+  <h2>为什么值得你关注</h2>
+  <div class="text-body" style="display:flex;flex-direction:column;gap:6px;">
+    <div><strong>你自己就在构建 Agent 系统。</strong>你用的 Hermes + Claude Code + Ralph Loop 多 Agent 编队已经在跑，Kanban worker 调度、cron 定时任务、多平台消息路由——这些都需要可观测性。</div>
+    <div><strong>LangSmith 的 Tracing 思路直接对应你的痛点：</strong></div>
+    <div>· Hermes 的 Agent 多轮调用 → 需要端到端 trace 来理解「为什么 agent 这么做」</div>
+    <div>· Kanban dispatcher → worker 分发 → 需要评估「哪个 worker 配置更好」</div>
+    <div>· Cron 日报生成 → 需要对比「今天的日报质量 vs 昨天」</div>
+    <div><strong>LangSmith 是如果你要商业化 Agent 产品，可观测性是第一块要铺的砖。</strong></div>
+  </div>
+</div>
+
+<!-- Closing -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">核心结论</div>
+  <h2>LangSmith 是当前最完整的 Agent 工程平台，但价格和生态锁定是双刃剑</h2>
+  <div class="text-body" style="margin-top:8px;">
+    LangSmith 的核心竞争力在于将<strong>Tracing、Evaluation、Prompt Hub、Monitoring、Deployment</strong> 整合为单一工作流，并与 LangChain/LangGraph 生态深度绑定。日均处理超 10 亿事件、服务 35% Fortune 500 企业、客户量化收益显著。<br><br>
+    <strong>适合的场景：</strong>深度使用 LangChain/LangGraph 的团队（几乎默认选择）· 需要完整开发到生产闭环的企业 · 预算充足的中大型团队。<br>
+    <strong>需要谨慎的场景：</strong>预算敏感的小团队（考虑 LangFuse/Arize Phoenix 开源替代）· 非 LangChain 生态（评估竞品功能覆盖）· 需要完全自托管且非企业计划。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent Engineering</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Observability</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLM Evaluation</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Deployment</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">独角兽</span>
+  </div>
+</div>
+
+<!-- References -->
+<div class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>📄 <a href="https://docs.langchain.com/langsmith" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith 官方文档 — docs.langchain.com</a></div>
+    <div>📄 <a href="https://www.langchain.com/pricing-langsmith" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith 定价页面 — langchain.com/pricing</a></div>
+    <div>📄 <a href="https://changelog.langchain.com/" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith Changelog — changelog.langchain.com</a></div>
+    <div>📄 <a href="https://blog.langchain.dev/customers-podium/" target="_blank" style="color:#5e6ad2;text-decoration:none;">Podium 客户案例 — blog.langchain.dev</a></div>
+    <div>📄 <a href="https://docs.langchain.com/self-hosted" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith Self-Hosted 文档 — docs.langchain.com</a></div>
+    <div>🌐 <a href="https://www.langchain.com/about" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangChain 公司介绍 — langchain.com/about</a></div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
