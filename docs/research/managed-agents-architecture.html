@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-24">
+<title>Managed Agents 架构深度解读 — 解耦脑与手，Agent 蜂群的版本答案</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span><span>深度调研</span><span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">深度调研 · 2026/5/24</div>
+  <h1>Managed Agents：解耦脑与手，Agent 蜂群的版本答案</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    小天fotos 视频解读 · Anthropic Managed Agents 架构深度剖析<br>
+    从「养宠物」到「用牛马」—— 为什么解耦是 Agent 规模化的唯一出路
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Anthropic</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Managed Agents</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">多 Agent 协作</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">架构解耦</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Coordinator</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Session Store</span>
+  </div>
+</div>
+
+<!-- Quick Facts -->
+<div class="card span-1">
+  <div class="label-sm">视频信息</div>
+  <div class="info-item"><span class="info-label">作者</span><span class="info-text">小天fotos</span></div>
+  <div class="info-item"><span class="info-label">时长</span><span class="info-text">约 11 分钟</span></div>
+  <div class="info-item"><span class="info-label">来源</span><span class="info-text">Bilibili</span></div>
+  <div class="info-item"><span class="info-label">核心主题</span><span class="info-text">Managed Agents 架构</span></div>
+  <div class="info-item"><span class="info-label">原创博客</span><span class="info-text">Anthropic (2026/4/8)</span></div>
+  <div class="info-item"><span class="info-label">实操</span><span class="info-text">已本地复刻</span></div>
+</div>
+
+<!-- Core Thesis -->
+<div class="card span-3">
+  <div class="label-sm">核心论断</div>
+  <h2>「要扩大 Agent 的规模，就要解耦脑和手」</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    2026 年 4 月 8 日，Anthropic 发布了一篇关于 <strong>Managed Agents</strong> 的博客，披露了内部将 Agent 从「单兵作战」推向「蜂群协作」的架构演进。核心结论：<strong>你为模型写的修补代码注定会过时</strong>，因为模型的进化速度永远比你重构代码的速度快。唯一的破局之道是<strong>解耦</strong>——把大模型的规划决策能力（大脑）和执行代码的沙盒环境（双手）彻底劈开。
+  </div>
+  <div class="quote">
+    <strong>「宠物 vs 牛马」：</strong>传统 Agent 架构把模型、记忆和环境死死绑在一起——等于把 Agent 当宠物养。跑错一行配置、记忆越来越多、环境被污染，系统就越来越难用甚至得重装。Managed Agents 告诉你：把 Agent 当牛马用——大脑只管发指令，底层双手全是无状态的独立沙盒。哪个沙盒跑崩了？直接干掉，重新拉起一个干净的接着干。
+  </div>
+</div>
+
+<!-- Architecture: 6 modules -->
+<div class="card span-4">
+  <div class="label-sm">架构发现</div>
+  <h2>SDK Beta 目录下的六个核心模块</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    小天通过逆向 Anthropic SDK 的 <strong>beta 目录</strong>，发现了一整套 Managed Agents 基础架构。六个模块虽然没有具体实现（都是云端 API 的包裹），但从参数和类型定义中可以推断出完整的设计意图：
+  </div>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🤖 Agents</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        静态模板：定义模型、工具、系统提示词。Agent 是「我是谁」——不承载状态，只承载能力定义。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">📦 Environments</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        无状态沙盒：执行代码的隔离环境。可随时销毁重建，确保双手永不污染大脑。
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">💬 Sessions</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        动态状态：对话、线程、记忆挂载。Session 是「我在干什么」——同一 Agent 可跑十个独立 Session。
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🛠 Skills</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        能力扩展：Agent 可用的工具和能力集，通过 Skills 机制动态挂载到 Agent 模板上。
+      </div>
+    </div>
+    <div style="background:rgba(236,72,153,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🧠 Memory</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        持久记忆：Agent 的记忆不附着于 Agent 本身，而是作为 Memory Store 挂载到 Session 上——这又是解耦。
+      </div>
+    </div>
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">💾 Stores</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        数据存储：文件、知识库、向量数据库等持久化数据层，与 Agent 和 Session 完全解耦。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Coordinator pattern -->
+<div class="card span-2">
+  <div class="label-sm">关键发现</div>
+  <h2>🎯 Coordinator：不干活的指挥官</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">📋</div>
+      <div class="vitem-content">
+        <div class="vitem-title">唯一职责：拆任务、派活</div>
+        <div class="vitem-desc">在 Agent 类的类型定义中，有一个 <strong>coordinator</strong> 字段——一个不写代码、不做推理的纯调度者</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">👥</div>
+      <div class="vitem-content">
+        <div class="vitem-title">花名册：最多 20 个 Agent</div>
+        <div class="vitem-desc">每个 Agent 有独立的 prompt、工具和 MCP 服务器，Coordinator 只管分配不管执行</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">🔄</div>
+      <div class="vitem-content">
+        <div class="vitem-title">天然解决上下文窗口问题</div>
+        <div class="vitem-desc">单人做长任务会不断压缩上下文、丢失记忆。多 Agent 编队：一个编码、一个 review、一个测试——各自的上下文保持干净</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Session decoupling -->
+<div class="card span-2">
+  <div class="label-sm">核心概念</div>
+  <h2>💡 Session 解耦：最重要的设计决策</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon">📝</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Agent 是「我是谁」→ 模板</div>
+        <div class="vitem-desc">模型 + 工具 + 提示词 = 静态能力定义。Agent 本身不存储任何状态</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">💬</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Session 是「我在干什么」→ 状态</div>
+        <div class="vitem-desc">对话、线程、记忆、文件挂载都归属 Session。同一 Agent 可同时跑 10 个独立 Session</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon">⏪</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Session 快照：随时回滚「最聪明状态」</div>
+        <div class="vitem-desc">Agent 刚搜完代码库时是最聪明的状态。任务做多了会变笨——但 Coordinator 可以保存这个「巅峰状态」，随时克隆复用来应对新任务</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pet vs Workhorse -->
+<div class="card span-2">
+  <div class="label-sm">范式转移</div>
+  <h2>🐱 宠物 vs 🐂 牛马</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    传统 Agent = <strong>宠物</strong>：模型、记忆、环境死死绑定。配置错一行、记忆越来越多、环境被污染 → 系统越来越难用，甚至得重装。
+  </div>
+  <div class="text-body">
+    Managed Agent = <strong>牛马</strong>：大脑（决策）和双手（执行）彻底分离。大脑只管发指令，双手全是无状态沙盒。沙盒跑崩了？直接干掉重拉——一个配置导致全盘崩溃在这种架构下根本不可能发生。
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>核心理由：</strong>你为模型写的修补代码注定会过时。模型的进化速度永远比你重构代码的速度快。所以不要修补——要解耦。
+  </div>
+</div>
+
+<!-- Implementation details -->
+<div class="card span-2">
+  <div class="label-sm">本地实践</div>
+  <h2>🔧 作者的实现路线</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">1</div>
+      <div class="vitem-content">
+        <div class="vitem-title">逆向 SDK Beta 目录</div>
+        <div class="vitem-desc">从 Anthropic SDK 的 beta 目录提取 Agents / Environments / Sessions / Skills / Memory / Stores 六个模块的类型定义</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div>
+      <div class="vitem-content">
+        <div class="vitem-title">本地实现 Coordinator</div>
+        <div class="vitem-desc">只做任务分解和派发，不执行代码。管理最多 20 个子 Agent</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div>
+      <div class="vitem-content">
+        <div class="vitem-title">接入腾讯 Cube Sandbox</div>
+        <div class="vitem-desc">毫秒级沙盒启动，替代 Docker 容器的启动延迟。实现「拉一个干净沙盒」的真正的无状态执行</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(236,72,153,0.12);color:#ec4899;">4</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Session Checkpoint</div>
+        <div class="vitem-desc">实现 Session 状态快照和回滚，使 Coordinator 能保存 Agent 的「最聪明时刻」并复用</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The bigger picture -->
+<div class="card span-4">
+  <div class="label-sm">行业全景</div>
+  <h2>从个人工具到企业基础设施——Agent 的下一个维度</h2>
+  <div class="grid-2">
+    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🏢 Anthropic · Managed Agents</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        云端 Agent 操作系统。Coordinator + 20 Agent 编队 + Session Store + 无状态沙盒。本质：做一个云端的 Agent OS，接口已做好，让企业直接买服务。
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🔬 Pointer · AIP 系统</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        海外另一个 Agent 编排系统，与 Managed Agents 共享相同的核心理念：解耦、编排、规模化。
+      </div>
+    </div>
+    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">🤖 OpenAI · Frontier</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        OpenAI 的 Agent 基础设施方向，同样在将 Agent 从「个人工具」升级为「企业级编排平台」。
+      </div>
+    </div>
+    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">👤 FDE · 新兴职业</div>
+      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
+        Foundation Data Engineer — 一个围绕 Agent 基础设施的新职业，负责构建和维护 Agent 运行所需的数据和知识基础。
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:12px;">
+    <strong>都在做同一件事：</strong>把 Agent 从个人工具变成企业基础设施。而我们还在研究「怎么样在本地养多只小龙虾」，还在为用 OpenCLI 还是用 Hermes 争论不休。海外已经进入了下一个维度。
+  </div>
+</div>
+
+<!-- Cloud paradigm shift -->
+<div class="card span-2">
+  <div class="label-sm">技术趋势</div>
+  <h2>☁️ 计算范式的转变</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    以前云计算是「一个容器固定服务长期使用」。但在 Managed Agents 模式下，未来可能是<strong>无数个 Agent 容器在不断地创建和销毁</strong>。Docker 容器的启动和销毁延迟在这种场景下成了瓶颈——这也是为什么腾讯 Cube Sandbox（毫秒级沙盒启动）的出现恰逢其时。
+  </div>
+  <div class="text-body">
+    计算资源的分配和计价模式也会随之变革：不再是按「容器运行时长」计费，而是按「Agent 任务完成量」计费。云计算的下一个形态，可能是 <strong>Agent 原生的 Serverless</strong>。
+  </div>
+</div>
+
+<!-- Why This Matters -->
+<div class="card span-2">
+  <div class="label-sm">Why This Matters</div>
+  <h2>这跟你有什么关系</h2>
+  <div class="text-body" style="display:flex;flex-direction:column;gap:6px;">
+    <div><strong>你就已经在跑多 Agent 架构。</strong>你的 Hermes + Kanban + Ralph Loop 本质上就是 Coordinator + Worker 模式。Kanban dispatcher 拆任务、派活，worker profile 各自执行——这正是 Managed Agents 的协调者思维。</div>
+    <div><strong>但差距在哪？</strong></div>
+    <div>· Session 状态管理——你的 Kanban worker 之间共享状态吗？有没有 Session 快照和回滚？</div>
+    <div>· 沙盒隔离——你的 worker 跑在同一环境里还是独立沙盒？一个 worker 崩了会影响其他吗？</div>
+    <div>· 规模化——你能同时跑 20 个 worker 吗？上下文压缩是瓶颈吗？</div>
+    <div><strong>这篇视频不是在讲一个遥远的概念——它在讲你已经在做但还没做透的事。</strong></div>
+  </div>
+</div>
+
+<!-- Closing -->
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">核心结论</div>
+  <h2>解耦不是选择，是 Agent 规模化的唯一数学解</h2>
+  <div class="text-body" style="margin-top:8px;">
+    小天这期视频的核心价值不在于「复刻了 Anthropic 的 SDK」——而在于<strong>用实际代码跑通了这套理念</strong>：Coordinator 只调度不执行、Agent 模板与 Session 状态分离、沙盒作为无状态执行单元可随时销毁重建。<br><br>
+    <strong>最重要的警示：</strong>当海外厂商已经把 Agent 从「个人工具」上升到「企业基础设施」的时候，国内还在争论 OpenCLI vs Hermes 哪个更好用。这不是工具之争——这是<strong>对 Agent 理解维度的差距</strong>。Anthropic 的阳谋是做一个云端的 Agent 操作系统，而如果你还在琢磨怎么在本地养好一只 Agent，你已经落后了一个维度。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Managed Agents</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Coordinator Pattern</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Session Decoupling</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">脑手解耦</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">基础设施化</span>
+  </div>
+</div>
+
+<!-- References -->
+<div class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
+    <div>🎬 <a href="https://www.bilibili.com/video/BV1DB546wEb8" target="_blank" style="color:#5e6ad2;text-decoration:none;">比Openclaw更好！我发现了多Agent协作架构的版本答案！— 小天fotos (Bilibili)</a></div>
+    <div>📄 Anthropic Managed Agents 官方博客（2026/4/8）— 解耦脑与手的架构设计理念</div>
+    <div>🔧 Anthropic SDK Beta 目录 — Agents / Environments / Sessions / Skills / Memory / Stores 模块</div>
+    <div>🏢 腾讯 Cube Sandbox — 毫秒级沙盒启动，开源项目（2026/4 发布）</div>
+    <div>⚠️ 视频字幕基于 Bilibili AI 字幕自动生成，内容经人工核对整理</div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
