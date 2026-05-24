@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LangSmith Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f5f5f4;
+    font-family: 'Geist', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 2rem;
+  }
+  .page {
+    max-width: 960px; width: 100%;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .header {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 8px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #8b8b8b;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.75rem; font-weight: 400; color: #1c1c1c;
+  }
+  .subtitle {
+    font-size: 12px; color: #6b6b6b; font-family: 'Geist', sans-serif;
+  }
+  .diagram {
+    background: #fff; border: 1px solid rgba(28,28,28,0.08); border-radius: 8px;
+    padding: 1.5rem; overflow-x: auto;
+  }
+  .cards {
+    display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 12px;
+  }
+  .card {
+    background: #fff; border: 1px solid rgba(28,28,28,0.10); border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .card-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 7px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #8b8b8b; margin-bottom: 8px;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+  .card-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .card-dot.accent { background: #5e6ad2; }
+  .card-dot.ink { background: #1c1c1c; }
+  .card-dot.muted { background: #6b6b6b; }
+  h3 { font-size: 13px; font-weight: 600; color: #1c1c1c; }
+  .card ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .card li { font-size: 11px; color: #6b6b6b; line-height: 1.5; padding-left: 12px; position: relative; }
+  .card li::before { content: '—'; position: absolute; left: 0; color: #8b8b8b; }
+  .card strong { color: #1c1c1c; }
+  footer {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px; color: #8b8b8b; text-align: center;
+    padding-top: 1rem; border-top: 1px solid rgba(28,28,28,0.08);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <p class="eyebrow">LangSmith Architecture</p>
+  <h1>Control Plane + Data Plane</h1>
+  <p class="subtitle">LangChain 公司 · SmithDB 专有引擎 · 四种集成方式 · 四种部署模式</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+  <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#6b6b6b"/>
+  </marker>
+  <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5e6ad2"/>
+  </marker>
+  <marker id="arrow-dashed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#8b8b8b"/>
+  </marker>
+</defs>
+
+<!-- Background -->
+<rect width="920" height="560" fill="#f5f5f4"/>
+
+<!-- Region: Control Plane -->
+<rect x="16" y="16" width="508" height="200" rx="8" fill="none" stroke="rgba(94,106,210,0.30)" stroke-width="1" stroke-dasharray="4,4"/>
+<rect x="16" y="6" width="104" height="12" rx="2" fill="#f5f5f4"/>
+<text x="68" y="15" fill="#5e6ad2" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">CONTROL PLANE</text>
+
+<!-- Region: Data Plane -->
+<rect x="540" y="16" width="364" height="200" rx="8" fill="none" stroke="rgba(28,28,28,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
+<rect x="704" y="6" width="80" height="12" rx="2" fill="#f5f5f4"/>
+<text x="744" y="15" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">DATA PLANE</text>
+
+<!-- Region: Storage -->
+<rect x="16" y="312" width="888" height="104" rx="8" fill="none" stroke="rgba(28,28,28,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+<rect x="408" y="302" width="72" height="12" rx="2" fill="#f5f5f4"/>
+<text x="444" y="311" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">STORAGE</text>
+
+<!-- ===== CONTROL PLANE NODES ===== -->
+
+<!-- Nginx -->
+<rect x="32" y="44" width="100" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
+<rect x="40" y="52" width="32" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="56" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">PROXY</text>
+<text x="82" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Nginx</text>
+<text x="82" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">:443</text>
+
+<!-- Backend API -->
+<rect x="164" y="44" width="120" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
+<rect x="172" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="186" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+<text x="224" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Backend</text>
+<text x="224" y="96" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CRUD · Auth</text>
+
+<!-- Queue (focal) -->
+<rect x="316" y="44" width="108" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="324" y="52" width="36" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
+<text x="342" y="61" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">QUEUE</text>
+<text x="370" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Async Queue</text>
+<text x="370" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">trace writer</text>
+
+<!-- Playground -->
+<rect x="456" y="44" width="56" height="28" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="484" y="62" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Geist', sans-serif" text-anchor="middle">Playground</text>
+
+<!-- ACE -->
+<rect x="456" y="80" width="56" height="28" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="484" y="98" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Geist', sans-serif" text-anchor="middle">ACE</text>
+
+<!-- Control plane arrows -->
+<line x1="132" y1="76" x2="164" y2="76" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="284" y1="76" x2="316" y2="76" stroke="#5e6ad2" stroke-width="1" marker-end="url(#arrow-accent)"/>
+<line x1="424" y1="68" x2="456" y2="58" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="424" y1="84" x2="456" y2="94" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
+
+<!-- Control plane → Storage arrow -->
+<line x1="370" y1="108" x2="370" y2="136" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="332" y="116" width="76" height="12" rx="2" fill="#f5f5f4"/>
+<text x="370" y="125" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE</text>
+
+<!-- ===== DATA PLANE NODES ===== -->
+
+<!-- Agent Server -->
+<rect x="556" y="44" width="120" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
+<rect x="564" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="578" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">POD</text>
+<text x="616" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Agent Server</text>
+<text x="616" y="96" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">runtime pods</text>
+
+<!-- Collector -->
+<rect x="708" y="44" width="116" height="64" rx="6" fill="rgba(28,28,28,0.05)" stroke="#6b6b6b" stroke-width="1"/>
+<rect x="716" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="730" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">COL</text>
+<text x="766" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Dist. Collector</text>
+<text x="766" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">async callback</text>
+
+<!-- Data plane arrows -->
+<line x1="676" y1="76" x2="708" y2="76" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="680" y="68" width="40" height="12" rx="2" fill="#f5f5f4"/>
+<text x="700" y="77" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">TRACE</text>
+
+<!-- Collector → Storage -->
+<line x1="766" y1="108" x2="766" y2="136" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="728" y="116" width="76" height="12" rx="2" fill="#f5f5f4"/>
+<text x="766" y="125" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE</text>
+
+<!-- ===== STORAGE NODES ===== -->
+
+<!-- ClickHouse -->
+<rect x="32" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="40" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
+<text x="54" y="357" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">OLAP</text>
+<text x="102" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">ClickHouse</text>
+<text x="102" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">traces · feedback</text>
+
+<!-- PostgreSQL -->
+<rect x="192" y="340" width="128" height="64" rx="6" fill="rgba(28,28,28,0.04)" stroke="#6b6b6b" stroke-width="1"/>
+<rect x="200" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="214" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SQL</text>
+<text x="256" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">PostgreSQL</text>
+<text x="256" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">operational data</text>
+
+<!-- Redis -->
+<rect x="340" y="340" width="112" height="64" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.25)" stroke-width="1"/>
+<rect x="348" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="362" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">KV</text>
+<text x="396" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Redis / Valkey</text>
+<text x="396" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">queue · cache</text>
+
+<!-- Blob -->
+<rect x="472" y="340" width="140" height="64" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
+<rect x="480" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="494" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">BLOB</text>
+<text x="542" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Blob Storage</text>
+<text x="542" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">S3 · GCS · Azure</text>
+
+<!-- SmithDB (focal) -->
+<rect x="632" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1.2"/>
+<text x="702" y="360" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">SmithDB</text>
+<text x="702" y="376" fill="#5e6ad2" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">proprietary engine</text>
+<text x="702" y="392" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">12x trace · 15x search</text>
+
+<!-- ===== INTEGRATION LAYER ===== -->
+
+<!-- Integration nodes at top-left -->
+<rect x="32" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.04)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
+<text x="72" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">SDK</text>
+<text x="72" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">Py · TS · Go · Java</text>
+
+<rect x="128" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
+<text x="168" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">OpenTelemetry</text>
+<text x="168" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">existing pipes</text>
+
+<rect x="224" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
+<text x="264" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Frameworks</text>
+<text x="264" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">OpenAI · LlamaIdx</text>
+
+<rect x="320" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
+<text x="360" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">LangGraph</text>
+<text x="360" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">auto-deploy</text>
+
+<!-- Integration → Nginx -->
+<line x1="72" y1="192" x2="82" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
+<line x1="168" y1="192" x2="148" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
+<line x1="264" y1="192" x2="244" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
+<line x1="360" y1="192" x2="360" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
+
+<!-- Agent Server → integration label -->
+<rect x="556" y="144" width="120" height="48" rx="6" fill="rgba(94,106,210,0.04)" stroke="rgba(94,106,210,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="616" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Deployment</text>
+<text x="616" y="180" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">LangSmith Deploy</text>
+
+<!-- Deployment → Agent Server -->
+<line x1="616" y1="144" x2="616" y2="108" stroke="rgba(94,106,210,0.40)" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+<!-- Deployment modes -->
+<rect x="708" y="144" width="196" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
+<text x="806" y="160" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif" text-anchor="middle">Modes: Cloud SaaS · Self-Hosted (K8s)</text>
+<text x="806" y="176" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">Hybrid · Standalone Server</text>
+
+<!-- ===== LEGEND ===== -->
+<line x1="32" y1="440" x2="888" y2="440" stroke="rgba(28,28,28,0.08)" stroke-width="0.8"/>
+<text x="32" y="456" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+
+<rect x="100" y="446" width="8" height="8" rx="1" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1"/>
+<text x="114" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Focal (≤2)</text>
+
+<rect x="200" y="446" width="8" height="8" rx="1" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
+<text x="214" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Backend / Service</text>
+
+<rect x="340" y="446" width="8" height="8" rx="1" fill="rgba(28,28,28,0.05)" stroke="#6b6b6b" stroke-width="1"/>
+<text x="354" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Store / Data</text>
+
+<rect x="460" y="446" width="8" height="8" rx="1" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
+<text x="474" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">External / Optional</text>
+
+<line x1="600" y1="450" x2="632" y2="450" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
+<text x="640" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Data flow</text>
+
+<line x1="720" y1="450" x2="752" y2="450" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="760" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Optional / Async</text>
+
+</svg>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <p class="card-eyebrow">DATA FLOW</p>
+    <div class="card-header"><span class="card-dot accent"></span><h3>从 Trace 到 Insight</h3></div>
+    <ul>
+      <li>Agent 执行 → <strong>SDK 异步回调</strong> → Distributed Collector</li>
+      <li>Collector → Queue → <strong>ClickHouse</strong> (trace) + <strong>PostgreSQL</strong> (operational)</li>
+      <li><strong>SmithDB</strong> 提供 12x trace 查询 · 15x 全文搜索加速</li>
+    </ul>
+  </div>
+  <div class="card">
+    <p class="card-eyebrow">INTEGRATION</p>
+    <div class="card-header"><span class="card-dot ink"></span><h3>四种接入方式</h3></div>
+    <ul>
+      <li>① SDK 直连 (<strong>Python/TS/Go/Java</strong>)</li>
+      <li>② OpenTelemetry 兼容现有管道</li>
+      <li>③ 框架原生 (OpenAI, Anthropic, LlamaIndex)</li>
+      <li>④ LangGraph 一键部署</li>
+    </ul>
+  </div>
+  <div class="card">
+    <p class="card-eyebrow">DEPLOYMENT</p>
+    <div class="card-header"><span class="card-dot muted"></span><h3>四种部署模式</h3></div>
+    <ul>
+      <li><strong>Cloud SaaS</strong> — GCP us-central-1</li>
+      <li><strong>Self-Hosted</strong> — K8s (Enterprise)</li>
+      <li><strong>Hybrid</strong> — SaaS CP + 自托管 DP</li>
+      <li><strong>Standalone</strong> — Agent Server only</li>
+    </ul>
+  </div>
+</div>
+
+<footer>LangSmith Architecture Diagram · May 2026 · ai-news Research Report</footer>
+
+</div>
+</body>
+</html>
