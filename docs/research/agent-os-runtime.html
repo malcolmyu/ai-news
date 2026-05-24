@@ -117,31 +117,18 @@
 <div class="card span-4">
   <div class="label-sm">架构总览</div>
   <h2>三层架构：Application → Kernel → Hardware</h2>
-  <div class="grid-2">
-    <div style="background:rgba(94,106,210,0.04);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">📱 Application Layer（应用层）</div>
-      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
-        Agent 应用框架（ReAct、AutoGen、MetaGPT 等）通过 <strong>AIOS SDK</strong> 调用内核。Agent 只需关注业务逻辑，资源调度完全交给内核。
-      </div>
-    </div>
-    <div style="background:rgba(16,185,129,0.04);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">⚙️ Kernel Layer（内核层）</div>
-      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
-        <strong>AIOS Kernel</strong>（LLM 核心 + 调度器 + 上下文管理器 + 内存管理器 + 存储管理器 + 工具管理器 + 访问管理器）+ 传统 OS 内核。这是 AIOS 的核心创新。
-      </div>
-    </div>
-    <div style="background:rgba(245,158,11,0.04);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🖥️ Hardware Layer（硬件层）</div>
-      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
-        CPU、GPU、内存、磁盘、外设。AIOS 内核直接管理 GPU 显存分配，避免传统框架的「尝试加载 → CUDA OOM → 重试」试错模式。
-      </div>
-    </div>
-    <div style="background:rgba(139,92,246,0.04);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🔌 AIOS SDK</div>
-      <div style="font-size:12px;color:#6b6b6b;line-height:1.5;">
-        Agent 开发者通过统一的 SDK 接口调用内核服务。Agent 注册时指定使用的 LLM 模型和所需工具，内核负责分配资源、调度执行。
-      </div>
-    </div>
+  <div style="background:#f5f5f4;border-radius:8px;overflow:hidden;margin-top:10px;">
+    <iframe src="assets/aios-architecture.html" style="width:100%;height:620px;border:none;" loading="lazy" title="AIOS 三层架构图"></iframe>
+  </div>
+  <div class="dots-row" style="margin-top:10px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AIOS Kernel</span>
+    <span class="tag">LLM Core</span>
+    <span class="tag">Scheduler</span>
+    <span class="tag">Context Mgr</span>
+    <span class="tag">Memory Mgr</span>
+    <span class="tag">Storage</span>
+    <span class="tag">Tool Mgr</span>
+    <span class="tag">Access Mgr</span>
   </div>
 </div>
 
