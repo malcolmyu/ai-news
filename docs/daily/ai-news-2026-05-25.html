@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-05-25 AI 日报 - 第二号</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
+.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+<div class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年5月25日</div>
+  <h1>Cerebras CEO 十年复盘：推理速度从无人问津到 OpenAI 200 亿美元大单</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    Cerebras 创始人 Andrew Feldman 在 No Priors 播客中深度复盘了十年创业路——从 2019 年造出餐盘大小的晶圆级芯片却无人理睬，到如今推理速度比 GPU 快 15-20 倍、签下 OpenAI 200 亿美元协议。YC CEO Garry Tan 用几小时微调 Qwen3.5-397B，宣示个人 AI 时代即将到来。Replit CEO Amjad Masad 透露 Dial 让开发者在周末就搞定 MVP 并通过 Apple 审核。Vercel CEO Guillermo Rauch 发起 AI 产品调查，1400+ 回复揭示 Codex 正在追赶 Claude Code。GitHub Trending 持续被 AI Coding Agent 生态统治。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">推理速度</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">晶圆级芯片</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 编程</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">个人 AI</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">代码知识图谱</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 生态</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">追踪 Builder</div></div>
+    <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">GitHub 项目</div></div>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">今日头条</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">Cerebras CEO Andrew Feldman：推理速度是范式革命，不是锦上添花</strong>——从 2019 年造出晶圆级芯片（46,000mm²，餐盘大小）到 2025 年签下 OpenAI 200 亿协议，Cerebras 走过了十年长跑。核心教训：① 速度是质变——比 GPU 快 15-20 倍不是小幅优化，"要获得质变，架构必须根本不同"，慢速 AI 的市场和慢速搜索一样：零；② G42 的 10 亿美元订单成为战略桥梁，让 Cerebras 能在实战中测试大规模集群；③ 上市改变了游戏——用专业 VC 投资人换散户，资金成本更低但规则更严，但如今 OpenAI/Anthropic/Databricks 能私有融资到上市级别估值，游戏已不同。Feldman 的金句："我们经历过两年多的黑暗期，造出了计算机行业最难的东西，然后没人在乎。"
+      </div>
+      <div style="margin-top:8px;">
+        <a href="https://www.youtube.com/watch?v=jeop9wfb9jU" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">收听播客 →</a>
+      </div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">AI 编程工具之战白热化：Codex 追赶上来了</strong>——Vercel CEO Guillermo Rauch 发起"展示你用 AI 打造的最自豪产品"社区调查，1400+ 回复揭示：OpenAI 正在追赶 Anthropic，Codex 的提及次数已超过 Claude Code；但按模型名称统计，Anthropic 仍全面领先。另一边，Replit CEO Amjad Masad 转发用户案例——在 Cursor 上做三个 app 觉得已很快，试了 Dial 后一个周末搞定 MVP 并首次提交就通过 Apple 审核。AI 编程工具的竞争正从"能不能写代码"升级到"能不能让开发者一次通过"。同时，Anthropic Claude Code 工程师 Thariq 展示了用 "please save me money" prompt 清理旧服务的实用技巧（463 赞），道出了开发者用 AI 做运维的共鸣。
+      </div>
+      <div style="margin-top:8px;">
+        <a href="https://x.com/rauchg/status/2058353051073970416" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">AI 产品调查 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">创业感悟</div>
+  <h3>Anthropic 工程师 Thariq：用 AI 省钱的真实体验</h3>
+  <div class="text-body">
+    Anthropic Claude Code 工程师分享了用 Claude Code 清理旧创业公司遗留服务的经历——"偶尔想起来你可以用 'please save me money' prompt，它真的管用。" 一条推文 463 赞，触动了开发者用 AI 做运维的共鸣。当 AI 编程工具的能力从"写代码"延伸到"管理基础设施成本"，工程师的工具箱正在发生根本性的变化。
+  </div>
+  <div class="quote">"Every once in a while you remember you can prompt 'please save me money' and it actually works."</div>
+  <img src="assets/2026-05-25/trq212-2058377974882210096-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/trq212/status/2058377974882210096" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">产品竞争</div>
+  <h3>Replit CEO Amjad Masad：Dial 让开发者一次通过 Apple 审核</h3>
+  <div class="text-body">
+    Amjad Masad 转发了一个用户案例：一个开发者在 Cursor 上做了三个 app 觉得已经很快了，但试了 Replit Dial 后一个周末就搞定 MVP，且<strong>首次提交就被 Apple 审核通过</strong>——"这在我身上从来没发生过。" 这个案例直指 AI 编程工具的新战场：不仅是写代码的速度，更是<strong>从开发到上线的完整成功率</strong>。一次通过 Apple 审核意味着工具的工程化成熟度已经达到了一个新高度。
+  </div>
+  <div class="quote">"Built 3 apps with Cursor and thought that was fast. Then tried Replit Dial and got an MVP in one weekend — and Apple approved it first submission."</div>
+  <img src="assets/2026-05-25/amasad-2058418731840159953-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/amasad/status/2058418731840159953" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">社区洞察</div>
+  <h3>Vercel CEO Guillermo Rauch：AI 产品 1400+ 回复揭示的竞争格局</h3>
+  <div class="text-body">
+    Guillermo Rauch 发起"展示你用 AI 打造的最自豪的产品"社区调查，获得 1400+ 回复。分析结果：OpenAI 正在追赶 Anthropic，Codex 提及次数已超过 Claude Code；但按模型名称统计，Anthropic 仍全面领先。这场 AI coding 工具之战正在白热化——<strong>工具的选择不再只是技术偏好，而是直接决定了开发者的产出效率和质量</strong>。
+  </div>
+  <img src="assets/2026-05-25/rauchg-2058353051073970416-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/rauchg/status/2058353051073970416" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">劳动经济学</div>
+  <h3>Box CEO Aaron Levie：不要把任务自动化等同于岗位消灭</h3>
+  <div class="text-body">
+    Aaron Levie 发表了一篇关于"AI 不会消灭工作"的深度长文：人们总把任务自动化等同于消灭整个岗位。实际上，当 AI 能完成某些任务时，岗位的定义反而会<strong>扩大</strong>——做更多、更好、更高级的事。小企业雇佣不起广告公司，但可以雇一个用 AI agent 武装的营销人。核心洞察：<strong>不要把任务和岗位混为一谈</strong>。正如他昨天预判安全工程师需求将因 AI 而爆发——杰文斯悖论在 AI 时代的核心表现形式就是：效率越高，对人的需求越大。
+  </div>
+  <div class="quote">"People keep confusing task automation with eliminating entire jobs. When AI automates tasks, the role definition actually expands — do more, better, and higher-level things."</div>
+  <img src="assets/2026-05-25/levie-2058223867815227756-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/levie/status/2058223867815227756" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">技术实践</div>
+  <h3>Garry Tan：几小时微调 Qwen3.5-397B，个人 AI 即将到来</h3>
+  <div class="text-body">
+    YC CEO 用 Thinking Machines 在几小时内微调了 Qwen3.5-397B 模型，同时发布 GBrain 评测——在 LongMemEval 上比 MemPalace 高 1%，比传统 Vector RAG 高 38%。核心判断：<strong>快速可用的多模态模型将催生"令人震撼的个人 AI"</strong>。当微调大模型变得像写一个 Python 脚本一样简单，AI 的个人化将进入爆发期——每个人都将拥有自己的专属 AI 助手，而非共享同一个通用模型。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/garrytan/status/2058378310254793013" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">开发实践</div>
+  <h3>Peter Steinberger：GitHub 仪表盘 + Codex scratch-log 技巧</h3>
+  <div class="text-body">
+    OpenClaw 创始人发布了一个面向所有人的 GitHub 仪表盘（676 赞），可以查看仓库、Issue/PR、版本发布和提交统计。同时分享了一个实用技巧：<strong>让 Codex 在重构时维护 scratch-log</strong>，记录决策、权衡和 review 修订——"方便事后理解 agent 做了哪些取舍，以及你忘了交代什么。" 这个技巧直指 AI 编程的一个核心痛点：agent 的决策过程不透明，事后难以追溯。
+  </div>
+  <img src="assets/2026-05-25/steipete-2058381186884411473-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/steipete/status/2058381186884411473" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub 仪表盘 →</a>
+    &nbsp;&nbsp;
+    <a href="https://x.com/steipete/status/2058308112134635528" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">Scratch-log 技巧 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">历史视角</div>
+  <h3>前 Dropbox CTO Aditya Agarwal：AI 六个月完成代码量超越人类历史总和</h3>
+  <div class="text-body">
+    前 Dropbox CTO 感叹时间的压缩感：6 个月前（2025 年 11 月）我们还只是在跟 LLM 聊天就觉得 AI 很酷了。现在是 2026 年 5 月——<strong>这些 LLM 已经产出了比人类历史上所有手写代码加起来还多的代码</strong>。这个观察不是技术分析，而是历史视角——当变化的速度超过了我们感知变化的能力，我们很容易低估正在发生的事情。Agarwal 的提醒是：停下来，看看我们走了多远。
+  </div>
+  <div class="quote">"6 months ago we were just chatting with LLMs and thought AI was cool. Now they've produced more code than all humans have ever written combined."</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/adityaag/status/2058233900464238801" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">播客深度</div>
+  <h2>No Priors：Cerebras 创始人 Andrew Feldman 复盘十年芯片创业路</h2>
+  <div class="text-body">
+    Andrew Feldman 在 No Priors 播客中深入回顾了 Cerebras 从 2019 年造出全球最大晶圆级芯片到 630 亿美元 IPO 的全过程。核心论述：AI 推理速度不是性能优化，而是范式革命——就像带宽提升让 Netflix 从租 DVD 变成电影制片厂，快速推理将催生全新的商业模式。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">三代产品的增长曲线</div>
+        <div class="vitem-desc">第一代卖了十几台，第二代约 300 台，第三代卖到数万台。2019 年就造出了 46,000mm² 的晶圆级芯片，但直到 2025 年 AI 才"聪明到有用"，市场才真正爆发。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">速度不是量变——是质变</div>
+        <div class="vitem-desc">比 GPU 推理快 15-20 倍，不是小幅优化。"要获得质变，架构必须根本不同。" 慢速 AI 的市场和慢速搜索一样：零。就像带宽提升颠覆了内容产业，推理速度将颠覆 AI 产业。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">G42——10 亿美元的桥梁</div>
+        <div class="vitem-desc">G42 的巨额订单成为 Cerebras 的战略桥梁，让公司能在足够大的集群中实战测试，为后续 OpenAI 200 亿和 AWS 大单铺平道路。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">上市改变了什么</div>
+        <div class="vitem-desc">上市是用专业 VC 投资人换散户，换来更低资金成本但更严格的规则。但如今 OpenAI/Anthropic/Databricks 能私有融资到上市级别估值，游戏规则已不同。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Cerebras 内部的 AI 编程实践</div>
+        <div class="vitem-desc">8 个月前每月推理 token 花费不到 1000 美元，现在 2.5-3 万美元。少数工程师已变成 100x 程序员（跑 8-10 个 agent 7×24），多数人还在摸索。Feldman 坦言：大多数人只看到成功案例，忽略了多少人还在卡在入门阶段。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">速度文化——"不可能"只是自我设限</div>
+        <div class="vitem-desc">Feldman 列举了多个"不可能"的例子：Cognition 一个周末收购 Windsurf、Elon Musk 建数据中心的速度、四周半签下 200 亿协议。"当你每天都在做，就会发现'不可能'只是自我设限。"</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:12px;">
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/jeop9wfb9jU" style="border-radius:12px;border:none;" allowfullscreen></iframe>
+  </div>
+</div>
+<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月25日</div>
+  <h2>AI Coding Agent 生态系统标准化加速——代码知识图谱、Agent 平台、插件生态全面铺开</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Lum1104/Understand-Anything ⭐ 3,999 · TypeScript</div>
+        <div class="vitem-desc">将任何代码转为可交互的知识图谱，支持搜索和问答。兼容 Claude Code、Codex、Cursor、Copilot、Gemini CLI。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">colbymchenry/codegraph ⭐ 3,003 · TypeScript</div>
+        <div class="vitem-desc">预索引的代码知识图谱，面向 Claude Code、Codex、Cursor 等——更少 Token、更少工具调用、100% 本地运行。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/colbymchenry/codegraph" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">multica-ai/andrej-karpathy-skills ⭐ 2,551</div>
+        <div class="vitem-desc">从 Andrej Karpathy 对 LLM 编程痛点的观察中提炼的单一 CLAUDE.md，用于改善 Claude Code 行为——给 AI Agent 装上"大脑"。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/claude-plugins-official ⭐ 1,173 · Python</div>
+        <div class="vitem-desc">Anthropic 官方维护的高质量 Claude Code 插件目录——Agent 的"应用商店"雏形。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/claude-plugins-official" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">manaflow-ai/cmux ⭐ 696 · Swift</div>
+        <div class="vitem-desc">基于 Ghostty 的 macOS 终端，带垂直标签页和通知功能，专为 AI 编程 agent 设计。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/manaflow-ai/cmux" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">multica-ai/multica ⭐ 585 · TypeScript</div>
+        <div class="vitem-desc">开源托管 Agent 平台——将编程 agent 变成真正的队友：分配任务、跟踪进度、积累技能。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/multica-ai/multica" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Alishahryar1/free-claude-code ⭐ 553 · Python</div>
+        <div class="vitem-desc">在终端、VSCode 或 Discord 中免费使用 Claude Code（支持语音交互）。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Alishahryar1/free-claude-code" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">codecrafters-io/build-your-own-x ⭐ 550 · Markdown</div>
+        <div class="vitem-desc">通过从零重建你喜欢的开源技术来掌握编程——经典学习资源的持续热度。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/knowledge-work-plugins ⭐ 550 · Python</div>
+        <div class="vitem-desc">面向知识工作者的 Claude Cowork 插件开源仓库——Anthropic 将 Agent 插件生态从编程扩展到通用知识工作。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">earendil-works/pi ⭐ 456 · TypeScript</div>
+        <div class="vitem-desc">AI agent 工具包：coding agent CLI、统一 LLM API、TUI 和 Web UI 库、Slack bot、vLLM pods——一站式 Agent 开发套件。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/earendil-works/pi" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">666ghj/MiroFish ⭐ 197 · Python</div>
+        <div class="vitem-desc">简洁通用的群体智能引擎——"预测万物"。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/666ghj/MiroFish" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">dotnet/skills ⭐ 183 · C#</div>
+        <div class="vitem-desc">为 AI 编程 agent 提供 .NET 和 C# 辅助的 skills 仓库——微软为 Agent 生态打下的语言桩。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/dotnet/skills" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">shiyu-coder/Kronos ⭐ 106 · Python</div>
+        <div class="vitem-desc">金融市场语言的基础模型——用 AI 理解金融数据。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/shiyu-coder/Kronos" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    趋势观察：今天的 GitHub Trending 清晰指向——AI Coding Agent 的基础设施正在标准化。代码知识图谱（Understand-Anything、Codegraph）占据前两名，Agent 管理平台（Multica）持续上升，官方插件生态（Anthropic Plugins、dotnet/skills）加速铺开，专用终端（cmux）开始出现。这不再是单个工具之争，而是整个 Agent 开发生态的系统性建设。免费 Claude Code 接入方案（free-claude-code）更是说明：Agent 工具的民主化正在加速——高质量 AI 编程的门槛正在被社区力量不断拉低。
+  </div>
+</div>
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">推理速度——AI 隐藏的范式革命</div>
+      <div class="callout-text">Andrew Feldman 用 Netflix 的类比击中要害：带宽提升让 Netflix 从租 DVD 变成了电影制片厂。快速推理将催生全新的商业模式，而非仅仅优化现有流程。当 Cerebras 把一个 "没人关心你有多快" 的产业变成了 OpenAI 200 亿美元的必争之地，这不仅是商业胜利，更是对 "速度即能力" 的终极验证。慢速 AI 的市场和慢速搜索一样：零。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">黑暗期的耐心——护城河藏在无人喝彩时</div>
+      <div class="callout-text">Feldman 说："我们经历过两年多的黑暗期，造出了计算机行业最难的东西，然后没人在乎。" 现在几乎每一家 AI 公司都在为推理速度付费。这不仅是 Cerebras 的故事——几乎每一个 AI 基础设施领域的突破都遵循同样的曲线：数年无人问津，然后一夜之间"显而易见"。护城河不是技术，而是你愿意在无人喝彩时坚持多久。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">不要把任务自动化等同于岗位消灭</div>
+      <div class="callout-text">Aaron Levie 连续两天的发言构成了一条完整的思想链：昨天预判安全工程师需求将因 AI 而爆发（杰文斯悖论），今天进一步阐述 "当 AI 自动化任务时，岗位定义反而扩大"。核心逻辑：AI 不是减少对人力的需求，而是改变对人力技能的要求。小企业雇不起广告公司，但可以雇一个用 AI agent 武装的营销人——这就是 AI 时代的劳动力市场新形态。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">个人 AI 的临界点</div>
+      <div class="callout-text">Garry Tan 在几小时内微调了 Qwen3.5-397B，GBrain 在 LongMemEval 上比传统 Vector RAG 高 38%。当微调大模型变得像写 Python 脚本一样简单，AI 将进入 "个人化" 爆发期。Peter Steinberger 的 scratch-log 技巧和 Thariq 的 "please save me money" prompt 暗示了另一个方向：开发者正在发明与 AI agent 协作的新范式——不只是给指令，而是建立工作流和信任。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>今日一问：</strong>Andrew Feldman 等了一年又一年才等到市场认可，Cerebras 造出了计算机行业最难的东西然后没人在乎——而现在，推理速度正在成为 AI 产业的终极壁垒。如果 "无人问津的耐力" 是 AI 基础设施创业者的护城河，那么 "在快节奏中保持方向感的定力" 是否也是每个人在 AI 时代最稀缺的能力？
+  </div>
+</div>
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+    <a href="https://www.youtube.com/watch?v=jeop9wfb9jU" target="_blank" style="color:#5e6ad2;text-decoration:none;">No Priors 播客 — Cerebras CEO Andrew Feldman 十年复盘</a><br>
+    <a href="https://x.com/trq212/status/2058377974882210096" target="_blank" style="color:#5e6ad2;text-decoration:none;">Thariq — Claude Code 清理旧服务省钱技巧</a><br>
+    <a href="https://x.com/amasad/status/2058418731840159953" target="_blank" style="color:#5e6ad2;text-decoration:none;">Amjad Masad — Replit Dial 一个周末 MVP 通过 Apple 审核</a><br>
+    <a href="https://x.com/rauchg/status/2058353051073970416" target="_blank" style="color:#5e6ad2;text-decoration:none;">Guillermo Rauch — AI 产品 1400+ 回复社区调查</a><br>
+    <a href="https://x.com/levie/status/2058223867815227756" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — 不要把任务自动化等同于岗位消灭</a><br>
+    <a href="https://x.com/garrytan/status/2058378310254793013" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 微调 Qwen3.5-397B + GBrain 评测</a><br>
+    <a href="https://x.com/steipete/status/2058381186884411473" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — 面向所有人的 GitHub 仪表盘</a><br>
+    <a href="https://x.com/steipete/status/2058308112134635528" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — Codex 重构 scratch-log 技巧</a><br>
+    <a href="https://x.com/adityaag/status/2058233900464238801" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aditya Agarwal — AI 六个月代码量超越人类历史总和</a>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+    来源：No Priors 播客、X/Twitter、GitHub Trending。AI 日报每日更新。
+  </div>
+</div>
+</div>
+
+</body>
+</html>
