@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LangSmith Architecture</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>LangSmith 架构图</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+Mono+SC:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: #f5f5f4;
-    font-family: 'Geist', sans-serif;
+    font-family: 'Noto Sans SC', sans-serif;
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh; padding: 2rem;
   }
@@ -21,16 +21,16 @@
     display: flex; flex-direction: column; gap: 4px;
   }
   .eyebrow {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Noto Sans Mono SC', monospace;
     font-size: 8px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
     color: #8b8b8b;
   }
   h1 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Noto Serif SC', serif;
     font-size: 1.75rem; font-weight: 400; color: #1c1c1c;
   }
   .subtitle {
-    font-size: 12px; color: #6b6b6b; font-family: 'Geist', sans-serif;
+    font-size: 12px; color: #6b6b6b; font-family: 'Noto Sans SC', sans-serif;
   }
   .diagram {
     background: #fff; border: 1px solid rgba(28,28,28,0.08); border-radius: 8px;
@@ -44,7 +44,7 @@
     padding: 1.25rem;
   }
   .card-eyebrow {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Noto Sans Mono SC', monospace;
     font-size: 7px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
     color: #8b8b8b; margin-bottom: 8px;
   }
@@ -63,7 +63,7 @@
   .card li::before { content: '—'; position: absolute; left: 0; color: #8b8b8b; }
   .card strong { color: #1c1c1c; }
   footer {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Noto Sans Mono SC', monospace;
     font-size: 9px; color: #8b8b8b; text-align: center;
     padding-top: 1rem; border-top: 1px solid rgba(28,28,28,0.08);
   }
@@ -73,8 +73,8 @@
 <div class="page">
 
 <div class="header">
-  <p class="eyebrow">LangSmith Architecture</p>
-  <h1>Control Plane + Data Plane</h1>
+  <p class="eyebrow">LangSmith 架构解析</p>
+  <h1>控制平面 + 数据平面</h1>
   <p class="subtitle">LangChain 公司 · SmithDB 专有引擎 · 四种集成方式 · 四种部署模式</p>
 </div>
 
@@ -93,224 +93,223 @@
   </marker>
 </defs>
 
-<!-- Background -->
 <rect width="920" height="560" fill="#f5f5f4"/>
 
-<!-- Region: Control Plane -->
+<!-- 区域：控制平面 -->
 <rect x="16" y="16" width="508" height="200" rx="8" fill="none" stroke="rgba(94,106,210,0.30)" stroke-width="1" stroke-dasharray="4,4"/>
-<rect x="16" y="6" width="104" height="12" rx="2" fill="#f5f5f4"/>
-<text x="68" y="15" fill="#5e6ad2" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">CONTROL PLANE</text>
+<rect x="16" y="6" width="80" height="12" rx="2" fill="#f5f5f4"/>
+<text x="56" y="15" fill="#5e6ad2" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" font-weight="500" letter-spacing="0.08em">控制平面</text>
 
-<!-- Region: Data Plane -->
+<!-- 区域：数据平面 -->
 <rect x="540" y="16" width="364" height="200" rx="8" fill="none" stroke="rgba(28,28,28,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
 <rect x="704" y="6" width="80" height="12" rx="2" fill="#f5f5f4"/>
-<text x="744" y="15" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">DATA PLANE</text>
+<text x="744" y="15" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" font-weight="500" letter-spacing="0.08em">数据平面</text>
 
-<!-- Region: Storage -->
+<!-- 区域：存储层 -->
 <rect x="16" y="312" width="888" height="104" rx="8" fill="none" stroke="rgba(28,28,28,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
 <rect x="408" y="302" width="72" height="12" rx="2" fill="#f5f5f4"/>
-<text x="444" y="311" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="500" letter-spacing="0.08em">STORAGE</text>
+<text x="444" y="311" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" font-weight="500" letter-spacing="0.08em">存储层</text>
 
-<!-- ===== CONTROL PLANE NODES ===== -->
+<!-- ===== 控制平面节点 ===== -->
 
-<!-- Nginx -->
+<!-- 反向代理 -->
 <rect x="32" y="44" width="100" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
-<rect x="40" y="52" width="32" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="56" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">PROXY</text>
-<text x="82" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Nginx</text>
-<text x="82" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">:443</text>
+<rect x="40" y="52" width="38" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
+<text x="59" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">反向代理</text>
+<text x="82" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">Nginx</text>
+<text x="82" y="100" fill="#6b6b6b" font-size="9" font-family="'Noto Sans Mono SC', monospace" text-anchor="middle">:443</text>
 
-<!-- Backend API -->
+<!-- 后端 API -->
 <rect x="164" y="44" width="120" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
 <rect x="172" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="186" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
-<text x="224" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Backend</text>
-<text x="224" y="96" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CRUD · Auth</text>
+<text x="186" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">接口</text>
+<text x="224" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">后端服务</text>
+<text x="224" y="96" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">增删改查 · 认证</text>
 
-<!-- Queue (focal) -->
+<!-- 异步队列（焦点） -->
 <rect x="316" y="44" width="108" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
 <rect x="324" y="52" width="36" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
-<text x="342" y="61" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">QUEUE</text>
-<text x="370" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Async Queue</text>
-<text x="370" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">trace writer</text>
+<text x="342" y="61" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">队列</text>
+<text x="370" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">异步队列</text>
+<text x="370" y="100" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">追踪写入器</text>
 
 <!-- Playground -->
 <rect x="456" y="44" width="56" height="28" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="484" y="62" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Geist', sans-serif" text-anchor="middle">Playground</text>
+<text x="484" y="62" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">调试场</text>
 
 <!-- ACE -->
 <rect x="456" y="80" width="56" height="28" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="484" y="98" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Geist', sans-serif" text-anchor="middle">ACE</text>
+<text x="484" y="98" fill="#6b6b6b" font-size="10" font-weight="500" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">评估引擎</text>
 
-<!-- Control plane arrows -->
+<!-- 控制平面箭头 -->
 <line x1="132" y1="76" x2="164" y2="76" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
 <line x1="284" y1="76" x2="316" y2="76" stroke="#5e6ad2" stroke-width="1" marker-end="url(#arrow-accent)"/>
 <line x1="424" y1="68" x2="456" y2="58" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
 <line x1="424" y1="84" x2="456" y2="94" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
 
-<!-- Control plane → Storage arrow -->
+<!-- 控制平面 → 存储层 -->
 <line x1="370" y1="108" x2="370" y2="136" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
-<rect x="332" y="116" width="76" height="12" rx="2" fill="#f5f5f4"/>
-<text x="370" y="125" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE</text>
+<rect x="340" y="116" width="60" height="12" rx="2" fill="#f5f5f4"/>
+<text x="370" y="125" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" letter-spacing="0.06em">写入</text>
 
-<!-- ===== DATA PLANE NODES ===== -->
+<!-- ===== 数据平面节点 ===== -->
 
-<!-- Agent Server -->
+<!-- Agent 服务器 -->
 <rect x="556" y="44" width="120" height="64" rx="6" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
 <rect x="564" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="578" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">POD</text>
-<text x="616" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Agent Server</text>
-<text x="616" y="96" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">runtime pods</text>
+<text x="578" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">容器</text>
+<text x="616" y="80" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">Agent 服务器</text>
+<text x="616" y="96" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">运行时容器</text>
 
-<!-- Collector -->
+<!-- 分布式收集器 -->
 <rect x="708" y="44" width="116" height="64" rx="6" fill="rgba(28,28,28,0.05)" stroke="#6b6b6b" stroke-width="1"/>
 <rect x="716" y="52" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="730" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">COL</text>
-<text x="766" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Dist. Collector</text>
-<text x="766" y="100" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">async callback</text>
+<text x="730" y="61" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">收集</text>
+<text x="766" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">分布式收集器</text>
+<text x="766" y="100" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">异步回调</text>
 
-<!-- Data plane arrows -->
+<!-- 数据平面箭头 -->
 <line x1="676" y1="76" x2="708" y2="76" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
 <rect x="680" y="68" width="40" height="12" rx="2" fill="#f5f5f4"/>
-<text x="700" y="77" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">TRACE</text>
+<text x="700" y="77" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" letter-spacing="0.06em">追踪</text>
 
-<!-- Collector → Storage -->
+<!-- 收集器 → 存储层 -->
 <line x1="766" y1="108" x2="766" y2="136" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
-<rect x="728" y="116" width="76" height="12" rx="2" fill="#f5f5f4"/>
-<text x="766" y="125" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE</text>
+<rect x="736" y="116" width="60" height="12" rx="2" fill="#f5f5f4"/>
+<text x="766" y="125" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" letter-spacing="0.06em">写入</text>
 
-<!-- ===== STORAGE NODES ===== -->
+<!-- ===== 存储层节点 ===== -->
 
 <!-- ClickHouse -->
 <rect x="32" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
 <rect x="40" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
-<text x="54" y="357" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">OLAP</text>
-<text x="102" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">ClickHouse</text>
-<text x="102" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">traces · feedback</text>
+<text x="54" y="357" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">分析</text>
+<text x="102" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">ClickHouse</text>
+<text x="102" y="392" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">追踪 · 反馈</text>
 
 <!-- PostgreSQL -->
 <rect x="192" y="340" width="128" height="64" rx="6" fill="rgba(28,28,28,0.04)" stroke="#6b6b6b" stroke-width="1"/>
 <rect x="200" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="214" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SQL</text>
-<text x="256" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">PostgreSQL</text>
-<text x="256" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">operational data</text>
+<text x="214" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">关系</text>
+<text x="256" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">PostgreSQL</text>
+<text x="256" y="392" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">运营数据</text>
 
 <!-- Redis -->
 <rect x="340" y="340" width="112" height="64" rx="6" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.25)" stroke-width="1"/>
 <rect x="348" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="362" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">KV</text>
-<text x="396" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Redis / Valkey</text>
-<text x="396" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">queue · cache</text>
+<text x="362" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">缓存</text>
+<text x="396" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">Redis / Valkey</text>
+<text x="396" y="392" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">队列 · 缓存</text>
 
 <!-- Blob -->
 <rect x="472" y="340" width="140" height="64" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
 <rect x="480" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(28,28,28,0.40)" stroke-width="0.8"/>
-<text x="494" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">BLOB</text>
-<text x="542" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Blob Storage</text>
-<text x="542" y="392" fill="#6b6b6b" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">S3 · GCS · Azure</text>
+<text x="494" y="357" fill="rgba(28,28,28,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">对象</text>
+<text x="542" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">对象存储</text>
+<text x="542" y="392" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">S3 · GCS · Azure</text>
 
-<!-- SmithDB (focal) -->
+<!-- SmithDB（焦点） -->
 <rect x="632" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1.2"/>
-<text x="702" y="360" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">SmithDB</text>
-<text x="702" y="376" fill="#5e6ad2" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">proprietary engine</text>
-<text x="702" y="392" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">12x trace · 15x search</text>
+<text x="702" y="360" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">SmithDB</text>
+<text x="702" y="376" fill="#5e6ad2" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">专有引擎</text>
+<text x="702" y="392" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">12倍追踪 · 15倍搜索</text>
 
-<!-- ===== INTEGRATION LAYER ===== -->
+<!-- ===== 集成层 ===== -->
 
-<!-- Integration nodes at top-left -->
+<!-- 集成节点 -->
 <rect x="32" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.04)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
-<text x="72" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">SDK</text>
-<text x="72" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">Py · TS · Go · Java</text>
+<text x="72" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">开发工具包</text>
+<text x="72" y="180" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">Python · TS · Go · Java</text>
 
 <rect x="128" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
-<text x="168" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">OpenTelemetry</text>
-<text x="168" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">existing pipes</text>
+<text x="168" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">OpenTelemetry</text>
+<text x="168" y="180" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">兼容现有管道</text>
 
 <rect x="224" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
-<text x="264" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Frameworks</text>
-<text x="264" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">OpenAI · LlamaIdx</text>
+<text x="264" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">框架集成</text>
+<text x="264" y="180" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">OpenAI · LlamaIndex</text>
 
 <rect x="320" y="144" width="80" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
-<text x="360" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">LangGraph</text>
-<text x="360" y="180" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">auto-deploy</text>
+<text x="360" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">LangGraph</text>
+<text x="360" y="180" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">一键部署</text>
 
-<!-- Integration → Nginx -->
+<!-- 集成 → Nginx -->
 <line x1="72" y1="192" x2="82" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
 <line x1="168" y1="192" x2="148" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
 <line x1="264" y1="192" x2="244" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
 <line x1="360" y1="192" x2="360" y2="108" stroke="#8b8b8b" stroke-width="0.8" marker-end="url(#arrow-dashed)"/>
 
-<!-- Agent Server → integration label -->
+<!-- Agent 服务器 → 部署标签 -->
 <rect x="556" y="144" width="120" height="48" rx="6" fill="rgba(94,106,210,0.04)" stroke="rgba(94,106,210,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="616" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Deployment</text>
-<text x="616" y="180" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">LangSmith Deploy</text>
+<text x="616" y="164" fill="#1c1c1c" font-size="11" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">部署方式</text>
+<text x="616" y="180" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">LangSmith Deploy</text>
 
-<!-- Deployment → Agent Server -->
+<!-- 部署 → Agent 服务器 -->
 <line x1="616" y1="144" x2="616" y2="108" stroke="rgba(94,106,210,0.40)" stroke-width="0.8" stroke-dasharray="3,3"/>
 
-<!-- Deployment modes -->
+<!-- 部署模式 -->
 <rect x="708" y="144" width="196" height="48" rx="6" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
-<text x="806" y="160" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif" text-anchor="middle">Modes: Cloud SaaS · Self-Hosted (K8s)</text>
-<text x="806" y="176" fill="#8b8b8b" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">Hybrid · Standalone Server</text>
+<text x="806" y="160" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">模式：云端 SaaS · 自托管 (K8s)</text>
+<text x="806" y="176" fill="#8b8b8b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">混合部署 · 独立服务器</text>
 
-<!-- ===== LEGEND ===== -->
+<!-- ===== 图例 ===== -->
 <line x1="32" y1="440" x2="888" y2="440" stroke="rgba(28,28,28,0.08)" stroke-width="0.8"/>
-<text x="32" y="456" fill="#6b6b6b" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+<text x="32" y="456" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" letter-spacing="0.14em">图例</text>
 
 <rect x="100" y="446" width="8" height="8" rx="1" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1"/>
-<text x="114" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Focal (≤2)</text>
+<text x="114" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">焦点节点（≤2）</text>
 
-<rect x="200" y="446" width="8" height="8" rx="1" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
-<text x="214" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Backend / Service</text>
+<rect x="220" y="446" width="8" height="8" rx="1" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>
+<text x="234" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">后端服务</text>
 
-<rect x="340" y="446" width="8" height="8" rx="1" fill="rgba(28,28,28,0.05)" stroke="#6b6b6b" stroke-width="1"/>
-<text x="354" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Store / Data</text>
+<rect x="330" y="446" width="8" height="8" rx="1" fill="rgba(28,28,28,0.05)" stroke="#6b6b6b" stroke-width="1"/>
+<text x="344" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">存储 / 数据层</text>
 
 <rect x="460" y="446" width="8" height="8" rx="1" fill="rgba(28,28,28,0.02)" stroke="rgba(28,28,28,0.18)" stroke-width="1"/>
-<text x="474" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">External / Optional</text>
+<text x="474" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">外部 / 可选</text>
 
 <line x1="600" y1="450" x2="632" y2="450" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
-<text x="640" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Data flow</text>
+<text x="640" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">数据流</text>
 
 <line x1="720" y1="450" x2="752" y2="450" stroke="rgba(28,28,28,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="760" y="454" fill="#6b6b6b" font-size="9" font-family="'Geist', sans-serif">Optional / Async</text>
+<text x="760" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">可选 / 异步</text>
 
 </svg>
 </div>
 
 <div class="cards">
   <div class="card">
-    <p class="card-eyebrow">DATA FLOW</p>
-    <div class="card-header"><span class="card-dot accent"></span><h3>从 Trace 到 Insight</h3></div>
+    <p class="card-eyebrow">数据流向</p>
+    <div class="card-header"><span class="card-dot accent"></span><h3>从追踪到洞察</h3></div>
     <ul>
-      <li>Agent 执行 → <strong>SDK 异步回调</strong> → Distributed Collector</li>
-      <li>Collector → Queue → <strong>ClickHouse</strong> (trace) + <strong>PostgreSQL</strong> (operational)</li>
-      <li><strong>SmithDB</strong> 提供 12x trace 查询 · 15x 全文搜索加速</li>
+      <li>Agent 执行 → <strong>SDK 异步回调</strong> → 分布式收集器</li>
+      <li>收集器 → 队列 → <strong>ClickHouse</strong>（追踪）+ <strong>PostgreSQL</strong>（运营）</li>
+      <li><strong>SmithDB</strong> 提供 12 倍追踪查询 · 15 倍全文搜索加速</li>
     </ul>
   </div>
   <div class="card">
-    <p class="card-eyebrow">INTEGRATION</p>
+    <p class="card-eyebrow">集成方式</p>
     <div class="card-header"><span class="card-dot ink"></span><h3>四种接入方式</h3></div>
     <ul>
-      <li>① SDK 直连 (<strong>Python/TS/Go/Java</strong>)</li>
+      <li>① SDK 直连（<strong>Python/TS/Go/Java</strong>）</li>
       <li>② OpenTelemetry 兼容现有管道</li>
-      <li>③ 框架原生 (OpenAI, Anthropic, LlamaIndex)</li>
+      <li>③ 框架原生（OpenAI、Anthropic、LlamaIndex）</li>
       <li>④ LangGraph 一键部署</li>
     </ul>
   </div>
   <div class="card">
-    <p class="card-eyebrow">DEPLOYMENT</p>
+    <p class="card-eyebrow">部署模式</p>
     <div class="card-header"><span class="card-dot muted"></span><h3>四种部署模式</h3></div>
     <ul>
-      <li><strong>Cloud SaaS</strong> — GCP us-central-1</li>
-      <li><strong>Self-Hosted</strong> — K8s (Enterprise)</li>
-      <li><strong>Hybrid</strong> — SaaS CP + 自托管 DP</li>
-      <li><strong>Standalone</strong> — Agent Server only</li>
+      <li><strong>云端 SaaS</strong> — GCP us-central-1</li>
+      <li><strong>自托管</strong> — K8s（企业版）</li>
+      <li><strong>混合部署</strong> — SaaS 控制平面 + 自托管数据平面</li>
+      <li><strong>独立部署</strong> — 仅 Agent 服务器</li>
     </ul>
   </div>
 </div>
 
-<footer>LangSmith Architecture Diagram · May 2026 · ai-news Research Report</footer>
+<footer>LangSmith 架构图 · 2026年5月 · ai-news 调研报告</footer>
 
 </div>
 </body>
