@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-05-26 AI 日报 - 第二号</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
+.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+<div class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年5月26日</div>
+  <h1>Yann LeCun：LLM 不是通往 AGI 的路，企业 AI 落地卡在"最后一公里"</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    图灵奖得主 Yann LeCun 离开 Meta 后首次长篇访谈，直言 LLM 范式走不到人类级智能，JEPA 世界模型才是正解。Box CEO Aaron Levie 精准诊断企业 AI 落地困局——CEO 最容易患上"AI 精神病"。YC CEO Garry Tan 断言高自主性加高品味是当下最大竞争力。开发者开始用 Claude Code 逆向工程 API，Agent 工具链正快速成熟。GitHub Trending 持续被 AI Coding Agent 基础设施占领。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">世界模型</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">JEPA</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">企业 AI</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI Agent</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">知识图谱</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLM 范式</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">追踪 Builder</div></div>
+    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">GitHub 项目</div></div>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">今日头条</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">Yann LeCun 离开 Meta 后首次长篇访谈：LLM 不是通往人类级智能的路径</strong>——图灵奖得主在 Unsupervised Learning 播客中系统阐述了他的判断：LLM 在离散符号领域表现出色，但现实世界是连续、高维、充满噪声的，需要完全不同的架构。他创立的 Ami Labs 聚焦 JEPA 架构的世界模型，核心论点：VLA 已被业界视为失败方向，生成式世界模型（预测像素）是死胡同，JEPA 在抽象表征空间做预测才是正解。最新论文 SIGREG 提供了对抗表征坍缩的有希望方案。
+      </div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">企业 AI 落地困局：CEO 的"AI 精神病"与表演型 Demo</strong>——Box CEO Aaron Levie 精准诊断：CEO 离实际落地的最后一公里太远，看到 happy path 就觉得 AGI 已到，却忽略代码审查、合同校验、数据对接等现实中必须解决的 20 件事。Google 产品负责人 Madhu Guru 呼应：CEO 的 AI FOMO 催生模糊指令，员工用表演型 Demo 应付交差，两年过去毫无实质进展，而亲力亲为的创业公司已在颠覆他们。
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">企业 AI</div>
+  <h3>Box CEO Aaron Levie：CEO 最容易患上"AI 精神病"</h3>
+  <div class="text-body">
+    Aaron Levie 给出了一个精准的企业 AI 诊断：CEO 是高危人群——他们离实际落地的最后一公里太远，看到 happy path 就觉得 AGI 已到，却忽略了代码审查、合同校验、数据对接等现实中必须解决的 20 件事。他的建议：<strong>CEO 要大量亲自使用 AI</strong>，只有亲手操作才能同时看清 AI 的上限和真实工作量。这个诊断直指企业 AI 落地的核心病灶——决策者与执行层之间存在巨大的感知鸿沟。
+  </div>
+  <div class="quote">"CEOs are the most susceptible to AI psychosis. They're farthest from the last mile of actual execution — they see the happy path and think AGI is here, ignoring the 20 things that need to actually work in reality."</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/levie/status/2058582370253701432" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">企业 AI</div>
+  <h3>Google PM Madhu Guru：表演型 Demo 正在杀死企业 AI 转型</h3>
+  <div class="text-body">
+    Google Gemini/Veo 产品负责人 Madhu Guru 呼应了 Levie 的诊断，从另一个角度揭示问题：CEO 们的 AI FOMO 催生了模糊的 AI 指令，员工则交出表演型 Demo 应付交差，<strong>两年过去毫无实质进展</strong>。而另一边，亲力亲为的创业公司已经在颠覆他们。这形成了一个讽刺的局面：资源最多的大公司在 AI 转型中最慢，因为它们缺少的不是技术，而是从上到下的真实理解和执行力。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/realmadhuguru/status/2058591611245011157" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">代码进化</div>
+  <h3>Anthropic 工程师 Thariq：遗留代码库将成为"蒸馏"新代码的宝贵原料</h3>
+  <div class="text-body">
+    Anthropic Claude Code 团队成员 Thariq 在 Bun 重写事件的讨论中提炼出一个深刻洞察：<strong>遗留代码库将成为"蒸馏"新代码的宝贵原料</strong>——每款游戏应该跨平台、所有遗留软件应该 Web 化、不再需要 COBOL。"模型目前还不太行，但它们会到的。"这个视角将遗留代码从"技术债"重新定义为"训练数据"，暗示 AI 将彻底改变我们对待老旧系统的态度。
+  </div>
+  <div class="quote">"Legacy codebases will become valuable feedstock for 'distilling' into newer forms. Every game should be cross-platform, every legacy app should be webified, no more COBOL."</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/trq212/status/2058576195000660319" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">创业哲学</div>
+  <h3>YC CEO Garry Tan：高自主性 + 高品味 = 当下最大竞争力</h3>
+  <div class="text-body">
+    Garry Tan 言简意赅的洞察：<strong>高自主性（high agency）加高品味（high taste）是当下最大的竞争力组合</strong>。在 AI 工具极大降低执行门槛的时代，能主动发起行动的人和不满足于平庸结果的人将获得指数级优势。"当你的所有朋友都在边界上建造东西时，我老实说正在度过人生最快乐的时光。"这句话捕捉了 AI 时代创业者的核心心态——边界正在快速扩展，而建造者正在享受前所未有的创造自由。
+  </div>
+  <div class="quote">"High agency + high taste. When all your friends are building things at the frontier, I'm honestly having the time of my life."</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/garrytan/status/2058769355916411099" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">AGI 辩论</div>
+  <h3>VC Matt Turck：AGI 的瓶颈可能不在模型，而在工程整合</h3>
+  <div class="text-body">
+    Matt Turck 引用 OpenAI 的 Yann Dubois 最新访谈中的一句话：<strong>"如果我们冻结现有模型，专心打磨 harness 并多花时间用它训练，人们会在每个领域都感受到 AGI。"</strong>这与 LeCun 的判断形成尖锐对比——一方说现有模型加工程就够，另一方说 LLM 永远到不了 AGI。两种观点背后是对"智能"定义的完全不同理解：是工具层面的实用性，还是认知层面的通用性？
+  </div>
+  <div class="quote">"If we froze current models, focused on the harness, and spent more time training with it, people would feel AGI in every domain." — Yann Dubois, OpenAI</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/mattturck/status/2058659995311358332" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">开发实践</div>
+  <h3>VC Nikunj Kothari：用 Claude Code 逆向工程网站 API</h3>
+  <div class="text-body">
+    Nikunj Kothari 分享了一个实操性极强的技巧：<strong>用 Claude Code 逆向工程网站 API</strong>——通过抓取网络请求、识别 cookie auth、试错找出 rate limit，可以快速构建编程化数据管道。他进一步预测：每个网站很快都需要 headless 化，未来还需要 <code>tools.txt</code> 让 AI agent 知道可调用哪些工具。这个预测暗示 Web 将从"为人设计"转向"为 agent 设计"，将催生一套全新的 Web 标准。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/nikunj/status/2058783316753686558" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">创业实践</div>
+  <h3>Roblox PM Peter Yang：用 AI Agent 单人运营创业公司</h3>
+  <div class="text-body">
+    Peter Yang 采访了用 AI Agent 单人运营创业公司的 Ryan Carson，提炼出核心转变：<strong>"我们现在不应该说'先做 MVP'，而应该说'先做能造 MVP 的系统'。"</strong> Ryan 用 OpenClaw 当 AI 幕僚长、Codex 和 Devin 当工程团队，把 Agent 当真正员工对待——给它们邮箱、日历、GitHub 账号。这标志着创业的方法论正在从"先做产品"升级为"先建能持续产出产品的 AI 系统"。
+  </div>
+  <div class="quote">"We shouldn't say 'build an MVP first' anymore. We should say 'build the system that builds MVPs first'." — Ryan Carson</div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/petergyang/status/2058555226479866312" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">品牌哲学</div>
+  <h3>Vercel CEO Guillermo Rauch：打造伟大品牌的最好方式是打造伟大产品</h3>
+  <div class="text-body">
+    Guillermo Rauch 的极简品牌哲学只用了一句话：<strong>"如何打造伟大品牌？打造伟大产品。"</strong>在 AI 工具让产品开发门槛急剧降低的时代，这一定律比以往任何时候都更重要——当任何人都能快速做出产品时，真正能区分品牌的只有产品的内在质量。Rauch 顺便透露他最近迷上了巴西柔术，从另一个角度诠释了"把一件事做到极致"的哲学。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/rauchg/status/2058750970998505505" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">工具分享</div>
+  <h3>Zara Zhang：Mac 神器 Amphetamine + EM 转 IC 的趋势 + Codex 开源发现</h3>
+  <div class="text-body">
+    Zara Zhang 分享了三个洞察：① Mac 上 Amphetamine 比 <code>caffeinate</code> 命令更可靠地保持合盖不休眠；② 越来越多的工程经理自愿转回 IC 角色，因为终于能重新动手造东西了——AI 工具让个人产出大幅提升，管理工作的相对价值正在下降；③ 她发现 Codex 是开源的。三条看似无关的观察共同指向一个趋势：AI 时代个人创作者的力量正在回归。
+  </div>
+  <img src="assets/2026-05-26/zarazhangrui-2058643577421631538-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <img src="assets/2026-05-26/zarazhangrui-2058643577421631538-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
+  <img src="assets/2026-05-26/zarazhangrui-2058643577421631538-2.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/zarazhangrui/status/2058643577421631538" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">播客深度</div>
+  <h2>Unsupervised Learning Ep 86：Yann LeCun 离开 Meta 后首次长篇访谈</h2>
+  <div class="text-body">
+    图灵奖得主 Yann LeCun 在离开 Meta 创立 Ami Labs 后，首次在 Unsupervised Learning 播客中系统阐述了他对 AI 未来的判断。核心论点：LLM 不是通往人类级智能的路径——它们在语言等离散符号领域表现出色，但现实世界是连续的、高维的、充满噪声的，需要完全不同的架构。
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">VLA 已被业界视为失败方向</div>
+        <div class="vitem-desc">Vision Language Action 模型不够可靠，需要太多训练数据。LeCun 认为这条路走不通，需要从架构层面重新思考。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">两种世界模型路线：生成式 vs JEPA</div>
+        <div class="vitem-desc">生成式世界模型（预测像素）是死胡同——在像素空间做预测浪费太多算力。JEPA 在抽象表征空间做预测，更像人类感知世界的方式。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">真正的智能需要三个要素</div>
+        <div class="vitem-desc">预测行动后果的能力 + 通过搜索与优化的规划能力 + 在抽象层面而非像素层面建模。缺少任何一个要素，都无法构建真正的智能体。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">表征坍缩与 SIGREG 方案</div>
+        <div class="vitem-desc">JEPA 的核心挑战是表征坍缩——模型学会把所有输入映射到同一个常数表征，从而"作弊"式地让预测误差为零。最新论文 SIGREG（sketch isotropic Gaussian regularization）提供了一个有希望的解决方案。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">推荐论文：Le World Model</div>
+        <div class="vitem-desc">LeCun 与 Randall Balestriero 合作的论文，系统阐述了 JEPA 世界模型的理论框架。如果你关心 AI 的下一个范式，这是必读。</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:12px;font-size:12px;color:#6b6b6b;text-align:center;">
+    播客来源：<a href="https://www.youtube.com/@RedpointAI" target="_blank" style="color:#5e6ad2;text-decoration:none;">Unsupervised Learning @ RedpointAI</a>
+  </div>
+</div>
+<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月26日</div>
+  <h2>AI Coding Agent 基础设施持续爆发——知识图谱、插件生态、技能配置全面开花</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Lum1104/Understand-Anything ⭐ 5,604 · TypeScript</div>
+        <div class="vitem-desc">将任何代码转化为可探索、可搜索、可提问的交互式知识图谱。支持 Claude Code、Codex、Cursor、Copilot、Gemini CLI。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">colbymchenry/codegraph ⭐ 3,161 · TypeScript</div>
+        <div class="vitem-desc">预索引的代码知识图谱，专为 Claude Code、Codex、Cursor、OpenCode、Hermes Agent 优化——更少 token、更少工具调用、100% 本地运行。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/colbymchenry/codegraph" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">multica-ai/andrej-karpathy-skills ⭐ 2,749</div>
+        <div class="vitem-desc">源自 Karpathy 对 LLM 编码常见陷阱的观察，一个单独的 CLAUDE.md 文件用于改善 Claude Code 行为。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/knowledge-work-plugins ⭐ 1,441 · Python</div>
+        <div class="vitem-desc">Anthropic 官方开源的知识工作者插件库，用于 Claude Cowork——将插件生态从编程扩展到通用知识工作。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">garrytan/gstack ⭐ 640 · TypeScript</div>
+        <div class="vitem-desc">YC CEO Garry Tan 的真实 Claude Code 配置：23 个 opinionated 工具，覆盖 CEO、设计师、工程经理、发布经理、文档工程师、QA 等角色。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/garrytan/gstack" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">manaflow-ai/cmux ⭐ 603 · Swift</div>
+        <div class="vitem-desc">基于 Ghostty 的 macOS 终端，带垂直标签页和 AI 编程 agent 通知——专用终端工具开始出现。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/manaflow-ai/cmux" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">hardikpandya/stop-slop ⭐ 345</div>
+        <div class="vitem-desc">一个去除 AI 写作痕迹的 skill 文件——从文本中剥离那些"AI tells"，让 AI 生成的内容更自然。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">shiyu-coder/Kronos ⭐ 245 · Python</div>
+        <div class="vitem-desc">金融市场语言的基础模型——用 AI 理解金融数据。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/shiyu-coder/Kronos" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Axorax/awesome-free-apps ⭐ 192 · JavaScript</div>
+        <div class="vitem-desc">最佳免费 PC 和移动应用精选列表。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Axorax/awesome-free-apps" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">paperless-ngx/paperless-ngx ⭐ 176 · Python</div>
+        <div class="vitem-desc">社区驱动的文档管理系统：扫描、索引、归档所有物理文档。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/claude-cookbooks ⭐ 141 · Jupyter Notebook</div>
+        <div class="vitem-desc">Anthropic 官方 Claude 使用技巧合集（notebooks/recipes）。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/claude-cookbooks" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">moeru-ai/airi ⭐ 62 · TypeScript</div>
+        <div class="vitem-desc">自托管的 Grok 伴侣容器，支持实时语音、Minecraft、Factorio，跨 Web/macOS/Windows。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/moeru-ai/airi" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    趋势观察：今天的 GitHub Trending 延续了 AI Coding Agent 基础设施的主题。知识图谱（Understand-Anything 飙升至 5,604 星、Codegraph 3,161 星）继续霸榜前两名，技能配置（Karpathy skills、gstack）展示了开发者如何"调教"自己的 AI agent，插件生态（Anthropic 知识工作插件）从编程向通用知识工作扩展。一个有趣的新信号是 stop-slop——开发者开始关心如何让 AI 的输出不那么"AI 味"，这标志着 AI 写作工具从"能不能写"进化到了"写得好不好"的阶段。
+  </div>
+</div>
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">LeCun vs OpenAI：AGI 定义的根本分歧</div>
+      <div class="callout-text">LeCun 说 LLM 不是通往 AGI 的路，需要全新的 JEPA 架构；OpenAI 的人说冻结现有模型加工程就够了。这不是技术路线之争，而是对"智能"的定义完全不同：是认知层面的通用理解能力，还是工具层面的实用有效性？如果你相信 AGI 意味着真正理解世界，那 LeCun 是对的；如果你相信 AGI 意味着在所有领域提供超人类水平的工具辅助，那 Dubois 是对的。两种定义将导向完全不同的 AI 发展路径。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">企业 AI 的"最后一公里"鸿沟</div>
+      <div class="callout-text">Aaron Levie 的诊断切中要害：CEO 离落地太远，看到 happy path 就宣布胜利；员工用表演型 Demo 应付模糊指令。问题不在技术能力，而在组织内部对 AI 的真实理解存在断层。当决策者不亲手用 AI、执行者没有清晰的 AI 战略时，两年的"AI 转型"可以毫无实质进展。而亲力亲为的创业公司正在这个空隙中崛起——它们没有组织惯性的包袱，从头就用 AI 原生方式工作。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">遗留代码的新价值：从技术债到训练数据</div>
+      <div class="callout-text">Thariq 的洞察重新定义了遗留代码的意义——它们不再是需要维护的负担，而是"蒸馏"新代码的原料。当 AI 能够理解并重写老旧系统时，每行 COBOL 代码都变成了有价值的训练数据。这不仅是技术变革，更是对软件资产价值的根本重估：你维护了 20 年的遗留系统，可能突然变成了最珍贵的 AI 训练语料。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">从"造 MVP"到"造能造 MVP 的系统"</div>
+      <div class="callout-text">Ryan Carson 的方法论升级揭示了 AI 时代创业的本质变化：目标不是做产品，而是做能持续产出产品的系统。把 AI Agent 当真正员工对待——给它们邮箱、日历、GitHub 账号——这不再是科幻，而是正在发生的现实。当一个人加一套 AI Agent 系统就能运营一家创业公司时，"团队规模"作为竞争力指标的意义将被彻底改写。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>今日一问：</strong>LeCun 和 OpenAI 的 Dubois 给出了两种完全不同的 AGI 判断——一个说 LLM 永远到不了，一个说现有模型加工程就够了。如果你正在构建 AI 产品或制定 AI 战略，你选择相信哪一种判断？你的产品路线图会因此有什么不同？
+  </div>
+</div>
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+    <a href="https://www.youtube.com/@RedpointAI" target="_blank" style="color:#5e6ad2;text-decoration:none;">Unsupervised Learning Ep 86 — Yann LeCun 离开 Meta 后首次长篇访谈</a><br>
+    <a href="https://x.com/levie/status/2058582370253701432" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — CEO 最容易患上"AI 精神病"</a><br>
+    <a href="https://x.com/realmadhuguru/status/2058591611245011157" target="_blank" style="color:#5e6ad2;text-decoration:none;">Madhu Guru — 表演型 Demo 正在杀死企业 AI 转型</a><br>
+    <a href="https://x.com/trq212/status/2058576195000660319" target="_blank" style="color:#5e6ad2;text-decoration:none;">Thariq — 遗留代码库将成为"蒸馏"新代码的原料</a><br>
+    <a href="https://x.com/garrytan/status/2058769355916411099" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 高自主性 + 高品味 = 最大竞争力</a><br>
+    <a href="https://x.com/mattturck/status/2058659995311358332" target="_blank" style="color:#5e6ad2;text-decoration:none;">Matt Turck — AGI 瓶颈可能在工程而非模型</a><br>
+    <a href="https://x.com/nikunj/status/2058783316753686558" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — 用 Claude Code 逆向工程 API</a><br>
+    <a href="https://x.com/petergyang/status/2058555226479866312" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — 用 AI Agent 单人运营创业公司</a><br>
+    <a href="https://x.com/rauchg/status/2058750970998505505" target="_blank" style="color:#5e6ad2;text-decoration:none;">Guillermo Rauch — 打造伟大品牌就是打造伟大产品</a><br>
+    <a href="https://x.com/zarazhangrui/status/2058643577421631538" target="_blank" style="color:#5e6ad2;text-decoration:none;">Zara Zhang — Mac 神器 + EM 转 IC 趋势 + Codex 开源</a>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+    来源：Unsupervised Learning 播客、X/Twitter、GitHub Trending。AI 日报每日更新。
+  </div>
+</div>
+</div>
+
+</body>
+</html>
