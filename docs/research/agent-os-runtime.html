@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="date" content="2026-05-25">
-<title>AIOS 深度架构解析 — LLM Agent 操作系统的内核设计与生态全景</title>
+<title>Agent OS 深度解析 — 从 AIOS 内核到 Sandbox 运行时生态全景</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
@@ -62,24 +62,25 @@
 <!-- Hero -->
 <div class="card span-4">
   <div class="label-sm">深度调研 · 2026/5/25</div>
-  <h1>AIOS：LLM Agent 操作系统的内核设计与生态全景</h1>
+  <h1>Agent OS 深度解析：从 AIOS 内核到 Sandbox 运行时生态全景</h1>
   <div class="subtitle" style="margin-top:6px;">
-    Kai Mei, Xi Zhu 等 (Rutgers University) · COLM 2025 正式论文 · arXiv 2403.16971<br>
-    第一个系统性定义 LLM Agent OS 的学术工作——LLM 内核 + 调度器 + 上下文管理 + 内存管理 + 存储/工具/访问控制的完整 OS 级抽象
+    <strong>上篇：</strong>Kai Mei, Xi Zhu 等 (Rutgers) · COLM 2025 · arXiv 2403.16971 — 第一个系统性定义 LLM Agent OS 内核<br>
+    <strong>下篇：</strong>PolluxAI 2026/5/7 — 8 个开源 Agent Sandbox 横向评测 · MicroVM vs 容器 vs K8s · 四层运行时架构
   </div>
   <div class="stat-row" style="margin-top:16px;">
-    <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">内核模块</div></div>
+    <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">AIOS 内核模块</div></div>
+    <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Sandbox 项目横评</div></div>
     <div class="stat-item"><div class="stat-num">2.1×</div><div class="stat-label">吞吐量提升</div></div>
-    <div class="stat-item"><div class="stat-num">2,000</div><div class="stat-label">并发 Agent 测试</div></div>
-    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">生态项目</div></div>
+    <div class="stat-item"><div class="stat-num">90.4</div><div class="stat-label">CubeSandbox 评分</div></div>
   </div>
   <div class="dots-row" style="margin-top:12px;">
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AIOS</span>
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent OS</span>
     <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">内核架构</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">调度器</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">系统调用</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Crab · LSFS · TopoClaw</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Sandbox</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">MicroVM</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">调度器</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">CubeSandbox</span>
   </div>
 </div>
 
@@ -332,6 +333,243 @@
   </div>
 </div>
 
+<!-- ====== 下篇：Agent Sandbox 运行时 ====== -->
+
+<div class="card span-4">
+  <div class="label-sm">下篇 · Agent Sandbox 运行时</div>
+  <h2>🛡️ Agent 的真正问题不是"怎么调用模型"，而是"把不可控执行体放在哪里"</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    只要 Agent 开始执行代码、操作文件、访问网页、安装依赖、调用系统命令，问题就不再是 prompt engineering，而是一个更底层的工程问题：<strong>我们到底要把这个不完全可控的执行体放在哪里？</strong>
+  </div>
+  <div class="quote">
+    <strong>传统沙箱：</strong>解决"不信任代码"的问题。<br>
+    <strong>Agent 沙箱：</strong>解决"不完全信任一个会自己规划、自己调用工具、自己产生副作用的系统"的问题。<br>
+    它既要隔离风险，又要保留足够真实的运行环境；既要启动快、成本低，又要支持浏览器、终端、文件系统、MCP、IDE、Jupyter 等复杂工具链。
+  </div>
+  <div class="dots-row" style="margin-top:8px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">MicroVM</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">eBPF 隔离</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">KVM</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">WASM</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">K8s CRD</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">MCP 工具层</span>
+  </div>
+</div>
+
+<!-- Sandbox 8 项目横评 -->
+<div class="card span-4">
+  <div class="label-sm">8 项目横评 · 四大类</div>
+  <h2>从完整 MicroVM 运行时到上下文压缩层</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    PolluxAI 基于四个维度（技术架构 25% · 运行时能力 30% · 工程成熟度 25% · 生态适配 20%）对 8 个开源项目打分。项目分为四类：
+  </div>
+  <table>
+    <tr><th>项目</th><th>Stars</th><th>语言</th><th>核心定位</th><th>更像什么</th><th>总分</th></tr>
+    <tr><td><strong>CubeSandbox</strong></td><td>5.1k</td><td>Rust</td><td>高性能 MicroVM 沙箱服务</td><td>生产级 Agent 运行时</td><td><span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">90.4</span></td></tr>
+    <tr><td><strong>microsandbox</strong></td><td>6.0k</td><td>Rust</td><td>本地、安全、可编程沙箱</td><td>开发者友好的嵌入式运行时</td><td><span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">88.9</span></td></tr>
+    <tr><td><strong>agent-infra/sandbox</strong></td><td>4.5k</td><td>Python</td><td>Browser + Shell + 文件 + MCP + VSCode 一体化容器</td><td>All-in-One 工具环境</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">77.4</span></td></tr>
+    <tr><td><strong>OpenSandbox</strong></td><td>10.5k</td><td>Python</td><td>安全、快速、可扩展沙箱运行时</td><td>企业级沙箱框架（阿里）</td><td><span class="tag" style="background:rgba(139,92,246,0.08);color:#8b5cf6;">76.5</span></td></tr>
+    <tr><td><strong>k8s-sigs/agent-sandbox</strong></td><td>2.1k</td><td>Go</td><td>K8s CRD 管理隔离有状态工作负载</td><td>K8s 原生控制面</td><td><span class="tag">73.8</span></td></tr>
+    <tr><td><strong>sandbox-agent</strong></td><td>1.3k</td><td>TS</td><td>HTTP 统一控制 Claude Code / Codex / OpenCode</td><td>多 Agent 控制层</td><td><span class="tag">73.2</span></td></tr>
+    <tr><td><strong>openbrowser</strong></td><td>9.4k</td><td>TS</td><td>让 AI Agent 浏览网页</td><td>浏览器自动化组件</td><td><span class="tag">65.5</span></td></tr>
+    <tr><td><strong>context-mode</strong></td><td>13.5k</td><td>TS</td><td>压缩工具输出到上下文窗口</td><td>上下文沙箱/压缩层</td><td><span class="tag">59.5</span></td></tr>
+  </table>
+</div>
+
+<!-- 重点分析 -->
+<div class="card span-2">
+  <div class="label-sm">第一梯队</div>
+  <h2>🏆 CubeSandbox：生产级性能之王</h2>
+  <div class="vlist">
+    <div class="vitem" style="border-left:3px solid #5e6ad2;">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">⚡</div>
+      <div class="vitem-content">
+        <div class="vitem-title">冷启动 &lt;60ms · P99 &lt;150ms · 内存 &lt;5MB</div>
+        <div class="vitem-desc">CubeAPI → CubeMaster → Cubelet/CubeProxy/CubeVS → CubeHypervisor → <strong>KVM MicroVM</strong>。eBPF 做网络隔离，RustVMM 构建 MicroVM。E2B API 兼容——降低迁移成本</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #10b981;">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">🎯</div>
+      <div class="vitem-content">
+        <div class="vitem-title">适用场景：大规模 Agent 执行平台</div>
+        <div class="vitem-desc">多租户代码运行 · E2B 替代或成本优化 · 对冷启动和部署密度极度敏感的生产系统。短板：主要面向 Linux 生产环境，架构较重，需要运行时/网络/集群运维能力</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">第一梯队</div>
+  <h2>🛠️ microsandbox：最像开发者产品</h2>
+  <div class="vlist">
+    <div class="vitem" style="border-left:3px solid #5e6ad2;">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">📦</div>
+      <div class="vitem-content">
+        <div class="vitem-title">libkrun · KVM MicroVM · smoltcp 用户态网络</div>
+        <div class="vitem-desc"><code>Sandbox::builder().image("python").cpus(1).memory(512).create()</code> ——像 SDK 一样嵌入应用。Rust / Python / TypeScript SDK + MCP 支持 + OCI 镜像</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #10b981;">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">🎯</div>
+      <div class="vitem-content">
+        <div class="vitem-title">适用场景：本地开发 · 桌面工具 · SDK 嵌入</div>
+        <div class="vitem-desc">跨平台支持更好。风险：生产验证相对不足，高并发多租户场景需重点压测网络、存储、快照和异常恢复。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">工具型 · 云原生</div>
+  <h2>🐳 agent-infra/sandbox：最快能用</h2>
+  <div class="text-body">
+    把 Browser + Shell + File + MCP + VSCode Server + Jupyter 塞进一个 Docker 容器。不追求最强隔离，追求<strong>开箱即用</strong>——早期产品最缺的是反馈速度，不是完美架构。
+  </div>
+  <div class="dots-row" style="margin-top:8px;">
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;\">原型验证</span>
+    <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;\">不适合多租户</span>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">工具型 · 云原生</div>
+  <h2>☸️ k8s-sigs/agent-sandbox：K8s 原生</h2>
+  <div class="text-body">
+    把 Agent 沙箱抽象成 K8s 声明式资源：SandboxClaim → SandboxTemplate → Sandbox → Pod → Runtime。适合已有成熟 K8s 平台的团队——把 Agent 沙箱纳入已有治理体系。
+  </div>
+  <div class="dots-row" style="margin-top:8px;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;\">CRD</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;\">GitOps</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;\">WarmPool</span>
+  </div>
+</div>
+
+<!-- 生态组件 -->
+<div class="card span-2">
+  <div class="label-sm">生态组件</div>
+  <h2>🎛️ sandbox-agent：统一 Agent 控制层</h2>
+  <div class="text-body">
+    通过 HTTP 统一控制 Claude Code、Codex、OpenCode、Amp 等 Coding Agent，输出统一会话 schema。<strong>不是底层沙箱，是控制适配层。</strong>适合：Coding Agent 平台、多 Agent 对比路由、统一会话审计。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">生态组件</div>
+  <h2>📡 openbrowser + context-mode</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">🌐</div>
+      <div class="vitem-content">
+        <div class="vitem-title">openbrowser：Agent 的浏览器能力组件</div>
+        <div class="vitem-desc">封装浏览器自动化，适配 Agent 使用模式。但浏览器隔离 ≠ 系统隔离</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">📉</div>
+      <div class="vitem-content">
+        <div class="vitem-title">context-mode：上下文也是一种"沙箱"</div>
+        <div class="vitem-desc">对工具输出做隔离和压缩——声称减少 <strong>98%</strong> 工具输出 token。认知隔离，不是安全隔离</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 四层架构 -->
+<div class="card span-4">
+  <div class="label-sm">架构分层</div>
+  <h2>🧱 真正落地：四层 Agent Runtime 可组合栈</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    不建议寻找"一个项目解决所有问题"。现实工程中的 Agent Runtime 架构通常分四层：
+  </div>
+  <div style="background:#f5f5f4;border-radius:8px;padding:16px;margin-bottom:12px;">
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:#5e6ad2;color:#fff;border-radius:6px;padding:8px 12px;text-align:center;font-weight:600;font-size:14px;">🎛️ Agent Control Layer — 统一控制 Claude Code / Codex / OpenCode / 自研 Agent</div>
+      <div style="border-left:2px dashed #5e6ad2;margin-left:24px;height:12px;"></div>
+      <div style="background:rgba(94,106,210,0.12);border-radius:6px;padding:8px 12px;text-align:center;font-weight:600;font-size:14px;">🔧 Tool Layer — Browser / Shell / File / MCP / IDE / Jupyter</div>
+      <div style="border-left:2px dashed #5e6ad2;margin-left:24px;height:12px;"></div>
+      <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:6px;padding:8px 12px;text-align:center;font-weight:600;font-size:14px;">🛡️ Sandbox Runtime Layer — MicroVM / Container / K8s Pod / Serverless Sandbox</div>
+      <div style="border-left:2px dashed #5e6ad2;margin-left:24px;height:12px;"></div>
+      <div style="background:#f0f0f0;border-radius:6px;padding:8px 12px;text-align:center;font-weight:600;font-size:14px;">🏗️ Infrastructure Layer — Network / Storage / Image / Snapshot / Observability / Policy</div>
+    </div>
+  </div>
+  <div class="text-body" style="margin-bottom:6px;"><strong>项目映射：</strong></div>
+  <div class="dots-row" style="gap:6px;flex-wrap:wrap;">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">控制层：sandbox-agent</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">浏览器工具：openbrowser</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">上下文压缩：context-mode</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">一体化工具：agent-infra/sandbox</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">底层运行时：CubeSandbox · microsandbox · OpenSandbox</span>
+    <span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">K8s 管理层：k8s-sigs/agent-sandbox</span>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>参考组合 — 生产级 Coding Agent 平台：</strong><br>
+    前端产品 → Agent 编排服务 → sandbox-agent 统一控制 Claude Code / Codex → CubeSandbox 提供 MicroVM 执行环境 → openbrowser 提供浏览器操作 → context-mode 控制工具输出进入上下文的粒度 → K8s / 自研调度系统管理资源池
+  </div>
+</div>
+
+<!-- 趋势 -->
+<div class="card span-4">
+  <div class="label-sm">趋势判断</div>
+  <h2>📈 Agent Sandbox 五年趋势</h2>
+  <div class="vlist">
+    <div class="vitem" style="border-left:3px solid #5e6ad2;">
+      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">1</div>
+      <div class="vitem-content">
+        <div class="vitem-title">MicroVM 成为高安全 Agent Runtime 主流方向</div>
+        <div class="vitem-desc">容器不会消失，但在不可信代码、多租户、云端执行场景里，MicroVM 隔离边界更容易解释，也更容易通过安全审计</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #10b981;">
+      <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div>
+      <div class="vitem-content">
+        <div class="vitem-title">冷启动成为核心竞争指标——&lt;100ms 是合格线</div>
+        <div class="vitem-desc">Agent 任务天然碎片化：创建→执行→暂停→恢复→销毁。P99 可控、内存 &lt;20MB、预热池和快照恢复是标配</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #f59e0b;">
+      <div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div>
+      <div class="vitem-content">
+        <div class="vitem-title">MCP 推动工具层标准化——沙箱不只是"运行代码的地方"</div>
+        <div class="vitem-desc">浏览器、文件、数据库、CI、代码编辑器等通过 MCP 统一暴露。沙箱成为"托管工具能力的边界"</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #8b5cf6;">
+      <div class="vitem-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">4</div>
+      <div class="vitem-content">
+        <div class="vitem-title">上下文管理成为运行时的一部分——隔离信息流</div>
+        <div class="vitem-desc">Agent 时代不光隔离 CPU/内存/文件/网络，还要隔离信息流：哪些工具输出进入模型上下文？哪些只进审计系统？</div>
+      </div>
+    </div>
+    <div class="vitem" style="border-left:3px solid #ef4444;">
+      <div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">5</div>
+      <div class="vitem-content">
+        <div class="vitem-title">生产平台走向组合式，不是单体式</div>
+        <div class="vitem-desc">MicroVM 负责安全执行 + K8s 负责资源管理 + MCP 负责工具协议 + Agent 控制层负责会话事件 + 上下文层负责信息压缩 + 可观测性负责审计回放</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 选型速查 -->
+<div class="card span-4">
+  <div class="label-sm">选型速查</div>
+  <h2>🎯 一句话选型矩阵</h2>
+  <table>
+    <tr><th>目标</th><th>首选</th><th>备选</th></tr>
+    <tr><td>生产级高性能 Agent 沙箱</td><td><strong>CubeSandbox</strong></td><td>microsandbox</td></tr>
+    <tr><td>本地开发和 SDK 嵌入</td><td><strong>microsandbox</strong></td><td>agent-infra/sandbox</td></tr>
+    <tr><td>企业安全合规</td><td><strong>OpenSandbox</strong></td><td>CubeSandbox</td></tr>
+    <tr><td>快速原型和内部 Demo</td><td><strong>agent-infra/sandbox</strong></td><td>microsandbox</td></tr>
+    <tr><td>K8s 原生管理</td><td><strong>k8s-sigs/agent-sandbox</strong></td><td>自研 CRD + 底层沙箱</td></tr>
+    <tr><td>多 Coding Agent 统一控制</td><td><strong>sandbox-agent</strong></td><td>自研适配层</td></tr>
+    <tr><td>浏览器自动化</td><td><strong>openbrowser</strong></td><td>Playwright 自研封装</td></tr>
+    <tr><td>上下文优化（token 压缩）</td><td><strong>context-mode</strong></td><td>自研工具输出摘要</td></tr>
+  </table>
+  <div class="quote" style="margin-top:10px;">
+    <strong>核心洞察：</strong>RAG 解决的是"Agent 知道什么"，MCP 解决的是"Agent 能调用什么"，Sandbox 解决的是最关键的问题——<strong>Agent 真正动手时，风险被关在哪里？</strong>
+  </div>
+</div>
+
 <!-- Why This Matters -->
 <div class="card span-4 card-highlight">
   <div class="label-sm" style="color:#5e6ad2;">Why This Matters</div>
@@ -362,6 +600,7 @@
     <div>📄 <a href="https://arxiv.org/abs/2604.28138" target="_blank" style="color:#5e6ad2;text-decoration:none;">Crab: Semantics-Aware Checkpoint/Restore Runtime — Wu et al. (HKUST, 2026)</a></div>
     <div>🔧 <a href="https://github.com/agiresearch/AIOS" target="_blank" style="color:#5e6ad2;text-decoration:none;">AIOS 开源代码 — github.com/agiresearch/AIOS</a></div>
     <div>🔧 <a href="https://github.com/rivet-dev/agent-os" target="_blank" style="color:#5e6ad2;text-decoration:none;">rivet-dev/agent-os — WASM + V8 Agent 运行时</a></div>
+    <div>📄 <a href="https://mp.weixin.qq.com/s/Bv1O2TPHvRJiiK9j8ZPM1g" target="_blank" style="color:#5e6ad2;text-decoration:none;">AI Agent Sandbox 开源项目技术分析 — PolluxAI (2026/5/7)</a></div>
     <div>📄 已有报告：<a href="managed-agents-architecture.html" style="color:#5e6ad2;text-decoration:none;">Managed Agents 架构深度解读</a></div>
   </div>
 </div>
