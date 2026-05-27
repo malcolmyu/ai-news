@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-05-27 AI 日报 - 第二号</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
+.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+<div class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年5月27日</div>
+  <h1>Agent 基础设施进入深水区：从"能不能跑"到"跑得好不好"</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    Daytona CEO Ivan Burazin 在 MAD Podcast 中系统论证：AWS/Azure 的架构是为无状态应用设计的，而 Agent 需要的是能跑 24 小时、有自己硬盘的状态机。OpenClaw 的 Peter Steinberger 用 2MB 替换了 140MB 的图片处理依赖。Garry Tan 提出了实操性极强的 Eval 方法论。Peter Yang 引用 Ryan Carson 经验——Agent 时代应该先建系统，再建 MVP。AI Agent 工程正在从"大力出奇迹"阶段进入精细化工程阶段。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 基础设施</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">沙盒运行时</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Eval 方法论</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Token 效率</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">依赖瘦身</span>
+    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 工程</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">追踪 Builder</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">GitHub 项目</div></div>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">今日头条</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">Daytona CEO Ivan Burazin：AWS 和 Azure 的架构跑不了自主 Agent</strong>——The MAD Podcast 最新访谈中，Ivan 给出了一个深刻论断：超大规模云的架构是为无状态应用设计的，就像卡车和跑车都有四个轮子但底盘完全不同。Agent 需要的是状态机——CPU、内存、硬盘绑在同一台物理机上的专属电脑，能像人一样持续工作。他预测全球 CPU 短缺即将来临，因为每个 Agent 都需要自己的计算机，而 RL 训练又吞噬大量 CPU 资源。同时他对 Transformer 架构保持清醒怀疑："我不觉得现在的模型架构是终局。"
+      </div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">Agent 工程实践大爆发：依赖瘦身、Eval 方法论、Token 效率</strong>——OpenClaw 创始人 Steipete 将图片处理依赖从 140MB 瘦身到 2MB，用 Rust 编译到 WebAssembly 的 photon 替代 Sharp+Jimp。Garry Tan 提出三个模型交叉评分的 Eval 方法论，迭代到 10 分制。Peter Yang 引用 Ryan Carson 经验：Agent 时代应该"先建能造 MVP 的系统"。工程纪律正在成为 AI Agent 时代的真正护城河。
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">Agent 工程</div>
+  <h3>OpenClaw 创始人 Peter Steinberger：把 140MB 依赖砍到 2MB</h3>
+  <div class="text-body">
+    Peter Steinberger 密集分享了三项 Agent 工程实践：① <strong>做减法</strong>——用 Rust 编译到 WebAssembly 的 <code>photon</code> 替代了 Sharp 和 Jimp，依赖从 140MB 降到 2MB，证明了 Agent 运行时需要全新的工程范式；② <strong>Token 效率</strong>——写 skill 时要注意 token 效率，太多 skill 文件写得跟书一样厚全塞进每一轮 context，不必太在意语法，实用优先；③ 调侃安全圈 "There's security, and there's clankers"，在 Agent 时代重新思考安全的边界。
+  </div>
+  <img src="assets/2026-05-27/steipete-2058922222790525272-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <img src="assets/2026-05-27/steipete-2058917897590673525-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
+  <img src="assets/2026-05-27/steipete-2058884046940225918-0.png" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://x.com/steipete/status/2058922222790525272" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/steipete/status/2058917897590673525" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ② →</a>
+    <a href="https://x.com/steipete/status/2058884046940225918" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ③ →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">AI 与经济</div>
+  <h3>Box CEO Aaron Levie：AI 不会消灭工作，但会淘汰跟不上的人</h3>
+  <div class="text-body">
+    Aaron Levie 引用高盛 CEO 的观点反击 AI 导致失业的悲观论——核心论证：如果几十年前你看到现在的工作效率，你会以为工作早没了。但实际发生的是，有人用自动化做出更好的产品，<strong>所有人的期望被拉高，跟不上的人被淘汰</strong>。不是工作变少，而是工作变深：分析师产出更多财务分析、律师提供更全面的法律意见、医疗提供更深入的诊断。这个视角将 AI 从"威胁"重新定义为"升级"，关键在于你能否跟上期望曲线的斜率。
+  </div>
+  <img src="assets/2026-05-27/levie-2059025559896883489-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <img src="assets/2026-05-27/levie-2059025559896883489-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
+  <div style="margin-top:10px;">
+    <a href="https://x.com/levie/status/2059025559896883489" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">Agent Eval</div>
+  <h3>YC CEO Garry Tan：三个模型交叉评分，迭代到 10 分</h3>
+  <div class="text-body">
+    Garry Tan 密集输出 Agent 工程实践。他对 Eval 的定义非常实操：<strong>让三个不同的前沿模型审视你的 skill 输入输出，打分——为什么不是 10 分？怎么改到 10 分？</strong>跑几轮，你会被改善速度震惊。他还转发了一条关于 "prompter 将成为新工种" 的推文并评论："Brave new world. Prompters of the world unite." 这标志着 prompt engineering 正在从个人技能升级为组织职能。
+  </div>
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://x.com/garrytan/status/2059148823403082154" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/garrytan/status/2059155926939299968" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ② →</a>
+    <a href="https://x.com/garrytan/status/2059151927011909800" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ③ →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">工具评测</div>
+  <h3>Roblox PM Peter Yang：Codex vs Claude + Tokenmaxxing 概念</h3>
+  <div class="text-body">
+    Peter Yang 实测 Codex 后给出评价：Codex 很不错，尤其是它能用浏览器测试自己写的代码，<strong>但涉及设计和前端，Claude 还是赢</strong>。他还提出了 "tokenmaxxing" 概念——把 tokenmaxxing 想象成自助餐吃蟹腿，吃到饱的 AI 订阅不会永远存在，趁现在使劲吃。另一条推文引用了 Ryan Carson 的洞见：<strong>过去做 MVP 是先不搭系统，现在反过来——必须先花大量时间建文档、skill 文件、cron job，然后你一个人能干十个人的活。</strong>
+  </div>
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://x.com/petergyang/status/2059099566377693305" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/petergyang/status/2059070818798465330" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ② →</a>
+    <a href="https://x.com/petergyang/status/2059029752858775581" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ③ →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">Build vs 投资</div>
+  <h3>FPV Ventures 合伙人 Nikunj Kothari：VC 为什么还在写代码</h3>
+  <div class="text-body">
+    Nikunj Kothari 回应了常被问到的问题"你是 VC 为什么还在写代码"——<strong>"这个领域变化太快，不 build 根本没法保持在前沿。每几个月就得重新思考所有先验假设。手握外星超智能却还用老方法干活，不觉得荒谬吗？Automate or get automated."</strong> 这段发言揭示了 AI 时代投资人的身份裂变：当好 VC 的前提是先当好 Builder，因为只有亲手建造的人才能真正理解下一个范式的边界在哪里。
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/nikunj/status/2058927145519562867" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">AI 伦理</div>
+  <h3>Anthropic 哲学家 Amanda Askell：有人冒充我写博客</h3>
+  <div class="text-body">
+    Anthropic 的哲学家兼伦理学家 Amanda Askell 罕见发声澄清：<strong>五年没写过个人博客，网上挂她名字的都不是她写的</strong>。这条推文可能暗示有人利用 AI 冒充知名人物产出内容并署名。在 AI 生成内容泛滥的时代，身份验证和内容溯源正成为日益严峻的问题——当任何人都可以用 Claude 生成一篇"Amanda Askell 风格"的哲学文章，我们如何区分真实与伪造？
+  </div>
+  <div style="margin-top:10px;">
+    <a href="https://x.com/AmandaAskell/status/2058994218484338726" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+  </div>
+</div>
+<div class="card span-2">
+  <div class="label-sm">科技人文</div>
+  <h3>Every CEO Dan Shipper：After Automation 的争论 + 教皇谈 AI</h3>
+  <div class="text-body">
+    Dan Shipper 分享了两条引人深思的动态：① 内部对 "After Automation" 出现反驳观点——在机器接管一切之后，人类到底还剩下什么价值？② <strong>引用教皇方济各关于 AI 的声明："人类面临选择：建造新的巴别塔，还是建造神与人共同居住的城"</strong>——并调侃教皇显然读过 Every 2024 年的内容。两条动态共同指向 AI 时代最根本的哲学问题：当技术能替代越来越多的人类能力时，我们选择用技术连接还是隔离彼此？
+  </div>
+  <img src="assets/2026-05-27/danshipper-2058962119287038145-0.png" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://x.com/danshipper/status/2059014616059879501" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/danshipper/status/2058962119287038145" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">原文 ② →</a>
+  </div>
+</div>
+<div class="card span-4">
+  <div class="label-sm">播客深度</div>
+  <h2>The MAD Podcast：为何 AWS 和 Azure 跑不了自主 Agent</h2>
+  <div class="text-body">
+    Daytona CEO Ivan Burazin 在 The MAD Podcast 中系统阐述了他对 Agent 基础设施的判断。核心论点：每个 Agent 至少需要一个沙盒——不是"隔离环境"那么简单，而是 Agent 的专属电脑，带 CPU、内存、硬盘、浏览器、文件系统。Agent 本质上是数字知识工作者，而知识工作者需要工具才能产出。
+  </div>
+  <div style="margin-top:12px;">
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/kMXJrzAa5fM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">超大规模云的"错误底盘"</div>
+        <div class="vitem-desc">AWS/Azure 的架构是为无状态应用设计的，不是为 Agent 设计的。就像卡车和跑车都有四个轮子和发动机，但底盘完全不同。传统云假设你的 app 不会在运行时被改变；Agent 恰好相反，它需要在运行时不断安装工具、写代码、开浏览器。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Agent 需要的是状态机，不是无状态函数</div>
+        <div class="vitem-desc">Daytona 把 CPU、内存、硬盘全绑在同一台物理机上（而非网络盘），IOPS 从数十万跳到数千万。这让 Agent 可以像人一样持续工作——打开笔记本干活、合上盖子、换个设备继续。这是从"云原生"到"Agent 原生"的范式转换。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">全球 CPU 短缺正在来临</div>
+        <div class="vitem-desc">GPU 短缺广为人知，但 Ivan 指出 SemiAnalysis 预测今年 10 月 CPU 也会不够用。原因？每个 Agent 都需要自己的计算机，而 RL 训练又吞噬大量 CPU 资源。基础设施的瓶颈正在从"能不能训练"转向"能不能运行"。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">对模型架构的清醒判断</div>
+        <div class="vitem-desc">Ivan 不认为 Transformer 是终点："有人用湿件复刻了果蝇大脑，能像果蝇一样行动。如果复刻一个通用人类大脑呢？我不觉得现在的模型架构是终局。"这种从底层硬件到顶层架构的系统性思考，在 AI 基础设施创业者中并不多见。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月27日</div>
+  <h2>AI Coding 知识图谱持续霸榜——技能配置、AI 痕迹清理、开源替代品全面开花</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Lum1104/Understand-Anything ⭐ 4,697 · TypeScript</div>
+        <div class="vitem-desc">将任何代码转化为可探索、可搜索、可提问的交互式知识图谱。支持 Claude Code、Codex、Cursor、Copilot、Gemini CLI 等主流 AI 编程工具。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/knowledge-work-plugins ⭐ 1,718 · Python</div>
+        <div class="vitem-desc">Anthropic 官方开源的知识工作者插件库，专为 Claude Cowork 设计——将插件生态从编程扩展到通用知识工作。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">DigitalPlatDev/FreeDomain ⭐ 1,219 · HTML</div>
+        <div class="vitem-desc">免费域名项目，面向所有人——在 AI 工具让建站门槛急剧降低的背景下，免费域名让更多人能上线自己的作品。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/DigitalPlatDev/FreeDomain" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Axorax/awesome-free-apps ⭐ 731 · JavaScript</div>
+        <div class="vitem-desc">PC 和手机上最佳免费应用精选列表——AI 工具爆发时代，免费应用的质量正在快速追赶付费软件。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Axorax/awesome-free-apps" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">hardikpandya/stop-slop ⭐ 539</div>
+        <div class="vitem-desc">一个 skill 文件，用于从文本中消除 AI 痕迹（AI tells）——让 AI 生成的内容读起来更自然、更像人写的。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">twentyhq/twenty ⭐ 216 · TypeScript</div>
+        <div class="vitem-desc">Salesforce 的开源替代品，为 AI 原生设计——传统 CRM 正在被 AI 原生方案从底层重构。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/twentyhq/twenty" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">st-tech/ppf-contact-solver ⭐ 170 · Python</div>
+        <div class="vitem-desc">物理模拟接触求解器，支持布料、固体和杆件模拟——物理仿真领域的开源进展。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/st-tech/ppf-contact-solver" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Open-Dev-Society/OpenStock ⭐ 156 · TypeScript</div>
+        <div class="vitem-desc">开源股票市场平台——实时价格追踪、个性化提醒、公司深度分析，永久免费。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Open-Dev-Society/OpenStock" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">jellyfin/jellyfin ⭐ 83 · C#</div>
+        <div class="vitem-desc">自由软件媒体系统——服务端和 API，开源媒体管理的老牌项目持续获得关注。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/jellyfin/jellyfin" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    趋势观察：今天 GitHub Trending 延续了 AI Coding 知识图谱的主线——Understand-Anything 以 4,697 星稳居第一，Anthropic 的知识工作插件以 1,718 星紧随其后。两个信号值得注意：① stop-slop（539 星）的出现标志着开发者开始关心 AI 输出质量而非仅仅是功能完整性——从"能不能写"到"写得好不好"的转折；② twenty（216 星）代表了 AI 原生 CRM 的开源替代浪潮，传统企业软件正在被 AI 从底层重构。技能配置类和知识图谱项目已经连续多天霸榜，说明 AI Coding Agent 的生态正在系统化建设中。
+  </div>
+</div>
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#5e6ad2;">今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">Agent 基础设施的范式转换：云原生 → Agent 原生</div>
+      <div class="callout-text">Ivan Burazin 的诊断切中了一个被大多数人忽视的问题：AWS/Azure 的设计哲学是为无状态应用服务的，而 Agent 是状态机。Steipete 的 140MB→2MB 依赖瘦身实验在微观层面证明了同样的命题——Agent 运行时需要全新的工程范式。当每个人都在讨论模型能力时，少数人在重新设计 Agent 的"底盘"：从存储架构（本地盘 vs 网络盘）到依赖管理（2MB vs 140MB），再到执行模式（24 小时持续运行 vs 请求-响应）。Agent 基础设施的竞争，不是谁家 GPU 更多，而是谁的"底盘"更适合 Agent 的工作方式。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">工程纪律正在成为 Agent 时代的护城河</div>
+      <div class="callout-text">Garry Tan 的 Eval 方法论（三个模型交叉评分 → 迭代到 10 分）和 Peter Yang 引用的 Ryan Carson 经验（先建系统再建 MVP）指向同一个方向：Agent 时代的生产力瓶颈不在模型能力，而在工程纪律。代码写得好不好另说，文档和 Eval 写得好不好才是真正的护城河。Nikunj Kothari 说 VC 必须持续 build 才能保持在前沿，Aaron Levie 说 CEO 必须亲自用 AI 才能避开"AI 精神病"——共同点是什么？<strong>亲力亲为。</strong>在 AI 工具极大降低执行门槛的今天，最大的竞争优势不是拥有最好的模型，而是拥有最紧的 build-eval-iterate 循环。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">"Prompter"：从个人技能到组织职能</div>
+      <div class="callout-text">Garry Tan 转发的"prompter 将成为新工种"推文不只是一个有趣的概念——它标志着一个严肃的产业趋势。当公司开始为 prompt engineering 设立专职岗位时，意味着 AI 已经从"辅助工具"升级为"组织基础设施"。正如 DevOps 在 2010 年代从个人技能演变为专属工程学科，prompt engineering 正在经历同样的制度化过程。唯一的区别是速度：这次快得多。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">AI 时代的身份危机：真实 vs 伪造</div>
+      <div class="callout-text">Amanda Askell 被人冒充写博客的事件不是孤例——它是 AI 生成内容泛滥的必然结果。当任何人都可以用 Claude 生成一篇"某知名人物风格"的内容并署名时，身份验证和内容溯源将成为 AI 时代的核心基础设施需求。Dan Shipper 引用的教皇 AI 声明从另一个角度切入同一问题：在这个真假边界模糊的时代，人类需要重新思考技术是用来连接还是隔离彼此。这是一个技术问题，更是一个哲学问题。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>今日一问：</strong>Ivan Burazin 说 Agent 需要的是状态机而非无状态函数，Steipete 把依赖从 140MB 砍到 2MB，Garry Tan 和 Peter Yang 都强调工程纪律。如果你的团队正在构建 AI Agent 应用，你们的"底盘"设计——从基础设施选择到 Eval 方法论——是基于"无状态应用"的老范式，还是基于"状态机"的新范式？
+  </div>
+</div>
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+    <a href="https://www.youtube.com/watch?v=kMXJrzAa5fM" target="_blank" style="color:#5e6ad2;text-decoration:none;">The MAD Podcast — Ivan Burazin：为何 AWS 和 Azure 跑不了自主 Agent</a><br>
+    <a href="https://x.com/steipete/status/2058922222790525272" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — 依赖瘦身 140MB→2MB</a><br>
+    <a href="https://x.com/steipete/status/2058917897590673525" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — Skill 文件的 Token 效率</a><br>
+    <a href="https://x.com/steipete/status/2058884046940225918" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Steinberger — 安全圈调侃</a><br>
+    <a href="https://x.com/levie/status/2059025559896883489" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — AI 不会消灭工作，只会淘汰跟不上的人</a><br>
+    <a href="https://x.com/garrytan/status/2059148823403082154" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — Eval 方法论：三个模型交叉评分</a><br>
+    <a href="https://x.com/garrytan/status/2059155926939299968" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — Prompter 将成为新工种</a><br>
+    <a href="https://x.com/garrytan/status/2059151927011909800" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — Brave new world</a><br>
+    <a href="https://x.com/petergyang/status/2059099566377693305" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — Codex vs Claude 评测</a><br>
+    <a href="https://x.com/petergyang/status/2059070818798465330" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — Tokenmaxxing 概念</a><br>
+    <a href="https://x.com/petergyang/status/2059029752858775581" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — 先建系统再建 MVP</a><br>
+    <a href="https://x.com/nikunj/status/2058927145519562867" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — VC 为什么还在写代码</a><br>
+    <a href="https://x.com/AmandaAskell/status/2058994218484338726" target="_blank" style="color:#5e6ad2;text-decoration:none;">Amanda Askell — 有人冒充我写博客</a><br>
+    <a href="https://x.com/danshipper/status/2059014616059879501" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — After Automation 反驳</a><br>
+    <a href="https://x.com/danshipper/status/2058962119287038145" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — 教皇谈 AI</a>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+    来源：The MAD Podcast、X/Twitter、GitHub Trending。AI 日报每日更新。
+  </div>
+</div>
+</div>
+
+</body>
+</html>
