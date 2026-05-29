@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-29">
+<title>OpenSpec 深度解析 — SDD 框架如何让 AI 编程不再跑偏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">&#x1f916;</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">&#x2315;</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>&#x2318;K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">&times;</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">深度调研 &middot; 2026年5月29日</div>
+  <h1>OpenSpec：规格驱动开发如何让 AI 不再「做偏」</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    来源：Bilibili 精讲视频 + GitHub 仓库深度分析<br>
+    Vibe Coding 总跑偏？OpenSpec 用三层架构（Skill + CLI + schema.yaml）在编码前对齐需求，让 AI 先写规格再写代码。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">SDD</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">OpenSpec</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">规格驱动</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">AI 工程化</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Vibe Coding</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">文档体系</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">核心命令</div></div>
+    <div class="stat-item"><div class="stat-num">25+</div><div class="stat-label">支持工具</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">架构层</div></div>
+    <div class="stat-item"><div class="stat-num">14min</div><div class="stat-label">视频时长</div></div>
+  </div>
+</div>
+
+<!-- Problem Statement -->
+<div class="card span-2">
+  <div class="label-sm">痛点</div>
+  <h3>Vibe Coding 的核心矛盾</h3>
+  <div class="text-body">
+    Vibe Coding 看起来爽——一句话让 AI 写出整个功能。但需求没说清楚，模型就会「做偏」。这其实对个人的逻辑能力和表达能力要求极高。SDD（规格驱动开发）在入口处加了一道闸门：<strong>先对齐需求，再写代码</strong>。不是泛泛地说「要做什么」，而是细致到每个功能的规格。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">定位</div>
+  <h3>OpenSpec 是什么</h3>
+  <div class="text-body">
+    一个轻量级 SDD 框架，通过提示词注入让 AI 严格按规格开发。与 GitHub Spec Kit（重）、Kiro（绑定 IDE）不同，OpenSpec 走<strong>轻量灵活</strong>路线——不绑定模型、不绑定工具、不强制阶段门槛。npm 全局安装，25+ 工具支持，MIT 开源。
+  </div>
+</div>
+
+<!-- 4 Core Commands -->
+<div class="card span-4">
+  <div class="label-sm">工作流</div>
+  <h2>四步核心流程 — 从想法到归档</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Explore — 需求探索（强烈推荐）</div>
+        <div class="vitem-desc">你说「帮我做一个 AI 对话机器人」，AI 会反过来问你：用什么前端？什么模型？什么架构？要不要对话历史？要不要流式输出？<strong>把思考外包给 AI</strong>，不用一开始就想清楚。UP 主评价：「这个指令是我最喜欢的，他的提问更全面，经常会让我觉得——这个问题问得好，我咋就没想到呢。」</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">2</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Propose — 生成规格文档</div>
+        <div class="vitem-desc">AI 自动创建 3 个文档 + 1 个文件夹：<strong>proposal.md</strong>（为什么做）、<strong>design.md</strong>（怎么做）、<strong>specs/</strong>（每个功能的详细规格，用「当…则…」结构化句式）、<strong>tasks.md</strong>（开发计划清单）。UP 主评价：「好的文档是把开发者变成无脑的执行机器，拿到文档就能干活。OpenSpec 基本做到了。」</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">3</div>
+      <div class="vitem-content">
+        <div class="vitem-title">Apply — 执行开发</div>
+        <div class="vitem-desc">AI 读取 tasks.md 中的任务清单 + 相关规格文档，逐步执行开发。视频中演示项目 7 分钟跑完，AI 自己完成测试并截图验证。完成后在 tasks.md 中逐项打勾标记进度。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">4</div>
+      <div class="vitem-title">Archive — 智能归档</div>
+      <div class="vitem-desc">归档做两件事：① 将当前任务文件夹移入 archive/（保留历史轨迹）；② 将 specs/ 合并到全局 Specs 文件夹，执行<strong>增删改</strong>三种操作——新功能直接复制、已有功能新增场景则在原文中插入段落、已有功能修改则直接改写原段落。结果：archive/ 保留每次变更全貌，Specs/ 始终保持项目最新功能描述。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Architecture Deep Dive -->
+<div class="card span-3">
+  <div class="label-sm">核心原理</div>
+  <h2>三层架构：Skill 管流程，CLI 生成指令，schema.yaml 定义文档</h2>
+  <div class="text-body" style="margin-bottom:12px;">
+    起初以为 OpenSpec 只是一堆 skill/command 文件，深入后才发现它的设计远比表面复杂。它把<strong>工作流控制</strong>和<strong>文档定义</strong>完全分离：
+  </div>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Skill 层（工作流）</div>
+        <div class="vitem-desc">只维护基本流程——explore &rarr; propose &rarr; apply &rarr; archive。不记录要写什么文档、怎么写。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">CLI 层（动态指令生成）</div>
+        <div class="vitem-desc">AI 执行 CLI 命令后，后端程序从配置文件中组合信息，<strong>动态生成</strong>文档撰写要求（JSON 格式）。包括：要读什么依赖文档、用什么模板、有什么注意事项。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">schema.yaml（文档体系定义者）</div>
+        <div class="vitem-desc"><strong>整个框架的核心。</strong> artifacts 字段决定生成哪些文件，每个文件有 template（模板路径）、instruction（撰写指导）、requires（依赖文档，决定撰写顺序）。默认顺序：需求文档 &rarr; 设计方案+功能规格（并行）&rarr; 开发计划。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card span-1">
+  <div class="label-sm">对比</div>
+  <h3>vs 其他方案</h3>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">vs Spec Kit (GitHub)</div>
+        <div class="vitem-desc">重、阶段门禁严格、Python 环境。OpenSpec 更轻。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">vs Kiro (AWS)</div>
+        <div class="vitem-desc">强但绑定 IDE 和 Claude。OpenSpec 不绑定工具。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">vs 无规格</div>
+        <div class="vitem-desc">模糊 prompt &rarr; 不可预测结果。SDD 增加可预测性。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Schema -->
+<div class="card span-2">
+  <div class="label-sm">自定义</div>
+  <h3>搭建自己的文档体系</h3>
+  <div class="text-body">
+    执行 <code>openspec schema init</code> 复制默认 schema 到项目。然后：① 修改 schema.yaml — 增删文档、调整顺序；② 修改 templates/ 下的模板 — 调整章节标题和撰写要点；③ 在 config 中切换到新 schema。<strong>操作简单，难的是想清楚你的文档体系要长什么样。</strong>
+  </div>
+  <div class="quote" style="margin-top:8px;">
+    <strong>注意：</strong>如果你删掉了 Specs 文档，模型就不会输出功能规格，归档时也无法将新功能和历史功能整合 —— 这会丢失 OpenSpec 最核心的增量文档管理能力。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">配置</div>
+  <h3>全局上下文注入</h3>
+  <div class="text-body">
+    schema.yaml 之外还有一个 <code>config</code> 文件，可写入<strong>全局要求</strong>：项目背景、技术选型、文档风格、语言偏好等。AI 撰写所有文档时都会参考这段 context。还可以针对每个文档写个性化要求——比如要求 proposal.md 控制在 500 字符以内。
+  </div>
+  <div class="vlist" style="margin-top:8px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">推荐模型</div>
+        <div class="vitem-desc">Codex 5.5 / Opus 4.7，高推理模型效果最佳</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">上下文卫生</div>
+        <div class="vitem-desc">开发前清空上下文，保持干净</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SDD Philosophy -->
+<div class="card span-4" style="background:rgba(37,99,235,0.02);border-color:rgba(37,99,235,0.12);">
+  <div class="label-sm" style="color:#2563eb;">核心观点</div>
+  <h2>SDD 不会随模型升级而消失</h2>
+  <div class="grid-2">
+    <div class="tip-card">
+      <h3>「AI 会看文档，你不看没关系」</h3>
+      <div class="text-muted">视频结尾的洞察：「在真实世界里，你接触到的开发者基本上不看文档。在数字世界里，AI 可是听话多了。」即使你懒得读规格文档，让 AI 先产出文档再开发，质量也会显著提升——因为 AI 在后续开发中会参考这些文档。</div>
+    </div>
+    <div class="tip-card">
+      <h3>「Token 成本是划算的」</h3>
+      <div class="text-muted">不要以为 SDD 只是多消耗 token 和时间。相比需求不明确造成的反复折腾和方向跑偏，前置投入是非常划算的。需求对齐是整个开发流程中 ROI 最高的环节。</div>
+    </div>
+    <div class="tip-card">
+      <h3>「模型变聪明，但不会读心」</h3>
+      <div class="text-muted">SDD 不会因为模型升级而消失。模型会变强，但它依然需要明确的输入——它不会自动知道你想要什么。SDD 解决的是「需求表达」问题，不是「模型能力」问题。</div>
+    </div>
+    <div class="tip-card">
+      <h3>「SDD + TDD 组合使用」</h3>
+      <div class="text-muted">UP 主提到他经常把 OpenSpec 和 Superpowers 结合使用——SDD 在入口约束需求，TDD 在出口管控质量。两者不是对立的，组合使用效果最好。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Why This Matters -->
+<div class="card span-4" style="background:rgba(37,99,235,0.02);border-color:rgba(37,99,235,0.12);">
+  <div class="label-sm" style="color:#2563eb;">与你的场景</div>
+  <h2>Harness 研发体系 + OpenSpec：规格驱动如何嵌入 Agent 工作流</h2>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">当前场景：Agent 模式下的需求对齐缺口</div>
+        <div class="vitem-desc">你在做 Harness 移动端 AI-native 研发体系，Agent 自主修复+验证，人只做架构决策和验收。但 Agent 在执行长程任务时，需求可能漂移——这正是 SDD 解决的「目标漂移」问题。在 Agent 开始执行前注入规格文档，可作为任务执行的锚点。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">OpenSpec 的三层架构 &harr; Hermes 的 Skill + Memory 体系</div>
+        <div class="vitem-desc">OpenSpec 的 Skill（流程）/ CLI（动态指令）/ schema.yaml（文档定义）三层分离，与 Hermes 的 Skill（工作流）/ Memory（持久状态）/ Tool（能力边界）三层的设计哲学高度重合。尤其是 schema.yaml 的「文档依赖链」概念，可以借鉴到 Hermes skill 中——让 skill 声明自己依赖的前置 skill 和产出物。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">归档机制 &harr; 长程任务的增量记忆</div>
+        <div class="vitem-desc">OpenSpec 的 archive/（历史全貌）+ Specs/（当前最新）双轨制，对应了 Agent 记忆系统中「短期任务轨迹」和「长期规范对齐」的分层。这种「保存每次变更 + 维护当前最新状态」的模式，正是 Harness 面试考点中 Memory 机制的「局部更新与溯源」需求的工程实现。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- References -->
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">&#x1f4da; 参考来源</div>
+    <a href="https://www.bilibili.com/video/BV1eU5A6MERk" target="_blank" style="color:#2563eb;text-decoration:none;">Bilibili 精讲视频 — 从操作到原理吃透 OpenSpec</a><br>
+    <a href="https://github.com/Fission-AI/OpenSpec" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub — Fission-AI/OpenSpec</a><br>
+    <a href="https://www.npmjs.com/package/@fission-ai/openspec" target="_blank" style="color:#2563eb;text-decoration:none;">npm — @fission-ai/openspec</a><br>
+    视频作者 · Bilibili &middot; 2026 · 14:26<br>
+    GitHub 仓库 · Fission-AI · MIT License · 25+ 工具支持
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+    来源：Bilibili 视频转写（Whisper small 模型）+ GitHub README。深度调研 · 第二号知识库。
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
