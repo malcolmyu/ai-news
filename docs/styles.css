@@ -5,15 +5,15 @@
 
 /* ── Design Tokens ─────────────────────────────────────────────────────── */
 :root {
-  --accent: #5e6ad2;
-  --accent-light: rgba(94,106,210,0.08);
-  --accent-subtle: rgba(94,106,210,0.04);
-  --accent-border: rgba(94,106,210,0.12);
+  --accent: #2563eb;
+  --accent-light: rgba(37,99,235,0.08);
+  --accent-subtle: rgba(37,99,235,0.04);
+  --accent-border: rgba(37,99,235,0.12);
 
   --bg-primary: #f5f5f4;
   --bg-secondary: #fafafa;
-  --bg-card: #ffffff;
-  --bg-hover: #f0f0ee;
+  --bg-card: #fafaf8;
+  --bg-hover: #f0efec;
 
   --text-primary: #1c1c1c;
   --text-secondary: #6b6b6b;
@@ -23,9 +23,9 @@
   --border: #e8e8e6;
   --border-light: #f0f0ee;
 
-  --shadow-none: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-none: 0 1px 3px rgba(28,28,28,0.04);
+  --shadow-sm: 0 2px 6px rgba(28,28,28,0.04);
+  --shadow-md: 0 4px 12px rgba(28,28,28,0.05);
 
   --radius-sm: 10px;
   --radius-md: 12px;
@@ -36,7 +36,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: 'Inter', 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-feature-settings: "cv01", "ss03";
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -183,7 +183,7 @@ body {
 }
 .card-category {
   font-size: 11px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   color: var(--accent);
 }
 .card-icon {
@@ -258,13 +258,12 @@ body {
 .label-sm {
   font-size: 11px; font-weight: 600;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   margin-bottom: 8px;
 }
 .section-label {
   font-size: 11px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   color: var(--accent);
   margin-bottom: 16px; margin-top: 32px;
 }
@@ -289,7 +288,7 @@ h3 {
   margin-bottom: 6px;
 }
 .text-body { font-size: 13px; color: var(--text-body); line-height: 1.6; }
-.text-muted { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.text-muted { font-size: 12px; color: var(--text-muted); line-height: 1.5; overflow-wrap: break-word; }
 .text-body strong, .text-muted strong { color: var(--text-primary); font-weight: 500; }
 .text-body code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
@@ -338,6 +337,8 @@ h3 {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 .tip-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary); }
 
@@ -383,7 +384,7 @@ h3 {
 .callout-text strong { color: var(--text-primary); font-weight: 500; }
 
 /* ── Divider ───────────────────────────────────────────────────────────── */
-.divider { height: 1px; background: var(--border); margin: 12px 0; }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 12px 0; }
 
 /* ── Info Item (research sidebar) ──────────────────────────────────────── */
 .info-item {
@@ -395,7 +396,7 @@ h3 {
 .info-label {
   font-size: 11px; font-weight: 600;
   color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   min-width: 60px; flex-shrink: 0;
 }
 .info-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
@@ -419,7 +420,7 @@ th {
   font-size: 11px; font-weight: 600; color: var(--text-muted);
   text-align: left; padding: 8px 10px 6px;
   border-bottom: 1px solid var(--border);
-  text-transform: uppercase; letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 td {
   font-size: 12px; color: var(--text-body);
@@ -594,8 +595,7 @@ body.search-modal-open { overflow: hidden; }
   font-size: 11px;
   font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   margin-bottom: 4px;
 }
 
@@ -674,7 +674,7 @@ body.search-modal-open { overflow: hidden; }
   --pagefind-ui-tag: var(--bg-secondary);
   --pagefind-ui-border-width: 1px;
   --pagefind-ui-border-radius: 8px;
-  --pagefind-ui-font: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --pagefind-ui-font: 'Inter', 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .site-search .pagefind-ui__form {

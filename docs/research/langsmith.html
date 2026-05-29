@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="date" content="2026-05-24">
 <title>LangSmith 深度调研 — LLM Agent 可观测性与评估平台</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
 <script src="../pagefind/pagefind-ui.js" defer></script>
@@ -70,11 +72,11 @@
     服务 35% Fortune 500 企业，开源下载量超 10 亿次 — 从 Tracing 到 Deployment 的完整 Agent 工程闭环
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LangChain</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 可观测性</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLM 评估</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">部署平台</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">竞品对比</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">LangChain</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 可观测性</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">LLM 评估</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">部署平台</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">竞品对比</span>
   </div>
 </div>
 
@@ -118,7 +120,7 @@
     <iframe src="assets/langsmith-architecture.html" style="width:100%;height:620px;border:none;" loading="lazy" title="LangSmith 架构图"></iframe>
   </div>
   <div class="dots-row" style="margin-top:10px;">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">SmithDB</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">SmithDB</span>
     <span class="tag">ClickHouse</span>
     <span class="tag">PostgreSQL</span>
     <span class="tag">Redis</span>
@@ -356,14 +358,14 @@
       <div class="info-text" style="font-weight:500;">Base Trace</div>
       <div class="text-muted" style="font-size:11px;">14 天保留</div>
     </div>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">$2.50/千条</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">$2.50/千条</span>
   </div>
   <div class="metric-row">
     <div>
       <div class="info-text" style="font-weight:500;">Extended Trace</div>
       <div class="text-muted" style="font-size:11px;">400 天保留</div>
     </div>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">$5.00/千条</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">$5.00/千条</span>
   </div>
   <div class="metric-row">
     <div>
@@ -483,8 +485,8 @@
   <div class="label-sm">应用阶段</div>
   <h2>Dev → Staging → Production</h2>
   <div class="vlist">
-    <div class="vitem" style="border-left:3px solid #5e6ad2;">
-      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">🛠</div>
+    <div class="vitem" style="border-left:3px solid #2563eb;">
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">🛠</div>
       <div class="vitem-content">
         <div class="vitem-title">开发阶段</div>
         <div class="vitem-desc">Tracing 调试每一步 · Playground 实验提示词 · 离线评估 · Studio 测试 Graph</div>
@@ -523,7 +525,7 @@
 
 <!-- Closing -->
 <div class="card span-4 card-highlight">
-  <div class="label-sm" style="color:#5e6ad2;">核心结论</div>
+  <div class="label-sm" style="color:#2563eb;">核心结论</div>
   <h2>LangSmith 是当前最完整的 Agent 工程平台，但价格和生态锁定是双刃剑</h2>
   <div class="text-body" style="margin-top:8px;">
     LangSmith 的核心竞争力在于将<strong>Tracing、Evaluation、Prompt Hub、Monitoring、Deployment</strong> 整合为单一工作流，并与 LangChain/LangGraph 生态深度绑定。日均处理超 10 亿事件、服务 35% Fortune 500 企业、客户量化收益显著。<br><br>
@@ -531,10 +533,10 @@
     <strong>需要谨慎的场景：</strong>预算敏感的小团队（考虑 LangFuse/Arize Phoenix 开源替代）· 非 LangChain 生态（评估竞品功能覆盖）· 需要完全自托管且非企业计划。
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent Engineering</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Observability</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">LLM Evaluation</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Deployment</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent Engineering</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Observability</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">LLM Evaluation</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Deployment</span>
     <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">独角兽</span>
   </div>
 </div>
@@ -543,12 +545,12 @@
 <div class="card span-4">
   <div class="label-sm">参考来源</div>
   <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
-    <div>📄 <a href="https://docs.langchain.com/langsmith" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith 官方文档 — docs.langchain.com</a></div>
-    <div>📄 <a href="https://www.langchain.com/pricing-langsmith" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith 定价页面 — langchain.com/pricing</a></div>
-    <div>📄 <a href="https://changelog.langchain.com/" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith Changelog — changelog.langchain.com</a></div>
-    <div>📄 <a href="https://blog.langchain.dev/customers-podium/" target="_blank" style="color:#5e6ad2;text-decoration:none;">Podium 客户案例 — blog.langchain.dev</a></div>
-    <div>📄 <a href="https://docs.langchain.com/self-hosted" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangSmith Self-Hosted 文档 — docs.langchain.com</a></div>
-    <div>🌐 <a href="https://www.langchain.com/about" target="_blank" style="color:#5e6ad2;text-decoration:none;">LangChain 公司介绍 — langchain.com/about</a></div>
+    <div>📄 <a href="https://docs.langchain.com/langsmith" target="_blank" style="color:#2563eb;text-decoration:none;">LangSmith 官方文档 — docs.langchain.com</a></div>
+    <div>📄 <a href="https://www.langchain.com/pricing-langsmith" target="_blank" style="color:#2563eb;text-decoration:none;">LangSmith 定价页面 — langchain.com/pricing</a></div>
+    <div>📄 <a href="https://changelog.langchain.com/" target="_blank" style="color:#2563eb;text-decoration:none;">LangSmith Changelog — changelog.langchain.com</a></div>
+    <div>📄 <a href="https://blog.langchain.dev/customers-podium/" target="_blank" style="color:#2563eb;text-decoration:none;">Podium 客户案例 — blog.langchain.dev</a></div>
+    <div>📄 <a href="https://docs.langchain.com/self-hosted" target="_blank" style="color:#2563eb;text-decoration:none;">LangSmith Self-Hosted 文档 — docs.langchain.com</a></div>
+    <div>🌐 <a href="https://www.langchain.com/about" target="_blank" style="color:#2563eb;text-decoration:none;">LangChain 公司介绍 — langchain.com/about</a></div>
   </div>
 </div>
 

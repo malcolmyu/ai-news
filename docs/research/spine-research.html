@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="date" content="2026-05-12">
 <title>Spine 2D 骨骼动画全面调研：原理 + AI 生成路径</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
@@ -64,12 +66,12 @@
       Spine 原理剖析 + AI 生成 Spine 动画的可行路径：从骨骼、插槽、附件、蒙皮到 IK 约束，5 种 AI 方案逐项评估
     </div>
     <div class="dots-row">
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Spine</span>
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">骨骼动画</span>
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI 生成</span>
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">2D 游戏</span>
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">渲染引擎</span>
-      <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">开源工具</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Spine</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">骨骼动画</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">AI 生成</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">2D 游戏</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">渲染引擎</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">开源工具</span>
     </div>
   </div>
 
@@ -106,7 +108,7 @@
         <div style="font-size:11px;color:#8b8b8b;">真彩色 · 体量大</div>
       </div>
       <div style="flex:1;min-width:140px;background:rgba(94,106,210,0.04);border:1px solid rgba(94,106,210,0.2);border-radius:10px;padding:12px;text-align:center;">
-        <div style="font-size:13px;font-weight:500;color:#5e6ad2;">Spine</div>
+        <div style="font-size:13px;font-weight:500;color:#2563eb;">Spine</div>
         <div style="font-size:11px;color:#8b8b8b;">骨骼复用 · 最灵活</div>
       </div>
     </div>
@@ -205,28 +207,28 @@
     <h2>每帧渲染循环</h2>
     <div class="vlist">
       <div class="vitem">
-        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.12);">▶</div>
         <div class="vitem-content">
           <div class="vitem-title"><code>AnimationState.update(delta)</code></div>
           <div class="vitem-desc">推进动画时间轴</div>
         </div>
       </div>
       <div class="vitem">
-        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.12);">▶</div>
         <div class="vitem-content">
           <div class="vitem-title"><code>Animation.apply()</code></div>
           <div class="vitem-desc">所有 Timeline 执行插值</div>
         </div>
       </div>
       <div class="vitem">
-        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">▶</div>
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.12);">▶</div>
         <div class="vitem-content">
           <div class="vitem-title"><code>Skeleton.updateWorldTransform()</code></div>
           <div class="vitem-desc">重新计算世界坐标</div>
         </div>
       </div>
       <div class="vitem">
-        <div class="vitem-icon" style="background:#5e6ad2;color:#fff;">▶</div>
+        <div class="vitem-icon" style="background:#2563eb;color:#fff;">▶</div>
         <div class="vitem-content">
           <div class="vitem-title">Renderer 遍历 drawOrder</div>
           <div class="vitem-desc">Canvas / Three.js / WebGL / PixiJS</div>
@@ -321,7 +323,7 @@
     <div class="vitem" style="padding:0;border:none;margin-bottom:8px;">
       <div style="width:28px;height:28px;border-radius:6px;background:rgba(94,106,210,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">🧪</div>
       <div class="vitem-content">
-        <div class="vitem-title" style="color:#5e6ad2;">github.com/GenielabsOpenSource/spine-animation-ai</div>
+        <div class="vitem-title" style="color:#2563eb;">github.com/GenielabsOpenSource/spine-animation-ai</div>
         <div class="vitem-desc">Claude 技能 · 开源 · 2026 年 2 月</div>
       </div>
     </div>
@@ -423,7 +425,7 @@
     <h2>AI + Spine 完整管线设计</h2>
     <div class="vlist">
       <div class="vitem" style="background:rgba(94,106,210,0.04);">
-        <div class="vitem-icon" style="background:rgba(94,106,210,0.12);">①</div>
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.12);">①</div>
         <div class="vitem-content">
           <div class="vitem-title">角色图 → AI 分割</div>
           <div class="vitem-desc">Gemini/VLM 识别人物部件，CV 分割输出透明 PNG 组</div>
@@ -527,12 +529,12 @@
   <div class="card span-4">
     <div class="label-sm">参考来源</div>
     <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
-      <div>📄 <a href="https://segmentfault.com/a/1190000040082417" style="color:#5e6ad2;text-decoration:none;">Spine 2D 骨骼动画渲染原理解析与源码解读</a> · 曾培森 · SegmentFault</div>
-      <div>🐙 <a href="https://github.com/GenielabsOpenSource/spine-animation-ai" style="color:#5e6ad2;text-decoration:none;">GenielabsOpenSource/spine-animation-ai</a> · GitHub</div>
-      <div>🌐 <a href="https://godmodeai.co/ai-spine-animation" style="color:#5e6ad2;text-decoration:none;">God Mode AI Spine Animation</a> · godmodeai.co</div>
-      <div>🌐 <a href="https://apatero.com/blog/comfyui-unirig-automatic-skeleton-rigging-guide-2025" style="color:#5e6ad2;text-decoration:none;">ComfyUI UniRig Guide</a> · apatero.com</div>
-      <div>📄 <a href="https://stretchy.studio/" style="color:#5e6ad2;text-decoration:none;">Stretchy Studio</a> · 开源 2D 骨骼动画工具</div>
-      <div>📄 <a href="https://www.layer.ai/tools/layer--create-spine-components" style="color:#5e6ad2;text-decoration:none;">Layer AI Spine Components</a> · layer.ai</div>
+      <div>📄 <a href="https://segmentfault.com/a/1190000040082417" style="color:#2563eb;text-decoration:none;">Spine 2D 骨骼动画渲染原理解析与源码解读</a> · 曾培森 · SegmentFault</div>
+      <div>🐙 <a href="https://github.com/GenielabsOpenSource/spine-animation-ai" style="color:#2563eb;text-decoration:none;">GenielabsOpenSource/spine-animation-ai</a> · GitHub</div>
+      <div>🌐 <a href="https://godmodeai.co/ai-spine-animation" style="color:#2563eb;text-decoration:none;">God Mode AI Spine Animation</a> · godmodeai.co</div>
+      <div>🌐 <a href="https://apatero.com/blog/comfyui-unirig-automatic-skeleton-rigging-guide-2025" style="color:#2563eb;text-decoration:none;">ComfyUI UniRig Guide</a> · apatero.com</div>
+      <div>📄 <a href="https://stretchy.studio/" style="color:#2563eb;text-decoration:none;">Stretchy Studio</a> · 开源 2D 骨骼动画工具</div>
+      <div>📄 <a href="https://www.layer.ai/tools/layer--create-spine-components" style="color:#2563eb;text-decoration:none;">Layer AI Spine Components</a> · layer.ai</div>
     </div>
   </div>
 

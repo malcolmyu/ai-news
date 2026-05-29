@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="date" content="2026-05-24">
 <title>Managed Agents 架构深度解读 — 解耦脑与手，Agent 蜂群的版本答案</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
 <script src="../pagefind/pagefind-ui.js" defer></script>
@@ -68,12 +70,12 @@
     从「养宠物」到「用牛马」—— 为什么解耦是 Agent 规模化的唯一出路
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Anthropic</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Managed Agents</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">多 Agent 协作</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">架构解耦</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Coordinator</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Session Store</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Anthropic</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Managed Agents</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">多 Agent 协作</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">架构解耦</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Coordinator</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Session Store</span>
   </div>
 </div>
 
@@ -226,7 +228,7 @@
   <h2>🔧 作者的实现路线</h2>
   <div class="vlist">
     <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(94,106,210,0.12);color:#5e6ad2;">1</div>
+      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div>
       <div class="vitem-content">
         <div class="vitem-title">逆向 SDK Beta 目录</div>
         <div class="vitem-desc">从 Anthropic SDK 的 beta 目录提取 Agents / Environments / Sessions / Skills / Memory / Stores 六个模块的类型定义</div>
@@ -319,16 +321,16 @@
 
 <!-- Closing -->
 <div class="card span-4 card-highlight">
-  <div class="label-sm" style="color:#5e6ad2;">核心结论</div>
+  <div class="label-sm" style="color:#2563eb;">核心结论</div>
   <h2>解耦不是选择，是 Agent 规模化的唯一数学解</h2>
   <div class="text-body" style="margin-top:8px;">
     小天这期视频的核心价值不在于「复刻了 Anthropic 的 SDK」——而在于<strong>用实际代码跑通了这套理念</strong>：Coordinator 只调度不执行、Agent 模板与 Session 状态分离、沙盒作为无状态执行单元可随时销毁重建。<br><br>
     <strong>最重要的警示：</strong>当海外厂商已经把 Agent 从「个人工具」上升到「企业基础设施」的时候，国内还在争论 OpenCLI vs Hermes 哪个更好用。这不是工具之争——这是<strong>对 Agent 理解维度的差距</strong>。Anthropic 的阳谋是做一个云端的 Agent 操作系统，而如果你还在琢磨怎么在本地养好一只 Agent，你已经落后了一个维度。
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Managed Agents</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Coordinator Pattern</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Session Decoupling</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Managed Agents</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Coordinator Pattern</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Session Decoupling</span>
     <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">脑手解耦</span>
     <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">基础设施化</span>
   </div>
@@ -338,7 +340,7 @@
 <div class="card span-4">
   <div class="label-sm">参考来源</div>
   <div class="text-muted" style="display:flex;flex-direction:column;gap:4px;">
-    <div>🎬 <a href="https://www.bilibili.com/video/BV1DB546wEb8" target="_blank" style="color:#5e6ad2;text-decoration:none;">比Openclaw更好！我发现了多Agent协作架构的版本答案！— 小天fotos (Bilibili)</a></div>
+    <div>🎬 <a href="https://www.bilibili.com/video/BV1DB546wEb8" target="_blank" style="color:#2563eb;text-decoration:none;">比Openclaw更好！我发现了多Agent协作架构的版本答案！— 小天fotos (Bilibili)</a></div>
     <div>📄 Anthropic Managed Agents 官方博客（2026/4/8）— 解耦脑与手的架构设计理念</div>
     <div>🔧 Anthropic SDK Beta 目录 — Agents / Environments / Sessions / Skills / Memory / Stores 模块</div>
     <div>🏢 腾讯 Cube Sandbox — 毫秒级沙盒启动，开源项目（2026/4 发布）</div>

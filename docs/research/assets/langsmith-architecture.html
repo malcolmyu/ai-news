@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LangSmith 架构图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+Mono+SC:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,7 +56,7 @@
   .card-dot {
     width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
   }
-  .card-dot.accent { background: #5e6ad2; }
+  .card-dot.accent { background: #2563eb; }
   .card-dot.ink { background: #1c1c1c; }
   .card-dot.muted { background: #6b6b6b; }
   h3 { font-size: 13px; font-weight: 600; color: #1c1c1c; }
@@ -86,7 +88,7 @@
     <polygon points="0 0, 8 3, 0 6" fill="#6b6b6b"/>
   </marker>
   <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-    <polygon points="0 0, 8 3, 0 6" fill="#5e6ad2"/>
+    <polygon points="0 0, 8 3, 0 6" fill="#2563eb"/>
   </marker>
   <marker id="arrow-dashed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
     <polygon points="0 0, 8 3, 0 6" fill="#8b8b8b"/>
@@ -98,7 +100,7 @@
 <!-- 区域：控制平面 -->
 <rect x="16" y="16" width="508" height="200" rx="8" fill="none" stroke="rgba(94,106,210,0.30)" stroke-width="1" stroke-dasharray="4,4"/>
 <rect x="16" y="6" width="80" height="12" rx="2" fill="#f5f5f4"/>
-<text x="56" y="15" fill="#5e6ad2" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" font-weight="500" letter-spacing="0.08em">控制平面</text>
+<text x="56" y="15" fill="#2563eb" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle" font-weight="500" letter-spacing="0.08em">控制平面</text>
 
 <!-- 区域：数据平面 -->
 <rect x="540" y="16" width="364" height="200" rx="8" fill="none" stroke="rgba(28,28,28,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
@@ -127,7 +129,7 @@
 <text x="224" y="96" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">增删改查 · 认证</text>
 
 <!-- 异步队列（焦点） -->
-<rect x="316" y="44" width="108" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="316" y="44" width="108" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#2563eb" stroke-width="1"/>
 <rect x="324" y="52" width="36" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
 <text x="342" y="61" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">队列</text>
 <text x="370" y="84" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">异步队列</text>
@@ -143,7 +145,7 @@
 
 <!-- 控制平面箭头 -->
 <line x1="132" y1="76" x2="164" y2="76" stroke="#6b6b6b" stroke-width="1" marker-end="url(#arrow)"/>
-<line x1="284" y1="76" x2="316" y2="76" stroke="#5e6ad2" stroke-width="1" marker-end="url(#arrow-accent)"/>
+<line x1="284" y1="76" x2="316" y2="76" stroke="#2563eb" stroke-width="1" marker-end="url(#arrow-accent)"/>
 <line x1="424" y1="68" x2="456" y2="58" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
 <line x1="424" y1="84" x2="456" y2="94" stroke="#8b8b8b" stroke-width="1" stroke-dasharray="4,3"/>
 
@@ -181,7 +183,7 @@
 <!-- ===== 存储层节点 ===== -->
 
 <!-- ClickHouse -->
-<rect x="32" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="32" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.06)" stroke="#2563eb" stroke-width="1"/>
 <rect x="40" y="348" width="28" height="12" rx="2" fill="transparent" stroke="rgba(94,106,210,0.40)" stroke-width="0.8"/>
 <text x="54" y="357" fill="rgba(94,106,210,0.8)" font-size="7" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">分析</text>
 <text x="102" y="376" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">ClickHouse</text>
@@ -209,9 +211,9 @@
 <text x="542" y="392" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">S3 · GCS · Azure</text>
 
 <!-- SmithDB（焦点） -->
-<rect x="632" y="340" width="140" height="64" rx="6" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1.2"/>
+<rect x="632" y="340" width="140" height="64" rx="6" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.2"/>
 <text x="702" y="360" fill="#1c1c1c" font-size="12" font-weight="600" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">SmithDB</text>
-<text x="702" y="376" fill="#5e6ad2" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">专有引擎</text>
+<text x="702" y="376" fill="#2563eb" font-size="9" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">专有引擎</text>
 <text x="702" y="392" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" text-anchor="middle">12倍追踪 · 15倍搜索</text>
 
 <!-- ===== 集成层 ===== -->
@@ -256,7 +258,7 @@
 <line x1="32" y1="440" x2="888" y2="440" stroke="rgba(28,28,28,0.08)" stroke-width="0.8"/>
 <text x="32" y="456" fill="#6b6b6b" font-size="8" font-family="'Noto Sans SC', sans-serif" letter-spacing="0.14em">图例</text>
 
-<rect x="100" y="446" width="8" height="8" rx="1" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="100" y="446" width="8" height="8" rx="1" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1"/>
 <text x="114" y="454" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">焦点节点（≤2）</text>
 
 <rect x="220" y="446" width="8" height="8" rx="1" fill="#fff" stroke="#1c1c1c" stroke-width="1"/>

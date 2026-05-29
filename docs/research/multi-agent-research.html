@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="date" content="2026-05-11">
 <title>多智能体系统 — 架构、编排与工程实践</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
@@ -170,7 +172,7 @@
         <defs>
           <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/></filter>
           <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5e6ad2"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
           </marker>
           <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="#d0d0d0"/>
@@ -182,7 +184,7 @@
         <rect width="660" height="400" fill="transparent" rx="8"/>
 
         <!-- Main orchestrator -->
-        <rect x="230" y="10" width="200" height="34" rx="6" fill="#5e6ad2" filter="url(#s)"/>
+        <rect x="230" y="10" width="200" height="34" rx="6" fill="#2563eb" filter="url(#s)"/>
         <text x="330" y="32" fill="#fff" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🧠 主 Agent（协调层）</text>
 
         <line x1="330" y1="44" x2="330" y2="58" stroke="#d0d0d0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
@@ -195,7 +197,7 @@
         <text x="330" y="126" fill="#8b8b8b" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1">逐任务执行循环</text>
 
         <!-- Dev agent -->
-        <rect x="50" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
+        <rect x="50" y="145" width="170" height="36" rx="6" fill="#fff" stroke="#2563eb" stroke-width="1" filter="url(#s)"/>
         <text x="135" y="161" fill="#1c1c1c" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">👨‍💻 开发子 Agent</text>
         <text x="135" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">返回文件路径+状态</text>
 
@@ -210,13 +212,13 @@
         <text x="525" y="174" fill="#8b8b8b" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">功能/边界/回归测试</text>
 
         <!-- Connections from planner to agents -->
-        <path d="M 290 112 L 135 143" stroke="#5e6ad2" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
+        <path d="M 290 112 L 135 143" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
         <path d="M 330 112 L 330 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
         <path d="M 370 112 L 525 143" stroke="#c4842f" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-orange)"/>
 
         <!-- Feedback arrows back to main -->
-        <path d="M 220 163 L 290 163 L 290 150" stroke="#5e6ad2" stroke-width="1" fill="none" marker-end="url(#arrow-blue)"/>
-        <text x="255" y="147" fill="#5e6ad2" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
+        <path d="M 220 163 L 290 163 L 290 150" stroke="#2563eb" stroke-width="1" fill="none" marker-end="url(#arrow-blue)"/>
+        <text x="255" y="147" fill="#2563eb" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
 
         <path d="M 415 163 L 380 163 L 380 150" stroke="#c4842f" stroke-width="1" fill="none" marker-end="url(#arrow-orange)"/>
         <text x="398" y="147" fill="#c4842f" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">路径</text>
@@ -237,15 +239,15 @@
         <text x="493" y="220" fill="#d1453b" font-size="9" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">同一测试验收</text>
 
         <!-- Pass -->
-        <line x1="330" y1="240" x2="330" y2="258" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+        <line x1="330" y1="240" x2="330" y2="258" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
-        <rect x="240" y="262" width="180" height="30" rx="6" fill="rgba(94,106,210,0.04)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="281" fill="#5e6ad2" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">✅ 全部通过 → 下一任务</text>
+        <rect x="240" y="262" width="180" height="30" rx="6" fill="rgba(94,106,210,0.04)" stroke="#2563eb" stroke-width="1" filter="url(#s)"/>
+        <text x="330" y="281" fill="#2563eb" font-size="12" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">✅ 全部通过 → 下一任务</text>
 
-        <line x1="330" y1="292" x2="330" y2="312" stroke="#5e6ad2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+        <line x1="330" y1="292" x2="330" y2="312" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
-        <rect x="260" y="316" width="140" height="26" rx="6" fill="rgba(94,106,210,0.06)" stroke="#5e6ad2" stroke-width="1" filter="url(#s)"/>
-        <text x="330" y="333" fill="#5e6ad2" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🏁 全部任务完成</text>
+        <rect x="260" y="316" width="140" height="26" rx="6" fill="rgba(94,106,210,0.06)" stroke="#2563eb" stroke-width="1" filter="url(#s)"/>
+        <text x="330" y="333" fill="#2563eb" font-size="11" font-weight="500" text-anchor="middle" font-family="Inter, sans-serif">🏁 全部任务完成</text>
 
         <text x="330" y="370" fill="#8b8b8b" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">核心原则：写 Bug 的人修 Bug、提 Bug 的人验收、协调者只看状态码</text>
       </svg>
@@ -281,7 +283,7 @@
     <div class="label-sm">05 · Framework Comparison</div>
     <h2>主流多 Agent 框架对比</h2>
     <div class="comp-grid">
-      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
+      <div class="comp-item" style="border-top:2px solid #2563eb;">
         <h3>Hermes Agent</h3>
         <div class="text-muted">
           基于 <code>delegate_task</code> 的原生多 Agent 支持。支持并行子 Agent（最多 3 并发）、隔离上下文、Acp 协议集成。<br><br>
@@ -295,7 +297,7 @@
           <strong>亮点：</strong>完全无服务器依赖，纯 CLI 生态。
         </div>
       </div>
-      <div class="comp-item" style="border-top:2px solid #5e6ad2;">
+      <div class="comp-item" style="border-top:2px solid #2563eb;">
         <h3>OpenAI Codex CLI</h3>
         <div class="text-muted">
           Plan → Code → Review 三段式。每个阶段一个 Agent 做一件事。但 review 阶段不是独立第三方。<br><br>
@@ -321,8 +323,8 @@
         <div style="font-size:11px;font-weight:600;color:#8b8b8b;">L1 - 单 Agent</div>
         <div class="text-muted">一个模型，全权处理</div>
       </div>
-      <div style="background:rgba(94,106,210,0.04);border:1px solid #5e6ad2;border-radius:10px;padding:8px 10px;">
-        <div style="font-size:11px;font-weight:600;color:#5e6ad2;">L2 - 主 + 子 Agent</div>
+      <div style="background:rgba(94,106,210,0.04);border:1px solid #2563eb;border-radius:10px;padding:8px 10px;">
+        <div style="font-size:11px;font-weight:600;color:#2563eb;">L2 - 主 + 子 Agent</div>
         <div class="text-muted">协调 + 专家（Hermes 模式）</div>
       </div>
       <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:8px 10px;">
@@ -402,14 +404,14 @@
         <div class="vs-affil">OpenAI</div>
         <div class="vs-desc">"Harness 是拐杖，推理模型一来很多基础设施就不需要了。" 一个模型搞定一切，多 Agent 是过渡方案。</div>
       </div>
-      <div class="vs-card" style="border-top:2px solid #5e6ad2;">
-        <div class="vs-label" style="color:#5e6ad2;">Big Orchestration</div>
+      <div class="vs-card" style="border-top:2px solid #2563eb;">
+        <div class="vs-label" style="color:#2563eb;">Big Orchestration</div>
         <div class="vs-name">Jerry Liu</div>
         <div class="vs-affil">LlamaIndex</div>
         <div class="vs-desc">"模型是引擎，Harness 是方向盘和刹车。" 多 Agent 不是能力问题，而是工程可靠性问题。</div>
       </div>
     </div>
-    <div class="quote" style="background:#fff;">
+    <div class="quote" style="background:var(--bg-card);">
       <strong>两者都在理。</strong> 模型越强，Harness 越薄，但不会消失。架构约束、反馈循环、熵管理只会换形态——从 Prompt 约束变成代码约束、从手动审查变成自动验收。就像自动驾驶：L2 需要人盯，L4 不需要盯但需要冗余传感器和 Failover 机制。
     </div>
   </div>
@@ -441,7 +443,7 @@
   <!-- CONCLUSION: span-1 -->
   <div class="card span-1">
     <div class="label-sm">Conclusion</div>
-    <div class="quote" style="background:#fff;border-left-color:#5e6ad2;padding:10px 14px;">
+    <div class="quote" style="background:var(--bg-card);border-left-color:#2563eb;padding:10px 14px;">
       <strong style="font-size:14px;">多 Agent 的真正价值不是"多个模型一起工作"，而是"让每个模型在自己的约束范围内可靠工作"。</strong>
     </div>
     <div style="margin-top:12px;">
@@ -461,11 +463,11 @@
   <div class="card span-4" style="text-align:center;padding:20px;border-top:1px solid #e8e8e6;">
     <div class="text-muted" style="font-size:11px;line-height:1.8;">
       <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
-      <a href="https://hermes-agent.nousresearch.com" target="_blank" style="color:#5e6ad2;text-decoration:none;">Hermes Agent</a> ·
-      <a href="https://github.com/nousresearch/ralph" target="_blank" style="color:#5e6ad2;text-decoration:none;">Ralph 多 Agent 编队</a> ·
-      <a href="https://github.com/openai/codex" target="_blank" style="color:#5e6ad2;text-decoration:none;">OpenAI Codex CLI</a> ·
-      <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" style="color:#5e6ad2;text-decoration:none;">Claude Code</a> ·
-      <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" style="color:#5e6ad2;text-decoration:none;">Anthropic Building Effective Agents</a>
+      <a href="https://hermes-agent.nousresearch.com" target="_blank" style="color:#2563eb;text-decoration:none;">Hermes Agent</a> ·
+      <a href="https://github.com/nousresearch/ralph" target="_blank" style="color:#2563eb;text-decoration:none;">Ralph 多 Agent 编队</a> ·
+      <a href="https://github.com/openai/codex" target="_blank" style="color:#2563eb;text-decoration:none;">OpenAI Codex CLI</a> ·
+      <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" style="color:#2563eb;text-decoration:none;">Claude Code</a> ·
+      <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" style="color:#2563eb;text-decoration:none;">Anthropic Building Effective Agents</a>
       <br>
       本文档综合 Hermes Agent 工作流实践、OpenAI Codex CLI 架构分析、Ralph 多 Agent 编队参考架构及行业实践编译 · 2026
     </div>

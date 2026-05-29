@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AIOS 架构 — 分层结构</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+Mono+SC:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,7 +40,7 @@
   }
   .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .card-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .card-dot.accent { background: #5e6ad2; }
+  .card-dot.accent { background: #2563eb; }
   .card-dot.ink { background: #1c1c1c; }
   .card-dot.muted { background: #6b6b6b; }
   h3 { font-size: 13px; font-weight: 600; color: #1c1c1c; }
@@ -68,7 +70,7 @@
     <polygon points="0 0, 8 3, 0 6" fill="#6b6b6b"/>
   </marker>
   <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-    <polygon points="0 0, 8 3, 0 6" fill="#5e6ad2"/>
+    <polygon points="0 0, 8 3, 0 6" fill="#2563eb"/>
   </marker>
 </defs>
 
@@ -87,19 +89,19 @@
 
 <text x="148" y="88" fill="#6b6b6b" font-size="11" font-family="'Noto Sans SC', sans-serif">Agent 框架 (ReAct · AutoGen · MetaGPT · Open-Interpreter)</text>
 <text x="148" y="108" fill="#6b6b6b" font-size="11" font-family="'Noto Sans SC', sans-serif">↓ 通过</text>
-<text x="196" y="108" fill="#5e6ad2" font-size="11" font-family="'Noto Sans SC', sans-serif" font-weight="500">AIOS SDK</text>
+<text x="196" y="108" fill="#2563eb" font-size="11" font-family="'Noto Sans SC', sans-serif" font-weight="500">AIOS SDK</text>
 
 <text x="864" y="68" fill="#8b8b8b" font-size="9" font-family="'Noto Sans Mono SC', monospace" text-anchor="end">仅含 Agent 逻辑</text>
 
 <!-- 系统调用箭头：应用 → 内核 -->
-<line x1="248" y1="120" x2="248" y2="164" stroke="#5e6ad2" stroke-width="0.8" marker-end="url(#arrow-accent)" stroke-dasharray="3,3"/>
+<line x1="248" y1="120" x2="248" y2="164" stroke="#2563eb" stroke-width="0.8" marker-end="url(#arrow-accent)" stroke-dasharray="3,3"/>
 <rect x="214" y="134" width="68" height="12" rx="2" fill="#f5f5f4"/>
-<text x="248" y="143" fill="#5e6ad2" font-size="7" font-family="'Noto Sans Mono SC', monospace" text-anchor="middle" letter-spacing="0.06em">系统调用</text>
+<text x="248" y="143" fill="#2563eb" font-size="7" font-family="'Noto Sans Mono SC', monospace" text-anchor="middle" letter-spacing="0.06em">系统调用</text>
 
 <!-- ===== 第二层：AIOS 内核（焦点层） ===== -->
-<rect x="72" y="164" width="816" height="200" rx="6" fill="rgba(94,106,210,0.04)" stroke="#5e6ad2" stroke-width="1.2"/>
+<rect x="72" y="164" width="816" height="200" rx="6" fill="rgba(94,106,210,0.04)" stroke="#2563eb" stroke-width="1.2"/>
 
-<text x="96" y="188" fill="#5e6ad2" font-size="9" font-family="'Noto Sans Mono SC', monospace" font-weight="500" letter-spacing="0.1em">第二层</text>
+<text x="96" y="188" fill="#2563eb" font-size="9" font-family="'Noto Sans Mono SC', monospace" font-weight="500" letter-spacing="0.1em">第二层</text>
 <text x="148" y="188" fill="#1c1c1c" font-size="14" font-weight="600" font-family="'Noto Sans SC', sans-serif">AIOS 内核</text>
 <text x="864" y="188" fill="#8b8b8b" font-size="9" font-family="'Noto Sans Mono SC', monospace" text-anchor="end">7 个模块 · 线程绑定系统调用</text>
 
@@ -169,7 +171,7 @@
 <line x1="72" y1="472" x2="888" y2="472" stroke="rgba(28,28,28,0.08)" stroke-width="0.8"/>
 <text x="72" y="488" fill="#6b6b6b" font-size="8" font-family="'Noto Sans Mono SC', monospace" letter-spacing="0.14em">图例</text>
 
-<rect x="148" y="478" width="8" height="8" rx="1" fill="rgba(94,106,210,0.08)" stroke="#5e6ad2" stroke-width="1"/>
+<rect x="148" y="478" width="8" height="8" rx="1" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1"/>
 <text x="162" y="486" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">焦点层（内核）</text>
 
 <rect x="300" y="478" width="8" height="8" rx="1" fill="rgba(28,28,28,0.03)" stroke="rgba(28,28,28,0.14)" stroke-width="1"/>
@@ -181,7 +183,7 @@
 <rect x="580" y="478" width="8" height="8" rx="1" fill="rgba(28,28,28,0.04)" stroke="#6b6b6b" stroke-width="1"/>
 <text x="594" y="486" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">支撑模块</text>
 
-<line x1="720" y1="482" x2="752" y2="482" stroke="#5e6ad2" stroke-width="0.8" stroke-dasharray="3,3" marker-end="url(#arrow-accent)"/>
+<line x1="720" y1="482" x2="752" y2="482" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="3,3" marker-end="url(#arrow-accent)"/>
 <text x="760" y="486" fill="#6b6b6b" font-size="9" font-family="'Noto Sans SC', sans-serif">系统调用</text>
 
 </svg>

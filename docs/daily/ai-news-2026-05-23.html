@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026-05-23 AI 日报 - 第二号</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
 <script src="../pagefind/pagefind-ui.js" defer></script>
@@ -69,12 +71,12 @@
     OpenAI 后训练负责人 Yann Dubois 深度拆解 GPT-5.5 背后的关键转变：强化学习不再只解数学题和编程竞赛，正在进入混乱的真实工作场景。Box CEO Aaron Levie 判断：AI 刚刚跨过 Chat → Agent 的门槛，产品经济模型将彻底改变。Sam Altman 发起"AI 最该解决什么问题"社区征集，同时新版 Codex 正式发布。Anthropic 发布 Claude Code Auto Mode——用分类器替代人工审批，FPR 仅 0.4% 但诚实面对 17% 漏检率。GitHub Trending：AI Agent 工具链彻底统治榜单，代码知识图谱、插件生态、浏览器操控、语言 SDK 正在构成 Agent 的"四肢和感官"。
   </div>
   <div class="dots-row">
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">RL 真实化转型</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">AI Agent 执行力</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">GPT-5.5 内部故事</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Claude Code Auto Mode</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">代码知识图谱</span>
-    <span class="tag" style="background:rgba(94,106,210,0.08);color:#5e6ad2;">Agent 经济模型</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">RL 真实化转型</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">AI Agent 执行力</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">GPT-5.5 内部故事</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Claude Code Auto Mode</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">代码知识图谱</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 经济模型</span>
   </div>
   <div class="stat-row" style="margin-top:12px;">
     <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">焦点事件</div></div>
@@ -91,7 +93,7 @@
         <strong style="color:#1c1c1c;">OpenAI 后训练负责人揭秘 GPT-5.5：RL 从竞赛走向真实世界</strong>——Yann Dubois 在 The MAD Podcast 中详细拆解了 GPT-5.5 背后的核心转变。三个关键加速因素：① 可靠性越过阈值——大概在 2025 年 12 月，内部感觉模型已经可以信任，能够完成大量真实工作；② 自我加速飞轮——当模型本身好到可以辅助编写代码，研究人员就能用它们来训练更好的模型；③ RL 从"可验证奖励"（数学题有标准答案）走向优化"用户效用"——不再追求对错，而是优化真实世界价值。GPT-5.5 内部经历了情绪过山车，"过度兴奋→深度怀疑→再次拉升"的振幅尤其大。最终效率提升约 2 倍，整个公司围绕"同一个月亮"对齐。
       </div>
       <div style="margin-top:8px;">
-        <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">完整播客 →</a>
+        <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">完整播客 →</a>
       </div>
     </div>
     <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
@@ -99,7 +101,7 @@
         <strong style="color:#1c1c1c;">Anthropic 发布 Claude Code Auto Mode——用分类器替代人工审批</strong>——解决了"权限疲劳"这一真实痛点（用户默认接受 93% 的权限弹窗）。架构设计：双层防御——输入层提示注入探针，输出层基于 Sonnet 4.6 的转录分类器。两阶段分类：第一阶段快速单 Token 过滤（宁可误拦），第二阶段仅对标记动作用 CoT 推理复审，FPR 从 8.5% 降到了 0.4%。分类器"推理盲"——剥离 Claude 自身的文本和工具输出，只看到用户消息和裸工具调用，防止被说服。真实流量 FPR 0.4%、FNR 17%，Anthropic 坦率表示这不是人工审查的替代品，而是理性中间地带。
       </div>
       <div style="margin-top:8px;">
-        <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5e6ad2;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">深度阅读 →</a>
+        <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(94,106,210,0.06);border-radius:8px;">深度阅读 →</a>
       </div>
     </div>
   </div>
@@ -111,9 +113,9 @@
     OpenAI CEO 发起社区征集——"你最希望 AI 在未来解决什么问题？"获得 7,400+ 点赞。同时，新版 Codex 正式发布，标志着 OpenAI 在开发者工具层面的持续投入。Altman 近期列出 OpenAI 最兴奋的三件事：AGI 加速科研、AGI 加速企业、个人 AGI 帮助每个人实现目标。"现在是时候在第三个方向上加大投入了。"这预示着 OpenAI 将在「个人 AI」方向持续发力。
   </div>
   <div style="margin-top:10px;">
-    <a href="https://x.com/sama/status/2057614780727480741" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">社区征集 →</a>
+    <a href="https://x.com/sama/status/2057614780727480741" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">社区征集 →</a>
     &nbsp;&nbsp;
-    <a href="https://x.com/sama/status/2057559714788258003" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">Codex 发布 →</a>
+    <a href="https://x.com/sama/status/2057559714788258003" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">Codex 发布 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -124,7 +126,7 @@
   </div>
   <img src="assets/2026-05-23/levie-2057663408376516703-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/levie/status/2057663408376516703" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/levie/status/2057663408376516703" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -136,9 +138,9 @@
   <img src="assets/2026-05-23/garrytan-2057701084031004928-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <img src="assets/2026-05-23/garrytan-2057636167525498961-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/garrytan/status/2057701084031004928" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">1000x 创始人对话 →</a>
+    <a href="https://x.com/garrytan/status/2057701084031004928" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">1000x 创始人对话 →</a>
     &nbsp;&nbsp;
-    <a href="https://x.com/garrytan/status/2057636167525498961" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">GBrain Agent →</a>
+    <a href="https://x.com/garrytan/status/2057636167525498961" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">GBrain Agent →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -148,9 +150,9 @@
     Replit CEO 的独立立场在 SaaS 圈引发讨论：用户不应该被强制要求与销售团队对话才能购买产品。同时，Replit 推出了应用变现 + 信用奖励机制，从开发者工具向开发者经济平台转型。Masad 的"反销售文化"立场正在定义 AI 时代的产品分发范式——自助、透明、开发者优先。
   </div>
   <div style="margin-top:10px;">
-    <a href="https://x.com/amasad/status/2057504360217891018" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">反销售立场 →</a>
+    <a href="https://x.com/amasad/status/2057504360217891018" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">反销售立场 →</a>
     &nbsp;&nbsp;
-    <a href="https://x.com/amasad/status/2057616724757827826" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">应用变现 →</a>
+    <a href="https://x.com/amasad/status/2057616724757827826" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">应用变现 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -160,7 +162,7 @@
     SPC GP 分享：如果工程师正在 Pre-B 轮初创公司与大公司/大实验室之间选择，他的四条建议——看创始人、看使命密度、看个人成长曲线的陡峭程度。推文获得 400+ 点赞，说明这个困惑在 AI 人才市场非常普遍。当大模型实验室开出天价薪资时，早期创业公司拿什么竞争？Aditya 的答案是：成长曲线和使命密度是钱买不来的。
   </div>
   <div style="margin-top:10px;">
-    <a href="https://x.com/adityaag/status/2057502381038846306" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/adityaag/status/2057502381038846306" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -171,7 +173,7 @@
   </div>
   <img src="assets/2026-05-23/joshwoodward-2057559267952214073-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/joshwoodward/status/2057559267952214073" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/joshwoodward/status/2057559267952214073" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -181,7 +183,7 @@
     Swyx 断言 local-first 技术栈的战争已经结束，给出了明确的技术选型判断。同时关注 Claude Code 的 <code>--dangerously-skip-git</code> 新模式带来的安全博弈——当 Agent 跳过 Git 安全检查时，开发者的信任边界如何重新定义？这两个话题看似无关，实则指向同一个问题：在 AI 时代，技术选型的标准正在被重写。
   </div>
   <div style="margin-top:10px;">
-    <a href="https://x.com/swyx/status/2057576893621150020" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/swyx/status/2057576893621150020" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -191,7 +193,7 @@
     Cursor 设计师宣布 Cursor 新模型、界面、SDK 同步上线——核心理念是"团队一起写代码才更有趣"。Cursor 正在从"单人 AI 编程工具"向"团队 AI 编程协作平台"演进，SDK 的发布意味着第三方开发者可以为 Cursor 构建插件和扩展。这是 AI 编程工具从产品走向平台的关键一步。
   </div>
   <div style="margin-top:10px;">
-    <a href="https://x.com/ryolu_/status/2057500107235557675" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/ryolu_/status/2057500107235557675" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -202,7 +204,7 @@
   </div>
   <img src="assets/2026-05-23/zarazhangrui-2057710284920520906-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/zarazhangrui/status/2057710284920520906" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/zarazhangrui/status/2057710284920520906" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -213,7 +215,7 @@
   </div>
   <img src="assets/2026-05-23/petergyang-2057674020481593710-0.png" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/petergyang/status/2057674020481593710" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/petergyang/status/2057674020481593710" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -224,7 +226,7 @@
   </div>
   <img src="assets/2026-05-23/danshipper-2057631479052517507-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/danshipper/status/2057631479052517507" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/danshipper/status/2057631479052517507" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-2">
@@ -236,7 +238,7 @@
   <img src="assets/2026-05-23/nikunj-2057462304149778588-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" alt="">
   <img src="assets/2026-05-23/nikunj-2057462304149778588-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" alt="">
   <div style="margin-top:10px;">
-    <a href="https://x.com/nikunj/status/2057462304149778588" target="_blank" style="font-size:11px;color:#5e6ad2;text-decoration:none;font-weight:500;">查看原文 →</a>
+    <a href="https://x.com/nikunj/status/2057462304149778588" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">查看原文 →</a>
   </div>
 </div>
 <div class="card span-4">
@@ -291,7 +293,7 @@
         <div class="vitem-desc">预索引的代码知识图谱，面向 Claude Code、Codex、Cursor、OpenCode 和 Hermes Agent——更少 Token、更少工具调用、100% 本地运行。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/colbymchenry/codegraph" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/colbymchenry/codegraph" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -300,7 +302,7 @@
         <div class="vitem-desc">Anthropic 官方维护的 Claude Code 高质量插件目录——AI 编程 Agent 的"应用商店"雏形。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/anthropics/claude-plugins-official" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/anthropics/claude-plugins-official" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -309,7 +311,7 @@
         <div class="vitem-desc">将任意代码转化为可交互知识图谱——可浏览、搜索、提问，支持 Claude Code、Codex、Cursor、Copilot 等。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -318,7 +320,7 @@
         <div class="vitem-desc">利用普通 WiFi 信号实现实时空间智能、生命体征监测和存在检测——无需任何摄像头。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/ruvnet/RuView" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/ruvnet/RuView" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -327,7 +329,7 @@
         <div class="vitem-desc">经典系统管理员/DevOps 知识合集：清单、手册、速查表、一行命令、CLI/Web 工具汇总。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/trimstray/the-book-of-secret-knowledge" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/trimstray/the-book-of-secret-knowledge" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -336,7 +338,7 @@
         <div class="vitem-desc">Chrome DevTools 面向编程 Agent 的 MCP 集成——让 Agent 能用 DevTools 协议操控浏览器。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -345,7 +347,7 @@
         <div class="vitem-desc">终端 AI 编程 Agent——基于 hash 锚定编辑、优化的工具框架、LSP、Python、浏览器、子 Agent 等。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/can1357/oh-my-pi" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/can1357/oh-my-pi" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -354,7 +356,7 @@
         <div class="vitem-desc">功能丰富的命令行音视频下载器，常年霸榜的瑞士军刀。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -363,7 +365,7 @@
         <div class="vitem-desc">.NET 官方推出的 AI 编程 Agent 技能库——帮助 AI 更好地理解和编写 C# 代码。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/dotnet/skills" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/dotnet/skills" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
     <div class="vitem">
@@ -372,7 +374,7 @@
         <div class="vitem-desc">Karpathy 经典课程"神经网络：从零到英雄"的代码仓库。</div>
       </div>
       <div style="flex-shrink:0;">
-        <a href="https://github.com/karpathy/nn-zero-to-hero" target="_blank" style="font-size:10px;color:#5e6ad2;text-decoration:none;font-weight:500;">GitHub →</a>
+        <a href="https://github.com/karpathy/nn-zero-to-hero" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
       </div>
     </div>
   </div>
@@ -381,7 +383,7 @@
   </div>
 </div>
 <div class="card span-4 card-highlight">
-  <div class="label-sm" style="color:#5e6ad2;">为什么重要</div>
+  <div class="label-sm" style="color:#2563eb;">为什么重要</div>
   <div class="grid-2">
     <div class="callout" style="margin-top:0;">
       <div class="callout-title">RL 真实化转型——AI 进步从"竞技场"走向"用户桌面"</div>
@@ -412,23 +414,23 @@
   <div class="divider"></div>
   <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
     <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
-    <a href="https://x.com/sama/status/2057614780727480741" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — 社区征集：AI 最该解决什么问题</a><br>
-    <a href="https://x.com/sama/status/2057559714788258003" target="_blank" style="color:#5e6ad2;text-decoration:none;">Sam Altman — 新版 Codex 正式发布</a><br>
-    <a href="https://x.com/levie/status/2057663408376516703" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aaron Levie — AI Chat 到 Agent 的门槛已跨过</a><br>
-    <a href="https://x.com/garrytan/status/2057701084031004928" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 工程师如何成为 1000 倍创始人</a><br>
-    <a href="https://x.com/garrytan/status/2057636167525498961" target="_blank" style="color:#5e6ad2;text-decoration:none;">Garry Tan — 每个人都该拥有带 GBrain 的 Agent</a><br>
-    <a href="https://x.com/amasad/status/2057504360217891018" target="_blank" style="color:#5e6ad2;text-decoration:none;">Amjad Masad — 用户不该被强制见销售</a><br>
-    <a href="https://x.com/amasad/status/2057616724757827826" target="_blank" style="color:#5e6ad2;text-decoration:none;">Amjad Masad — Replit 应用变现 + 信用奖励</a><br>
-    <a href="https://x.com/adityaag/status/2057502381038846306" target="_blank" style="color:#5e6ad2;text-decoration:none;">Aditya Agarwal — 早期招聘四条法则</a><br>
-    <a href="https://x.com/joshwoodward/status/2057559267952214073" target="_blank" style="color:#5e6ad2;text-decoration:none;">Josh Woodward — Google Labs Neural Expressive 三端上线</a><br>
-    <a href="https://x.com/swyx/status/2057576893621150020" target="_blank" style="color:#5e6ad2;text-decoration:none;">Swyx — local-first 战争结束 + Claude Code 安全博弈</a><br>
-    <a href="https://x.com/ryolu_/status/2057500107235557675" target="_blank" style="color:#5e6ad2;text-decoration:none;">Ryo Lu — Cursor 新模型 + 界面 + SDK 三箭齐发</a><br>
-    <a href="https://x.com/zarazhangrui/status/2057710284920520906" target="_blank" style="color:#5e6ad2;text-decoration:none;">Zara Zhang — Claude Code ↔ 飞书桥接开源</a><br>
-    <a href="https://x.com/petergyang/status/2057674020481593710" target="_blank" style="color:#5e6ad2;text-decoration:none;">Peter Yang — Codex 自动化改变游戏规则</a><br>
-    <a href="https://x.com/danshipper/status/2057631479052517507" target="_blank" style="color:#5e6ad2;text-decoration:none;">Dan Shipper — Digg 回归与互联网的轮回</a><br>
-    <a href="https://x.com/nikunj/status/2057462304149778588" target="_blank" style="color:#5e6ad2;text-decoration:none;">Nikunj Kothari — 前创业者驱动 AI 规模化</a><br>
-    <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank" style="color:#5e6ad2;text-decoration:none;">The MAD Podcast — Yann Dubois 谈 GPT-5.5 RL 真实化转型</a><br>
-    <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="color:#5e6ad2;text-decoration:none;">Anthropic Engineering — Claude Code Auto Mode 深度技术报告</a>
+    <a href="https://x.com/sama/status/2057614780727480741" target="_blank" style="color:#2563eb;text-decoration:none;">Sam Altman — 社区征集：AI 最该解决什么问题</a><br>
+    <a href="https://x.com/sama/status/2057559714788258003" target="_blank" style="color:#2563eb;text-decoration:none;">Sam Altman — 新版 Codex 正式发布</a><br>
+    <a href="https://x.com/levie/status/2057663408376516703" target="_blank" style="color:#2563eb;text-decoration:none;">Aaron Levie — AI Chat 到 Agent 的门槛已跨过</a><br>
+    <a href="https://x.com/garrytan/status/2057701084031004928" target="_blank" style="color:#2563eb;text-decoration:none;">Garry Tan — 工程师如何成为 1000 倍创始人</a><br>
+    <a href="https://x.com/garrytan/status/2057636167525498961" target="_blank" style="color:#2563eb;text-decoration:none;">Garry Tan — 每个人都该拥有带 GBrain 的 Agent</a><br>
+    <a href="https://x.com/amasad/status/2057504360217891018" target="_blank" style="color:#2563eb;text-decoration:none;">Amjad Masad — 用户不该被强制见销售</a><br>
+    <a href="https://x.com/amasad/status/2057616724757827826" target="_blank" style="color:#2563eb;text-decoration:none;">Amjad Masad — Replit 应用变现 + 信用奖励</a><br>
+    <a href="https://x.com/adityaag/status/2057502381038846306" target="_blank" style="color:#2563eb;text-decoration:none;">Aditya Agarwal — 早期招聘四条法则</a><br>
+    <a href="https://x.com/joshwoodward/status/2057559267952214073" target="_blank" style="color:#2563eb;text-decoration:none;">Josh Woodward — Google Labs Neural Expressive 三端上线</a><br>
+    <a href="https://x.com/swyx/status/2057576893621150020" target="_blank" style="color:#2563eb;text-decoration:none;">Swyx — local-first 战争结束 + Claude Code 安全博弈</a><br>
+    <a href="https://x.com/ryolu_/status/2057500107235557675" target="_blank" style="color:#2563eb;text-decoration:none;">Ryo Lu — Cursor 新模型 + 界面 + SDK 三箭齐发</a><br>
+    <a href="https://x.com/zarazhangrui/status/2057710284920520906" target="_blank" style="color:#2563eb;text-decoration:none;">Zara Zhang — Claude Code ↔ 飞书桥接开源</a><br>
+    <a href="https://x.com/petergyang/status/2057674020481593710" target="_blank" style="color:#2563eb;text-decoration:none;">Peter Yang — Codex 自动化改变游戏规则</a><br>
+    <a href="https://x.com/danshipper/status/2057631479052517507" target="_blank" style="color:#2563eb;text-decoration:none;">Dan Shipper — Digg 回归与互联网的轮回</a><br>
+    <a href="https://x.com/nikunj/status/2057462304149778588" target="_blank" style="color:#2563eb;text-decoration:none;">Nikunj Kothari — 前创业者驱动 AI 规模化</a><br>
+    <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank" style="color:#2563eb;text-decoration:none;">The MAD Podcast — Yann Dubois 谈 GPT-5.5 RL 真实化转型</a><br>
+    <a href="https://www.anthropic.com/engineering/claude-code-auto-mode" target="_blank" style="color:#2563eb;text-decoration:none;">Anthropic Engineering — Claude Code Auto Mode 深度技术报告</a>
   </div>
   <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
     来源：YouTube 播客、X/Twitter、Anthropic Engineering。AI 日报每日更新。
