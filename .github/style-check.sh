@@ -70,8 +70,8 @@ bold "【Design System (docs/styles.css)】"
 
 if [ -f docs/styles.css ]; then
   # Verify key design tokens are present
-  grep -q '#5e6ad2' docs/styles.css 2>/dev/null
-  check "Accent color #5e6ad2 defined"
+  grep -q '#2563eb' docs/styles.css 2>/dev/null
+  check "Accent color #2563eb defined"
 
   grep -q '#f5f5f4' docs/styles.css 2>/dev/null
   check "Background color #f5f5f4 defined"
