@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-05-29 AI 日报 - 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js" defer></script>
+<style>
+.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
+.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
+.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+<div class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年5月29日</div>
+  <h1>不是 AI 取代你，而是 AI 让你变得平庸——专家反而更稀缺</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    Every 的 Dan Shipper 揭示 AI 化悖论：全公司最 AI 化，团队反而从 4 人扩到 30 人。OpenAI 发布 GPT-5.2——用强 teacher model 做 RL 训练编码 agent，SWE-Bench 达 82.6% 新 SOTA。Anthropic 公开 Claude Code 事故复盘：系统 prompt 加一行"不超过 25 词"导致智商下降 3%，Opus 4.7 在 code review 中找出关键 bug。Managed Agents 架构解耦——大脑和手分离后 P50 延迟下降 60%。
+  </div>
+  <div class="dots-row">
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">AI 与就业</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">GPT-5.2</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">RL Teacher Model</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 架构</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">事故复盘</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Manus</span>
+  </div>
+  <div class="stat-row" style="margin-top:12px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">深度博客</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">GitHub 项目</div></div>
+  </div>
+</div>
+
+<div class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">Every 的 AI 化悖论：全公司最 AI 化，反而招了更多人。</strong> Dan Shipper 与 COO Brandon 深度对谈：AI 把"昨天的专家能力"变得极廉价，任何人用 prompt 都能生成代码和文章。结果是大量"看起来不错但差点意思"的内容充斥着工作流——非专家产出激增，但每一样都需要真正的专家来收尾。Slack 里人和 agent 一样多，团队从 4 人扩张到 30 人还在招。核心论点：AI 不会抢走工作，但会重新定义什么是真正值钱的工作。
+      </div>
+    </div>
+    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+        <strong style="color:#1c1c1c;">OpenAI GPT-5.2：更强的 teacher model 训练更强的 coding agent。</strong> GPT-5.2 定位为 RL 训练的最优策略模型，用它作为 teacher 训练出的编码 agent 在 SWE-Bench Verified 达 82.6%（新 SOTA），Terminal-Bench 2.0 性能是 Claude Opus 4.5 的 2.8 倍。OpenAI 明确：未来最强的 coding agent 不是靠更好的 prompt，而是靠更强的 teacher model 做 RL——暗示了一条模型能力自我强化的飞轮路径。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card span-4">
+  <div class="label-sm">深度博客</div>
+  <h2>OpenAI GPT-5.2 · Anthropic 事故复盘 · Managed Agents 架构演进</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">GPT-5.2 — "更聪明的模型训练更聪明的模型"</div>
+        <div class="vitem-desc">OpenAI 发布 GPT-5.2，定位为 RL 训练的最优策略模型。核心突破：用它作为 teacher model 训练出的编码 agent 在 SWE-Bench Verified 达到 82.6%（新 SOTA），Terminal-Bench 2.0 上性能是 Claude Opus 4.5 的 2.8 倍。目前仅向 Tier 5 API 用户开放。OpenAI 明确表示：未来最强的 coding agent 不是靠更好的 prompt，而是靠更强的 teacher model 做 RL——这暗示了一条模型能力自我强化的飞轮路径。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Claude Code 事故复盘 — 一行 prompt 引发的智商下降</div>
+        <div class="vitem-desc">Anthropic 公开复盘 4 月 Claude Code 性能退化：① Extended thinking 被 context management bug 意外丢弃，导致"健忘"和"重复"，最终是 Opus 4.7 在 code review 中找到这个 bug（Opus 4.6 没发现）；② 系统 prompt 为降低 verbosity 加上"不超过 25 词"一句，上线前通过所有 eval，但后续更广的 ablation 暴露了 3% 的"智商丢失"，已立即撤回。所有订阅用户用量限制被重置。后续改进：更多内部员工使用公开版本、系统 prompt 变更需跨模型完整评估、关键变更增加 soak period。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Managed Agents 架构解耦 — 把"大脑"和"手"分开</div>
+        <div class="vitem-desc">Anthropic 详述 Managed Agents 架构演进——本质是一次"操作系统的虚拟化"。之前 harness（编排层）、sandbox（执行环境）、session（会话日志）全塞在一个容器里，容器一挂全挂。解耦方案：大脑（harness）调用手（sandbox）变成标准化接口 execute(name, input) → string，容器可随时重建，harness 无状态可随时重启，session 作为持久化的 append-only log 独立存储。收益：P50 TTFT 下降约 60%，P95 下降超过 90%。安全模型也被重构——凭证永远不会进入 sandbox。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Managed Agents 支持自托管 Sandbox + MCP 隧道</div>
+        <div class="vitem-desc">企业级功能：agent 的 sandbox 可以跑在你自己基础设施上，支持 Cloudflare、Daytona、Modal、Vercel。MCP 隧道让 agent 能访问你内网的 MCP server，无需暴露公网端口。Amplitude、Clay、Rogo 等公司已在生产中使用。这表明 Anthropic 正从"我们帮你 sandbox"转向"你用自己的 sandbox，我们只管 agent 大脑"——生态位在向平台层移动。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>核心信号：</strong>三条博客放在一起看——GPT-5.2 证明 RL teacher model 路线可行；Claude Code 事故复盘暴露"一行 prompt 就能掉 3% 智商"的脆弱性；Managed Agents 架构解耦展示 Agent 基础设施正走向标准化接口。三者共同指向：<strong>2026 年的 AI 正在同时经历模型能力的指数增长、工程实践的惨烈踩坑、以及基础设施的标准化——三个维度相互独立又彼此加速。</strong>
+  </div>
+  <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://openai.com/index/gpt-5-2/" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">GPT-5.2 原文 →</a>
+    <a href="https://www.anthropic.com/engineering/claude-code-incident-review" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">事故复盘原文 →</a>
+    <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">Managed Agents 架构 →</a>
+    <a href="https://claude.com/blog/claude-managed-agents-updates" target="_blank" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;">自托管 Sandbox →</a>
+  </div>
+</div>
+
+<div class="card span-4">
+  <div class="label-sm">播客精选</div>
+  <h2>AI & I：自动化一切之后，我们的团队反而翻了三倍</h2>
+  <div class="text-body">
+    Every 的 Dan Shipper 与 COO Brandon 深度对谈，拆解了一个看似悖论的现象：Every 是全行业 AI 化程度最高的公司之一，Slack 里人和 agent 一样多，所有人每天用 Claude Code、Codex——但团队反而从 4 人扩张到了 30 人，还在招。核心论点来自 Dan 的文章《After Automation》。
+  </div>
+  <div style="margin-top:12px;">
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/dCmOTURRf1Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">AI 把专家变得廉价——然后专家更稀缺了</div>
+        <div class="vitem-desc">「任何会用 prompt 的人都能生成代码、写文章、做设计。结果是大量"看起来不错但差点意思"的内容充斥着工作流——非专家产出激增，但每一样都需要专家来收尾。」这就是 Every 扩招的原因：AI 放大了"草稿"，但判断什么值得做、什么时候该停下、哪里需要打磨——这些仍然需要人。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Agent 离人越远，价值越低</div>
+        <div class="vitem-desc">Dan 区分了两个概念：人类有"自主意愿"（agency），agent 只有"自动化执行能力"（autonomy）。AI 永远不会自己决定今天不想干活。Zeno 悖论的反转：你让 AI 做事，它惊艳你；然后它停下来看着你问"接下来怎么办？"——这个循环不会消失。</div>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">SOP 驱动的大公司呢？</div>
+        <div class="vitem-desc">Brandon 追问：在成熟流程驱动的大公司（如 ClickUp CEO 裁掉 22% 员工的案例），这个论点还成立吗？Dan 的回应：如果你只是骑在模型能力上，你没事；但如果你不去思考什么才是有价值的差异化工作，就会被替代。关键在于——你是在用 AI 放大你已经有的东西，还是在用 AI 创造新的价值。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    <strong>这可能是今年以来关于"AI 与就业"最清醒的论述。</strong>不是 AI 抢走工作，而是 AI 重新定义了"什么才是真正值钱的工作"。AI 抹平了入门门槛，但拉高了"真正的专家"的天花板——因为人人都能生成中等质量的输出，只有真正的专家才能做出差异。
+  </div>
+</div>
+
+<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月29日</div>
+  <h2>AI 视频生成霸榜，知识图谱、Markdown 转换持续火热</h2>
+  <div class="vlist" style="margin-top:6px;">
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">harry0703/MoneyPrinterTurbo ⭐ 4,698 · Python</div>
+        <div class="vitem-desc">利用 AI 大模型一键生成高清短视频。日增 4,698 星，持续霸榜。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">Lum1104/Understand-Anything ⭐ 3,776 · TypeScript</div>
+        <div class="vitem-desc">将任意代码转化为可交互知识图谱，支持 Claude Code、Codex、Cursor、Copilot、Gemini CLI。连续多日高增长。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">byoungd/English-level-up-tips ⭐ 2,019</div>
+        <div class="vitem-desc">英语学习指南与教程，日增 2,019 星。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/byoungd/English-level-up-tips" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">DigitalPlatDev/FreeDomain ⭐ 1,761 · HTML</div>
+        <div class="vitem-desc">免费域名服务，日增 1,761 星。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/DigitalPlatDev/FreeDomain" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">microsoft/markitdown ⭐ 1,410 · Python</div>
+        <div class="vitem-desc">将各类文件和 Office 文档转换为 Markdown。微软官方出品，日增 1,410 星。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/microsoft/markitdown" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">codecrafters-io/build-your-own-x ⭐ 1,066 · Markdown</div>
+        <div class="vitem-desc">从零重建你喜欢的技术——编程大师之路。经典仓库持续上榜。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">hardikpandya/stop-slop ⭐ 761</div>
+        <div class="vitem-desc">去除 AI 写作痕迹的 skill 文件。AI 输出质量控制需求持续增长。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">anthropics/skills ⭐ 718 · Python</div>
+        <div class="vitem-desc">Anthropic 官方 Agent Skills 公开仓库。日增 718 星。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/anthropics/skills" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">twentyhq/twenty ⭐ 493 · TypeScript</div>
+        <div class="vitem-desc">Salesforce 的开源替代品，为 AI 时代设计。日增 493 星。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/twentyhq/twenty" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-content">
+        <div class="vitem-title">EveryInc/compound-engineering-plugin ⭐ 184 · TypeScript</div>
+        <div class="vitem-desc">Compound Engineering 官方插件，支持 Claude Code、Codex、Cursor。</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:10px;">
+    GitHub Trending 四大信号：① MoneyPrinterTurbo 以 4,698 星领跑——AI 视频生成仍是最大公约数需求；② Understand-Anything 连续多日高增长——代码知识图谱正从"新奇"变为"刚需"；③ stop-slop（761 星）再度入榜——AI 输出质量控制已是独立赛道；④ Anthropic 官方 skills 仓库（718 星）和 Every compound-engineering-plugin（184 星）双双入榜——Agent 生态的"技能商店"模式正在形成。
+  </div>
+</div>
+
+<div class="card span-4 card-highlight">
+  <div class="label-sm" style="color:#2563eb;">今日思考</div>
+  <div class="grid-2">
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-title">AI 时代的新稀缺性：不是劳动力，是判断力</div>
+      <div class="callout-text">Dan Shipper 的观点和 OpenAI 的 GPT-5.2 路线放在一起看：GPT-5.2 证明更强的模型可以训练更强的 agent，AI 的生成能力在指数级提升；但 Every 的经验证明，生成能力越强，"什么是好的判断"就越稀缺。模型能生成一百个方案，但只有人能选出最好的那一个。AI 不是在替代人类——它在让"做"变得廉价的同时，让"判断"变得前所未有的贵。</div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">基础设施标准化 × 模型能力飞跃 × 工程踩坑——三条线并行加速</div>
+      <div class="callout-text">今天的三组内容恰好覆盖了 AI 2026 的三个维度：① GPT-5.2 代表模型能力仍在高速增长——RL teacher model → student agent 的路线被验证可规模化；② Managed Agents 的架构解耦代表基础设施正在标准化——大脑和手分离、标准化接口、自托管选项；③ Claude Code 事故复盘代表工程实践仍在惨烈踩坑——一行 prompt 掉 3% 智商，context management bug 靠更强的模型才找到。三个维度独立推进但又相互加速。</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:13px;">
+    <strong>今日一问：</strong>如果 GPT-5.2 训练的 agent 能写大部分代码，而 Anthropic 的 Managed Agents 能自动执行大部分操作——你剩下的独特价值，是熟练操作 AI 的能力，还是对"什么值得做"的判断力？
+  </div>
+</div>
+
+<div class="card span-4">
+  <div class="divider"></div>
+  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+    <a href="https://www.youtube.com/watch?v=dCmOTURRf1Y" target="_blank" style="color:#2563eb;text-decoration:none;">AI & I 播客 — We Automated Everything With AI and Tripled Our Headcount</a><br>
+    <a href="https://openai.com/index/gpt-5-2/" target="_blank" style="color:#2563eb;text-decoration:none;">OpenAI — GPT-5.2：更聪明的模型训练更聪明的模型</a><br>
+    <a href="https://www.anthropic.com/engineering/claude-code-incident-review" target="_blank" style="color:#2563eb;text-decoration:none;">Anthropic 工程博客 — Claude Code 事故复盘</a><br>
+    <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" style="color:#2563eb;text-decoration:none;">Anthropic 工程博客 — Managed Agents 架构演进</a><br>
+    <a href="https://claude.com/blog/claude-managed-agents-updates" target="_blank" style="color:#2563eb;text-decoration:none;">Claude Blog — Managed Agents 自托管 Sandbox</a><br>
+    <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: MoneyPrinterTurbo</a><br>
+    <a href="https://github.com/Lum1104/Understand-Anything" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: Understand-Anything</a><br>
+    <a href="https://github.com/anthropics/skills" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: anthropics/skills</a><br>
+    <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: stop-slop</a><br>
+    <a href="https://github.com/microsoft/markitdown" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: markitdown</a>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+    来源：AI & I 播客、OpenAI 官方博客、Anthropic 工程博客、GitHub Trending。AI 日报每日更新。
+  </div>
+</div>
+</div>
+
+</body>
+</html>
