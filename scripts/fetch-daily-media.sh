@@ -88,7 +88,7 @@ fetch_x_via_vxtwitter() {
   local api_url="https://api.vxtwitter.com/${username}/status/${tweet_id}"
 
   local json
-  json=$(curl -sL --max-time 10 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL --max-time 8 "$api_url" 2>/dev/null) || true
 
   if [[ -z "$json" ]]; then
     return 1
@@ -157,7 +157,7 @@ fetch_x_via_fxtwitter() {
   local api_url="https://api.fxtwitter.com/status/${tweet_id}"
 
   local json
-  json=$(curl -sL --max-time 15 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL --max-time 12 "$api_url" 2>/dev/null) || true
 
   if [[ -z "$json" ]]; then
     return 1
@@ -204,7 +204,7 @@ download_images() {
 
     local dest="${output_dir}/${prefix}-${idx}.${ext}"
 
-    if curl -sL --max-time 20 -o "$dest" "$img_url" 2>/dev/null && [[ -s "$dest" ]]; then
+    if curl -sL --max-time 12 -o "$dest" "$img_url" 2>/dev/null && [[ -s "$dest" ]]; then
       # Output path relative to project root
       paths+="${dest}"$'\n'
       ((idx++))
@@ -238,23 +238,30 @@ process_x_url() {
   # Fetch vxtwitter JSON directly for richer data
   local api_url="https://api.vxtwitter.com/${username}/status/${tweet_id}"
   local json
-  json=$(curl -sL --max-time 10 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL --max-time 8 "$api_url" 2>/dev/null) || true
 
   if [[ -n "$json" ]]; then
-    # Extract image URLs
+    # Extract image URLs from main tweet
     local img_urls
     img_urls=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "image") | .url // empty' 2>/dev/null) || true
     
-    # Also try quoted tweet images
+    # Also get video thumbnails (they're still images, useful for demos)
+    local vid_thumbs
+    vid_thumbs=$(echo "$json" | jq -r '.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .thumbnail_url // empty' 2>/dev/null) || true
+
+    # Also try quoted tweet images and video thumbnails
     local qrt_urls
     qrt_urls=$(echo "$json" | jq -r '.qrt.media_extended[]? | select(.type == "image") | .url // empty' 2>/dev/null) || true
+
+    local qrt_thumbs
+    qrt_thumbs=$(echo "$json" | jq -r '.qrt.media_extended[]? | select(.type == "video" or .type == "animated_gif") | .thumbnail_url // empty' 2>/dev/null) || true
 
     # Article card image from quoted tweet
     local article_img
     article_img=$(echo "$json" | jq -r '.qrt.article?.image // empty' 2>/dev/null) || true
 
-    # Combine all image URLs
-    local all_img_urls="${img_urls}"$'\n'"${qrt_urls}"
+    # Combine all image URLs (media photos + video thumbs)
+    local all_img_urls="${img_urls}"$'\n'"${vid_thumbs}"$'\n'"${qrt_urls}"$'\n'"${qrt_thumbs}"
     if [[ -n "$article_img" ]]; then
       all_img_urls="${all_img_urls}"$'\n'"${article_img}"
     fi
@@ -317,17 +324,20 @@ process_youtube_url() {
     return
   fi
 
-  # Try multiple YouTube thumbnail resolutions (maxres → hq → sd)
+  # Try multiple YouTube thumbnail CDNs (img.youtube.com and i.ytimg.com)
   local thumbnail_path=""
   local attempted_urls=(
     "https://img.youtube.com/vi/${video_id}/maxresdefault.jpg"
     "https://img.youtube.com/vi/${video_id}/hqdefault.jpg"
+    "https://i.ytimg.com/vi/${video_id}/maxresdefault.jpg"
+    "https://i.ytimg.com/vi/${video_id}/hqdefault.jpg"
     "https://img.youtube.com/vi/${video_id}/sddefault.jpg"
+    "https://i.ytimg.com/vi/${video_id}/sddefault.jpg"
   )
 
   for thumb_url in "${attempted_urls[@]}"; do
     local dest="${output_dir}/yt-${video_id}.jpg"
-    if curl -sL --max-time 20 -o "$dest" "$thumb_url" 2>/dev/null && [[ -s "$dest" ]]; then
+    if curl -sL --max-time 10 -o "$dest" "$thumb_url" 2>/dev/null && [[ -s "$dest" ]]; then
       # Validate it's a real image (YouTube returns a placeholder for missing resolutions)
       if file "$dest" 2>/dev/null | grep -qi 'JPEG\|PNG\|GIF\|Web'; then
         thumbnail_path="${output_dir}/yt-${video_id}.jpg"
@@ -358,30 +368,74 @@ process_youtube_url() {
 }
 
 # ---------------------------------------------------------------------------
-# 8. Main loop — iterate over all URLs, classify & process each
+# 8. Parallel processing — process URLs concurrently
 # ---------------------------------------------------------------------------
-MEDIA_RESULTS="[]"
+# Max concurrent fetches (be nice to vxtwitter/fxtwitter APIs)
+MAX_PARALLEL=6
+TMPDIR="${TMPDIR:-/tmp}/fetch-media-$$"
+mkdir -p "$TMPDIR"
+trap "rm -rf '$TMPDIR'" EXIT
 
 URL_COUNT=$(echo "$URLS_JSON" | jq 'length')
+echo "  [fetch] Processing ${URL_COUNT} URLs (max ${MAX_PARALLEL} parallel)..." >&2
 
-for (( i=0; i<URL_COUNT; i++ )); do
-  URL=$(echo "$URLS_JSON" | jq -r '.['"$i"']')
+# Export functions and vars for subprocesses
+export -f is_x_url is_youtube_url process_x_url process_youtube_url extract_x_username extract_x_tweet_id extract_yt_video_id get_ext fetch_x_via_vxtwitter fetch_x_via_fxtwitter download_images
+export OUTPUT_DIR
+
+# Process each URL in a background job, write result to temp file
+process_url_worker() {
+  local i="$1"
+  local URL="$2"
+  local tmpfile="$3"
 
   if is_x_url "$URL"; then
-    RESULT=$(process_x_url "$URL" "$OUTPUT_DIR")
+    process_x_url "$URL" "$OUTPUT_DIR" > "$tmpfile" 2>&2
   elif is_youtube_url "$URL"; then
-    RESULT=$(process_youtube_url "$URL" "$OUTPUT_DIR")
+    process_youtube_url "$URL" "$OUTPUT_DIR" > "$tmpfile" 2>&2
   else
-    RESULT='{"type":"unknown","url":"'"$URL"'","error":"unsupported URL type"}'
+    echo '{"type":"unknown","url":"'"$URL"'","error":"unsupported URL type"}' > "$tmpfile"
     echo "  [skip] Unsupported URL: ${URL}" >&2
   fi
+}
 
-  MEDIA_RESULTS=$(echo "$MEDIA_RESULTS" | jq '. + ['"$RESULT"']')
+export -f process_url_worker
+
+# Launch workers, respecting MAX_PARALLEL limit
+for (( i=0; i<URL_COUNT; i++ )); do
+  URL=$(echo "$URLS_JSON" | jq -r '.['"$i"']')
+  TMPFILE="${TMPDIR}/result-${i}.json"
+
+  # Block if we've reached the parallel limit
+  while [[ $(jobs -rp | wc -l | tr -d ' ') -ge $MAX_PARALLEL ]]; do
+    wait -n 2>/dev/null || true
+  done
+
+  process_url_worker "$i" "$URL" "$TMPFILE" &
 done
 
+# Wait for all remaining jobs
+wait
+
+echo "  [fetch] All workers done, assembling results..." >&2
+
 # ---------------------------------------------------------------------------
-# 9. Output final JSON to stdout (only JSON, all diagnostics go to stderr)
+# 9. Assemble results in original order, output JSON
 # ---------------------------------------------------------------------------
+MEDIA_RESULTS="[]"
+for (( i=0; i<URL_COUNT; i++ )); do
+  TMPFILE="${TMPDIR}/result-${i}.json"
+  if [[ -s "$TMPFILE" ]]; then
+    RESULT=$(cat "$TMPFILE")
+    MEDIA_RESULTS=$(echo "$MEDIA_RESULTS" | jq '. + ['"$RESULT"']')
+  else
+    URL=$(echo "$URLS_JSON" | jq -r '.['"$i"']')
+    RESULT='{"type":"unknown","url":"'"$URL"'","error":"timeout or no output"}'
+    MEDIA_RESULTS=$(echo "$MEDIA_RESULTS" | jq '. + ['"$RESULT"']')
+  fi
+done
+
+# Output final JSON to stdout
 echo "$MEDIA_RESULTS" | jq '{media: .}'
 
 exit 0
