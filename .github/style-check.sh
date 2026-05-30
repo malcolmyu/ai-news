@@ -63,6 +63,30 @@ for f in docs/*.html docs/research/*.html docs/daily/*.html; do
 done
 check "All HTML files are complete (no truncation)"
 
+# Check for read_file line number pollution in <style> blocks
+# Browsers fail to parse CSS when selectors are prefixed like "15|.callout"
+for f in docs/*.html docs/research/*.html docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  # Extract <style> block and check for line number patterns
+  if python3 -c "
+import re, sys
+with open('$f') as fh:
+    html = fh.read()
+m = re.search(r'<style>(.*?)</style>', html, re.DOTALL)
+if m and re.search(r'\\d+\\|\\.', m.group(1)):
+    sys.exit(1)
+" 2>/dev/null; then
+    true  # clean
+  else
+    # Check if this file even has a <style> block
+    if grep -q '<style>' "$f" 2>/dev/null; then
+      red "  ✗ $f: <style> block contains line number prefixes — CSS will not parse!"
+      ERRORS=$((ERRORS + 1))
+    fi
+  fi
+done
+check "No read_file line numbers in CSS blocks"
+
 println
 
 # ── Part 0.5: Shared Stylesheet Integrity ─────────────────────────────
