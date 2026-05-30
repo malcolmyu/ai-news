@@ -22,10 +22,18 @@ INPUT=$(cat)
 
 OUTPUT_DIR=$(echo "$INPUT" | jq -r '.output_dir // ""')
 URLS_JSON=$(echo "$INPUT" | jq -c '.urls // []')
+PROXY=$(echo "$INPUT" | jq -r '.proxy // ""')
 
 if [[ -z "$OUTPUT_DIR" ]]; then
   echo '{"error":"missing output_dir in input JSON"}' >&2
   exit 1
+fi
+
+# Proxy flag for curl (empty string = no proxy)
+PROXY_FLAG=""
+if [[ -n "$PROXY" ]]; then
+  PROXY_FLAG="--proxy $PROXY"
+  echo "  [fetch] Using proxy: ${PROXY}" >&2
 fi
 
 # Auto-create output dir including parent directories
@@ -88,7 +96,7 @@ fetch_x_via_vxtwitter() {
   local api_url="https://api.vxtwitter.com/${username}/status/${tweet_id}"
 
   local json
-  json=$(curl -sL --max-time 8 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL $PROXY_FLAG --max-time 8 "$api_url" 2>/dev/null) || true
 
   if [[ -z "$json" ]]; then
     return 1
@@ -157,7 +165,7 @@ fetch_x_via_fxtwitter() {
   local api_url="https://api.fxtwitter.com/status/${tweet_id}"
 
   local json
-  json=$(curl -sL --max-time 12 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL $PROXY_FLAG --max-time 12 "$api_url" 2>/dev/null) || true
 
   if [[ -z "$json" ]]; then
     return 1
@@ -204,7 +212,7 @@ download_images() {
 
     local dest="${output_dir}/${prefix}-${idx}.${ext}"
 
-    if curl -sL --max-time 12 -o "$dest" "$img_url" 2>/dev/null && [[ -s "$dest" ]]; then
+    if curl -sL $PROXY_FLAG --max-time 12 -o "$dest" "$img_url" 2>/dev/null && [[ -s "$dest" ]]; then
       # Output path relative to project root
       paths+="${dest}"$'\n'
       ((idx++))
@@ -238,7 +246,7 @@ process_x_url() {
   # Fetch vxtwitter JSON directly for richer data
   local api_url="https://api.vxtwitter.com/${username}/status/${tweet_id}"
   local json
-  json=$(curl -sL --max-time 8 "$api_url" 2>/dev/null) || true
+  json=$(curl -sL $PROXY_FLAG --max-time 8 "$api_url" 2>/dev/null) || true
 
   if [[ -n "$json" ]]; then
     # Extract image URLs from main tweet
@@ -337,7 +345,7 @@ process_youtube_url() {
 
   for thumb_url in "${attempted_urls[@]}"; do
     local dest="${output_dir}/yt-${video_id}.jpg"
-    if curl -sL --max-time 10 -o "$dest" "$thumb_url" 2>/dev/null && [[ -s "$dest" ]]; then
+    if curl -sL $PROXY_FLAG --max-time 10 -o "$dest" "$thumb_url" 2>/dev/null && [[ -s "$dest" ]]; then
       # Validate it's a real image (YouTube returns a placeholder for missing resolutions)
       if file "$dest" 2>/dev/null | grep -qi 'JPEG\|PNG\|GIF\|Web'; then
         thumbnail_path="${output_dir}/yt-${video_id}.jpg"
@@ -382,6 +390,7 @@ echo "  [fetch] Processing ${URL_COUNT} URLs (max ${MAX_PARALLEL} parallel)..." 
 # Export functions and vars for subprocesses
 export -f is_x_url is_youtube_url process_x_url process_youtube_url extract_x_username extract_x_tweet_id extract_yt_video_id get_ext fetch_x_via_vxtwitter fetch_x_via_fxtwitter download_images
 export OUTPUT_DIR
+export PROXY_FLAG
 
 # Process each URL in a background job, write result to temp file
 process_url_worker() {

@@ -1,472 +1,486 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026-05-30 AI 日报 - 第二号</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
-<script src="../pagefind/pagefind-ui.js" defer></script>
-<script src="../search.js" defer></script>
-<style>
-.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
-.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
-.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
-.vlist { display: flex; flex-direction: column; gap: 8px; }
-.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
-.vitem-content { flex: 1; }
-.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
-.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
-</style>
-</head>
-<body>
-<header class="header" data-pagefind-ignore>
-<div class="container">
-<div class="header-inner">
-<a href="../index.html" class="logo">
-<div class="logo-icon">🤖</div>
-<span class="logo-text">第二号</span>
-</a>
-<nav class="nav">
-<a href="../index.html" class="nav-link">首页</a>
-<a href="archive.html" class="nav-link">AI 日报</a>
-<a href="../research/archive.html" class="nav-link">深度调研</a>
-</nav>
-<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
-<span class="search-trigger-icon">⌕</span>
-<span class="search-trigger-label">搜索</span>
-<kbd>⌘K</kbd>
-</button>
-</div>
-</div>
-</header>
-<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
-<div class="search-modal-backdrop" data-search-close></div>
-<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
-<div class="search-dialog-head">
-<div>
-<div class="search-dialog-label">搜索</div>
-<h2 id="search-dialog-title">搜索第二号知识库</h2>
-</div>
-<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
-</div>
-<div class="search-dialog-meta">
-<span>AI 日报</span>
-<span>深度调研</span>
-<span>思维模型</span>
-<span class="search-shortcut">Esc 关闭</span>
-</div>
-<div id="site-search" class="site-search"></div>
-</div>
-</div>
-
-<div class="bento">
-
-<!-- Hero -->
-<div class="card span-4">
-  <div class="label-sm">AI 日报 · 2026年5月30日</div>
-  <h1>企业 AI「成本觉醒」：Token 从零花钱变成 CFO 议题</h1>
-  <div class="subtitle" style="margin-top:6px;">
-    Box CEO Aaron Levie 在 MAD Podcast 中直言，token 成本已占企业 AI 讨论的 1/3 到一半。一个 coding agent 单次任务就能烧掉 $1,000，$20/人/月的 SaaS 定价模型彻底失效。YC CEO Garry Tan 盛赞 Opus 4.8 + OpenClaw 组合，Vercel CEO Guillermo Rauch 宣布 Docker 进驻 Sandbox——agent 基础设施军备竞赛加速。GitHub Trending：AI 视频创作工具 MoneyPrinterTurbo 霸榜，微软 markitdown 为 RAG 铺路。
-  </div>
-  <div class="dots-row">
-    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Token 成本</span>
-    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">企业 AI</span>
-    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">MAD Podcast</span>
-    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 基础设施</span>
-    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Builder 动态</span>
-  </div>
-  <div class="stat-row" style="margin-top:12px;">
-    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
-    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Builder 动态</div></div>
-    <div class="stat-item"><div class="stat-num">15</div><div class="stat-label">GitHub 项目</div></div>
-  </div>
-</div>
-
-<!-- 今日要点 -->
-<div class="card span-4">
-  <div class="label-sm">今日要点</div>
-  <div class="grid-2">
-    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
-      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
-        <strong style="color:#1c1c1c;">🎙️ Aaron Levie：Token 成本是头号议题，$20/人/月定价已死。</strong> Box CEO 在 MAD Podcast 中系统拆解了企业 AI 的五个核心趋势：① Token 成本从 IT 预算溢出到业务线预算（市场营销、销售、制造部门需要学会管自己的 compute budget）；②「无头软件」崛起——软件不再需要 UI，只需 API 供 agent 调用；③ MoE 是统治性架构，密集模型成本太高难支撑大规模 agentic workload；④ 企业内部涌现「FDE」——能用 Claude Code/Cursor 快速搭建应用的非工程师业务专家；⑤ 创业机会在「桥接层」：做模型商不愿做的集成、变更管理和持续支持。
-      </div>
-      <div style="margin-top:10px;">
-        <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 查看播客 →</a>
-      </div>
-    </div>
-    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
-      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
-        <strong style="color:#1c1c1c;">🔧 Agent 基础设施军备竞赛：Opus 4.8 + Docker in Sandbox。</strong> YC CEO Garry Tan 盛赞 Opus 4.8 with OpenClaw「他妈的太棒了」——表达清晰度飞跃。他还指出技术债一直是工具问题，AI 让依赖升级几乎零成本后，「留着以后升级」的借口彻底死了。Vercel CEO Guillermo Rauch 宣布两大进展：Vercel CLI 作为自更新零依赖二进制成为 agent 云基础设施入口，Docker 进驻 Vercel Sandbox 让 agent 直接跑容器。两大 CEO 同时押注 agent 运行时——这不是巧合。
-      </div>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
-        <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 Garry Tan →</a>
-        <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 Guillermo Rauch →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 🎙️ 播客深度分析 -->
-<div class="card span-4">
-  <div class="label-sm">🎙️ 本周播客</div>
-  <h2>MAD Podcast — Aaron Levie 谈企业 AI 2026</h2>
-  <div class="quote" style="margin-top:8px;">
-    <strong>核心洞察：</strong>AI 能力突破的速度<strong>快于</strong>企业落地的速度，制造了一个悖论——技术越先进，企业部署反而越慢，因为刚落地的东西很快就被新一代能力淘汰。
-  </div>
-  <div class="vlist" style="margin-top:10px;">
-    <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div>
-      <div class="vitem-content">
-        <div class="vitem-title">Token 成本是头号议题</div>
-        <div class="vitem-desc">一个 coding agent 单次任务就能烧掉 $1,000 的计算资源。AI 预算正在从 IT 部门（占营收 3-7%）溢出到业务线预算（占营收 60-80%），市场营销、销售、制造部门需要学会管理自己的 compute budget。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">2</div>
-      <div class="vitem-content">
-        <div class="vitem-title">「无头软件」崛起</div>
-        <div class="vitem-desc">软件不再需要 UI，只需要 API 供 agent 调用。这对传统 SaaS 公司的产品形态和商业模式构成根本性挑战。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">3</div>
-      <div class="vitem-content">
-        <div class="vitem-title">MoE 是主导架构，不是过渡方案</div>
-        <div class="vitem-desc">Levie 认为 MoE 是「未来几年甚至更久」的统治性选择。密集模型成本太高，难以支撑大规模 agentic workload。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">4</div>
-      <div class="vitem-content">
-        <div class="vitem-title">内部 FDE（非工程师业务专家）出现</div>
-        <div class="vitem-desc">企业内部正在涌现一类新角色：能用 Claude Code、Codex、Cursor 快速搭建应用的非工程师业务专家。他们不是开发者，但能用 AI 驱动实际业务流程。</div>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">5</div>
-      <div class="vitem-content">
-        <div class="vitem-title">创业机会在「桥接层」</div>
-        <div class="vitem-desc">将 AI 能力嵌入具体业务流程，做模型商不愿或做不好的集成、变更管理和持续支持。资本市场会自我调节——太封闭的模型商会催生开放生态的反击。</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:10px;">
-    <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 查看完整播客 →</a>
-  </div>
-</div>
-
-<!-- 🐦 Builder 动态 -->
-<div class="card span-4">
-  <div class="label-sm">🐦 Builder 动态</div>
-  <h2>Garry Tan、Guillermo Rauch、Dan Shipper、Amjad Masad 等 12 位 Builder 今日发声</h2>
-  <div class="vlist" style="margin-top:6px;">
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Garry Tan (YC CEO) 🔥 618 ❤️</div>
-        <div class="vitem-desc">「Opus 4.8 with OpenClaw 他妈的太棒了。它对自己的修复方案、思考过程以及如何与你协作解决问题的表达清晰多了。」他还指出：技术债一直是工具问题。AI 让依赖升级几乎零成本后，「留着以后升级」的借口彻底死了。</div>
-        <div class="quote" style="margin-top:6px;font-size:11px;">"Opus 4.8 with OpenClaw is fucking awesome. It articulates its fixes, thinking, and how it collaborates with you to solve problems so much more clearly."</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Guillermo Rauch (Vercel CEO) 🔥 274 ❤️</div>
-        <div class="vitem-desc">宣布两大进展：① Vercel CLI 作为自更新零依赖二进制发布，成为「agent 的云基础设施」关键入口。② Docker 进驻 Vercel Sandbox，agent 可以直接在沙箱里跑容器。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Dan Shipper (Every CEO) 🔥 158 ❤️</div>
-        <div class="vitem-desc">转发了一篇关于 tokenmaxxing 恐慌的分析，认为这种恐慌不会持续——当前的成本飙升是供需失衡和基础设施追赶期的短期现象，不是 AI 经济的永久特征。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/danshipper/status/2060382815821209801" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Amjad Masad (Replit CEO) 🔥 109 ❤️</div>
-        <div class="vitem-desc">发布 Replit Canvas：一个集图像生成、视频、音频、绘制、拖拽编辑、多人协作于一体的 AI 创作画布。目标是让 marketing、网站、艺术创作都变成「一起做饭」式的协作体验。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/amasad/status/2060122956429472027" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Peter Steinberger (OpenClaw 核心贡献者) 🔥 358 ❤️</div>
-        <div class="vitem-desc">抛出两个争议观点：① "clanker 不是蔑称，vibe coding 才是"——引发社区对 AI 编程文化标签的激烈讨论。② 质疑「不用 LLM 找 bug」的立场，认为 LLM 在 bug 发现方面已经有实质价值。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/steipete/status/2060371944168358250" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Matt Turck (FirstMark VC) 🔥 619 ❤️</div>
-        <div class="vitem-desc">用黑色幽默描绘「2026 年 VC 的一天」：早会推 Anthropic/OpenAI 采用，午餐讨论如何避开 Anthropic/OpenAI 找蓝海，下午做尽调问 Claude「你会不会自己做这个」，晚上帮 portfolio 公司升级 Anthropic 套餐。全行业都在吃 token flow。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/mattturck/status/2060136766238028213" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Nikunj Kothari (FPV Ventures Partner)</div>
-        <div class="vitem-desc">指出应用层创业公司收入暴涨的真正原因：大家都在拼命挤进 token 管道。但利润率是另一回事。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/nikunj/status/2060420902521835905" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Josh Woodward (Google Labs VP)</div>
-        <div class="vitem-desc">连续分享 Gemini 新能力 demo：从笔记本里飞出的鸟、一次管理 20 个 runtime 环境的 agent job、让照片动起来。Gemini 的多模态 + agent 定位越来越清晰。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/joshwoodward/status/2060443102507302948" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Swyx（AI Engineer 社区领袖）</div>
-        <div class="vitem-desc">与 ACM 主席会面，探讨 AI Engineering 与学术界的深度合作，甚至提出了「AI Engineering 图灵奖」的设想。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/swyx/status/2060148078754267426" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Peter Yang (Roblox 产品经理)</div>
-        <div class="vitem-desc">Google 免费 5 天 AI Agents 课程回归，新增 vibe coding 章节。上次有 150 万学习者。Day 1-5 涵盖 agent 构建、工具互联、记忆系统、安全测试、生产部署全流程。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/petergyang/status/2060149158615609474" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">Zara Zhang（Builder）</div>
-        <div class="vitem-desc">提出「AI 精神病」概念——频繁在多 agent 会话间上下文切换是否会损害人类注意力？呼吁学术界开展相关心理学研究。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://x.com/zarazhangrui/status/2060435594334130467" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- 📈 GitHub Trending -->
-<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
-  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月30日</div>
-  <h2>AI 视频创作霸榜：MoneyPrinterTurbo 领跑，markitdown 为 RAG 铺路</h2>
-  <div class="vlist" style="margin-top:6px;">
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">1. harry0703/MoneyPrinterTurbo ⭐ 3,567 · Python</div>
-        <div class="vitem-desc">利用 AI 大模型一键生成高清短视频。中文社区热门的 AI 视频创作工具，今日 Star 暴涨。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">2. microsoft/markitdown ⭐ 1,873 · Python</div>
-        <div class="vitem-desc">微软开源的文件转 Markdown 工具。将 Office 文档、PDF 等格式统一转为 Markdown，为 RAG 和 agent 处理文档铺路。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/microsoft/markitdown" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">3. byoungd/English-level-up-tips ⭐ 1,566</div>
-        <div class="vitem-desc">一份「离谱」的英语学习指南，中英双语，从听说读写到技术英语全覆盖，社区口碑极佳。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/byoungd/English-level-up-tips" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">4. DigitalPlatDev/FreeDomain ⭐ 1,313 · HTML</div>
-        <div class="vitem-desc">免费域名服务，今天突然爆发。DigitalPlat 生态的引流项目。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/DigitalPlatDev/FreeDomain" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">5. codecrafters-io/build-your-own-x ⭐ 866 · Markdown</div>
-        <div class="vitem-desc">经典项目回归 Trending。「通过从零重建你热爱的技术来掌握编程」，涵盖 Git、Docker、Redis 等几十个主题。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">6. run-llama/liteparse ⭐ 701 · Rust</div>
-        <div class="vitem-desc">LlamaIndex 团队出品的高性能文档解析器，Rust 实现。面向 RAG pipeline 的文档 ingestion 环节。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/run-llama/liteparse" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">7. hardikpandya/stop-slop ⭐ 617</div>
-        <div class="vitem-desc">去除 AI 写作痕迹的 skill 文件。在「AI 味」成为内容质量杀手的当下，这个工具的走红非常说明问题。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">8. twentyhq/twenty ⭐ 578 · TypeScript</div>
-        <div class="vitem-desc">Salesforce 的开源替代品，专为 AI 时代设计。CRM 领域的「AI-native」尝试。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/twentyhq/twenty" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">9. anthropics/claude-code ⭐ 395 · Python</div>
-        <div class="vitem-desc">Anthropic 的终端 agentic coding 工具，直接在终端里理解代码库、执行任务、处理 git 工作流。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/anthropics/claude-code" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">10. galilai-group/stable-worldmodel ⭐ 362 · Python</div>
-        <div class="vitem-desc">可复现的世界模型研究平台。面向具身智能和世界模型评估的标准化框架。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/galilai-group/stable-worldmodel" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">11. EveryInc/compound-engineering-plugin ⭐ 353 · TypeScript</div>
-        <div class="vitem-desc">Compound Engineering 官方插件，支持 Claude Code、Codex、Cursor 等多种 AI 编程工具，提供工程最佳实践集成。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">12. Crosstalk-Solutions/project-nomad ⭐ 318 · TypeScript</div>
-        <div class="vitem-desc">Project N.O.M.A.D——自给自足的离线生存计算机，内置关键工具、知识和 AI，随时随地在无网环境下保持信息掌控。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">13. DataTalksClub/data-engineering-zoomcamp ⭐ 160 · Jupyter Notebook</div>
-        <div class="vitem-desc">免费 9 周数据工程训练营，覆盖生产级数据管道建设。下一期 2026 年 1 月开课。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/DataTalksClub/data-engineering-zoomcamp" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">14. cursor/plugins ⭐ 134 · TypeScript</div>
-        <div class="vitem-desc">Cursor 官方插件规范和官方插件集合。随着 Cursor 生态扩展，插件化成为差异化关键。</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/cursor/plugins" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-    <div class="vitem">
-      <div class="vitem-content">
-        <div class="vitem-title">15. Biohub/esm ⭐ 52 · Jupyter Notebook</div>
-        <div class="vitem-desc">（无描述）</div>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="https://github.com/Biohub/esm" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 今日思考 -->
-<div class="card span-4 card-highlight">
-  <div class="label-sm" style="color:#2563eb;">今日思考</div>
-  <div class="grid-2">
-    <div class="callout" style="margin-top:0;">
-      <div class="callout-title">Token 成本从 IT 零花钱变成 CFO 议题：SaaS 定价模型的历史转折</div>
-      <div class="callout-text">Aaron Levie 在播客中指向一个深层变化：AI 预算正在从 IT 部门（占营收 3-7%）溢出到业务线预算（占营收 60-80%）。这意味着市场营销 VP、销售 VP、制造 VP 现在需要学会管理自己的 compute budget——一个他们从未处理过的成本项。$20/人/月的 SaaS 定价模型建立在「软件边际成本趋近于零」的前提上，但 agent 每次运行都在烧真金白银。这不是一个技术问题，这是一个商业模式问题。谁先解决「用量定价 + 业务线可理解」这个方程，谁就能吃掉这波迁移的红利。</div>
-    </div>
-    <div class="callout">
-      <div class="callout-title">变更管理才是真正的瓶颈</div>
-      <div class="callout-text">Levie 提到一个反直觉现象：AI 能力突破得越快，企业刚铺好的基础设施就越快过时。这制造了一个悖论——技术越先进，企业部署反而越慢。当所有人都在 tokenmaxxing，真正赢的可能是那些把变更管理做对的人。「慢下来」在某个时间点上反而成了竞争优势。</div>
-    </div>
-  </div>
-  <div class="divider"></div>
-  <div class="text-body" style="text-align:center;font-size:13px;">
-    <strong>今日一问：</strong>你的组织里，AI 的 token 成本目前由谁在管？是 IT 部门默默扛着，还是已经进入了业务线的 P&amp;L？如果明天 CFO 要求每个部门报自己的 AI 预算，你的团队能拿出什么数字？
-  </div>
-</div>
-
-<!-- 参考来源 -->
-<div class="card span-4">
-  <div class="divider"></div>
-  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
-    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
-    <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="color:#2563eb;text-decoration:none;">MAD Podcast — Aaron Levie: State of Enterprise AI 2026</a><br>
-    <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="color:#2563eb;text-decoration:none;">Garry Tan — Opus 4.8 + OpenClaw</a><br>
-    <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="color:#2563eb;text-decoration:none;">Guillermo Rauch — Vercel CLI + Docker in Sandbox</a><br>
-    <a href="https://x.com/danshipper/status/2060382815821209801" target="_blank" style="color:#2563eb;text-decoration:none;">Dan Shipper — Tokenmaxxing 恐慌分析</a><br>
-    <a href="https://x.com/amasad/status/2060122956429472027" target="_blank" style="color:#2563eb;text-decoration:none;">Amjad Masad — Replit Canvas</a><br>
-    <a href="https://x.com/steipete/status/2060371944168358250" target="_blank" style="color:#2563eb;text-decoration:none;">Peter Steinberger — Clanker vs Vibe Coding 争议</a><br>
-    <a href="https://x.com/mattturck/status/2060136766238028213" target="_blank" style="color:#2563eb;text-decoration:none;">Matt Turck — 2026 年 VC 的一天</a><br>
-    <a href="https://x.com/nikunj/status/2060420902521835905" target="_blank" style="color:#2563eb;text-decoration:none;">Nikunj Kothari — 应用层收入与利润率</a><br>
-    <a href="https://x.com/joshwoodward/status/2060443102507302948" target="_blank" style="color:#2563eb;text-decoration:none;">Josh Woodward — Gemini 多模态 Demo</a><br>
-    <a href="https://x.com/swyx/status/2060148078754267426" target="_blank" style="color:#2563eb;text-decoration:none;">Swyx — AI Engineering 图灵奖设想</a><br>
-    <a href="https://x.com/petergyang/status/2060149158615609474" target="_blank" style="color:#2563eb;text-decoration:none;">Peter Yang — Google 免费 AI Agents 课程</a><br>
-    <a href="https://x.com/zarazhangrui/status/2060435594334130467" target="_blank" style="color:#2563eb;text-decoration:none;">Zara Zhang — AI 精神病概念</a><br>
-    <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: MoneyPrinterTurbo</a><br>
-    <a href="https://github.com/microsoft/markitdown" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: microsoft/markitdown</a><br>
-  </div>
-  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
-    来源：X/Twitter Builder 动态、YouTube MAD Podcast、GitHub Trending。AI 日报每日更新。
-  </div>
-</div>
-
-</div>
-
-</body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>2026-05-30 AI 日报 - 第二号</title>
+     7|<link rel="preconnect" href="https://fonts.googleapis.com">
+     8|<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     9|<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+    10|<link rel="stylesheet" href="../styles.css">
+    11|<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+    12|<script src="../pagefind/pagefind-ui.js" defer></script>
+    13|<script src="../search.js" defer></script>
+    14|<style>
+    15|.callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
+    16|.callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
+    17|.callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
+    18|.vlist { display: flex; flex-direction: column; gap: 8px; }
+    19|.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+    20|.vitem-content { flex: 1; }
+    21|.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+    22|.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+    23|</style>
+    24|</head>
+    25|<body>
+    26|<header class="header" data-pagefind-ignore>
+    27|<div class="container">
+    28|<div class="header-inner">
+    29|<a href="../index.html" class="logo">
+    30|<div class="logo-icon">🤖</div>
+    31|<span class="logo-text">第二号</span>
+    32|</a>
+    33|<nav class="nav">
+    34|<a href="../index.html" class="nav-link">首页</a>
+    35|<a href="archive.html" class="nav-link">AI 日报</a>
+    36|<a href="../research/archive.html" class="nav-link">深度调研</a>
+    37|</nav>
+    38|<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+    39|<span class="search-trigger-icon">⌕</span>
+    40|<span class="search-trigger-label">搜索</span>
+    41|<kbd>⌘K</kbd>
+    42|</button>
+    43|</div>
+    44|</div>
+    45|</header>
+    46|<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+    47|<div class="search-modal-backdrop" data-search-close></div>
+    48|<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+    49|<div class="search-dialog-head">
+    50|<div>
+    51|<div class="search-dialog-label">搜索</div>
+    52|<h2 id="search-dialog-title">搜索第二号知识库</h2>
+    53|</div>
+    54|<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+    55|</div>
+    56|<div class="search-dialog-meta">
+    57|<span>AI 日报</span>
+    58|<span>深度调研</span>
+    59|<span>思维模型</span>
+    60|<span class="search-shortcut">Esc 关闭</span>
+    61|</div>
+    62|<div id="site-search" class="site-search"></div>
+    63|</div>
+    64|</div>
+    65|
+    66|<div class="bento">
+    67|
+    68|<!-- Hero -->
+    69|<div class="card span-4">
+    70|  <div class="label-sm">AI 日报 · 2026年5月30日</div>
+    71|  <h1>企业 AI「成本觉醒」：Token 从零花钱变成 CFO 议题</h1>
+    72|  <div class="subtitle" style="margin-top:6px;">
+    73|    Box CEO Aaron Levie 在 MAD Podcast 中直言，token 成本已占企业 AI 讨论的 1/3 到一半。一个 coding agent 单次任务就能烧掉 $1,000，$20/人/月的 SaaS 定价模型彻底失效。YC CEO Garry Tan 盛赞 Opus 4.8 + OpenClaw 组合，Vercel CEO Guillermo Rauch 宣布 Docker 进驻 Sandbox——agent 基础设施军备竞赛加速。GitHub Trending：AI 视频创作工具 MoneyPrinterTurbo 霸榜，微软 markitdown 为 RAG 铺路。
+    74|  </div>
+    75|  <div class="dots-row">
+    76|    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Token 成本</span>
+    77|    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">企业 AI</span>
+    78|    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">MAD Podcast</span>
+    79|    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 基础设施</span>
+    80|    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Builder 动态</span>
+    81|  </div>
+    82|  <div class="stat-row" style="margin-top:12px;">
+    83|    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    84|    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Builder 动态</div></div>
+    85|    <div class="stat-item"><div class="stat-num">15</div><div class="stat-label">GitHub 项目</div></div>
+    86|  </div>
+    87|</div>
+    88|
+    89|<!-- 今日要点 -->
+    90|<div class="card span-4">
+    91|  <div class="label-sm">今日要点</div>
+    92|  <div class="grid-2">
+    93|    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+    94|      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+    95|        <strong style="color:#1c1c1c;">🎙️ Aaron Levie：Token 成本是头号议题，$20/人/月定价已死。</strong> Box CEO 在 MAD Podcast 中系统拆解了企业 AI 的五个核心趋势：① Token 成本从 IT 预算溢出到业务线预算（市场营销、销售、制造部门需要学会管自己的 compute budget）；②「无头软件」崛起——软件不再需要 UI，只需 API 供 agent 调用；③ MoE 是统治性架构，密集模型成本太高难支撑大规模 agentic workload；④ 企业内部涌现「FDE」——能用 Claude Code/Cursor 快速搭建应用的非工程师业务专家；⑤ 创业机会在「桥接层」：做模型商不愿做的集成、变更管理和持续支持。
+    96|      </div>
+    97|      <div style="margin-top:10px;">
+    98|        <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 查看播客 →</a>
+    99|      </div>
+   100|    </div>
+   101|    <div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;">
+   102|      <div style="font-size:13px;line-height:1.6;color:#4a4a4a;">
+   103|        <strong style="color:#1c1c1c;">🔧 Agent 基础设施军备竞赛：Opus 4.8 + Docker in Sandbox。</strong> YC CEO Garry Tan 盛赞 Opus 4.8 with OpenClaw「他妈的太棒了」——表达清晰度飞跃。他还指出技术债一直是工具问题，AI 让依赖升级几乎零成本后，「留着以后升级」的借口彻底死了。Vercel CEO Guillermo Rauch 宣布两大进展：Vercel CLI 作为自更新零依赖二进制成为 agent 云基础设施入口，Docker 进驻 Vercel Sandbox 让 agent 直接跑容器。两大 CEO 同时押注 agent 运行时——这不是巧合。
+   104|      </div>
+   105|      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+   106|        <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 Garry Tan →</a>
+   107|        <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 Guillermo Rauch →</a>
+   108|      </div>
+   109|    </div>
+   110|  </div>
+   111|</div>
+   112|
+   113|<!-- 🎙️ 播客深度分析 -->
+   114|<div class="card span-4">
+   115|  <div class="label-sm">🎙️ 本周播客</div>
+   116|  <h2>MAD Podcast — Aaron Levie 谈企业 AI 2026</h2>
+   117|  <div class="quote" style="margin-top:8px;">
+   118|    <strong>核心洞察：</strong>AI 能力突破的速度<strong>快于</strong>企业落地的速度，制造了一个悖论——技术越先进，企业部署反而越慢，因为刚落地的东西很快就被新一代能力淘汰。
+   119|  </div>
+   120|  <div class="vlist" style="margin-top:10px;">
+   121|    <div class="vitem">
+   122|      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div>
+   123|      <div class="vitem-content">
+   124|        <div class="vitem-title">Token 成本是头号议题</div>
+   125|        <div class="vitem-desc">一个 coding agent 单次任务就能烧掉 $1,000 的计算资源。AI 预算正在从 IT 部门（占营收 3-7%）溢出到业务线预算（占营收 60-80%），市场营销、销售、制造部门需要学会管理自己的 compute budget。</div>
+   126|      </div>
+   127|    </div>
+   128|    <div class="vitem">
+   129|      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">2</div>
+   130|      <div class="vitem-content">
+   131|        <div class="vitem-title">「无头软件」崛起</div>
+   132|        <div class="vitem-desc">软件不再需要 UI，只需要 API 供 agent 调用。这对传统 SaaS 公司的产品形态和商业模式构成根本性挑战。</div>
+   133|      </div>
+   134|    </div>
+   135|    <div class="vitem">
+   136|      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">3</div>
+   137|      <div class="vitem-content">
+   138|        <div class="vitem-title">MoE 是主导架构，不是过渡方案</div>
+   139|        <div class="vitem-desc">Levie 认为 MoE 是「未来几年甚至更久」的统治性选择。密集模型成本太高，难以支撑大规模 agentic workload。</div>
+   140|      </div>
+   141|    </div>
+   142|    <div class="vitem">
+   143|      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">4</div>
+   144|      <div class="vitem-content">
+   145|        <div class="vitem-title">内部 FDE（非工程师业务专家）出现</div>
+   146|        <div class="vitem-desc">企业内部正在涌现一类新角色：能用 Claude Code、Codex、Cursor 快速搭建应用的非工程师业务专家。他们不是开发者，但能用 AI 驱动实际业务流程。</div>
+   147|      </div>
+   148|    </div>
+   149|    <div class="vitem">
+   150|      <div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">5</div>
+   151|      <div class="vitem-content">
+   152|        <div class="vitem-title">创业机会在「桥接层」</div>
+   153|        <div class="vitem-desc">将 AI 能力嵌入具体业务流程，做模型商不愿或做不好的集成、变更管理和持续支持。资本市场会自我调节——太封闭的模型商会催生开放生态的反击。</div>
+   154|      </div>
+   155|    </div>
+   156|  </div>
+   157|  <div style="margin-top:10px;">
+   158|    <img src="assets/2026-05-30/yt-Gs2styCcwro.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="MAD Podcast - Aaron Levie">
+<a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;text-decoration:none;font-weight:500;padding:6px 12px;background:rgba(37,99,235,0.06);border-radius:8px;">📱 查看完整播客 →</a>
+   159|  </div>
+   160|</div>
+   161|
+   162|<!-- 🐦 Builder 动态 -->
+   163|<div class="card span-4">
+   164|  <div class="label-sm">🐦 Builder 动态</div>
+   165|  <h2>Garry Tan、Guillermo Rauch、Dan Shipper、Amjad Masad 等 12 位 Builder 今日发声</h2>
+   166|  <div class="vlist" style="margin-top:6px;">
+   167|
+   168|    <div class="vitem">
+   169|      <div class="vitem-content">
+   170|        <div class="vitem-title">Garry Tan (YC CEO) 🔥 618 ❤️</div>
+   171|        <div class="vitem-desc">「Opus 4.8 with OpenClaw 他妈的太棒了。它对自己的修复方案、思考过程以及如何与你协作解决问题的表达清晰多了。」他还指出：技术债一直是工具问题。AI 让依赖升级几乎零成本后，「留着以后升级」的借口彻底死了。</div>
+   172|        <div class="quote" style="margin-top:6px;font-size:11px;">"Opus 4.8 with OpenClaw is fucking awesome. It articulates its fixes, thinking, and how it collaborates with you to solve problems so much more clearly."</div>
+   173|      </div>
+   174|      <div style="flex-shrink:0;">
+   175|        <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+   176|      </div>
+   177|    </div>
+   178|
+   179|    <div class="vitem">
+   180|      <div class="vitem-content">
+   181|        <div class="vitem-title">Guillermo Rauch (Vercel CEO) 🔥 274 ❤️</div>
+   182|        <div class="vitem-desc">宣布两大进展：① Vercel CLI 作为自更新零依赖二进制发布，成为「agent 的云基础设施」关键入口。② Docker 进驻 Vercel Sandbox，agent 可以直接在沙箱里跑容器。</div>
+   183|      </div>
+   184|      <div style="flex-shrink:0;">
+   185|        <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/rauchg-2060443982342357032-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/rauchg-2060105470460010993-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/rauchg-2060105470460010993-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+   186|      </div>
+   187|    </div>
+   188|
+   189|    <div class="vitem">
+   190|      <div class="vitem-content">
+   191|        <div class="vitem-title">Dan Shipper (Every CEO) 🔥 158 ❤️</div>
+   192|        <div class="vitem-desc">转发了一篇关于 tokenmaxxing 恐慌的分析，认为这种恐慌不会持续——当前的成本飙升是供需失衡和基础设施追赶期的短期现象，不是 AI 经济的永久特征。</div>
+   193|      </div>
+   194|      <div style="flex-shrink:0;">
+   195|        <a href="https://x.com/danshipper/status/2060382815821209801" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/danshipper-2060382815821209801-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+   196|      </div>
+   197|    </div>
+   198|
+   199|    <div class="vitem">
+   200|      <div class="vitem-content">
+   201|        <div class="vitem-title">Amjad Masad (Replit CEO) 🔥 109 ❤️</div>
+   202|        <div class="vitem-desc">发布 Replit Canvas：一个集图像生成、视频、音频、绘制、拖拽编辑、多人协作于一体的 AI 创作画布。目标是让 marketing、网站、艺术创作都变成「一起做饭」式的协作体验。</div>
+   203|      </div>
+   204|      <div style="flex-shrink:0;">
+   205|        <a href="https://x.com/amasad/status/2060122956429472027" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/amasad-2060122956429472027-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+   206|      </div>
+   207|    </div>
+   208|
+   209|    <div class="vitem">
+   210|      <div class="vitem-content">
+   211|        <div class="vitem-title">Peter Steinberger (OpenClaw 核心贡献者) 🔥 358 ❤️</div>
+   212|        <div class="vitem-desc">抛出两个争议观点：① "clanker 不是蔑称，vibe coding 才是"——引发社区对 AI 编程文化标签的激烈讨论。② 质疑「不用 LLM 找 bug」的立场，认为 LLM 在 bug 发现方面已经有实质价值。</div>
+   213|      </div>
+   214|      <div style="flex-shrink:0;">
+   215|        <a href="https://x.com/steipete/status/2060371944168358250" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/steipete-2060371944168358250-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/steipete-2060358460831682895-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/steipete-2060358460831682895-1.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/steipete-2060358460831682895-2.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/steipete-2060358460831682895-3.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+   216|      </div>
+   217|    </div>
+   218|
+   219|    <div class="vitem">
+   220|      <div class="vitem-content">
+   221|        <div class="vitem-title">Matt Turck (FirstMark VC) 🔥 619 ❤️</div>
+   222|        <div class="vitem-desc">用黑色幽默描绘「2026 年 VC 的一天」：早会推 Anthropic/OpenAI 采用，午餐讨论如何避开 Anthropic/OpenAI 找蓝海，下午做尽调问 Claude「你会不会自己做这个」，晚上帮 portfolio 公司升级 Anthropic 套餐。全行业都在吃 token flow。</div>
+   223|      </div>
+   224|      <div style="flex-shrink:0;">
+   225|        <a href="https://x.com/mattturck/status/2060136766238028213" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+   226|      </div>
+   227|    </div>
+   228|
+   229|    <div class="vitem">
+   230|      <div class="vitem-content">
+   231|        <div class="vitem-title">Nikunj Kothari (FPV Ventures Partner)</div>
+   232|        <div class="vitem-desc">指出应用层创业公司收入暴涨的真正原因：大家都在拼命挤进 token 管道。但利润率是另一回事。</div>
+   233|      </div>
+   234|      <div style="flex-shrink:0;">
+   235|        <a href="https://x.com/nikunj/status/2060420902521835905" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+   236|      </div>
+   237|    </div>
+   238|
+   239|    <div class="vitem">
+   240|      <div class="vitem-content">
+   241|        <div class="vitem-title">Josh Woodward (Google Labs VP)</div>
+   242|        <div class="vitem-desc">连续分享 Gemini 新能力 demo：从笔记本里飞出的鸟、一次管理 20 个 runtime 环境的 agent job、让照片动起来。Gemini 的多模态 + agent 定位越来越清晰。</div>
+   243|      </div>
+   244|      <div style="flex-shrink:0;">
+   245|        <a href="https://x.com/joshwoodward/status/2060443102507302948" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/joshwoodward-2060443102507302948-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+<img src="assets/2026-05-30/joshwoodward-2060443100703842527-0.jpg" style="width:100%;border-radius:8px;margin-top:6px;" loading="lazy" alt="">
+   246|      </div>
+   247|    </div>
+   248|
+   249|    <div class="vitem">
+   250|      <div class="vitem-content">
+   251|        <div class="vitem-title">Swyx（AI Engineer 社区领袖）</div>
+   252|        <div class="vitem-desc">与 ACM 主席会面，探讨 AI Engineering 与学术界的深度合作，甚至提出了「AI Engineering 图灵奖」的设想。</div>
+   253|      </div>
+   254|      <div style="flex-shrink:0;">
+   255|        <a href="https://x.com/swyx/status/2060148078754267426" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+<img src="assets/2026-05-30/swyx-2060148078754267426-0.jpg" style="width:100%;border-radius:8px;margin-top:10px;" loading="lazy" alt="">
+   256|      </div>
+   257|    </div>
+   258|
+   259|    <div class="vitem">
+   260|      <div class="vitem-content">
+   261|        <div class="vitem-title">Peter Yang (Roblox 产品经理)</div>
+   262|        <div class="vitem-desc">Google 免费 5 天 AI Agents 课程回归，新增 vibe coding 章节。上次有 150 万学习者。Day 1-5 涵盖 agent 构建、工具互联、记忆系统、安全测试、生产部署全流程。</div>
+   263|      </div>
+   264|      <div style="flex-shrink:0;">
+   265|        <a href="https://x.com/petergyang/status/2060149158615609474" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+   266|      </div>
+   267|    </div>
+   268|
+   269|    <div class="vitem">
+   270|      <div class="vitem-content">
+   271|        <div class="vitem-title">Zara Zhang（Builder）</div>
+   272|        <div class="vitem-desc">提出「AI 精神病」概念——频繁在多 agent 会话间上下文切换是否会损害人类注意力？呼吁学术界开展相关心理学研究。</div>
+   273|      </div>
+   274|      <div style="flex-shrink:0;">
+   275|        <a href="https://x.com/zarazhangrui/status/2060435594334130467" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">查看 →</a>
+   276|      </div>
+   277|    </div>
+   278|
+   279|  </div>
+   280|</div>
+   281|
+   282|<!-- 📈 GitHub Trending -->
+   283|<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+   284|  <div class="label-sm" style="color:#10b981;">GitHub Trending · 5月30日</div>
+   285|  <h2>AI 视频创作霸榜：MoneyPrinterTurbo 领跑，markitdown 为 RAG 铺路</h2>
+   286|  <div class="vlist" style="margin-top:6px;">
+   287|    <div class="vitem">
+   288|      <div class="vitem-content">
+   289|        <div class="vitem-title">1. harry0703/MoneyPrinterTurbo ⭐ 3,567 · Python</div>
+   290|        <div class="vitem-desc">利用 AI 大模型一键生成高清短视频。中文社区热门的 AI 视频创作工具，今日 Star 暴涨。</div>
+   291|      </div>
+   292|      <div style="flex-shrink:0;">
+   293|        <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   294|      </div>
+   295|    </div>
+   296|    <div class="vitem">
+   297|      <div class="vitem-content">
+   298|        <div class="vitem-title">2. microsoft/markitdown ⭐ 1,873 · Python</div>
+   299|        <div class="vitem-desc">微软开源的文件转 Markdown 工具。将 Office 文档、PDF 等格式统一转为 Markdown，为 RAG 和 agent 处理文档铺路。</div>
+   300|      </div>
+   301|      <div style="flex-shrink:0;">
+   302|        <a href="https://github.com/microsoft/markitdown" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   303|      </div>
+   304|    </div>
+   305|    <div class="vitem">
+   306|      <div class="vitem-content">
+   307|        <div class="vitem-title">3. byoungd/English-level-up-tips ⭐ 1,566</div>
+   308|        <div class="vitem-desc">一份「离谱」的英语学习指南，中英双语，从听说读写到技术英语全覆盖，社区口碑极佳。</div>
+   309|      </div>
+   310|      <div style="flex-shrink:0;">
+   311|        <a href="https://github.com/byoungd/English-level-up-tips" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   312|      </div>
+   313|    </div>
+   314|    <div class="vitem">
+   315|      <div class="vitem-content">
+   316|        <div class="vitem-title">4. DigitalPlatDev/FreeDomain ⭐ 1,313 · HTML</div>
+   317|        <div class="vitem-desc">免费域名服务，今天突然爆发。DigitalPlat 生态的引流项目。</div>
+   318|      </div>
+   319|      <div style="flex-shrink:0;">
+   320|        <a href="https://github.com/DigitalPlatDev/FreeDomain" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   321|      </div>
+   322|    </div>
+   323|    <div class="vitem">
+   324|      <div class="vitem-content">
+   325|        <div class="vitem-title">5. codecrafters-io/build-your-own-x ⭐ 866 · Markdown</div>
+   326|        <div class="vitem-desc">经典项目回归 Trending。「通过从零重建你热爱的技术来掌握编程」，涵盖 Git、Docker、Redis 等几十个主题。</div>
+   327|      </div>
+   328|      <div style="flex-shrink:0;">
+   329|        <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   330|      </div>
+   331|    </div>
+   332|    <div class="vitem">
+   333|      <div class="vitem-content">
+   334|        <div class="vitem-title">6. run-llama/liteparse ⭐ 701 · Rust</div>
+   335|        <div class="vitem-desc">LlamaIndex 团队出品的高性能文档解析器，Rust 实现。面向 RAG pipeline 的文档 ingestion 环节。</div>
+   336|      </div>
+   337|      <div style="flex-shrink:0;">
+   338|        <a href="https://github.com/run-llama/liteparse" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   339|      </div>
+   340|    </div>
+   341|    <div class="vitem">
+   342|      <div class="vitem-content">
+   343|        <div class="vitem-title">7. hardikpandya/stop-slop ⭐ 617</div>
+   344|        <div class="vitem-desc">去除 AI 写作痕迹的 skill 文件。在「AI 味」成为内容质量杀手的当下，这个工具的走红非常说明问题。</div>
+   345|      </div>
+   346|      <div style="flex-shrink:0;">
+   347|        <a href="https://github.com/hardikpandya/stop-slop" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   348|      </div>
+   349|    </div>
+   350|    <div class="vitem">
+   351|      <div class="vitem-content">
+   352|        <div class="vitem-title">8. twentyhq/twenty ⭐ 578 · TypeScript</div>
+   353|        <div class="vitem-desc">Salesforce 的开源替代品，专为 AI 时代设计。CRM 领域的「AI-native」尝试。</div>
+   354|      </div>
+   355|      <div style="flex-shrink:0;">
+   356|        <a href="https://github.com/twentyhq/twenty" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   357|      </div>
+   358|    </div>
+   359|    <div class="vitem">
+   360|      <div class="vitem-content">
+   361|        <div class="vitem-title">9. anthropics/claude-code ⭐ 395 · Python</div>
+   362|        <div class="vitem-desc">Anthropic 的终端 agentic coding 工具，直接在终端里理解代码库、执行任务、处理 git 工作流。</div>
+   363|      </div>
+   364|      <div style="flex-shrink:0;">
+   365|        <a href="https://github.com/anthropics/claude-code" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   366|      </div>
+   367|    </div>
+   368|    <div class="vitem">
+   369|      <div class="vitem-content">
+   370|        <div class="vitem-title">10. galilai-group/stable-worldmodel ⭐ 362 · Python</div>
+   371|        <div class="vitem-desc">可复现的世界模型研究平台。面向具身智能和世界模型评估的标准化框架。</div>
+   372|      </div>
+   373|      <div style="flex-shrink:0;">
+   374|        <a href="https://github.com/galilai-group/stable-worldmodel" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   375|      </div>
+   376|    </div>
+   377|    <div class="vitem">
+   378|      <div class="vitem-content">
+   379|        <div class="vitem-title">11. EveryInc/compound-engineering-plugin ⭐ 353 · TypeScript</div>
+   380|        <div class="vitem-desc">Compound Engineering 官方插件，支持 Claude Code、Codex、Cursor 等多种 AI 编程工具，提供工程最佳实践集成。</div>
+   381|      </div>
+   382|      <div style="flex-shrink:0;">
+   383|        <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   384|      </div>
+   385|    </div>
+   386|    <div class="vitem">
+   387|      <div class="vitem-content">
+   388|        <div class="vitem-title">12. Crosstalk-Solutions/project-nomad ⭐ 318 · TypeScript</div>
+   389|        <div class="vitem-desc">Project N.O.M.A.D——自给自足的离线生存计算机，内置关键工具、知识和 AI，随时随地在无网环境下保持信息掌控。</div>
+   390|      </div>
+   391|      <div style="flex-shrink:0;">
+   392|        <a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   393|      </div>
+   394|    </div>
+   395|    <div class="vitem">
+   396|      <div class="vitem-content">
+   397|        <div class="vitem-title">13. DataTalksClub/data-engineering-zoomcamp ⭐ 160 · Jupyter Notebook</div>
+   398|        <div class="vitem-desc">免费 9 周数据工程训练营，覆盖生产级数据管道建设。下一期 2026 年 1 月开课。</div>
+   399|      </div>
+   400|      <div style="flex-shrink:0;">
+   401|        <a href="https://github.com/DataTalksClub/data-engineering-zoomcamp" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   402|      </div>
+   403|    </div>
+   404|    <div class="vitem">
+   405|      <div class="vitem-content">
+   406|        <div class="vitem-title">14. cursor/plugins ⭐ 134 · TypeScript</div>
+   407|        <div class="vitem-desc">Cursor 官方插件规范和官方插件集合。随着 Cursor 生态扩展，插件化成为差异化关键。</div>
+   408|      </div>
+   409|      <div style="flex-shrink:0;">
+   410|        <a href="https://github.com/cursor/plugins" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   411|      </div>
+   412|    </div>
+   413|    <div class="vitem">
+   414|      <div class="vitem-content">
+   415|        <div class="vitem-title">15. Biohub/esm ⭐ 52 · Jupyter Notebook</div>
+   416|        <div class="vitem-desc">（无描述）</div>
+   417|      </div>
+   418|      <div style="flex-shrink:0;">
+   419|        <a href="https://github.com/Biohub/esm" target="_blank" style="font-size:10px;color:#2563eb;text-decoration:none;font-weight:500;">GitHub →</a>
+   420|      </div>
+   421|    </div>
+   422|  </div>
+   423|</div>
+   424|
+   425|<!-- 今日思考 -->
+   426|<div class="card span-4 card-highlight">
+   427|  <div class="label-sm" style="color:#2563eb;">今日思考</div>
+   428|  <div class="grid-2">
+   429|    <div class="callout" style="margin-top:0;">
+   430|      <div class="callout-title">Token 成本从 IT 零花钱变成 CFO 议题：SaaS 定价模型的历史转折</div>
+   431|      <div class="callout-text">Aaron Levie 在播客中指向一个深层变化：AI 预算正在从 IT 部门（占营收 3-7%）溢出到业务线预算（占营收 60-80%）。这意味着市场营销 VP、销售 VP、制造 VP 现在需要学会管理自己的 compute budget——一个他们从未处理过的成本项。$20/人/月的 SaaS 定价模型建立在「软件边际成本趋近于零」的前提上，但 agent 每次运行都在烧真金白银。这不是一个技术问题，这是一个商业模式问题。谁先解决「用量定价 + 业务线可理解」这个方程，谁就能吃掉这波迁移的红利。</div>
+   432|    </div>
+   433|    <div class="callout">
+   434|      <div class="callout-title">变更管理才是真正的瓶颈</div>
+   435|      <div class="callout-text">Levie 提到一个反直觉现象：AI 能力突破得越快，企业刚铺好的基础设施就越快过时。这制造了一个悖论——技术越先进，企业部署反而越慢。当所有人都在 tokenmaxxing，真正赢的可能是那些把变更管理做对的人。「慢下来」在某个时间点上反而成了竞争优势。</div>
+   436|    </div>
+   437|  </div>
+   438|  <div class="divider"></div>
+   439|  <div class="text-body" style="text-align:center;font-size:13px;">
+   440|    <strong>今日一问：</strong>你的组织里，AI 的 token 成本目前由谁在管？是 IT 部门默默扛着，还是已经进入了业务线的 P&amp;L？如果明天 CFO 要求每个部门报自己的 AI 预算，你的团队能拿出什么数字？
+   441|  </div>
+   442|</div>
+   443|
+   444|<!-- 参考来源 -->
+   445|<div class="card span-4">
+   446|  <div class="divider"></div>
+   447|  <div class="text-muted" style="text-align:center;font-size:11px;line-height:1.8;">
+   448|    <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+   449|    <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" style="color:#2563eb;text-decoration:none;">MAD Podcast — Aaron Levie: State of Enterprise AI 2026</a><br>
+   450|    <a href="https://x.com/garrytan/status/2060387204774633720" target="_blank" style="color:#2563eb;text-decoration:none;">Garry Tan — Opus 4.8 + OpenClaw</a><br>
+   451|    <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" style="color:#2563eb;text-decoration:none;">Guillermo Rauch — Vercel CLI + Docker in Sandbox</a><br>
+   452|    <a href="https://x.com/danshipper/status/2060382815821209801" target="_blank" style="color:#2563eb;text-decoration:none;">Dan Shipper — Tokenmaxxing 恐慌分析</a><br>
+   453|    <a href="https://x.com/amasad/status/2060122956429472027" target="_blank" style="color:#2563eb;text-decoration:none;">Amjad Masad — Replit Canvas</a><br>
+   454|    <a href="https://x.com/steipete/status/2060371944168358250" target="_blank" style="color:#2563eb;text-decoration:none;">Peter Steinberger — Clanker vs Vibe Coding 争议</a><br>
+   455|    <a href="https://x.com/mattturck/status/2060136766238028213" target="_blank" style="color:#2563eb;text-decoration:none;">Matt Turck — 2026 年 VC 的一天</a><br>
+   456|    <a href="https://x.com/nikunj/status/2060420902521835905" target="_blank" style="color:#2563eb;text-decoration:none;">Nikunj Kothari — 应用层收入与利润率</a><br>
+   457|    <a href="https://x.com/joshwoodward/status/2060443102507302948" target="_blank" style="color:#2563eb;text-decoration:none;">Josh Woodward — Gemini 多模态 Demo</a><br>
+   458|    <a href="https://x.com/swyx/status/2060148078754267426" target="_blank" style="color:#2563eb;text-decoration:none;">Swyx — AI Engineering 图灵奖设想</a><br>
+   459|    <a href="https://x.com/petergyang/status/2060149158615609474" target="_blank" style="color:#2563eb;text-decoration:none;">Peter Yang — Google 免费 AI Agents 课程</a><br>
+   460|    <a href="https://x.com/zarazhangrui/status/2060435594334130467" target="_blank" style="color:#2563eb;text-decoration:none;">Zara Zhang — AI 精神病概念</a><br>
+   461|    <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: MoneyPrinterTurbo</a><br>
+   462|    <a href="https://github.com/microsoft/markitdown" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub: microsoft/markitdown</a><br>
+   463|  </div>
+   464|  <div style="margin-top:8px;font-size:11px;color:#8b8b8b;text-align:center;">
+   465|    来源：X/Twitter Builder 动态、YouTube MAD Podcast、GitHub Trending。AI 日报每日更新。
+   466|  </div>
+   467|</div>
+   468|
+   469|</div>
+   470|
+   471|</body>
+   472|</html>
