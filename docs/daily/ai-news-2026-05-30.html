@@ -6,18 +6,20 @@
 <title>2026-05-30 AI 日报 - 第二号</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531d">
 <link rel="stylesheet" href="../pagefind/pagefind-ui.css">
 <script src="../pagefind/pagefind-ui.js" defer></script>
-<script src="../search.js" defer></script>
+<script src="../search.js?v=20260531d" defer></script>
 <style>
     .callout { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; }
     .callout-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 6px; }
     .callout-text { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
     .vlist { display: flex; flex-direction: column; gap: 10px; }
-    .vlist-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .vlist-2col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; }
+    .vlist-2col .masonry-column { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
     .vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .vlist-2col .vitem { width: 100%; min-width: 0; }
     .vitem-body { }
     .vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
     .vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.6; }
@@ -25,12 +27,18 @@
     .vitem-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; }
     .vitem-gallery.cols-2 { grid-template-columns: 1fr 1fr; }
     .vitem-gallery.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .vitem-gallery img { width: 100%; max-width: 100%; border-radius: 8px; display: block; }
+    .vitem-gallery img { width: 100%; max-width: 100%; height: auto; border-radius: 8px; display: block; background: #f0f0ee; }
     .vitem-gallery img:hover { transform: scale(1.02); transition: transform 0.15s ease; }
     .vitem-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
     .vitem-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #2563eb; text-decoration: none; font-weight: 500; padding: 5px 10px; background: rgba(37,99,235,0.06); border-radius: 8px; }
     .podcast-thumb { margin-top: 12px; }
     .podcast-thumb img { width: 100%; max-width: 100%; border-radius: 10px; }
+    @media (max-width: 760px) {
+      .vlist-2col { display: flex; flex-direction: column; }
+      .vlist-2col .masonry-column { display: contents; }
+      .vitem-gallery.cols-2,
+      .vitem-gallery.cols-3 { grid-template-columns: 1fr; }
+    }
 </style>
 </head>
 <body>
@@ -157,7 +165,7 @@
     </div>
   </div>
   <div class="podcast-thumb">
-    <img src="assets/2026-05-30/yt-Gs2styCcwro.jpg" loading="lazy" alt="MAD Podcast — Aaron Levie">
+        <img src="assets/2026-05-30/yt-Gs2styCcwro.jpg" width="1200" height="675" loading="lazy" alt="MAD Podcast — Aaron Levie">
   </div>
   <div class="vitem-actions" style="justify-content:flex-start;margin-top:4px;">
     <a href="https://www.youtube.com/watch?v=Gs2styCcwro" target="_blank" class="vitem-link">📱 查看完整播客 →</a>
@@ -188,8 +196,8 @@
         <div class="vitem-desc">宣布两大进展：① Vercel CLI 作为自更新零依赖二进制发布，成为「agent 的云基础设施」关键入口。② Docker 进驻 Vercel Sandbox，agent 可以直接在沙箱里跑容器。</div>
       </div>
       <div class="vitem-gallery cols-2">
-        <img src="assets/2026-05-30/rauchg-2060105470460010993-0.jpg" loading="lazy" alt="Vercel CLI">
-        <img src="assets/2026-05-30/rauchg-2060105470460010993-1.jpg" loading="lazy" alt="Docker in Sandbox">
+        <img src="assets/2026-05-30/rauchg-2060105470460010993-0.jpg" width="1800" height="600" loading="lazy" alt="Vercel CLI">
+        <img src="assets/2026-05-30/rauchg-2060105470460010993-1.jpg" width="2048" height="1072" loading="lazy" alt="Docker in Sandbox">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/rauchg/status/2060443982342357032" target="_blank" class="vitem-link">查看 →</a>
@@ -203,7 +211,7 @@
         <div class="vitem-desc">转发了一篇关于 tokenmaxxing 恐慌的分析，认为这种恐慌不会持续——当前的成本飙升是供需失衡和基础设施追赶期的短期现象，不是 AI 经济的永久特征。</div>
       </div>
       <div class="vitem-gallery">
-        <img src="assets/2026-05-30/danshipper-2060382815821209801-0.jpg" loading="lazy" alt="Tokenmaxxing 分析">
+        <img src="assets/2026-05-30/danshipper-2060382815821209801-0.jpg" width="1200" height="1161" loading="lazy" alt="Tokenmaxxing 分析">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/danshipper/status/2060382815821209801" target="_blank" class="vitem-link">查看 →</a>
@@ -217,7 +225,7 @@
         <div class="vitem-desc">发布 Replit Canvas：一个集图像生成、视频、音频、绘制、拖拽编辑、多人协作于一体的 AI 创作画布。目标是让 marketing、网站、艺术创作都变成「一起做饭」式的协作体验。</div>
       </div>
       <div class="vitem-gallery">
-        <img src="assets/2026-05-30/amasad-2060122956429472027-0.jpg" loading="lazy" alt="Replit Canvas">
+        <img src="assets/2026-05-30/amasad-2060122956429472027-0.jpg" width="1200" height="675" loading="lazy" alt="Replit Canvas">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/amasad/status/2060122956429472027" target="_blank" class="vitem-link">查看 →</a>
@@ -231,11 +239,11 @@
         <div class="vitem-desc">抛出两个争议观点：① "clanker 不是蔑称，vibe coding 才是"——引发社区对 AI 编程文化标签的激烈讨论。② 质疑「不用 LLM 找 bug」的立场，认为 LLM 在 bug 发现方面已经有实质价值。</div>
       </div>
       <div class="vitem-gallery cols-3">
-        <img src="assets/2026-05-30/steipete-2060371944168358250-0.jpg" loading="lazy" alt="Clanker 争议">
-        <img src="assets/2026-05-30/steipete-2060358460831682895-0.jpg" loading="lazy" alt="Steinberger 观点 1">
-        <img src="assets/2026-05-30/steipete-2060358460831682895-1.jpg" loading="lazy" alt="Steinberger 观点 2">
-        <img src="assets/2026-05-30/steipete-2060358460831682895-2.jpg" loading="lazy" alt="Steinberger 观点 3">
-        <img src="assets/2026-05-30/steipete-2060358460831682895-3.jpg" loading="lazy" alt="Steinberger 观点 4">
+        <img src="assets/2026-05-30/steipete-2060371944168358250-0.jpg" width="1200" height="630" loading="lazy" alt="Clanker 争议">
+        <img src="assets/2026-05-30/steipete-2060358460831682895-0.jpg" width="1200" height="454" loading="lazy" alt="Steinberger 观点 1">
+        <img src="assets/2026-05-30/steipete-2060358460831682895-1.jpg" width="1200" height="211" loading="lazy" alt="Steinberger 观点 2">
+        <img src="assets/2026-05-30/steipete-2060358460831682895-2.jpg" width="1200" height="959" loading="lazy" alt="Steinberger 观点 3">
+        <img src="assets/2026-05-30/steipete-2060358460831682895-3.jpg" width="1200" height="972" loading="lazy" alt="Steinberger 观点 4">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/steipete/status/2060371944168358250" target="_blank" class="vitem-link">查看 →</a>
@@ -271,8 +279,8 @@
         <div class="vitem-desc">连续分享 Gemini 新能力 demo：从笔记本里飞出的鸟、一次管理 20 个 runtime 环境的 agent job、让照片动起来。Gemini 的多模态 + agent 定位越来越清晰。</div>
       </div>
       <div class="vitem-gallery cols-2">
-        <img src="assets/2026-05-30/joshwoodward-2060443102507302948-0.jpg" loading="lazy" alt="Gemini Demo 1">
-        <img src="assets/2026-05-30/joshwoodward-2060443100703842527-0.jpg" loading="lazy" alt="Gemini Demo 2">
+        <img src="assets/2026-05-30/joshwoodward-2060443102507302948-0.jpg" width="1200" height="675" loading="lazy" alt="Gemini Demo 1">
+        <img src="assets/2026-05-30/joshwoodward-2060443100703842527-0.jpg" width="1200" height="675" loading="lazy" alt="Gemini Demo 2">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/joshwoodward/status/2060443102507302948" target="_blank" class="vitem-link">查看 →</a>
@@ -286,7 +294,7 @@
         <div class="vitem-desc">与 ACM 主席会面，探讨 AI Engineering 与学术界的深度合作，甚至提出了「AI Engineering 图灵奖」的设想。</div>
       </div>
       <div class="vitem-gallery">
-        <img src="assets/2026-05-30/swyx-2060148078754267426-0.jpg" loading="lazy" alt="Swyx ACM 会面">
+        <img src="assets/2026-05-30/swyx-2060148078754267426-0.jpg" width="1200" height="900" loading="lazy" alt="Swyx ACM 会面">
       </div>
       <div class="vitem-actions">
         <a href="https://x.com/swyx/status/2060148078754267426" target="_blank" class="vitem-link">查看 →</a>

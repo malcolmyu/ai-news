@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "build": "npm run build:search",
-    "build:search": "pagefind --site docs --output-subdir pagefind"
+    "build:search": "pagefind --site docs --output-subdir pagefind",
+    "site:update": "scripts/python.sh scripts/site_harness.py update-all",
+    "site:validate": "scripts/python.sh scripts/site_harness.py validate"
   },
   "devDependencies": {
     "pagefind": "^1.5.2"

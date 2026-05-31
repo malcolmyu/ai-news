@@ -35,6 +35,14 @@ warn() {
 println() { printf "\n"; }
 
 cd "$REPO" || { red "ERROR: Cannot cd to $REPO"; exit 1; }
+PYTHON_BIN="${PYTHON_BIN:-}"
+if [ -z "$PYTHON_BIN" ]; then
+  if [ -x "$REPO/scripts/python.sh" ]; then
+    PYTHON_BIN="$("$REPO/scripts/python.sh" --print)"
+  else
+    PYTHON_BIN="${PYTHON:-python3}"
+  fi
+fi
 bold "═══════════════════════════════════════════"
 bold "  ai-news Style & Integrity Check"
 bold "  Repo: $(basename "$REPO")"
@@ -68,7 +76,7 @@ check "All HTML files are complete (no truncation)"
 for f in docs/*.html docs/research/*.html docs/daily/*.html; do
   [ -f "$f" ] || continue
   # Extract <style> block and check for line number patterns
-  if python3 -c "
+  if "$PYTHON_BIN" -c "
 import re, sys
 with open('$f') as fh:
     html = fh.read()
@@ -169,7 +177,7 @@ else
     fi
 
     # 2b. Extra web fonts (only Inter allowed)
-    FONT_COUNT=$(grep -c 'fonts.googleapis.com' "$REPORT" 2>/dev/null || echo 0)
+    FONT_COUNT=$(grep -c 'fonts.googleapis.com/css2?family=' "$REPORT" 2>/dev/null || echo 0)
     if [ "$FONT_COUNT" -gt 1 ]; then
       warn "$BASENAME imports multiple fonts ($FONT_COUNT) — should only import Inter"
     fi
@@ -187,7 +195,7 @@ else
 
     # 2d. Shared stylesheet ensures correct palette & border-radius
     if grep -q 'styles.css' "$REPORT" 2>/dev/null; then
-      green "    â Uses shared styles.css"
+      green "    \xE2\x9C\x93 Uses shared styles.css"
     else
       # Legacy: hardcoded value checks for files without shared stylesheet
       if grep -q '#f5f5f4' "$REPORT" 2>/dev/null; then
@@ -228,6 +236,18 @@ for report in $(grep -oE 'research/[a-zA-Z0-9_-]+\.html' docs/index.html 2>/dev/
   fi
 done
 check "All homepage links point to existing files"
+
+println
+
+# ── Part 4: Structured Site Harness ─────────────────────────────────
+bold "【Structured Site Harness】"
+
+if "$PYTHON_BIN" scripts/site_harness.py validate; then
+  green "  \xE2\x9C\x93 Content index, archives, and generated sections are consistent"
+else
+  red "  \xE2\x9C\x97 Structured site harness validation failed"
+  ERRORS=$((ERRORS + 1))
+fi
 
 println
 

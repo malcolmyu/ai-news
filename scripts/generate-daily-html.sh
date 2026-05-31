@@ -119,6 +119,25 @@ echo "" >&2
 echo "--- Step 3: HTML embed snippets ---" >&2
 echo ""
 
+image_attrs() {
+  local path="$1"
+  local full_path="$PROJECT_DIR/$path"
+  local width=""
+  local height=""
+
+  if command -v sips >/dev/null 2>&1 && [[ -f "$full_path" ]]; then
+    width=$(sips -g pixelWidth "$full_path" 2>/dev/null | awk '/pixelWidth/ {print $2}')
+    height=$(sips -g pixelHeight "$full_path" 2>/dev/null | awk '/pixelHeight/ {print $2}')
+  elif command -v identify >/dev/null 2>&1 && [[ -f "$full_path" ]]; then
+    width=$(identify -format '%w' "$full_path" 2>/dev/null || true)
+    height=$(identify -format '%h' "$full_path" 2>/dev/null || true)
+  fi
+
+  if [[ -n "$width" && -n "$height" ]]; then
+    printf ' width="%s" height="%s"' "$width" "$height"
+  fi
+}
+
 # Print HTML snippets for embedding into the daily page
 echo "$MEDIA_JSON" | jq -r '.media[] | @json' | while read -r item; do
   TYPE=$(echo "$item" | jq -r '.type')
@@ -140,7 +159,8 @@ echo "$MEDIA_JSON" | jq -r '.media[] | @json' | while read -r item; do
         # Convert absolute path to relative path from docs/daily/
         BASENAME=$(basename "$abs_path")
         REL_PATH="${ASSETS_REL}/${BASENAME}"
-        echo "  <img src=\"${REL_PATH}\" alt=\"${USERNAME} tweet ${TWEET_ID} image ${IDX}\" style=\"width:100%;border-radius:8px;margin-top:10px;\">"
+        ATTRS=$(image_attrs "docs/daily/${REL_PATH}")
+        echo "  <img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"${USERNAME} tweet ${TWEET_ID} image ${IDX}\" style=\"width:100%;border-radius:8px;margin-top:10px;\">"
         IDX=$((IDX + 1))
       done
     fi
@@ -163,7 +183,8 @@ echo "$MEDIA_JSON" | jq -r '.media[] | @json' | while read -r item; do
     if [[ -n "$THUMBNAIL" ]]; then
       BASENAME=$(basename "$THUMBNAIL")
       REL_PATH="${ASSETS_REL}/${BASENAME}"
-      echo "  <!-- Thumbnail: <img src=\"${REL_PATH}\" alt=\"YouTube thumbnail\" style=\"width:100%;border-radius:8px;margin-top:10px;\"> -->"
+      ATTRS=$(image_attrs "docs/daily/${REL_PATH}")
+      echo "  <!-- Thumbnail: <img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"YouTube thumbnail\" style=\"width:100%;border-radius:8px;margin-top:10px;\"> -->"
     fi
 
     if [[ -n "$ERROR" ]]; then
@@ -191,9 +212,9 @@ echo "  Place it at the top of the archived-days list (reverse chronological ord
 # Step 5: Homepage update instructions
 # ---------------------------------------------------------------------------
 echo "" >&2
-echo "--- Step 5: Homepage update ---" >&2
-echo "  Run: python3 scripts/update-homepage.py" >&2
-echo "  This script scans docs/daily/ and updates docs/index.html automatically." >&2
+echo "--- Step 5: Site index update ---" >&2
+echo "  Run: npm run site:update" >&2
+echo "  This scans docs/daily/ and docs/research/, then updates homepage and archive pages." >&2
 
 # ---------------------------------------------------------------------------
 # Final summary

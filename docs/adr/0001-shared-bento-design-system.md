@@ -1,15 +1,34 @@
-# 001 — Shared Bento Design System with CSS Custom Properties
+# 001 — 使用共享 Bento 设计系统
 
-Context: 34 HTML files each carried their own inline `<style>` block duplicating the same bento design tokens (accent `#5e6ad2`, background `#f5f5f4`, border-radius 14px, Inter font). Two visual schemes coexisted — bento (22 files) and an older blue scheme (`#3b82f6`, 19 files). The `style-check.sh` pre-deployment check enforced a "no CSS :root variables" convention for research reports, because consistency relied on copy-pasted hardcoded values.
+## 背景
 
-Decision: Extract all shared design tokens and component classes into a single `docs/styles.css` using CSS custom properties (`:root { --accent, --bg-primary, --border, --radius-lg, … }`). All HTML files link to this stylesheet. The older blue scheme (thinking/ pages, deleted homepage.html) is retired in favor of bento. The style-check.sh now validates design tokens in `styles.css` and verifies each report links to it, rather than grepping for hardcoded hex values per file.
+项目里曾经有几十个 HTML 文件各自携带独立的 `<style>` 块，重复定义 bento 设计 token，例如强调色、背景色、圆角和 Inter 字体。与此同时，仓库里还同时存在两套视觉语言：日报/调研使用 bento 风格，旧 thinking 页面和历史页面使用另一套蓝色风格。
 
-Why: A shared stylesheet turns the design system into a deep module — a small interface (~80 class names + ~15 tokens) with high leverage (34 callers). Changing the accent color is now a one-line edit, not a 22-file search-and-replace. CSS custom properties were chosen over hardcoded values despite the old convention because in a truly shared stylesheet, the variables are the design system — they provide a single source of truth, readable names, and a path to dark-mode theming.
+早期的 `style-check.sh` 通过“禁止页面内 CSS 变量”的方式维持一致性。这在每个页面都复制样式的阶段是合理的防御，但当项目开始抽取共享样式表后，这条规则会反过来阻碍设计系统沉淀。
 
-Considered alternative: Using hardcoded values throughout styles.css to preserve the "no variables" convention. Rejected because that convention was a workaround for the inline-styles-per-file world; variables in a shared file serve a different purpose and are worth the precedent change.
+## 决策
 
-Consequences:
-- `docs/styles.css` is now the design system seam; any page that links to it inherits bento styling automatically
-- Thinking model pages (cognition, communication, decision, product) lost their distinct blue identity — now unified under bento
-- Standalone dark-theme presentation pages (`docs/20260510-thariq-html.html`, `docs/20260512-guizang-ppt.html`) keep their own inline styles — they are not part of the bento content system
-- `style-check.sh` `:root` check is relaxed to allow the shared stylesheet; per-report check now validates the link rather than hex values
+把共享设计 token 和公共组件类集中到 `docs/styles.css`。内容页面统一链接这个样式表，设计 token 使用 CSS custom properties 表达，例如 `--accent`、`--bg-primary`、`--border`、`--radius-lg`。
+
+旧的蓝色视觉方案不再作为新增内容标准。日报、调研报告、首页和归档页都应逐步使用共享 bento 设计系统。
+
+`style-check.sh` 不再逐页检查硬编码颜色，而是检查共享样式表是否存在关键 token，以及内容页是否链接 `docs/styles.css`。
+
+## 理由
+
+共享样式表让设计系统成为一个稳定模块：接口很小，影响面很大。修改强调色、圆角或卡片样式时，不需要在几十个 HTML 文件中搜索替换。
+
+CSS 变量在这里不是“页面私有样式”，而是设计系统的命名接口。它们比散落的硬编码值更清晰，也为后续主题化和暗色模式保留空间。
+
+## 备选方案
+
+继续在 `docs/styles.css` 内使用硬编码值，以延续“禁止变量”的旧约定。
+
+这个方案被放弃，因为旧约定是为了避免页面之间复制样式时发生漂移；一旦样式已经集中到共享文件里，变量本身就是防漂移机制。
+
+## 影响
+
+- `docs/styles.css` 成为 bento 设计系统的唯一真理来源。
+- 新增日报和调研报告必须使用共享样式表。
+- thinking 页面和历史展示页可以保留旧样式，但不作为新内容模板。
+- `style-check.sh` 和 `scripts/site_harness.py` 应围绕共享样式表做校验，而不是要求每个页面复制同一套颜色值。
