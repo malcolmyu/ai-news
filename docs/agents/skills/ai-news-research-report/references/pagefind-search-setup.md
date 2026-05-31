@@ -11,6 +11,7 @@ ai-news 站点使用 [Pagefind](https://pagefind.app/) (v1.5.2) 实现客户端�
 | `package.json` | 定义 `build:search` 脚本 → `pagefind --site docs --output-subdir pagefind` |
 | `package-lock.json` | Pagefind 依赖锁定 |
 | `docs/search.js` | 搜索 UI 逻辑（modal、快捷键、PagefindUI 初始化） |
+| `docs/site.js` | 全站交互逻辑（日报瀑布流、图片 lightbox、旧日报图片兼容层） |
 | `docs/styles.css` | 搜索触发器按钮样式 + modal 样式 |
 | `docs/index.html` | 搜索 HTML 结构（`#search-modal`、`#site-search`） + 引用 `pagefind/pagefind-ui.css` 和 `pagefind/pagefind-ui.js` |
 | `docs/pagefind/` | **搜索索引文件（必须提交）** — 由 `npm run build:search` 生成 |

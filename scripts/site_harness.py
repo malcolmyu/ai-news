@@ -20,7 +20,7 @@ AGENTS_DIR = DOCS / "agents"
 DAILY_DIR = DOCS / "daily"
 RESEARCH_DIR = DOCS / "research"
 INDEX = DOCS / "index.html"
-ASSET_VERSION = "20260531e"
+ASSET_VERSION = "20260531f"
 
 HOMEPAGE_DAILY_START = "<!-- HOMEPAGE-DAILY-START -->"
 HOMEPAGE_DAILY_END = "<!-- HOMEPAGE-DAILY-END -->"
@@ -209,7 +209,8 @@ def e(value: str) -> str:
 def search_assets(prefix: str) -> str:
     return f"""<link rel="stylesheet" href="{prefix}pagefind/pagefind-ui.css">
 <script src="{prefix}pagefind/pagefind-ui.js" defer></script>
-<script src="{prefix}search.js?v={ASSET_VERSION}" defer></script>"""
+<script src="{prefix}search.js?v={ASSET_VERSION}" defer></script>
+<script src="{prefix}site.js?v={ASSET_VERSION}" defer></script>"""
 
 
 def header(prefix: str, daily_href: str, research_href: str) -> str:
@@ -595,6 +596,8 @@ def validate() -> int:
             errors.append(f"{rel}: does not end with </html>")
         if re.search(r"<style\b.*?\d+\|\.", content, flags=re.S):
             errors.append(f"{rel}: style block contains read_file line prefixes")
+        if "search.js" in content and "site.js" not in content:
+            errors.append(f"{rel}: missing shared site.js")
         if path.parent in {DAILY_DIR, RESEARCH_DIR} and path.name != "archive.html":
             if "styles.css" not in content:
                 errors.append(f"{rel}: missing shared styles.css")
@@ -622,9 +625,13 @@ def validate() -> int:
             errors.append(f"docs/styles.css: missing image component token {token}")
 
     search_js = read_text(DOCS / "search.js") if (DOCS / "search.js").exists() else ""
+    if "PagefindUI" not in search_js or "openSearch" not in search_js:
+        errors.append("docs/search.js: missing search UI hooks")
+
+    site_js = read_text(DOCS / "site.js") if (DOCS / "site.js").exists() else ""
     for token in ("upgradeLegacyDailyGalleries", "openImageLightbox", ".vitem-gallery img, .podcast-thumb img"):
-        if token not in search_js:
-            errors.append(f"docs/search.js: missing image component hook {token}")
+        if token not in site_js:
+            errors.append(f"docs/site.js: missing site interaction hook {token}")
 
     for required in (
         AGENTS_DIR / "architecture.md",

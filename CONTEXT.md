@@ -35,6 +35,8 @@
 ```
 docs/
   styles.css              — shared bento design system
+  search.js               — Pagefind search modal and search UI behavior
+  site.js                 — shared page interactions: masonry, image lightbox, legacy galleries
   index.html              — homepage
   agents/
     README.md                — project-local production skill ownership notes

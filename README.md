@@ -18,6 +18,8 @@ Bento 风格：4 列网格布局，`#2563eb` 强调色，`#f5f5f4` 背景，Inte
 ```
 docs/
   styles.css                  # 共享 Bento 设计系统
+  search.js                   # 搜索弹窗与 Pagefind 初始化
+  site.js                     # 全站交互：瀑布流、图片预览、旧日报兼容层
   index.html                  # 首页
   agents/                     # 项目内 Hermes/Codex 生产 skills
   daily/                      # 日报 + 媒体资源 + 归档

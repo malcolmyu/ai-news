@@ -11,7 +11,7 @@ description: Fetch media (images, thumbnails) from X/Twitter and YouTube URLs fo
 **当前项目要求：**
 - 本地图片必须带 `width` / `height` HTML 属性，用于首屏前预判尺寸和瀑布流配平。
 - 禁止写 `style="width:100%"` 这类 inline CSS；响应式宽度由共享 `.vitem-gallery img` 样式处理。
-- Builder 动态必须放入 `.vlist.vlist-2col`，共享 `docs/search.js` 会自动按高度精确配平并在移动端恢复单列。
+- Builder 动态必须放入 `.vlist.vlist-2col`，共享 `docs/site.js` 会自动按高度精确配平并在移动端恢复单列。
 - 下载后的图片压缩目标是 800px 宽、JPEG 85、锐化；不要回退到 400px/55q。
 - 校验由 `scripts/site_harness.py validate` 拦截 `.vitem-gallery` 本地图片缺宽高的问题。
 
@@ -113,8 +113,8 @@ When generating daily digest HTML:
 - Multi-image: `class="vitem-gallery cols-2"` (2 images) or `cols-3` (3+ images)
 - Single image: `class="vitem-gallery"` (auto-fit defaults to 1 column)
 - Multi-image galleries are height-aligned by shared CSS: desktop uses same-row cropped thumbnails (`object-fit: cover`) and mobile returns to natural image height.
-- Daily pages get click-to-zoom automatically from `docs/search.js`; do not wrap images in custom links or page-specific modal code.
-- Legacy daily pages are upgraded at runtime by `upgradeLegacyDailyGalleries()` in `docs/search.js`: direct local `<img src="assets/...">` children under `.card` or `.vitem` are moved into generated `.vitem-gallery` wrappers. Do not remove this compatibility layer unless all old daily HTML has been migrated.
+- Daily pages get click-to-zoom automatically from `docs/site.js`; do not wrap images in custom links or page-specific modal code.
+- Legacy daily pages are upgraded at runtime by `upgradeLegacyDailyGalleries()` in `docs/site.js`: direct local `<img src="assets/...">` children under `.card` or `.vitem` are moved into generated `.vitem-gallery` wrappers. Do not remove this compatibility layer unless all old daily HTML has been migrated.
 - Only add `<img>` tags for tweets that have images in the output
 - Path: relative `assets/YYYY-MM-DD/xxx.jpg`
 - Do NOT add placeholder img tags for tweets without media

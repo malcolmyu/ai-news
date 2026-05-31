@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-05-31">
+<title>可验证性优先：从第二号生产 Harness 到移动 Agent 集群</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+
+  <!-- HERO -->
+  <div class="card span-4">
+    <div class="label-sm">Research · 2026/5/31 · Harness 展望</div>
+    <h1>可验证性优先：从第二号生产 Harness 到移动 Agent 集群</h1>
+    <div class="subtitle" style="margin-top:6px;">自然语言编排 Agent 蜂群时，瓶颈不在写代码，而在双轨验收与近真执行面。本文以「第二号」站点为已跑通样本，推演移动端 AI-native 研发的缺口与补齐路径。</div>
+    <div class="dots-row" style="margin-top:12px;">
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">可验证性</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Hermes / Codex</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">移动研发</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Agent 蜂群</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">双轨验收</span>
+    </div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Agent 角色分工</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">并行验收轨道</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">L1～L4</div>
+        <div class="stat-label">移动任务难度级</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">双向</div>
+        <div class="stat-label">起点↔终态追赶</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 VISION -->
+  <div class="card span-3">
+    <div class="label-sm">01 · 范式畅想</div>
+    <h2>未来开发：自然语言总指挥，Agent 蜂群执行</h2>
+    <div class="text-body" style="margin-bottom:10px;">
+      <strong>工作假设（非终局定论）：</strong>最佳软件工程体验不是「人写更多代码」，而是人握<strong>意图、规格与验收权</strong>，由 Personal Agent（Orchestrator）把任务拆给多个 Code / GUI Agent（Executor），在 Harness 约束下闭环执行。
+    </div>
+    <div class="quote">
+      <strong>发版前 walkthrough：</strong>你对 Orchestrator 说「今晚发版」。它派出三个子 Agent：一个改仓库并跑结构校验；一个用自动化测试 + 全链路日志断言业务路径；一个对关键屏做截图 diff。你只在汇总面板前签<strong>残留风险</strong>——不再逐行读 diff，除非某轨失败并附带证据链。
+    </div>
+    <div class="divider"></div>
+    <div class="text-body">
+      <strong>五条原则：</strong>（1）契约进仓库，不进聊天；（2）验证分层，硬锚优先；（3）失败可恢复、轨迹可回放；（4）模型变强 Harness 变薄，但不消失；（5）人永远握最终 merge 权。
+    </div>
+  </div>
+
+  <div class="card span-1">
+    <div class="label-sm">角色</div>
+    <h2>谁做什么</h2>
+    <div class="tip-card" style="margin-bottom:6px;">
+      <h3>👤 人</h3>
+      <div class="text-muted">意图、架构决策、验收标准、残留风险签核</div>
+    </div>
+    <div class="tip-card" style="margin-bottom:6px;">
+      <h3>🧭 Orchestrator</h3>
+      <div class="text-muted">Hermes 式调度：选 skill、拆任务、汇总结果</div>
+    </div>
+    <div class="tip-card">
+      <h3>⚙️ Executor</h3>
+      <div class="text-muted">Codex / GUI Agent：改文件、跑命令、操作设备</div>
+    </div>
+    <div class="divider"></div>
+    <div class="text-muted" style="font-size:11px;">第二号是当前范式里<strong>验收边界最清晰</strong>的子集；移动端是<strong>验收最难</strong>的子集。</div>
+  </div>
+
+  <!-- SWARM DIAGRAM -->
+  <div class="card span-4">
+    <div class="label-sm">架构图</div>
+    <h2>蜂群编排 + 双轨验收（工作模型）</h2>
+    <div class="diagram-wrap" style="background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:16px;margin-top:10px;overflow-x:auto;">
+      <svg viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg" style="display:block;min-width:720px;">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker>
+        </defs>
+        <rect x="360" y="16" width="200" height="44" rx="8" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="460" y="44" fill="#2563eb" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">自然语言意图 / 规格</text>
+        <line x1="460" y1="60" x2="460" y2="78" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="330" y="78" width="260" height="44" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5"/>
+        <text x="460" y="106" fill="#c4842f" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle">Orchestrator（Hermes）</text>
+        <line x1="380" y1="122" x2="200" y2="168" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+        <line x1="460" y1="122" x2="460" y2="168" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+        <line x1="540" y1="122" x2="720" y2="168" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+        <rect x="80" y="168" width="240" height="52" rx="8" fill="#fff" stroke="#2563eb"/>
+        <text x="200" y="192" fill="#1c1c1c" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">Code Agent</text>
+        <text x="200" y="208" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">改仓库 · 跑测试</text>
+        <rect x="340" y="168" width="240" height="52" rx="8" fill="#fff" stroke="#2563eb"/>
+        <text x="460" y="192" fill="#1c1c1c" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">GUI Agent</text>
+        <text x="460" y="208" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">点按 · 截屏 · 采日志</text>
+        <rect x="600" y="168" width="240" height="52" rx="8" fill="#fff" stroke="#2563eb"/>
+        <text x="720" y="192" fill="#1c1c1c" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">Judge Agent</text>
+        <text x="720" y="208" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">断言 · diff · 报告</text>
+        <line x1="200" y1="220" x2="320" y2="252" stroke="#8b8b8b" stroke-width="1"/>
+        <line x1="460" y1="220" x2="460" y2="252" stroke="#8b8b8b" stroke-width="1"/>
+        <line x1="720" y1="220" x2="600" y2="252" stroke="#8b8b8b" stroke-width="1"/>
+        <rect x="120" y="252" width="160" height="48" rx="8" fill="rgba(37,99,235,0.06)" stroke="#2563eb"/>
+        <text x="200" y="272" fill="#2563eb" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle">逻辑还原轨</text>
+        <text x="200" y="288" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="8" text-anchor="middle">日志·测试·轨迹</text>
+        <rect x="380" y="252" width="160" height="48" rx="8" fill="rgba(196,132,47,0.08)" stroke="#c4842f"/>
+        <text x="460" y="272" fill="#c4842f" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle">UI 还原轨</text>
+        <text x="460" y="288" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="8" text-anchor="middle">截图·布局 diff</text>
+        <rect x="640" y="252" width="160" height="48" rx="8" fill="#fff" stroke="#8b8b8b"/>
+        <text x="720" y="272" fill="#1c1c1c" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle">人 · 签核</text>
+        <text x="720" y="288" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="8" text-anchor="middle">残留风险</text>
+        <text x="460" y="310" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">两轨可并行，执行顺序可 UI 先或逻辑先</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 02 SECOND 号 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 已跑通样本</div>
+    <h2>第二号：Orchestrator + Executor + 仓库契约</h2>
+    <div class="text-body">
+      「第二号」不是普通静态站，而是<strong>内容生产 Harness 的试点</strong>：几乎全程用自然语言驱动 Hermes 调度、Codex 在仓库内执行。复杂度的核心不在 GitHub Pages，而在<strong>稳定、可复查、可验证地生产</strong>日报与调研报告。
+    </div>
+    <div class="vlist" style="margin-top:10px;">
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.1);color:#2563eb;">H</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Hermes — 调度与发号施令</div>
+          <div class="vitem-desc">选择 <code>docs/agents/skills/</code> 内项目 skill，拼装任务，<strong>不直接写文件</strong>。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.1);color:#2563eb;">C</div>
+        <div class="vitem-content">
+          <div class="vitem-title">Codex — 仓库内执行</div>
+          <div class="vitem-desc">改 HTML/CSS、跑 <code>site:validate</code>、浏览器验收、重建 Pagefind 索引。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.1);color:#2563eb;">R</div>
+        <div class="vitem-content">
+          <div class="vitem-title">仓库 — 权威契约</div>
+          <div class="vitem-desc"><code>docs/agents/contracts/</code>、<code>scripts/site_harness.py</code>、<code>.github/style-check.sh</code>。全局 skill 只能引用，不能覆盖。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card span-2">
+    <div class="label-sm">02 · 验证闭环</div>
+    <h2>一条标准流水线</h2>
+    <ol style="padding-left:18px;margin:8px 0 0;">
+      <li class="text-body" style="margin-bottom:6px;font-size:12px;">Hermes 选 skill → Codex 生成页面与资源</li>
+      <li class="text-body" style="margin-bottom:6px;font-size:12px;"><code>npm run site:update</code> 刷新首页与归档</li>
+      <li class="text-body" style="margin-bottom:6px;font-size:12px;"><code>npm run site:validate</code> + <code>style-check.sh</code></li>
+      <li class="text-body" style="margin-bottom:6px;font-size:12px;">内容变更时 <code>npm run build:search</code></li>
+      <li class="text-body" style="font-size:12px;">布局/媒体变更时浏览器检查桌面 + <strong>390px 移动端</strong></li>
+    </ol>
+    <div class="divider"></div>
+    <table class="table" style="font-size:11px;">
+      <tr><th>检查层</th><th>机制</th><th>类比移动「双轨」</th></tr>
+      <tr><td>结构 / 逻辑轨雏形</td><td><code>site_harness.py validate</code></td><td>日志 + 自动化断言</td></tr>
+      <tr><td>视觉 / UI 轨雏形</td><td>浏览器 390px 验收</td><td>截图 diff、布局回归</td></tr>
+    </table>
+    <div class="quote" style="margin-top:10px;">
+      <strong>一条教训：</strong><code>validate</code> 通过 ≠ 瀑布流对齐、搜索弹窗、架构图嵌入一定正确。<strong>结构可机验 ≠ 像素与交互可机验</strong>——这正是移动端要补的课。
+    </div>
+  </div>
+
+  <!-- 03 GAP -->
+  <div class="card span-3">
+    <div class="label-sm">03 · 差距（全文脊梁）</div>
+    <h2>常规工程（尤其移动端）与第二号差在哪？</h2>
+    <div class="text-body" style="margin-bottom:10px;">
+      第二号证明：在<strong>验收边界清晰</strong>的任务上，自然语言 + Agent 蜂群已能稳定交付。移动端缺的不是 Copilot 式补全，而是<strong>轨迹级、双轨、可并行</strong>的验收基础设施。
+    </div>
+    <table class="table" style="font-size:11px;margin-bottom:10px;">
+      <tr><th>维度</th><th>第二号（内容 Web）</th><th>常规移动 App</th></tr>
+      <tr><td>任务难度</td><td>约 L1～L2</td><td>普遍 L3～L4（跨屏、跨 App）</td></tr>
+      <tr><td>硬锚</td><td>HTML schema、链接、token</td><td>权限弹窗、系统 UI、网络时序</td></tr>
+      <tr><td>执行面</td><td>文件系统 + 浏览器</td><td>模拟器 / 真机 / 系统服务</td></tr>
+      <tr><td>失败证据</td><td>validate 日志 + 截图</td><td>需全链路 trace（console / network / DOM）</td></tr>
+    </table>
+    <div class="text-body">
+      参考 <a href="https://arxiv.org/abs/2605.26114" target="_blank" style="color:#2563eb;">MobileGym</a> 分级：L4 跨 App 工作流上最强模型成功率仍约 <strong>22%</strong>——瓶颈在<strong>可验证性与执行面</strong>，不在「会不会点屏幕」。
+    </div>
+  </div>
+
+  <div class="card span-1">
+    <div class="label-sm">行业锚点</div>
+    <h2>三层解耦</h2>
+    <div class="text-muted" style="font-size:11px;margin-bottom:8px;">Anthropic Managed Agents 把 Agent 拆为 Session / Harness / Sandbox——接口稳定、实现可换。详见本站 <a href="managed-agents.html" style="color:#2563eb;">Managed Agents 调研</a>。</div>
+    <div class="tip-card" style="margin-bottom:6px;">
+      <h3>📋 Session</h3>
+      <div class="text-muted">轨迹与事件日志，Harness 外持久化</div>
+    </div>
+    <div class="tip-card" style="margin-bottom:6px;">
+      <h3>🔧 Harness</h3>
+      <div class="text-muted">循环调模型、路由 tool、嵌 judge</div>
+    </div>
+    <div class="tip-card">
+      <h3>📦 Sandbox</h3>
+      <div class="text-muted">执行环境：仓库 / 模拟器 / 真机</div>
+    </div>
+  </div>
+
+  <!-- 04 SOLUTION -->
+  <div class="card span-4">
+    <div class="label-sm">04 · 弥补路径</div>
+    <h2>双轨验收 + 近真执行集群</h2>
+    <div class="grid-2" style="margin-top:10px;">
+      <div class="vitem" style="flex:1;">
+        <div class="vitem-content">
+          <div class="vitem-title">逻辑还原</div>
+          <div class="vitem-desc"><strong>自动化测试</strong> + 全链路日志（console、network、Element 等）+ GUI Agent 操作 + <strong>截屏留证</strong>。回答「对不对、完没完、卡在哪一步」。</div>
+        </div>
+      </div>
+      <div class="vitem" style="flex:1;">
+        <div class="vitem-content">
+          <div class="vitem-title">UI 还原</div>
+          <div class="vitem-desc">相对设计稿或 baseline 的<strong>视觉/布局 judge</strong>。回答「像不像、偏在哪」。与逻辑轨<strong>并行</strong>，谁先跑视任务而定；失败必须<strong>分因</strong>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="text-body"><strong>执行面（L1 架构，不含运营细节）：</strong></div>
+    <div class="diagram-wrap" style="background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;margin-top:8px;overflow-x:auto;">
+      <svg viewBox="0 0 880 200" xmlns="http://www.w3.org/2000/svg" style="display:block;min-width:640px;">
+        <rect x="20" y="70" width="140" height="56" rx="8" fill="#fff" stroke="#c4842f" stroke-width="1.5"/>
+        <text x="90" y="96" fill="#c4842f" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">Orchestrator</text>
+        <text x="90" y="112" fill="#8b8b8b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">任务队列</text>
+        <line x1="160" y1="98" x2="200" y2="98" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="200" y="55" width="160" height="86" rx="8" fill="#fff" stroke="#2563eb"/>
+        <text x="280" y="82" fill="#2563eb" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">Agent 执行池</text>
+        <text x="280" y="98" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">GUI · 测试 · 采集</text>
+        <text x="280" y="114" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">trace 回传</text>
+        <line x1="360" y1="98" x2="400" y2="98" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="400" y="55" width="180" height="86" rx="8" fill="#fff" stroke="#2563eb"/>
+        <text x="490" y="82" fill="#2563eb" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle">Mac mini 节点</text>
+        <text x="490" y="98" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">调度 · 日志汇聚</text>
+        <text x="490" y="114" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle">USB 真机槽位</text>
+        <line x1="580" y1="98" x2="620" y2="98" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="620" y="70" width="120" height="56" rx="8" fill="rgba(37,99,235,0.06)" stroke="#2563eb"/>
+        <text x="680" y="96" fill="#2563eb" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle">真机终验</text>
+        <text x="680" y="112" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="8" text-anchor="middle">Sim-to-Real</text>
+        <rect x="200" y="155" width="480" height="36" rx="6" fill="#fff" stroke="#8b8b8b" stroke-dasharray="4,3"/>
+        <text x="440" y="178" fill="#6b6b6b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">互补：浏览器模拟器（如 MobileGym）批量跑 · 真机抽验闭合缝隙</text>
+      </svg>
+    </div>
+    <div class="text-body" style="margin-top:10px;">
+      <strong>与模拟器的分工：</strong>Sandbox 侧重<strong>规模</strong>（nightly、并行、确定性 judge）；真机集群侧重<strong>终验</strong>（系统权限、厂商 ROM、网络时序）。多 Agent 集群是放大器，不替代双轨 judge。
+    </div>
+  </div>
+
+  <!-- 05 CONVERGENCE -->
+  <div class="card span-2">
+    <div class="label-sm">05 · 双向追赶</div>
+    <h2>从起点与终态往中间收敛</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">从起点追（第二号 → 移动）</div>
+          <div class="vitem-desc">把「契约进仓库 + 命令门禁」迁移为移动任务模板：规格 YAML、judge 脚本、trace 存储路径。先 L2 单 App 多步，再碰 L4。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">从终态追（蜂群 → 今日）</div>
+          <div class="vitem-desc">先在一个仓库插双轨 judge，再扩 Agent 池与真机槽位。规格锚定（如 OpenSpec）防长程<strong>目标漂移</strong>——见 <a href="openspec.html" style="color:#2563eb;">OpenSpec 调研</a>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card span-2">
+    <div class="label-sm">05 · 模型 vs 编排</div>
+    <h2>Harness 会变薄，不会消失</h2>
+    <div class="quote">
+      模型越强，Harness 越薄，但不会消失。约束从 Prompt 沉入代码与 judge；审查从人眼沉入双轨自动化。详见 <a href="multi-agent-research.html" style="color:#2563eb;">多 Agent 调研</a> 中的 Big Model / Big Orchestration 讨论。
+    </div>
+  </div>
+
+  <!-- 06 PILOT -->
+  <div class="card span-4 card-highlight">
+    <div class="label-sm">06 · 近期试点</div>
+    <h2>三条可执行验证（团队对齐用）</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">① 逻辑轨</div>
+          <div class="vitem-desc">选一个 L2 移动任务（单 App、多步）→ 产出「Agent 轨迹 + console/network 断言」模板。<em>Done：nightly 无人值守红/绿，失败可定位到步骤。</em></div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">② UI 轨</div>
+          <div class="vitem-desc">同任务或同屏建立 screenshot baseline + diff 门禁（与逻辑轨并行，顺序任选）。<em>Done：行为失败与视觉失败可分因。</em></div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">③ 执行面</div>
+          <div class="vitem-desc">Sandbox 批量 + 真机抽验一条 Sim-to-Real 闭环。<em>Done：至少 1 个任务可度量 sim/真机结论一致率。</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR SCENE -->
+  <div class="card span-4" style="background:rgba(37,99,235,0.02);border-color:rgba(37,99,235,0.12);">
+    <div class="label-sm" style="color:#2563eb;">与你的场景</div>
+    <h2>第二号生产 Harness ↔ 移动 AI-native 研发</h2>
+    <div class="vlist">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">本仓库已是「自然语言开发」的受控试点</div>
+          <div class="vitem-desc">Hermes/Codex 分工与 ADR 002 已落地。写本篇报告本身，就是同一套 Harness 的 dogfooding——证明难点在<strong>验收设计</strong>，不在「能不能生成 HTML」。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title"><code>site_harness validate</code> 是移动「逻辑还原」的极简先例</div>
+          <div class="vitem-desc">结构校验通过仍要浏览器验收，等价于移动「日志断言过了仍要 UI 轨」。不要把 Web 的轻松误当成移动的默认。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">下一步不是更长的 skill，而是更硬的 judge</div>
+          <div class="vitem-desc">延续「契约进仓库」哲学：把 UI/逻辑还原的产物（trace 包、baseline 图、断言脚本）版本化进 repo 或 artifact 库，让 Agent 蜂群在<strong>可验证边界</strong>内自治。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card span-4" style="text-align:center;padding:20px;border-top:1px solid #e8e8e6;">
+    <div class="text-muted" style="font-size:11px;line-height:1.8;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="../agents/architecture.md" style="color:#2563eb;text-decoration:none;">第二号 Hermes/Codex 架构</a> ·
+      <a href="managed-agents.html" style="color:#2563eb;text-decoration:none;">Managed Agents 调研</a> ·
+      <a href="multi-agent-research.html" style="color:#2563eb;text-decoration:none;">多 Agent 调研</a> ·
+      <a href="openspec.html" style="color:#2563eb;text-decoration:none;">OpenSpec 调研</a> ·
+      <a href="hermes-agent-architecture.html" style="color:#2563eb;text-decoration:none;">Hermes Agent 架构</a> ·
+      <a href="https://arxiv.org/abs/2605.26114" target="_blank" style="color:#2563eb;text-decoration:none;">MobileGym 论文</a> ·
+      <a href="https://github.com/Purewhiter/mobilegym" target="_blank" style="color:#2563eb;text-decoration:none;">MobileGym</a> ·
+      <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" style="color:#2563eb;text-decoration:none;">Anthropic — Building Effective Agents</a>
+      <br>
+      本文基于第二号工程实践、Harness 研发探索与站内已有调研交叉编写 · 2026-05-31
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

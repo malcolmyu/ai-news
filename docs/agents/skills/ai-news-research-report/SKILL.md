@@ -12,9 +12,9 @@ description: 为 ai-news 项目生成 bento HTML 内容（调研报告 + 每日�
 **当前项目架构已经升级：**
 - 共享样式来自 `docs/styles.css`，不要为每篇报告复制一整套内联 CSS。
 - 站点更新统一走 `scripts/site_harness.py`，旧的 `scripts/update-homepage.py` 只是兼容 wrapper。
-- 日报和调研报告都必须加载统一 header、search modal、`styles.css?v=<ASSET_VERSION>`、`search.js?v=<ASSET_VERSION>`。
+- 日报和调研报告都必须加载统一 header、search modal、`styles.css?v=<ASSET_VERSION>`、`search.js?v=<ASSET_VERSION>`、`site.js?v=<ASSET_VERSION>`。
 - 每次新增或修改 HTML 后，必须运行 `python3 scripts/site_harness.py validate`、`.github/style-check.sh`、必要时 `npm run build:search`。
-- 图片型 Builder 动态使用 `.vlist.vlist-2col`，共享 `search.js` 会自动做瀑布流和移动端单列。
+- 图片型 Builder 动态使用 `.vlist.vlist-2col`，共享 `site.js` 会自动做瀑布流和移动端单列。
 
 **已废弃的旧规则：**
 - 不再要求复制 `docs/research/ai-native-engineering-org.html` 的 `<style>` 块。
@@ -220,7 +220,7 @@ Codex 有两种认证模式，取决于用户的订阅类型：
 - 多图：2 张用 `cols-2`，3+ 张用 `cols-3`，单张不用额外 class（auto-fit 自动全宽）
 - 无图的 vitem 省略 `vitem-gallery`，直接用模式 1
 - **⚠️ 绝对禁止把图塞在 vitem 右侧 flex-shrink:0 侧栏** — 这会导致图文割裂
-- 新页面必须直接输出规范 `.vitem-gallery`。旧日报中直接散落在 `.card` / `.vitem` 下的本地图片由 `docs/search.js` 的 `upgradeLegacyDailyGalleries()` 运行时升级；这是正式兼容层，不应在页面里复制一套自定义逻辑。
+- 新页面必须直接输出规范 `.vitem-gallery`。旧日报中直接散落在 `.card` / `.vitem` 下的本地图片由 `docs/site.js` 的 `upgradeLegacyDailyGalleries()` 运行时升级；这是正式兼容层，不应在页面里复制一套自定义逻辑。
 
 #### 突出引用框（.quote）
 强调关键洞察或注意事项，替换旧版 `.callout`：

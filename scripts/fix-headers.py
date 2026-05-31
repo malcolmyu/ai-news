@@ -46,6 +46,7 @@ DAILY_SEARCH_MODAL = '''<div class="search-modal" id="search-modal" aria-hidden=
 SEARCH_HEAD = '''<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
 <script src="../pagefind/pagefind-ui.js" defer></script>
 <script src="../search.js" defer></script>
+<script src="../site.js" defer></script>
 '''
 
 RESEARCH_HEADER = '''<header class="header" data-pagefind-ignore>

@@ -85,7 +85,7 @@ bash .github/style-check.sh .
 
 新增日报应直接写出规范结构：图片放在 `.vitem-gallery` 中，2 张图使用 `cols-2`，3 张及以上使用 `cols-3`，本地图片保留 `width` 和 `height` 属性。
 
-旧日报不要求逐篇重写。`docs/search.js` 在页面加载时执行 `upgradeLegacyDailyGalleries()`，扫描 `.vitem` 和 `.card` 下直接散落的本地图片，把它们移动进自动生成的 `.vitem-gallery`。这样早期日报也能复用同一套多图等高、点击放大、键盘可访问能力。
+旧日报不要求逐篇重写。`docs/site.js` 在页面加载时执行 `upgradeLegacyDailyGalleries()`，扫描 `.vitem` 和 `.card` 下直接散落的本地图片，把它们移动进自动生成的 `.vitem-gallery`。这样早期日报也能复用同一套多图等高、点击放大、键盘可访问能力。
 
 兼容层只处理 `src` 以 `assets/` 开头的本地图片，避免误伤外链、徽章、图标和搜索组件。未来如果批量迁移旧日报 HTML，可以保留这个兼容层作为防回归兜底。
 
