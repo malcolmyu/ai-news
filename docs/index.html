@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第二号 — AI 新闻与研究</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="pagefind/pagefind-ui.css">
 <link rel="stylesheet" href="styles.css">
 <script src="pagefind/pagefind-ui.js" defer></script>
@@ -15,9 +15,10 @@
 const REPORTS = [
   '2026-03-26','2026-03-27','2026-03-28','2026-03-29','2026-03-30','2026-03-31',
   '2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06',
-  '2026-04-09','2026-04-15',
-  '2026-05-11','2026-05-13','2026-05-14','2026-05-15','2026-05-16','2026-05-17',
-  '2026-05-18','2026-05-19','2026-05-20','2026-05-21','2026-05-22','2026-05-23','2026-05-24','2026-05-25','2026-05-26','2026-05-27','2026-05-28','2026-05-29','2026-05-30'
+  '2026-04-09','2026-04-15','2026-05-11','2026-05-13','2026-05-14','2026-05-15',
+  '2026-05-16','2026-05-17','2026-05-18','2026-05-19','2026-05-20','2026-05-21',
+  '2026-05-22','2026-05-23','2026-05-24','2026-05-25','2026-05-26','2026-05-27',
+  '2026-05-28','2026-05-29','2026-05-30','2026-05-31'
 ];
 const REPORT_SET = new Set(REPORTS);
 const DAY_NAMES = ['一','二','三','四','五','六','日'];
@@ -28,33 +29,28 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 (function(){
   let curYear, curMonth;
   const today = new Date();
-  
+
   function renderCal() {
     const grid = document.getElementById('cal-grid');
     const label = document.getElementById('cal-month-label');
     const count = document.getElementById('cal-count');
     if (!grid) return;
-    
+
     label.textContent = curYear + '年 ' + MONTH_LABELS[curMonth];
-    
-    // count reports this month
+
     let monthCount = 0;
     for (const d of REPORTS) {
       const p = d.split('-');
       if (+p[0] === curYear && +p[1] === curMonth+1) monthCount++;
     }
     count.textContent = monthCount + ' 篇日报';
-    
-    const firstDay = new Date(curYear, curMonth, 1).getDay(); // 0=Sun
+
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
     const daysInMonth = new Date(curYear, curMonth+1, 0).getDate();
-    // convert Sun=0 to Mon=0
     const startOffset = firstDay === 0 ? 6 : firstDay - 1;
-    
+
     let html = '';
-    // empty cells before 1st
-    for (let i = 0; i < startOffset; i++) {
-      html += '<span class="cal-day empty"></span>';
-    }
+    for (let i = 0; i < startOffset; i++) html += '<span class="cal-day empty"></span>';
     for (let d = 1; d <= daysInMonth; d++) {
       const ds = fmtDate(curYear, curMonth, d);
       const has = REPORT_SET.has(ds);
@@ -62,15 +58,13 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
       let cls = 'cal-day';
       if (has) cls += ' has-report';
       if (isToday) cls += ' today';
-      if (has) {
-        html += '<a class="'+cls+'" href="daily/ai-news-'+ds+'.html" title="'+ds+'">'+d+'</a>';
-      } else {
-        html += '<span class="'+cls+'">'+d+'</span>';
-      }
+      html += has
+        ? '<a class="'+cls+'" href="daily/ai-news-'+ds+'.html" title="'+ds+'">'+d+'</a>'
+        : '<span class="'+cls+'">'+d+'</span>';
     }
     grid.innerHTML = html;
   }
-  
+
   window.calPrev = function() {
     curMonth--;
     if (curMonth < 0) { curMonth = 11; curYear--; }
@@ -81,18 +75,14 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
     if (curMonth > 11) { curMonth = 0; curYear++; }
     renderCal();
   };
-  
-  // init on DOM ready
+
   function init() {
     curYear = today.getFullYear();
     curMonth = today.getMonth();
     renderCal();
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
@@ -151,6 +141,7 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </section>
 
 <section class="hp-section" id="daily">
+<!-- HOMEPAGE-DAILY-START -->
 <div class="container">
 <div class="section-header-hp">
 <div>
@@ -161,41 +152,33 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 <div class="daily-layout">
 <div class="daily-left">
-<a href="daily/ai-news-2026-05-30.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<a href="daily/ai-news-2026-05-31.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
 <div style="flex:1;min-width:0;">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span class="featured-badge">最新</span>
-<span style="font-size:12px;color:var(--text-muted);">5月30日</span>
+<span style="font-size:12px;color:var(--text-muted);">5月31日</span>
 </div>
-<div style="font-weight:500;font-size:15px;margin-bottom:6px;">企业 AI「成本觉醒」：Token 从零花钱变成 CFO 议题</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Aaron Levie 谈 Token 成本 + 无头软件崛起 + MoE 统治性架构 + 12 位 Builder 动态 + 15 个 GitHub 项目。</div>
-<div style="display:flex;gap:18px;">
-<div><span style="font-size:18px;font-weight:500;color:#1c1c1c;">1</span><span style="font-size:10px;color:var(--text-muted);margin-left:3px;">深度播客</span></div>
-<div><span style="font-size:18px;font-weight:500;color:#1c1c1c;">12</span><span style="font-size:10px;color:var(--text-muted);margin-left:3px;">Builder</span></div>
-<div><span style="font-size:18px;font-weight:500;color:#1c1c1c;">15</span><span style="font-size:10px;color:var(--text-muted);margin-left:3px;">项目</span></div>
-</div>
+<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Salesforce 用 Claude Code 把 231 天缩成 13 天：Agentic 开发的效率与质量双赢</div>
+<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Salesforce 全面转向 agentic 工作流，一个预估 231 天的迁移任务 13 天完成，单 PR 交付 21 个 API 端点、测试覆盖率 100%，总事故反降 5%。OpenAI Codex 负责人暗示里程碑级数据即将公布。Box CEO Aaron Levie 犀利点评有人花 5 亿美元自建就证明 SaaS 价值远未被定价捕获。No Priors 播客聚焦 AI Agent 安全——一个正在发生但被严重低估的领域。</div>
 </div>
 <div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
-</a>
-<a href="daily/ai-news-2026-05-29.html" class="daily-entry">
+</a><a href="daily/ai-news-2026-05-30.html" class="daily-entry">
+<div class="entry-icon">📰</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:3px;">企业 AI「成本觉醒」：Token 从零花钱变成 CFO 议题</div>
+<div style="font-size:12px;color:var(--text-muted);">5月30日 · Box CEO Aaron Levie 在 MAD Podcast 中直言，token 成本已占企业 AI 讨论的 1/3 到一半。一个 coding agent 单次任务就能烧掉 $1,000，$20/人/月的 SaaS 定价模型彻底失效。YC CEO Garry Tan 盛赞 Opus 4.8 + OpenClaw 组合，Vercel CEO Guill</div>
+</div>
+<div style="font-size:16px;color:var(--accent);">→</div>
+</a><a href="daily/ai-news-2026-05-29.html" class="daily-entry">
 <div class="entry-icon">📰</div>
 <div style="flex:1;">
 <div style="font-weight:500;font-size:14px;margin-bottom:3px;">不是 AI 取代你，而是 AI 让你变得平庸——专家反而更稀缺</div>
-<div style="font-size:12px;color:var(--text-muted);">5月29日 · Every AI 化悖论 + GPT-5.2 + Anthropic 事故复盘 + Managed Agents + 10 个 GitHub 项目</div>
+<div style="font-size:12px;color:var(--text-muted);">5月29日 · Every 的 Dan Shipper 揭示 AI 化悖论：全公司最 AI 化，团队反而从 4 人扩到 30 人。OpenAI 发布 GPT-5.2——用强 teacher model 做 RL 训练编码 agent，SWE-Bench 达 82.6% 新 SOTA。Anthropic 公开 Claude Code 事故复盘：系统 prompt 加一行"不超</div>
 </div>
 <div style="font-size:16px;color:var(--accent);">→</div>
-</a>
-<a href="daily/ai-news-2026-05-28.html" class="daily-entry">
-<div class="entry-icon">📰</div>
-<div style="flex:1;">
-<div style="font-weight:500;font-size:14px;margin-bottom:3px;">RL 训练揭秘：模型会作弊，Anthropic 详解 Agent 隔离三种模式</div>
-<div style="font-size:12px;color:var(--text-muted);">5月28日 · Cursor Composer RL 训练内幕 + Anthropic 安全工程博客 + 15 个 GitHub 项目</div>
-</div>
-<div style="font-size:16px;color:var(--accent);">→</div>
-</a>
-<a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
+</a><a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
 <span style="font-size:12px;font-weight:500;color:var(--text-secondary);">历史日报</span>
-<span style="font-size:11px;color:var(--text-muted);">共 33 期归档 →</span>
+<span style="font-size:11px;color:var(--text-muted);">共 34 期归档 →</span>
 </a>
 </div>
 <div class="daily-right">
@@ -224,6 +207,7 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 </div>
 </div>
+<!-- HOMEPAGE-DAILY-END -->
 </section>
 
 <section class="hp-section" id="research">
@@ -244,7 +228,28 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 <a href="research/archive.html" class="section-link">查看全部 →</a>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;">
-<a href="research/openspec.html" class="featured-card"><div class="featured-content"><div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/29</span></div><h3 class="featured-title">OpenSpec 深度解析</h3><p class="featured-desc">查看完整调研报告</p></div><div class="featured-arrow">→</div></a><a href="research/agent-os-runtime.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent OS 深度解析</div><div style="font-size:12px;color:var(--text-muted);">2026/5/25</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a><a href="research/langsmith.html" class="daily-entry"><div class="entry-icon">📊</div><div style="flex:1;"><div style="font-weight:500;font-size:14px;margin-bottom:2px;">LangSmith 深度调研</div><div style="font-size:12px;color:var(--text-muted);">2026/5/24</div></div><div style="font-size:16px;color:var(--text-muted);">→</div></a>
+<a href="research/openspec.html" class="featured-card">
+<div class="featured-content">
+<div class="featured-meta"><span class="featured-badge">最新</span><span>2026/5/29</span></div>
+<h3 class="featured-title">OpenSpec：规格驱动开发如何让 AI 不再「做偏」</h3>
+<p class="featured-desc">来源：Bilibili 精讲视频 + GitHub 仓库深度分析 Vibe Coding 总跑偏？OpenSpec 用三层架构（Skill + CLI + schema.yaml）在编码前对齐需求，让 AI 先写规格再写代码。</p>
+</div>
+<div class="featured-arrow">→</div>
+</a><a href="research/agent-os-runtime.html" class="daily-entry">
+<div class="entry-icon">📊</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:2px;">Agent OS 深度解析：从 AIOS 内核到 Sandbox 运行时生态全景</div>
+<div style="font-size:12px;color:var(--text-muted);">2026/5/25 · 深度调研</div>
+</div>
+<div style="font-size:16px;color:var(--text-muted);">→</div>
+</a><a href="research/langsmith.html" class="daily-entry">
+<div class="entry-icon">📊</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:2px;">LangSmith：LLM Agent 可观测性与评估平台的领跑者</div>
+<div style="font-size:12px;color:var(--text-muted);">2026/5/24 · 深度调研</div>
+</div>
+<div style="font-size:16px;color:var(--text-muted);">→</div>
+</a>
 </div>
 </div>
 <!-- HOMEPAGE-RESEARCH-END -->
