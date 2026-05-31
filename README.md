@@ -11,7 +11,7 @@
 
 ## 设计系统
 
-Bento 风格：4 列网格布局，`#5e6ad2` 强调色，`#f5f5f4` 背景，Inter 字体，14px 圆角。共享样式表 `docs/styles.css` 作为唯一设计真理来源。
+Bento 风格：4 列网格布局，`#2563eb` 强调色，`#f5f5f4` 背景，Inter 字体，14px 圆角。共享样式表 `docs/styles.css` 作为唯一设计真理来源。
 
 ## 目录结构
 
@@ -19,13 +19,16 @@ Bento 风格：4 列网格布局，`#5e6ad2` 强调色，`#f5f5f4` 背景，Inte
 docs/
   styles.css                  # 共享 Bento 设计系统
   index.html                  # 首页
+  agents/                     # 项目内 Hermes/Codex 生产 skills
   daily/                      # 日报 + 媒体资源 + 归档
   research/                   # 调研报告 + 截图 + 归档
   thinking/                   # 思维模型页面
 scripts/
+  python.sh                    # Python runtime resolver for harness scripts
   fetch-daily-media.sh        # 下载 X/Twitter 图片 + YouTube 缩略图
   generate-daily-html.sh      # URL → HTML embed 流水线
-  update-homepage.py          # 通过注释标记更新首页调研区域
+  site_harness.py             # 内容索引、首页/归档生成、结构校验
+  update-homepage.py          # 兼容 wrapper，实际调用 site_harness.py
 .github/
   style-check.sh              # 部署前完整性 + 风格检查
   workflows/pages.yml         # GitHub Pages 自动部署
@@ -33,12 +36,18 @@ scripts/
 
 ## 工作流
 
-1. 每日日报通过 Claude Code session 生成，直接写入 `docs/daily/ai-news-YYYY-MM-DD.html`
-2. 调研报告手动编写为静态 HTML
-3. 首页调研区域通过 `python3 scripts/update-homepage.py` 自动更新
-4. Push 到 `main` 或 `malcolmyu/auckland` 分支触发 GitHub Pages 部署
-5. `style-check.sh` 在部署前运行完整性验证
+1. Hermes 根据 `docs/agents/` 中的项目内 skill 调度日报或调研报告任务
+2. Codex 执行文件编辑、媒体处理、浏览器验收和 git 操作
+3. 每日日报写入 `docs/daily/ai-news-YYYY-MM-DD.html`，媒体写入 `docs/daily/assets/YYYY-MM-DD/`
+4. 调研报告按 `docs/agents/skills/ai-news-research-report/` 的项目内流程生成
+5. 首页与归档页通过 `npm run site:update` 从内容文件自动生成
+6. `npm run site:validate`、`bash .github/style-check.sh .`、必要时 `npm run build:search` 在发布前运行完整性验证
+7. Push 到 `main` 或 `malcolmyu/auckland` 分支触发 GitHub Pages 部署
 
 ## 内容约定
 
 详见 [CONTEXT.md](CONTEXT.md)。
+
+## Harness 架构
+
+详见 [docs/agents/architecture.md](docs/agents/architecture.md) 和 [docs/adr/0002-hermes-codex-production-harness.md](docs/adr/0002-hermes-codex-production-harness.md)。

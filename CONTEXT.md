@@ -15,7 +15,7 @@
 
 ### Bento Style (current standard)
 
-- Accent: `#5e6ad2` (indigo)
+- Accent: `#2563eb` (blue)
 - Background: `#f5f5f4` (warm stone)
 - Card background: `#ffffff`
 - Text primary: `#1c1c1c`, secondary: `#6b6b6b`, muted: `#8b8b8b`
@@ -36,6 +36,9 @@
 docs/
   styles.css              — shared bento design system
   index.html              — homepage
+  agents/
+    README.md                — project-local production skill ownership notes
+    skills/                  — Hermes skills copied into the repo and modernized for this site
   daily/
     ai-news-YYYY-MM-DD.html  — daily reports
     assets/YYYY-MM-DD/       — media assets per day
@@ -47,17 +50,30 @@ docs/
   thinking/
     *.html                   — thinking model pages
 scripts/
+  python.sh                   — Python runtime resolver for harness scripts
   fetch-daily-media.sh       — download X/Twitter images + YouTube thumbnails
   generate-daily-html.sh     — URL extraction to HTML embed pipeline
-  update-homepage.py         — inject research section into homepage via markers
+  site_harness.py            — content index, homepage/archive generation, structural validation
+  update-homepage.py         — compatibility wrapper for homepage generation
 .github/
   style-check.sh             — pre-deployment integrity + style check
   workflows/pages.yml        — GitHub Pages deploy on push
 ```
 
+## Agent Production Skills
+
+Project-local skill source of truth lives in `docs/agents/skills/`.
+
+- `ai-news-research-report` defines the research report and daily page production workflow, updated for shared `docs/styles.css`, `scripts/site_harness.py`, Pagefind, and browser validation.
+- `daily-digest-media-fetch` defines X/Twitter + YouTube media fetching, image compression, intrinsic image dimensions, and masonry-friendly Builder card markup.
+
+Global Hermes skills may delegate the work, but Codex should execute repository changes according to these project-local versions.
+
+The harness architecture is documented in `docs/agents/architecture.md`; the architecture decision is captured in `docs/adr/0002-hermes-codex-production-harness.md`.
+
 ## Key Terms
 
 - **Builder** — someone building at the frontier of AI (founders, researchers, engineers), tracked in daily digests
 - **Bento** — the grid-based card layout used for daily/research content; 4-column grid at desktop, 2 at tablet, 1 at mobile
-- **nav-back** — the "← 返回首页" navigation pattern used on content pages
+- **nav-back** — retired "← 返回首页" navigation pattern; current pages should use the shared header/search shell
 - **数字分身** — "digital avatar", the framing for the entire site as a persistent AI-powered presence
