@@ -75,11 +75,19 @@ bash .github/style-check.sh .
 
 ## 校验职责
 
-`scripts/site_harness.py validate` 检查每次发布都应该成立的结构事实：HTML 是否完整、是否使用共享样式、首页与归档是否同步、本地链接是否存在、设计 token 是否存在、日报 Builder 图像是否带有尺寸信息、生产 contract 是否仍在仓库内。
+`scripts/site_harness.py validate` 检查每次发布都应该成立的结构事实：HTML 是否完整、是否使用共享样式、首页与归档是否同步、本地链接是否存在、设计 token 是否存在、日报 Builder 图像是否带有尺寸信息、图片组件兼容层是否仍在共享脚本里、生产 contract 是否仍在仓库内。
 
 `.github/style-check.sh` 是部署前门禁。它可以保留一些面向历史页面的检查，但结构判断应逐步下沉到 `scripts/site_harness.py`。
 
 浏览器验收仍然必要，因为静态检查无法证明视觉行为，例如瀑布流对齐、移动端溢出、搜索弹窗、架构图嵌入效果。
+
+## 图片组件与旧日报兼容层
+
+新增日报应直接写出规范结构：图片放在 `.vitem-gallery` 中，2 张图使用 `cols-2`，3 张及以上使用 `cols-3`，本地图片保留 `width` 和 `height` 属性。
+
+旧日报不要求逐篇重写。`docs/search.js` 在页面加载时执行 `upgradeLegacyDailyGalleries()`，扫描 `.vitem` 和 `.card` 下直接散落的本地图片，把它们移动进自动生成的 `.vitem-gallery`。这样早期日报也能复用同一套多图等高、点击放大、键盘可访问能力。
+
+兼容层只处理 `src` 以 `assets/` 开头的本地图片，避免误伤外链、徽章、图标和搜索组件。未来如果批量迁移旧日报 HTML，可以保留这个兼容层作为防回归兜底。
 
 ## 演进方向
 

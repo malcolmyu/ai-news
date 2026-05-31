@@ -112,6 +112,9 @@ When generating daily digest HTML:
 - Use `.vitem-gallery` with CSS Grid inside `.vitem` — images flow naturally in the content column
 - Multi-image: `class="vitem-gallery cols-2"` (2 images) or `cols-3` (3+ images)
 - Single image: `class="vitem-gallery"` (auto-fit defaults to 1 column)
+- Multi-image galleries are height-aligned by shared CSS: desktop uses same-row cropped thumbnails (`object-fit: cover`) and mobile returns to natural image height.
+- Daily pages get click-to-zoom automatically from `docs/search.js`; do not wrap images in custom links or page-specific modal code.
+- Legacy daily pages are upgraded at runtime by `upgradeLegacyDailyGalleries()` in `docs/search.js`: direct local `<img src="assets/...">` children under `.card` or `.vitem` are moved into generated `.vitem-gallery` wrappers. Do not remove this compatibility layer unless all old daily HTML has been migrated.
 - Only add `<img>` tags for tweets that have images in the output
 - Path: relative `assets/YYYY-MM-DD/xxx.jpg`
 - Do NOT add placeholder img tags for tweets without media

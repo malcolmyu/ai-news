@@ -154,15 +154,28 @@ echo "$MEDIA_JSON" | jq -r '.media[] | @json' | while read -r item; do
       echo "  <!-- [MEDIA FAILED] ${ERROR} — add manual screenshot if needed -->"
     else
       # Print <img> tags with relative paths (relative to docs/daily/)
+      IMAGE_COUNT=$(echo "$IMAGES" | jq 'length')
+      if [[ "$IMAGE_COUNT" -gt 0 ]]; then
+        GALLERY_CLASS="vitem-gallery"
+        if [[ "$IMAGE_COUNT" -eq 2 ]]; then
+          GALLERY_CLASS="vitem-gallery cols-2"
+        elif [[ "$IMAGE_COUNT" -gt 2 ]]; then
+          GALLERY_CLASS="vitem-gallery cols-3"
+        fi
+        echo "  <div class=\"${GALLERY_CLASS}\">"
+      fi
       IDX=0
       echo "$IMAGES" | jq -r '.[]' | while read -r abs_path; do
         # Convert absolute path to relative path from docs/daily/
         BASENAME=$(basename "$abs_path")
         REL_PATH="${ASSETS_REL}/${BASENAME}"
         ATTRS=$(image_attrs "docs/daily/${REL_PATH}")
-        echo "  <img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"${USERNAME} tweet ${TWEET_ID} image ${IDX}\" style=\"width:100%;border-radius:8px;margin-top:10px;\">"
+        echo "    <img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"${USERNAME} tweet ${TWEET_ID} image ${IDX}\">"
         IDX=$((IDX + 1))
       done
+      if [[ "$IMAGE_COUNT" -gt 0 ]]; then
+        echo "  </div>"
+      fi
     fi
     echo ""
 
@@ -184,7 +197,7 @@ echo "$MEDIA_JSON" | jq -r '.media[] | @json' | while read -r item; do
       BASENAME=$(basename "$THUMBNAIL")
       REL_PATH="${ASSETS_REL}/${BASENAME}"
       ATTRS=$(image_attrs "docs/daily/${REL_PATH}")
-      echo "  <!-- Thumbnail: <img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"YouTube thumbnail\" style=\"width:100%;border-radius:8px;margin-top:10px;\"> -->"
+      echo "  <!-- Thumbnail: <div class=\"vitem-gallery\"><img src=\"${REL_PATH}\"${ATTRS} loading=\"lazy\" alt=\"YouTube thumbnail\"></div> -->"
     fi
 
     if [[ -n "$ERROR" ]]; then

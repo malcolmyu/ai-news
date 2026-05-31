@@ -220,6 +220,7 @@ Codex 有两种认证模式，取决于用户的订阅类型：
 - 多图：2 张用 `cols-2`，3+ 张用 `cols-3`，单张不用额外 class（auto-fit 自动全宽）
 - 无图的 vitem 省略 `vitem-gallery`，直接用模式 1
 - **⚠️ 绝对禁止把图塞在 vitem 右侧 flex-shrink:0 侧栏** — 这会导致图文割裂
+- 新页面必须直接输出规范 `.vitem-gallery`。旧日报中直接散落在 `.card` / `.vitem` 下的本地图片由 `docs/search.js` 的 `upgradeLegacyDailyGalleries()` 运行时升级；这是正式兼容层，不应在页面里复制一套自定义逻辑。
 
 #### 突出引用框（.quote）
 强调关键洞察或注意事项，替换旧版 `.callout`：

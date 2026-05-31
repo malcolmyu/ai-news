@@ -1,6 +1,8 @@
 (function () {
   var modal;
+  var imageLightbox;
   var lastActiveElement;
+  var lastImageElement;
 
   function focusSearchInput() {
     window.setTimeout(function () {
@@ -51,8 +53,116 @@
       }
 
       if (event.key === "Escape") {
+        closeImageLightbox();
         closeSearch();
       }
+    });
+  }
+
+  function ensureImageLightbox() {
+    if (imageLightbox) return imageLightbox;
+
+    imageLightbox = document.createElement("div");
+    imageLightbox.className = "image-lightbox";
+    imageLightbox.setAttribute("aria-hidden", "true");
+    imageLightbox.setAttribute("data-pagefind-ignore", "");
+    imageLightbox.innerHTML = [
+      '<div class="image-lightbox-backdrop" data-image-lightbox-close></div>',
+      '<div class="image-lightbox-dialog" role="dialog" aria-modal="true" aria-label="图片预览">',
+      '<button class="image-lightbox-close" type="button" data-image-lightbox-close aria-label="关闭图片预览">×</button>',
+      '<img class="image-lightbox-img" alt="">',
+      '<div class="image-lightbox-caption"></div>',
+      "</div>"
+    ].join("");
+    document.body.appendChild(imageLightbox);
+
+    imageLightbox.querySelectorAll("[data-image-lightbox-close]").forEach(function (trigger) {
+      trigger.addEventListener("click", closeImageLightbox);
+    });
+
+    return imageLightbox;
+  }
+
+  function openImageLightbox(img) {
+    var src = img.currentSrc || img.src;
+    if (!src) return;
+
+    var lightbox = ensureImageLightbox();
+    var preview = lightbox.querySelector(".image-lightbox-img");
+    var caption = lightbox.querySelector(".image-lightbox-caption");
+    lastImageElement = img;
+
+    preview.src = src;
+    preview.alt = img.alt || "图片预览";
+    caption.textContent = img.alt || "";
+    caption.hidden = !img.alt;
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("image-lightbox-open");
+
+    var closeButton = lightbox.querySelector(".image-lightbox-close");
+    if (closeButton) closeButton.focus();
+  }
+
+  function closeImageLightbox() {
+    if (!imageLightbox || imageLightbox.getAttribute("aria-hidden") === "true") return;
+
+    imageLightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("image-lightbox-open");
+
+    var preview = imageLightbox.querySelector(".image-lightbox-img");
+    if (preview) preview.removeAttribute("src");
+
+    if (lastImageElement && typeof lastImageElement.focus === "function") {
+      lastImageElement.focus();
+    }
+  }
+
+  function upgradeLegacyDailyGalleries() {
+    document.querySelectorAll(".vitem, .card").forEach(function (item) {
+      if (item.querySelector(":scope > .vitem-gallery")) return;
+
+      var images = Array.prototype.slice.call(item.children).filter(function (child) {
+        return child.tagName === "IMG" && /^assets\//.test(child.getAttribute("src") || "");
+      });
+      if (!images.length) return;
+
+      var gallery = document.createElement("div");
+      gallery.className = "vitem-gallery";
+      if (images.length === 2) {
+        gallery.className += " cols-2";
+      } else if (images.length > 2) {
+        gallery.className += " cols-3";
+      }
+
+      item.insertBefore(gallery, images[0]);
+      images.forEach(function (img) {
+        gallery.appendChild(img);
+      });
+    });
+  }
+
+  function initImageComponents() {
+    upgradeLegacyDailyGalleries();
+
+    var selector = ".vitem-gallery img, .podcast-thumb img";
+    document.querySelectorAll(selector).forEach(function (img) {
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", (img.alt ? img.alt + "，" : "") + "点击放大图片");
+    });
+
+    document.addEventListener("click", function (event) {
+      var img = event.target.closest ? event.target.closest(selector) : null;
+      if (!img) return;
+      openImageLightbox(img);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      var img = event.target.closest ? event.target.closest(selector) : null;
+      if (!img || (event.key !== "Enter" && event.key !== " ")) return;
+
+      event.preventDefault();
+      openImageLightbox(img);
     });
   }
 
@@ -203,6 +313,7 @@
 
   function init() {
     initSearchShell();
+    initImageComponents();
     initDailyMasonry();
     initSearch();
   }

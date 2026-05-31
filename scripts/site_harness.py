@@ -20,7 +20,7 @@ AGENTS_DIR = DOCS / "agents"
 DAILY_DIR = DOCS / "daily"
 RESEARCH_DIR = DOCS / "research"
 INDEX = DOCS / "index.html"
-ASSET_VERSION = "20260531d"
+ASSET_VERSION = "20260531e"
 
 HOMEPAGE_DAILY_START = "<!-- HOMEPAGE-DAILY-START -->"
 HOMEPAGE_DAILY_END = "<!-- HOMEPAGE-DAILY-END -->"
@@ -617,6 +617,14 @@ def validate() -> int:
     for token in ("--accent: #2563eb", "--bg-primary: #f5f5f4", "--text-primary: #1c1c1c", "--border: #e8e8e6", "--radius-lg: 14px"):
         if token not in styles:
             errors.append(f"docs/styles.css: missing token {token}")
+    for token in (".image-lightbox", "object-fit: cover", "body.image-lightbox-open"):
+        if token not in styles:
+            errors.append(f"docs/styles.css: missing image component token {token}")
+
+    search_js = read_text(DOCS / "search.js") if (DOCS / "search.js").exists() else ""
+    for token in ("upgradeLegacyDailyGalleries", "openImageLightbox", ".vitem-gallery img, .podcast-thumb img"):
+        if token not in search_js:
+            errors.append(f"docs/search.js: missing image component hook {token}")
 
     for required in (
         AGENTS_DIR / "architecture.md",
