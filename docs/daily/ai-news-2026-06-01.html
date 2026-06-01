@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-01 AI 日报 - 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260601">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260601" defer></script>
+<script src="../site.js?v=20260601" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:15px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:15px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月1日 · 周一</div>
+  <h1>AI 建造者日报</h1>
+  <div class="subtitle">
+    前晚 Gemini 联合负责人 <strong>Oriol Vinyals</strong> 在 Unsupervised Learning 播客上丢出一句话：如果拿七年前的标准衡量，现在的模型已经是 AGI 了。但他真正追的东西比“通过图灵测试”野心大得多，模型能不能像 AlphaGo 的 Move 37 那样，在机器学习研究本身做出人类想不到的创新。
+  </div>
+  <div class="dots-row">
+    <span class="tag">Gemini</span>
+    <span class="tag">世界模型</span>
+    <span class="tag">强化学习</span>
+    <span class="tag">记忆系统</span>
+    <span class="tag">Agent 架构</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">今日重点</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">趋势项目</div></div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>🧠 Oriol Vinyals：真正缺失的是持续学习与研究创新。</strong> 当前模型在数学和编程上的 RL 突破已经惊人，但 Gemini 团队更关心世界模型、记忆系统、Agent 架构，以及模型是否能提出人类没想到的机器学习创新。</p>
+      <div class="vitem-gallery" style="margin-top:12px;">
+        <img src="assets/2026-06-01/yt-NQczevdpxq0.jpg" width="1280" height="720" loading="lazy" alt="Oriol Vinyals 播客缩略图">
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>📰 Anthropic Claude Managed Agents 更新。</strong> 新能力包括 dreaming、outcomes、multiagent orchestration。最有趣的是 dreaming：Agent 会在后台回顾历史会话，发现模式并自我优化，不需要人类介入。</p>
+      <div style="margin-top:12px;">
+        <a href="https://claude.com/blog/new-in-claude-managed-agents" target="_blank" class="vitem-link">查看发布 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Oriol Vinyals：从世界模型到 Move 37 式创新</h2>
+  <div class="text-body">
+    <strong>核心论点：</strong>Vinyals 系统性分享了 Gemini 团队对世界模型、RL 下一阶段、记忆系统、以及 Agent 架构的思考。他认为当前模型在数学和编程上的 RL 突破是惊人的，但真正令人兴奋的是“元能力”：持续学习、从经验中高效抽象、以及在新领域中的泛化。
+  </div>
+  <div class="vitem-gallery" style="margin-top:12px;">
+    <img src="assets/2026-06-01/yt-NQczevdpxq0.jpg" width="1280" height="720" loading="lazy" alt="Oriol Vinyals 在 Unsupervised Learning 播客">
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">世界模型的 GPT 时刻尚未到来</div><div class="vitem-desc">从纯视频数据提取概念而不依赖语言标注，是机器学习十年来未解的难题。Omni 虽然强大，但那种“给所有视频就能学会重力定律”的纯无监督迁移还没实现。</div></div>
+    <div class="vitem"><div class="vitem-title">RL 的下一个前沿不是垂直领域，是元能力</div><div class="vitem-desc">数学和编程可以验证，所以 RL 效果爆炸。但大部分我们希望模型做的事根本无法写出验证器。让人乐观的是，验证总是比创造简单，模型自己终将成为评判者。</div></div>
+    <div class="vitem"><div class="vitem-title">记忆系统 = 文件系统</div><div class="vitem-desc">当前最实用的记忆方案不是改权重，而是 Agent 在交互中将思考写入文件系统、建立知识库。这种非参数化的记忆方式可能是下一个类似推理突破的范式转移。</div></div>
+    <div class="vitem"><div class="vitem-title">Bitter Lesson 正在吃掉 Agent 脚手架</div><div class="vitem-desc">今天人们手写的 multi-agent、delegation、长时间运行系统，最终会被模型自己动态生成。模型会为当前任务自动决定需要怎样的子 Agent 架构。</div></div>
+    <div class="vitem"><div class="vitem-title">“AGI 已经很近了”</div><div class="vitem-desc">Vinyals 同意 Demis 在 Google I/O 上“处在奇点山脚”的判断，但他补充：真正的缺失是模型从经验中持续学习的能力。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=NQczevdpxq0" target="_blank" class="vitem-link">观看播客 →</a>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>Codex、Vercel、Box、OpenClaw、Every、Cursor 与 YC 的今天</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+    <div class="vitem">
+      <div class="vitem-title">OpenAI Codex 团队 Thibault Sottiaux</div>
+      <div class="vitem-desc">Codex 用户突破 500 万，GPT-5.5 带来速度与效率的显著跃升。从 5.0→5.1→5.5 的版本号递增对应的是能力提升和 token 效率的改善。他还在征集社区反馈：有什么长期没修、又很烦人的问题？</div>
+      <div class="vitem-actions"><a href="https://x.com/thsottiaux/status/2060627747760984429" target="_blank" class="vitem-link">500 万用户 →</a><a href="https://x.com/thsottiaux/status/2060964284117782996" target="_blank" class="vitem-link">社区反馈 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Vercel CEO Guillermo Rauch</div>
+      <div class="vitem-desc">发布 AI Gateway 的按 API Key 消费上限功能。关于产品哲学，他只说了八个词：“Ship the best product. Use lots of AI, some AI, maybe no AI. Just be the best.”</div>
+      <div class="vitem-gallery"><img src="assets/2026-06-01/rauchg-2060787704166776927-0.jpg" width="1200" height="1105" loading="lazy" alt="Guillermo Rauch 推文截图"></div>
+      <div class="vitem-actions"><a href="https://x.com/rauchg/status/2060803480823193840" target="_blank" class="vitem-link">AI Gateway →</a><a href="https://x.com/rauchg/status/2060787704166776927" target="_blank" class="vitem-link">产品哲学 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Box CEO Aaron Levie</div>
+      <div class="vitem-desc">在和大量企业 CIO/CTO 的交流中发现一个反直觉趋势：AI 正在创造而不是消灭工作岗位。企业因 AI 增长，催生了 FDE、工程等新角色，而非简单替代。</div>
+      <div class="vitem-gallery cols-3">
+        <img src="assets/2026-06-01/levie-2060923684295221390-0.jpg" width="1170" height="1090" loading="lazy" alt="Aaron Levie 推文图片一">
+        <img src="assets/2026-06-01/levie-2060923684295221390-1.jpg" width="824" height="1200" loading="lazy" alt="Aaron Levie 推文图片二">
+        <img src="assets/2026-06-01/levie-2060923684295221390-2.jpg" width="1137" height="632" loading="lazy" alt="Aaron Levie 推文图片三">
+      </div>
+      <div class="vitem-actions"><a href="https://x.com/levie/status/2060923684295221390" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">OpenClaw 创始人 Peter Steinberger</div>
+      <div class="vitem-desc">GPT 5.5 让他的 Agent 任务从 30-60 分钟延伸到 4-10 小时，且可靠性大幅提升。“Yielding agents is a skill” 也是一句提醒：驾驭 Agent 本身就是一门手艺。他还指出 Codex 的一个有趣现象：直接问有没有 bug 会说没问题，但告诉它“这里有 bug”就会不断深入发现真正的问题。</div>
+      <div class="vitem-actions"><a href="https://x.com/steipete/status/2060678430031597696" target="_blank" class="vitem-link">长任务 →</a><a href="https://x.com/steipete/status/2060672154727825718" target="_blank" class="vitem-link">找 bug →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Every CEO Dan Shipper</div>
+      <div class="vitem-desc">Codex 重度使用数据：380 亿 token 消耗，单次最长任务 56 小时，连续 41 天使用。42 天 streak 还在继续。</div>
+      <div class="vitem-gallery"><img src="assets/2026-06-01/danshipper-2060771279280513362-0.jpg" width="1200" height="812" loading="lazy" alt="Dan Shipper Codex 使用数据"></div>
+      <div class="vitem-actions"><a href="https://x.com/danshipper/status/2060771279280513362" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Cursor 设计师 Ryo Lu</div>
+      <div class="vitem-desc">Auto-review 功能让新手能理解每条命令的作用和风险，大幅降低了编码学习门槛。</div>
+      <div class="vitem-gallery"><img src="assets/2026-06-01/ryolu_-2060766674203353190-0.jpg" width="1200" height="675" loading="lazy" alt="Cursor Auto-review 功能截图"></div>
+      <div class="vitem-actions"><a href="https://x.com/ryolu_/status/2060766674203353190" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">YC CEO Garry Tan</div>
+      <div class="vitem-desc">警告旧金山的建筑热潮还没来，这不是好信号。同时发布加州投票指南，支持 Patrick Wolff 竞选保险专员。</div>
+      <div class="vitem-actions"><a href="https://x.com/garrytan/status/2060949003790176667" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Roblox / 独立创作者 Peter Yang</div>
+      <div class="vitem-desc">预言 AI 教育的终极形态：在玩 Final Fantasy 的过程中学会数学和计算机科学。他已经用 Brilliant.org 在教女儿编程。</div>
+      <div class="vitem-actions"><a href="https://x.com/petergyang/status/2060930599565811774" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Zara Zhang</div>
+      <div class="vitem-desc">注意到 Opus 4.8 不再使用 Em Dash，这种细节变化暗示着模型输出风格的微妙转变。</div>
+      <div class="vitem-actions"><a href="https://x.com/zarazhangrui/status/2060962160872919043" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">FPV Ventures Nikunj Kothari</div>
+      <div class="vitem-desc">“Time is a flat circle.” 对于那些重新进入讨论的老话题，这是个优雅的提醒。</div>
+      <div class="vitem-gallery cols-2">
+        <img src="assets/2026-06-01/nikunj-2060948669164347448-0.jpg" width="1200" height="1167" loading="lazy" alt="Nikunj Kothari 推文图片一">
+        <img src="assets/2026-06-01/nikunj-2060948669164347448-1.jpg" width="1200" height="1167" loading="lazy" alt="Nikunj Kothari 推文图片二">
+      </div>
+      <div class="vitem-actions"><a href="https://x.com/nikunj/status/2060948669164347448" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending · 2026-06-01</div>
+  <h2>今日 12 个趋势项目</h2>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">1. microsoft/markitdown ⭐ 2,798 · Python</div><div class="vitem-desc">将 Office 文档批量转换为 Markdown 的 Python 工具，微软出品。</div></div><a href="https://github.com/microsoft/markitdown" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">2. harry0703/MoneyPrinterTurbo ⭐ 1,937 · Python</div><div class="vitem-desc">利用 AI 大模型一键生成高清短视频。面向中文创作者的视频自动化生产工具。</div></div><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">3. codecrafters-io/build-your-own-x ⭐ 1,158 · Markdown</div><div class="vitem-desc">通过从零重建你喜爱的技术来精通编程，涵盖 Git、Redis、Docker 等数十个项目。</div></div><a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">4. OpenBMB/VoxCPM ⭐ 635 · Python</div><div class="vitem-desc">无 Tokenizer 的多语言语音合成模型，支持创意声音设计和逼真声音克隆。面壁智能出品。</div></div><a href="https://github.com/OpenBMB/VoxCPM" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">5. FareedKhan-dev/train-llm-from-scratch ⭐ 626 · Jupyter Notebook</div><div class="vitem-desc">从下载数据到生成文本，一条清晰的训练 LLM 实战路径。</div></div><a href="https://github.com/FareedKhan-dev/train-llm-from-scratch" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">6. anthropics/claude-code ⭐ 489 · Python</div><div class="vitem-desc">Anthropic 官方的终端 Agent 编码工具，理解代码库并加速开发。</div></div><a href="https://github.com/anthropics/claude-code" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">7. Crosstalk-Solutions/project-nomad ⭐ 374 · TypeScript</div><div class="vitem-desc">离线生存计算机，预装关键工具、知识和生存指南的独立设备。</div></div><a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">8. revfactory/harness ⭐ 323 · HTML</div><div class="vitem-desc">元技能框架，设计特定领域的 Agent 团队，定义专业 Agent 并生成其使用的技能。</div></div><a href="https://github.com/revfactory/harness" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">9. supermemoryai/supermemory ⭐ 264 · TypeScript</div><div class="vitem-desc">AI 时代的内存引擎与 API，极速、可扩展的长期记忆基础设施。</div></div><a href="https://github.com/supermemoryai/supermemory" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">10. EveryInc/compound-engineering-plugin ⭐ 251 · TypeScript</div><div class="vitem-desc">Compound Engineering 官方插件，同时支持 Claude Code、Codex、Cursor。</div></div><a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">11. emmabostian/developer-portfolios ⭐ 73 · Python</div><div class="vitem-desc">开发者作品集灵感合集，Emma Bostian 维护。</div></div><a href="https://github.com/emmabostian/developer-portfolios" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">12. github/docs ⭐ 27 · TypeScript</div><div class="vitem-desc">GitHub 官方文档的开源仓库。</div></div><a href="https://github.com/github/docs" target="_blank" class="github-link">GitHub →</a></div></div>
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>Move 37 式的创新，才是 AGI 的真正试金石</h2>
+  <div class="grid-2">
+    <div class="quote">Vinyals 说他最不确定的问题是：模型能否真正创新？不是搜索空间里的穷举，而是人类看了会愣住的那种“这怎么可能想到”。</div>
+    <div class="quote">当模型能提出一个机器学习研究者都没想到的架构改进时，世界的运转方式会彻底改变。</div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:14px;">
+    <strong>今日一问：</strong>我们该用什么信号判断模型已经具备真正的研究创新能力？
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://www.youtube.com/watch?v=NQczevdpxq0" target="_blank">Oriol Vinyals 播客</a>
+    <a href="https://x.com/thsottiaux/status/2060627747760984429" target="_blank">Thibault Sottiaux — Codex 用户突破 500 万</a>
+    <a href="https://x.com/thsottiaux/status/2060964284117782996" target="_blank">Thibault Sottiaux — 社区反馈征集</a>
+    <a href="https://x.com/rauchg/status/2060803480823193840" target="_blank">Guillermo Rauch — AI Gateway 消费上限</a>
+    <a href="https://x.com/rauchg/status/2060787704166776927" target="_blank">Guillermo Rauch — 产品哲学</a>
+    <a href="https://x.com/levie/status/2060923684295221390" target="_blank">Aaron Levie — AI 创造岗位</a>
+    <a href="https://x.com/steipete/status/2060678430031597696" target="_blank">Peter Steinberger — GPT 5.5 长任务</a>
+    <a href="https://x.com/steipete/status/2060672154727825718" target="_blank">Peter Steinberger — Codex 找 bug</a>
+    <a href="https://x.com/danshipper/status/2060771279280513362" target="_blank">Dan Shipper — Codex 使用数据</a>
+    <a href="https://x.com/ryolu_/status/2060766674203353190" target="_blank">Ryo Lu — Cursor Auto-review</a>
+    <a href="https://x.com/garrytan/status/2060949003790176667" target="_blank">Garry Tan — 加州投票指南</a>
+    <a href="https://x.com/petergyang/status/2060930599565811774" target="_blank">Peter Yang — AI 教育</a>
+    <a href="https://x.com/zarazhangrui/status/2060962160872919043" target="_blank">Zara Zhang — Opus 4.8 输出风格</a>
+    <a href="https://x.com/nikunj/status/2060948669164347448" target="_blank">Nikunj Kothari — Time is a flat circle</a>
+    <a href="https://claude.com/blog/new-in-claude-managed-agents" target="_blank">Anthropic Claude Managed Agents 更新</a>
+    <a href="https://github.com/microsoft/markitdown" target="_blank">GitHub: microsoft/markitdown</a>
+    <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank">GitHub: MoneyPrinterTurbo</a>
+    <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank">GitHub: build-your-own-x</a>
+    <a href="https://github.com/OpenBMB/VoxCPM" target="_blank">GitHub: OpenBMB/VoxCPM</a>
+    <a href="https://github.com/FareedKhan-dev/train-llm-from-scratch" target="_blank">GitHub: train-llm-from-scratch</a>
+    <a href="https://github.com/anthropics/claude-code" target="_blank">GitHub: anthropics/claude-code</a>
+    <a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank">GitHub: project-nomad</a>
+    <a href="https://github.com/revfactory/harness" target="_blank">GitHub: revfactory/harness</a>
+    <a href="https://github.com/supermemoryai/supermemory" target="_blank">GitHub: supermemory</a>
+    <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank">GitHub: compound-engineering-plugin</a>
+    <a href="https://github.com/emmabostian/developer-portfolios" target="_blank">GitHub: developer-portfolios</a>
+    <a href="https://github.com/github/docs" target="_blank">GitHub: github/docs</a>
+  </div>
+  <div class="divider"></div>
+  <div style="font-size:12px;color:#8b8b8b;text-align:center;">关注建造者，而非意见领袖。明天见。</div>
+</section>
+</main>
+</body>
+</html>
