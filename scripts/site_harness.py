@@ -367,7 +367,8 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 
 
 def render_daily_homepage(daily_items: list[ContentItem]) -> str:
-    latest = daily_items[0]
+    homepage_items = daily_items[:3]
+    latest = homepage_items[0]
     entries = []
     entries.append(f"""<a href="{e(latest.href)}" class="daily-entry daily-entry-today" style="padding:18px 20px;">
 <div style="flex:1;min-width:0;">
@@ -380,7 +381,7 @@ def render_daily_homepage(daily_items: list[ContentItem]) -> str:
 </div>
 <div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
 </a>""")
-    for item in daily_items[1:3]:
+    for item in homepage_items[1:]:
         entries.append(f"""<a href="{e(item.href)}" class="daily-entry">
 <div class="entry-icon">📰</div>
 <div style="flex:1;">

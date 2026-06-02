@@ -24,6 +24,10 @@
 - Font: Inter only (weights 300/400/500/600)
 - Shared stylesheet: `docs/styles.css`
 
+### Homepage Daily Entries
+
+- Production rule: the homepage Daily section renders exactly the 3 most recent daily entries, followed by the `历史日报` archive row.
+
 ### Older Style (thinking/ pages, homepage.html)
 
 - Accent: `#3b82f6` (blue)
