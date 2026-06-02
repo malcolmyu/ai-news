@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-02 AI 日报 - 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260602">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260602" defer></script>
+<script src="../site.js?v=20260602" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:15px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:15px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月2日 · 周二</div>
+  <h1>AI 建造者日报</h1>
+  <div class="subtitle">
+    当 <strong>PewDiePie</strong> 一个 YouTuber 用 vibecoding 一夜之间做出万星 AI 生产力套件时，它暴露的不仅是门槛降低——更是知识工作 Agent 这个品类本身可能没有护城河。与此同时，Sam Altman 宣布 <strong>OpenAI Robotics</strong> 正式成立，Garry Tan 预言 2027 年将爆发"AI Harness 战争"。
+  </div>
+  <div class="dots-row">
+    <span class="tag">Agent</span>
+    <span class="tag">Robotics</span>
+    <span class="tag">Harness</span>
+    <span class="tag">持续学习</span>
+    <span class="tag">开源</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">趋势项目</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">今日播客</div></div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>💥 PewDiePie vibecoded 万星 AI 套件。</strong> Swyx 投下震撼弹：PewDiePie 用 vibecoding 做了一个 OpenCode 包装器，完整的个人 AI 生产力套件（邮件、文档、日历），一天内 HN 头条、百万浏览、万星。知识工作 Agent 创业公司面临前所未有的门槛挑战。</p>
+      <div class="vitem-gallery cols-2" style="margin-top:12px;">
+        <img src="assets/2026-06-02/swyx-2061256096719970337-0.jpg" width="1200" height="800" loading="lazy" alt="Swyx 关于 PewDiePie 的推文截图">
+        <img src="assets/2026-06-02/swyx-2061256096719970337-1.jpg" width="1200" height="800" loading="lazy" alt="Swyx 关于持续学习平台的推文截图">
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>🤖 OpenAI Robotics 正式成立。</strong> Sam Altman 宣布由 Aditya Ramesh 领导的新部门，正在招聘全栈硬件、系统、ML 工程师。短期聚焦辅助熟练工人的基建机器人，长期愿景是每个人都有一个能帮自己做任何事的个人机器人。</p>
+      <div class="vitem-gallery" style="margin-top:12px;">
+        <img src="assets/2026-06-02/sama-2061101875303530871-0.jpg" width="1200" height="675" loading="lazy" alt="Sam Altman 宣布 OpenAI Robotics">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Yann Dubois：为什么 AI 进步突然感觉真实了</h2>
+  <div class="text-body">
+    <strong>核心论点：</strong>OpenAI 后训练 Frontiers 团队联合负责人 Yann Dubois（GPT 5.5、o3、GPT-5 Thinking 的核心贡献者）在 MAD Podcast 上深度分享了三个关键洞察，解释为什么 AI 进步感觉像阶跃函数，并坦承持续学习仍是最大的未解决问题。
+  </div>
+  <div class="vitem-gallery" style="margin-top:12px;">
+    <img src="assets/2026-06-02/yt-DhD1zZ8w8Mw.jpg" width="1280" height="720" loading="lazy" alt="Yann Dubois 在 MAD Podcast">
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">可靠性跨过临界点</div><div class="vitem-desc">大约 2025 年 12 月，模型终于达到了可以真正信任它完成大量工作的可靠度。Agent 模型每两分钟有一定的出错概率，时间越长越容易出错——5.5 大幅降低了这个概率，推理速度提升约 2 倍。</div></div>
+    <div class="vitem"><div class="vitem-title">自我加速循环</div><div class="vitem-desc">好模型帮助训练更好的模型，好模型帮助研究员构建更好的工具，形成飞轮。从竞赛到有用性到用户——这就是当下的感受。</div></div>
+    <div class="vitem"><div class="vitem-title">强化学习从竞赛走向真实世界</div><div class="vitem-desc">o1/o3 时代 RL 只能优化"可验证奖励"（数学题、编程竞赛），现在这些算法已经被泛化到真实用户场景。</div></div>
+    <div class="vitem"><div class="vitem-title">持续学习：最大未解难题</div><div class="vitem-desc">当前模型在企业中就像"入职即巅峰但无法成长"的员工——起点很高，但不学习公司知识、不随着时间变高效。"三年前 ChatGPT 发布时我以为 OpenAI 六个月内就能解决持续学习，三年后我们还没到那一步。"</div></div>
+    <div class="vitem"><div class="vitem-title">给创业者的建议：深耕最后一公里</div><div class="vitem-desc">不要花太多精力在通用 harness 上——模型能力进步太快，通用 harness 会被吃掉。但在特定垂直领域的最后一公里（权限、连接器、领域知识）有巨大空间。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank" class="vitem-link">观看播客 →</a>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>OpenAI、Vercel、Box、YC、Swyx、OpenClaw 与 Codex 的今天</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+    <div class="vitem">
+      <div class="vitem-title">OpenAI CEO Sam Altman</div>
+      <div class="vitem-desc">宣布 OpenAI Robotics 正式成立，由 Aditya Ramesh 领导，正在招聘全栈硬件、系统、ML 工程师。短期聚焦辅助熟练工人的基建机器人，长期愿景是每个人都有一个能帮自己做任何事的个人机器人。同天还宣布 OpenAI 将协助全球生物防御准备。</div>
+      <div class="vitem-gallery"><img src="assets/2026-06-02/sama-2061101875303530871-0.jpg" width="1200" height="675" loading="lazy" alt="Sam Altman OpenAI Robotics"></div>
+      <div class="vitem-actions"><a href="https://x.com/sama/status/2061117302528188712" target="_blank" class="vitem-link">OpenAI Robotics →</a><a href="https://x.com/sama/status/2061101875303530871" target="_blank" class="vitem-link">生物防御 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Vercel CEO Guillermo Rauch</div>
+      <div class="vitem-desc">CEO 和 CTO 们正在疯狂回归写代码，因为 coding agent 让他们重新爱上了交付软件。"上市公司 CEO 私信我说他们用 Claude Code + Vercel 重新找回了 shipping 的快感。Coding agent 是企业 PLG 化的终极武器——烂软件再也藏不住了。"</div>
+      <div class="vitem-actions"><a href="https://x.com/rauchg/status/2061135404942974982" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Box CEO Aaron Levie</div>
+      <div class="vitem-desc">指出企业 AI Agent 的 #1 问题是上下文。从 coding agent（代码库天然提供大量上下文）转向知识工作 agent 时，上下文问题急剧恶化：数据分散在遗留系统中、权限控制与真实工作流不匹配、大量决策和流程存在于人的"部落知识"中。能解决这个问题的公司将获得巨大杠杆。</div>
+      <div class="vitem-actions"><a href="https://x.com/levie/status/2061247380897579500" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">YC CEO Garry Tan</div>
+      <div class="vitem-desc">连续发声预言 2027 年将爆发"AI Harness 战争"——类似当年的浏览器战争。"你应该掌控和托管自己的记忆，这是唯一一个你应该能带到任何平台的东西。"他警告平台封闭的风险：如果数据提取需要大量工作，你只是在别人的 AI 生态里做佃农。</div>
+      <div class="vitem-gallery cols-2">
+        <img src="assets/2026-06-02/garrytan-2061174413513678941-0.jpg" width="1200" height="800" loading="lazy" alt="Garry Tan 推文一">
+        <img src="assets/2026-06-02/garrytan-2061176075288453333-0.jpg" width="1200" height="800" loading="lazy" alt="Garry Tan 推文二">
+      </div>
+      <div class="vitem-actions"><a href="https://x.com/garrytan/status/2061174413513678941" target="_blank" class="vitem-link">Harness 战争 →</a><a href="https://x.com/garrytan/status/2061176075288453333" target="_blank" class="vitem-link">掌控记忆 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Swyx（Latent Space, Cognition）</div>
+      <div class="vitem-desc">PewDiePie 用 vibecoding 做了一个 OpenCode 包装器，完整个人 AI 生产力套件（邮件、文档、日历），一天内 HN 头条、百万浏览、万星。"如果你的知识工作 Agent 创业公司连 PewDiePie 都打不过，那基本可以收摊了。"他还指出所有 evals/analytics 创业公司正在经历代际升级——转型为持续学习平台。</div>
+      <div class="vitem-actions"><a href="https://x.com/swyx/status/2061256096719970337" target="_blank" class="vitem-link">PewDiePie →</a><a href="https://x.com/swyx/status/2061206120233054327" target="_blank" class="vitem-link">持续学习 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">OpenClaw 创始人 Peter Steinberger</div>
+      <div class="vitem-desc">展示了前沿实践：训练 Codex 成为 QA 助手，每次 commit 自动生成用户测试场景，用浏览器和 computer use 工具像真人 QA 一样测试 OpenClaw，自动提交修复 PR。另外 Codex 首次展现了自动写 codemod 的能力，完成了大规模 TypeScript 迁移——"Impressed."</div>
+      <div class="vitem-gallery"><img src="assets/2026-06-02/steipete-2061208638027395490-0.jpg" width="1200" height="800" loading="lazy" alt="Peter Steinberger Codex QA"></div>
+      <div class="vitem-actions"><a href="https://x.com/steipete/status/2061208638027395490" target="_blank" class="vitem-link">QA 助手 →</a><a href="https://x.com/steipete/status/2061115471760441692" target="_blank" class="vitem-link">Codemod →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Codex 团队 Thibault Sottiaux</div>
+      <div class="vitem-desc">宣布所有付费 ChatGPT 订阅的 Codex 使用限额已重置，小时和周期额度恢复 100%。</div>
+      <div class="vitem-actions"><a href="https://x.com/thsottiaux/status/2061106703446450392" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Zara Zhang</div>
+      <div class="vitem-desc">吐槽 coding agent 的措辞："为什么 agent 说 'just say the word' 让我这么烦？你是我的 cofounder，不是我的仆人。"</div>
+      <div class="vitem-actions"><a href="https://x.com/zarazhangrui/status/2061341642544783801" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Roblox 产品经理 Peter Yang</div>
+      <div class="vitem-desc">发起实用讨论：Codex Automations vs Claude Code Routines，哪个更好？想把所有 cron job 整合到一个列表里。</div>
+      <div class="vitem-actions"><a href="https://x.com/petergyang/status/2061277577785000203" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending · 2026-06-02</div>
+  <h2>今日 14 个趋势项目</h2>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">1. harry0703/MoneyPrinterTurbo ⭐ 3,375 · Python</div><div class="vitem-desc">利用 AI 大模型，一键生成高清短视频。</div></div><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">2. microsoft/markitdown ⭐ 3,034 · Python</div><div class="vitem-desc">Microsoft 官方出品的文件转 Markdown 工具，支持 Office 文档等格式转换。</div></div><a href="https://github.com/microsoft/markitdown" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">3. codecrafters-io/build-your-own-x ⭐ 1,212 · Markdown</div><div class="vitem-desc">通过从零重建你喜欢的科技产品来掌握编程——经典复刻项目合集。</div></div><a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">4. OpenBMB/VoxCPM ⭐ 888 · Python</div><div class="vitem-desc">VoxCPM2：无 Tokenizer 的多语言语音生成 TTS，支持创意声音设计和逼真声音克隆。</div></div><a href="https://github.com/OpenBMB/VoxCPM" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">5. FareedKhan-dev/train-llm-from-scratch ⭐ 861 · Jupyter Notebook</div><div class="vitem-desc">从下载数据到生成文本，手把手教你从零训练大语言模型。</div></div><a href="https://github.com/FareedKhan-dev/train-llm-from-scratch" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">6. supermemoryai/supermemory ⭐ 647 · TypeScript</div><div class="vitem-desc">AI 时代的内存引擎——极快、可扩展的记忆 API。</div></div><a href="https://github.com/supermemoryai/supermemory" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">7. revfactory/harness ⭐ 524 · HTML</div><div class="vitem-desc">元技能工具：设计领域专用 Agent 团队、定义专用 Agent 并生成其使用的技能。</div></div><a href="https://github.com/revfactory/harness" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">8. pbakaus/impeccable ⭐ 485 · JavaScript</div><div class="vitem-desc">让 AI harness 设计能力更强的设计语言框架。</div></div><a href="https://github.com/pbakaus/impeccable" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">9. EveryInc/compound-engineering-plugin ⭐ 417 · TypeScript</div><div class="vitem-desc">Every 官方 Compound Engineering 插件，支持 Claude Code、Codex、Cursor 等。</div></div><a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">10. can1357/oh-my-pi ⭐ 335 · TypeScript</div><div class="vitem-desc">终端 AI Coding Agent：hash 锚定编辑、LSP、Python、浏览器、子 Agent 等。</div></div><a href="https://github.com/can1357/oh-my-pi" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">11. TauricResearch/TradingAgents ⭐ 299 · Python</div><div class="vitem-desc">多 Agent 大模型金融交易框架。</div></div><a href="https://github.com/TauricResearch/TradingAgents" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">12. p-e-w/heretic ⭐ 249 · Python</div><div class="vitem-desc">全自动去除语言模型审查限制的工具。</div></div><a href="https://github.com/p-e-w/heretic" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">13. stefan-jansen/machine-learning-for-trading ⭐ 93 · Jupyter Notebook</div><div class="vitem-desc">《Machine Learning for Algorithmic Trading》第二版配套代码。</div></div><a href="https://github.com/stefan-jansen/machine-learning-for-trading" target="_blank" class="github-link">GitHub →</a></div></div>
+    <div class="vitem"><div class="vitem-row"><div class="vitem-content"><div class="vitem-title">14. godotengine/godot ⭐ 77 · C++</div><div class="vitem-desc">Godot 引擎——跨平台 2D/3D 游戏引擎。</div></div><a href="https://github.com/godotengine/godot" target="_blank" class="github-link">GitHub →</a></div></div>
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>门槛消失之后，什么才是护城河？</h2>
+  <div class="grid-2">
+    <div class="quote">当 PewDiePie 一个 YouTuber 用 vibecoding 一夜之间做出万星 AI 生产力套件时，它暴露的不仅是门槛降低——更是知识工作 Agent 这个品类本身可能没有护城河。</div>
+    <div class="quote">Yann Dubois 的答案是"最后一公里"的垂直深耕，Gary Tan 的答案是"你自己掌控的记忆"。两条路，你选哪条？</div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;font-size:14px;">
+    <strong>今日一问：</strong>如果模型持续进步 + harness 只是临时脚手架，那什么才是持久的价值？
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://www.youtube.com/watch?v=DhD1zZ8w8Mw" target="_blank">Yann Dubois 播客 — MAD Podcast</a>
+    <a href="https://x.com/sama/status/2061117302528188712" target="_blank">Sam Altman — OpenAI Robotics</a>
+    <a href="https://x.com/sama/status/2061101875303530871" target="_blank">Sam Altman — 全球生物防御</a>
+    <a href="https://x.com/rauchg/status/2061135404942974982" target="_blank">Guillermo Rauch — CEO/CTO 回归写代码</a>
+    <a href="https://x.com/levie/status/2061247380897579500" target="_blank">Aaron Levie — 企业 AI Agent #1 问题</a>
+    <a href="https://x.com/garrytan/status/2061174413513678941" target="_blank">Garry Tan — AI Harness 战争</a>
+    <a href="https://x.com/garrytan/status/2061176075288453333" target="_blank">Garry Tan — 掌控记忆</a>
+    <a href="https://x.com/swyx/status/2061256096719970337" target="_blank">Swyx — PewDiePie 万星 AI 套件</a>
+    <a href="https://x.com/swyx/status/2061206120233054327" target="_blank">Swyx — Evals → 持续学习平台</a>
+    <a href="https://x.com/steipete/status/2061208638027395490" target="_blank">Peter Steinberger — Codex QA 助手</a>
+    <a href="https://x.com/steipete/status/2061115471760441692" target="_blank">Peter Steinberger — Codex Codemod</a>
+    <a href="https://x.com/thsottiaux/status/2061106703446450392" target="_blank">Thibault Sottiaux — Codex 限额重置</a>
+    <a href="https://x.com/zarazhangrui/status/2061341642544783801" target="_blank">Zara Zhang — Agent 措辞</a>
+    <a href="https://x.com/petergyang/status/2061277577785000203" target="_blank">Peter Yang — Codex vs Claude Code Routines</a>
+    <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank">GitHub: MoneyPrinterTurbo</a>
+    <a href="https://github.com/microsoft/markitdown" target="_blank">GitHub: microsoft/markitdown</a>
+    <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank">GitHub: build-your-own-x</a>
+    <a href="https://github.com/OpenBMB/VoxCPM" target="_blank">GitHub: OpenBMB/VoxCPM</a>
+    <a href="https://github.com/FareedKhan-dev/train-llm-from-scratch" target="_blank">GitHub: train-llm-from-scratch</a>
+    <a href="https://github.com/supermemoryai/supermemory" target="_blank">GitHub: supermemory</a>
+    <a href="https://github.com/revfactory/harness" target="_blank">GitHub: revfactory/harness</a>
+    <a href="https://github.com/pbakaus/impeccable" target="_blank">GitHub: pbakaus/impeccable</a>
+    <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank">GitHub: compound-engineering-plugin</a>
+    <a href="https://github.com/can1357/oh-my-pi" target="_blank">GitHub: oh-my-pi</a>
+    <a href="https://github.com/TauricResearch/TradingAgents" target="_blank">GitHub: TradingAgents</a>
+    <a href="https://github.com/p-e-w/heretic" target="_blank">GitHub: p-e-w/heretic</a>
+    <a href="https://github.com/stefan-jansen/machine-learning-for-trading" target="_blank">GitHub: machine-learning-for-trading</a>
+    <a href="https://github.com/godotengine/godot" target="_blank">GitHub: godot</a>
+  </div>
+  <div class="divider"></div>
+  <div style="font-size:12px;color:#8b8b8b;text-align:center;">关注建造者，而非意见领袖。明天见。</div>
+</section>
+</main>
+</body>
+</html>
