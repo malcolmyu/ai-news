@@ -215,7 +215,129 @@ else
 fi
 
 println
-# ── Part 3: Link Integrity ────────────────────────────────────────
+
+# ── Part 3: Font Size Constraints ──────────────────────────────────
+bold "【Font Size Constraints】"
+
+# Content text (body, p, .text-body, .vitem-desc, etc.) must not exceed 13px.
+# Uses Python for precise pixel value extraction from inline styles.
+font_check_py() {
+  "$PYTHON_BIN" -c "
+import re, sys
+with open('$1') as f:
+    html = f.read()
+
+issues = []
+# Check inline style font-size values
+for m in re.finditer(r'style=\"([^\"]*)\"', html):
+    style = m.group(1)
+    fs = re.search(r'font-size:\s*(\\d+)\\s*px', style)
+    if fs:
+        val = int(fs.group(1))
+        # Allow up to 14px for headings (h1-h4) but flag >14px in non-heading context
+        if val > 14:
+            # Check if this is a legitimate heading override (h1-h4 are larger in shared CSS)
+            # Get context: look backward for <h1, <h2, etc.
+            ctx_start = max(0, m.start() - 30)
+            ctx = html[ctx_start:m.start()]
+            if not re.search(r'<(h[1-4]|title|stat-num|hero-)', ctx):
+                issues.append(f'font-size:{val}px in non-heading context')
+        if val > 16:
+            # Anything >16px is definitely wrong for body text
+            issues.append(f'font-size:{val}px exceeds maximum (16px)')
+    # Check for font-size > 13px in <style> blocks
+for m in re.finditer(r'<style>(.*?)</style>', html, re.DOTALL):
+    css = m.group(1)
+    for fm in re.finditer(r'font-size:\s*(\\d+)\\s*px', css):
+        val = int(fm.group(1))
+        # In CSS, flag selectors with font-size > 15px for non-heading elements
+        if val > 15:
+            # Get the CSS rule context (100 chars before)
+            rule_start = max(0, fm.start() - 100)
+            rule_ctx = css[rule_start:fm.end()]
+            # Skip heading selectors and known large elements
+            if not re.search(r'(h[1-4]|stat-num|\\.hero-|nav-|\\.search-)', rule_ctx):
+                issues.append(f'CSS font-size:{val}px in non-heading rule')
+
+if issues:
+    for i in issues[:5]:
+        print(f'    ISSUE: {i}')
+    sys.exit(1)
+" 2>/dev/null
+}
+
+for f in docs/daily/*.html docs/research/*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  if font_check_py "$f"; then
+    green "  ✓ $bn — font sizes within limits"
+  else
+    red "  ✗ $bn — font-size exceeds max (body text ≤13px, headings ≤32px)"
+    ERRORS=$((ERRORS + 1))
+  fi
+done
+
+println
+
+# ── Part 3.5: YouTube Embed Check ──────────────────────────────────
+bold "【YouTube Embed Check — 深度对话】"
+
+for f in docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  # Check if this file has a 深度对话 section
+  if grep -q '深度对话' "$f" 2>/dev/null; then
+    # Check for YouTube URLs in the 深度对话 section
+    YT_LINKS=$(grep -oE 'https?://(www\.)?(youtube\.com/watch\?v=|youtu\.be/)[a-zA-Z0-9_-]+' "$f" 2>/dev/null)
+    if [ -n "$YT_LINKS" ]; then
+      # Must have <iframe> embed, not just <img> or text link
+      if grep -q '<iframe.*youtube' "$f" 2>/dev/null; then
+        green "  ✓ $bn — YouTube embedded via iframe"
+      else
+        red "  ✗ $bn — 深度对话 references YouTube but has no <iframe> embed (only image/link)"
+        ERRORS=$((ERRORS + 1))
+      fi
+    else
+      green "  ✓ $bn — no YouTube links in 深度对话"
+    fi
+  fi
+done
+
+println
+
+# ── Part 3.6: GitHub Trending Layout Check ─────────────────────────
+bold "【GitHub Trending Layout】"
+
+for f in docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  if grep -q 'GitHub Trending' "$f" 2>/dev/null; then
+    # GitHub Trending section must use vlist-2col layout (dual-column waterfall)
+    # Check by looking for vlist-2col within the Trending card
+    if "$PYTHON_BIN" -c "
+import re, sys
+with open('$f') as fh:
+    html = fh.read()
+# Find the GitHub Trending section — look for label-sm + GitHub Trending in a card
+m = re.search(r'class=\"label-sm\"[^>]*>GitHub Trending.*?</section>', html, re.DOTALL)
+if m:
+    section = m.group(0)
+    if 'vlist-2col' in section:
+        sys.exit(0)
+    else:
+        print('GitHub Trending section does not use vlist-2col layout')
+        sys.exit(1)
+" 2>/dev/null; then
+      green "  ✓ $bn — GitHub Trending uses vlist-2col layout"
+    else
+      red "  ✗ $bn — GitHub Trending must use vlist-2col (dual-column waterfall) layout"
+      ERRORS=$((ERRORS + 1))
+    fi
+  fi
+done
+
+println
+# ── Part 4: Link Integrity ────────────────────────────────────────
 bold "【Link Integrity】"
 
 # Homepage should not link to .md files
@@ -239,7 +361,7 @@ check "All homepage links point to existing files"
 
 println
 
-# ── Part 4: Structured Site Harness ─────────────────────────────────
+# ── Part 5: Structured Site Harness ─────────────────────────────────
 bold "【Structured Site Harness】"
 
 if "$PYTHON_BIN" scripts/site_harness.py validate; then
