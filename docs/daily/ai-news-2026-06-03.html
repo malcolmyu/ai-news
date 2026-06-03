@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-03 AI 日报 - 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260603">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260603" defer></script>
+<script src="../site.js?v=20260603" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月3日 · 周三</div>
+  <h1>AI 构建者日报</h1>
+  <div class="subtitle">
+    <strong>Codex/OpenAI 正在疯狂释放能量。</strong> Thibault Sottiaux 的三条推文引爆社区——Codex 不仅能写代码还能"种田"、GPT-5.5 登陆 AWS 标志多云战略关键一步。Claude Code "保持同步"Prompt 模板获 6183 赞；<strong>MiniMax M3</strong> 成本仅 Opus 1/10 却成为 Next.js Agent 评测第一开源模型；Replit 发布 <strong>"Prompt to Business"</strong> 一键创业概念。
+  </div>
+  <div class="dots-row">
+    <span class="tag">Agent</span>
+    <span class="tag">Codex</span>
+    <span class="tag">开源</span>
+    <span class="tag">创业</span>
+    <span class="tag">多云</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">趋势项目</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">今日播客</div></div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>🧠 Claude Code "保持同步"模板引爆社区。</strong> Anthropic Claude Code 团队成员 Thariq 分享了同事 Suzanne 的 Prompt 模板，获 6183 赞。核心思路：让 Claude 在每次会话结束时自动生成结构化摘要，用语音模式自然交互——可能是目前最实用的 Agent 工作流管理技巧。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/trq212/status/2061545633560010826" target="_blank" class="vitem-link">查看原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>🏆 MiniMax M3 成本 1/10 却拿第一。</strong> Vercel CEO Guillermo Rauch 公布：MiniMax M3 成为 Next.js Agent 评测中排名第一的开源模型，仅次于 Opus 和 GPT-5，但成本仅为其 1/10（通过 Vercel AI Gateway 甚至 1/20）。同时 GPT-5.5 登陆 AWS，OpenAI 多云战略迈出关键一步。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/rauchg/status/2061593874498531707" target="_blank" class="vitem-link">查看原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Unsupervised Learning：揭秘 DeepMind 的超级智能之路</h2>
+  <div class="text-body">
+    <strong>核心洞察：</strong>Sebastian Malaby 花了 30+ 小时与 Demis Hassabis 深度对谈，写出《The Infinity Machine》这本 DeepMind 编年史。本期播客分享了大量内幕——从"单实验室乌托邦"到"集体行动论"的转变，2015 年 SpaceX AI 安全峰会的背叛，Reid Hoffman 的 10 亿美元分拆出价，到 David Silver 与 Ilya Sutskever 的学术双雄故事。
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">从"单实验室乌托邦"到"集体行动论"</div><div class="vitem-desc">Demis 早期梦想只有一个实验室安全实现 AGI；现在认为必须有政府强制力确保所有玩家遵守规则，最终需要中美合作。</div></div>
+    <div class="vitem"><div class="vitem-title">2015 年 SpaceX AI 安全峰会的背叛</div><div class="vitem-desc">DeepMind 想让 Elon Musk 进入"帐篷内"共谋安全，结果年底 Elon 就创办了 OpenAI。这次背叛彻底粉碎了 Demis 对自愿合作的幻想。</div></div>
+    <div class="vitem"><div class="vitem-title">为什么 DeepMind 被低估</div><div class="vitem-desc">公众连名字都念不对，但他 2010 年就创办了 OG 实验室、创造了后来 OpenAI 复制的模型、在 AI for Science 领域独占多年。Google 的"多重下注"策略让他们科学领先但产品化落后。</div></div>
+    <div class="vitem"><div class="vitem-title">Reid Hoffman 曾出价 10 亿美元分拆</div><div class="vitem-desc">想让 Demis 把 DeepMind 从 Google 分拆出来。但 Demis 可能成为 Google CEO？他每天双重轮班——晚饭后回办公室直到凌晨 4 点做科学。</div></div>
+    <div class="vitem"><div class="vitem-title">David Silver × Ilya Sutskever 双雄传</div><div class="vitem-desc">强化学习派与深度学习派的交锋。Malaby 认为这两人值得一部双人传记。DeepMind 是 AGI 竞赛中最被低估的玩家——同时拥有最强科学人才、Google 无限算力和相对克制的产品化节奏。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/@RedpointAI" target="_blank" class="vitem-link">观看播客 →</a>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>Codex 种田、一键创业、Agent 护城河与硅谷地理优势</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+    <div class="vitem">
+      <div class="vitem-title">Anthropic Claude Code · Thariq</div>
+      <div class="vitem-desc">分享同事 Suzanne 的"与 Claude 保持同步"Prompt 模板，6183 赞引爆社区。核心思路：每次会话结束时自动生成结构化摘要，用语音模式自然交互——目前最实用的 Agent 工作流管理技巧。</div>
+      <div class="vitem-actions"><a href="https://x.com/trq212/status/2061545633560010826" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Vercel CEO Guillermo Rauch</div>
+      <div class="vitem-desc">MiniMax M3 成为 Next.js Agent 评测第一开源模型，成本仅 Opus 1/10。分享 Vercel 全栈 Agent 示例，抛出一句"Git is all you need. Always has been."——暗合 Vercel 的 Git-driven 部署哲学。</div>
+      <div class="vitem-actions"><a href="https://x.com/rauchg/status/2061593874498531707" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Replit CEO Amjad Masad</div>
+      <div class="vitem-desc">发布"Prompt to Business"概念：从 prompt 一键生成网站、移动 App、支付系统和 Delaware 公司注册。VibeCon 同步预告。AI 正在从"辅助编码"走向"辅助创业"。</div>
+      <div class="vitem-actions"><a href="https://x.com/amasad/status/2061575503434408106" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Box CEO Aaron Levie</div>
+      <div class="vitem-desc">发长文阐述 Agent 时代的竞争护城河：当所有公司都能接入相同 AI 模型时，真正的差异化在于企业内部知识、数据资产和垂直领域工作流。每个行业都会有自己的版本。</div>
+      <div class="vitem-actions"><a href="https://x.com/levie/status/2061662386680127688" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">OpenClaw 创始人 Peter Steinberger</div>
+      <div class="vitem-desc">人称 ClawFather——透露他让 Codex 在需要人类帮助时通过 TTS 语音呼叫自己。"这是我用过最酷的东西"。Agent 正在从"被动工具"变成"主动协作者"。</div>
+      <div class="vitem-actions"><a href="https://x.com/steipete/status/2061574752574283858" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Every CEO Dan Shipper</div>
+      <div class="vitem-desc">Codex 哲学："你不需要每周工作 7 天——只要让一群 Codex 在 /goal 上不停跑就行。但你可能还是会想工作。"Agent 化的工作方式正在重塑生产力定义。</div>
+      <div class="vitem-actions"><a href="https://x.com/danshipper/status/2061443674311999739" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">YC CEO Garry Tan</div>
+      <div class="vitem-desc">引用 Brian Chesky 的话"领导力是存在，不是缺席"，同时推广 GStack 一键式产品创意办公时间。YC 正在将 AI 深度嵌入创业辅导流程。</div>
+      <div class="vitem-actions"><a href="https://x.com/garrytan/status/2061495739637960927" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Peter Yang · Solo 开发者 6 条铁律</div>
+      <div class="vitem-desc">总结 Josh Shpigford 用 AI Agent 同时维护多个产品的经验：①尽早发布别怕丢脸 ②从第一天就收费 ③用 git worktree 并行开发 ④用 GPT review Claude 的代码 ⑤建立"学习"skill 避免重复犯错 ⑥25 年构建经验才是 AI 效率的基石。</div>
+      <div class="vitem-actions"><a href="https://x.com/petergyang/status/2061452068792287622" target="_blank" class="vitem-link">查看 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">VC 圈动态</div>
+      <div class="vitem-desc">Matt Turck 调侃"CEO 说我们有数万 Agent 在生产环境跑着，CTO 的表情包.jpg"——道尽企业 Agent 落地的真实差距。Nikunj Kothari 指出 237 号公路沿线的几乎每家科技公司都创造了改变人生的财富——硅谷地理优势重新确认。</div>
+      <div class="vitem-actions"><a href="https://x.com/mattturck/status/2061533386296963464" target="_blank" class="vitem-link">Matt Turck →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">OpenAI CEO Sam Altman</div>
+      <div class="vitem-desc">宣布 OpenAI Foundation 正在推进"AI 社会韧性"计划，更多内容即将发布。Codex 团队 Thibault Sottiaux 则调侃要不要把 Codex 改名成"ChadGPT"获近 3000 赞，同时 GPT-5.5 正式登陆 AWS。</div>
+      <div class="vitem-actions"><a href="https://x.com/sama/status/2061562575322492937" target="_blank" class="vitem-link">AI 社会韧性 →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending · 2026-06-03</div>
+  <h2>今日 11 个趋势项目</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+    <div class="vitem">
+      <div class="vitem-title">1. microsoft/markitdown ⭐ 3,618 · Python</div>
+      <div class="vitem-desc">将各类文件和 Office 文档转换为 Markdown 的 Python 工具。微软出品，文档处理的瑞士军刀。</div>
+      <div class="vitem-actions"><a href="https://github.com/microsoft/markitdown" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">2. nesquena/hermes-webui ⭐ 1,722 · Python</div>
+      <div class="vitem-desc">Hermes Agent 的 Web UI——从浏览器或手机上使用 Hermes 的最佳方式！Agent 框架正在走向大众化。</div>
+      <div class="vitem-actions"><a href="https://github.com/nesquena/hermes-webui" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">3. affaan-m/ECC ⭐ 1,533 · JavaScript</div>
+      <div class="vitem-desc">Agent 性能优化系统。Skills、instincts、memory、安全性和研究优先开发——适用于 Claude Code、Codex、Opencode、Cursor 及更多。</div>
+      <div class="vitem-actions"><a href="https://github.com/affaan-m/ECC" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">4. chopratejas/headroom ⭐ 1,265 · Python</div>
+      <div class="vitem-desc">压缩工具输出、日志、文件和 RAG chunks——在到达 LLM 之前减少 60-95% token 消耗，答案质量不变。库、代理、MCP 服务器三合一。</div>
+      <div class="vitem-actions"><a href="https://github.com/chopratejas/headroom" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">5. D4Vinci/Scrapling ⭐ 1,182 · Python</div>
+      <div class="vitem-desc">自适应爬虫框架，从单次请求到全量抓取都能应对。现代 web scraping 的瑞士军刀。</div>
+      <div class="vitem-actions"><a href="https://github.com/D4Vinci/Scrapling" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">6. OpenBMB/VoxCPM ⭐ 783 · Python</div>
+      <div class="vitem-desc">VoxCPM2：无 Tokenizer 的多语言语音生成 TTS，支持创意声音设计和逼真声音克隆。智源研究院出品。</div>
+      <div class="vitem-actions"><a href="https://github.com/OpenBMB/VoxCPM" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">7. supermemoryai/supermemory ⭐ 680 · TypeScript</div>
+      <div class="vitem-desc">极速可扩展的记忆引擎——"AI 时代的 Memory API"。为 Agent 持久记忆而生。</div>
+      <div class="vitem-actions"><a href="https://github.com/supermemoryai/supermemory" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">8. stefan-jansen/machine-learning-for-trading ⭐ 574 · Jupyter Notebook</div>
+      <div class="vitem-desc">《Machine Learning for Algorithmic Trading》第 2 版配套代码。量化交易学习者的经典教材。</div>
+      <div class="vitem-actions"><a href="https://github.com/stefan-jansen/machine-learning-for-trading" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">9. reconurge/flowsint ⭐ 124 · TypeScript</div>
+      <div class="vitem-desc">面向网络安全分析师的可视化图调查平台。灵活可扩展的现代调查工具。</div>
+      <div class="vitem-actions"><a href="https://github.com/reconurge/flowsint" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">10. Open-LLM-VTuber/Open-LLM-VTuber ⭐ 66 · Python</div>
+      <div class="vitem-desc">与任意 LLM 免提语音交互，支持语音打断和 Live2D 虚拟形象，跨平台本地运行。</div>
+      <div class="vitem-actions"><a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">11. jamwithai/production-agentic-rag-course ⭐ 30 · Python</div>
+      <div class="vitem-desc">生产级 Agentic RAG 课程。</div>
+      <div class="vitem-actions"><a href="https://github.com/jamwithai/production-agentic-rag-course" target="_blank" class="vitem-link">GitHub →</a></div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:12px;">
+    <strong>📌 今日 Trending 亮点：</strong>Agent 工具链成为绝对主角——headroom 的 token 压缩、ECC 的 Agent 性能优化、supermemory 的持久记忆引擎，三者共同勾勒出 Agent 基础设施栈的轮廓。Hermes WebUI 上榜也印证了 Agent 框架正在走向大众化。
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>当 Agent 变成"会主动找你的数字同事"</h2>
+  <div class="grid-2">
+    <div class="quote">当 Thariq 的 6183 赞 tweet 告诉世界"如何让 Claude 保持同步"，当 Peter Steinberger 让 Codex 用语音呼叫自己帮忙——Agent 正在从"更强的 Copilot"进化为"会主动找你的数字同事"。</div>
+    <div class="quote">Replit 的"Prompt to Business"、Aaron Levie 的 Agent 护城河论、DeepMind 的集体行动安全观——三条不同的线索指向同一个方向：AI 不在替代工具，而是在重塑"工作"本身的定义。</div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-body" style="text-align:center;">
+    <strong>今日一问：</strong>当我们的 Agent 越来越有"存在感"，工作流应该围绕它们重新设计，还是让它们适应我们？Builder 们的答案似乎是——两者都要，但倾向于前者。
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/trq212/status/2061545633560010826" target="_blank">Thariq — Claude Code "保持同步"模板</a>
+    <a href="https://x.com/rauchg/status/2061593874498531707" target="_blank">Guillermo Rauch — MiniMax M3 开源第一</a>
+    <a href="https://x.com/amasad/status/2061575503434408106" target="_blank">Amjad Masad — Prompt to Business</a>
+    <a href="https://x.com/levie/status/2061662386680127688" target="_blank">Aaron Levie — Agent 时代护城河</a>
+    <a href="https://x.com/steipete/status/2061574752574283858" target="_blank">Peter Steinberger — Codex TTS 呼叫</a>
+    <a href="https://x.com/danshipper/status/2061443674311999739" target="_blank">Dan Shipper — Codex 生产力哲学</a>
+    <a href="https://x.com/garrytan/status/2061495739637960927" target="_blank">Garry Tan — 领导力与 GStack</a>
+    <a href="https://x.com/petergyang/status/2061452068792287622" target="_blank">Peter Yang — Solo 开发者 6 条铁律</a>
+    <a href="https://x.com/mattturck/status/2061533386296963464" target="_blank">Matt Turck — Agent 落地差距</a>
+    <a href="https://x.com/sama/status/2061562575322492937" target="_blank">Sam Altman — AI 社会韧性</a>
+    <a href="https://www.youtube.com/@RedpointAI" target="_blank">Unsupervised Learning — DeepMind 超级智能之路</a>
+    <a href="https://github.com/microsoft/markitdown" target="_blank">GitHub: microsoft/markitdown</a>
+    <a href="https://github.com/nesquena/hermes-webui" target="_blank">GitHub: hermes-webui</a>
+    <a href="https://github.com/affaan-m/ECC" target="_blank">GitHub: ECC</a>
+    <a href="https://github.com/chopratejas/headroom" target="_blank">GitHub: headroom</a>
+    <a href="https://github.com/D4Vinci/Scrapling" target="_blank">GitHub: Scrapling</a>
+    <a href="https://github.com/OpenBMB/VoxCPM" target="_blank">GitHub: VoxCPM</a>
+    <a href="https://github.com/supermemoryai/supermemory" target="_blank">GitHub: supermemory</a>
+    <a href="https://github.com/stefan-jansen/machine-learning-for-trading" target="_blank">GitHub: machine-learning-for-trading</a>
+    <a href="https://github.com/reconurge/flowsint" target="_blank">GitHub: flowsint</a>
+    <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank">GitHub: Open-LLM-VTuber</a>
+    <a href="https://github.com/jamwithai/production-agentic-rag-course" target="_blank">GitHub: production-agentic-rag-course</a>
+  </div>
+  <div class="divider"></div>
+  <div style="font-size:12px;color:#8b8b8b;text-align:center;">关注建造者，而非意见领袖。明天见。</div>
+</section>
+</main>
+</body>
+</html>
