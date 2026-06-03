@@ -285,17 +285,25 @@ bold "【YouTube Embed Check — 深度对话】"
 for f in docs/daily/*.html; do
   [ -f "$f" ] || continue
   bn=$(basename "$f")
-  # Check if this file has a 深度对话 section
   if grep -q '深度对话' "$f" 2>/dev/null; then
-    # Check for YouTube URLs in the 深度对话 section
-    YT_LINKS=$(grep -oE 'https?://(www\.)?(youtube\.com/watch\?v=|youtu\.be/)[a-zA-Z0-9_-]+' "$f" 2>/dev/null)
-    if [ -n "$YT_LINKS" ]; then
-      # Must have <iframe> embed, not just <img> or text link
-      if grep -q '<iframe.*youtube' "$f" 2>/dev/null; then
-        green "  ✓ $bn — YouTube embedded via iframe"
-      else
-        red "  ✗ $bn — 深度对话 references YouTube but has no <iframe> embed (only image/link)"
+    # Extract all YouTube URLs from the file
+    ALL_YT=$(grep -oE 'https?://(www\.)?(youtube\.com/[^"[:space:]]+|youtu\.be/[a-zA-Z0-9_-]+)' "$f" 2>/dev/null)
+    if [ -n "$ALL_YT" ]; then
+      # Check for channel links — these cannot be embedded
+      CHANNEL_LINKS=$(echo "$ALL_YT" | grep -E 'youtube\.com/@' 2>/dev/null)
+      # Check for valid video URLs
+      VIDEO_LINKS=$(echo "$ALL_YT" | grep -E 'youtube\.com/watch\?v=|youtu\.be/' 2>/dev/null)
+
+      if [ -n "$CHANNEL_LINKS" ] && [ -z "$VIDEO_LINKS" ]; then
+        red "  ✗ $bn — 深度对话 links to YouTube channel (@username), not a video. No iframe embed possible."
         ERRORS=$((ERRORS + 1))
+      elif [ -n "$VIDEO_LINKS" ]; then
+        if grep -q '<iframe.*youtube' "$f" 2>/dev/null; then
+          green "  ✓ $bn — YouTube video embedded via iframe"
+        else
+          red "  ✗ $bn — 深度对话 has YouTube video link but no <iframe> embed"
+          ERRORS=$((ERRORS + 1))
+        fi
       fi
     else
       green "  ✓ $bn — no YouTube links in 深度对话"
@@ -305,7 +313,86 @@ done
 
 println
 
-# ── Part 3.6: GitHub Trending Layout Check ─────────────────────────
+# ── Part 3.6: Image Content Check — 建造者动态 ─────────────────────
+bold "【Image Content Check — 建造者动态】"
+
+for f in docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  if grep -q '建造者动态' "$f" 2>/dev/null; then
+    # Count vitem entries in builder section and those with images
+    IMG_EXIT=0
+    "$PYTHON_BIN" -c "
+import re, sys
+with open('$f') as fh:
+    html = fh.read()
+# Find 建造者 dynamic section
+m = re.search(r'class=\"label-sm\"[^>]*>建造者动态.*?</section>', html, re.DOTALL)
+if m:
+    section = m.group(0)
+    vitems = re.findall(r'class=\"vitem\"', section)
+    vitem_galleries = re.findall(r'vitem-gallery', section)
+    total = len(vitems)
+    with_img = len(vitem_galleries)
+    if total == 0:
+        sys.exit(0)  # no items, skip
+    ratio = with_img / total
+    if ratio < 0.3:
+        print(f'Only {with_img}/{total} builder items have images ({ratio:.0%})')
+        # WARN only — many tweets are text-only with no media
+        sys.exit(2)
+    print(f'{with_img}/{total} builder items have images')
+" 2>/dev/null
+    IMG_EXIT=$?
+    if [ $IMG_EXIT -eq 0 ]; then
+      green "  ✓ $bn — 建造者动态 has sufficient images"
+    elif [ $IMG_EXIT -eq 2 ]; then
+      warn "$bn — 建造者动态 lacks images (check if source tweets had media)"
+    else
+      red "  ✗ $bn — 建造者动态 lacks images (need ≥30% items with vitem-gallery)"
+      ERRORS=$((ERRORS + 1))
+    fi
+  fi
+done
+
+println
+
+# ── Part 3.7: Image Content Check — GitHub Trending ─────────────────
+bold "【Image Content Check — GitHub Trending】"
+
+for f in docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  if grep -q 'GitHub Trending' "$f" 2>/dev/null; then
+    if "$PYTHON_BIN" -c "
+import re, sys
+with open('$f') as fh:
+    html = fh.read()
+m = re.search(r'class=\"label-sm\"[^>]*>GitHub Trending.*?</section>', html, re.DOTALL)
+if m:
+    section = m.group(0)
+    vitems = re.findall(r'class=\"vitem\"', section)
+    vitem_galleries = re.findall(r'vitem-gallery', section)
+    total = len(vitems)
+    with_img = len(vitem_galleries)
+    if total == 0:
+        sys.exit(0)
+    ratio = with_img / total
+    if ratio < 0.2:
+        print(f'Only {with_img}/{total} trending items have images ({ratio:.0%})')
+        sys.exit(1)
+    print(f'{with_img}/{total} trending items have images')
+" 2>/dev/null; then
+      green "  ✓ $bn — GitHub Trending has sufficient repo images"
+    else
+      red "  ✗ $bn — GitHub Trending lacks repo images (need ≥20% items with vitem-gallery)"
+      ERRORS=$((ERRORS + 1))
+    fi
+  fi
+done
+
+println
+# ── Part 3.8: GitHub Trending Layout Check ─────────────────────────
 bold "【GitHub Trending Layout】"
 
 for f in docs/daily/*.html; do
@@ -361,7 +448,7 @@ check "All homepage links point to existing files"
 
 println
 
-# ── Part 5: Structured Site Harness ─────────────────────────────────
+# ── Part 6: Structured Site Harness ─────────────────────────────────
 bold "【Structured Site Harness】"
 
 if "$PYTHON_BIN" scripts/site_harness.py validate; then
