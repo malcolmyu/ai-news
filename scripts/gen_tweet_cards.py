@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Fetch tweet data and generate HTML cards for daily digest builder section.
-Usage: python3 scripts/gen_tweet_cards.py <daily_html_path>
+Usage: python3 scripts/gen_tweet_cards.py <daily_html_path> [--translations trans.json]
 Reads tweet URLs from the builder section, fetches data from syndication API,
 downloads media, and generates tweet card HTML vitems.
+--translations: optional JSON file mapping tweet_id -> Chinese translation.
 """
 
 import requests, json, re, os, sys
@@ -15,7 +16,7 @@ ASSETS_DIR = os.path.join(WORKDIR, 'docs', 'daily', 'assets')
 
 def fetch_tweet(tweet_id):
     """Fetch tweet data from syndication API. Returns dict or None."""
-    url = f'https://cdn.syndication.twimg.com/tweet-result?id={tweet_id}&token=0'
+    url = f'https://cdn.syndication.twimg.com/tweet-result?id={tweet_id}&token=***'
     try:
         r = requests.get(url, timeout=10)
         return r.json() if r.status_code == 200 else None
@@ -72,7 +73,7 @@ def esc(text):
     text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
     return re.sub(r'(https?://[^\s]+)', r'<a href="\1" target="_blank">\1</a>', text)
 
-def card_html(tweet, tweet_id, screen_name):
+def card_html(tweet, tweet_id, screen_name, translation=None):
     u = tweet.get('user', {})
     name = u.get('name', screen_name)
     handle = u.get('screen_name', screen_name)
@@ -95,6 +96,9 @@ def card_html(tweet, tweet_id, screen_name):
           <span class="tweet-date">{date_str}</span>
         </div>
         <div class="tweet-body">{text}</div>'''
+    if translation:
+        card += f'''
+        <div class="tweet-translation">{esc(translation)}</div>'''
     if media:
         card += f'''
         <div class="tweet-media"><img src="{media}" alt="" loading="lazy"></div>'''
@@ -109,7 +113,8 @@ def card_html(tweet, tweet_id, screen_name):
     </div>'''
     return card
 
-def process_daily(html_path):
+def process_daily(html_path, translations=None):
+    translations = translations or {}
     with open(html_path) as f:
         html = f.read()
 
@@ -122,7 +127,7 @@ def process_daily(html_path):
     for url, sn, tid in urls:
         tweet = fetch_tweet(tid)
         if tweet:
-            cards.append(card_html(tweet, tid, sn))
+            cards.append(card_html(tweet, tid, sn, translation=translations.get(tid, '')))
         else:
             print(f"  FAIL: @{sn}/{tid} — keeping original", file=sys.stderr)
 
@@ -149,5 +154,17 @@ def process_daily(html_path):
     print(f"Updated {html_path} with {len(cards)} tweet cards")
 
 if __name__ == '__main__':
-    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(WORKDIR, 'docs', 'daily', 'ai-news-2026-06-04.html')
-    process_daily(path)
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument('html_path', nargs='?', default=None)
+    p.add_argument('--translations', type=str, default=None, help='JSON file: {"tweet_id": "中文翻译", ...}')
+    args = p.parse_args()
+
+    path = args.html_path or os.path.join(WORKDIR, 'docs', 'daily', 'ai-news-2026-06-04.html')
+
+    trans = {}
+    if args.translations:
+        with open(args.translations) as f:
+            trans = json.load(f)
+
+    process_daily(path, translations=trans)
