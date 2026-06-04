@@ -69,13 +69,16 @@ def fetch_feed(feed):
                             pass
 
             if pub_date and title:
-                articles.append({
-                    'title': title,
-                    'link': link,
-                    'description': desc_clean or '',
-                    'source': feed['name'],
-                    'date': pub_date.strftime('%m-%d %H:%M'),
-                })
+                # Only include articles from the last 24 hours
+                cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+                if pub_date >= cutoff:
+                    articles.append({
+                        'title': title,
+                        'link': link,
+                        'description': desc_clean or '',
+                        'source': feed['name'],
+                        'date': pub_date.strftime('%m-%d %H:%M'),
+                    })
 
         # Sort by date desc, limit per source
         articles.sort(key=lambda a: a['date'], reverse=True)
@@ -122,6 +125,20 @@ def process_daily(html_path):
 
     if not all_articles:
         print("No recent RSS articles found")
+        # Clean up any stale RSS section
+        with open(html_path) as f:
+            html = f.read()
+        modified = False
+        while '<div class="label-sm">RSS 精选</div>' in html:
+            existing = html.find('<div class="label-sm">RSS 精选</div>')
+            sec_start = html.rfind('<section', 0, existing)
+            sec_end = html.find('</section>', existing) + len('</section>')
+            html = html[:sec_start] + html[sec_end:]
+            modified = True
+        if modified:
+            with open(html_path, 'w') as f:
+                f.write(html)
+            print(f"  Removed stale RSS section from {html_path}")
         return
 
     with open(html_path) as f:
