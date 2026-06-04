@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 工具被白领「接管」：增速超程序员 3 倍，SaaS 正被重新定价 — AI 构建者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260604">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260604" defer></script>
+<script src="../site.js?v=20260604" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月4日 · 周四</div>
+  <h1>Agent 工具被白领「接管」：增速超程序员 3 倍，SaaS 正被重新定价</h1>
+  <div class="subtitle">
+    <strong>OpenAI Codex 最新报告揭示被低估的趋势：知识工作者已占 Codex 用户 20%，增长速度是开发者 3 倍以上。</strong> 增长最快的任务类型：数据分析（+110%）、研究（+37%）、知识产物（+36%）。同时 Peter Yang 警告窄场景 SaaS 正在被 AI Agent 重新定价，Claude Code 发布 Workflows 大升级，Listen Labs 用 AI 重构市场研究。
+  </div>
+  <div class="dots-row">
+    <span class="tag">Agent</span>
+    <span class="tag">Codex</span>
+    <span class="tag">SaaS</span>
+    <span class="tag">Workflows</span>
+    <span class="tag">市场研究</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+    <div class="stat-item"><div class="stat-num">15</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">趋势项目</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">今日播客</div></div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>📊 Codex 报告：知识工作者正在「接管」Agent 工具。</strong> 非技术用户已占 Codex 用户的 20%，增长速度是开发者的 3 倍以上。增长最快的任务：数据分析（周环比 +110%）、研究（+37%）、知识产物（+36%）。这意味着 AI 编码工具的主战场正在从纯工程场景向白领知识工作快速迁移。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/joshwoodward/status/2061870160315884010" target="_blank" class="vitem-link">查看原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>🎙️ Listen Labs：AI 正在重构市场研究。</strong> Alfred Wahlforss 的创业公司能同时运行数百个 AI 语音访谈，已服务 20% 的财富 500 强企业。AI 访谈比问卷更可靠、视频情绪检测弥合「说」和「做」的鸿沟、正在开发客户模拟能力——咨询公司的传统利润率正在被压缩。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.youtube.com/watch?v=Rumft-rsEu4" target="_blank" class="vitem-link">观看播客 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Training Data：Listen Labs 如何用 AI 重塑客户研究</h2>
+  <div class="text-body">
+    <strong>核心洞察：</strong>Listen Labs 创始人兼 CEO Alfred Wahlforss 分享了 AI 如何从根本上改变市场研究——从一次数百个同步 AI 语音访谈，到视频情绪分析，再到正在开发的客户模拟能力。他们已服务 20% 的财富 500 强企业，80% 的工程资源花在受众匹配上，目标是一亿人规模的受访者库。
+  </div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/Rumft-rsEu4" title="Training Data: Listen Labs' Alfred Wahlforss" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">AI 访谈比问卷调查更可靠</div><div class="vitem-desc">同一人两次做选择题问卷结果高度不一致，但语音访谈中人们需要真正思考，回答一致性好得多。AI 能捕捉到人类调查员容易遗漏的细微差异。</div></div>
+    <div class="vitem"><div class="vitem-title">视频 + 情绪检测弥合「说」和「做」的鸿沟</div><div class="vitem-desc">AI 分析面部表情、语气和眼神，比单纯文字更接近真实行为。这是传统问卷和文本分析做不到的维度。</div></div>
+    <div class="vitem"><div class="vitem-title">受众分层是护城河</div><div class="vitem-desc">80% 的工程资源花在受众匹配上。目标是一亿人规模的受访者库，能精准找到「对种子油有认知的城市高收入女性」这样的细分人群。</div></div>
+    <div class="vitem"><div class="vitem-title">正在开发模拟能力</div><div class="vitem-desc">当积累了数万次访谈数据后，能否预测客户未来会如何回答问题？「接近 AGI 之后，最难的不是做东西，而是知道该做什么。」</div></div>
+    <div class="vitem"><div class="vitem-title">咨询公司的利润率会被压缩</div><div class="vitem-desc">贝恩等公司已在用 Listen 加速流程，但传统服务中很大一部分会被 AI Agent 替代。市场研究的单位经济学正在被彻底改写。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=Rumft-rsEu4" target="_blank" class="vitem-link">观看播客 →</a>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <div class="vitem-title">Josh Woodward · OpenAI Codex</div>
+      <div class="vitem-desc">分享了 Codex 最新采用数据。非技术用户正以前所未有的速度涌入编程型 Agent 工具，做数据分析、调研和知识管理——这些场景过去需要多个专业工具协作。</div>
+      <div class="vitem-actions"><a href="https://x.com/joshwoodward/status/2061870160315884010" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Thibault Sottiaux · OpenAI Codex & ChatGPT</div>
+      <div class="vitem-desc">「ChatGPT 就是 AI 的代名词，很快也将是 Agent 的代名词。」Codex Business 版新增网站托管分享、插件/技能大幅升级、可视化标注反馈能力。</div>
+      <div class="vitem-actions"><a href="https://x.com/thsottiaux/status/2061876999564791952" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Peter Yang · Roblox 产品负责人</div>
+      <div class="vitem-desc">窄场景 SaaS 越来越难变现。AI Agent 拥有用户个人上下文和记忆后，能更灵活地解决问题。人们花 $20/月订阅 SaaS 时，会对比已有的 Claude/ChatGPT 订阅价值。</div>
+      <div class="vitem-actions"><a href="https://x.com/petergyang/status/2061846283263103274" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Thariq · Anthropic Claude Code</div>
+      <div class="vitem-desc">Workflows 是 Claude Code 自 Skills 和 Subagents 以来最大升级。非技术任务也能由 Claude Code 完成，博客详解最佳实践。</div>
+      <div class="vitem-actions"><a href="https://x.com/trq212/status/2061907538741006796" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Guillermo Rauch · Vercel CEO</div>
+      <div class="vitem-desc">提出「Yes-Code」概念：no-code 建立在代码昂贵的假设上，但编码 Agent 彻底改变了方程。Conductor 是为编码 Agent 而生的 ADE（Agent 开发环境）。</div>
+      <div class="vitem-actions"><a href="https://x.com/rauchg/status/2061934154732974376" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Aaron Levie · Box CEO</div>
+      <div class="vitem-desc">模型路由（Model Routing）将成为 AI 应用层核心差异化能力。随 Token 成本占比增大，能智能路由到不同层级模型的产品将拥有最强需求聚合能力。</div>
+      <div class="vitem-actions"><a href="https://x.com/levie/status/2061974298760495132" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Amjad Masad · Replit CEO</div>
+      <div class="vitem-desc">与微软合作，企业用户可在 Fabric 平台安全构建部署数据应用。传统 SWE 基准测试无法衡量应用构建能力，ViBench 可以。</div>
+      <div class="vitem-actions"><a href="https://x.com/amasad/status/2061893093696434578" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Garry Tan · YC CEO</div>
+      <div class="vitem-desc">正在开发 GBrain——「面向检索和记忆的 Agent 瑞士军刀」，一个统一的 Agentic 检索记忆系统。</div>
+      <div class="vitem-actions"><a href="https://x.com/garrytan/status/2062052761945223266" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Zara Zhang · Frontend Slides</div>
+      <div class="vitem-desc">Frontend Slides 在 GitHub 突破 2 万星。越来越多人用 HTML 幻灯片彻底取代 PPT，最近新增精美模板、网页发布/PDF 导出和内联编辑。</div>
+      <div class="vitem-actions"><a href="https://x.com/zarazhangrui/status/2061889286585405790" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Nikunj Kothari · FPV Ventures</div>
+      <div class="vitem-desc">警告创始人：融资门槛前所未有地高。仅靠「AI 风口」不够——必须同时讲清 AI 时机、市场规模、产品差异化和分发优势，才能让 VC 内部过会。</div>
+      <div class="vitem-actions"><a href="https://x.com/nikunj/status/2062033620773306763" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Peter Steinberger · OpenClaw 创始人</div>
+      <div class="vitem-desc">与微软合作将 OpenClaw 带入企业市场，同时联合开发了可观测性和可验证工作空间功能。</div>
+      <div class="vitem-actions"><a href="https://x.com/steipete/status/2061874084649025728" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Dan Shipper · Every CEO</div>
+      <div class="vitem-desc">就 Claude Opus 4.8 收集反馈：测试时看好但社区反应偏冷。理论是 Opus 4.8 会主动挑战用户框架，结果方差大——有时惊艳有时错。</div>
+      <div class="vitem-actions"><a href="https://x.com/danshipper/status/2061817375519809665" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Sam Altman · OpenAI CEO</div>
+      <div class="vitem-desc">就美国 AI 新行政令表态：美国应持续开发最强模型、确保安全、将网络工具交给可信防御者。新 EO 比重拿捏得当。</div>
+      <div class="vitem-actions"><a href="https://x.com/sama/status/2061973280655904815" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Anthropic Claude 官方 × Legora</div>
+      <div class="vitem-desc">介绍用 Claude 做法律 AI 的创业公司 Legora。联合创始人 Max Junestrand 的赌注：每个新模型发布抬高水位，Legora 正在为所有人造船。</div>
+      <div class="vitem-actions"><a href="https://x.com/claudeai/status/2061829558999912680" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-title">Swyx · AI 开发者</div>
+      <div class="vitem-desc">分享「saranormous codex is agi man」惊叹，以及一个他认为是最好的推理效率奖励函数的论文链接。</div>
+      <div class="vitem-actions"><a href="https://x.com/swyx/status/2062062585391014245" target="_blank" class="vitem-link">查看原文 →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">microsoft/markitdown</div>
+          <div class="vitem-desc">将各种文件和 Office 文档转换为 Markdown 的 Python 工具</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 1,984</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Python</span><a href="https://github.com/microsoft/markitdown" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">NousResearch/hermes-agent</div>
+          <div class="vitem-desc">与你共同成长的 Agent —— Hermes Agent 正式开源</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 1,735</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Python</span><a href="https://github.com/NousResearch/hermes-agent" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">Open-LLM-VTuber/Open-LLM-VTuber</div>
+          <div class="vitem-desc">免提语音交互 + 语音打断 + Live2D 虚拟形象，跨平台运行本地 LLM</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 693</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Python</span><a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">supermemoryai/supermemory</div>
+          <div class="vitem-desc">极速、可扩展的记忆引擎——AI 时代的 Memory API</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 600</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">TypeScript</span><a href="https://github.com/supermemoryai/supermemory" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">opendataloader-project/opendataloader-pdf</div>
+          <div class="vitem-desc">AI 就绪的 PDF 解析器，自动化 PDF 无障碍处理，开源</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 570</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Java</span><a href="https://github.com/opendataloader-project/opendataloader-pdf" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">jwasham/coding-interview-university</div>
+          <div class="vitem-desc">完整的计算机科学学习计划，目标是成为软件工程师</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 330</span>
+      </div>
+      <div class="vitem-actions"><a href="https://github.com/jwasham/coding-interview-university" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">HKUDS/Vibe-Trading</div>
+          <div class="vitem-desc">Vibe-Trading：你的个人交易 Agent</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 197</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Python</span><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">odoo/odoo</div>
+          <div class="vitem-desc">开源企业应用套件，助力业务增长</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 29</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Python</span><a href="https://github.com/odoo/odoo" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">aquasecurity/trivy</div>
+          <div class="vitem-desc">容器、K8s、代码仓库、云环境的安全漏洞/配置错误/密钥/SBOM 扫描器</div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap;">⭐ 24</span>
+      </div>
+      <div class="vitem-actions"><span style="font-size:11px;color:#8b8b8b;">Go</span><a href="https://github.com/aquasecurity/trivy" target="_blank" class="github-link">GitHub →</a></div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:14px;">
+    今日 Trending 亮点：微软 Markitdown 领跑，Hermes Agent 紧随其后——AI 工具链和 Agent 框架依然是社区最关注的方向。Open-LLM-VTuber 和 Supermemory 则分别代表了「LLM 交互新形态」和「Agent 记忆基础设施」两个快速崛起的赛道。
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <p class="text-body" style="margin-bottom:0;">
+    本周多个信号指向同一个方向——<strong>Agent 工具的用户群正在从开发者向知识工作者大规模扩展。</strong> Codex 的数据、Claude Code 的 Workflows 支持非技术任务、Vercel 的 Yes-Code 叙事，都在描绘一个「人人皆可用 Agent 编程」的未来。问题不再是「要不要用 AI」，而是「你的组织准备好让非技术人员用 Agent 了吗？」
+  </p>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/joshwoodward/status/2061870160315884010" target="_blank">Josh Woodward · Codex 采用数据</a>
+    <a href="https://x.com/thsottiaux/status/2061876999564791952" target="_blank">Thibault Sottiaux · Codex Business 更新</a>
+    <a href="https://x.com/petergyang/status/2061846283263103274" target="_blank">Peter Yang · SaaS 重估</a>
+    <a href="https://x.com/trq212/status/2061907538741006796" target="_blank">Thariq · Claude Code Workflows</a>
+    <a href="https://x.com/rauchg/status/2061934154732974376" target="_blank">Guillermo Rauch · Yes-Code</a>
+    <a href="https://x.com/levie/status/2061974298760495132" target="_blank">Aaron Levie · 模型路由</a>
+    <a href="https://x.com/amasad/status/2061893093696434578" target="_blank">Amjad Masad · Replit + 微软</a>
+    <a href="https://x.com/garrytan/status/2062052761945223266" target="_blank">Garry Tan · GBrain</a>
+    <a href="https://x.com/zarazhangrui/status/2061889286585405790" target="_blank">Zara Zhang · Frontend Slides 20k</a>
+    <a href="https://x.com/nikunj/status/2062033620773306763" target="_blank">Nikunj Kothari · 融资建议</a>
+    <a href="https://x.com/steipete/status/2061874084649025728" target="_blank">Peter Steinberger · OpenClaw + 微软</a>
+    <a href="https://x.com/danshipper/status/2061817375519809665" target="_blank">Dan Shipper · Opus 4.8 反馈</a>
+    <a href="https://x.com/sama/status/2061973280655904815" target="_blank">Sam Altman · AI 行政令</a>
+    <a href="https://x.com/claudeai/status/2061829558999912680" target="_blank">Anthropic · Legora 法律 AI</a>
+    <a href="https://x.com/swyx/status/2062062585391014245" target="_blank">Swyx · Codex AGI</a>
+    <a href="https://www.youtube.com/watch?v=Rumft-rsEu4" target="_blank">Training Data · Listen Labs 播客</a>
+    <a href="https://github.com/microsoft/markitdown" target="_blank">GitHub: microsoft/markitdown</a>
+    <a href="https://github.com/NousResearch/hermes-agent" target="_blank">GitHub: NousResearch/hermes-agent</a>
+    <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" target="_blank">GitHub: Open-LLM-VTuber</a>
+    <a href="https://github.com/supermemoryai/supermemory" target="_blank">GitHub: supermemoryai/supermemory</a>
+  </div>
+</section>
+</main>
+
+</body>
+</html>
