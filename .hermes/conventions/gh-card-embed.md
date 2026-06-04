@@ -1,6 +1,6 @@
 # GitHub 仓库卡片嵌入规范
 
-日报 GitHub Trending 区从普通 vitem 升级为带头像/描述/中文翻译/语言/Topics/Star 数的卡片。
+日报 GitHub Trending 区升级为带头像/描述/中文翻译/语言/Topics/Star 数的仓库卡片。整张卡片可点击跳转到仓库。
 
 ## 数据源
 
@@ -21,18 +21,18 @@ Headers: Accept: application/vnd.github+json
 {"owner/repo": "中文描述", ...}
 ```
 
-脚本调用方式：
+脚本调用：
 ```bash
 python3 scripts/gen_gh_cards.py docs/daily/ai-news-YYYY-MM-DD.html --translations /tmp/gh-trans-YYYYMMDD.json
 ```
 
-`--translations` 可选，不传则只显示原文。
-
 ## 卡片 HTML
+
+整张卡片是 `<a>` 标签，点击跳转到仓库。卡片内不嵌套链接。
 
 ```html
 <div class="vitem">
-  <div class="gh-card">
+  <a href="https://github.com/{owner}/{repo}" target="_blank" class="gh-card">
     <div class="gh-header">
       <img class="gh-avatar" src="{avatar_url}" alt="" loading="lazy">
       <div class="gh-repo">
@@ -40,23 +40,27 @@ python3 scripts/gen_gh_cards.py docs/daily/ai-news-YYYY-MM-DD.html --translation
       </div>
       <span class="gh-stars">⭐ {stars}</span>
     </div>
-    <div class="gh-body">{description}</div>
-    <!-- 有翻译时渲染 -->
+    <div class="gh-body">{description — URL 纯文本}</div>
     <div class="gh-translation">{中文描述}</div>
     <div class="gh-meta">
       <span class="gh-lang">● {language}</span>
       <span class="gh-forks">🍴 {forks}</span>
       <span class="gh-topics"><span class="gh-topic">{topic}</span>...</span>
     </div>
-    <a href="https://github.com/{owner}/{repo}" target="_blank" class="gh-link">查看仓库 →</a>
-  </div>
+  </a>
 </div>
 ```
 
-## CSS（追加到 docs/styles.css）
+关键点：
+- `.gh-card` 是 `<a>` 标签，`display:block` 全卡可点击
+- `esc()` 只做 HTML 实体转义，不 linkify URL
+- 无底部分离链接
+
+## CSS
 
 ```css
-.gh-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.5}
+.gh-card{display:block;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.5;text-decoration:none;color:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gh-card:hover{border-color:#c4c4c0;box-shadow:0 2px 8px rgba(28,28,28,.06)}
 .gh-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .gh-avatar{width:28px;height:28px;border-radius:6px;flex-shrink:0}
 .gh-repo{flex:1;min-width:0;font-size:13px;font-weight:600}
@@ -70,29 +74,29 @@ python3 scripts/gen_gh_cards.py docs/daily/ai-news-YYYY-MM-DD.html --translation
 .gh-lang{font-weight:500}
 .gh-topics{display:flex;gap:4px;flex-wrap:wrap}
 .gh-topic{background:#eef2ff;color:#4338ca;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}
-.gh-link{font-size:12px;color:var(--accent);text-decoration:none}
-.gh-link:hover{text-decoration:underline}
 ```
+
+Hover: 边框变深 + 微阴影（与推文卡片一致）。
 
 ## 数字格式化
 
-- star/fork 数 ≥1000 时显示为 `1.2k` / `23.4k`
-- Topics 最多显示 4 个
+- star/fork 数 ≥1000 → `1.2k` / `23.4k`
+- Topics 最多 4 个
 
 ## Codex 工作流
 
-日报生成时，Hermes 主控流程：
-1. 生成原始日报 HTML（GitHub Trending 区放占位 vitem 或链接）
-2. 翻译所有仓库描述 → 写入 `/tmp/gh-trans-YYYYMMDD.json`
-3. 运行 `python3 scripts/gen_gh_cards.py <path> --translations /tmp/gh-trans-YYYYMMDD.json`
-4. 运行 `python3 scripts/gen_tweet_cards.py <path> --translations /tmp/tweet-trans-YYYYMMDD.json`
-5. 运行 `.github/style-check.sh` 验证
+1. 生成原始日报 HTML（GitHub Trending 区放占位链接）
+2. 翻译所有仓库描述 → `/tmp/gh-trans-YYYYMMDD.json`
+3. `python3 scripts/gen_tweet_cards.py <path> --translations /tmp/tweet-trans-YYYYMMDD.json`
+4. `python3 scripts/gen_gh_cards.py <path> --translations /tmp/gh-trans-YYYYMMDD.json`
+5. `bash .github/style-check.sh .`
 6. 提交推送
 
 ## 注意事项
 
-- 不要修改 GitHub Trending 以外的任何内容
-- 保持 vlist-2col 瀑布流布局不变
+- 不修改 GitHub Trending 以外的任何内容
+- 保持 vlist-2col 布局
+- 卡片内禁止嵌套 `<a>` 标签
+- `esc()` 只转义，不 linkify
 - GitHub API 公开访问 60 req/h，够用
-- 提交前运行 `.github/style-check.sh`
-- 执行完立即推送
+- style-check.sh 目前用 `vitem-gallery` 检测图片，gh-card 格式不适用 — 后续需更新门禁

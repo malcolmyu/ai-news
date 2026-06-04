@@ -22,8 +22,7 @@ def fetch_repo(owner, repo):
         return None
 
 def esc(text):
-    text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    return re.sub(r'(https?://[^\s]+)', r'<a href="\1" target="_blank">\1</a>', text)
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 def fmt_num(n):
     if n >= 1000:
@@ -40,7 +39,7 @@ def card_html(repo_data, owner, repo_name, translation=None):
     homepage = repo_data.get('homepage', '')
 
     card = f'''    <div class="vitem">
-      <div class="gh-card">
+      <a href="https://github.com/{owner}/{repo_name}" target="_blank" class="gh-card">
         <div class="gh-header">
           <img class="gh-avatar" src="{avatar}" alt="" loading="lazy">
           <div class="gh-repo">
@@ -67,8 +66,7 @@ def card_html(repo_data, owner, repo_name, translation=None):
           <span class="gh-topics">{topic_tags}</span>'''
     card += f'''
         </div>
-        <a href="https://github.com/{owner}/{repo_name}" target="_blank" class="gh-link">查看仓库 →</a>
-      </div>
+      </a>
     </div>'''
     return card
 

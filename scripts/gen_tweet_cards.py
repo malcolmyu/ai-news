@@ -70,8 +70,7 @@ def fmt_time(created_at):
         return ''
 
 def esc(text):
-    text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    return re.sub(r'(https?://[^\s]+)', r'<a href="\1" target="_blank">\1</a>', text)
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 def card_html(tweet, tweet_id, screen_name, translation=None):
     u = tweet.get('user', {})
@@ -86,7 +85,7 @@ def card_html(tweet, tweet_id, screen_name, translation=None):
     media = download_media(tweet, tweet_id)
 
     card = f'''    <div class="vitem">
-      <div class="tweet-card">
+      <a href="https://x.com/{handle}/status/{tweet_id}" target="_blank" class="tweet-card">
         <div class="tweet-header">
           <img class="tweet-avatar" src="{avatar}" alt="" loading="lazy">
           <div class="tweet-author">
@@ -108,8 +107,7 @@ def card_html(tweet, tweet_id, screen_name, translation=None):
           <span>↺ {rts}</span>
           <span>💬 {replies}</span>
         </div>
-        <a href="https://x.com/{handle}/status/{tweet_id}" target="_blank" class="tweet-link">在 X 上查看</a>
-      </div>
+      </a>
     </div>'''
     return card
 
