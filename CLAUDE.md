@@ -33,6 +33,7 @@ ai-news/
 6. **vitem 透明化**：`.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card)` 自动去掉背景/边框/内边距，无双层边框。
 7. **禁止嵌套 `<a>`**：`esc()` 只做 HTML 实体转义，不 linkify URL。
 8. **无 ALL-CAPS**：`label-sm`、`section-label` 等不使用全大写。
+9. **首页 Featured Card**：`docs/index.html` 的深度报告区第一条必须用 `class="featured-card"`，禁止改成 `daily-entry`。有 `<!-- FEATURED-CARD-START -->` / `<!-- FEATURED-CARD-END -->` 守卫注释，不可删除。
 
 ## 日报 HTML 结构
 

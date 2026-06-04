@@ -448,7 +448,30 @@ check "All homepage links point to existing files"
 
 println
 
-# ── Part 6: Structured Site Harness ─────────────────────────────────
+# ── Part 6: Homepage Featured Card ────────────────────────────────
+bold "【Homepage Featured Card】"
+
+FEATURED_CHECK=$(grep -c 'class="featured-card"' "$REPO/docs/index.html" 2>/dev/null || echo 0)
+if [ "$FEATURED_CHECK" -ge 1 ]; then
+  green "  \\xE2\\x9C\\x93 Homepage research section has featured-card"
+else
+  red "  \\xE2\\x9C\\x97 Homepage research section missing featured-card (first item must use class=\"featured-card\", not daily-entry)"
+  ERRORS=$((ERRORS + 1))
+fi
+
+# Check for guard comments
+GUARD_START=$(grep -c 'FEATURED-CARD-START' "$REPO/docs/index.html" 2>/dev/null || echo 0)
+GUARD_END=$(grep -c 'FEATURED-CARD-END' "$REPO/docs/index.html" 2>/dev/null || echo 0)
+if [ "$GUARD_START" -ge 1 ] && [ "$GUARD_END" -ge 1 ]; then
+  green "  \\xE2\\x9C\\x93 Featured card guard comments present"
+else
+  yellow "  \\xE2\\x9A\\xA0 Featured card guard comments missing (should have FEATURED-CARD-START / FEATURED-CARD-END)"
+  WARNINGS=$((WARNINGS + 1))
+fi
+
+println
+
+# ── Part 7: Structured Site Harness ─────────────────────────────────
 bold "【Structured Site Harness】"
 
 if "$PYTHON_BIN" scripts/site_harness.py validate; then
