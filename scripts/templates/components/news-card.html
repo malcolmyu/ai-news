@@ -1,0 +1,20 @@
+<div class="vitem">
+  <div class="vitem-title">{{ item.title }}</div>
+  {% if item.summary %}
+  <div class="vitem-desc">{{ item.summary }}</div>
+  {% endif %}
+  {% if item.media %}
+  <div class="vitem-gallery{% if item.galleryCols %} cols-{{ item.galleryCols }}{% endif %}">
+    {% for image in item.media %}
+    <img src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if item.links %}
+  <div class="vitem-actions">
+    {% for link in item.links %}
+    <a href="{{ link.url }}" target="_blank" class="vitem-link">{{ link.label }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>

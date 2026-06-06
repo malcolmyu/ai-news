@@ -13,6 +13,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from daily_source import load_daily_metadata
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -160,6 +162,14 @@ def extract_item(track: str, path: Path) -> ContentItem:
     page_title = clean_title(title or display_title)
     date = parse_meta_date(content, path)
     summary = first_summary(content, display_title)
+    if track == "daily":
+        source_meta = load_daily_metadata(path)
+        if source_meta:
+            if source_meta.get("title"):
+                display_title = clean_title(source_meta["title"])
+                page_title = clean_title(source_meta["title"])
+            if source_meta.get("summary") and is_useful_summary(source_meta["summary"]):
+                summary = source_meta["summary"][:180]
     category = match_attr(r'<meta[^>]*(?:name|property)=["\']category["\'][^>]*content=["\']([^"\']+)["\']', content)
     if not category and track == "research":
         category = "深度调研"

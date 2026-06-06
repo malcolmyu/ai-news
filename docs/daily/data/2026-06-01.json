@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-06-01",
+  "title": "「按七年前的标准，现在已经是 AGI 了」——但模型还没走出自己的 Move 37",
+  "summary": "前晚 Gemini 联合负责人 <strong>Oriol Vinyals</strong> 在 Unsupervised Learning 播客上丢出一句话：如果拿七年前的标准衡量，现在的模型已经是 AGI 了。但他真正追的东西比“通过图灵测试”野心大得多，模型能不能像 AlphaGo 的 Move 37 那样，在机器学习研究本身做出人类想不到的创新。",
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "今日要点",
+      "items": [
+        {
+          "title": "要点",
+          "summary": "<strong>🧠 Oriol Vinyals：真正缺失的是持续学习与研究创新。</strong> 当前模型在数学和编程上的 RL 突破已经惊人，但 Gemini 团队更关心世界模型、记忆系统、Agent 架构，以及模型是否能提出人类没想到的机器学习创新。"
+        },
+        {
+          "title": "要点",
+          "summary": "<strong>📰 Anthropic Claude Managed Agents 更新。</strong> 新能力包括 dreaming、outcomes、multiagent orchestration。最有趣的是 dreaming：Agent 会在后台回顾历史会话，发现模式并自我优化，不需要人类介入。",
+          "links": [
+            {
+              "url": "https://claude.com/blog/new-in-claude-managed-agents",
+              "label": "查看发布 →"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "vitem",
+      "label": "深度对话",
+      "title": "Oriol Vinyals：从世界模型到 Move 37 式创新",
+      "intro": "<strong>核心论点：</strong>Vinyals 系统性分享了 Gemini 团队对世界模型、RL 下一阶段、记忆系统、以及 Agent 架构的思考。他认为当前模型在数学和编程上的 RL 突破是惊人的，但真正令人兴奋的是“元能力”：持续学习、从经验中高效抽象、以及在新领域中的泛化。",
+      "items": [
+        {
+          "title": "世界模型的 GPT 时刻尚未到来",
+          "summary": "从纯视频数据提取概念而不依赖语言标注，是机器学习十年来未解的难题。Omni 虽然强大，但那种“给所有视频就能学会重力定律”的纯无监督迁移还没实现。",
+          "media": [
+            {
+              "src": "assets/2026-06-01/yt-NQczevdpxq0.jpg",
+              "alt": "Oriol Vinyals 在 Unsupervised Learning 播客",
+              "width": 1280,
+              "height": 720
+            }
+          ]
+        },
+        {
+          "title": "RL 的下一个前沿不是垂直领域，是元能力",
+          "summary": "数学和编程可以验证，所以 RL 效果爆炸。但大部分我们希望模型做的事根本无法写出验证器。让人乐观的是，验证总是比创造简单，模型自己终将成为评判者。"
+        },
+        {
+          "title": "记忆系统 = 文件系统",
+          "summary": "当前最实用的记忆方案不是改权重，而是 Agent 在交互中将思考写入文件系统、建立知识库。这种非参数化的记忆方式可能是下一个类似推理突破的范式转移。"
+        },
+        {
+          "title": "Bitter Lesson 正在吃掉 Agent 脚手架",
+          "summary": "今天人们手写的 multi-agent、delegation、长时间运行系统，最终会被模型自己动态生成。模型会为当前任务自动决定需要怎样的子 Agent 架构。"
+        },
+        {
+          "title": "“AGI 已经很近了”",
+          "summary": "Vinyals 同意 Demis 在 Google I/O 上“处在奇点山脚”的判断，但他补充：真正的缺失是模型从经验中持续学习的能力。",
+          "links": [
+            {
+              "url": "https://www.youtube.com/watch?v=NQczevdpxq0",
+              "label": "观看播客 →"
+            }
+          ],
+          "url": "https://www.youtube.com/watch?v=NQczevdpxq0"
+        }
+      ],
+      "footnote": "观看播客 →"
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "建造者动态",
+      "title": "Codex、Vercel、Box、OpenClaw、Every、Cursor 与 YC 的今天",
+      "items": [
+        {
+          "title": "OpenAI Codex 团队 Thibault Sottiaux",
+          "summary": "Codex 用户突破 500 万，GPT-5.5 带来速度与效率的显著跃升。从 5.0→5.1→5.5 的版本号递增对应的是能力提升和 token 效率的改善。他还在征集社区反馈：有什么长期没修、又很烦人的问题？",
+          "links": [
+            {
+              "url": "https://x.com/thsottiaux/status/2060627747760984429",
+              "label": "500 万用户 →"
+            },
+            {
+              "url": "https://x.com/thsottiaux/status/2060964284117782996",
+              "label": "社区反馈 →"
+            }
+          ],
+          "url": "https://x.com/thsottiaux/status/2060627747760984429"
+        },
+        {
+          "title": "Vercel CEO Guillermo Rauch",
+          "summary": "发布 AI Gateway 的按 API Key 消费上限功能。关于产品哲学，他只说了八个词：“Ship the best product. Use lots of AI, some AI, maybe no AI. Just be the best.”",
+          "media": [
+            {
+              "src": "assets/2026-06-01/rauchg-2060787704166776927-0.jpg",
+              "alt": "Guillermo Rauch 推文截图",
+              "width": 1200,
+              "height": 1105
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/rauchg/status/2060803480823193840",
+              "label": "AI Gateway →"
+            },
+            {
+              "url": "https://x.com/rauchg/status/2060787704166776927",
+              "label": "产品哲学 →"
+            }
+          ],
+          "url": "https://x.com/rauchg/status/2060803480823193840"
+        },
+        {
+          "title": "Box CEO Aaron Levie",
+          "summary": "在和大量企业 CIO/CTO 的交流中发现一个反直觉趋势：AI 正在创造而不是消灭工作岗位。企业因 AI 增长，催生了 FDE、工程等新角色，而非简单替代。",
+          "media": [
+            {
+              "src": "assets/2026-06-01/levie-2060923684295221390-0.jpg",
+              "alt": "Aaron Levie 推文图片一",
+              "width": 1170,
+              "height": 1090
+            },
+            {
+              "src": "assets/2026-06-01/levie-2060923684295221390-1.jpg",
+              "alt": "Aaron Levie 推文图片二",
+              "width": 824,
+              "height": 1200
+            },
+            {
+              "src": "assets/2026-06-01/levie-2060923684295221390-2.jpg",
+              "alt": "Aaron Levie 推文图片三",
+              "width": 1137,
+              "height": 632
+            }
+          ],
+          "galleryCols": 3,
+          "links": [
+            {
+              "url": "https://x.com/levie/status/2060923684295221390",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/levie/status/2060923684295221390"
+        },
+        {
+          "title": "OpenClaw 创始人 Peter Steinberger",
+          "summary": "GPT 5.5 让他的 Agent 任务从 30-60 分钟延伸到 4-10 小时，且可靠性大幅提升。“Yielding agents is a skill” 也是一句提醒：驾驭 Agent 本身就是一门手艺。他还指出 Codex 的一个有趣现象：直接问有没有 bug 会说没问题，但告诉它“这里有 bug”就会不断深入发现真正的问题。",
+          "links": [
+            {
+              "url": "https://x.com/steipete/status/2060678430031597696",
+              "label": "长任务 →"
+            },
+            {
+              "url": "https://x.com/steipete/status/2060672154727825718",
+              "label": "找 bug →"
+            }
+          ],
+          "url": "https://x.com/steipete/status/2060678430031597696"
+        },
+        {
+          "title": "Every CEO Dan Shipper",
+          "summary": "Codex 重度使用数据：380 亿 token 消耗，单次最长任务 56 小时，连续 41 天使用。42 天 streak 还在继续。",
+          "media": [
+            {
+              "src": "assets/2026-06-01/danshipper-2060771279280513362-0.jpg",
+              "alt": "Dan Shipper Codex 使用数据",
+              "width": 1200,
+              "height": 812
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/danshipper/status/2060771279280513362",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/danshipper/status/2060771279280513362"
+        },
+        {
+          "title": "Cursor 设计师 Ryo Lu",
+          "summary": "Auto-review 功能让新手能理解每条命令的作用和风险，大幅降低了编码学习门槛。",
+          "media": [
+            {
+              "src": "assets/2026-06-01/ryolu_-2060766674203353190-0.jpg",
+              "alt": "Cursor Auto-review 功能截图",
+              "width": 1200,
+              "height": 675
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/ryolu_/status/2060766674203353190",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/ryolu_/status/2060766674203353190"
+        },
+        {
+          "title": "YC CEO Garry Tan",
+          "summary": "警告旧金山的建筑热潮还没来，这不是好信号。同时发布加州投票指南，支持 Patrick Wolff 竞选保险专员。",
+          "links": [
+            {
+              "url": "https://x.com/garrytan/status/2060949003790176667",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/garrytan/status/2060949003790176667"
+        },
+        {
+          "title": "Roblox / 独立创作者 Peter Yang",
+          "summary": "预言 AI 教育的终极形态：在玩 Final Fantasy 的过程中学会数学和计算机科学。他已经用 Brilliant.org 在教女儿编程。",
+          "links": [
+            {
+              "url": "https://x.com/petergyang/status/2060930599565811774",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/petergyang/status/2060930599565811774"
+        },
+        {
+          "title": "Zara Zhang",
+          "summary": "注意到 Opus 4.8 不再使用 Em Dash，这种细节变化暗示着模型输出风格的微妙转变。",
+          "links": [
+            {
+              "url": "https://x.com/zarazhangrui/status/2060962160872919043",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/zarazhangrui/status/2060962160872919043"
+        },
+        {
+          "title": "FPV Ventures Nikunj Kothari",
+          "summary": "“Time is a flat circle.” 对于那些重新进入讨论的老话题，这是个优雅的提醒。",
+          "media": [
+            {
+              "src": "assets/2026-06-01/nikunj-2060948669164347448-0.jpg",
+              "alt": "Nikunj Kothari 推文图片一",
+              "width": 1200,
+              "height": 1167
+            },
+            {
+              "src": "assets/2026-06-01/nikunj-2060948669164347448-1.jpg",
+              "alt": "Nikunj Kothari 推文图片二",
+              "width": 1200,
+              "height": 1167
+            }
+          ],
+          "galleryCols": 2,
+          "links": [
+            {
+              "url": "https://x.com/nikunj/status/2060948669164347448",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/nikunj/status/2060948669164347448"
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "simple",
+      "label": "GitHub Trending · 6月1日",
+      "title": "今日 12 个趋势项目",
+      "footnote": "",
+      "items": [
+        {
+          "title": "microsoft/markitdown",
+          "url": "https://github.com/microsoft/markitdown",
+          "summary": "将 Office 文档批量转换为 Markdown 的 Python 工具，微软出品。",
+          "stars": 2798,
+          "language": "Python"
+        },
+        {
+          "title": "harry0703/MoneyPrinterTurbo",
+          "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+          "summary": "利用 AI 大模型一键生成高清短视频。面向中文创作者的视频自动化生产工具。",
+          "stars": 1937,
+          "language": "Python"
+        },
+        {
+          "title": "codecrafters-io/build-your-own-x",
+          "url": "https://github.com/codecrafters-io/build-your-own-x",
+          "summary": "通过从零重建你喜爱的技术来精通编程，涵盖 Git、Redis、Docker 等数十个项目。",
+          "stars": 1158,
+          "language": "Markdown"
+        },
+        {
+          "title": "OpenBMB/VoxCPM",
+          "url": "https://github.com/OpenBMB/VoxCPM",
+          "summary": "无 Tokenizer 的多语言语音合成模型，支持创意声音设计和逼真声音克隆。面壁智能出品。",
+          "stars": 635,
+          "language": "Python"
+        },
+        {
+          "title": "FareedKhan-dev/train-llm-from-scratch",
+          "url": "https://github.com/FareedKhan-dev/train-llm-from-scratch",
+          "summary": "从下载数据到生成文本，一条清晰的训练 LLM 实战路径。",
+          "stars": 626,
+          "language": "Jupyter Notebook"
+        },
+        {
+          "title": "anthropics/claude-code",
+          "url": "https://github.com/anthropics/claude-code",
+          "summary": "Anthropic 官方的终端 Agent 编码工具，理解代码库并加速开发。",
+          "stars": 489,
+          "language": "Python"
+        },
+        {
+          "title": "Crosstalk-Solutions/project-nomad",
+          "url": "https://github.com/Crosstalk-Solutions/project-nomad",
+          "summary": "离线生存计算机，预装关键工具、知识和生存指南的独立设备。",
+          "stars": 374,
+          "language": "TypeScript"
+        },
+        {
+          "title": "revfactory/harness",
+          "url": "https://github.com/revfactory/harness",
+          "summary": "元技能框架，设计特定领域的 Agent 团队，定义专业 Agent 并生成其使用的技能。",
+          "stars": 323,
+          "language": "HTML"
+        },
+        {
+          "title": "supermemoryai/supermemory",
+          "url": "https://github.com/supermemoryai/supermemory",
+          "summary": "AI 时代的内存引擎与 API，极速、可扩展的长期记忆基础设施。",
+          "stars": 264,
+          "language": "TypeScript"
+        },
+        {
+          "title": "EveryInc/compound-engineering-plugin",
+          "url": "https://github.com/EveryInc/compound-engineering-plugin",
+          "summary": "Compound Engineering 官方插件，同时支持 Claude Code、Codex、Cursor。",
+          "stars": 251,
+          "language": "TypeScript"
+        },
+        {
+          "title": "emmabostian/developer-portfolios",
+          "url": "https://github.com/emmabostian/developer-portfolios",
+          "summary": "开发者作品集灵感合集，Emma Bostian 维护。",
+          "stars": 73,
+          "language": "Python"
+        },
+        {
+          "title": "github/docs",
+          "url": "https://github.com/github/docs",
+          "summary": "GitHub 官方文档的开源仓库。",
+          "stars": 27,
+          "language": "TypeScript"
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "今日思考",
+      "intro": "<h2>Move 37 式的创新，才是 AGI 的真正试金石</h2>\n  <div class=\"grid-2\">\n    <div class=\"quote\">Vinyals 说他最不确定的问题是：模型能否真正创新？不是搜索空间里的穷举，而是人类看了会愣住的那种“这怎么可能想到”。</div>\n    <div class=\"quote\">当模型能提出一个机器学习研究者都没想到的架构改进时，世界的运转方式会彻底改变。</div>\n  </div>\n  <div class=\"divider\"></div>\n  <div class=\"text-body\" style=\"text-align:center;font-size:14px;\">\n    <strong>今日一问：</strong>我们该用什么信号判断模型已经具备真正的研究创新能力？\n  </div>\n</section>",
+      "items": [
+        {
+          "title": "今日思考",
+          "summary": "Move 37 式的创新，才是 AGI 的真正试金石 Vinyals 说他最不确定的问题是：模型能否真正创新？不是搜索空间里的穷举，而是人类看了会愣住的那种“这怎么可能想到”。 当模型能提出一个机器学习研究者都没想到的架构改进时，世界的运转方式会彻底改变。 今日一问： 我们该用什么信号判断模型已经具备真正的研究创新能力？"
+        }
+      ]
+    }
+  ],
+  "heroLabel": "AI 日报 · 2026年6月1日 · 周一",
+  "tags": [
+    "Gemini",
+    "世界模型",
+    "强化学习",
+    "记忆系统",
+    "Agent 架构",
+    "GitHub Trending"
+  ],
+  "stats": [
+    {
+      "num": "2",
+      "label": "今日重点"
+    },
+    {
+      "num": "1",
+      "label": "深度对话"
+    },
+    {
+      "num": "10",
+      "label": "建造者动态"
+    },
+    {
+      "num": "12",
+      "label": "趋势项目"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Oriol Vinyals 播客",
+      "url": "https://www.youtube.com/watch?v=NQczevdpxq0"
+    },
+    {
+      "title": "Thibault Sottiaux — Codex 用户突破 500 万",
+      "url": "https://x.com/thsottiaux/status/2060627747760984429"
+    },
+    {
+      "title": "Thibault Sottiaux — 社区反馈征集",
+      "url": "https://x.com/thsottiaux/status/2060964284117782996"
+    },
+    {
+      "title": "Guillermo Rauch — AI Gateway 消费上限",
+      "url": "https://x.com/rauchg/status/2060803480823193840"
+    },
+    {
+      "title": "Guillermo Rauch — 产品哲学",
+      "url": "https://x.com/rauchg/status/2060787704166776927"
+    },
+    {
+      "title": "Aaron Levie — AI 创造岗位",
+      "url": "https://x.com/levie/status/2060923684295221390"
+    },
+    {
+      "title": "Peter Steinberger — GPT 5.5 长任务",
+      "url": "https://x.com/steipete/status/2060678430031597696"
+    },
+    {
+      "title": "Peter Steinberger — Codex 找 bug",
+      "url": "https://x.com/steipete/status/2060672154727825718"
+    },
+    {
+      "title": "Dan Shipper — Codex 使用数据",
+      "url": "https://x.com/danshipper/status/2060771279280513362"
+    },
+    {
+      "title": "Ryo Lu — Cursor Auto-review",
+      "url": "https://x.com/ryolu_/status/2060766674203353190"
+    },
+    {
+      "title": "Garry Tan — 加州投票指南",
+      "url": "https://x.com/garrytan/status/2060949003790176667"
+    },
+    {
+      "title": "Peter Yang — AI 教育",
+      "url": "https://x.com/petergyang/status/2060930599565811774"
+    },
+    {
+      "title": "Zara Zhang — Opus 4.8 输出风格",
+      "url": "https://x.com/zarazhangrui/status/2060962160872919043"
+    },
+    {
+      "title": "Nikunj Kothari — Time is a flat circle",
+      "url": "https://x.com/nikunj/status/2060948669164347448"
+    },
+    {
+      "title": "Anthropic Claude Managed Agents 更新",
+      "url": "https://claude.com/blog/new-in-claude-managed-agents"
+    },
+    {
+      "title": "GitHub: microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown"
+    },
+    {
+      "title": "GitHub: MoneyPrinterTurbo",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo"
+    },
+    {
+      "title": "GitHub: build-your-own-x",
+      "url": "https://github.com/codecrafters-io/build-your-own-x"
+    },
+    {
+      "title": "GitHub: OpenBMB/VoxCPM",
+      "url": "https://github.com/OpenBMB/VoxCPM"
+    },
+    {
+      "title": "GitHub: train-llm-from-scratch",
+      "url": "https://github.com/FareedKhan-dev/train-llm-from-scratch"
+    },
+    {
+      "title": "GitHub: anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code"
+    },
+    {
+      "title": "GitHub: project-nomad",
+      "url": "https://github.com/Crosstalk-Solutions/project-nomad"
+    },
+    {
+      "title": "GitHub: revfactory/harness",
+      "url": "https://github.com/revfactory/harness"
+    },
+    {
+      "title": "GitHub: supermemory",
+      "url": "https://github.com/supermemoryai/supermemory"
+    },
+    {
+      "title": "GitHub: compound-engineering-plugin",
+      "url": "https://github.com/EveryInc/compound-engineering-plugin"
+    },
+    {
+      "title": "GitHub: developer-portfolios",
+      "url": "https://github.com/emmabostian/developer-portfolios"
+    },
+    {
+      "title": "GitHub: github/docs",
+      "url": "https://github.com/github/docs"
+    }
+  ]
+}

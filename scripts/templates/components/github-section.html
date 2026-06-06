@@ -1,0 +1,14 @@
+<div class="card span-4" style="background:rgba(16,185,129,0.02);border-color:rgba(16,185,129,0.12);">
+  <div class="label-sm" style="color:#10b981;">{{ block.label }}</div>
+  <h2>{{ block.title }}</h2>
+  <div class="vlist" style="margin-top:6px;">
+    {% for item in block['items'] %}
+      {% include "components/github-trending.html" %}
+    {% endfor %}
+  </div>
+  {% if block.footnote %}
+  <div class="quote" style="margin-top:10px;">
+    {{ block.footnote }}
+  </div>
+  {% endif %}
+</div>

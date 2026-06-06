@@ -1,0 +1,38 @@
+<div class="vitem">
+  <a href="{{ item.url }}" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      {% if item.avatar %}
+      <img class="tweet-avatar" src="{{ item.avatar }}" alt="" loading="lazy">
+      {% endif %}
+      <div class="tweet-author">
+        <span class="tweet-name">{{ item.title }}</span>
+        <span class="tweet-handle">@{{ item.builder }}</span>
+      </div>
+      <span class="tweet-date">{{ item.tweetDate or '' }}</span>
+    </div>
+    <div class="tweet-body">{{ item.summary }}</div>
+    {% if item.translation %}
+    <div class="tweet-translation">{{ item.translation }}</div>
+    {% endif %}
+    {% if item.media %}
+    <div class="tweet-media">
+      {% if item.media|length > 1 %}
+      <div class="vitem-gallery{% if item.galleryCols %} cols-{{ item.galleryCols }}{% endif %}">
+        {% for image in item.media %}
+        <img src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" loading="lazy">
+        {% endfor %}
+      </div>
+      {% else %}
+      <img src="{{ item.media[0].src }}" width="{{ item.media[0].width }}" height="{{ item.media[0].height }}" alt="{{ item.media[0].alt }}" loading="lazy">
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if item.metrics %}
+    <div class="tweet-metrics">
+      <span>♥ {{ item.metrics.favorites }}</span>
+      <span>↺ {{ item.metrics.retweets }}</span>
+      <span>💬 {{ item.metrics.replies }}</span>
+    </div>
+    {% endif %}
+  </a>
+</div>

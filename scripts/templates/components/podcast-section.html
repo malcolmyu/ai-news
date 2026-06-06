@@ -1,0 +1,35 @@
+<section class="card span-4">
+  <div class="label-sm">{{ block.label }}</div>
+  {% if block.title %}
+  <h2>{{ block.title }}</h2>
+  {% endif %}
+  {% if block.intro %}
+  <div class="text-body">{{ block.intro | safe }}</div>
+  {% endif %}
+  {% if block.embedUrl %}
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="{{ block.embedUrl }}" title="{{ block.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  {% elif block['items'] and block['items'][0].media %}
+  <div class="vitem-gallery">
+    {% for image in block['items'][0].media %}
+    <img src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% set detail_items = block['items'] | selectattr('title') | list %}
+  {% if detail_items|length > 1 or (detail_items|length == 1 and detail_items[0].title != block.label and detail_items[0].title != block.title) %}
+  <div class="vlist" style="margin-top:{% if block.intro or block.embedUrl %}12{% else %}10{% endif %}px;">
+    {% for item in detail_items %}
+    <div class="vitem"><div class="vitem-title">{{ item.title }}</div><div class="vitem-desc">{{ item.summary }}</div></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if block['items'] and block['items'][-1].links %}
+  <div style="margin-top:12px;">
+    {% for link in block['items'][-1].links %}
+    <a href="{{ link.url }}" target="_blank" class="vitem-link">{{ link.label }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

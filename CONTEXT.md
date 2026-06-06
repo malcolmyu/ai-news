@@ -47,6 +47,7 @@ docs/
     skills/                  — Hermes skills copied into the repo and modernized for this site
   daily/
     ai-news-YYYY-MM-DD.html  — daily reports
+    data/YYYY-MM-DD.json     — Daily Source JSON (canonical input for render pipeline)
     assets/YYYY-MM-DD/       — media assets per day
     archive.html             — daily archive index
   research/
@@ -83,3 +84,4 @@ The harness architecture is documented in `docs/agents/architecture.md`; the arc
 - **Bento** — the grid-based card layout used for daily/research content; 4-column grid at desktop, 2 at tablet, 1 at mobile
 - **nav-back** — retired "← 返回首页" navigation pattern; current pages should use the shared header/search shell
 - **数字分身** — "digital avatar", the framing for the entire site as a persistent AI-powered presence
+- **Daily Source** — `docs/daily/data/YYYY-MM-DD.json`; canonical structured input for the Daily Digest render pipeline (hero, sections by `kind`/`layout`, optional `sources`)

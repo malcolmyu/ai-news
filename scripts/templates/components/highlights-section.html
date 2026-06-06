@@ -1,0 +1,21 @@
+<section class="card span-4">
+  <div class="label-sm">{{ block.label }}</div>
+  <div class="grid-2">
+    {% for item in block['items'] %}
+    <div class="feature-card">
+      {% if '<' in item.summary %}
+      <p>{{ item.summary | safe }}</p>
+      {% else %}
+      <p>{{ item.summary }}</p>
+      {% endif %}
+      {% if item.links %}
+      <div style="margin-top:12px;">
+        {% for link in item.links %}
+        <a href="{{ link.url }}" target="_blank" class="vitem-link">{{ link.label }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>

@@ -94,6 +94,13 @@ bash .github/style-check.sh .
 生产框架后续应该把更多逻辑从纯文本 skill 移到可执行契约里：
 
 - 用结构化数据渲染日报和调研报告，而不是直接手写完整 HTML。
+- Daily Source 放在 `docs/daily/data/YYYY-MM-DD.json`；构建期由 `scripts/render_daily.py` + `scripts/templates/components/` 渲染 section，再 merge 进 `docs/daily/ai-news-YYYY-MM-DD.html`。
+- 全页 ingest：`scripts/ingest_daily_html.py --date DATE --from-html PATH [--render]` 从 HTML 抽取 hero / 今日要点 / 播客 / RSS / builders / 今日思考 / 参考来源；保留已有 `github` section。
+- GitHub Trending 由 `scripts/gen_gh_cards.py` 写入 Daily Source JSON（`layout: simple|card`），不再 patch HTML；可选 `--render`。
+- Builder 区由 `scripts/gen_tweet_cards.py`（`layout: tweet`）或 ingest（`layout: vitem`）写入 JSON。
+- RSS 由 `scripts/gen_rss_cards.py` 写入 `kind: news` section；可选 `--render`。
+- npm：`site:ingest-daily`、`site:ingest-tweets`、`site:ingest-rss`、`site:render-daily`。
+- `site_harness.py` 索引 Daily 时优先读取 Daily Source 的 `title` / `summary`。
 - 把设计 token 和组件继续集中在 `docs/styles.css`。
 - 把外部信息抓取做成可替换步骤，因为 X/Twitter、YouTube、GitHub 的表面经常变化。
 - 所有项目特定的 agent 行为先落在本仓库，再同步到全局 Hermes skill。

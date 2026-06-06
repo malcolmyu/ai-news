@@ -23,8 +23,14 @@ API 失败时回退到纯文本 vitem 格式。
 
 脚本调用：
 ```bash
-python3 scripts/gen_tweet_cards.py docs/daily/ai-news-YYYY-MM-DD.html --translations /tmp/tweet-trans-YYYYMMDD.json
+python3 scripts/gen_tweet_cards.py --date YYYY-MM-DD --from-html docs/daily/ai-news-YYYY-MM-DD.html --translations /tmp/tweet-trans-YYYYMMDD.json --render
 ```
+
+Legacy HTML patch 已废弃。脚本 upsert `docs/daily/data/YYYY-MM-DD.json` 的 `builders` section（`layout: tweet`）。
+
+**头像**：默认通过 syndication API 拉取 `profile_image_url_https`，并下载到 `docs/daily/assets/YYYY-MM-DD/{handle}-avatar.jpg`（400×400）。JSON 存相对路径 `assets/...`，渲染时由模板输出。
+
+已有 HTML 可先 `--ingest-html-only` 迁移（会解析 `tweet-avatar` src）；若 HTML 头像为空，去掉该 flag 走 API 刷新。全页 `ingest_daily_html.py` 不会覆盖已有 github section，但 tweet builders 应优先用 `gen_tweet_cards.py` 刷新头像/指标。
 
 ## 卡片 HTML
 

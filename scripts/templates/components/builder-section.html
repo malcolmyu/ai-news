@@ -1,0 +1,9 @@
+<div class="card span-4">
+  <div class="label-sm">{{ block.label }}</div>
+  <h2>{{ block.title }}</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+    {% for item in block['items'] %}
+      {% include "components/builder-card.html" %}
+    {% endfor %}
+  </div>
+</div>

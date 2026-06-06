@@ -5,7 +5,11 @@
     "build": "npm run build:search",
     "build:search": "pagefind --site docs --output-subdir pagefind",
     "site:update": "scripts/python.sh scripts/site_harness.py update-all",
-    "site:validate": "scripts/python.sh scripts/site_harness.py validate"
+    "site:validate": "scripts/python.sh scripts/site_harness.py validate",
+    "site:render-daily": "scripts/python.sh scripts/render_daily.py",
+    "site:ingest-daily": "scripts/python.sh scripts/ingest_daily_html.py",
+    "site:ingest-tweets": "scripts/python.sh scripts/gen_tweet_cards.py",
+    "site:ingest-rss": "scripts/python.sh scripts/gen_rss_cards.py"
   },
   "devDependencies": {
     "pagefind": "^1.5.2"

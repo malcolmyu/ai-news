@@ -1,0 +1,19 @@
+<section class="card span-4">
+  <div class="label-sm">{{ digest.heroLabel }}</div>
+  <h1>{{ digest.title }}</h1>
+  <div class="subtitle">{{ digest.summary | safe }}</div>
+  {% if digest.tags %}
+  <div class="dots-row">
+    {% for tag in digest.tags %}
+    <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if digest.stats %}
+  <div class="stat-row" style="margin-top:14px;">
+    {% for stat in digest.stats %}
+    <div class="stat-item"><div class="stat-num">{{ stat.num }}</div><div class="stat-label">{{ stat.label }}</div></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

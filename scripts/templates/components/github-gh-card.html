@@ -1,0 +1,28 @@
+<div class="vitem">
+  <a href="{{ item.url }}" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="{{ item.avatar }}" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">{{ item.owner }}</span><span class="gh-sep">/</span><span class="gh-name">{{ item.repoName }}</span>
+      </div>
+      <span class="gh-stars">⭐ {{ item.stars | format_compact_num }}</span>
+    </div>
+    {% if item.summary %}
+    <div class="gh-body">{{ item.summary }}</div>
+    {% endif %}
+    {% if item.translation %}
+    <div class="gh-translation">{{ item.translation }}</div>
+    {% endif %}
+    <div class="gh-meta">
+      {% if item.language %}
+      <span class="gh-lang">● {{ item.language }}</span>
+      {% endif %}
+      {% if item.forks is not none %}
+      <span class="gh-forks">🍴 {{ item.forks | format_compact_num }}</span>
+      {% endif %}
+      {% if item.topics %}
+      <span class="gh-topics">{% for topic in item.topics %}<span class="gh-topic">{{ topic }}</span>{% endfor %}</span>
+      {% endif %}
+    </div>
+  </a>
+</div>

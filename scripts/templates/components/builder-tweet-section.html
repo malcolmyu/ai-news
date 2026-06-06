@@ -1,0 +1,11 @@
+<section class="card span-4">
+  <div class="label-sm">{{ block.label }}</div>
+  {% if block.title %}
+  <h2>{{ block.title }}</h2>
+  {% endif %}
+  <div class="vlist-2col">
+    {% for item in block['items'] %}
+      {% include "components/builder-tweet-card.html" %}
+    {% endfor %}
+  </div>
+</section>

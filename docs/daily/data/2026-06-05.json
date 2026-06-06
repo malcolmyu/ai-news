@@ -1,0 +1,527 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-06-05",
+  "title": "私域评估是企业新 IP：Nadella 重新定义 AI 护城河，Anthropic 公开 Agent 安全三板斧",
+  "summary": "<strong>Satya Nadella 在 Build 大会播客中提出：AI 时代企业最有价值的 IP 不再是代码或数据，而是不会泄露给外部的「私域评估集」。</strong> 与此同时，Anthropic 发布工程博客详述过去一年的 Agent 安全实践——从临时容器到密封 VM 的三层隔离架构，并坦诚分享了三个惊险踩坑故事。Coding Agent 赛道也在加速：OpenAI 多条向量指向同一方向，Replit 实现 48 小时从 App 到 App Store。",
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "今日要点",
+      "items": [
+        {
+          "title": "要点",
+          "summary": "<strong>🔑 Nadella：私域评估集 = 企业新 IP。</strong> 随着公开基准越来越容易被刷分，每家公司独有的私域评估集将成为最核心的知识产权。判断标准：「你有一个私域评估集，换模型还能继续爬山优化——那你掌握主动权。否则你就失去了控制。」MAI 模型的「干净血统」策略：高质量预训练 → 爬山脚手架 → RL → 私域评估 → 持续优化。",
+          "links": [
+            {
+              "url": "https://www.youtube.com/watch?v=LE90Yc5TuCs",
+              "label": "观看播客 →"
+            }
+          ]
+        },
+        {
+          "title": "要点",
+          "summary": "<strong>🔒 Anthropic：Agent 安全三层隔离。</strong> 临时容器（claude.ai）→ 人机协同沙盒（Claude Code）→ 密封 VM（Claude Cowork）。三个踩坑故事：信任弹窗前的配置文件漏洞、钓鱼邮件通过用户注入绕过模型防御、白名单域名外传漏洞。核心教训：环境层先行，模型层补充——确定性边界是概率性防御失效后的最后防线。",
+          "links": [
+            {
+              "url": "https://www.anthropic.com/engineering/how-we-contain-claude",
+              "label": "阅读全文 →"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "Satya Nadella × No Priors：全栈 Builder 与超级杠杆通才的崛起",
+      "intro": "<strong>来源：</strong>Microsoft Build 2026 播客 | Satya Nadella 与 Sarah Guo、Elad Gil (No Priors)、Swyx (Latent Space) 的深度对谈。六大核心观点重塑 AI 时代的竞争逻辑。",
+      "items": [
+        {
+          "title": "生态位 &gt; 单一模型",
+          "summary": "AI 竞争不是模型对决，而是生态系统的较量。平台的定义：「平台之上创造的价值大于平台本身捕获的价值」。Microsoft 的使命是让每家公司成为一等参与者。「如果只是一群人围着一个模型膜拜，那就不叫开发者大会。」"
+        },
+        {
+          "title": "MAI 的「干净血统」策略",
+          "summary": "从预训练开始建立「干净的血统」——高质量数据 + 严格消融实验。5B 推理模型通过轨迹收集和爬山优化，可以超越更大的通用模型。「许多开源权重模型在一个或两个基准上看起来很棒，但实际使用中表现不佳。」"
+        },
+        {
+          "title": "私域评估 = 新 IP（最颠覆的观点）",
+          "summary": "「你有一个私域评估集，用模型 A 能爬山优化，切换到模型 B 还能继续爬山——那你就掌握主动权。如果不能，你就失去了控制。」企业最有价值的 IP 不再是代码或数据，而是不会泄露给外部模型、能让企业持续优化的内部评测标准。"
+        },
+        {
+          "title": "Harness（缰绳）设计：模型 + 数据 + 工具的闭环",
+          "summary": "「过去两年我们学到的最重要的事情是，准备上下文层的工作量才是魔法所在。」Microsoft 将 GitHub harness 推广到 Copilot、安全 Copilot、Emdash 等全线产品。"
+        },
+        {
+          "title": "软件行业纵向堆叠正在被重新洗牌",
+          "summary": "SaaS 过去 20 年的「数据模型 + 业务逻辑 + UI + 配置」模式正被 Agent 拆解重组。「六个月后，我们都会说——天哪，昨晚有一堆 Autopilot 在我授权下完成了大量工作。」"
+        },
+        {
+          "title": "Token 资本 + 人力资本 = 公司老兵 Agent",
+          "summary": "企业 Agent 通过长期运行积累的轨迹可以训练出掌握企业隐性知识的「公司老兵 Agent」。Nadella 大胆设想：这种 Agent 甚至可能成为资产负债表上的资产。",
+          "links": [
+            {
+              "url": "https://www.youtube.com/watch?v=LE90Yc5TuCs",
+              "label": "观看播客 →"
+            }
+          ],
+          "url": "https://www.youtube.com/watch?v=LE90Yc5TuCs"
+        }
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/LE90Yc5TuCs",
+      "footnote": "观看播客 →"
+    },
+    {
+      "kind": "builders",
+      "layout": "tweet",
+      "label": "建造者动态",
+      "title": "今日 Builder 动态",
+      "items": [
+        {
+          "title": "Tibo",
+          "builder": "thsottiaux",
+          "summary": "Lots of little vectors at OpenAI all pointing in the same direction. Excited to see it all add up and come together over the coming weeks.",
+          "url": "https://x.com/thsottiaux/status/2062423528927015414",
+          "tweetId": "2062423528927015414",
+          "translation": "OpenAI 内部多条向量正向同一方向汇聚，未来几周将迎来重大整合。他同时为近期 Codex 可靠性事故道歉并重置付费计划使用上限。"
+        },
+        {
+          "title": "Amjad Masad",
+          "builder": "amasad",
+          "summary": "App to App Store in 48 hours!",
+          "url": "https://x.com/amasad/status/2062369124609892655",
+          "tweetId": "2062369124609892655",
+          "translation": "从 App 到 App Store 仅需 48 小时——「你可以跑，但躲不开 B2B SaaS」",
+          "media": [
+            {
+              "src": "assets/2026-06-05/amasad-2062369124609892655-0.jpg",
+              "alt": "",
+              "width": 554,
+              "height": 1200
+            }
+          ]
+        },
+        {
+          "title": "Guillermo Rauch",
+          "builder": "rauchg",
+          "summary": "Grok Imagine Video on @vercel AI Gateway – the top image-to-video model on http://arena.ai",
+          "url": "https://x.com/rauchg/status/2062332963636060313",
+          "tweetId": "2062332963636060313",
+          "translation": "Grok Imagine Video 接入 Vercel AI Gateway——arena.ai 上排名第一的图生视频模型。Vercel 同时强调基于业务数据生成前端是 Coding AI 的杀手级应用，在 Snowflake 之上获得 1000 倍价值提升。",
+          "media": [
+            {
+              "src": "assets/2026-06-05/rauchg-2062332963636060313-0.jpg",
+              "alt": "",
+              "width": 800,
+              "height": 419
+            },
+            {
+              "src": "assets/2026-06-05/rauchg-2062332963636060313-1.jpg",
+              "alt": "",
+              "width": 1200,
+              "height": 675
+            }
+          ],
+          "galleryCols": 2
+        },
+        {
+          "title": "cat",
+          "builder": "_catwu",
+          "summary": "Excited to share how Anthropic's data team has automated 95% of business analytics queries with Claude. Blog post covers how we approach evals, ablations, and online validation!",
+          "url": "https://x.com/_catwu/status/2062408623565984209",
+          "tweetId": "2062408623565984209",
+          "translation": "Anthropic 数据团队已用 Claude 自动化内部 95% 的商业分析查询。博客详述了评估、消融实验和在线验证的方法",
+          "media": [
+            {
+              "src": "assets/2026-06-05/_catwu-2062408623565984209-0.jpg",
+              "alt": "",
+              "width": 800,
+              "height": 419
+            }
+          ]
+        },
+        {
+          "title": "Peter Steinberger 🦞",
+          "builder": "steipete",
+          "summary": "Here's the video of my talk at MS Build: Build the thing that builds the thing. https://build.microsoft.com/en-US/sessions/BRK245",
+          "url": "https://x.com/steipete/status/2062390654022332691",
+          "tweetId": "2062390654022332691",
+          "translation": "MS Build 演讲「Build the thing that builds the thing」视频已上线。OpenClaw npm 周下载量创历史新高，加上 Docker/GitHub/企业部署，实际 1000-2000 万次/周"
+        },
+        {
+          "title": "Aaron Levie",
+          "builder": "levie",
+          "summary": "The jobs data coming out continues to suggest the opposite of what a lot of people had thought would happen. Just take engineering, as the prime example of the area with greatest AI impact (and perceived risk). Most companies now have far more software projects than ever before because of AI…",
+          "url": "https://x.com/levie/status/2062335852379066698",
+          "tweetId": "2062335852379066698",
+          "translation": "就业数据与「AI 取代工程师」的叙事完全相反。AI 让软件项目数量暴增，只有工程师能做这些工作。AI 反而会让公司招聘更多销售（Agent 处理更多线索）、创造更多营销角色（投放效率暴增）——AI 对就业的影响与大多数人想象的正好相反",
+          "media": [
+            {
+              "src": "assets/2026-06-05/levie-2062335852379066698-0.jpg",
+              "alt": "",
+              "width": 1199,
+              "height": 855
+            }
+          ]
+        },
+        {
+          "title": "Aaron Levie",
+          "builder": "levie",
+          "summary": "Even with employer caps, the spend on AI tokens dramatically exceeds any other historical spend on software. Typically, companies maybe would spend on the order of $10-50 for a software license per month per employee, but now will pay hundreds or thousands on tokens to augment their productivity.",
+          "url": "https://x.com/levie/status/2062280745889222937",
+          "tweetId": "2062280745889222937",
+          "translation": "AI Token 支出已远超历史上任何软件支出。过去公司每月为每个员工花 $10-50 买软件许可证，现在为 Token 支付数百甚至数千美元来增强生产力。AI 的 TAM 将远超传统软件市场"
+        },
+        {
+          "title": "Google Labs",
+          "builder": "GoogleLabs",
+          "summary": "🚨 NEW EXPERIMENT 🚨 Dreambeans is a new, experimental mobile app that uses Personal Intelligence to connect to your Google apps. Every day, it delivers collections of personalized stories…",
+          "url": "https://x.com/GoogleLabs/status/2062206479026069544",
+          "tweetId": "2062206479026069544",
+          "translation": "Google Labs 推出 Dreambeans——利用「个人智能」连接你的 Google 应用，每天推送个性化故事合集。团队口号：「Hope scrolling, not doom scrolling」",
+          "media": [
+            {
+              "src": "assets/2026-06-05/GoogleLabs-2062206479026069544-0.jpg",
+              "alt": "",
+              "width": 1200,
+              "height": 675
+            }
+          ]
+        },
+        {
+          "title": "Zara Zhang",
+          "builder": "zarazhangrui",
+          "summary": "Introducing the Beautiful Feishu Whiteboard skill: Your agent can now create EDITABLE SVG graphics in Feishu/Lark docs in 30+ predefined styles",
+          "url": "https://x.com/zarazhangrui/status/2062256374730699257",
+          "tweetId": "2062256374730699257",
+          "translation": "Beautiful Feishu Whiteboard：Agent 可在飞书文档中创建 30+ 种预定义风格的可编辑 SVG 图形——概念可视化、技术架构图、会议总结，甚至替代 PPT",
+          "media": [
+            {
+              "src": "assets/2026-06-05/zarazhangrui-2062256374730699257-0.jpg",
+              "alt": "",
+              "width": 1200,
+              "height": 853
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "GitHub Trending",
+      "footnote": "",
+      "items": [
+        {
+          "title": "NousResearch/hermes-agent",
+          "owner": "NousResearch",
+          "repoName": "hermes-agent",
+          "summary": "The agent that grows with you",
+          "url": "https://github.com/NousResearch/hermes-agent",
+          "translation": "可生长、可扩展的 AI Agent 框架，与你共同成长",
+          "stars": 181100,
+          "forks": 31100,
+          "language": "Python",
+          "avatar": "https://avatars.githubusercontent.com/u/134168893?v=4",
+          "topics": [
+            "ai",
+            "ai-agent",
+            "ai-agents"
+          ]
+        },
+        {
+          "title": "jwasham/coding-interview-university",
+          "owner": "jwasham",
+          "repoName": "coding-interview-university",
+          "summary": "A complete computer science study plan to become a software engineer.",
+          "url": "https://github.com/jwasham/coding-interview-university",
+          "translation": "从零到软件工程师的完整 CS 自学路线，经典面试宝典持续更新",
+          "stars": 349800,
+          "forks": 83200,
+          "avatar": "https://avatars.githubusercontent.com/u/3771963?v=4",
+          "topics": [
+            "algorithm",
+            "algorithms",
+            "coding-interview"
+          ]
+        },
+        {
+          "title": "Open-LLM-VTuber/Open-LLM-VTuber",
+          "owner": "Open-LLM-VTuber",
+          "repoName": "Open-LLM-VTuber",
+          "summary": "Talk to any LLM with hands-free voice interaction, voice interruption, and Live2D taking face running locally across platforms",
+          "url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber",
+          "translation": "免提语音交互 + Live2D 虚拟形象的 LLM 前端，支持语音打断，可跨平台本地运行",
+          "stars": 9600,
+          "forks": 1200,
+          "language": "Python",
+          "avatar": "https://avatars.githubusercontent.com/u/193920693?v=4",
+          "topics": [
+            "ai",
+            "ai-companion",
+            "ai-vtuber"
+          ]
+        },
+        {
+          "title": "github/spec-kit",
+          "owner": "github",
+          "repoName": "spec-kit",
+          "summary": "💫 Toolkit to help you get started with Spec-Driven Development",
+          "url": "https://github.com/github/spec-kit",
+          "translation": "GitHub 官方推出的 Spec-Driven Development 工具包，规范驱动开发",
+          "stars": 108600,
+          "forks": 9600,
+          "language": "Python",
+          "avatar": "https://avatars.githubusercontent.com/u/9919?v=4",
+          "topics": [
+            "ai",
+            "copilot",
+            "development"
+          ]
+        },
+        {
+          "title": "reconurge/flowsint",
+          "owner": "reconurge",
+          "repoName": "flowsint",
+          "summary": "A modern platform for visual, flexible, and extensible graph-based investigations.",
+          "url": "https://github.com/reconurge/flowsint",
+          "translation": "现代化可视化图调查平台，面向网络安全与威胁情报分析",
+          "stars": 5300,
+          "forks": 641,
+          "language": "TypeScript",
+          "avatar": "https://avatars.githubusercontent.com/u/182449807?v=4",
+          "topics": [
+            "investigation",
+            "osint",
+            "python"
+          ]
+        },
+        {
+          "title": "aquasecurity/trivy",
+          "owner": "aquasecurity",
+          "repoName": "trivy",
+          "summary": "Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more",
+          "url": "https://github.com/aquasecurity/trivy",
+          "translation": "全面的安全扫描器：容器、K8s、代码仓库的漏洞/配置错误/密钥/SBOM 检测",
+          "stars": 35700,
+          "forks": 431,
+          "language": "Go",
+          "avatar": "https://avatars.githubusercontent.com/u/12783832?v=4",
+          "topics": [
+            "containers",
+            "devsecops",
+            "docker"
+          ]
+        },
+        {
+          "title": "lfnovo/open-notebook",
+          "owner": "lfnovo",
+          "repoName": "open-notebook",
+          "summary": "An Open Source implementation of Notebook LM with more flexibility and features",
+          "url": "https://github.com/lfnovo/open-notebook",
+          "translation": "Google Notebook LM 的开源替代，更灵活、功能更丰富",
+          "stars": 25100,
+          "forks": 2900,
+          "language": "TypeScript",
+          "avatar": "https://avatars.githubusercontent.com/u/579178?v=4",
+          "topics": [
+            "assistant",
+            "learning",
+            "note-taking"
+          ]
+        },
+        {
+          "title": "mvanhorn/last30days-skill",
+          "owner": "mvanhorn",
+          "repoName": "last30days-skill",
+          "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web",
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "translation": "AI Agent 技能：跨 Reddit/X/YouTube/HN/Polymarket 调研任意话题并合成总结",
+          "stars": 27600,
+          "forks": 2300,
+          "language": "Python",
+          "avatar": "https://avatars.githubusercontent.com/u/455140?v=4",
+          "topics": [
+            "ai-prompts",
+            "ai-skill",
+            "bluesky"
+          ]
+        },
+        {
+          "title": "PaddlePaddle/PaddleOCR",
+          "owner": "PaddlePaddle",
+          "repoName": "PaddleOCR",
+          "summary": "Turn any PDF or image document into structured data for your AI. Supports 100+ languages.",
+          "url": "https://github.com/PaddlePaddle/PaddleOCR",
+          "translation": "将 PDF/图片文档转化为结构化数据，轻量级 OCR 工具包，支持 100+ 语言",
+          "stars": 79900,
+          "forks": 10600,
+          "language": "Python",
+          "avatar": "https://avatars.githubusercontent.com/u/23534030?v=4",
+          "topics": [
+            "ai4science",
+            "chineseocr",
+            "document-parsing"
+          ]
+        },
+        {
+          "title": "NVIDIA/cosmos",
+          "owner": "NVIDIA",
+          "repoName": "cosmos",
+          "summary": "NVIDIA Cosmos is an open platform of world models, datasets, and tools that enables developers to build Physical AI",
+          "url": "https://github.com/NVIDIA/cosmos",
+          "translation": "NVIDIA 开放的世界模型平台：数据集 + 工具，赋能物理 AI 开发者",
+          "stars": 9000,
+          "forks": 581,
+          "language": "Jupyter Notebook",
+          "avatar": "https://avatars.githubusercontent.com/u/1728152?v=4"
+        },
+        {
+          "title": "github/copilot-sdk",
+          "owner": "github",
+          "repoName": "copilot-sdk",
+          "summary": "Multi-platform SDK for integrating GitHub Copilot Agent into apps and services",
+          "url": "https://github.com/github/copilot-sdk",
+          "translation": "GitHub Copilot Agent 的多平台 SDK，将 Copilot 集成到任意应用",
+          "stars": 9000,
+          "forks": 1200,
+          "language": "Java",
+          "avatar": "https://avatars.githubusercontent.com/u/9919?v=4"
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "今日思考",
+      "intro": "<div class=\"text-body\">\n    <p>今天的头条来自两个看似不同却高度交叉的方向：Nadella 说「私域评估 = 新 IP」，Anthropic 用三层隔离为 Agent 安全设定行业基准。这两条线正在交汇——<strong>当 Agent 获得越来越多的自主权和系统访问权限时，如何在不牺牲能力的前提下控制 blast radius，将成为 2026 下半年最重要的工程命题。</strong></p>\n    <p>Aaron Levie 的数据也给出清晰信号：AI 不是在消灭工程岗位，而是在创造更多软件项目——但每个工程师的杠杆率正在急剧上升，Token 支出正在重新定义企业软件预算结构。过去公司为每个员工花 $10-50/月买软件许可，现在为 Token 支付数百甚至数千美元。</p>\n    <p><strong>💡 一个值得思考的问题：</strong>如果你的公司从今天开始建立私域评估集，一年后你的「爬山优化」能力会比竞争对手强多少？这不是技术问题，而是战略选择。</p>\n  </div>\n</section>",
+      "items": [
+        {
+          "title": "今日思考",
+          "summary": "今天的头条来自两个看似不同却高度交叉的方向：Nadella 说「私域评估 = 新 IP」，Anthropic 用三层隔离为 Agent 安全设定行业基准。这两条线正在交汇—— 当 Agent 获得越来越多的自主权和系统访问权限时，如何在不牺牲能力的前提下控制 blast radius，将成为 2026 下半年最重要的工程命题。 Aaron Levie 的数据也给出清晰信号：AI 不是在消灭工程岗位，而是在创造更多软件项目——但每个工程师的杠杆率正在急剧上升，Token 支出正"
+        }
+      ]
+    }
+  ],
+  "heroLabel": "AI 日报 · 2026年6月5日 · 周五",
+  "tags": [
+    "私域评估",
+    "Agent 安全",
+    "Coding Agent",
+    "播客精读",
+    "GitHub Trending"
+  ],
+  "stats": [
+    {
+      "num": "1",
+      "label": "深度播客"
+    },
+    {
+      "num": "1",
+      "label": "深度阅读"
+    },
+    {
+      "num": "9",
+      "label": "建造者动态"
+    },
+    {
+      "num": "11",
+      "label": "趋势项目"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Tibo @thsottiaux — OpenAI vectors converging",
+      "url": "https://x.com/thsottiaux/status/2062423528927015414"
+    },
+    {
+      "title": "Amjad Masad — App to App Store in 48h",
+      "url": "https://x.com/amasad/status/2062369124609892655"
+    },
+    {
+      "title": "Guillermo Rauch — Grok Imagine Video on Vercel AI Gateway",
+      "url": "https://x.com/rauchg/status/2062332963636060313"
+    },
+    {
+      "title": "Cat Wu — Claude automates 95% analytics",
+      "url": "https://x.com/_catwu/status/2062408623565984209"
+    },
+    {
+      "title": "Peter Steinberger — MS Build talk",
+      "url": "https://x.com/steipete/status/2062390654022332691"
+    },
+    {
+      "title": "Aaron Levie — AI jobs data (1)",
+      "url": "https://x.com/levie/status/2062335852379066698"
+    },
+    {
+      "title": "Aaron Levie — Token spend exceeds software (2)",
+      "url": "https://x.com/levie/status/2062280745889222937"
+    },
+    {
+      "title": "Google Labs — Dreambeans launch",
+      "url": "https://x.com/GoogleLabs/status/2062206479026069544"
+    },
+    {
+      "title": "Zara Zhang — Feishu Whiteboard skill",
+      "url": "https://x.com/zarazhangrui/status/2062256374730699257"
+    },
+    {
+      "title": "Satya Nadella × No Priors — Build 2026 Podcast",
+      "url": "https://www.youtube.com/watch?v=LE90Yc5TuCs"
+    },
+    {
+      "title": "Anthropic — How we contain Claude",
+      "url": "https://www.anthropic.com/engineering/how-we-contain-claude"
+    },
+    {
+      "title": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent"
+    },
+    {
+      "title": "jwasham/coding-interview-university",
+      "url": "https://github.com/jwasham/coding-interview-university"
+    },
+    {
+      "title": "Open-LLM-VTuber/Open-LLM-VTuber",
+      "url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber"
+    },
+    {
+      "title": "github/spec-kit",
+      "url": "https://github.com/github/spec-kit"
+    },
+    {
+      "title": "reconurge/flowsint",
+      "url": "https://github.com/reconurge/flowsint"
+    },
+    {
+      "title": "aquasecurity/trivy",
+      "url": "https://github.com/aquasecurity/trivy"
+    },
+    {
+      "title": "lfnovo/open-notebook",
+      "url": "https://github.com/lfnovo/open-notebook"
+    },
+    {
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill"
+    },
+    {
+      "title": "PaddlePaddle/PaddleOCR",
+      "url": "https://github.com/PaddlePaddle/PaddleOCR"
+    },
+    {
+      "title": "NVIDIA/cosmos",
+      "url": "https://github.com/NVIDIA/cosmos"
+    },
+    {
+      "title": "github/copilot-sdk",
+      "url": "https://github.com/github/copilot-sdk"
+    }
+  ]
+}

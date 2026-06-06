@@ -23,8 +23,10 @@ Headers: Accept: application/vnd.github+json
 
 脚本调用：
 ```bash
-python3 scripts/gen_gh_cards.py docs/daily/ai-news-YYYY-MM-DD.html --translations /tmp/gh-trans-YYYYMMDD.json
+python3 scripts/gen_gh_cards.py --date YYYY-MM-DD --from-html docs/daily/ai-news-YYYY-MM-DD.html --translations /tmp/gh-trans-YYYYMMDD.json --render
 ```
+
+Legacy HTML patch 已废弃。脚本现在 upsert `docs/daily/data/YYYY-MM-DD.json` 的 `github` section；加 `--render` 会调用 `render_daily.py` 把模板结果 merge 进日报 HTML。
 
 ## 卡片 HTML
 

@@ -1,0 +1,16 @@
+<section class="card span-4">
+  <div class="label-sm">{{ block.label }}</div>
+  {% if block.title %}
+  <h2>{{ block.title }}</h2>
+  {% endif %}
+  <div class="vlist-2col">
+    {% for item in block['items'] %}
+      {% include "components/github-gh-card.html" %}
+    {% endfor %}
+  </div>
+  {% if block.footnote %}
+  <div class="quote" style="margin-top:10px;">
+    {{ block.footnote }}
+  </div>
+  {% endif %}
+</section>

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-05-31",
+  "title": "231 天→13 天，事故反降 5%；但有人花 5 亿美元自建，说明 AI 工具还远未定价",
+  "summary": "Salesforce 全面转向 agentic 工作流，一个预估 231 天的迁移任务 13 天完成，单 PR 交付 21 个 API 端点、测试覆盖率 100%，总事故反降 5%。OpenAI Codex 负责人暗示里程碑级数据即将公布。Box CEO Aaron Levie 犀利点评：有人花 5 亿美元自建就证明 SaaS 价值远未被定价捕获。No Priors 播客聚焦 AI Agent 安全——一个正在发生但被严重低估的领域。",
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "今日要点",
+      "items": [
+        {
+          "title": "要点",
+          "summary": "<strong style=\"color:#1c1c1c;\">🧠 Salesforce × Claude Code：231 天缩减到 13 天，质量不降反升。</strong> Anthropic Claude Code 团队成员 Boris Cherny 分享：Salesforce 全面转向 agentic 工作流，一个预估 231 天的迁移任务实际 13 天完成，单 PR 交付 21 个 API 端点且测试覆盖率达到 100%。更关键的是 PR 数量增加但总事故下降了 5%——安全审查和代码质量直接内嵌进了 agent 工作流，而非事后补课。"
+        },
+        {
+          "title": "要点",
+          "summary": "<strong style=\"color:#1c1c1c;\">👀 OpenAI Codex 里程碑数据即将公布。</strong> OpenAI Codex & ChatGPT 负责人 Thibault Sottiaux 发推称看到一个让他\"很开心\"的仪表板数字，暗示近期会有官方消息。同时抛出尖锐问题：\"你还相信 benchmark 吗，还是只听朋友的推荐？什么会让你尝试一个新模型？\" 545 条回复说明 AI 工具选型标准是行业共同痛点。"
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "vitem",
+      "label": "深度播客",
+      "title": "用 AI 监督 AI——Onyx Security 的 Agent 安全方案",
+      "intro": "No Priors 播客采访 Onyx Security CEO Maxim Bar Kogan。Onyx 是一家以色列安全创业公司，专做\"用 AI agent 看守 AI agent\"。当企业指数级采用自主 AI agent，传统安全工具完全失效——你需要一个专用的 AI 系统来裁决 agent 操作是否合法。",
+      "items": [
+        {
+          "title": "分级裁决架构：小模型直觉 + 大模型深审",
+          "summary": "Onyx 训练很小的专用模型处理 90% 的日常裁决，只在关键节点唤醒更强 agent 做深度审查。类比国际象棋——顶级棋手多数走子靠直觉，只在关键节点长时间计算。既控制成本又保证可靠。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/yt-QDsbFLEt9ro.jpg",
+              "alt": "No Priors interview with Onyx Security CEO Maxim Bar Kogan",
+              "width": 800,
+              "height": 450
+            }
+          ]
+        },
+        {
+          "title": "当前企业 AI 使用结构",
+          "summary": "超过 50% 是自主编码 agent，约 45% 是低代码自动化（拖拽式），仅 2% 是企业自建的一方 agent。自主 agent 是增长最快的类别，且目前几乎没有任何安全控制。"
+        },
+        {
+          "title": "身份安全为什么对 agent 失效",
+          "summary": "传统安全第一道防线是限制权限。但 AI agent 恰恰相反——我们希望给它尽可能多的权限来完成各种任务。不可能为 agent 定义\"正确的权限集合\"，整个身份安全范式需要重新设计。"
+        },
+        {
+          "title": "企业为什么不信任大模型厂商做安全",
+          "summary": "Anthropic 和 OpenAI 是\"数据饥渴\"的公司，企业不愿意把 agent 历史行为数据交给它们做安全分析。Onyx 作为独立第三方可以获得这些数据来做行为基线分析。"
+        },
+        {
+          "title": "Mythos 级别模型即将到来——现在就该投资 AI 安全",
+          "summary": "Maxim 建议所有企业立即投资 AI 安全基础设施，不要等。一旦有 Mythos 级别的开源/中国模型出现，来不及补课的企业将完全暴露。",
+          "links": [
+            {
+              "url": "https://www.youtube.com/watch?v=QDsbFLEt9ro",
+              "label": "🎧 观看播客 →"
+            }
+          ],
+          "url": "https://www.youtube.com/watch?v=QDsbFLEt9ro"
+        }
+      ],
+      "footnote": "🎧 观看播客 →"
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "Builder 动态",
+      "title": "Boris Cherny、Thibault Sottiaux、Aaron Levie 等 8 位 Builder 今日发声",
+      "items": [
+        {
+          "title": "Boris Cherny (Claude Code @ Anthropic)",
+          "summary": "Salesforce 的 agentic 转型案例给出硬数据：一个预估 231 天的迁移任务 13 天完成，单 PR 交付 21 个 API 端点，测试覆盖率 100%。更关键的是，PR 变多但总事故下降 5%，说明安全与质量被直接嵌入了 agent 工作流。",
+          "quote": "真正获益的团队不是加速旧流程，而是在删步骤、消除交接，让 agent 端到端拥有任务。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/bcherny-2060390855383400729-0.jpg",
+              "alt": "Salesforce Claude Code agentic workflow case study",
+              "width": 800,
+              "height": 419
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/bcherny/status/2060390855383400729",
+              "label": "完整案例 →"
+            },
+            {
+              "url": "https://x.com/bcherny/status/2060390852619272526",
+              "label": "数据点 →"
+            }
+          ],
+          "url": "https://x.com/bcherny/status/2060390855383400729"
+        },
+        {
+          "title": "Thibault Sottiaux (Codex & ChatGPT @ OpenAI)",
+          "summary": "Codex 负责人暗示仪表板上出现了令人振奋的数字，并预告很快会公布更多消息。同时抛出一个产品选型问题：你还相信 benchmark，还是只听朋友推荐？这正击中 AI coding tool 当前的真实购买标准缺口。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/thsottiaux-2060529970523603099-0.jpg",
+              "alt": "Codex glasses",
+              "width": 1200,
+              "height": 1200
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/thsottiaux/status/2060565265906290786",
+              "label": "数据暗示 →"
+            },
+            {
+              "url": "https://x.com/thsottiaux/status/2060563528596287874",
+              "label": "benchmark 问题 →"
+            },
+            {
+              "url": "https://x.com/thsottiaux/status/2060529970523603099",
+              "label": "Codex 眼镜 →"
+            }
+          ],
+          "url": "https://x.com/thsottiaux/status/2060565265906290786"
+        },
+        {
+          "title": "Aaron Levie (Box CEO)",
+          "summary": "针对某公司花 5 亿美元自建内部工具的新闻，Levie 的解读是：这反而是 App 层最好的广告。若企业愿意用九位数自建一个已有 SaaS 的版本，说明软件品类的真实价值远未被当前 SaaS 定价捕获。",
+          "quote": "自建巨额内部工具不是 SaaS 失败，而是软件价值仍被低估。",
+          "links": [
+            {
+              "url": "https://x.com/levie/status/2060525104384418271",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/levie/status/2060525104384418271"
+        },
+        {
+          "title": "Peter Steinberger (OpenClaw)",
+          "summary": "OpenClaw 宣布 Vince 加入团队，Steinberger 的判断是：极少数人真正理解软件被构建的新方式，而 Vince 懂。同时他另一条「I smell a takedown in 3...2...1」暗示围绕 OpenClaw/AI coding 生态的争议仍在升温。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/steipete-2060306947035832628-0.jpg",
+              "alt": "Vince joins OpenClaw",
+              "width": 1200,
+              "height": 900
+            },
+            {
+              "src": "assets/2026-05-31/steipete-2060294413377519808-0.jpg",
+              "alt": "OpenClaw discussion screenshot",
+              "width": 800,
+              "height": 419
+            }
+          ],
+          "galleryCols": 2,
+          "links": [
+            {
+              "url": "https://x.com/steipete/status/2060306947035832628",
+              "label": "查看 →"
+            },
+            {
+              "url": "https://x.com/steipete/status/2060294413377519808",
+              "label": "争议 →"
+            }
+          ],
+          "url": "https://x.com/steipete/status/2060306947035832628"
+        },
+        {
+          "title": "Garry Tan (YC CEO)",
+          "summary": "Garry 给创始人的提醒很直接：不要把「缺钱」误判成「缺需求」。资金不能点燃业务，只能给已经存在的火苗加速。先证明用户足够想要，再谈融资，否则钱只会放大一个还没成立的假设。",
+          "quote": "Money is not the fire. Money is gasoline you pour on a fire that already exists.",
+          "links": [
+            {
+              "url": "https://x.com/garrytan/status/2060600088079356292",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/garrytan/status/2060600088079356292"
+        },
+        {
+          "title": "Josh Woodward (Google Labs / Gemini)",
+          "summary": "Josh 连续展示 Gemini 多模态能力：把汽车变成兰博基尼，以及让多语言能力变得「ridiculously easy」。相比单点 demo，这些片段共同指向 Gemini 的产品方向：把视觉编辑、语言转换和创作流收束成日常工具。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/joshwoodward-2060443095527989413-0.jpg",
+              "alt": "Gemini visual editing demo",
+              "width": 1080,
+              "height": 1080
+            },
+            {
+              "src": "assets/2026-05-31/joshwoodward-2060443093825094091-0.jpg",
+              "alt": "Gemini multilingual demo",
+              "width": 1200,
+              "height": 589
+            }
+          ],
+          "galleryCols": 2,
+          "links": [
+            {
+              "url": "https://x.com/joshwoodward/status/2060443095527989413",
+              "label": "视觉 demo →"
+            },
+            {
+              "url": "https://x.com/joshwoodward/status/2060443093825094091",
+              "label": "多语言 demo →"
+            }
+          ],
+          "url": "https://x.com/joshwoodward/status/2060443095527989413"
+        },
+        {
+          "title": "Nikunj Kothari (FPV Ventures)",
+          "summary": "Nikunj 转发 YC 面试过程相关内容，关注点是年轻创始人如何穿过 YC 的高压筛选。放在今天的语境里，这与 Garry 的「先找火苗」呼应：融资与加速器的价值建立在已有需求信号之上。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/nikunj-2060580468781953169-0.jpg",
+              "alt": "YC interview process",
+              "width": 1200,
+              "height": 586
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/nikunj/status/2060580468781953169",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/nikunj/status/2060580468781953169"
+        },
+        {
+          "title": "Dan Shipper (Every CEO)",
+          "summary": "Dan 简短转发「extremely sick」，延续 Every 对 AI 工具前沿 demo 的高频追踪。虽然信息密度不如其他 builder，但它是一个信号：AI-native 媒体/产品团队正在用转发流来捕捉工具生态的早期审美与采用迹象。",
+          "media": [
+            {
+              "src": "assets/2026-05-31/danshipper-2060487621915152571-0.jpg",
+              "alt": "AI tool demo shared by Dan Shipper",
+              "width": 1200,
+              "height": 810
+            }
+          ],
+          "links": [
+            {
+              "url": "https://x.com/danshipper/status/2060487621915152571",
+              "label": "查看 →"
+            }
+          ],
+          "url": "https://x.com/danshipper/status/2060487621915152571"
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "simple",
+      "label": "GitHub Trending · 5月31日",
+      "title": "Agent 工具链与新开源项目持续活跃，微软 markitdown 入榜",
+      "footnote": "今日三大信号：① agentic 开发效率数据持续涌现——Salesforce 案例 231 天→13 天、事故反降 5%，说明 agent 开发已进入可验证阶段而非 Demo 阶段；② OpenAI Codex 暗示里程碑级数据——工具赛道竞争白热化；③ Agent 安全获独立关注——No Priors 播客和 Onyx Security 的出现，说明 AI agent 安全正从附属于网络安全变为独立赛道。",
+      "items": [
+        {
+          "title": "harry0703/MoneyPrinterTurbo",
+          "summary": "利用AI大模型，一键生成高清短视频 Generate short videos with one click using AI LLM.",
+          "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+          "stars": 80036,
+          "language": "Python"
+        },
+        {
+          "title": "microsoft/markitdown",
+          "summary": "Python tool for converting files and office documents to Markdown.",
+          "url": "https://github.com/microsoft/markitdown",
+          "stars": 145629,
+          "language": "Python"
+        },
+        {
+          "title": "OpenBMB/VoxCPM",
+          "summary": "VoxCPM2: Tokenizer-Free TTS for Multilingual Speech Generation, Creative Voice Design, and True-to-Life Cloning",
+          "url": "https://github.com/OpenBMB/VoxCPM",
+          "stars": 26687,
+          "language": "Python"
+        },
+        {
+          "title": "ruvnet/RuView",
+          "summary": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+          "url": "https://github.com/ruvnet/RuView",
+          "stars": 71115,
+          "language": "Rust"
+        },
+        {
+          "title": "anthropics/claude-code",
+          "summary": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+          "url": "https://github.com/anthropics/claude-code",
+          "stars": 130485,
+          "language": "Python"
+        },
+        {
+          "title": "Crosstalk-Solutions/project-nomad",
+          "summary": "Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.",
+          "url": "https://github.com/Crosstalk-Solutions/project-nomad",
+          "stars": 29046,
+          "language": "TypeScript"
+        },
+        {
+          "title": "EveryInc/compound-engineering-plugin",
+          "summary": "Official Compound Engineering plugin for Claude Code, Codex, Cursor, and more",
+          "url": "https://github.com/EveryInc/compound-engineering-plugin",
+          "stars": 19972,
+          "language": "TypeScript"
+        },
+        {
+          "title": "DataTalksClub/data-engineering-zoomcamp",
+          "summary": "Data Engineering Zoomcamp is a free 9-week course on building production-ready data pipelines. The next cohort starts in January 2026. Join the course here 👇🏼",
+          "url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+          "stars": 42132,
+          "language": "Jupyter Notebook"
+        },
+        {
+          "title": "OpenMOSS/MOSS-TTS",
+          "summary": "MOSS‑TTS Family is an open‑source speech and sound generation model family from MOSI.AI and the OpenMOSS team. It is designed for high‑fidelity, high‑expressiveness, and complex real‑world scenarios, covering stable long‑form speech, multi‑speaker dialogue, voice/character design, environmental sound effects, and real‑time streaming TTS.",
+          "url": "https://github.com/OpenMOSS/MOSS-TTS",
+          "stars": 3136,
+          "language": "Python"
+        },
+        {
+          "title": "run-llama/liteparse",
+          "summary": "快速、友好的开源文档解析器，LlamaIndex 团队出品。",
+          "url": "https://github.com/run-llama/liteparse",
+          "stars": 925,
+          "language": "Rust"
+        },
+        {
+          "title": "FareedKhan-dev/train-llm-from-scratch",
+          "summary": "从零训练 LLM 的实操教程，从下载数据到文本生成。",
+          "url": "https://github.com/FareedKhan-dev/train-llm-from-scratch",
+          "stars": 327,
+          "language": "Jupyter Notebook"
+        },
+        {
+          "title": "galilai-group/stable-worldmodel",
+          "summary": "可复现的世界模型研究平台，用于评估和对比世界模型。",
+          "url": "https://github.com/galilai-group/stable-worldmodel",
+          "stars": 318,
+          "language": "Python"
+        },
+        {
+          "title": "cursor/plugins",
+          "summary": "Cursor 插件规范和官方插件集。",
+          "url": "https://github.com/cursor/plugins",
+          "stars": 205,
+          "language": "TypeScript"
+        },
+        {
+          "title": "chen08209/FlClash",
+          "summary": "基于 ClashMeta 的多平台代理客户端，简洁易用，开源无广告。",
+          "url": "https://github.com/chen08209/FlClash",
+          "stars": 187,
+          "language": "Dart"
+        },
+        {
+          "title": "revfactory/harness",
+          "summary": "一个元技能（meta-skill），用于设计特定领域的 agent 团队、定义专用 agent 并生成其所需的技能。",
+          "url": "https://github.com/revfactory/harness",
+          "stars": 55,
+          "language": "HTML"
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "Why This Matters",
+      "title": "Why This Matters",
+      "intro": "<div class=\"grid-2\">\n    <div style=\"background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;\">\n      <div style=\"font-size:13px;font-weight:600;color:#1c1c1c;margin-bottom:6px;\">Agent 开发：速度与质量不再互斥</div>\n      <div style=\"font-size:12px;color:#6b6b6b;line-height:1.6;\">Salesforce 案例打破了\"快=差\"的工程常识——231 天→13 天的同时，总事故下降 5%。核心不是 agent 写代码快，而是他们把安全审查和代码审查直接内嵌进了 agent 工作流。agent 不是\"更快的工程师\"，而是一种全新的工程范式。</div>\n    </div>\n    <div style=\"background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px;\">\n      <div style=\"font-size:13px;font-weight:600;color:#1c1c1c;margin-bottom:6px;\">Agent 安全：现在就该投资的基础设施</div>\n      <div style=\"font-size:12px;color:#6b6b6b;line-height:1.6;\">Onyx Security 的出现和 No Priors 的深度讨论传递一个明确信号：Agent 安全不是一个可选的功能模块，而是企业部署自主 agent 的前提条件。当 50% 的企业 AI 使用是自主编码 agent 时，\"没有安全控制\"不是一个可接受的状态。</div>\n    </div>\n  </div>\n  <div class=\"divider\"></div>\n  <div class=\"text-body\" style=\"text-align:center;font-size:13px;\">\n    <strong>今日一问：</strong>当你的团队考虑采用 agentic 开发时，你更关心的是效率提升的倍数，还是 agent 操作的安全边界？Salesforce 的数据表明两者可能不是 trade-off。\n  </div>\n</div>",
+      "items": [
+        {
+          "title": "Why This Matters",
+          "summary": "Agent 开发：速度与质量不再互斥 Salesforce 案例打破了\"快=差\"的工程常识——231 天→13 天的同时，总事故下降 5%。核心不是 agent 写代码快，而是他们把安全审查和代码审查直接内嵌进了 agent 工作流。agent 不是\"更快的工程师\"，而是一种全新的工程范式。 Agent 安全：现在就该投资的基础设施 Onyx Security 的出现和 No Priors 的深度讨论传递一个明确信号：Agent 安全不是一个可选的功能模块，而是企业部署自主 "
+        }
+      ]
+    }
+  ],
+  "heroLabel": "AI 日报 · 2026年5月31日",
+  "tags": [
+    "agentic 开发",
+    "Claude Code",
+    "Salesforce",
+    "Codex",
+    "SaaS 价值",
+    "Agent 安全",
+    "OpenClaw"
+  ],
+  "stats": [
+    {
+      "num": "5",
+      "label": "焦点事件"
+    },
+    {
+      "num": "1",
+      "label": "深度播客"
+    },
+    {
+      "num": "8",
+      "label": "追踪 Builder"
+    },
+    {
+      "num": "15",
+      "label": "GitHub 项目"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Boris Cherny — Salesforce agentic 转型完整案例",
+      "url": "https://x.com/bcherny/status/2060390855383400729"
+    },
+    {
+      "title": "Boris Cherny — 231 天到 13 天数据点",
+      "url": "https://x.com/bcherny/status/2060390852619272526"
+    },
+    {
+      "title": "Thibault Sottiaux — Codex 里程碑数据暗示",
+      "url": "https://x.com/thsottiaux/status/2060565265906290786"
+    },
+    {
+      "title": "Thibault Sottiaux — benchmark 还是朋友推荐？",
+      "url": "https://x.com/thsottiaux/status/2060563528596287874"
+    },
+    {
+      "title": "Thibault Sottiaux — Codex glasses",
+      "url": "https://x.com/thsottiaux/status/2060529970523603099"
+    },
+    {
+      "title": "Aaron Levie — 花 5 亿自建是对 App 层最好的广告",
+      "url": "https://x.com/levie/status/2060525104384418271"
+    },
+    {
+      "title": "Peter Steinberger — Vince 加入 OpenClaw",
+      "url": "https://x.com/steipete/status/2060306947035832628"
+    },
+    {
+      "title": "Peter Steinberger — OpenClaw 生态争议",
+      "url": "https://x.com/steipete/status/2060294413377519808"
+    },
+    {
+      "title": "Garry Tan — 钱不是火，是汽油",
+      "url": "https://x.com/garrytan/status/2060600088079356292"
+    },
+    {
+      "title": "Josh Woodward — Gemini 视觉 Demo",
+      "url": "https://x.com/joshwoodward/status/2060443095527989413"
+    },
+    {
+      "title": "Josh Woodward — Gemini 多语言 Demo",
+      "url": "https://x.com/joshwoodward/status/2060443093825094091"
+    },
+    {
+      "title": "Nikunj Kothari — YC 面试过程观察",
+      "url": "https://x.com/nikunj/status/2060580468781953169"
+    },
+    {
+      "title": "Dan Shipper — AI 工具前沿 Demo 转发",
+      "url": "https://x.com/danshipper/status/2060487621915152571"
+    },
+    {
+      "title": "No Priors 播客 — Onyx Security Agent 安全方案",
+      "url": "https://www.youtube.com/watch?v=QDsbFLEt9ro"
+    },
+    {
+      "title": "GitHub: MoneyPrinterTurbo",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo"
+    },
+    {
+      "title": "GitHub: microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown"
+    },
+    {
+      "title": "GitHub: anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code"
+    },
+    {
+      "title": "GitHub: compound-engineering-plugin",
+      "url": "https://github.com/EveryInc/compound-engineering-plugin"
+    },
+    {
+      "title": "GitHub: OpenBMB/VoxCPM",
+      "url": "https://github.com/OpenBMB/VoxCPM"
+    }
+  ]
+}
