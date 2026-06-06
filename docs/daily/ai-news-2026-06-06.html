@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic 80% 代码由 AI 编写：我们正在穿越临界点 — AI 构建者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260606">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260606" defer></script>
+<script src="../site.js?v=20260606" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span>思维模型</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月6日 · 周六</div>
+  <h1>Anthropic 80% 代码由 AI 编写：我们正在穿越临界点</h1>
+  <div class="subtitle">
+    <strong>Anthropic 研究员 Alex Albert 自曝：公司代码库中超过 80% 的代码由 Claude 自己编写，许多研究员已几个月没手写代码。</strong> 推理、调试、代码审查——几乎全流程由 Claude 驱动。Box CEO Aaron Levie 评论：这正是 AI 乐观场景的核心——人类提出方向，AI 负责大规模执行和探索，创新速度不再受人力瓶颈限制。
+  </div>
+  <div class="dots-row">
+    <span class="tag">Anthropic 80%</span>
+    <span class="tag">RL 科学发现</span>
+    <span class="tag">Codex SDK</span>
+    <span class="tag">YC Polaris</span>
+    <span class="tag">Agent 安全</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">博客精选</div></div>
+    <div class="stat-item"><div class="stat-num">17</div><div class="stat-label">信息源</div></div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>Anthropic 自曝：Claude 已写公司 80% 代码。</strong> 研究员 Alex Albert 透露，公司合并到代码库的代码中超过 80% 由 Claude 自己编写。推理、调试、代码审查——几乎全流程由 Claude 驱动。Alex 称之为 Anthropic 内部的「想法、工具、模拟的爆炸式增长」。Box CEO Aaron Levie：人类提出方向，AI 大规模执行和探索——创新速度不再受人力瓶颈限制。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/alexalbert__/status/2062580571214389510" target="_blank" class="vitem-link">Alex Albert 原文</a>
+        <a href="https://x.com/levie/status/2062728257359790292" target="_blank" class="vitem-link" style="margin-left:12px;">Levie 评论</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>OpenAI Dan Roberts：RL 是科学发现的新范式。</strong> 在 OpenAI、DeepMind、Anthropic 三家几乎同时攻破 Erdos 数学难题之际，Dan 详解了 RL 范式如何让 AI 做科学发现。ChatGPT 解出 Erdos 问题的方法是「先假设它错了」——需要极强信念沿着漫长的计算路径走下去。Dan 理论物理出身（MIT 博士），后转向深度学习理论。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.youtube.com/watch?v=oWOz2htozfI" target="_blank" class="vitem-link">观看播客</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>OpenAI Dan Roberts — 为什么 AI 现在能做科学发现了</h2>
+  <div class="text-body">
+    <strong>来源：</strong>Matt Turck 的 MAD Podcast | OpenAI 基础强化学习团队负责人 Dan Roberts 深度对话。在 OpenAI、DeepMind、Anthropic 三家几乎同时攻破 Erdos 数学难题的背景下，这场对话来得正是时候。
+  </div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/oWOz2htozfI" title="MAD Podcast: Dan Roberts, OpenAI RL Lead" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">RL 才是关键范式</div><div class="vitem-desc">Dan 用马里奥游戏做类比：监督学习是看爸爸打游戏然后自己模仿，强化学习是自己上手死无数次后学会。推理模型（O1 系列）的本质就是在测试时做 RL。这与 Anthropic 的 RL-first 路线不谋而合。</div></div>
+    <div class="vitem"><div class="vitem-title">「先假设它错了」——ChatGPT 如何解出 Erdos 问题</div><div class="vitem-desc">ChatGPT 解出 Erdos 问题的方法是先假设一个与主流共识相反的结论，然后需要极强信念沿着漫长的计算路径走下去。这种「反共识 + 跨领域」的能力，人类数学家很难同时具备。</div></div>
+    <div class="vitem"><div class="vitem-title">OpenAI vs DeepMind 路线差异</div><div class="vitem-desc">DeepMind 用 Lean 形式化语言做严格验证；OpenAI 走非形式化路线，像人类数学家一样用自然语言推理，验证更依赖人工检查。两条路线各有优劣，目前难分高下。</div></div>
+    <div class="vitem"><div class="vitem-title">理论物理 → 深度学习 → OpenAI</div><div class="vitem-desc">Dan 本人 MIT 量子引力博士出身，后转向深度学习理论（合著 Principles of Deep Learning Theory），两年前加入 OpenAI，因为他认为「前沿正在发生惊人的科学进步，你必须身在其中」。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=oWOz2htozfI" target="_blank" class="vitem-link">观看播客</a>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <a href="https://x.com/alexalbert__/status/2062580571214389510" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1856486626072915968/JEQpB9CW_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Alex Albert</span>
+            <span class="tweet-handle">@alexalbert__</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">We just published internal data on how much of Claude's development is already being done by Claude:
+- Over 80% of all code merged into our codebase is now written by Claude
+- It's been months since many researchers at Anthropic hand-wrote code
+- The typical Anthropic engineer</div>
+        <div class="tweet-metrics">
+          <span>♥ 3087</span>
+          <span>↺ 0</span>
+          <span>💬 174</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/levie/status/2062728257359790292" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/885529357904510976/tM0vLiYS_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Aaron Levie</span>
+            <span class="tweet-handle">@levie</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Good thought provoking post from Anthropic. I think this paragraph points to the key element of the optimistic scenario of AI:
+
+“There has been an explosion of new ideas, initiatives, tools, and simulations, as a result of Anthropic employees working with highly capable</div>
+        <div class="tweet-metrics">
+          <span>♥ 358</span>
+          <span>↺ 0</span>
+          <span>💬 50</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/sama/status/2062660086787613116" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/2046764873200394240/r7BxVezs_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Sam Altman</span>
+            <span class="tweet-handle">@sama</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">big upgrade to chatgpt memory rolling out today!</div>
+        <div class="tweet-metrics">
+          <span>♥ 5042</span>
+          <span>↺ 0</span>
+          <span>💬 479</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/thsottiaux/status/2062734215494664697" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1953339828738899968/WWQlU2RT_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Tibo</span>
+            <span class="tweet-handle">@thsottiaux</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">You can use codex within your own programs using the Python SDK. It's awesome. Built by @ah20im and friends
+
+```
+pip install openai-codex
+```
+
+https://t.co/GjQVEPwtkF</div>
+        <div class="tweet-metrics">
+          <span>♥ 2136</span>
+          <span>↺ 0</span>
+          <span>💬 165</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/petergyang/status/2062740262338929110" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1454103621516206083/_klMwpkk_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Yang</span>
+            <span class="tweet-handle">@petergyang</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">I spent the whole day today setting up integrations and skills in Codex for my top creator workflows.
+
+Now I'm convinced that you can save at least 50% of your time on any type of knowledge work if you just set up the system upfront.
+
+Note that all my workflows have human</div>
+        <div class="tweet-metrics">
+          <span>♥ 246</span>
+          <span>↺ 0</span>
+          <span>💬 22</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/_catwu/status/2062659533047259212" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1645578728532246528/Llilll47_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">cat</span>
+            <span class="tweet-handle">@_catwu</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">I'm hiring a PM for Claude Code, focused on model performance.
+
+If you have experience writing agentic evals and want to integrate research ideas into our core products, I'd love to hear from you here: https://t.co/IKWlAr8tSb</div>
+        <div class="tweet-metrics">
+          <span>♥ 1573</span>
+          <span>↺ 0</span>
+          <span>💬 83</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/trq212/status/2062605395101884916" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1976939058741039104/r3GgzqRh_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Thariq</span>
+            <span class="tweet-handle">@trq212</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">An app can be a home-cooked meal (2020) 
+
+personal software was a bit early in 2020 but in 2026, it really can be as personal as a home cooked meal, or a handwritten letter
+
+https://t.co/bzzbHofywN</div>
+        <div class="tweet-metrics">
+          <span>♥ 648</span>
+          <span>↺ 0</span>
+          <span>💬 37</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/garrytan/status/2062763109849411834" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1922894268403941377/-dGWAt3N_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Garry Tan</span>
+            <span class="tweet-handle">@garrytan</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Two YC decacorns in one day and one of them is building commercial fusion. Polaris hit 150 million degrees C, first privately funded machine to do it. This is the abundance future, built by people who actually ship. https://t.co/calTVslNEw</div>
+        <div class="tweet-metrics">
+          <span>♥ 198</span>
+          <span>↺ 0</span>
+          <span>💬 19</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/danshipper/status/2062628079869005876" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1946219091305340928/_Ef-eDlc_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Dan Shipper 📧</span>
+            <span class="tweet-handle">@danshipper</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">NEW:
+
+Spiral 4.0—a writing partner for you and your agent by @every
+
+-&amp;gt; Stylometry: we built a new Style Engine based on the principles of stylometry to extract you and your brand's voice and produce great writing every time, based on examples of your past work
+
+-&amp;gt; MCP and CLI: https://t.co/eVeehc59IG</div>
+        <div class="tweet-media"><img src="assets/tweet_2062628079869005876.jpg" alt="" loading="lazy"></div>
+        <div class="tweet-metrics">
+          <span>♥ 299</span>
+          <span>↺ 0</span>
+          <span>💬 30</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/claudeai/status/2062558332695556378" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1950950107937185792/QOfEjFoJ_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Claude</span>
+            <span class="tweet-handle">@claudeai</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Anton Osika (@antonosika) is the co-founder and CEO of @lovable, where anyone can build software through conversation.
+
+His working thesis: the most underrated moat in AI is trust, and earning it takes craft, care, and obsession. https://t.co/xxGDgonNzS</div>
+        <div class="tweet-metrics">
+          <span>♥ 2349</span>
+          <span>↺ 0</span>
+          <span>💬 188</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/rauchg/status/2062535454130676193" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1783856060249595904/8TfcCN0r_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Guillermo Rauch</span>
+            <span class="tweet-handle">@rauchg</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Congrats Void team!
+
+We @vercel reaffirm our collaboration on an open platform for the web, with our investment in @nitrojsdev, open runtimes, and native support for Vite-based frameworks like Nuxt, Svelte, and TanStack Start 🫡</div>
+        <div class="tweet-metrics">
+          <span>♥ 976</span>
+          <span>↺ 0</span>
+          <span>💬 39</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/adityaag/status/2062655784127971565" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="https://pbs.twimg.com/profile_images/1445089558161334279/0nZjx6qu_normal.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Aditya Agarwal</span>
+            <span class="tweet-handle">@adityaag</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">A lot of roles will now have engineering infused into them.
+
+Marketing Engineer is a great example of this.</div>
+        <div class="tweet-metrics">
+          <span>♥ 24</span>
+          <span>↺ 0</span>
+          <span>💬 1</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">博客精选</div>
+  <div class="vlist">
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">Anthropic Engineering：Claude Code 质量事故复盘</div>
+          <div class="vitem-desc">坦诚披露了两个 bug：扩展思考的缓存失效导致智能下降（已修复于 v2.1.101）；减少冗余的系统 Prompt 改动导致了 3% eval 下降（已回滚）。改进：扩大内部员工使用公开版本的比例，为每个 Prompt 改动设立更严格的评估流程。</div>
+        </div>
+        <a href="https://www.anthropic.com/engineering/april-23-postmortem" target="_blank" class="vitem-link">阅读</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">Anthropic Engineering：Managed Agents 架构 — 将大脑与双手解耦</div>
+          <div class="vitem-desc">深度技术文章。将 Agent 系统分解为三个可独立替换的接口：Session（持久事件日志）、Harness（调用 Claude 的循环）、Sandbox（执行环境）。解耦后 TTFT P50 下降约 60%，P95 下降超 90%。安全边界也被重新设计：凭据永远不会进入 Sandbox。</div>
+        </div>
+        <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" class="vitem-link">阅读</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">Claude 博客：Managed Agents 支持自托管沙箱和 MCP 隧道</div>
+          <div class="vitem-desc">企业可将 Agent 执行放在自己的基础设施（或 Cloudflare / Daytona / Modal / Vercel 等托管商）。MCP 隧道让 Agent 能访问内网的 MCP Server，无需暴露公网端点。</div>
+        </div>
+        <a href="https://claude.com/blog/claude-managed-agents-updates" target="_blank" class="vitem-link">阅读</a>
+      </div>
+    </div>
+    <div class="vitem">
+      <div class="vitem-row">
+        <div class="vitem-content">
+          <div class="vitem-title">Claude 博客：生活类 Connector 扩展</div>
+          <div class="vitem-desc">新增 AllTrails、Instacart、Audible、Tripadvisor、TurboTax 等日常应用连接器。Claude 会在对话中动态推荐合适的应用。</div>
+        </div>
+        <a href="https://claude.com/blog/connectors-for-everyday-life" target="_blank" class="vitem-link">阅读</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <div class="text-body">
+    <p>今天的主线非常清晰：<strong>AI 公司正在用 AI 建造 AI。</strong></p>
+    <p>Anthropic 的 80% 自写代码率是一个质变的信号——不是「AI 辅助编程」，而是「AI 作为主要生产者，人类转向方向设定和验收」。Alex Albert 称之为「想法、工具、模拟的爆炸式增长」——当代码生产不再受人力瓶颈限制，创新的速度和广度将被彻底改写。</p>
+    <p>与此同时，OpenAI 用 ChatGPT 攻破 Erdos 数学难题的路径揭示了一个更深层的范式：<strong>RL 让 AI 能够沿着「先假设它错了」的路径进行反共识探索。</strong> 这不是简单的知识检索，而是真正的方法论创新。</p>
+    <p><strong>一个值得思考的问题：</strong>如果 Anthropic 今天已经 80% 的代码由 AI 编写，一年后这个数字会是多少？当「写代码」不再是软件工程的核心技能，「提出正确问题」和「设计评估体系」的重要性将远远超过「实现能力」——Nadella 昨天说的「私域评估 = 新 IP」，和今天 Anthropic 的 80% 代码率，是同一场变革的两面。</p>
+  </div>
+</section>
+
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/alexalbert__/status/2062580571214389510" target="_blank">Alex Albert — Anthropic 80% 代码由 Claude 编写</a>
+    <a href="https://x.com/levie/status/2062728257359790292" target="_blank">Aaron Levie — 评论 Anthropic 80% 代码事件</a>
+    <a href="https://x.com/sama/status/2062660086787613116" target="_blank">Sam Altman — ChatGPT Memory 升级 + Web App</a>
+    <a href="https://x.com/thsottiaux/status/2062734215494664697" target="_blank">Thibault Sottiaux — Codex Python SDK + bug 修复</a>
+    <a href="https://x.com/petergyang/status/2062740262338929110" target="_blank">Peter Yang — Codex 可节省 50% 时间</a>
+    <a href="https://x.com/_catwu/status/2062659533047259212" target="_blank">Cat Wu — Claude Code PM 招聘</a>
+    <a href="https://x.com/trq212/status/2062605395101884916" target="_blank">Thariq — App can be a home-cooked meal</a>
+    <a href="https://x.com/garrytan/status/2062763109849411834" target="_blank">Garry Tan — YC 一天两家 decacorn, Polaris</a>
+    <a href="https://x.com/danshipper/status/2062628079869005876" target="_blank">Dan Shipper — Spiral 4.0 发布</a>
+    <a href="https://x.com/claudeai/status/2062558332695556378" target="_blank">Claude 官方 — 最被低估的护城河是信任</a>
+    <a href="https://x.com/rauchg/status/2062535454130676193" target="_blank">Guillermo Rauch — 投资 NitroJS, Vite 生态</a>
+    <a href="https://x.com/adityaag/status/2062655784127971565" target="_blank">Aditya Agarwal — Marketing Engineer 角色</a>
+    <a href="https://www.youtube.com/watch?v=oWOz2htozfI" target="_blank">Dan Roberts (OpenAI) × MAD Podcast</a>
+    <a href="https://www.anthropic.com/engineering/april-23-postmortem" target="_blank">Anthropic — Claude Code 质量事故复盘</a>
+    <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank">Anthropic — Managed Agents 架构</a>
+    <a href="https://claude.com/blog/claude-managed-agents-updates" target="_blank">Claude — Managed Agents 自托管沙箱</a>
+    <a href="https://claude.com/blog/connectors-for-everyday-life" target="_blank">Claude — 生活类 Connector 扩展</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:40px 20px;color:#8b8b8b;font-size:12px;border-top:1px solid #e8e8e6;margin-top:40px;" data-pagefind-ignore>
+  <div style="max-width:1160px;margin:0 auto;">
+    <p style="margin:0 0 6px;">第二号 · AI 构建者日报</p>
+    <p style="margin:0;opacity:.7;">每日追踪 AI 建造者动态 · 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
