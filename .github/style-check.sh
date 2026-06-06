@@ -313,7 +313,33 @@ done
 
 println
 
-# ── Part 3.6: Image Content Check — 建造者动态 ─────────────────────
+# ── Part 3.5.5: Module Completeness Check ──────────────────────────
+bold "【Module Completeness Check】"
+
+# Each daily page must have these sections
+REQUIRED_SECTIONS="今日要点|深度对话|建造者动态|今日思考"
+for f in docs/daily/ai-news-*.html; do
+  [ -f "$f" ] || continue
+  bn=$(basename "$f")
+  missing=""
+  for sec in $(echo "$REQUIRED_SECTIONS" | tr '|' ' '); do
+    if ! grep -q "$sec" "$f" 2>/dev/null; then
+      missing="$missing $sec"
+    fi
+  done
+  # GitHub Trending: must have either gh-card or label-sm section
+  if ! grep -qE 'GitHub Trending|gh-card' "$f" 2>/dev/null; then
+    missing="$missing GitHub_Trending"
+  fi
+  if [ -n "$missing" ]; then
+    red "  ✗ $bn — missing sections:$missing"
+    ERRORS=$((ERRORS + 1))
+  else
+    green "  ✓ $bn — all required sections present"
+  fi
+done
+
+println
 bold "【Image Content Check — 建造者动态】"
 
 for f in docs/daily/*.html; do
