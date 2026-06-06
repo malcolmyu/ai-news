@@ -471,6 +471,30 @@ fi
 
 println
 
+# ── Part 6.5: Homepage Daily List — Max 3 Days ─────────────────────
+bold "【Homepage Daily List (3-day limit)】"
+
+# Count daily-entry items in daily-left (excluding daily-entry-archive)
+DAILY_COUNT=$("$PYTHON_BIN" -c "
+import re, sys
+with open('$REPO/docs/index.html') as f:
+    html = f.read()
+m = re.search(r'class=\"daily-left\"[^>]*>(.*?)</div>', html, re.DOTALL)
+if m:
+    section = m.group(1)
+    entries = re.findall(r'class=\"daily-entry[\" ](?!.*daily-entry-archive)', section)
+    print(len(entries))
+    sys.exit(0 if len(entries) == 3 else 1)
+" 2>/dev/null)
+if [ "$DAILY_COUNT" = "3" ]; then
+  green "  \\xE2\\x9C\\x93 Daily list has exactly 3 entries (today + yesterday + day before)"
+else
+  red "  \\xE2\\x9C\\x97 Daily list has ${DAILY_COUNT:-?} entries — must have exactly 3 (today + yesterday + day before)"
+  ERRORS=$((ERRORS + 1))
+fi
+
+println
+
 # ── Part 7: Structured Site Harness ─────────────────────────────────
 bold "【Structured Site Harness】"
 

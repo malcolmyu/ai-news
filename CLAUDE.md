@@ -34,6 +34,7 @@ ai-news/
 7. **禁止嵌套 `<a>`**：`esc()` 只做 HTML 实体转义，不 linkify URL。
 8. **无 ALL-CAPS**：`label-sm`、`section-label` 等不使用全大写。
 9. **首页 Featured Card**：`docs/index.html` 的深度报告区第一条必须用 `class="featured-card"`，禁止改成 `daily-entry`。有 `<!-- FEATURED-CARD-START -->` / `<!-- FEATURED-CARD-END -->` 守卫注释，不可删除。
+10. **首页日报列表三天限制**：`docs/index.html` 的「今日日报」区域只保留 3 条（今日 + 昨日 + 前日）+ 历史日报链接。禁止出现第 4 条日报条目——多了就打乱与右侧日历的高度对齐。
 
 ## 日报 HTML 结构
 
