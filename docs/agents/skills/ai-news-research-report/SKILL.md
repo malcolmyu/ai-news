@@ -114,7 +114,7 @@ Codex 有两种认证模式，取决于用户的订阅类型：
 
 执行以下步骤（全部必须做）：
 
-1. **读 CONTEXT.md** — 了解项目身份（「第二号」数字分身）、内容轨道（日报/深度调研/思维模型）、设计约定（Bento 风格 vs 旧风格）、目录惯例、关键术语
+1. **读 CONTEXT.md** — 了解项目身份（「第二号」数字分身）、内容轨道（日报/深度调研/首页）、共享 Bento 设计约定、目录惯例、关键术语和已退役表面
 2. **探索仓库结构** — `find docs/ -maxdepth 2 -type f` 查看当前文件布局，`ls -la docs/research/` 看有哪些已有报告
 3. **读首页 index.html** — 理解首页聚合结构（Hero + Daily section + Research section + footer），确认锚点标记存在
 4. **读至少 2 篇已有报告** — 除了模板 `ai-native-engineering-org.html`，再读 1-2 篇相关的（如本 session 产出的 `agent-os-runtime.html` 连接 managed-agents 主题），理解内容组织模式、卡片搭配、与其他报告的交叉引用
@@ -786,7 +786,7 @@ grep '<h1>' docs/daily/ai-news-$(date +%F).html
       <button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
     </div>
     <div class="search-dialog-meta">
-      <span>AI 日报</span><span>深度调研</span><span>思维模型</span>
+      <span>AI 日报</span><span>深度调研</span>
       <span class="search-shortcut">Esc 关闭</span>
     </div>
     <div id="site-search" class="site-search"></div>

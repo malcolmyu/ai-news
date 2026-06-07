@@ -26,11 +26,11 @@ flowchart LR
 
 ### AI 日报
 
-输入是 Builder 动态、社交媒体、播客、GitHub 项目和必要的背景资料。
+输入是 Builder 动态、社交媒体、播客、RSS、GitHub 项目和必要的背景资料。
 
 结构契约是 `docs/agents/contracts/daily-digest.schema.json`。
 
-输出是 `docs/daily/ai-news-YYYY-MM-DD.html` 和 `docs/daily/assets/YYYY-MM-DD/`。
+主接口是 `docs/daily/data/YYYY-MM-DD.json`。这是日报的 Daily Source，包含 hero、section、layout、sources 和媒体引用。渲染入口是 `scripts/render_daily.py`，输出 `docs/daily/ai-news-YYYY-MM-DD.html` 和 `docs/daily/assets/YYYY-MM-DD/`。
 
 页面必须使用共享 header、`docs/styles.css`、bento 区块、Builder 双列/瀑布流卡片，并为本地图片写入 `width` 和 `height`。
 
@@ -52,6 +52,19 @@ flowchart LR
 
 输出是 `docs/index.html`、`docs/daily/archive.html`、`docs/research/archive.html` 和结构校验结果。
 
+站点交互入口分成两个小接口：`docs/search.js` 只负责 Pagefind 搜索弹窗；`docs/site.js` 负责瀑布流、图片放大和旧日报图片兼容层。不要再把图片兼容逻辑放回 `docs/search.js`。
+
+## 已退役表面
+
+以下内容不再是生产框架的一部分：
+
+- `docs/thinking/` 思维模型页面。
+- 2026 年 5 月的独立演示页面和对应根目录资源：`docs/20260510-thariq-html.html`、`docs/20260512-guizang-ppt.html`、`assets/20260510/`、`assets/20260512/`。
+- 一次性迁移脚本：`scripts/fix-headers.py`、`scripts/gen-agent-eval-ppt.js`。
+- 临时草稿和一次性计划：`docs/research/temp_research.md`、`docs/plans/`。
+
+这些表面通过 `scripts/site_harness.py validate` 做防回归检查。它们被删除后，复杂度没有迁移到其他调用方；这说明它们是浅模块或历史内容，而不是仍有 leverage 的生产接口。
+
 ## 标准执行流程
 
 1. Hermes 从 `docs/agents/skills/` 选择项目内 skill。
@@ -68,6 +81,10 @@ flowchart LR
 
 ```bash
 npm run site:update
+npm run site:render-daily -- YYYY-MM-DD
+npm run site:ingest-daily -- --date YYYY-MM-DD --from-html PATH --render
+npm run site:ingest-tweets -- --date YYYY-MM-DD --from-html PATH --render
+npm run site:ingest-rss -- --date YYYY-MM-DD --render
 npm run site:validate
 npm run build:search
 bash .github/style-check.sh .
@@ -75,9 +92,9 @@ bash .github/style-check.sh .
 
 ## 校验职责
 
-`scripts/site_harness.py validate` 检查每次发布都应该成立的结构事实：HTML 是否完整、是否使用共享样式、首页与归档是否同步、本地链接是否存在、设计 token 是否存在、日报 Builder 图像是否带有尺寸信息、图片组件兼容层是否仍在共享脚本里、生产 contract 是否仍在仓库内。
+`scripts/site_harness.py validate` 检查每次发布都应该成立的结构事实：HTML 是否完整、是否使用共享样式、首页与归档是否同步、本地链接是否存在、设计 token 是否存在、日报 Builder 图像是否带有尺寸信息、图片组件兼容层是否仍在共享脚本里、生产 contract 是否仍在仓库内、已退役表面是否被重新加入。
 
-`.github/style-check.sh` 是部署前门禁。它可以保留一些面向历史页面的检查，但结构判断应逐步下沉到 `scripts/site_harness.py`。
+`.github/style-check.sh` 是轻量部署前门禁，只检查文件完整性、共享设计系统、首页基本结构、链接和研究报告是否仍使用共享样式。日报/调研的结构判断集中在 `scripts/site_harness.py`，避免旧日报历史形态把部署门禁变成过期规则集合。
 
 浏览器验收仍然必要，因为静态检查无法证明视觉行为，例如瀑布流对齐、移动端溢出、搜索弹窗、架构图嵌入效果。
 
@@ -89,18 +106,24 @@ bash .github/style-check.sh .
 
 兼容层只处理 `src` 以 `assets/` 开头的本地图片，避免误伤外链、徽章、图标和搜索组件。未来如果批量迁移旧日报 HTML，可以保留这个兼容层作为防回归兜底。
 
+## 架构判断
+
+当前最重要的深模块是三处：
+
+- Daily Source：一个 JSON 接口背后隐藏日报结构、Builder 卡片、RSS、GitHub、参考来源和媒体引用的生成细节。
+- Site Harness：一个命令接口背后隐藏首页、归档、链接、样式、退役表面和生产契约校验。
+- Shared Site Assets：`styles.css`、`search.js`、`site.js` 三个接口分别承担设计、搜索、交互，避免页面级 HTML 复制实现细节。
+
+已删除的思维模型页面、独立演示页面和一次性脚本不再提供变更局部性；保留它们只会让 agent 误判生产轨道。因此退役删除比继续兼容更符合当前 harness 目标。
+
 ## 演进方向
 
-生产框架后续应该把更多逻辑从纯文本 skill 移到可执行契约里：
+生产框架后续应该继续把更多逻辑从纯文本 skill 移到可执行契约里：
 
 - 用结构化数据渲染日报和调研报告，而不是直接手写完整 HTML。
-- Daily Source 放在 `docs/daily/data/YYYY-MM-DD.json`；构建期由 `scripts/render_daily.py` + `scripts/templates/components/` 渲染 section，再 merge 进 `docs/daily/ai-news-YYYY-MM-DD.html`。
-- 全页 ingest：`scripts/ingest_daily_html.py --date DATE --from-html PATH [--render]` 从 HTML 抽取 hero / 今日要点 / 播客 / RSS / builders / 今日思考 / 参考来源；保留已有 `github` section。
-- GitHub Trending 由 `scripts/gen_gh_cards.py` 写入 Daily Source JSON（`layout: simple|card`），不再 patch HTML；可选 `--render`。
-- Builder 区由 `scripts/gen_tweet_cards.py`（`layout: tweet`）或 ingest（`layout: vitem`）写入 JSON。
-- RSS 由 `scripts/gen_rss_cards.py` 写入 `kind: news` section；可选 `--render`。
-- npm：`site:ingest-daily`、`site:ingest-tweets`、`site:ingest-rss`、`site:render-daily`。
-- `site_harness.py` 索引 Daily 时优先读取 Daily Source 的 `title` / `summary`。
+- 继续收敛调研报告的结构化输入，让 Research Source 也能像 Daily Source 一样成为稳定接口。
+- 把调研报告中的架构图、截图和引用来源沉到可验证 contract，减少 skill 文本里的隐式规则。
+- `site_harness.py` 已经优先读取 Daily Source 的 `title` / `summary`；后续可以继续读取 section 摘要来增强归档与搜索说明。
 - 把设计 token 和组件继续集中在 `docs/styles.css`。
 - 把外部信息抓取做成可替换步骤，因为 X/Twitter、YouTube、GitHub 的表面经常变化。
 - 所有项目特定的 agent 行为先落在本仓库，再同步到全局 Hermes skill。

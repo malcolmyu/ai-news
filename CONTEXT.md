@@ -8,7 +8,6 @@
 
 - **日报** (Daily Digest) — `docs/daily/ai-news-YYYY-MM-DD.html`. Daily AI news summaries tracking builders, podcasts, and GitHub trending repos. Uses bento grid layout.
 - **深度调研** (Deep Research) — `docs/research/*.html`. Long-form architecture and trend analysis reports. Uses bento grid layout.
-- **思维模型** (Thinking Models) — `docs/thinking/*.html`. Conceptual framework pages (cognition, communication, decision, product). Uses older visual style.
 - **首页** (Homepage) — `docs/index.html`. Aggregates latest daily and research content.
 
 ## Design Conventions
@@ -27,12 +26,6 @@
 ### Homepage Daily Entries
 
 - Production rule: the homepage Daily section renders exactly the 3 most recent daily entries, followed by the `历史日报` archive row.
-
-### Older Style (thinking/ pages, homepage.html)
-
-- Accent: `#3b82f6` (blue)
-- Uses JetBrains Mono alongside Inter
-- CSS custom properties with different naming
 
 ## Directory Conventions
 
@@ -54,12 +47,12 @@ docs/
     *.html                   — research reports
     screenshots/             — research screenshots
     archive.html             — research archive index
-  thinking/
-    *.html                   — thinking model pages
 scripts/
   python.sh                   — Python runtime resolver for harness scripts
   fetch-daily-media.sh       — download X/Twitter images + YouTube thumbnails
   generate-daily-html.sh     — URL extraction to HTML embed pipeline
+  render_daily.py            — render Daily Source JSON into daily HTML
+  ingest_daily_html.py       — extract existing daily HTML into Daily Source JSON
   site_harness.py            — content index, homepage/archive generation, structural validation
   update-homepage.py         — compatibility wrapper for homepage generation
 .github/
@@ -77,6 +70,10 @@ Project-local skill source of truth lives in `docs/agents/skills/`.
 Global Hermes skills may delegate the work, but Codex should execute repository changes according to these project-local versions.
 
 The harness architecture is documented in `docs/agents/architecture.md`; the architecture decision is captured in `docs/adr/0002-hermes-codex-production-harness.md`.
+
+## Retired Surfaces
+
+`docs/thinking/`、2026 年 5 月的独立演示页面、根目录旧资源 `assets/20260510/` 与 `assets/20260512/`、一次性迁移脚本和临时调研草稿都已退役。生产 harness 只应发布日报、深度调研、首页、归档、搜索和共享站点资源。
 
 ## Key Terms
 

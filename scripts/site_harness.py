@@ -23,6 +23,19 @@ DAILY_DIR = DOCS / "daily"
 RESEARCH_DIR = DOCS / "research"
 INDEX = DOCS / "index.html"
 ASSET_VERSION = "20260531f"
+RETIRED_PATHS = (
+    DOCS / "thinking",
+    DOCS / "plans",
+    DOCS / "20260510-thariq-html.html",
+    DOCS / "20260512-guizang-ppt.html",
+    DOCS / "20260512-guizang-ppt-screenshot.png",
+    RESEARCH_DIR / "temp_research.md",
+    ROOT / "assets" / "20260510",
+    ROOT / "assets" / "20260512",
+    ROOT / "assets" / "deploy.txt",
+    ROOT / "scripts" / "fix-headers.py",
+    ROOT / "scripts" / "gen-agent-eval-ppt.js",
+)
 
 HOMEPAGE_DAILY_START = "<!-- HOMEPAGE-DAILY-START -->"
 HOMEPAGE_DAILY_END = "<!-- HOMEPAGE-DAILY-END -->"
@@ -260,7 +273,6 @@ def search_modal() -> str:
 <div class="search-dialog-meta">
 <span>AI 日报</span>
 <span>深度调研</span>
-<span>思维模型</span>
 <span class="search-shortcut">Esc 关闭</span>
 </div>
 <div id="site-search" class="site-search"></div>
@@ -634,6 +646,13 @@ def validate() -> int:
     for token in (".image-lightbox", "object-fit: cover", "body.image-lightbox-open"):
         if token not in styles:
             errors.append(f"docs/styles.css: missing image component token {token}")
+    for token in (".container-thinking", ".hero-thinking", ".model-card", ".nav-back"):
+        if token in styles:
+            errors.append(f"docs/styles.css: retired style token still present {token}")
+
+    for path in RETIRED_PATHS:
+        if path.exists():
+            errors.append(f"{path.relative_to(ROOT)}: retired surface should not be present")
 
     search_js = read_text(DOCS / "search.js") if (DOCS / "search.js").exists() else ""
     if "PagefindUI" not in search_js or "openSearch" not in search_js:
