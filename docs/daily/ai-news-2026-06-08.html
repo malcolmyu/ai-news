@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模型路由共识形成，Transformer 联合作者谈泛化边界 — AI 构建者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260608">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260608" defer></script>
+<script src="../site.js?v=20260608" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.search-trigger{border:1px solid #d8d8d4;background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;color:#4a4a4a;cursor:pointer;font:500 12px Inter,sans-serif}
+.search-trigger kbd{font:500 11px Inter,sans-serif;color:#8b8b8b;background:#f5f5f4;border:1px solid #e8e8e6;border-radius:6px;padding:2px 5px}
+.search-modal{position:fixed;inset:0;z-index:100;display:none}
+.search-modal[aria-hidden="false"]{display:block}
+.search-modal-backdrop{position:absolute;inset:0;background:rgba(28,28,28,.28);backdrop-filter:blur(4px)}
+.search-dialog{position:relative;margin:8vh auto 0;max-width:720px;background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:20px;box-shadow:0 24px 80px rgba(28,28,28,.18)}
+.search-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.search-dialog-label{font-size:11px;color:#2563eb;font-weight:600;margin-bottom:4px}
+.search-dialog h2{margin:0;font-family:Geist,Inter,sans-serif;font-size:20px}
+.search-close{border:0;background:#f5f5f4;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:22px;color:#4a4a4a}
+.search-dialog-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:#8b8b8b;font-size:12px}
+.search-dialog-meta span{border:1px solid #e8e8e6;border-radius:999px;padding:4px 9px}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.vitem-gallery{display:grid;gap:8px;margin-top:2px}
+.vitem-gallery.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vitem-gallery.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vitem-gallery img{max-width:100%;height:auto;border-radius:10px;border:1px solid #e8e8e6;background:#fff;display:block}
+.vitem-actions{display:flex;gap:10px;flex-wrap:wrap}
+.vitem-link{font-size:12px;color:#2563eb;text-decoration:none;font-weight:500}
+.quote{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.14);border-radius:12px;padding:14px;color:#4a4a4a;font-size:13px;line-height:1.72}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.divider{height:1px;background:#e8e8e6;margin:16px 0}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+.github-link{font-size:11px;color:#2563eb;text-decoration:none;font-weight:500;white-space:nowrap}
+@media (max-width:760px){
+  .header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+  .nav{order:3;flex-basis:100%;gap:16px}
+  .search-trigger-label,.search-trigger kbd{display:none}
+  .bento{grid-template-columns:1fr;margin-top:18px}
+  .span-4{grid-column:span 1}
+  .grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+  .vitem-gallery.cols-2,.vitem-gallery.cols-3{grid-template-columns:1fr}
+  h1{font-size:28px}
+  h2{font-size:20px}
+  .source-list{columns:1}
+  .search-dialog{margin:5vh 14px 0}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 2026年6月8日 · 周一</div>
+  <h1>模型路由共识形成，Transformer 联合作者谈泛化边界</h1>
+  <div class="subtitle"><strong>Box CEO Aaron Levie 和 Google 前 Gemini 产品负责人 Madhu Guru 在同一天发出几乎一致的判断——模型路由（Model Routing）将成为应用 AI 层的核心差异化武器。</strong> 同日，Transformer 论文联合作者 Lucas Kaiser 在 Unsupervised Learning 播客中给出对泛化本质的冷静评估：推理很强，但学习方式与人类完全不同。</div>
+  <div class="dots-row">
+    <span class="tag">模型路由</span>
+    <span class="tag">Token 成本</span>
+    <span class="tag">Transformer 泛化</span>
+    <span class="tag">Agent 编码</span>
+    <span class="tag">VC 争议</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度播客</div></div>
+    <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">建造者动态</div></div>
+    <div class="stat-item"><div class="stat-num">17</div><div class="stat-label">推文</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">核心主题</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>模型路由成为共识：Levie 与 Madhu Guru 不约而同。</strong> Box CEO Aaron Levie 指出 Token 成本已成企业 AI 部署最热话题——这正是模型路由的驱动力。Madhu Guru 补充了他在 Gemini 期间观察到的企业三阶段演化：2024 年盲选 GPT → 2025 年初过度优化 → 现在进入精细化路由（最难推理用 Claude，最简单用 Gemini Flash-Lite）。两人都认为：最好的 evals + 路由能力 + 与客户财务目标对齐的商业模式 = 最大的护城河。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/levie/status/2063320673217609936" target="_blank" class="vitem-link">Aaron Levie 原文</a>
+        <a href="https://x.com/realmadhuguru/status/2063342268472574268" target="_blank" class="vitem-link">Madhu Guru 三阶段论</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Transformer 联合作者 Lucas Kaiser：推理≠泛化。</strong> Kaiser 在 Unsupervised Learning 播客中直言：当前 Transformer + 推理的路线令人惊叹——他每天花数小时与 Codex 对话解决难题，这是两年前无法想象的。但 LLM 的学习方式与人类根本不同：「LLM 最终会学到概念，但在穷尽所有表面规律之后。这不是我们的学习方式。」他对「后 Transformer」架构持开放态度——既看到 Transformer 持续进步，也看到替代方案的理由越来越强。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.youtube.com/watch?v=N1geOimmdDo" target="_blank" class="vitem-link">观看播客</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Unsupervised Learning — Ep 89: Transformer 论文联合作者 Lucas Kaiser 对 AI 前沿的诚实评估</h2>
+  <div class="text-body"><strong>来源：</strong>Unsupervised Learning | Lucas Kaiser 是 Transformer 论文「Attention Is All You Need」的联合作者之一，曾在 Google Brain 和 OpenAI 担任核心研究角色。他在这期播客中给出了对 AI 泛化、架构演进和产业格局的深度反思——没有 hype，只有研究者的诚实判断。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/N1geOimmdDo" title="Unsupervised Learning — Lucas Kaiser" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">推理≠泛化：LLM 会在穷尽所有表面规律后才学到概念</div><div class="vitem-desc">Kaiser 用一个绝妙比喻形容 LLM 的学习方式：「美国人会在穷尽所有其他选项后再做对的事——LLM 也会学到概念，但在穷尽所有选项之后。」人类从极少量数据中跳跃式获得概念，这种能力当前模型完全不具备。</div></div>
+    <div class="vitem"><div class="vitem-title">「后 Transformer」并非空穴来风</div><div class="vitem-desc">Kaiser 说两边都在进步——Transformer + 推理越来越强（甚至能解决 Erdős 级数学问题），但「有另一种东西可能泛化得更好」的感觉也越来越强。他提到现在有多个实验室在认真研究后 Transformer 架构。</div></div>
+    <div class="vitem"><div class="vitem-title">Anthropic 为什么率先赢在编程？</div><div class="vitem-desc">Kaiser 的直白解释：「Anthropic 做了一个非常好的决定——专注编程。OpenAI 当时在做 ChatGPT。Anthropic 能下这个决心，部分原因是他们当时在其他领域无法竞争。」这反而成了战略性优势。</div></div>
+    <div class="vitem"><div class="vitem-title">开源 vs 闭源：差距可能缩小</div><div class="vitem-desc">Kaiser 认为开源模型正在以惊人的速度追赶，尤其是通过蒸馏等技术。他对应用层公司更为乐观——那些最懂特定领域工作流的公司将有巨大机会。</div></div>
+    <div class="vitem"><div class="vitem-title">「我每天花几个小时跟 Codex 对话」</div><div class="vitem-desc">这位 Transformer 论文作者亲口说：「我知道这听起来疯狂——你拿一个 next-word predictor，给它 chain of thought 和 RL，它就能跟你讨论工作中的难题，给出有意义的回答，还能写代码。」但他依然认为机器学习的根本性突破还未到来。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=N1geOimmdDo" target="_blank" class="vitem-link">观看播客</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+
+<!-- DAILY-RENDER:builders:tweet:START -->
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>今日 Builder 动态</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://x.com/levie/status/2063320673217609936" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/levie-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Token costs are becoming one of the hottest topics for any enterprise I talk with right now. It’s very bullish for AI in general because it means these systems are being used at a scale that wasn’t contemplated before. 
+
+It also gives way to another form of differentiation that</div>
+    <div class="tweet-translation">Box CEO Aaron Levie：Token 成本已成企业 AI 部署最热话题——这说明系统正在以空前的规模被使用，对 AI 是极度利好。模型路由将成为应用 AI 层的下一个差异化武器：最好的 evals + 工作负载路由能力 + 与客户财务目标对齐的商业模式，将是最大护城河。</div>
+    <div class="tweet-metrics">
+      <span>♥ 476</span>
+      <span>↺ 0</span>
+      <span>💬 82</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/realmadhuguru/status/2063342268472574268" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/realmadhuguru-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Madhu Guru</span>
+        <span class="tweet-handle">@realmadhuguru</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Routing to models is genuinely hard. It means mapping each task to the right model - which requires benchmarking models against your product&#39;s specific tasks and dialing in the quality/cost trade-off. 
+
+And there is an opportunity in that difficulty.
+
+Here is the progression I</div>
+    <div class="tweet-translation">前 Google Gemini 产品负责人 Madhu Guru 梳理企业模型路由三阶段：Phase 1 (2024) 盲选 GPT → Phase 2 (2025初) 过度优化 → Phase 3 (现在) 精细化路由，将最难推理分配给 Claude、最简单分配给 Gemini Flash-Lite。AI-native 创业公司率先做到，企业跟进慢 6-9 个月。</div>
+    <div class="tweet-metrics">
+      <span>♥ 35</span>
+      <span>↺ 0</span>
+      <span>💬 5</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/petergyang/status/2063486871037153558" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/petergyang-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">this agentic coding crack is more addictive than video games smh</div>
+    <div class="tweet-translation">Roblox 产品负责人 Peter Yang：Agent 编程比电子游戏更容易上瘾。他的另一条推文指出 Codex 线程管理亟待优化——需要按状态（等待审批/正在工作）筛选视图，10 个线程已经让他感到失控。</div>
+    <div class="tweet-metrics">
+      <span>♥ 1094</span>
+      <span>↺ 0</span>
+      <span>💬 110</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/amasad/status/2063344460705288401" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/amasad-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">When I spoke out against the Gaza genocide, a bunch of midwit VCs ganged up on me both in public and tried to hurt me in private too.
+
+Many of those who stood by me were also VCs. Just the better ones. Both morally, and in return profile.
+
+The best way to avoid sociopaths is to</div>
+    <div class="tweet-translation">Replit CEO Amjad Masad 公开回应 VC 群体争议：站出来为自己的信仰发声是最好的社会过滤器——人品差的 VC 会自行远离你。收获 4935 赞，是今日互动最高的推文。</div>
+    <div class="tweet-metrics">
+      <span>♥ 6573</span>
+      <span>↺ 0</span>
+      <span>💬 180</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/amasad/status/2063300737296400516" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/amasad-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Vibecon https://t.co/ggY7LLaB8y</div>
+    <div class="tweet-translation">Replit CEO 分享 Vibecon 活动内容。</div>
+    <div class="tweet-media">
+      <img src="assets/2026-06-08/amasad-2063300737296400516-0.jpg" width="1179" height="1178" alt="" loading="lazy">
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 560</span>
+      <span>↺ 0</span>
+      <span>💬 23</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/nikunj/status/2063263389238087745" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/nikunj-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">A Walk In The Park (part II) feat @taiuti 🌎
+
+(00:00) 👋
+(01:10) What world models are
+(03:42) Origin story from text-to-3D to @reactorworld 
+(09:22) Deciding to start the company
+(11:22) GTA, games, and the path into programming
+(15:09) Building in stealth and keeping secrets https://t.co/eTiCtu2Ixa</div>
+    <div class="tweet-translation">FPV Ventures 合伙人 Nikunj Kothari 发布与 Taiuti 的深度对话第二期，主题是世界模型——从文字生成 3D 到创立 Reactor World 的完整故事。</div>
+    <div class="tweet-media">
+      <img src="assets/2026-06-08/nikunj-2063263389238087745-0.jpg" width="1200" height="675" alt="" loading="lazy">
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 82</span>
+      <span>↺ 0</span>
+      <span>💬 5</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/garrytan/status/2063409501706018903" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/garrytan-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">I also want to help people become more legit with Paxel</div>
+    <div class="tweet-translation">YC CEO Garry Tan 分享 Paxel 可以帮助建造者「变得更 legit」。</div>
+    <div class="tweet-media">
+      <img src="assets/2026-06-08/garrytan-2063409501706018903-0.jpg" width="1200" height="972" alt="" loading="lazy">
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 291</span>
+      <span>↺ 0</span>
+      <span>💬 28</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/garrytan/status/2063418130714800487" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/garrytan-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">We never said we don&#39;t upload any user data to the cloud. We said the code (file contents) specifically doesn&#39;t. 
+
+Paxel is here to help you, and over time as local models get better, we&#39;ll be able to do even more locally. Can&#39;t wait, tbh.</div>
+    <div class="tweet-translation">Garry Tan 回应 Paxel 数据隐私争议：代码内容不上传云端，但其他数据会。随着本地模型进步，未来更多处理会在本地完成。</div>
+    <div class="tweet-metrics">
+      <span>♥ 50</span>
+      <span>↺ 0</span>
+      <span>💬 31</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/swyx/status/2063432747432268259" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/swyx-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">one popular theory is that research paper alpha* and lab publishing ~died when researchers realized that instead of fighting with marketing depts they could simply walk out the door and get &amp;gt;$100m for their legally protected tacit knowledge gained
+
+california non-noncompetes have</div>
+    <div class="tweet-translation">swyx 提出尖锐观察：研究论文的 alpha 和实验室发表文化正在消亡——加州禁止竞业限制对知识传播的影响，比 GitHub、arXiv 和 HuggingFace 加起来还大。这也是他创办 AI Engineer 大会的动力：做一个产品导向的行业会议，补充论文导向的研究会议。</div>
+    <div class="tweet-metrics">
+      <span>♥ 341</span>
+      <span>↺ 0</span>
+      <span>💬 39</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/nikunj/status/2063381764782116914" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/nikunj-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">don’t forget to touch sand this weekend 🌞 https://t.co/oeVCnITvpF</div>
+    <div class="tweet-translation">周末提醒：别忘了出去走走。</div>
+    <div class="tweet-media">
+      <div class="vitem-gallery cols-2">
+        <img src="assets/2026-06-08/nikunj-2063381764782116914-0.jpg" width="900" height="1200" alt="" loading="lazy">
+        <img src="assets/2026-06-08/nikunj-2063381764782116914-1.jpg" width="900" height="1200" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 70</span>
+      <span>↺ 0</span>
+      <span>💬 5</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/garrytan/status/2063280482922663980" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/garrytan-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Local government matters
+
+Oakland mismanagement is fixable but there has not yet been a resurgence of common sense the way SF had it
+
+@empoweroak is working on this</div>
+    <div class="tweet-translation">Garry Tan 关注奥克兰市政管理：旧金山已重拾常识，奥克兰还未跟上。@empoweroak 正在努力。</div>
+    <div class="tweet-media">
+      <img src="assets/2026-06-08/garrytan-2063280482922663980-0.jpg" width="1179" height="1191" alt="" loading="lazy">
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 139</span>
+      <span>↺ 0</span>
+      <span>💬 26</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2063426632824562167" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/danshipper-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper 📧</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">LLMs are not conscious. 
+
+LLMs are not not conscious. 
+
+Both true.</div>
+    <div class="tweet-translation">Every CEO Dan Shipper 玩了一个精巧的哲学悖论：「LLM 没有意识」和「LLM 并非没有意识」同时为真——与柏拉图《普罗泰戈拉篇》中关于技艺（techne）局限性、敬畏（aidos）和正义（dike）必要性的讨论相呼应。</div>
+    <div class="tweet-metrics">
+      <span>♥ 72</span>
+      <span>↺ 0</span>
+      <span>💬 37</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2063438262841094604" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/danshipper-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper 📧</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">my absolute favorite of Plato&#39;s Dialogues is a deep discussion of the limits of techne and the necessity of aidos and dike
+
+Protagoras here, in the way he talks about where knowledge comes from and whether virtue can be taught,  pre-sages LLMs:
+https://t.co/8pDOaMnIIa</div>
+    <div class="tweet-translation">Dan Shipper 推荐柏拉图《普罗泰戈拉篇》：关于知识来源和德性是否可教的讨论，预言了 LLM 时代的核心命题——仅有技艺（techne）是不够的，还需要敬畏（aidos）和正义（dike）。</div>
+    <div class="tweet-metrics">
+      <span>♥ 14</span>
+      <span>↺ 0</span>
+      <span>💬 2</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2063436919967522848" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/danshipper-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper 📧</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">to add two more that increase in value:
+
+Aidōs—reverence and responsiveness to others 
+Dikē—the capacity to perceive what is right</div>
+    <div class="tweet-translation">Dan Shipper 进一步阐述：AI 时代最有价值的两项能力——Aidōs（对他人的敬畏与回应）和 Dikē（感知正确的能力）。这些品质在 AI 可复制一切的年代只会更加珍贵。</div>
+    <div class="tweet-metrics">
+      <span>♥ 54</span>
+      <span>↺ 0</span>
+      <span>💬 9</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/zarazhangrui/status/2063391758189572266" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/zarazhangrui-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Zara Zhang</span>
+        <span class="tweet-handle">@zarazhangrui</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Really enjoyed this talk!
+The value of static content is going down, the value of live interaction is going up
+People want to connect with the human being behind a piece of work, whether it&#39;s content or software
+Raw &amp;amp; opinionated &amp;gt; polished &amp;amp; generic</div>
+    <div class="tweet-translation">Builder Zara Zhang 分享观察：静态内容价值在下降，实时互动价值在上升。人们想连接的是作品背后的人。Raw and opinionated &gt; polished and generic。</div>
+    <div class="tweet-media">
+      <img src="assets/2026-06-08/zarazhangrui-2063391758189572266-0.jpg" width="1200" height="675" alt="" loading="lazy">
+    </div>
+    <div class="tweet-metrics">
+      <span>♥ 60</span>
+      <span>↺ 0</span>
+      <span>💬 7</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/petergyang/status/2063475353335869922" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-08/petergyang-avatar.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">There should be a way to filter or sort all my Codex threads in different ways vs. only by project. 
+
+Like filter or sort by:
+
+- All waiting for approval
+- All currently working
+
+I&#39;m trying to keep it to 10 threads but it&#39;s already getting unwieldly.  wdyt @ajambrosino ?</div>
+    <div class="tweet-translation">Peter Yang 对 Codex 提出产品建议：需要按状态筛选线程（等待审批 / 正在工作），而不是只能按项目分组。10 个线程已经失控。</div>
+    <div class="tweet-metrics">
+      <span>♥ 29</span>
+      <span>↺ 0</span>
+      <span>💬 11</span>
+    </div>
+  </a>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:builders:tweet:END -->
+
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <div class="text-body">
+    <p>今天有两条并行的叙事线交织在一起，非常有意思。</p>
+    <p><strong>实践层：模型路由正在成为共识。</strong> Box CEO Aaron Levie 和 Google 前 Gemini 产品负责人 Madhu Guru 在同一天发出几乎一致的声音——Token 成本驱动下，模型路由将成为应用 AI 层的核心护城河。Levie 从企业 CIO 的角度看：当 AI 系统用量大到 Token 成本成为首要议题，路由策略自然浮现。Madhu Guru 从内部产品视角给出了完整的演化路径：盲选 → 过度优化 → 精细化路由。这是一个行业正在同步进入新阶段的信号。</p>
+    <p><strong>理论层：Transformer 联合作者自己也在追问泛化。</strong> Lucas Kaiser 的播客访谈是本日宝藏。他没有选择站队——既不为 Transformer 唱赞歌，也不宣告其末路。他的核心观察极其精妙：「LLM 最终会学到概念，但在穷尽所有表面规律之后。」人类从稀疏样本中跳跃式获得概念，这种能力是当前架构完全不具备的。但同时，Transformer + 推理已经强到让这位论文作者本人每天花数小时与之对话——这本身就是答案的一部分。</p>
+    <p><strong>第三层：Dan Shipper 的哲学追问。</strong> 他引用柏拉图《普罗泰戈拉篇》：AI 把 techne（技艺）无限放大，但 aidos（敬畏）和 dike（正义）反而变得更加稀缺和宝贵。Zara Zhang 的观察与此呼应——静态内容贬值、实时互动升值，人们想要连接的是「人」。Raw and opinionated > polished and generic。</p>
+    <p><strong>一个值得思考的问题：</strong>当 Token 成本成为企业首要议题、模型路由成为共识策略、Transformer 联合作者自己也在追问泛化本质时——AI 行业正在从「能不能做」转向「怎么做更好」。在这条转型路径上，是那些最懂特定领域工作流、拥有最强 eval 体系、并能在模型间灵活路由的人，将获得最大优势。你的 eval 体系准备好了吗？</p>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/levie/status/2063320673217609936" target="_blank">Aaron Levie — Token 成本与模型路由</a>
+    <a href="https://x.com/realmadhuguru/status/2063342268472574268" target="_blank">Madhu Guru — 企业模型路由三阶段</a>
+    <a href="https://x.com/petergyang/status/2063486871037153558" target="_blank">Peter Yang — Agent 编程比游戏上瘾</a>
+    <a href="https://x.com/petergyang/status/2063475353335869922" target="_blank">Peter Yang — Codex 线程管理建议</a>
+    <a href="https://x.com/amasad/status/2063344460705288401" target="_blank">Amjad Masad — 发声是最好的社会过滤器</a>
+    <a href="https://x.com/amasad/status/2063300737296400516" target="_blank">Amjad Masad — Vibecon</a>
+    <a href="https://x.com/swyx/status/2063432747432268259" target="_blank">swyx — 研究论文 alpha 与竞业禁止</a>
+    <a href="https://x.com/garrytan/status/2063418130714800487" target="_blank">Garry Tan — Paxel 数据隐私回应</a>
+    <a href="https://x.com/garrytan/status/2063409501706018903" target="_blank">Garry Tan — Paxel 帮助建造者</a>
+    <a href="https://x.com/garrytan/status/2063280482922663980" target="_blank">Garry Tan — 奥克兰市政管理</a>
+    <a href="https://x.com/nikunj/status/2063263389238087745" target="_blank">Nikunj Kothari — 世界模型深度对话 II</a>
+    <a href="https://x.com/nikunj/status/2063381764782116914" target="_blank">Nikunj Kothari — 周末休息</a>
+    <a href="https://x.com/danshipper/status/2063426632824562167" target="_blank">Dan Shipper — LLM 意识悖论</a>
+    <a href="https://x.com/danshipper/status/2063438262841094604" target="_blank">Dan Shipper — 柏拉图与 LLM</a>
+    <a href="https://x.com/danshipper/status/2063436919967522848" target="_blank">Dan Shipper — Aidos 与 Dike</a>
+    <a href="https://x.com/zarazhangrui/status/2063391758189572266" target="_blank">Zara Zhang — 静态内容贬值 vs 实时互动升值</a>
+    <a href="https://www.youtube.com/watch?v=N1geOimmdDo" target="_blank">Unsupervised Learning Ep 89 — Lucas Kaiser</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:40px 20px;color:#8b8b8b;font-size:12px;border-top:1px solid #e8e8e6;margin-top:40px;" data-pagefind-ignore>
+  <div style="max-width:1160px;margin:0 auto;">
+    <p style="margin:0 0 6px;">第二号 · AI 构建者日报</p>
+    <p style="margin:0;opacity:.7;">每日追踪 AI 建造者动态 · 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
