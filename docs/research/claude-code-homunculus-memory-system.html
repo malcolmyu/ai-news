@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-06-11">
+<meta name="description" content="得物技术的 Homunculus 方案把 Claude Code Hook、行为模式提炼和本地向量记忆组合成三层自进化系统，真正有价值的是确定性观测和置信度演化。">
+<meta name="category" content="Agent 记忆 · Claude Code">
+<title>Claude Code 记忆自进化系统深度解析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<main class="bento">
+  <section class="card span-4">
+    <div class="label-sm">调研 · 2026/6/11 · Claude Code 记忆</div>
+    <h1>Claude Code 记忆自进化系统深度解析</h1>
+    <div class="subtitle" style="margin-top:6px;">得物技术工程师「晴天」描述的 Homunculus，不是单纯把历史对话塞进 Prompt，而是把 Claude Code Hook 变成行为观测面，再用规则和语义分析提炼可遗忘、可演化的个人工作本能。</div>
+    <div class="dots-row" style="margin-top:12px;">
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Hook 优先</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Instinct Engine</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">本地向量记忆</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">置信度演化</span>
+      <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Hermes 启示</span>
+    </div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">观测 / 提炼 / 注入层</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">记忆类型</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0.5 → 0.9</div>
+        <div class="stat-label">Instinct 置信度区间</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Top-5</div>
+        <div class="stat-label">会话启动召回</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-3">
+    <div class="label-sm">01 · 核心判断</div>
+    <h2>真正的新意不是「记忆」，而是「行为模式自动提炼」</h2>
+    <div class="text-body" style="margin-bottom:10px;">这套系统把 Agent 记忆拆成两类：<strong>Instinct 记行为模式</strong>，例如你总是先读规范再改代码；<strong>Memory 记知识事实</strong>，例如项目决策、用户偏好、已知 bug。前者影响行动策略，后者减少冷启动成本。</div>
+    <div class="quote">
+      <strong>关键分界：</strong>向量检索记忆已经是成熟范式，Hermes、Mem0、Zep 等路径都有替代实现；但基于 Claude Code Hook 的确定性行为观测，能把「你怎么工作」从聊天噪声里提炼出来，这是更难迁移、也更有护城河的部分。
+    </div>
+  </section>
+
+  <aside class="card span-1">
+    <div class="label-sm">可信度</div>
+    <h2>先降温</h2>
+    <div class="tip-card" style="margin-bottom:8px;">
+      <h3>数据未独立验证</h3>
+      <div class="text-muted">10 分钟到 30 秒、Token 降 78%、重复错误降 80% 都缺少测量口径。</div>
+    </div>
+    <div class="tip-card">
+      <h3>原系统未开源</h3>
+      <div class="text-muted">得物实现不可复查，只能用文章描述和开源 Homunculus 生态交叉校验。</div>
+    </div>
+  </aside>
+
+  <section class="card span-4">
+    <div class="label-sm">02 · 三层架构</div>
+    <h2>从工具调用，到本能规则，再到会话启动记忆</h2>
+    <div class="vlist" style="margin-top:10px;">
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(37,99,235,0.1);color:#2563eb;">1</div>
+        <div class="vitem-content">
+          <div class="vitem-title">行为观测层：Hook 捕获事实流</div>
+          <div class="vitem-desc">PreToolUse / PostToolUse 捕获每次工具调用并写入 JSONL；Stop Hook 在会话结束时触发分析。超过 5MB 或 8000 行按月归档，主文件只保留 30 天，避免观测日志无限膨胀。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">2</div>
+        <div class="vitem-content">
+          <div class="vitem-title">模式提炼层：规则检测 + Haiku 语义分析</div>
+          <div class="vitem-desc">会话结束后走双路径：硬编码统计检测覆盖 5 种预定义模式，Claude Haiku 补足语义理解。输出的 Instinct 是独立 Markdown 文件，包含 trigger、action、confidence。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">3</div>
+        <div class="vitem-content">
+          <div class="vitem-title">记忆注入层：本地 Embedding + Qdrant 召回</div>
+          <div class="vitem-desc">6 类记忆（feedback、project、user、decision、bug、knowledge）用本地 nomic-embed-text 向量化，Qdrant 做余弦相似度检索。SessionStart 用项目名和最近 3 条 git commit 构造查询，召回 Top-5 注入系统提示。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-2">
+    <div class="label-sm">03 · Instinct 机制</div>
+    <h2>一条规则只做一件事，才有演化空间</h2>
+    <div class="text-body" style="margin-bottom:10px;">得物方案把 Instinct 设计为原子单元：一个 trigger 对应一个 action，再加 confidence。首次出现设为 0.5，重复触发每次 +0.05，上限 0.9；长期不触发 -0.05，低于 0.55 标记 deprecated。</div>
+    <table class="table">
+      <tr><th>机制</th><th>作用</th><th>评价</th></tr>
+      <tr><td>原子性</td><td>一条规则只描述一个触发和动作</td><td>利于合并、衰减和审计</td></tr>
+      <tr><td>置信度演化</td><td>重复增强，沉默衰减</td><td>比静态 memory 更接近行为学习</td></tr>
+      <tr><td>Jaccard + Union-Find</td><td>合并重复或相近规则</td><td>可解释、低成本，但阈值经验化</td></tr>
+      <tr><td>domain 聚合</td><td>同域规则超过 2 条生成 evolved-{domain}.md</td><td>能形成更高层的行为摘要</td></tr>
+    </table>
+  </section>
+
+  <section class="card span-2">
+    <div class="label-sm">04 · 防膨胀</div>
+    <h2>记忆系统的难点是忘掉，而不是记住</h2>
+    <div class="vlist" style="margin-top:10px;">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">日志层裁剪</div>
+          <div class="vitem-desc">观测流按大小、行数和时间归档，避免 JSONL 成为永久垃圾场。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">规则层遗忘</div>
+          <div class="vitem-desc">Instinct 置信度随触发频率变化，长期无用的规则自然退场。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">注入层限流</div>
+          <div class="vitem-desc">SessionStart 只召回 Top-5，而不是把所有 memory 一次性塞进上下文。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">聚合层覆盖重写</div>
+          <div class="vitem-desc">rules/auto-evolved.md 每次会话覆盖重写，避免演化产物线性堆积。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-4">
+    <div class="label-sm">05 · 竞品对比</div>
+    <h2>Hermes Agent / OpenClaw / homunculus 能力矩阵</h2>
+    <table class="table">
+      <tr><th>系统</th><th>核心定位</th><th>观测方式</th><th>记忆 / 演化方式</th><th>主要短板</th></tr>
+      <tr><td>Hermes Agent</td><td>调度型个人 Agent / 工程执行编排</td><td>依赖 skill、对话上下文和显式约定</td><td>偏项目知识与执行规约；记忆更像全量注入或人工维护</td><td>缺自动行为提炼、置信度演化和智能召回链路</td></tr>
+      <tr><td>OpenClaw</td><td>多通道个人助理网关与 Agent 控制面</td><td>围绕网关、工具和运行时事件注册能力</td><td>更强调跨应用能力编排和权限边界，不以个人工作本能为核心</td><td>与 Claude Code Hook 体系不同，难直接复用 Homunculus 的细粒度工具观测</td></tr>
+      <tr><td>humanplane/homunculus</td><td>Claude Code 插件，观察工作流并学习 Instinct</td><td>Hook 捕获 prompt 和工具使用，官方 README 声称关键路径 100% 确定性</td><td>Instinct 聚类后可手动演化为命令、skill 或 agent；MIT，Shell + TypeScript 为主</td><td>开源版本没有得物文中的 Qdrant / Embedding 语义召回层，演化仍保留手动步骤</td></tr>
+      <tr><td>lunamoth7533/homunculus</td><td>Python 重实现，自动 gap 检测与能力合成</td><td>PreToolUse、PostToolUse、Stop Hook 观测</td><td>SQLite、16 种 gap 类型、5 类能力合成、元进化、人工审批</td><td>0 星小样本项目，生态验证不足，更像概念验证</td></tr>
+      <tr><td>得物 Homunculus</td><td>Claude Code 个人记忆与自我进化系统</td><td>Hook 全量工具观测 + Stop Hook 分析</td><td>Instinct 置信度演化 + 本地 Embedding / Qdrant 召回</td><td>未开源，收益数据无独立复现，Qdrant 增加运维面</td></tr>
+    </table>
+  </section>
+
+  <section class="card span-2">
+    <div class="label-sm">06 · 好的部分</div>
+    <h2>这套设计抓住了 Agent 记忆的关键矛盾</h2>
+    <div class="tips-grid" style="margin-top:10px;">
+      <div class="tip-card">
+        <h3>Hook 优先是正确架构</h3>
+        <div class="text-muted">确定性触发比模型主动记得调用某个 skill 更可靠。</div>
+      </div>
+      <div class="tip-card">
+        <h3>双路径分析务实</h3>
+        <div class="text-muted">统计规则便宜稳定，语义分析覆盖隐性模式。</div>
+      </div>
+      <div class="tip-card">
+        <h3>Jaccard 去重可解释</h3>
+        <div class="text-muted">在短规则文本上，比 Embedding 相似度更容易审计。</div>
+      </div>
+      <div class="tip-card">
+        <h3>隐私边界清晰</h3>
+        <div class="text-muted">Embedding 本地化，避免把个人工作记忆发往云端。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-2">
+    <div class="label-sm">07 · 潜在问题</div>
+    <h2>把个人习惯学进去，也会把噪声学进去</h2>
+    <div class="vlist" style="margin-top:10px;">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">单用户过拟合</div>
+          <div class="vitem-desc">系统越贴合一个人的局部习惯，越可能强化临时 workaround 或坏味道。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">Stop Hook 阻塞风险</div>
+          <div class="vitem-desc">会话结束时做分析很自然，但若分析链路慢或失败，会影响退出体验和数据一致性。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">阈值工程缺少基准</div>
+          <div class="vitem-desc">Jaccard 0.5、置信度 0.55、同域 2 条聚合都需要真实项目数据校准。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">Qdrant 对个人系统偏重</div>
+          <div class="vitem-desc">若只有单机、单用户、小规模记忆，SQLite + 向量扩展或轻量索引可能更低运维。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-3">
+    <div class="label-sm">08 · 对 Hermes 的启示</div>
+    <h2>Hermes 缺的不是更多规则，而是自动发现规则的回路</h2>
+    <div class="text-body" style="margin-bottom:10px;">Hermes 已经擅长「按项目 skill 执行」，但 Homunculus 暴露了两个差距：第一，Hermes 的行为经验主要靠人写进 skill 或文档；第二，记忆若全量注入，会在 token、相关性和过期知识之间摇摆。</div>
+    <table class="table">
+      <tr><th>能力</th><th>Hermes 现状</th><th>可借鉴方向</th></tr>
+      <tr><td>自动行为提炼</td><td><span class="tag" style="background:rgba(239,68,68,0.08);color:#ef4444;">缺失</span></td><td>记录工具序列、失败修复路径、用户纠偏，生成候选 skill patch</td></tr>
+      <tr><td>置信度演化</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">有限</span></td><td>为经验规则增加触发次数、最近触发、废弃状态</td></tr>
+      <tr><td>语义召回</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">粗粒度</span></td><td>按项目、目标、近期 git 变化召回 Top-K，而非全量加载</td></tr>
+      <tr><td>防膨胀</td><td><span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">硬限制为主</span></td><td>引入 TTL、置信度衰减、覆盖式聚合和审计队列</td></tr>
+    </table>
+  </section>
+
+  <aside class="card span-1">
+    <div class="label-sm">最小可行路径</div>
+    <h2>先别上 Qdrant</h2>
+    <div class="text-body">对 Hermes 来说，第一步应是<strong>工具事件日志 + 会后候选规则</strong>，而不是先做重型向量库。行为提炼跑通后，再决定是否需要 Embedding 召回。</div>
+    <div class="divider"></div>
+    <div class="text-muted" style="font-size:11px;">优先级：观测确定性 &gt; 候选规则审计 &gt; 置信度演化 &gt; 语义召回。</div>
+  </aside>
+
+  <section class="card span-4 card-highlight">
+    <div class="label-sm">09 · 结论</div>
+    <h2>适用 / 不适用场景</h2>
+    <div class="grid-2" style="margin-top:10px;">
+      <div class="tip-card">
+        <h3>适用</h3>
+        <div class="text-muted">高频使用 Claude Code、项目结构稳定、个人或小团队风格强、重复修正成本高、能接受本地 Hook 和日志留存的工程环境。</div>
+      </div>
+      <div class="tip-card">
+        <h3>不适用</h3>
+        <div class="text-muted">一次性任务、强监管或不能落本地行为日志的场景、多人共享同一 Agent 但缺少隔离策略的团队、对退出时延极敏感的工作流。</div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">
+      <strong>一句话总结：</strong>Homunculus 的价值不在让 Claude Code「记得更多」，而在让它用确定性 Hook 学会「你通常怎么把事情做对」，再通过置信度和遗忘机制防止这套本能变成上下文垃圾。
+    </div>
+  </section>
+
+  <section class="card span-4">
+    <div class="label-sm">参考来源</div>
+    <h2>来源与校验</h2>
+    <div class="vlist" style="margin-top:10px;">
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">得物技术微信公众号 · 晴天 · 2026-06-10</div>
+          <div class="vitem-desc"><a href="https://mp.weixin.qq.com/s/PGT49KORSVZYpJxykWnwOw" target="_blank" style="color:#2563eb;">Claude Code 记忆与自我进化系统原文</a>。微信页面抓取失败，本报告主体依据用户提供的原文摘要和结构化源材料整理。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">humanplane/homunculus</div>
+          <div class="vitem-desc"><a href="https://github.com/humanplane/homunculus" target="_blank" style="color:#2563eb;">GitHub 仓库</a>：README 描述 Hook 观测、Instinct、演化路径和 MIT 协议；页面校验时显示约 370 星、47 fork。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">lunamoth7533/homunculus</div>
+          <div class="vitem-desc"><a href="https://github.com/lunamoth7533/homunculus" target="_blank" style="color:#2563eb;">GitHub 仓库</a>：Python 重实现，README 描述 SQLite、16 种 gap 类型、5 类能力合成、元进化和人工审批。</div>
+        </div>
+      </div>
+      <div class="vitem">
+        <div class="vitem-content">
+          <div class="vitem-title">本站交叉参考</div>
+          <div class="vitem-desc"><a href="agent-memory-research.html" style="color:#2563eb;">Agent Memory 全面调研</a>、<a href="hermes-agent-architecture.html" style="color:#2563eb;">Hermes Agent 深度架构解析</a>、<a href="managed-agents-architecture.html" style="color:#2563eb;">Managed Agents 架构调研</a>。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
