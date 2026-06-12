@@ -97,6 +97,32 @@ check "No read_file line numbers in CSS blocks"
 
 println
 
+# ── Part 0.55: Image Path Sanity — catch docs/daily/ prefix in src ─────
+bold "【Image Path Sanity】"
+
+IMG_PATH_ISSUES=0
+for f in docs/daily/*.html; do
+  [ -f "$f" ] || continue
+  # Catch docs/daily/ prefix: GitHub Pages serves from docs/, so
+  # src="docs/daily/assets/..." resolves to /daily/docs/daily/assets/...
+  # Correct form is src="assets/..." (page-relative)
+  count=$(grep -c 'src="docs/daily/assets/' "$f" 2>/dev/null || true)
+  if [ "$count" -gt 0 ]; then
+    red "  ✗ $f — $count img src with 'docs/daily/' prefix (should be 'assets/…')"
+    IMG_PATH_ISSUES=$((IMG_PATH_ISSUES + 1))
+  fi
+  # Catch pbs.twimg.com avatar URLs in tweet-avatar (cross-origin blocked)
+  pbs_count=$(grep -c 'tweet-avatar.*pbs\.twimg\.com' "$f" 2>/dev/null || true)
+  if [ "$pbs_count" -gt 0 ]; then
+    red "  ✗ $f — $pbs_count tweet-avatar with pbs.twimg.com URL (must be local or unavatar.io)"
+    IMG_PATH_ISSUES=$((IMG_PATH_ISSUES + 1))
+  fi
+done
+[ "$IMG_PATH_ISSUES" -eq 0 ]
+check "All daily HTML image paths are correct (no docs/daily/ prefix, no pbs.twimg.com)"
+
+println
+
 # ── Part 0.5: Shared Stylesheet Integrity ─────────────────────────────
 bold "【Design System (docs/styles.css)】"
 
