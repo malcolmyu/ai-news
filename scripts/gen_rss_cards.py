@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -13,6 +15,12 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 import requests
+
+# Respect HTTPS_PROXY env var for feeds that need it (e.g. 量子位, Hacker News)
+_session = requests.Session()
+_proxy_url = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+if _proxy_url:
+    _session.proxies = {"http": _proxy_url, "https": _proxy_url}
 
 from daily_source import ROOT, date_from_html_path, get_section, load_digest, save_digest, upsert_section
 
@@ -25,12 +33,34 @@ def load_feeds() -> list[dict]:
 
 
 def strip_tag_text(value: str) -> str:
-    return re.sub(r"\s+", " ", value).strip()
+    """Strip HTML tags (including HTML-escaped entities) and normalize whitespace."""
+    # First unescape HTML entities (&lt; → < etc.)
+    unescaped = html.unescape(value)
+    # Strip HTML tags
+    no_tags = re.sub(r"<[^>]+>", " ", unescaped)
+    # Collapse whitespace
+    return re.sub(r"\s+", " ", no_tags).strip()
+
+
+def summarize_text(text: str, max_chars: int = 120) -> str:
+    """Smart truncation at sentence boundary, then word boundary."""
+    if len(text) <= max_chars:
+        return text
+    # Try sentence boundary (。.!? followed by space or end)
+    sentence_match = re.search(r'[。.!?]\s', text[:max_chars])
+    if sentence_match:
+        return text[:sentence_match.end()].rstrip()
+    # Try word boundary
+    truncated = text[:max_chars]
+    last_space = truncated.rfind(' ')
+    if last_space > max_chars // 2:
+        return truncated[:last_space].rstrip()
+    return truncated.rstrip()
 
 
 def fetch_feed(feed: dict) -> list[dict]:
     try:
-        response = requests.get(
+        response = _session.get(
             feed["url"],
             timeout=15,
             headers={"User-Agent": "ai-news-bot/1.0"},
@@ -54,7 +84,9 @@ def fetch_feed(feed: dict) -> list[dict]:
             else:
                 link = ""
             desc_raw = desc_el.text.strip() if desc_el is not None and desc_el.text else ""
-            desc_clean = strip_tag_text(re.sub(r"<[^>]+>", " ", desc_raw))[:200]
+            # Unescape HTML entities, strip tags, then smart-truncate to a summary
+            desc_clean = strip_tag_text(desc_raw)
+            desc_summary = summarize_text(desc_clean, max_chars=120)
             pub = item.find("pubDate")
             if pub is None:
                 pub = item.find(".//{http://www.w3.org/2005/Atom}published")
@@ -79,7 +111,7 @@ def fetch_feed(feed: dict) -> list[dict]:
                     articles.append(
                         {
                             "title": title,
-                            "summary": desc_clean or title[:200],
+                            "summary": desc_summary or title[:120],
                             "url": link,
                             "source": feed["name"],
                             "publishedAt": pub_date.strftime("%m-%d %H:%M"),
