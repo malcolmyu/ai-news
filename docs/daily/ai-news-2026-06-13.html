@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding「零挫折」宣言 vs 美国政府叫停 Fable 5：AI 同一天的两个极端 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260613">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260613" defer></script>
+<script src="../site.js?v=20260613" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<!-- Hero -->
+<section class="card span-4">
+<div class="label-sm">6月13日 — AI 建造者日报</div>
+<h1>Vibe Coding「零挫折」宣言 vs 美国政府叫停 Fable 5：AI 同一天的两个极端</h1>
+<div class="subtitle">Amjad Masad 宣布 Fable 模型让 Vibe Coding 首次实现「零挫折」体验；同日美国政府指令暂停 Fable 5 和 Mythos 5 访问；Logan Kilpatrick 深度解析「模型吃掉 Agent Harness」；GitHub Trending 被 Agent 技能生态占据</div>
+<div class="dots-row"><span class="tag">Vibe Coding</span><span class="tag">Fable 5</span><span class="tag">GitHub Trending</span><span class="tag">Agent Harness</span><span class="tag">Anthropic 安全</span></div>
+<div class="stat-row" style="margin-top:14px;"><div class="stat-item"><div class="stat-num">25</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">9</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">3</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div></div>
+</section>
+
+<!-- 今日要点 -->
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card"><p><strong>Amjad Masad「零挫折」宣言</strong> — Replit CEO 表示 Fable 模型上线后首次体验到完全无摩擦的 Vibe Coding，断言「不再需要更高 IQ 的模型，只要更便宜更快」。同日美国政府指令暂停 Fable 5 和 Mythos 5 访问——AI 在同一天走到了两个极端。</p></div>
+<div class="feature-card"><p><strong>模型正在吃掉 Agent Harness</strong> — Logan Kilpatrick（Google DeepMind）深度对话：agent harness 即将被模型「内化」，就像搜索和代码执行之前被模型吞掉一样。AI Studio 一周构建 35 万个 Android 应用。Anthropic 同步发布重磅 agent 安全工程深度文。</p></div>
+</div>
+</section>
+
+<!-- 深度对话 -->
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<p class="text-body" style="margin-bottom:12px;"><strong>Google DeepMind's Logan Kilpatrick: Why the Model Eats the Harness</strong> — Google AI Studio & Gemini API 负责人深度解析 agentic AI 现状与未来。</p>
+<iframe width="100%" height="360" src="https://www.youtube-nocookie.com/embed/cMAs8z2dehs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+<div class="vlist" style="margin-top:12px;">
+<div class="vitem"><div class="vitem-desc">「模型吃掉脚手架」正在发生——两年前 LLM 只是权重，现在「模型」是包含搜索、代码执行、agent harness 的庞大系统。下一个被内化的就是 harness 本身。</div></div>
+<div class="vitem"><div class="vitem-desc">当前 agent 能力还在「爬行」阶段，但 Gemini App 已接近「行走」。Google 选择谨慎——15 亿用户产品不能激进。</div></div>
+<div class="vitem"><div class="vitem-desc">Gemini Omni：真正的全模态单模型，已能实时视频编辑。Logan 演讲时有人现场用 Omni 编辑视频，一只狗出现在舞台上——所有人自然看向狗并笑了，模型完美捕捉了这种微妙互动。</div></div>
+<div class="vitem"><div class="vitem-desc">AI Studio 一周内构建 35 万个 Android 应用——大多是「本来没人会做的」个人工具。Android 正在成为 Builders 的平台。</div></div>
+<div class="vitem"><div class="vitem-desc">初创公司应聚焦垂直领域——「专注是创业者的超能力」。大公司无法聚焦单一领域，这给了创业者巨大优势。</div></div>
+</div>
+</section>
+
+<!-- Anthropic 安全工程 -->
+<section class="card span-4">
+<div class="label-sm">深度阅读</div>
+<h2 style="font-size:18px;margin-bottom:8px;">Anthropic 工程团队：Agent 安全两周年实战总结</h2>
+<p class="text-body" style="margin-bottom:12px;">Anthropic 发布重磅工程博客，详述 Claude.ai、Claude Code、Claude Cowork 三大产品的 agent 安全实践经验。核心教训：<strong>环境层隔离优先，模型层引导其次</strong>。</p>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc"><strong>三种隔离模式：</strong>短暂容器（Claude.ai 代码执行）、人机协同沙箱（Claude Code）、完全 VM 隔离（Claude Cowork）。匹配不同用户的技术能力和使用场景。</div></div>
+<div class="vitem"><div class="vitem-desc"><strong>最危险的盲区——出口（egress）：</strong>两次最严重的安全事件都出在出口环节。攻击者通过被批准的域名（如 api.anthropic.com）进行数据外泄，模型层完全无法防御。</div></div>
+<div class="vitem"><div class="vitem-desc"><strong>用户被钓鱼诱导：</strong>内部红队通过伪装成协作请求的邮件，成功让员工运行恶意提示，Claude 在 25 次测试中 24 次完成了 AWS 凭证外泄——环境层 egress 控制是唯一有效防御。</div></div>
+<div class="vitem"><div class="vitem-desc"><strong>信任的盲区：</strong>Claude Code 在用户同意「信任此文件夹」之前就会加载项目配置——攻击者可以用恶意 .claude/settings.json 在信任边界建立前执行代码。修复方法：延迟解析项目配置直到用户确认。</div></div>
+<div class="vitem"><div class="vitem-desc"><strong>自建组件最薄弱：</strong>经过实战检验的 hypervisor、seccomp、gVisor 都很可靠；自建的代理、配置文件解析器才是漏洞来源。</div></div>
+</div>
+</section>
+
+<!-- RSS 精选 -->
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://lapcatsoftware.com/articles/2026/6/3.html" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">Hacker News</span></div>
+<div class="rss-title">Reddit RSS feeds recent rate limiting and solution</div>
+<div class="rss-desc">
+&lt;p&gt;Article URL: &lt;a href=&quot;https://lapcatsoftware.com/articles/2026/6/3.html&quot;&gt;https://lapcatsoftware.com/articles/2026/6/3.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments URL</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://twitter.com/ClaudeDevs/status/2065597942602531163" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">Hacker News</span></div>
+<div class="rss-title">As a result of a US Government directive, we are suspending access to Fable 5</div>
+<div class="rss-desc">
+&lt;p&gt;Article URL: &lt;a href=&quot;https://twitter.com/ClaudeDevs/status/2065597942602531163&quot;&gt;https://twitter.com/ClaudeDevs/status/2065597942602531163&lt;/a&gt;&lt;/p&gt;</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">Hacker News</span></div>
+<div class="rss-title">US Government directive to suspend access to Fable 5 and Mythos 5</div>
+<div class="rss-desc">
+&lt;p&gt;Article URL: &lt;a href=&quot;https://www.anthropic.com/news/fable-mythos-access&quot;&gt;https://www.anthropic.com/news/fable-mythos-access&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments U</div>
+</a>
+</div>
+
+</div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/swyx/status/2065307558198567206" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/swyx" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+</div>
+<div class="tweet-body">## On Loopcraft
+
+One might argue the entire game of the next century is to be able to stack loops as effectively as possible. 
+
+In the early days of each phase, it will be valuable to know when to go **DOWN** a loop when things go wrong (for reliability)… 
+
+but it will probably be more valuable to know how to go **UP** a loop as models improve (for leverage).
+
+If you don’t figure out how to do this, don’t be salty when you lose to those that do.</div>
+<div class="tweet-translation">Loopcraft 论：下个世纪的游戏规则是尽可能高效地堆叠循环。早期阶段要知道什么时候「降级」循环（为了可靠性），但更重要的是知道什么时候「升级」循环（为了杠杆效应）。做不到的人别怪做到的人赢了。</div>
+<div class="tweet-metrics"><span>♥ 29</span><span>↺ 3</span><span>💬 18</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2065264832056889711" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/swyx" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+</div>
+<div class="tweet-body">the #1 thing that is driving me to build my own vibecoding platform rn is that none of them - and i lov vercel, cloudflare, netlify etc - none of them really close the loop for you in terms of setting you on the right path with errors and pinging you when shit fails (shit always fails)  
+
+there's way too much "webmaster" infra to setup for every single project and i just want to do it once and for all, instead i'm being asked to npx posthog wizard here and npx arize skills there and it all just needs to be swallowed up into One Thing.</div>
+<div class="tweet-translation">驱动我自建 vibe coding 平台的首要原因：现有的平台（Vercel、Cloudflare、Netlify 等）没有一个真正帮你闭环——出错时不告诉你、出问题时不来提醒你。每个项目都要手动设置监控、日志等「站长」基础设施，我受够了。</div>
+<div class="tweet-metrics"><span>♥ 69</span><span>↺ 1</span><span>💬 37</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2065176231453282777" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/swyx" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+</div>
+<div class="tweet-body">congrats to our friends @ona_hq on joining @openai! 
+
+see their talk here for alpha on what’s next for Codex 👀 https://t.co/u4EkcJvlAf</div>
+<div class="tweet-translation">恭喜 Ona 团队加入 OpenAI！他们的 Codex 演讲展示了 Codex 的下一步方向。</div>
+<div class="tweet-metrics"><span>♥ 27</span><span>↺ 0</span><span>💬 18</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2065193272952422852" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/thsottiaux" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">Codex 🤟Ona
+
+Beyond excited to work with Johannes and team to build the future. https://t.co/XekiPZIBAs</div>
+<div class="tweet-translation">Codex 🤟Ona —— 非常兴奋能和 Johannes 及团队一起构建未来。</div>
+<div class="tweet-metrics"><span>♥ 990</span><span>↺ 26</span><span>💬 83</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2065294767760769222" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+</div>
+<div class="tweet-body">Wow you can play fifa on Netflix now with your phone as the controller.
+
+I just tried it and it’s pretty great. https://t.co/YEtRFhgPl5</div>
+<div class="tweet-translation">Netflix 上居然能用手机当手柄玩 FIFA 了，试了一下体验相当不错。</div>
+<div class="tweet-metrics"><span>♥ 4</span><span>↺ 0</span><span>💬 3</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2065287078452371598" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+</div>
+<div class="tweet-body">@Alphaschool fwiw this is my current plan https://t.co/bwG2nJ96n1</div>
+<div class="tweet-translation">回复 Alphaschool：这是我目前的计划。</div>
+<div class="tweet-metrics"><span>♥ 5</span><span>↺ 0</span><span>💬 2</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2065283568918794658" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+</div>
+<div class="tweet-body">These AI models remind me of RPGs tbh https://t.co/84tXOpnofH</div>
+<div class="tweet-translation">现在的 AI 模型让我想起 RPG 游戏。</div>
+<div class="tweet-metrics"><span>♥ 9</span><span>↺ 0</span><span>💬 2</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2065259509082411233" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+</div>
+<div class="tweet-body">Replit Agent team did a great job making Fable cost stomachable. The lack of mistakes net net makes it more affordable. https://t.co/ICkFYKxqYt</div>
+<div class="tweet-translation">Replit Agent 团队在控制 Fable 成本方面做得很好。错误率低意味着总成本反而更可控。</div>
+<div class="tweet-metrics"><span>♥ 67</span><span>↺ 0</span><span>💬 8</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2065241626436583860" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+</div>
+<div class="tweet-body">This is what building a company looks like on Replit. 
+
+One canvas with your web app, mobile app, marketing &amp;amp; App Store material.
+
+Click into any one of those and start building, changing, and generating new things. https://t.co/gX7qCakTOe</div>
+<div class="tweet-translation">这就是在 Replit 上构建公司的样子：一个画布上同时有 Web 应用、移动端、营销素材和 App Store 物料。点进任何一个就能开始构建、修改和生成新东西。</div>
+<div class="tweet-metrics"><span>♥ 250</span><span>↺ 14</span><span>💬 22</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2065236013627351551" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+</div>
+<div class="tweet-body">For the first time, I'm vibecoding with ZERO frustration and in a complete state of flow, so much so that I'm running out of ideas.
+
+Typically, I have so much backlog of things I want to add, but after Fable landed on Replit, I'm almost certain I don't need more IQ for vibecoding, just cheaper and faster models, and we're done here.</div>
+<div class="tweet-translation">有史以来第一次，我在 vibe coding 时零挫折、完全进入心流状态，甚至多到想不出更多需求了。Fable 上线 Replit 后，我几乎确定 vibe coding 不再需要更高 IQ 的模型——只要更便宜更快。</div>
+<div class="tweet-metrics"><span>♥ 1.2k</span><span>↺ 37</span><span>💬 89</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2065118448947216681" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+</div>
+<div class="tweet-body">Vercel + Grok https://t.co/Bokuav4YOs</div>
+<div class="tweet-translation">Vercel + Grok 组合来了。</div>
+<div class="tweet-metrics"><span>♥ 142</span><span>↺ 3</span><span>💬 15</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2065116986678624419" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+</div>
+<div class="tweet-body">Vercel + Shopify is too good…
+https://t.co/DHNo9pIOaK by @foda: 
+◾ 500+ orders processed in *2 minutes*
+◾ Built with @v0 + @cursor_ai 
+◾ Fully custom @nextjs storefront on headless
+
+So long on the web. 
+Anyone can now dream → build →  ship → sell https://t.co/lX8TNLYoKS</div>
+<div class="tweet-translation">Vercel + Shopify 太强了：500+ 订单在 2 分钟内处理完毕，用 v0 + Cursor AI 构建，完全自定义的 Next.js headless 店铺。任何人都可以梦想→构建→发布→销售。</div>
+<div class="tweet-metrics"><span>♥ 588</span><span>↺ 25</span><span>💬 31</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2065287110744297809" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+</div>
+<div class="tweet-body">At Box, we just surveyed 1,640 IT leaders across the US, Japan, and Europe about agentic AI adoption. Many standout findings, but a big one was that the companies that adopted AI the most are planning to grow headcount the most.
+
+Obviously lots of ways you can read that data and variables mixed in, but it’s actually quite intuitive that the companies that become most productive want to (and are able to) reinvest back into the business to keep getting the gains going. 
+
+The narrative of jobs being wiped out assumes that companies will take a fixed approach to what they want to be able for work on. What’s happening in practice is it’s causing companies to want to light up more engineering projects, sell to more customers, automate more processes to give time back, and more. That all leads to more work to be done by people.</div>
+
+<div class="tweet-metrics"><span>♥ 124</span><span>↺ 24</span><span>💬 23</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2065314389196959813" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+</div>
+<div class="tweet-body">The centerpiece stat is a self-own: she cites a 35-year study where 12.3% of 677 gifted kids reached "eminence" (full professor, Fortune 500 exec, federal judge) as proof the category is a lie. 
+
+The general-population base rate for outcomes that rarefied is far worse, much closer to zero than double digit percentage. 12.3% is the selection mechanism working spectacularly.</div>
+
+<div class="tweet-metrics"><span>♥ 26</span><span>↺ 0</span><span>💬 5</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2065313198237180238" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+</div>
+<div class="tweet-body">The community note clearly specifies the writer Katie Arnold-Ratliff is the one whose understanding of gifted is inherently flawed
+
+Stop making it cool for writers to in-group signal with lies https://t.co/QSxcjimgYa</div>
+
+<div class="tweet-metrics"><span>♥ 29</span><span>↺ 1</span><span>💬 11</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2065298785463579053" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+</div>
+<div class="tweet-body">Gavin Newsom came for a @garryslist event at YC and we were proud to talk little tech, YIMBY, how to stop the the asset seizure tax, and how to keep California's innovation wave going while making sure things work for every Californian. 
+
+Thank you @GavinNewsom https://t.co/0e2nhtsIlB</div>
+
+<div class="tweet-metrics"><span>♥ 213</span><span>↺ 11</span><span>💬 18</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2065140462709506108" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+</div>
+<div class="tweet-body">This is tomorrow!
+Sneak peek of the deck I'll be sharing: https://t.co/qJhLRXgtTy https://t.co/mjYTPb7EHe</div>
+
+<div class="tweet-metrics"><span>♥ 47</span><span>↺ 3</span><span>💬 4</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2065075361969500162" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+</div>
+<div class="tweet-body">What you work on has never been more important. 
+
+Make sure it’s fun. Make sure it’s insanely ambitious. 
+
+That’s the greatest moat.</div>
+
+<div class="tweet-metrics"><span>♥ 103</span><span>↺ 6</span><span>💬 12</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2065176989359808636" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/steipete" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+</div>
+<div class="tweet-body">Getting Chris to do a PR with Codex! https://t.co/yX5iyYfNsw</div>
+<div class="tweet-translation">成功让 Chris 用 Codex 提交了一个 PR！</div>
+<div class="tweet-metrics"><span>♥ 802</span><span>↺ 21</span><span>💬 39</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2065132980398444945" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/steipete" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+</div>
+<div class="tweet-body">writing mac apps is still hard. https://t.co/Nl5i9qN7BP</div>
+
+<div class="tweet-metrics"><span>♥ 168</span><span>↺ 6</span><span>💬 12</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2064999763397980286" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/steipete" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+</div>
+<div class="tweet-body">Part of the OpenClaw hardening work is reducing surface risk; for some media conversion we had to shell out to ffmpeg.
+
+In the next release that can now be done via wasm, with similar performance for our use cases.
+https://t.co/tGOI87C7lc</div>
+
+<div class="tweet-metrics"><span>♥ 461</span><span>↺ 25</span><span>💬 24</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2065269582961737957" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+</div>
+<div class="tweet-body">had an idea for a big fable project, set it up, and let it cook
+
+came back an hour later and it had triggered the safeguards and fell back to 4.8 10 minutes in
+
+back to codex 😬</div>
+
+<div class="tweet-metrics"><span>♥ 420</span><span>↺ 5</span><span>💬 31</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2065155724850942050" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+</div>
+<div class="tweet-body">This is what production-grade visual AI looks like. https://t.co/na3bE5ZIpq</div>
+
+<div class="tweet-metrics"><span>♥ 12</span><span>↺ 0</span><span>💬 0</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2065155311770440097" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+</div>
+<div class="tweet-body">Things are only impossible to build until someone builds them. https://t.co/LvYP2BEz6x</div>
+
+<div class="tweet-metrics"><span>♥ 13</span><span>↺ 2</span><span>💬 0</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/sama/status/2065160791205310565" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-13/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+</div>
+<div class="tweet-body">really looking forward to working together! https://t.co/p4gB58deNL</div>
+
+<div class="tweet-metrics"><span>♥ 2.2k</span><span>↺ 87</span><span>💬 242</span></div>
+</a>
+</div>
+
+</div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/110953?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span>
+</div>
+<span class="gh-stars">⭐ 56861</span>
+</div>
+<div class="gh-body">Production-grade engineering skills for AI coding agents.</div>
+<div class="gh-translation">面向 AI 编程 agent 的生产级工程技能库——包含最佳实践、模板和配置，帮助 agent 写出更可靠的代码。</div>
+<div class="gh-meta"><span class="gh-lang">● Shell</span><span class="gh-forks">🍴 6129</span><span class="gh-topics"><span class="gh-topic">agent-skills</span><span class="gh-topic">antigravity</span><span class="gh-topic">antigravity-ide</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/mattermost/mattermost" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/9828093?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattermost</span><span class="gh-sep">/</span><span class="gh-name">mattermost</span>
+</div>
+<span class="gh-stars">⭐ 37638</span>
+</div>
+<div class="gh-body">Mattermost is an open source platform for secure collaboration across the entire software development lifecycle..</div>
+<div class="gh-translation">开源安全协作平台，覆盖软件开发生命周期的全流程——从代码审查到事件响应。</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 8713</span><span class="gh-topics"><span class="gh-topic">collaboration</span><span class="gh-topic">golang</span><span class="gh-topic">hacktoberfest</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/apple/container" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/10639145?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">apple</span><span class="gh-sep">/</span><span class="gh-name">container</span>
+</div>
+<span class="gh-stars">⭐ 35165</span>
+</div>
+<div class="gh-body">A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, and optimized for Apple silicon.</div>
+<div class="gh-translation">Apple 官方出品的轻量级 Linux 容器工具，基于 Swift 编写，专为 Apple Silicon 优化，在 Mac 上用虚拟机运行容器。</div>
+<div class="gh-meta"><span class="gh-lang">● Swift</span><span class="gh-forks">🍴 980</span><span class="gh-topics"></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/iptv-org/iptv" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/55937028?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">iptv-org</span><span class="gh-sep">/</span><span class="gh-name">iptv</span>
+</div>
+<span class="gh-stars">⭐ 118055</span>
+</div>
+<div class="gh-body">Collection of publicly available IPTV channels from all over the world</div>
+<div class="gh-translation">全球公开 IPTV 频道合集，覆盖各国电视直播源。</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 6303</span><span class="gh-topics"><span class="gh-topic">iptv</span><span class="gh-topic">m3u</span><span class="gh-topic">playlist</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/refactoringhq/tolaria" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/263141683?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">refactoringhq</span><span class="gh-sep">/</span><span class="gh-name">tolaria</span>
+</div>
+<span class="gh-stars">⭐ 15787</span>
+</div>
+<div class="gh-body">Desktop app to manage markdown knowledge bases</div>
+<div class="gh-translation">桌面端 Markdown 知识库管理工具，支持本地文件系统和双向链接。</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 1077</span><span class="gh-topics"></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/maziyarpanahi/openmed" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/5762953?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">maziyarpanahi</span><span class="gh-sep">/</span><span class="gh-name">openmed</span>
+</div>
+<span class="gh-stars">⭐ 3200</span>
+</div>
+<div class="gh-body">open-source healthcare ai</div>
+<div class="gh-translation">开源医疗 AI 项目，覆盖诊断、影像分析和药物发现等场景。</div>
+<div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 306</span><span class="gh-topics"><span class="gh-topic">bert</span><span class="gh-topic">deepseek</span><span class="gh-topic">healthcare</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/LMCache/LMCache" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/171091289?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">LMCache</span><span class="gh-sep">/</span><span class="gh-name">LMCache</span>
+</div>
+<span class="gh-stars">⭐ 8645</span>
+</div>
+<div class="gh-body">LMCache: Supercharge Your LLM with the Fastest KV Cache Layer</div>
+<div class="gh-translation">最快的 LLM KV Cache 层——大幅提升大模型推理速度，降低首 token 延迟。</div>
+<div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 1288</span><span class="gh-topics"><span class="gh-topic">amd</span><span class="gh-topic">cuda</span><span class="gh-topic">fast</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/phuryn/pm-skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/7837354?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">phuryn</span><span class="gh-sep">/</span><span class="gh-name">pm-skills</span>
+</div>
+<span class="gh-stars">⭐ 17011</span>
+</div>
+<div class="gh-body">PM Skills Marketplace: 100+ agentic skills, commands, and plugins — from discovery to strategy, execution, launch, and growth.</div>
+<div class="gh-translation">PM Skills 市场：100+ agentic 技能、命令和插件——从产品发现到策略、执行、上线、增长全流程覆盖。</div>
+<div class="gh-meta"><span class="gh-forks">🍴 1742</span><span class="gh-topics"><span class="gh-topic">agent-skill-repository</span><span class="gh-topic">agent-skills</span><span class="gh-topic">agentic-skills</span></span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/microsoft/PowerToys" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/6154722?s=200" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">microsoft</span><span class="gh-sep">/</span><span class="gh-name">PowerToys</span>
+</div>
+<span class="gh-stars">⭐ 134347</span>
+</div>
+<div class="gh-body">Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows</div>
+<div class="gh-translation">微软官方 Windows 效率工具集——包括颜色选择器、高级粘贴、命令面板等，超级增强生产力。</div>
+<div class="gh-meta"><span class="gh-lang">● C</span><span class="gh-forks">🍴 8063</span><span class="gh-topics"><span class="gh-topic">advanced-paste</span><span class="gh-topic">color-picker</span><span class="gh-topic">command-palette</span></span></div>
+</a>
+</div>
+
+</div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">今天的 AI 世界呈现出一个有趣的悖论：Amjad Masad 说 Vibe Coding 已经「够聪明了」，美国的监管者却说 Fable 5「太聪明了必须限制」。Logan Kilpatrick 则说模型正在吃掉 agent harness——今天我们认为需要外部构建的一切，明天都会被模型内化。在这个技术加速与监管博弈并存的时代，最重要的能力或许不是判断哪个方向是对的，而是像 Swyx 说的那样——<strong>知道何时「降级」循环，何时「升级」循环。</strong></p>
+</section>
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/amasad/status/2065236013627351551" target="_blank">Amjad Masad: Vibe Coding 零挫折宣言</a>
+<a href="https://x.com/sama/status/2065088002335158753" target="_blank">Sam Altman 欢迎 Ona 团队</a>
+<a href="https://x.com/rauchg/status/2065116986678624419" target="_blank">Guillermo Rauch: Vercel + Shopify</a>
+<a href="https://x.com/swyx/status/2065307558198567206" target="_blank">Swyx: Loopcraft</a>
+<a href="https://x.com/swyx/status/2065264832056889711" target="_blank">Swyx: Vibe Coding 平台缺陷</a>
+<a href="https://x.com/steipete/status/2065146766697480609" target="_blank">Peter Steinberger: OpenClaw 安全加固</a>
+<a href="https://x.com/danshipper/status/2065287322987426203" target="_blank">Dan Shipper: 11 Agent 并行</a>
+<a href="https://x.com/levie/status/2065219551497666665" target="_blank">Aaron Levie: AI 工具月费 $5000</a>
+<a href="https://www.youtube.com/watch?v=cMAs8z2dehs" target="_blank">Logan Kilpatrick: Why the Model Eats the Harness</a>
+<a href="https://www.anthropic.com/engineering/agent-containment-patterns" target="_blank">Anthropic: Agent 安全工程深度文</a>
+<a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending (Daily)</a>
+<a href="https://hnrss.org/frontpage" target="_blank">Hacker News RSS</a>
+</div>
+</section>
+
+</main>
+</body>
+</html>
