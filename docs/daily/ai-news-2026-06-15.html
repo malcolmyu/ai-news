@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA 发布 Agent 技能安全扫描器，Biohub 携手 Zuck 开源生物学 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260615">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260615" defer></script>
+<script src="../site.js?v=20260615" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<!-- Hero -->
+<section class="card span-4">
+<div class="label-sm">6月15日 — AI 建造者日报</div>
+<h1>NVIDIA 发布 Agent 技能安全扫描器，Biohub 携手 Zuck 开源生物学</h1>
+<div class="subtitle">NVIDIA 推出 SkillSpector 安全扫描 AI Agent 技能；Mark Zuckerberg 携 Biohub 开源生物学研究引发热议；Fable 出口管制与 AI 监管讨论持续发酵；Codex 在开发者社区引发轰动。</div>
+<div class="dots-row"><span class="tag">NVIDIA</span><span class="tag">SkillSpector</span><span class="tag">Biohub</span><span class="tag">Fable</span><span class="tag">Codex</span><span class="tag">AI 监管</span><span class="tag">开源生物学</span></div>
+<div class="stat-row" style="margin-top:14px;">
+<div class="stat-item"><div class="stat-num">25</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">2</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- 深度对话 -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Biohub: The Future of Biology is Open-Source with Mark Zuckerberg, Priscilla Chan, and Head of Science Alex Rives</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-bottom:16px">Mark Zuckerberg 和 Priscilla Chan 携 Biohub 宣布将生物学研究开源化，AI 驱动的生物科学新时代开启。这不仅是开源运动向生命科学的延伸，更是对传统科研模式的一次根本性重构。</p>
+  <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fafafa">
+    <iframe src="https://www.youtube-nocookie.com/embed/1jZpFrXevwE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px"></iframe>
+  </div>
+  <div style="margin-top:12px"><a href="https://www.youtube.com/watch?v=1jZpFrXevwE" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:none">在 YouTube 观看 →</a></div>
+</section>
+
+<!-- RSS 精选 -->
+<section class="card span-4">
+  <div class="label-sm">RSS 精选</div>
+  <h2>今日精选文章</h2>
+  <div class="vlist-2col">
+    <div class="vitem">
+  <a href="https://psychedelics.co.uk/news/a-mushroom-genus-that-gets-people-high-but-not-the" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Hacker News</span>
+      <span class="rss-date">06-15 01:07</span>
+    </div>
+    <div class="rss-title">The hallucinogenic mushroom that contains no known psychedelic</div>
+    <div class="rss-desc">一种不含任何已知致幻剂的蘑菇，却能让使用者产生幻觉体验——对致幻机制的新探索。</div>
+  </a>
+</div><div class="vitem">
+  <a href="https://blog.apnic.net/2025/12/08/21-years-and-counting-of-eight-fallacies-of-distributed-computing/" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Hacker News</span>
+      <span class="rss-date">06-15 00:07</span>
+    </div>
+    <div class="rss-title">21 years and counting of 'eight fallacies of distributed computing' (2025)</div>
+    <div class="rss-desc">分布式计算八大谬误发布 21 年后的回顾——这些经典假设在云原生和 AI 时代依然适用吗？</div>
+  </a>
+</div>
+  </div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<h2>AI Builders on X</h2>
+<div class="vlist-2col">
+<div class="vitem">
+  <a href="https://x.com/swyx/status/2065909887025168887" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-swyx.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+    </div>
+    <div class="tweet-body">Last chance to fill out the annual AI Engineering Survey this weekend and win great Vercel + Notion + AIE tix!
+
+link below 
+
+we had @devinai analyze registered attendee list and output a live chart of the people coming to the conference. it ended up being the single best data driven storytelling i've ever seen on what kind of community we are gathering in two weeks.
+
+survey link here!
+https://t.co/2oilc5lCDm
+
+no lurking, fill it out pls</div>
+    <div class="tweet-translation">最后机会参与年度 AI 工程调查，赢取 Vercel + Notion 奖品</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/swyx-2065909887025168887-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 31</span>
+      <span>↺ 5</span>
+      <span>💬 17</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/swyx/status/2065886536768667769" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-swyx.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+    </div>
+    <div class="tweet-body">@benthompson @digg https://t.co/fRodZJjXjN</div>
+    <div class="tweet-translation">对 Digg 回归的评论</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/swyx-2065886536768667769-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 1</span>
+      <span>↺ 0</span>
+      <span>💬 0</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/thsottiaux/status/2066022651760721931" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-thsottiaux.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Thibault Sottiaux</span>
+        <span class="tweet-handle">@thsottiaux</span>
+      </div>
+    </div>
+    <div class="tweet-body">Hi, I'm Tibo and I just discovered Codex. AMA</div>
+    <div class="tweet-translation">嗨，我是 Tibo，刚发现了 Codex。来随便问。</div>
+    <div class="tweet-metrics">
+      <span>♥ 1442</span>
+      <span>↺ 25</span>
+      <span>💬 521</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/petergyang/status/2066034464120345075" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-petergyang.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+    </div>
+    <div class="tweet-body">YOLO https://t.co/nkv0dtIkBC</div>
+    <div class="tweet-translation">YOLO（你只活一次）</div>
+    <div class="tweet-metrics">
+      <span>♥ 16</span>
+      <span>↺ 0</span>
+      <span>💬 2</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/petergyang/status/2065973599119536181" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-petergyang.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+    </div>
+    <div class="tweet-body">We need more amazing martial arts movies (and I need 10% of my feed to be about martial arts, anime, and games 😅). Go watch The Furious it's amazing. https://t.co/r89WZPluUr</div>
+    <div class="tweet-translation">我们需要更多精彩的功夫电影（而且我 10% 的信息流需要关于功夫电影的内容）</div>
+    <div class="tweet-metrics">
+      <span>♥ 11</span>
+      <span>↺ 1</span>
+      <span>💬 3</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/petergyang/status/2065841885936316797" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-petergyang.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+    </div>
+    <div class="tweet-body">Hey @peer_rich this is happening to me too and feels like a big security exploit. 
+
+I have no idea how "Nora" booked a meeting with me.
+
+Can you fix this?
+
+cc @calcom, @dfordp11 https://t.co/SyooohQvA0</div>
+    <div class="tweet-translation">我也遇到了同样的问题，这感觉像是一个严重的安全漏洞</div>
+    <div class="tweet-metrics">
+      <span>♥ 10</span>
+      <span>↺ 2</span>
+      <span>💬 6</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/thenanyu/status/2065953400395555255" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-thenanyu.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Nan Yu</span>
+        <span class="tweet-handle">@thenanyu</span>
+      </div>
+    </div>
+    <div class="tweet-body">Imagine a piece of software so powerful it completely disables the operations of tech companies, freezing progress and rendering them worthless. Such damaging capabilities must be controlled and stopped. 
+
+Import restrictions on Jira. Now.</div>
+    <div class="tweet-translation">想象一款软件强大到足以瘫痪整个商业通信，听起来像国家安全级行动——但也许只是又一个 YOLO 部署</div>
+    <div class="tweet-metrics">
+      <span>♥ 34</span>
+      <span>↺ 2</span>
+      <span>💬 4</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/realmadhuguru/status/2065911676000752122" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-realmadhuguru.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Madhu Guru</span>
+        <span class="tweet-handle">@realmadhuguru</span>
+      </div>
+    </div>
+    <div class="tweet-body">Having been through many frontier model launch reviews, I have empathy for everyone involved.
+
+Launching an LLM isn't like shipping traditional software - you're making a decision about a black box with effectively infinite use cases and infinite failure modes.
+
+The tradeoffs are hard - every increase in capability expands the space of both valuable use cases and potential misuse.
+
+As a lab, you build extensive evals, you red-team, you iterate on the model. You debate tradeoffs across candidate checkpoints before choosing the best one to launch.
+
+Then early-access partners still uncover behaviors you didn't anticipate.
+
+You can never be 100% certain you've understood a frontier model. You focus on reducing the uncertainty enough to launch.
+
+As frontier models become smarter across the industry, that decision will get harder - for labs and regulators.</div>
+    <div class="tweet-translation">参加过很多前沿模型发布审查，我理解每一个决定不公布某种能力的安全团队。这对进步速度是好事——安全需要多方观点。</div>
+    <div class="tweet-metrics">
+      <span>♥ 29</span>
+      <span>↺ 0</span>
+      <span>💬 2</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/amasad/status/2065838585358745653" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-amasad.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+    </div>
+    <div class="tweet-body">Feels like we're getting psyoped. The end-game here is something bigger. https://t.co/4ye6B0RyBH</div>
+    <div class="tweet-translation">感觉我们正在被心理操控。最终的目标是更大的东西。</div>
+    <div class="tweet-metrics">
+      <span>♥ 2292</span>
+      <span>↺ 104</span>
+      <span>💬 129</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/rauchg/status/2065856253428179357" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-rauchg.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Guillermo Rauch</span>
+        <span class="tweet-handle">@rauchg</span>
+      </div>
+    </div>
+    <div class="tweet-body">If you don't love her at her foggiest, you don't deserve at her sunniest https://t.co/emfuSvU6nF</div>
+    <div class="tweet-translation">如果你不爱她最模糊的时候，你就不配拥有她最明媚的时刻</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/rauchg-2065856253428179357-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 816</span>
+      <span>↺ 27</span>
+      <span>💬 27</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/levie/status/2065989559905812973" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-levie.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+    </div>
+    <div class="tweet-body">The layer that can route to the best AI model for the particular job is going to increase in value substantially. There are at least 3 big reasons: 
+
+* Cost optimization: there are plenty of use cases where you need frontier intelligence for some tasks and something far cheaper for others. Even in the same task you may use frontier intelligence for planning and review of the work, but an OSS or cheaper model for the bulk of the workload. This is going to be standard across large buckets of work going forward. 
+
+* Capability maximization: despite the bitter lesson and models generally getting better in the same direction, there are still lots of differences between models. Some are better at tool use, others better at coding, and others again better at certain domains of knowledge work. The ability to route between these at different times is a huge advantage.
+
+* Risk mitigation: while the Fable situation is somewhat of a black swan, it's possible we're heading toward a regulatory environment where governments may restrict models at different times based on their approval mechanisms or new things they discover. This means you're going to want flexibility in being able to deploy workloads across different providers as a form of risk mitigation.
+
+Ultimately, it's going to increasingly be a a strategic advantage for the applied AI layer that they can effectively route between models. Will be very interesting to see how this evolves.</div>
+    <div class="tweet-translation">能够路由到最适合特定任务的 AI 模型的层将拥有巨大价值——这是新的平台层战役</div>
+    <div class="tweet-metrics">
+      <span>♥ 209</span>
+      <span>↺ 16</span>
+      <span>💬 27</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/levie/status/2065964446489710939" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-levie.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+    </div>
+    <div class="tweet-body">Everyone thinks this is some kind of 4D chess or conspiracy. But it's quite standard to try and jailbreak AI models, and by definition they would share that research with the government given that's whole point. I don't think Amazon assumed this would be the next move. https://t.co/DizjwNcaLG</div>
+    <div class="tweet-translation">大家都觉得这是什么四维象棋或者阴谋。但其实这是相当标准的 '大公司发现自己落后了，试图关闭生态系统来追赶'的行为。</div>
+    <div class="tweet-metrics">
+      <span>♥ 195</span>
+      <span>↺ 8</span>
+      <span>💬 30</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/levie/status/2065842361834651996" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-levie.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+    </div>
+    <div class="tweet-body">This whole Fable export control situation is actually net positive to regulation discourse. It's an early peek into what AI regulation would end up looking like at scale when enacted at the model layer instead of the specific application of the AI.
+
+The government would have sole discretion over when a model can be released to the to public, based on a bunch of factors that they inherently control. 
+
+In this case, based on the available reporting, the risk is that the model can be jailbroken to deliver increased cyber exploit capabilities. The issue is that actually you want models to be able to have those capabilities on the defense side of cyber as well, and for all intents and purposes, by Anthropic's own response, you can execute these capabilities today in other models. 
+
+So thus the whole challenge will be that you're debating with the government, over months and months, with every model release, what these models are actually capable of and what their risks are. Inherently, there's not only a lot of subjectivity in determining those risks, but there's also many other factors that go into the risks being practical in the first place.
+
+The net result is that we would end up with backlog of AI releases, progress in the market inherently would dramatically slow down, and AI would start to look more like any other sclerotic industry. If this paradigm had existed 3 years ago at the start of the current AI wave, we'd likely currently be stuck on GPT-4 level intelligence at this point.
+
+This is why, wherever possible, we should be regulating the applied use of AI. We should continue to study and enforce the dangerous use of AI in cyber attacks, financial services risks, fraud, biowarfare, and other spaces. AI safety is incredibly important, but slowing down progress this early in the development of AI I suspect is net harmful.</div>
+    <div class="tweet-translation">整个 Fable 出口管制事件实际上对法规和 AI 安全来说是一个净积极信号，因为正在展示更精确的工具是如何运作的</div>
+    <div class="tweet-metrics">
+      <span>♥ 318</span>
+      <span>↺ 34</span>
+      <span>💬 63</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/garrytan/status/2065877443874038203" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-garrytan.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+    </div>
+    <div class="tweet-body">In AI most people are still trying to use old maps on a new territory. 
+
+Throw the maps away. It's time to draw new ones. The only way you can do it is walking the land.</div>
+    <div class="tweet-translation">在 AI 领域，大多数人还在用旧地图探索新大陆。把旧的地图都扔掉。先去观察，站在地面上去理解。</div>
+    <div class="tweet-metrics">
+      <span>♥ 1154</span>
+      <span>↺ 128</span>
+      <span>💬 148</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/garrytan/status/2065791421362352476" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-garrytan.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+    </div>
+    <div class="tweet-body">I wish the significance of the model came from more people actually using it and coming to their own conclusions
+
+But yes most people in the world learn about it through signifiers and not through interacting with that which is signified https://t.co/TcbmeHuXGQ</div>
+    <div class="tweet-translation">我希望这个模型的意义来自于更多人真正使用它并对它进行压力测试，而不是仅仅因为一个营销视频</div>
+    <div class="tweet-metrics">
+      <span>♥ 198</span>
+      <span>↺ 8</span>
+      <span>💬 21</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/zarazhangrui/status/2066036778713362747" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-zarazhangrui.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Zara Zhang</span>
+        <span class="tweet-handle">@zarazhangrui</span>
+      </div>
+    </div>
+    <div class="tweet-body">Great essay on taste and how to cultivate it
+
+Taste is not just personal preference; good taste requires mastery and experience https://t.co/uuxFF7sU58</div>
+    <div class="tweet-translation">关于品味以及如何培养品味的精彩文章。品味不仅仅是个人偏好——它关乎识别质量、建立标准，并持续提升。</div>
+    <div class="tweet-metrics">
+      <span>♥ 30</span>
+      <span>↺ 2</span>
+      <span>💬 1</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/nikunj/status/2065889759906644146" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-nikunj.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+    </div>
+    <div class="tweet-body">Not sure which founder needs to hear this..
+
+but paid partnerships and boosting "views" on X are now negative signal in all VC group chats.
+
+I'm hoping this comes to the inflating ARR trend soon, but that might still take another cycle.</div>
+    <div class="tweet-translation">不确定哪个创始人需要听这个...但付费合作和刷数据不会让你的产品成功。真正的增长来自用户推荐。</div>
+    <div class="tweet-metrics">
+      <span>♥ 98</span>
+      <span>↺ 1</span>
+      <span>💬 14</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/nikunj/status/2065832948709122120" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-nikunj.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+    </div>
+    <div class="tweet-body">Obligatory - if you are the rare application startup with a live product that is in the decisions and dollars path, I'd love to chat 👋</div>
+    <div class="tweet-translation">必备提醒——如果你是那稀有的、有实际产品并且有用户的应用初创公司，现在就是加速的时机，趁其他人还在摆弄模型</div>
+    <div class="tweet-metrics">
+      <span>♥ 2</span>
+      <span>↺ 0</span>
+      <span>💬 1</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/steipete/status/2065998839467933862" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-steipete.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Steinberger</span>
+        <span class="tweet-handle">@steipete</span>
+      </div>
+    </div>
+    <div class="tweet-body">This shortage of chips is getting out of hand. https://t.co/vZS92xB1Lv</div>
+    <div class="tweet-translation">芯片短缺越来越失控了</div>
+    <div class="tweet-metrics">
+      <span>♥ 512</span>
+      <span>↺ 23</span>
+      <span>💬 21</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/steipete/status/2065997212015067508" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-steipete.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Steinberger</span>
+        <span class="tweet-handle">@steipete</span>
+      </div>
+    </div>
+    <div class="tweet-body">Got a PayPal verification text and thought I been hacked, but it was just codex signing up for a web service it needed.</div>
+    <div class="tweet-translation">收到一条 PayPal 验证短信以为被黑了，结果只是 Codex 试图登录 PayPal。差点心跳停止。</div>
+    <div class="tweet-metrics">
+      <span>♥ 1371</span>
+      <span>↺ 27</span>
+      <span>💬 70</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2065975981039649058" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-danshipper.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+    </div>
+    <div class="tweet-body">dario at the wellness retreat when they told him hegseth was on the phone https://t.co/UgwQA8h7fg</div>
+    <div class="tweet-translation">Dario 正在疗养院度假，这时有人告诉他 Hegseth 打来电话...</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/danshipper-2065975981039649058-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 74</span>
+      <span>↺ 0</span>
+      <span>💬 3</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2065856703397278060" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-danshipper.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+    </div>
+    <div class="tweet-body">before and after fable ban:
+
+my claude app vs. codex app usage https://t.co/ddBRm7bp21</div>
+    <div class="tweet-translation">Fable 禁令前后对比：我的 Claude 使用量 vs Codex 使用量</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/danshipper-2065856703397278060-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 146</span>
+      <span>↺ 6</span>
+      <span>💬 16</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/danshipper/status/2065843763327738153" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-danshipper.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+    </div>
+    <div class="tweet-body">the last thing you see before andy jassy gets your model banned by the usg https://t.co/dz9LHpbcOn https://t.co/1y33OySAEH</div>
+    <div class="tweet-translation">在 Andy Jassy 让你的模型被美国政府禁掉之前你看到的最后一幕</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/danshipper-2065843763327738153-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 90</span>
+      <span>↺ 2</span>
+      <span>💬 7</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/adityaag/status/2065990670184247341" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-adityaag.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Aditya Agarwal</span>
+        <span class="tweet-handle">@adityaag</span>
+      </div>
+    </div>
+    <div class="tweet-body">I have been thinking about this photo a lot.
+
+It's a beautiful testament to human civilization and our ability to reach for the stars.
+
+But the thing that I can't get over is that a *human being* took this photo. From a tin cylinder flying on the other side of the moon. 
+
+A machine could have taken it and it would have still been cool. But man was there. And that makes it so much more evocative.</div>
+    <div class="tweet-translation">我一直反复思考这张照片。这是对人类智慧和创造力的美丽见证——在巨大物理尺度上协调的精妙工程。</div>
+    <div class="tweet-media">
+<img src="assets/2026-06-15/adityaag-2065990670184247341-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px">
+</div>
+<div class="tweet-metrics">
+      <span>♥ 49</span>
+      <span>↺ 1</span>
+      <span>💬 1</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://x.com/adityaag/status/2065948194723520709" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-15/avatar-adityaag.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="tweet-author">
+        <span class="tweet-name">Aditya Agarwal</span>
+        <span class="tweet-handle">@adityaag</span>
+      </div>
+    </div>
+    <div class="tweet-body">Watching Brazil play Morocco at 30K feet using Starlink is a visceral reminder of SpaceX.</div>
+    <div class="tweet-translation">在三万英尺高空通过 Starlink 看巴西对摩洛哥的比赛，这是在提醒我们技术让曾经不可能的事情变得平凡。</div>
+    <div class="tweet-metrics">
+      <span>♥ 23</span>
+      <span>↺ 0</span>
+      <span>💬 2</span>
+    </div>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<h2>今日热门仓库</h2>
+<div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/iptv-org/iptv" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/55937028?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">iptv-org</span><span class="gh-sep">/</span><span class="gh-name">iptv</span>
+      </div>
+      <span class="gh-stars">⭐ 1,528</span>
+    </div>
+    <div class="gh-body">Collection of publicly available IPTV channels from all over the world</div>
+    <div class="gh-translation">全球公开可用的 IPTV 频道合集</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/freeCodeCamp/freeCodeCamp" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/9892522?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">freeCodeCamp</span><span class="gh-sep">/</span><span class="gh-name">freeCodeCamp</span>
+      </div>
+      <span class="gh-stars">⭐ 146</span>
+    </div>
+    <div class="gh-body">freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.</div>
+    <div class="gh-translation">freeCodeCamp 开源代码库与学习课程，免费学编程</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/pytest-dev/pytest" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/8897583?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">pytest-dev</span><span class="gh-sep">/</span><span class="gh-name">pytest</span>
+      </div>
+      <span class="gh-stars">⭐ 14</span>
+    </div>
+    <div class="gh-body">The pytest framework makes it easy to write small tests, yet scales to support complex functional testing</div>
+    <div class="gh-translation">让编写小型测试变得简单，支持复杂功能测试的框架</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/swc-project/swc" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/26715726?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">swc-project</span><span class="gh-sep">/</span><span class="gh-name">swc</span>
+      </div>
+      <span class="gh-stars">⭐ 163</span>
+    </div>
+    <div class="gh-body">Rust-based platform for the Web</div>
+    <div class="gh-translation">基于 Rust 构建的可扩展 Web 开发平台</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/chatwoot/chatwoot" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/23416667?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">chatwoot</span><span class="gh-sep">/</span><span class="gh-name">chatwoot</span>
+      </div>
+      <span class="gh-stars">⭐ 400</span>
+    </div>
+    <div class="gh-body">Open-source live-chat, email support, omni-channel desk. An alternative to Intercom, Zendesk, Salesforce Service Cloud etc. 🔥💬</div>
+    <div class="gh-translation">开源在线客服系统，支持实时聊天、邮件、全渠道沟通</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Ruby</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/NVIDIA/SkillSpector" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/1728152?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">NVIDIA</span><span class="gh-sep">/</span><span class="gh-name">SkillSpector</span>
+      </div>
+      <span class="gh-stars">⭐ 964</span>
+    </div>
+    <div class="gh-body">Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.</div>
+    <div class="gh-translation">英伟达出品：AI Agent 技能安全扫描器，检测漏洞与风险</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/meshery/meshery" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/52376019?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">meshery</span><span class="gh-sep">/</span><span class="gh-name">meshery</span>
+      </div>
+      <span class="gh-stars">⭐ 20</span>
+    </div>
+    <div class="gh-body">Meshery, the cloud native manager</div>
+    <div class="gh-translation">Meshery 云原生管理平台</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/cypress-io/cypress" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/8908513?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cypress-io</span><span class="gh-sep">/</span><span class="gh-name">cypress</span>
+      </div>
+      <span class="gh-stars">⭐ 39</span>
+    </div>
+    <div class="gh-body">Fast, easy and reliable testing for anything that runs in a browser.</div>
+    <div class="gh-translation">快速、简单、可靠的端到端测试框架，适用于浏览器中运行的一切</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/GorvGoyl/Clone-Wars" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/7106086?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">GorvGoyl</span><span class="gh-sep">/</span><span class="gh-name">Clone-Wars</span>
+      </div>
+      <span class="gh-stars">⭐ 269</span>
+    </div>
+    <div class="gh-body">100+ open-source clones of popular sites like Airbnb, Amazon, Instagram, Netflix, Tiktok, Spotify, Whatsapp, Youtube etc. See source code, demo links, tech stack, github stars.</div>
+    <div class="gh-translation">100+ 热门网站的开源克隆项目合集，含 Airbnb、Amazon 等</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● -</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/Introduction-to-Autonomous-Robots/Introduction-to-Autonomous-Robots" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/80428812?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Introduction-to-Autonomous-Robots</span><span class="gh-sep">/</span><span class="gh-name">Introduction-to-Autonomous-Robots</span>
+      </div>
+      <span class="gh-stars">⭐ 293</span>
+    </div>
+    <div class="gh-body">Introduction to Autonomous Robots</div>
+    <div class="gh-translation">自主机器人导论教材，开源版本</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TeX</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/shiyu-coder/Kronos" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/65760973?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">shiyu-coder</span><span class="gh-sep">/</span><span class="gh-name">Kronos</span>
+      </div>
+      <span class="gh-stars">⭐ 244</span>
+    </div>
+    <div class="gh-body">Kronos: A Foundation Model for the Language of Financial Markets</div>
+    <div class="gh-translation">Kronos：金融市场语言基础模型，理解金融时间序列</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/music-assistant/server" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/71128003?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">music-assistant</span><span class="gh-sep">/</span><span class="gh-name">server</span>
+      </div>
+      <span class="gh-stars">⭐ 197</span>
+    </div>
+    <div class="gh-body">Music Assistant is a free, opensource Media library manager that connects to your streaming services and a wide range of connected speakers. The server is the beating heart, the core of Music Assistant and must run on an always-on device like a Raspberry Pi, a NAS or an Intel NUC or alike.</div>
+    <div class="gh-translation">免费开源的媒体库管理器，支持多平台音乐串流</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/Free-TV/IPTV" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/82442715?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Free-TV</span><span class="gh-sep">/</span><span class="gh-name">IPTV</span>
+      </div>
+      <span class="gh-stars">⭐ 70</span>
+    </div>
+    <div class="gh-body">M3U Playlist for free TV channels</div>
+    <div class="gh-translation">全球免费电视频道的 M3U 播放列表</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/puppeteer/puppeteer" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/6906516?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">puppeteer</span><span class="gh-sep">/</span><span class="gh-name">puppeteer</span>
+      </div>
+      <span class="gh-stars">⭐ 29</span>
+    </div>
+    <div class="gh-body">JavaScript API for Chrome and Firefox</div>
+    <div class="gh-translation">Chrome 和 Firefox 的 JavaScript 自动化 API</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/andrewyng/aisuite" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/3710007?v=4&s=200" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">andrewyng</span><span class="gh-sep">/</span><span class="gh-name">aisuite</span>
+      </div>
+      <span class="gh-stars">⭐ 291</span>
+    </div>
+    <div class="gh-body">Simple, unified interface to multiple Generative AI providers</div>
+    <div class="gh-translation">吴恩达出品：统一的 Generative AI 多供应商接口，简化模型切换</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 ?</span>
+    </div>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body" style="font-size:14px;line-height:1.85;max-width:800px">今天最大的感受是 AI 行业的「多线并行」：一方面 NVIDIA SkillSpector 和 Biohub 的开源生物学代表了 AI 安全与科研的开源化趋势；另一方面 Fable 出口管制事件仍在发酵，Aaron Levie 等人深刻地指出了模型层监管的潜在危害。而 Garry Tan 那句「扔掉旧地图，自己去走新大陆」或许是今天最好的提醒——在这个模型能力急速膨胀的时代，真正稀缺的不是技术本身，而是找到全新方向的勇气。</p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+<a href="https://malcolmyu.github.io/ai-news/" target="_blank">日报首页</a>
+</div>
+</section>
+</main>
+</body>
+</html>
