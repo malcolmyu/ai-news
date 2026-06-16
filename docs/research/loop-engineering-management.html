@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-06-16">
+<title>Loop Engineering 与管理升维 — 从一线执行到二线架构的认知迁移</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260616a">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260616a" defer></script>
+<script src="../site.js?v=20260616a" defer></script>
+<style>
+.vlist { display: flex; flex-direction: column; gap: 8px; }
+.vitem { background: #fafafa; border: 1px solid #e8e8e6; border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.vitem-content { flex: 1; }
+.vitem-title { font-size: 13px; font-weight: 600; color: #1c1c1c; margin-bottom: 4px; }
+.vitem-desc { font-size: 12px; color: #6b6b6b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span><span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+<div class="bento">
+
+<!-- Hero -->
+<div class="card span-4">
+  <div class="label-sm">深度调研 · 2026/6/16</div>
+  <h1>Loop Engineering 与管理升维：从一线执行到二线架构</h1>
+  <div class="subtitle" style="margin-top:6px;">
+    2026 年 6 月 AI Agent 领域涌现的 Loop Engineering 思潮，与一线管理者晋升二线管理者的认知迁移高度同构。<br>
+    这篇不讨论 Agent 怎么写代码。讨论一个人从「亲手做管理」到「设计管理系统」的过程中，什么样的问题会反复出现。
+  </div>
+  <div class="stat-row" style="margin-top:16px;">
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">抽象层级</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Building Block 映射</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">验证维度</div></div>
+    <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">通用问题</div></div>
+  </div>
+  <div class="dots-row" style="margin-top:12px;">
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Loop Engineering</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">管理升维</span>
+    <span class="tag" style="background:rgba(16,185,129,0.08);color:#10b981;">Claude Code</span>
+    <span class="tag" style="background:rgba(245,158,11,0.08);color:#f59e0b;">Codex</span>
+    <span class="tag" style="background:rgba(37,99,235,0.08);color:#2563eb;">Boris Cherny</span>
+    <span class="tag" style="background:rgba(139,92,246,0.08);color:#8b5cf6;">Steinberger</span>
+  </div>
+</div>
+
+<!-- 一、起源 -->
+<div class="card span-2">
+  <div class="label-sm">01 · 起源</div>
+  <h2>Boris 删了 IDE，你什么时候删了「亲自管」？</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    2026 年 6 月 8 日凌晨，Peter Steinberger 发了一条推，650 万浏览。两句话：
+  </div>
+  <blockquote style="background:#f5f5f4;padding:12px 16px;border-radius:8px;margin-bottom:10px;">
+    You shouldn't be prompting coding agents anymore.<br>
+    You should be designing <strong>loops</strong> that prompt your agents.
+  </blockquote>
+  <div class="text-body">
+    几天后，Claude Code 负责人 Boris Cherny 在 WorkOS 访谈里讲了更具体的事：他在 2025 年 11 月删了 IDE，之后 30 天 259 个 PR 全是 Claude Code 自己写的。他的工作从写代码变成了写 loop——让 Agent 自己去读 GitHub、读 Slack、读 Twitter，自己决定要做什么。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">01 · 翻译</div>
+  <h2>这不是 Agent 的问题。这是你的问题。</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    把「Claude」换成「你的 -1 管理者」。Boris 那句话不需要改一个字：
+  </div>
+  <div class="quote">
+    <strong>我不再 prompt 我的 -1 了。</strong>我设计了 loop，loop 去 prompt 他们、读结果、判断完成没有。我的工作是写 loop。
+  </div>
+  <div class="text-body" style="margin-top:8px;">
+    Loop Engineering 和管理升维的重叠不是巧合。它们面对的是<strong>同一个结构性问题</strong>：当你的杠杆从「亲手做」迁移到「设计系统让别人做」，所有架构问题都会重新出现一次。
+  </div>
+</div>
+
+<!-- 二、三层抽象 -->
+<div class="card span-4">
+  <div class="label-sm">02 · 三层抽象</div>
+  <h2>Prompt → Context → Loop：你卡在哪一层？</h2>
+  <table>
+    <tr><th>层</th><th>Agent 工程</th><th>管理阶段</th><th>你在优化什么</th></tr>
+    <tr><td><strong>Prompt Engineering</strong></td><td>手写指令，逐轮调教</td><td>一线管理者（管执行）</td><td>给每个人的具体指令质量</td></tr>
+    <tr><td><strong>Context Engineering</strong></td><td>管上下文窗口：文档、历史、工具</td><td>成熟一线（管节奏）</td><td>信息流、对齐机制、决策背景</td></tr>
+    <tr><td style="background:rgba(37,99,235,0.04);"><strong>Loop Engineering</strong></td><td style="background:rgba(37,99,235,0.04);">设计自运行系统：触发→执行→验证→迭代</td><td style="background:rgba(37,99,235,0.04);">二线管理者（管管理者）</td><td style="background:rgba(37,99,235,0.04);">系统能否在你不在场时运转</td></tr>
+  </table>
+  <div class="text-body" style="margin-top:12px;">
+    <strong>Prompt Engineering 阶段：</strong>你的杠杆来自你会不会下指令。你把话说清楚，下面的人做对了——这是「prompt 调优」。你活在每一个 1:1 里、每一个异常的第一响应里。
+  </div>
+  <div class="text-body" style="margin-top:6px;">
+    <strong>Context Engineering 阶段：</strong>你发现单条指令有天花板。你建文档、定流程、设对齐机制。你开始从「我说什么你做什么」转向「你知道背景，你来判断」。
+  </div>
+  <div class="text-body" style="margin-top:6px;">
+    <strong>Loop Engineering 阶段：</strong>你的 -1 自己成了管理者。你不能逐条 prompt 他们——他们需要自己 prompt 自己的团队。你设计的是<strong>让他们能在里面运行的管理回路</strong>。一线优化自己说的话。二线优化别人说话时能不能说对。
+  </div>
+</div>
+
+<!-- 三、六个 Building Block -->
+<div class="card span-4">
+  <div class="label-sm">03 · Building Blocks</div>
+  <h2>五个建筑块 + 记忆：Loop 的骨头</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    Lushbinary 和 cobusgreyling 的仓库把循环拆成五（加一）个建筑块。每个都能直译成管理场景。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">Block 1</div>
+  <h2>Automations — 管理节律</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    Loop 的心跳。定时触发，发现工作，不靠你主动问。
+  </div>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div><div class="vitem-content"><div class="vitem-title">-1 和他们的团队有固定 1:1 节奏</div><div class="vitem-desc">你参加但不主持。节律不依赖你在场——你不在它照样跑。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div><div class="vitem-content"><div class="vitem-title">异常升级有既定触发条件</div><div class="vitem-desc">「超过 2 周未解决」自动上浮至你。不需要你巡视。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div><div class="vitem-content"><div class="vitem-title">季度 OKR review 由 -1 拉通</div><div class="vitem-desc">你只审不推。loop 不能每次靠你手动启动。</div></div></div>
+  </div>
+  <div class="quote" style="margin-top:8px;">如果每次都要你主动问「最近怎么样」——那不是 loop，是你在手动 prompt。</div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">Block 2</div>
+  <h2>Worktrees — 边界与所有权</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    并行执行不互相踩。两个 Agent 写同一个文件 = 两个管理者在模糊地带同时发力。
+  </div>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div><div class="vitem-content"><div class="vitem-title">这个业务线归 A</div><div class="vitem-desc">B 有更好的想法也要 A 拍板。边界写在纸面上，不在默契里。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div><div class="vitem-content"><div class="vitem-title">跨团队项目有主责人和配合方</div><div class="vitem-desc">配合到什么程度有书面约定。模糊时仲裁权在你这里。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div><div class="vitem-content"><div class="vitem-title">边界越早划清</div><div class="vitem-desc">后续越少处理「他俩谁说了算」的冲突。Worktree 是跑之前就要搭的。</div></div></div>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">Block 3</div>
+  <h2>Skills — 管理知识外化</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    写下来。Agent 不用每次猜你的规范。你的 -1 不用每次靠你亲自讲。
+  </div>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div><div class="vitem-content"><div class="vitem-title">管理 Playbook</div><div class="vitem-desc">第一次面对团队冲突、绩效面谈、跨部门撕扯时看什么？不是靠你口述。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div><div class="vitem-content"><div class="vitem-title">决策框架</div><div class="vitem-desc">「技术债 vs 新功能」这种 classic 取舍，你的 -1 知不知道你是怎么做判断的？</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div><div class="vitem-content"><div class="vitem-title">失败案例库</div><div class="vitem-desc">每踩过一个坑，写三行：「当时情况 + 我做了什么 + 为什么错了 + 该怎么做」。这就是管理的 SKILL.md。</div></div></div>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">Block 4</div>
+  <h2>Connectors — 接口与人脉</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    Agent 接入已有工具链。你的 -1 需要往上（你）、横向（peer）、往下（自己团队）的通路。
+  </div>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div><div class="vitem-content"><div class="vitem-title">跨部门协调不靠你背书</div><div class="vitem-desc">-1 能自己对接 peer，不每次都拉你进来站台。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div><div class="vitem-content"><div class="vitem-title">对上汇报知道你的节奏</div><div class="vitem-desc">知道你什么时候要细节、什么时候只要结论。</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div><div class="vitem-content"><div class="vitem-title">组织障碍知道找谁解</div><div class="vitem-desc">不卡在你这里。差 connector 让你变成瓶颈。</div></div></div>
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">Block 5</div>
+  <h2>Sub-agents — 执行与验证分离</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    Loop Engineering 最核心的原则。<strong>写代码的和检查代码的不能是同一个人。</strong>
+  </div>
+  <div class="quote">
+    你的 -1 做了某个决策，你不能让同一个人评价「这个决策对不对」。你需要独立的验证层：其他 -1 的交叉 review、你设计的 check 机制、数据指标。A 既管交付又汇报交付质量 → 你会得到永远在进步的虚假叙事。
+  </div>
+  <div class="text-body" style="margin-top:8px;">
+    Claude Code 的 <code>/goal</code> 命令在每轮之后跑一个 verifier model 检查是否 done。不是「你觉得做完了吗」，是「测试真绿了吗」。管理里就是：不是「你觉得团队好吗」，是「attrition 率、skip-level 反馈、交叉 review 数据说了什么」。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">+ Memory</div>
+  <h2>持久的管理记忆</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    Agent 会忘。Repo 不会。状态活在磁盘上，不活在 context window 里。
+  </div>
+  <div class="quote">
+    人比 Agent 更会忘。上次 1:1 聊了什么、三个月前的绩效面谈结论、团队成员的成长拐点——不写下来，它们只活在你大脑的上下文窗口里。窗口清空那天，信息就丢了。
+  </div>
+  <div class="text-body" style="margin-top:8px;">
+    <strong>最小可行方案：</strong>每次 1:1 后各写三行摘要，存共享文档。绩效周期后核心判断写进持久库。组织级决策的上下文（当时为什么这么做）跟决策结果一样重要。这就是管理的 STATE.md。
+  </div>
+</div>
+
+<!-- 四、验证 -->
+<div class="card span-4">
+  <div class="label-sm">04 · 验证体系</div>
+  <h2>让系统自己说「不对」，而不是靠你巡视</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    @mosyaseen 在 Steinberger 那条推的回复被公认是 loop engineering 最核心的一条警告：
+  </div>
+  <blockquote style="background:#f5f5f4;padding:12px 16px;border-radius:8px;margin-bottom:10px;">
+    Designing the loop is half of it. The other half is putting something in the loop that can say no: a test, a type check, a real error. <strong>A loop with nothing to push back is the agent agreeing with itself on repeat.</strong>
+  </blockquote>
+  <div class="text-body" style="margin-bottom:12px;">
+    管理版直译：一个没有验证层的 -1 管理者，在长期运行中会逐渐把自己的判断当成事实。这不是人品问题——<strong>这是结构问题</strong>。只要执行者和评价者是同一个人，这个结果几乎必然出现。
+  </div>
+  <table>
+    <tr><th>验证维度</th><th>具体机制</th><th>周期</th></tr>
+    <tr><td><strong>定量门禁</strong></td><td>attrition 率、promo 率、项目 on-time 率。异常自动浮现，不等季度 review</td><td>月</td></tr>
+    <tr><td><strong>Skip-level</strong></td><td>每季度和 -1 团队做 1:1。不问「你老板怎么样」，问「你最近三个月最大成长是什么」「你最想改变的一件事」</td><td>季度</td></tr>
+    <tr><td><strong>交叉验证</strong></td><td>两个 -1 交叉 review 各自团队 OKR 达成。让 peer 评价，不只是你评价</td><td>季度</td></tr>
+    <tr><td><strong>成长观测</strong></td><td>-1 在下属出问题时第一反应是「我来修」还是「让 TA 自己修」？-1 能不能在你不给答案时拿出 2-3 个方案并分析取舍？</td><td>半年</td></tr>
+  </table>
+</div>
+
+<!-- 五、L1→L2→L3 -->
+<div class="card span-4">
+  <div class="label-sm">05 · 分级授权</div>
+  <h2>L1→L2→L3：新 loop 不能直接上全自动</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    cobusgreyling 的 pattern picker 有一个设计原则：<strong>新 loop 从 L1（只报告）起步，验证可靠后升 L2（辅助执行），最终到 L3（全自动）。直接上 L3 的 loop 几乎一定会炸。</strong>管理升维完全一样。
+  </div>
+  <table>
+    <tr><th>阶段</th><th>时间</th><th>你在干什么</th><th>你在验证什么</th></tr>
+    <tr><td><strong>L1 · 观察与报告</strong></td><td>3-6 个月</td><td>重大决策你拍板。TA 汇报「发生什么 + 打算怎么做 + 为什么」。你 shadow 但不主持</td><td>TA 的判断跟你差多远？信息不全时追问还是硬猜？冲突是回避还是处理？</td></tr>
+    <tr><td><strong>L2 · 辅助决策</strong></td><td>6-12 个月</td><td>TA 自主做大部分决策。跨团队、预算、敏感人事需提前同步你。OKR 你来审但不改</td><td>TA 的决策质量在你不在时是否稳定？团队没有你 direct involvement 能否运转？</td></tr>
+    <tr><td><strong>L3 · 自主运行</strong></td><td>12 月+</td><td>全权负责。你只做 ADR 级干预（方向偏差、重大风险）。TA 开始 mentor 更一线管理者</td><td>TA 有没有从「管执行」升维到「管管理者」？TA 有没有开始设计自己的 loop？</td></tr>
+  </table>
+</div>
+
+<!-- 六、失败模式 -->
+<div class="card span-4">
+  <div class="label-sm">06 · 失败模式</div>
+  <h2>Loop 会怎么炸，管理就怎么炸</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    Loop Engineering 材料里记录了四类典型失败。管理场景翻译过来一模一样。
+  </div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">失败 1</div>
+  <h2>无验证的循环自洽</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    <strong>Loop 版：</strong>Agent 每次认为自己完成了任务，因为没东西能说「不对」。
+  </div>
+  <div class="quote">
+    <strong>管理版：</strong>-1 汇报永远是「进展顺利」，你听完觉得问题不大，三个月后发现项目已偏航。
+  </div>
+  <div class="text-body" style="margin-top:6px;">解法：定量指标 + skip-level + 交叉 review，三者至少有其二。</div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">失败 2</div>
+  <h2>Comprehension Debt</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    <strong>Loop 版：</strong>你越来越不了解 loop 到底做了什么，只看它说完成了。
+  </div>
+  <div class="quote">
+    <strong>管理版：</strong>你不再理解 -1 团队里的实际情况，只满足于「管理管理者的报表」。
+  </div>
+  <div class="text-body" style="margin-top:6px;">解法：定期 skip-level、参与关键 review、保持你自己的技术/业务判断力不退化。</div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">失败 3</div>
+  <h2>过度自动化</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    <strong>Loop 版：</strong>L3 全自动跑一周，回头看合了 15 个有问题的 PR。
+  </div>
+  <div class="quote">
+    <strong>管理版：</strong>一切交给 -1，三个月后回来发现团队文化已偏，组织架构被你不在时做的人事决策锁死。
+  </div>
+  <div class="text-body" style="margin-top:6px;">解法：永远保留「降级回 L2 甚至 L1」的机制。自动化可逆，管理信任受损后很难修。</div>
+</div>
+
+<div class="card span-2">
+  <div class="label-sm">失败 4</div>
+  <h2>Harness 腐化</h2>
+  <div class="text-body" style="margin-bottom:6px;">
+    <strong>Loop 版：</strong>当年写 loop 时基于某个模型的假设，模型升级后假设不成立了，loop 还在按旧逻辑跑。
+  </div>
+  <div class="quote">
+    <strong>管理版：</strong>你对 -1 的判断基于半年前的 TA（刚晋升时的冲劲、当时的团队规模）。TA 和团队都在变。你还在按旧印象管理 TA。
+  </div>
+  <div class="text-body" style="margin-top:6px;">解法：每季度重新校准。你对每个 -1 的 mental model 和 TA 本人同步更新。</div>
+</div>
+
+<!-- 七、做管理 vs 设计管理 -->
+<div class="card span-4">
+  <div class="label-sm">07 · 核心迁移</div>
+  <h2>从「做管理」到「设计管理」</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    一线管理者最容易被困住的事情：把管理等同于「做管理的事」——开会、分配任务、解决冲突、做绩效。这些事情真实，但它们是<strong>运行一个已经继承的 loop</strong>，不是<strong>设计一个更好的 loop</strong>。
+  </div>
+  <div class="text-body" style="margin-bottom:10px;">
+    二线管理者的区别不在权力更大或管得更宽。在于视角：
+  </div>
+  <table>
+    <tr><th>一线问</th><th>二线问</th></tr>
+    <tr><td>这个任务谁来做？怎么做好？</td><td>什么样的系统能让做这件事的人自己做出好决策？</td></tr>
+    <tr><td>我搞定了 / 我说服了 / 我救了火</td><td>我不在场，他们自己搞定了</td></tr>
+    <tr><td>成就感来自直接干预的结果</td><td>成就感来自<strong>系统运转的可观测性</strong></td></tr>
+  </table>
+  <div class="text-body" style="margin-top:10px;">
+    这个迁移的痛苦在于它剥夺了你最熟悉的正反馈来源。Boris 删了 IDE 之后再也没写过一行 Claude Code 的代码。他的成就感从建造转向设计建造系统。你越成功，你越觉得自己可有可无——这既是目标，也是代价。
+  </div>
+</div>
+
+<!-- 八、长期判断 -->
+<div class="card span-4">
+  <div class="label-sm">08 · 长期共事</div>
+  <h2>在长时间运行中判断一个人是否适合做管理者</h2>
+  <div class="text-body" style="margin-bottom:8px;">
+    这就是一个 <strong>loop 的长期验证过程</strong>。你不能在一次绩效周期里下结论，就像不能跑一次 loop 就判断它能不能上 L3。
+  </div>
+  <table>
+    <tr><th>观察维度</th><th>看什么</th><th>周期</th></tr>
+    <tr><td><strong>决策质量</strong></td><td>没有你输入时，TA 的决策跟你预期差多远？</td><td>季度</td></tr>
+    <tr><td><strong>自我修正</strong></td><td>TA 发现自己的决策出问题后，是掩盖还是主动校准？</td><td>关键节点</td></tr>
+    <tr><td><strong>放大效应</strong></td><td>TA 的团队状态是 TA 个人品质的放大还是稀释？</td><td>半年</td></tr>
+    <tr><td><strong>管理意愿</strong></td><td>TA 是享受「带人成长」还是更享受「自己解决难问题」？</td><td>持续</td></tr>
+    <tr><td><strong>向上管理</strong></td><td>TA 报喜还是报真相？把你的话当指令还是输入？</td><td>每次 1:1</td></tr>
+  </table>
+  <div class="text-body" style="margin-top:12px;">
+    <strong>指点的分寸：</strong>给 -1 指点时，不能像指导执行者那样「告诉 TA 怎么做」。TA 的工作就是自己判断。你的指点该像 <strong>loop tuning</strong>——不是「你该这样管」，而是「上次你那样管之后，团队里发生了什么？你观察到什么？」不是「你的问题是 X」，而是「团队在 X 维度的数据/反馈是这样的，你觉得这说明什么？」目标不是让 -1 做出跟你一样的决定，而是让 TA 自己的决策回路变强。
+  </div>
+</div>
+
+<!-- 九、收束 -->
+<div class="card span-4">
+  <div class="label-sm">09 · 收束</div>
+  <h2>八个通用问题</h2>
+  <div class="text-body" style="margin-bottom:10px;">
+    二线管理不比一线管理更高级。它是把管理从<strong>操作</strong>升维到<strong>架构</strong>。Loop Engineering 提供了一套恰好可以平移的词汇——不是因为两个领域偶然相似，而是因为<strong>任何从「亲手做」升维到「设计系统让别人做」的迁移，都必然面对同一组问题</strong>：
+  </div>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">1</div><div class="vitem-content"><div class="vitem-title">怎么从单次干预升级为定期触发？</div><div class="vitem-desc">Automations</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">2</div><div class="vitem-content"><div class="vitem-title">怎么保证并行运转时不冲突？</div><div class="vitem-desc">Worktrees / 边界</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">3</div><div class="vitem-content"><div class="vitem-title">怎么让知识沉淀而非每次都重新解释？</div><div class="vitem-desc">Skills</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">4</div><div class="vitem-content"><div class="vitem-title">怎么让接口通畅而非拥堵在你这里？</div><div class="vitem-desc">Connectors</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">5</div><div class="vitem-content"><div class="vitem-title">怎么让执行和验证分离？</div><div class="vitem-desc">Sub-agents + verifier</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(34,197,94,0.12);color:#22c55e;">6</div><div class="vitem-content"><div class="vitem-title">怎么让状态持久而非随人脑遗忘？</div><div class="vitem-desc">Memory / STATE.md</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(236,72,153,0.12);color:#ec4899;">7</div><div class="vitem-content"><div class="vitem-title">怎么在长期运行中防止腐化？</div><div class="vitem-desc">定期重新校准</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">8</div><div class="vitem-content"><div class="vitem-title">怎么让系统自己说「不对」？</div><div class="vitem-desc">可验证性体系</div></div></div>
+  </div>
+  <div class="quote" style="margin-top:12px;">
+    这八个问题的答案，构成了一个 loop。也构成了一个二线管理者的日常工作。
+  </div>
+</div>
+
+<!-- Source -->
+<div class="card span-4">
+  <div class="label-sm">材料来源</div>
+  <h2>核心材料</h2>
+  <div class="vlist">
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(37,99,235,0.12);color:#2563eb;">📋</div><div class="vitem-content"><div class="vitem-title">Lushbinary — Loop Engineering: The Guide for AI Agents</div><div class="vitem-desc">五建筑块 + memory 的完整拆解，Claude Code / Codex 工具对照。2026.6.9</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">📦</div><div class="vitem-content"><div class="vitem-title">cobusgreyling/loop-engineering (GitHub)</div><div class="vitem-desc">7 种 production pattern + pattern picker + loop-audit / loop-init / loop-cost CLI。2026.6</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">🧠</div><div class="vitem-content"><div class="vitem-title">MindStudio — What Is Loop Engineering?</div><div class="vitem-desc">ReAct 溯源，loop anatomy，为什么 coding 需要 loop。2026.6.9</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">💾</div><div class="vitem-content"><div class="vitem-title">Mem0 — Loop Engineering for AI Agents: Memory-First Design</div><div class="vitem-desc">Token-rich vs token-poor loop，memory layer 在 loop 中的位置。2026.6.9</div></div></div>
+    <div class="vitem"><div class="vitem-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">🎤</div><div class="vitem-content"><div class="vitem-title">ExplainX — Loop Engineering: 2026 Guide</div><div class="vitem-desc">Boris Cherny WorkOS 访谈细节，Steinberger 推文溯源。2026.6.9</div></div></div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>第二号 © 2026</p>
+  </div>
+</footer>
+</body>
+</html>
