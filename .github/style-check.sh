@@ -202,14 +202,21 @@ else
       green "    \xE2\x9C\x93 No local :root (using shared styles.css)"
     fi
 
-    # 2b. Extra web fonts (only Inter allowed)
+    # 2b. Geist + Inter font check (both required for research reports)
+    if grep -q 'family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600' "$REPORT" 2>/dev/null; then
+      green "    ✓ Geist + Inter fonts loaded"
+    else
+      warn "$BASENAME: missing Geist+Inter font (standard is family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600)"
+    fi
+
+    # Extra web fonts beyond Geist+Inter
     FONT_COUNT=$(grep -c 'fonts.googleapis.com/css2?family=' "$REPORT" 2>/dev/null || echo 0)
     if [ "$FONT_COUNT" -gt 1 ]; then
-      warn "$BASENAME imports multiple fonts ($FONT_COUNT) — should only import Inter"
+      warn "$BASENAME imports multiple font links ($FONT_COUNT) — should only import Geist+Inter in one link"
     fi
 
     if grep -q 'JetBrains\|Noto\|Roboto\|Source Sans\|IBM Plex' "$REPORT" 2>/dev/null; then
-      warn "$BASENAME uses non-Inter web font"
+      warn "$BASENAME uses non-standard web font"
     fi
 
     # 2c. Unified header navigation (replaced nav-back)
@@ -234,6 +241,13 @@ else
       else
         warn "$BASENAME: card border-radius not 14px"
       fi
+    fi
+
+    # 2e. Standard footer — must contain the site-wide footer
+    if grep -q '把自己产品化.*持续进化中' "$REPORT" 2>/dev/null; then
+      green "    ✓ Standard footer present"
+    else
+      warn "$BASENAME: missing standard footer — should be: 🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中"
     fi
 
     printf "\n"
