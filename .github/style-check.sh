@@ -140,6 +140,9 @@ if [ -f docs/styles.css ]; then
   grep -q '#e8e8e6' docs/styles.css 2>/dev/null
   check "Border color #e8e8e6 defined"
 
+  grep -q '#fff.*card\|--bg-card.*#fff' docs/styles.css 2>/dev/null
+  check "Card background #fff (via --bg-card)"
+
   grep -q 'border-radius.*14px' docs/styles.css 2>/dev/null
   check "Card border-radius 14px defined"
 
