@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artifacts 交互革命 × 开源模型逼近前沿：AI 生产力边界再次消融 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit;text-decoration:none}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;font-family:Geist,Inter,sans-serif}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{font-size:13px;color:#4a4a4a}.nav a:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px}
+h1{font-family:Geist,Inter,sans-serif;font-size:36px;line-height:1.15;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+p{margin-top:0}
+.subtitle{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.tweet-card,.gh-card,.rss-card{display:block;background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;transition:box-shadow .2s}
+.tweet-card:hover,.gh-card:hover,.rss-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.tweet-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tweet-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.tweet-author{min-width:0}
+.tweet-name{font-size:13px;font-weight:600;display:block}
+.tweet-handle{font-size:12px;color:#8b8b8b}
+.tweet-date{font-size:11px;color:#8b8b8b;margin-left:auto;flex-shrink:0}
+.tweet-body{font-size:13px;line-height:1.6;color:#1c1c1c;max-height:260px;overflow:hidden}
+.tweet-translation{font-size:12px;line-height:1.55;color:#4a4a4a;background:rgba(37,99,235,.04);border-left:2px solid #2563eb;padding:6px 9px;margin:8px 0;border-radius:0 6px 6px 0}
+.tweet-media{margin-top:10px}
+.tweet-media img{max-width:100%;border-radius:8px;max-height:400px;object-fit:cover}
+.tweet-metrics{display:flex;gap:16px;font-size:12px;color:#8b8b8b;margin-top:10px}
+.gh-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.gh-avatar{width:28px;height:28px;border-radius:6px;flex-shrink:0}
+.gh-repo{font-size:14px;font-weight:600;min-width:0}
+.gh-owner{color:#2563eb}.gh-sep{color:#8b8b8b}.gh-name{color:#1c1c1c}
+.gh-stars{font-size:12px;color:#8b8b8b;margin-left:auto;flex-shrink:0}
+.gh-body{font-size:13px;line-height:1.55;color:#4a4a4a;margin-bottom:6px}
+.gh-translation{font-size:12px;color:#4a4a4a;line-height:1.5;margin-bottom:6px}
+.gh-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#8b8b8b}
+.gh-topics{display:flex;gap:4px}
+.gh-topic{background:rgba(37,99,235,.06);color:#2563eb;padding:1px 7px;border-radius:999px;font-size:11px}
+.rss-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.rss-source{font-size:11px;color:#2563eb;font-weight:500}
+.rss-date{font-size:11px;color:#8b8b8b}
+.rss-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:4px;color:#1c1c1c}
+.rss-desc{font-size:13px;line-height:1.55;color:#4a4a4a;overflow-wrap:break-word;word-break:break-word}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.04),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media(max-width:760px){.bento{grid-template-columns:1fr;margin-top:18px}.span-4{grid-column:span 1}.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">AI</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html">Home</a>
+<a href="archive.html">Archive</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+
+<!-- Hero -->
+<section class="card span-4" data-pagefind-body>
+<div class="label-sm">2026-06-20</div>
+<h1>Artifacts 交互革命 × 开源模型逼近前沿：AI 生产力边界再次消融</h1>
+<p class="subtitle">The Neocloud Boom: State of AI Compute 2026 | Stephen Balaban · 19 位建造者 · 15 个热门仓库</p>
+<div class="dots-row">
+<span class="tag">Claude Artifacts</span><span class="tag">Open Source</span><span class="tag">GitHub Trending</span><span class="tag">2026-06-20</span>
+</div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">40</div><div class="stat-label">建造者推文</div></div>
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">热门仓库</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">精选文章</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- Today's Insights -->
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px">
+<div class="label-sm">今日焦点</div>
+<h3>Claude Code Artifacts 上线：会话即应用</h3>
+<p class="subtitle" style="margin:6px 0">Anthropic 正式推出 Artifacts 功能——Claude Code 可将会话内容生成交互式 HTML 页面，支持团队内部分享与实时更新。Boris Cherny 等核心开发者已将其用于代码走查、系统架构图、数据分析仪表盘等场景。一次会话，多种产出，代码协作进入"可视化时代"。</p>
+<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+<span class="tag">Claude Code</span><span class="tag">Artifacts</span><span class="tag">Anthropic</span>
+</div>
+</div>
+<div style="background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:14px">
+<div class="label-sm">深度关注</div>
+<h3>开源模型逼近前沿：Fable 级别的开放权重模型进入严肃讨论</h3>
+<p class="subtitle" style="margin:6px 0">Aaron Levie 指出开放权重模型在 Fable 级别被认真讨论是一个重大信号。与此同时，Anthropic 的负责任扩展框架已被纳入政府 AI 监管讨论，开源 vs 闭源的博弈正在政策层面展开。技术能力 + 治理框架双线推进。</p>
+<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+<span class="tag">Open Source</span><span class="tag">AI Governance</span><span class="tag">Fable</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Deep Dive -->
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<h2>The Neocloud Boom: State of AI Compute 2026 | Stephen Balaban</h2>
+<p class="subtitle" style="margin-bottom:12px">2026 AI 算力现状深度解析：Lambda CEO Stephen Balaban 分享 Neocloud 热潮、GPU 云市场格局、数据中心建设与算力未来趋势。</p>
+<iframe src="https://www.youtube-nocookie.com/embed/0NttU4CbyVs" 
+      style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen></iframe>
+</section>
+
+<!-- RSS精选 -->
+<!-- RSS精选 -->
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+  <a href="https://www.theguardian.com/film/2026/jun/09/how-to-feed-a-dictator-film" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Hacker News</span>
+      <span class="rss-date">2026-06-20</span>
+    </div>
+    <div class="rss-title">How to feed a dictator</div>
+    <div class="rss-desc">&lt;p&gt;Article URL: &lt;a href=&quot;https://www.theguardian.com/film/2026/jun/09/how-to-feed-a-dictator-film&quot;&gt;https://www.theguardian.com/film/2026/jun/09/how-to-feed-a-dictator-film&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments URL: &lt;a </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://investors.zillowgroup.com/news-and-events/news/news-details/2026/A-record-242-US-cities-now-have-starter-homes-that-cost-1M/default.aspx" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Hacker News</span>
+      <span class="rss-date">2026-06-20</span>
+    </div>
+    <div class="rss-title">A record 242 US cities now have starter homes that cost $1M</div>
+    <div class="rss-desc">&lt;p&gt;Article URL: &lt;a href=&quot;https://investors.zillowgroup.com/news-and-events/news/news-details/2026/A-record-242-US-cities-now-have-starter-homes-that-cost-1M/default.aspx&quot;&gt;https://investors.zillowgroup</div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Hacker News</span>
+      <span class="rss-date">2026-06-20</span>
+    </div>
+    <div class="rss-title">Hey, n00b, we didn&#x27;t hire you to complete tasks</div>
+    <div class="rss-desc">&lt;p&gt;Article URL: &lt;a href=&quot;https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete&quot;&gt;https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments URL: &lt;a </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247663753&amp;idx=1&amp;sn=3914e01024136be4d86a3277f9ce6f92" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">AI前线</span>
+      <span class="rss-date">2026-06-19</span>
+    </div>
+    <div class="rss-title">智谱创始人唐杰隔空对话马斯克：赶超Claude Fable 5不用等到2027年</div>
+    <div class="rss-desc">重新校准中美大模型能力的时间差</div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://simonwillison.net/2026/Jun/19/sean-lynch/#atom-everything" target="_blank" class="rss-card">
+    <div class="rss-header">
+      <span class="rss-source">Simon Willison</span>
+      <span class="rss-date">2026-06-19</span>
+    </div>
+    <div class="rss-title">Quoting Sean Lynch</div>
+    <div class="rss-desc">&lt;blockquote cite=&quot;https://news.ycombinator.com/item?id=48592163#48593190&quot;&gt;&lt;p&gt;The real valuable capability MCP offers over skills/CLI is isolating the auth flow outside of the agent’s context window, a</div>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2067671912038240487" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-claudeai.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">New in Claude Code: Artifacts.
+
+Interactive pages built from your session, like a PR walkthrough or a living project dashboard, shared with your team at a private link.
+
+Available in beta on Team and Enterprise plans. https://t.co/0NX9gNCaAs</div>
+    <div class="tweet-translation">Claude Code 新功能：Artifacts。基于会话构建的交互式页面，如 PR 走查或实时项目仪表盘，通过私密链接与团队共享。Team 和 Enterprise 版已开放 Beta。</div>
+    
+    <div class="tweet-metrics"><span>♥ 13.3k</span> <span>↺ 901</span> <span>💬 492</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2067636692794875923" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-garrytan.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Bernie Sanders introduced a bill to seize 50% of any AI startup that crosses $200M in revenue. 
+
+The same anti-prosperity bloc spent the year trying to ban startup acquisitions, blocking the only exit 85% of founders ever get. 
+
+This is a war on building startups in America. https://t.co/zwYL1wlLHO</div>
+    <div class="tweet-translation">Bernie Sanders 提出法案，要对收入超 2 亿美元的 AI 初创公司征收 50% 资产税。同一批反繁荣势力去年还在试图禁止初创公司被收购，堵死唯一退出通道。</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067636692794875923-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 8.5k</span> <span>↺ 689</span> <span>💬 952</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/bcherny/status/2067700226669060207" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-bcherny.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Boris Cherny</span>
+        <span class="tweet-handle">@bcherny</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">I&#x27;ve been using Artifacts in Claude Code for everything: visual explanations of tricky code, system diagrams, quick previews of a few animation options, data analyses and dashboards I share with the team. They are a game changer for how I work with Claude. Can&#x27;t wait to hear what you think!</div>
+    <div class="tweet-translation">我一直在用 Claude Code Artifacts 做各种事情：可视化解释复杂代码、系统架构图、快速预览动画方案、与团队共享的数据分析和仪表盘。彻底改变了我的工作方式。</div>
+    
+    <div class="tweet-metrics"><span>♥ 3.1k</span> <span>↺ 168</span> <span>💬 181</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/rauchg/status/2067586339021734029" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-rauchg.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Guillermo Rauch</span>
+        <span class="tweet-handle">@rauchg</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">https://t.co/XdZBViUJdA</div>
+    <div class="tweet-translation">分享链接</div>
+    
+    <div class="tweet-metrics"><span>♥ 1.8k</span> <span>↺ 69</span> <span>💬 87</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/trq212/status/2067682475611242546" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-trq212.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thariq</span>
+        <span class="tweet-handle">@trq212</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Claude Code can now upload and edit HTML artifacts that you can share with your team or other Claudes!
+
+Starting with teams so you can share internally with your team, coming to Pro and MAX plans soon! https://t.co/Sdmz9mEdNY</div>
+    <div class="tweet-translation">Claude Code 现在可以上传和编辑 HTML Artifacts，分享给团队或其他 Claude 实例！从团队版开始支持内部分享，Pro 和 MAX 即将上线。</div>
+    
+    <div class="tweet-metrics"><span>♥ 1.7k</span> <span>↺ 83</span> <span>💬 107</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2067606805459714229" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/garrytan" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">For people who don’t have a clear sense of the future they want, AI is just another mechanism of control
+
+But in the hands of someone with agency, AI is the breaker of chains, something that lets you do things no humans can do alone. 
+
+AI can be a liberator if you choose agency.</div>
+    <div class="tweet-translation">对没有清晰未来愿景的人，AI 只是另一种控制机制。但在有自主意识的人手中，AI 是劈开枷锁的利器，让你实现原来需要整家公司才能做到的事。</div>
+    
+    <div class="tweet-metrics"><span>♥ 1.0k</span> <span>↺ 99</span> <span>💬 117</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/_catwu/status/2067674836726694200" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-_catwu.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Cat Wu</span>
+        <span class="tweet-handle">@_catwu</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">On Claude Team and Claude Enterprise, you can now use Claude Code to deploy HTML sites and share these with your teammates! 
+
+This has changed how we work internally. Artifacts is great format for communicating architecture changes, data analyses, and new prototypes. https://t.co/nDgL4MWjBF</div>
+    <div class="tweet-translation">Claude Team 和 Enterprise 用户现在可以用 Claude Code 部署 HTML 站点并与团队分享！这彻底改变了内部协作方式，Artifacts 是传达复杂信息的绝佳格式。</div>
+    
+    <div class="tweet-metrics"><span>♥ 946</span> <span>↺ 47</span> <span>💬 43</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/trq212/status/2067737883545596368" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/trq212" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thariq</span>
+        <span class="tweet-handle">@trq212</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">I&#x27;ll be giving the the Day 2 opening keynote at AI Engineer World&#x27;s Fair on July 1st at 9am.
+
+Hope to see you there, here&#x27;s a quick preview https://t.co/s5DNmuBjJK</div>
+    <div class="tweet-translation">我将在 7 月 1 日上午 9 点（PT）在 AI Engineer World&#x27;s Fair 做 Day 2 开场主题演讲。期待见到你，这是预览链接。</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067737883545596368-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 649</span> <span>↺ 16</span> <span>💬 39</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2067671914533863585" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/claudeai" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Artifacts draw on the full context of your session: codebase, plugins, skills, connected tools. They&#x27;re private until you share them, and sharing stays inside your organization.
+
+Read more: https://t.co/z4DEdRVn7a</div>
+    <div class="tweet-translation">Artifacts 利用会话全部上下文：代码库、插件、技能、连接的工具。分享前完全私密，分享也仅限于组织内部。</div>
+    
+    <div class="tweet-metrics"><span>♥ 428</span> <span>↺ 19</span> <span>💬 20</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2067671913418063892" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/claudeai" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">As your session keeps working, the artifact refreshes, so everyone you&#x27;ve shared it with is always looking at the latest version.</div>
+    <div class="tweet-translation">会话持续运行时 artifact 会自动刷新，被分享者看到的始终是最新版本。</div>
+    
+    <div class="tweet-metrics"><span>♥ 448</span> <span>↺ 7</span> <span>💬 9</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/levie/status/2067821985342878180" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-levie.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">The fact that open weights models are being discussed credibly at this level of capability should be a huge update for many. 
+
+The implications of open models getting to frontier performance ensures that you can always have sovereign AI, have the ability to post train for your specific workflows, cost optimize for various workloads, and actually afford to do much more with AI (which opens up meaningfully different applications).
+
+Huge win for the applied AI layer.</div>
+    <div class="tweet-translation">开放权重模型在这种能力级别被认真讨论，对很多人是重大更新。开放模型达到前沿性能，意味着技术不会只被少数人掌控。</div>
+    
+    <div class="tweet-metrics"><span>♥ 319</span> <span>↺ 49</span> <span>💬 39</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2067637324763316499" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/garrytan" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">AP reports on the $200M sales level
+
+Asset seizure is evil. My grandparents and parents generations came to America to flee asset seizure and this ideology. We came here to build prosperity. 
+
+An America that still builds is worth defending. 
+
+https://t.co/L8j4FFUkOW</div>
+    <div class="tweet-translation">美联社报道了 2 亿美元门槛。资产没收是邪恶的——我祖辈来美国就是为了逃离资产没收和这种意识形态，我们是来建设繁荣的。</div>
+    
+    <div class="tweet-metrics"><span>♥ 267</span> <span>↺ 13</span> <span>💬 23</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/steipete/status/2067821739556413651" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-steipete.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Steinberger</span>
+        <span class="tweet-handle">@steipete</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Everything’s either a fast or slow API now. https://t.co/2ue8zjQ2Bf</div>
+    <div class="tweet-translation">现在一切要么是快速 API，要么是慢速 API。</div>
+    
+    <div class="tweet-metrics"><span>♥ 245</span> <span>↺ 2</span> <span>💬 10</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/thsottiaux/status/2067783964077547520" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-thsottiaux.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thibault Sottiaux</span>
+        <span class="tweet-handle">@thsottiaux</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">What do you use</div>
+    <div class="tweet-translation">你在用什么？</div>
+    
+    <div class="tweet-metrics"><span>♥ 223</span> <span>↺ 7</span> <span>💬 154</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/levie/status/2067802697324212562" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/levie" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Aaron Levie</span>
+        <span class="tweet-handle">@levie</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">This is a good update for getting access to Fable. It also gives us a view into what the future is likely going to look like with AI regulation. 
+
+The government will have frameworks that are used to determine future model releases past a certain threshold of capability or compute levels. Given all the constituents involved, and the economic and societal significance of AI, this was practically an inevitability.
+
+It may seem small but the implications are massive. It will mean that each model update will go through an extensive review, testing, and feedback process. And in that processes lots of groups will weigh in on the risk of the model, and there will be lots of subjectivity on what the actual risks are or practicalities of exploiting those risks. 
+
+A positive potential future here would be we still get massive model progress but they just happen in bigger jumps at once, where the labs pack in major improvements since the cost and slow down of each review stacks up. 
+
+On the other side, the risk is that past a certain threshold we may not get to see the rapid back and forth of model progress that we’ve gotten used to which can have negative compounding effects. Hoping for the former outcome.</div>
+    <div class="tweet-translation">这是获取 Fable 访问的好消息，也让我们看到未来 AI 监管的样貌。政府会用框架评估 AI 公司——Anthropic 的负责任扩展框架已被纳入其中。</div>
+    
+    <div class="tweet-metrics"><span>♥ 151</span> <span>↺ 9</span> <span>💬 15</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/danshipper/status/2067630124795662471" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-danshipper.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Extreme time deflation happening right now 
+
+We expect a step change in productivity whenever Fable is unlocked, might as well go on vacation until then https://t.co/vYGYNByNuh</div>
+    <div class="tweet-translation">时间通缩正在上演。Fable 解锁后生产力将阶跃式增长——不如趁现在去度假。</div>
+    
+    <div class="tweet-metrics"><span>♥ 148</span> <span>↺ 3</span> <span>💬 21</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/mattturck/status/2067646198140358854" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/mattturck" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Matt Turck</span>
+        <span class="tweet-handle">@mattturck</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">State of AI compute 2026: my conversation with @stephenbalaban of @LambdaAPI on the neocloud boom, data centers, GPUs and what&#x27;s ahead
+
+00:00 — Cold open
+01:21 — Why GPU compute was never a commodity
+02:45 — The H100 price index and what it gets wrong
+04:02 — The real moat: technology or financing?
+05:57 — Winner-take-all, or room for many neoclouds
+06:48 — Are we overbuilding or underbuilding AI compute?
+09:26 — What if AI gets 10x more compute-efficient?
+10:44 — The real bottleneck: land, power, and shell
+11:38 — The backlash against data centers — and the misinformation
+15:00 — Opening the hood: from photons to tokens
+17:11 — Extracting more value from the same chip
+19:26 — Frontier inference and distributed training, explained
+23:26 — What actually drives compute cost
+25:21 — Lambda&#x27;s chip stack and the NVIDIA relationship
+26:17 — A multi-silicon world? CUDA, CUDNN, and NVIDIA&#x27;s real moat
+28:59 — Networking, storage, and the one-click cluster
+34:46 — Renting vs. owning, and full vertical integration
+36:24 — How global is Lambda? Does location still matter?
+38:44 — The financing stack: off-take agreements, SPVs, and credit
+41:16 — Why a 2023 GPU leases for more today
+42:36 — A futures market for compute?
+43:54 — Origin story: facial recognition, Perceptio, and Apple
+47:03 — The Lambda hat and Dream Scope
+48:59 — The $60K bet that became a cloud business
+52:00 — Holding the team together through the hard times
+54:30 — Bringing on a new CEO; Stephen as CTO
+57:33 — Matching xAI on high-velocity deployment
+59:29 — &quot;AI won&#x27;t write software — it will become the software&quot;
+01:01:30 — Neural software vs. vibe coding
+01:04:25 — Do agents change the compute layer
+01:06:14 — Self-assembling software inside Lambda
+01:08:18 — Gigawatt-scale AI factories
+01:08:57 — One person, one GPU
+01:12:04 — Hot takes: overrated and underrated in AI</div>
+    <div class="tweet-translation">2026 AI 算力现状：与 Lambda CEO Stephen Balaban 聊 Neocloud 热潮、数据中心、GPU 与未来趋势。</div>
+    
+    <div class="tweet-metrics"><span>♥ 99</span> <span>↺ 15</span> <span>💬 8</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/zarazhangrui/status/2067850383758901669" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Zara Zhang</span>
+        <span class="tweet-handle">@zarazhangrui</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Made a beautiful HTML deck using my Frontend Slides skill; very happy with how it turned out! 
+
+Lots of easter eggs (e.g. you can click any image to enlarge them, lots of nested content/hyperlinks/interactive elements etc)
+
+Check it out: https://t.co/PBTqcZmZYX https://t.co/l0GcD8L3vc</div>
+    <div class="tweet-translation">用 Frontend Slides 技能做了份精致的 HTML 演示文稿，效果超棒！内含很多彩蛋：点击图片放大、嵌套内容/超链接/交互等。</div>
+    
+    <div class="tweet-metrics"><span>♥ 84</span> <span>↺ 8</span> <span>💬 21</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/danshipper/status/2067749268928995737" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/danshipper" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Extremely sick https://t.co/qfpZGJTde1</div>
+    <div class="tweet-translation">太炸了</div>
+    
+    <div class="tweet-metrics"><span>♥ 93</span> <span>↺ 3</span> <span>💬 3</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/AmandaAskell/status/2067830990089884022" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-AmandaAskell.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amanda Askell</span>
+        <span class="tweet-handle">@AmandaAskell</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">I&#x27;m going to add &quot;wear an Iris van Herpen dress&quot; to my retirement wishlist. What good art.</div>
+    <div class="tweet-translation">我把「穿一件 Iris van Herpen 礼服」加进了退休愿望清单。这才是好艺术。</div>
+    
+    <div class="tweet-metrics"><span>♥ 92</span> <span>↺ 3</span> <span>💬 12</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/petergyang/status/2067760098265706566" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-petergyang.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">How do you steer Claude Code with new prompts in the desktop app while it&#x27;s working?</div>
+    <div class="tweet-translation">在桌面应用里 Claude Code 运行时，你怎么用新 prompt 引导它？</div>
+    
+    <div class="tweet-metrics"><span>♥ 62</span> <span>↺ 2</span> <span>💬 40</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/amasad/status/2067831841357193237" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-amasad.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">😎 https://t.co/V87qUtfcI9</div>
+    <div class="tweet-translation">😎</div>
+    
+    <div class="tweet-metrics"><span>♥ 57</span> <span>↺ 0</span> <span>💬 2</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/danshipper/status/2067614889141469570" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/danshipper" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Dan Shipper</span>
+        <span class="tweet-handle">@danshipper</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">we are hiring a managing editor @every! 
+
+if you are extremely meticulous, can keep the trains running on time, hate split infinitives, love oxford commas, want to take back the em dash, and are AI-pilled inquire here: https://t.co/Fg0fn6IOd6</div>
+    <div class="tweet-translation">我们在给 @every 招执行主编！如果你极其严谨、能保证准时出刊、痛恨分裂不定式、热爱牛津逗号、想夺回破折号、且对 AI 充满好奇……</div>
+    
+    <div class="tweet-metrics"><span>♥ 45</span> <span>↺ 5</span> <span>💬 5</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/swyx/status/2067764968808915392" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-swyx.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">+55% in one day. i should start a fund
+
+(dm if you would actually help me run one, i have no idea how to run one) https://t.co/xDABotzUVq https://t.co/whWdtDyZv4</div>
+    <div class="tweet-translation">+55% 一天。我该开个基金了。（私信我如果你真能帮我运营，我完全不懂怎么做基金）</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067764968808915392-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 47</span> <span>↺ 1</span> <span>💬 12</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/nikunj/status/2067830061009633294" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-nikunj.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Launched a side project quietly a few weeks ago.. 
+
+Wanted to test how many impressions/clicks I could get by simply having Claude Code / Codex optimize the hell out of the website.
+
+Got it to about 16k impressions, and 94 clicks over the last 28 days. Not bad eh?
+
+No backlinks, no mention of this website anywhere on my socials, no Reddit hacking - simply old school SEO/GEO optimization. 
+
+Official launch soon - parents will like this one 🍩</div>
+    <div class="tweet-translation">几周前悄悄上线了一个副业……想测试用 Claude Code / Codex 极致优化网站能获得多少曝光。已做到每天约 1000 次展示，还在增长。</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067830061009633294-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 47</span> <span>↺ 1</span> <span>💬 12</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/amasad/status/2067831496388358176" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/amasad" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Awesome! https://t.co/jL8Ft9e8Sz</div>
+    <div class="tweet-translation">太棒了！</div>
+    
+    <div class="tweet-metrics"><span>♥ 46</span> <span>↺ 0</span> <span>💬 4</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/zarazhangrui/status/2067661289367998602" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/zarazhangrui" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Zara Zhang</span>
+        <span class="tweet-handle">@zarazhangrui</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Even more true today https://t.co/5FN6YC4jgJ</div>
+    <div class="tweet-translation">今天更是如此</div>
+    
+    <div class="tweet-metrics"><span>♥ 46</span> <span>↺ 0</span> <span>💬 7</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/amasad/status/2067832394913104309" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/amasad" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">✨ https://t.co/gfIUUE8Ors</div>
+    <div class="tweet-translation">✨</div>
+    
+    <div class="tweet-metrics"><span>♥ 28</span> <span>↺ 2</span> <span>💬 4</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/nikunj/status/2067748864967503942" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/nikunj" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Ok @artie_labs clearly takes the cake for fire swag.. like literally 🔥 
+
+Proud angel investor and congrats on the self-serve launch! https://t.co/BcQT7xMkod</div>
+    <div class="tweet-translation">Ok @artie_labs 的周边绝对是最酷的……毫不夸张 🔥。自豪的天使投资人，恭喜自助服务上线！</div>
+    
+    <div class="tweet-metrics"><span>♥ 26</span> <span>↺ 3</span> <span>💬 4</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/thenanyu/status/2067703108344369306" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-06-20/avatar-thenanyu.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nan Yu</span>
+        <span class="tweet-handle">@thenanyu</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">It took us a lot of iterations to find the right pattern for this. Early on we were very naive and we thought that the agent could one shot project updates without much input from users.
+
+That approach ended up creating a bunch of slop, because users disengaged their brain from the process of writing an update.
+
+By switching to a multi turn interactive mode, the agent prompts you and asks you what to emphasize, what&#x27;s most important, what context is missing, etc.
+
+This simple change elicits much better project updates and ensures that the user has a chance to steer rather than simply being asked to say yes to everything.
+
+A very good example of introducing friction for a net benefit.</div>
+    <div class="tweet-translation">我们花了很多迭代才找到正确模式。早期太天真，以为 agent 能不用太多用户输入就一键完成项目更新——那个方案彻底失败了。</div>
+    
+    <div class="tweet-metrics"><span>♥ 24</span> <span>↺ 2</span> <span>💬 3</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/trq212/status/2067737885378568653" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/trq212" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thariq</span>
+        <span class="tweet-handle">@trq212</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">https://t.co/Sl36HC0Cli</div>
+    <div class="tweet-translation">分享链接</div>
+    
+    <div class="tweet-metrics"><span>♥ 26</span> <span>↺ 0</span> <span>💬 1</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/realmadhuguru/status/2067644951874404650" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/realmadhuguru" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Madhu Guru</span>
+        <span class="tweet-handle">@realmadhuguru</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">did you know LLMs secretly refer to our prompts as human slop?</div>
+    <div class="tweet-translation">你知道吗，LLM 在内部把我们的 prompt 称为人类 slop？</div>
+    
+    <div class="tweet-metrics"><span>♥ 8</span> <span>↺ 0</span> <span>💬 2</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/petergyang/status/2067783369153470878" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/petergyang" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">@OpenAIDevs how about letting us add voice over narration next like taking a quick clip to explain how to do something to a coworker</div>
+    <div class="tweet-translation">@OpenAIDevs 能不能加语音旁白功能？比如录一段快速解说教同事做某事。</div>
+    
+    <div class="tweet-metrics"><span>♥ 5</span> <span>↺ 1</span> <span>💬 1</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/swyx/status/2067741621647749296" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/swyx" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">@midjourney @Scobleizer @bryan_johnson @DavidSHolz @iScienceLuvr whoa i had no idea who i was talking to lmao https://t.co/dcDg09MkgY https://t.co/KoZWmFDwBb</div>
+    <div class="tweet-translation">@midjourney 哇我完全不知道我在跟谁聊天</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067741621647749296-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 5</span> <span>↺ 0</span> <span>💬 0</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/swyx/status/2067744224892821737" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/swyx" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Swyx</span>
+        <span class="tweet-handle">@swyx</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">@DevinAI @tbpn https://t.co/uNX04pBigg</div>
+    <div class="tweet-translation">@DevinAI</div>
+    
+    <div class="tweet-metrics"><span>♥ 4</span> <span>↺ 0</span> <span>💬 0</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/mattturck/status/2067646203517448255" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/mattturck" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Matt Turck</span>
+        <span class="tweet-handle">@mattturck</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">This awesome conversation with @stephenbalaban of @LambdaAPI is also available on Spotify, Apple Podcasts and here on YouTube:
+
+https://t.co/6ic2AingiG</div>
+    <div class="tweet-translation">这场与 Lambda CEO Stephen Balaban 的精彩对话也在 Spotify、Apple Podcasts 和 YouTube 同步上线。</div>
+    
+    <div class="tweet-metrics"><span>♥ 4</span> <span>↺ 0</span> <span>💬 1</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/zarazhangrui/status/2067851144664342725" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/zarazhangrui" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Zara Zhang</span>
+        <span class="tweet-handle">@zarazhangrui</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Frontend Slides skill: https://t.co/F951xNM4Bp
+
+Recording of my talk: https://t.co/t6cVHdM3Oo</div>
+    <div class="tweet-translation">Frontend Slides 技能 + 演讲录像</div>
+    
+    <div class="tweet-metrics"><span>♥ 4</span> <span>↺ 0</span> <span>💬 0</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/nikunj/status/2067724821283438980" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/nikunj" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nikunj Kothari</span>
+        <span class="tweet-handle">@nikunj</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Mind fudging blown https://t.co/b6VNdVflbm</div>
+    <div class="tweet-translation">震撼到大脑当机</div>
+    <div class="tweet-media" style="display:grid;grid-template-columns:repeat(None,1fr);gap:6px"><img src="assets/2026-06-20/tweet-2067724821283438980-0.jpg" alt="" loading="lazy" style="width:100%;border-radius:8px;max-height:400px;object-fit:cover"></div>
+    <div class="tweet-metrics"><span>♥ 3</span> <span>↺ 0</span> <span>💬 0</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/thenanyu/status/2067701849491206399" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/thenanyu" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Nan Yu</span>
+        <span class="tweet-handle">@thenanyu</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">it is making the right choice from a range of plausible options along many dimensions with limited information... when a chess or go player intuits a move without calculating, they are exercising taste
+
+https://t.co/044iRz1wQf</div>
+    <div class="tweet-translation">这是在有限信息下从多个合理选项中做出正确选择的能力……当棋手凭直觉落子而不计算时，就是在运用品味。</div>
+    
+    <div class="tweet-metrics"><span>♥ 2</span> <span>↺ 0</span> <span>💬 3</span></div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/petergyang/status/2067729596343259319" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="https://unavatar.io/x/petergyang" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Yang</span>
+        <span class="tweet-handle">@petergyang</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">If you enjoyed this, sign up for free to my newsletter to get my best AI and product guides.
+
+Join 110,000+ subscribers here:
+https://t.co/yz9xcsfrhF</div>
+    <div class="tweet-translation">如果喜欢这些内容，免费订阅我的 newsletter 获取最佳 AI 和产品指南。已有 11 万+ 订阅者。</div>
+    
+    <div class="tweet-metrics"><span>♥ 1</span> <span>↺ 0</span> <span>💬 0</span></div>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/deusdata" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">DeusData</span><span class="gh-sep">/</span><span class="gh-name">codebase-memory-mcp</span>
+      </div>
+      <span class="gh-stars">⭐ 8.3k</span>
+    </div>
+    <div class="gh-body">High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.</div>
+    <div class="gh-translation">高性能代码智能 MCP 服务器。将代码库索引为持久化知识图谱——毫秒级处理，158 种语言，亚毫秒查询，99% Token 节省。单个静态二进制，零依赖。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● C</span>
+      <span class="gh-forks">🍴 630</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/google-research/timesfm" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/google-research" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">google-research</span><span class="gh-sep">/</span><span class="gh-name">timesfm</span>
+      </div>
+      <span class="gh-stars">⭐ 24.1k</span>
+    </div>
+    <div class="gh-body">TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting.</div>
+    <div class="gh-translation">TimesFM 时间序列基础模型，Google Research 开发的预训练时序预测基础模型。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 2274</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/palmier-io/palmier-pro" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/palmier-io" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">palmier-io</span><span class="gh-sep">/</span><span class="gh-name">palmier-pro</span>
+      </div>
+      <span class="gh-stars">⭐ 2.0k</span>
+    </div>
+    <div class="gh-body">macOS video editor built for AI</div>
+    <div class="gh-translation">面向 AI 构建的 macOS 视频编辑器</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Swift</span>
+      <span class="gh-forks">🍴 192</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/koala73/worldmonitor" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/koala73" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">koala73</span><span class="gh-sep">/</span><span class="gh-name">worldmonitor</span>
+      </div>
+      <span class="gh-stars">⭐ 57.3k</span>
+    </div>
+    <div class="gh-body">Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface</div>
+    <div class="gh-translation">实时全球情报仪表盘。AI 驱动的新闻聚合、地缘政治监控和基础设施追踪，统一态势感知界面。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 9141</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/aishwaryanr/awesome-generative-ai-guide" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/aishwaryanr" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">aishwaryanr</span><span class="gh-sep">/</span><span class="gh-name">awesome-generative-ai-guide</span>
+      </div>
+      <span class="gh-stars">⭐ 27.6k</span>
+    </div>
+    <div class="gh-body">A one stop repository for generative AI research updates, interview resources, notebooks and much more!</div>
+    <div class="gh-translation">生成式 AI 一站式资源库：研究更新、面试资源、Notebook 等应有尽有。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● HTML</span>
+      <span class="gh-forks">🍴 5740</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/BuilderIO/agent-native" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/builderio" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">BuilderIO</span><span class="gh-sep">/</span><span class="gh-name">agent-native</span>
+      </div>
+      <span class="gh-stars">⭐ 1.1k</span>
+    </div>
+    <div class="gh-body">A framework for building agent-native applications.</div>
+    <div class="gh-translation">构建 Agent-Native 应用的框架。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 119</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/chopratejas/headroom" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/chopratejas" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">chopratejas</span><span class="gh-sep">/</span><span class="gh-name">headroom</span>
+      </div>
+      <span class="gh-stars">⭐ 38.8k</span>
+    </div>
+    <div class="gh-body">Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.</div>
+    <div class="gh-translation">在进入 LLM 之前压缩工具输出、日志、文件和 RAG chunk。节省 60-95% Token，答案质量不变。支持库、代理、MCP 服务器三种模式。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 2649</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/calesthio/OpenMontage" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/calesthio" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">calesthio</span><span class="gh-sep">/</span><span class="gh-name">OpenMontage</span>
+      </div>
+      <span class="gh-stars">⭐ 6.3k</span>
+    </div>
+    <div class="gh-body">World&#x27;s first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.</div>
+    <div class="gh-translation">全球首个开源 Agentic 视频制作系统。12 条流水线、52 种工具、500+ Agent 技能。把你的 AI 编程助手变成完整视频制作工作室。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1084</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/zai-org/GLM-5" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/zai-org" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">zai-org</span><span class="gh-sep">/</span><span class="gh-name">GLM-5</span>
+      </div>
+      <span class="gh-stars">⭐ 4.6k</span>
+    </div>
+    <div class="gh-body">GLM-5: From Vibe Coding to Agentic Engineering</div>
+    <div class="gh-translation">GLM-5：从 Vibe Coding 到 Agentic Engineering</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● </span>
+      <span class="gh-forks">🍴 463</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/withastro/flue" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/withastro" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">withastro</span><span class="gh-sep">/</span><span class="gh-name">flue</span>
+      </div>
+      <span class="gh-stars">⭐ 5.8k</span>
+    </div>
+    <div class="gh-body">The sandbox agent framework.</div>
+    <div class="gh-translation">沙盒 Agent 框架。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 324</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/n0-computer/iroh" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/n0-computer" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">n0-computer</span><span class="gh-sep">/</span><span class="gh-name">iroh</span>
+      </div>
+      <span class="gh-stars">⭐ 10.3k</span>
+    </div>
+    <div class="gh-body">IP addresses break, dial keys instead. Modular networking stack in Rust.</div>
+    <div class="gh-translation">IP 地址会失效，改用密钥拨号。Rust 实现的模块化网络协议栈。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 466</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/obra" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">obra</span><span class="gh-sep">/</span><span class="gh-name">superpowers</span>
+      </div>
+      <span class="gh-stars">⭐ 233.4k</span>
+    </div>
+    <div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+    <div class="gh-translation">一个 Agent 技能框架与软件开发方法论，行之有效。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Shell</span>
+      <span class="gh-forks">🍴 20725</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/penpot/penpot" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/penpot" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">penpot</span><span class="gh-sep">/</span><span class="gh-name">penpot</span>
+      </div>
+      <span class="gh-stars">⭐ 50.6k</span>
+    </div>
+    <div class="gh-body">Penpot: The open-source design tool for design and code collaboration</div>
+    <div class="gh-translation">Penpot：面向设计与代码协作的开源设计工具</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Clojure</span>
+      <span class="gh-forks">🍴 3268</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/Kong/insomnia" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/kong" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Kong</span><span class="gh-sep">/</span><span class="gh-name">insomnia</span>
+      </div>
+      <span class="gh-stars">⭐ 39.0k</span>
+    </div>
+    <div class="gh-body">The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC. With Cloud, Local and Git storage.</div>
+    <div class="gh-translation">开源跨平台 API 客户端，支持 GraphQL、REST、WebSockets、SSE 和 gRPC。支持云端、本地和 Git 存储。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 2300</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/Lightricks/LTX-2" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://avatars.githubusercontent.com/lightricks" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Lightricks</span><span class="gh-sep">/</span><span class="gh-name">LTX-2</span>
+      </div>
+      <span class="gh-stars">⭐ 7.7k</span>
+    </div>
+    <div class="gh-body">Official Python inference and LoRA trainer package for the LTX-2 audio–video generative model.</div>
+    <div class="gh-translation">LTX-2 音视频生成模型的官方 Python 推理和 LoRA 训练包。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1220</span>
+      <span class="gh-topics"></span>
+    </div>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p style="font-size:13px;line-height:1.78;color:#4a4a4a">
+今天的建造者动态有一个清晰的主线：<strong>AI 的交互范式正在从"文本对话"转向"可视化产物"</strong>。Claude Code Artifacts 让一次会话直接产出可分享的交互页面——PR 走查、系统图、仪表盘、动画预览……这不是简单的"好看"，而是改变了团队协作的信息密度和决策效率。
+</p>
+<p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-top:10px">
+同时，开源与闭源的博弈进入新阶段。Bernie Sanders 提出 AI 资产税法案（对收入超 2 亿美元的 AI 初创公司征收 50% 资产税），而 Aaron Levie 关注的是开放权重模型逼近前沿能力的意义。监管、开源、商业化——三条线索交织，2026 年下半年的 AI 格局值得观察。
+</p>
+<p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-top:10px">
+GitHub Trending 方面，superpowers（233k Star）持续霸榜，日增 1,110 Star——Agent 技能框架已经成为开发者的新基础设施。headroom（Token 压缩）、codebase-memory-mcp（代码知识图谱）等工具类项目也在快速增长，AI 工程化工具链日趋成熟。
+</p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+<a href="https://x.com/i/lists/1894545071887499758" target="_blank">AI Builders List</a>
+<a href="https://hnrss.org/frontpage" target="_blank">Hacker News</a>
+</div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:32px 20px 40px;font-size:12px;color:#8b8b8b" data-pagefind-ignore>
+<p>AI 建造者日报 · 2026-06-20 · Powered by Hermes Agent</p>
+</footer>
+</body>
+</html>
