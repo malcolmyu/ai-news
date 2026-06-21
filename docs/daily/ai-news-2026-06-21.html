@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic 冲击波：两万亿 IPO、诺奖得主跳槽、Claude Code 破译 3500 年古文字 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit;text-decoration:none}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;font-family:Geist,Inter,sans-serif}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{font-size:13px;color:#4a4a4a}.nav a:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px}
+h1{font-family:Geist,Inter,sans-serif;font-size:36px;line-height:1.15;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+p{margin-top:0}
+.subtitle{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.tweet-card,.gh-card,.rss-card{display:block;background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;transition:box-shadow .2s}
+.tweet-card:hover,.gh-card:hover,.rss-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.tweet-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tweet-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.tweet-author{min-width:0}
+.tweet-name{font-size:13px;font-weight:600;display:block}
+.tweet-handle{font-size:12px;color:#8b8b8b}
+.tweet-date{font-size:11px;color:#8b8b8b;margin-left:auto;flex-shrink:0}
+.tweet-body{font-size:13px;line-height:1.6;color:#1c1c1c;max-height:260px;overflow:hidden}
+.tweet-translation{font-size:12px;line-height:1.55;color:#4a4a4a;background:rgba(37,99,235,.04);border-left:2px solid #2563eb;padding:6px 9px;margin:8px 0;border-radius:0 6px 6px 0}
+.tweet-media{margin-top:10px}
+.tweet-media img{max-width:100%;border-radius:8px;max-height:400px;object-fit:cover}
+.tweet-metrics{display:flex;gap:16px;font-size:12px;color:#8b8b8b;margin-top:10px}
+.gh-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.gh-avatar{width:28px;height:28px;border-radius:6px;flex-shrink:0}
+.gh-repo{font-size:14px;font-weight:600;min-width:0}
+.gh-owner{color:#2563eb}.gh-sep{color:#8b8b8b}.gh-name{color:#1c1c1c}
+.gh-stars{font-size:12px;color:#8b8b8b;margin-left:auto;flex-shrink:0}
+.gh-body{font-size:13px;line-height:1.55;color:#4a4a4a;margin-bottom:6px}
+.gh-translation{font-size:12px;color:#4a4a4a;line-height:1.5;margin-bottom:6px}
+.gh-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#8b8b8b}
+.gh-topics{display:flex;gap:4px}
+.gh-topic{background:rgba(37,99,235,.06);color:#2563eb;padding:1px 7px;border-radius:999px;font-size:11px}
+.rss-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.rss-source{font-size:11px;color:#2563eb;font-weight:500}
+.rss-date{font-size:11px;color:#8b8b8b}
+.rss-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:4px;color:#1c1c1c}
+.rss-desc{font-size:13px;line-height:1.55;color:#4a4a4a;overflow-wrap:break-word;word-break:break-word}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.04),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media(max-width:760px){.bento{grid-template-columns:1fr;margin-top:18px}.span-4{grid-column:span 1}.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:16px}
+.feat-num{font-size:28px;font-weight:600;color:#2563eb;font-family:Geist,Inter,sans-serif;margin-bottom:4px}
+.feat-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.feat-desc{font-size:12px;color:#4a4a4a;line-height:1.65}
+.youtube-embed{position:relative;width:100%;padding-bottom:56.25%;border-radius:10px;overflow:hidden;margin-bottom:14px}
+.youtube-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vlist{display:flex;flex-direction:column;gap:10px}
+.vlist-item{font-size:13px;line-height:1.6;color:#4a4a4a;padding-left:14px;position:relative}
+.vlist-item::before{content:"•";position:absolute;left:0;color:#2563eb;font-weight:600}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">AI</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html">Home</a>
+<a href="archive.html">Archive</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+
+<!-- Hero -->
+<section class="card span-4" data-pagefind-body>
+<div class="label-sm">2026-06-21</div>
+<h1>Anthropic 冲击波：两万亿 IPO、诺奖得主跳槽、Claude Code 破译 3500 年古文字</h1>
+<p class="subtitle">12 位建造者 · 17 个热门仓库 · 5 篇 RSS 精选</p>
+<div class="dots-row">
+<span class="tag">Anthropic</span><span class="tag">Agents</span><span class="tag">GitHub Trending</span><span class="tag">2026-06-21</span>
+</div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">12</div><div class="stat-label">建造者推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">热门仓库</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- Today's Insights -->
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="feat-grid">
+
+<div class="feat-item">
+<div class="feat-num">01</div>
+<div class="feat-title">Anthropic 冲击波：Swyx 爆料 $2T 估值 IPO，诺奖得主 John Jumper 离开 DeepMind 加盟；Anthropic 同时发布 ...</div>
+<div class="feat-desc">Anthropic 冲击波：Swyx 爆料 $2T 估值 IPO，诺奖得主 John Jumper 离开 DeepMind 加盟；Anthropic 同时发布 Project Fetch Phase Two</div>
+</div>
+<div class="feat-item">
+<div class="feat-num">02</div>
+<div class="feat-title">Claude Code 破译 Linear A：Boris Cherny 用 AI 成功解读 3500 年前的克里特古文字，引发学术圈热议 (1460 赞)...</div>
+<div class="feat-desc">Claude Code 破译 Linear A：Boris Cherny 用 AI 成功解读 3500 年前的克里特古文字，引发学术圈热议 (1460 赞)</div>
+</div>
+<div class="feat-item">
+<div class="feat-num">03</div>
+<div class="feat-title">Agents 催生软件范式变革：Guillermo Rauch 认为 markdown 正在成为 AI 时代的「编程语言」—— agent 文件结构即配置，一行...</div>
+<div class="feat-desc">Agents 催生软件范式变革：Guillermo Rauch 认为 markdown 正在成为 AI 时代的「编程语言」—— agent 文件结构即配置，一行命令部署</div>
+</div>
+<div class="feat-item">
+<div class="feat-num">04</div>
+<div class="feat-title">Codex 生态崛起：Thibault Sottiaux 演示远程/本机交接功能；Peter Yang 从 Claude Code 转投 Codex，盛赞 GP...</div>
+<div class="feat-desc">Codex 生态崛起：Thibault Sottiaux 演示远程/本机交接功能；Peter Yang 从 Claude Code 转投 Codex，盛赞 GPT-5.5 和开发体验</div>
+</div>
+</div>
+</section>
+
+<!-- Deep Dive: Podcast -->
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+
+<h3>Re-engineering the Semiconductor Supply Chain with Intel CEO Lip Bu Tan</h3>
+<div class="youtube-embed">
+<iframe src="https://www.youtube-nocookie.com/embed/asCgCv2XB4s" title="Re-engineering the Semiconductor Supply Chain with Intel CEO Lip Bu Tan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="vlist">
+<div class="vlist-item">Intel CEO 陈立武深度对话半导体供应链重塑</div>
+<div class="vlist-item">从地缘政治到 AI 芯片需求，全球半导体格局正在经历结构性变革</div>
+<div class="vlist-item">制造业回流、台积电竞争、AI 计算需求爆发——多重变量交织</div>
+</div>
+</section>
+
+<!-- RSS -->
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+
+<div class="vitem">
+<a href="https://www.reuters.com/world/white-house-delays-release-us-voting-machine-study-midterms-near-2026-06-19/" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">Hacker News</span>
+<span class="rss-date">06-21</span>
+</div>
+<div class="rss-title">White House delays US voting-machine vulnerability report</div>
+<div class="rss-desc">Article URL: https://www.reuters.com/world/white-house-delays-release-us-voting-machine-study-midterms-near-2026-06-19/ Comments URL: https://news.ycombinator.com/item?id=48614809 Points: 13 # Comment</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://vinibrasil.com/when-i-reject-ai-code-even-if-it-works/" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">Hacker News</span>
+<span class="rss-date">06-21</span>
+</div>
+<div class="rss-title">When I reject AI code even if it works</div>
+<div class="rss-desc">Article URL: https://vinibrasil.com/when-i-reject-ai-code-even-if-it-works/ Comments URL: https://news.ycombinator.com/item?id=48614631 Points: 5 # Comments: 1</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://www.bbc.com/news/articles/c0rygp005wjo" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">Hacker News</span>
+<span class="rss-date">06-21</span>
+</div>
+<div class="rss-title">&#x27;We had to get out of the way&#x27;: The backlash over delivery robots</div>
+<div class="rss-desc">Article URL: https://www.bbc.com/news/articles/c0rygp005wjo Comments URL: https://news.ycombinator.com/item?id=48614390 Points: 17 # Comments: 5</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://www.anthropic.com/research/project-fetch-phase-two" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">Hacker News</span>
+<span class="rss-date">06-21</span>
+</div>
+<div class="rss-title">Project Fetch: Phase Two</div>
+<div class="rss-desc">Article URL: https://www.anthropic.com/research/project-fetch-phase-two Comments URL: https://news.ycombinator.com/item?id=48614311 Points: 28 # Comments: 7</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247663786&amp;idx=1&amp;sn=04e25de0c7167067e1839938e34ff36b" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">06-20</span>
+</div>
+<div class="rss-title">Redis 之父为 DeepSeek 抱不平：美国 AI 圈又为“蒸馏”吵起来了</div>
+<div class="rss-desc">2026 年 6 月 15 日，Redis 之父 Salvatore Sanfilippo，也就是 antirez ，在 X 上发了一串推文</div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Builder Tweets -->
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+
+<div class="vitem">
+<a href="https://x.com/bcherny/status/2068064304503660962" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-bcherny.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Boris Cherny</span>
+<span class="tweet-handle">@bcherny</span>
+</div>
+</div>
+<div class="tweet-body">Cool way to use Claude Code: deciphering Linear A, a 3500 year old written language from Crete
+
+https://t.co/Aqd4ZG7Cum
+
+Hope this holds up in peer review! 🤞</div>
+<div class="tweet-translation">Claude Code 的酷炫用法：破译 Linear A，一种 3500 年前的克里特岛古文字。希望同行评审能通过！🤞</div>
+<div class="tweet-metrics">
+<span>♥ 1460</span>
+<span>↺ 143</span>
+<span>💬 119</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2067936390285807940" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+</div>
+<div class="tweet-body">Agents are motivating so many healthy software habits. Open APIs, documentation (skills), tests (evals), Unix (CLIs), payment &amp;amp; commerce protocols, even wide 𝙰𝚌𝚌𝚎𝚙𝚝 use (markdown/json/html).
+
+The original vision of the WWW coming to life before our eyes.</div>
+<div class="tweet-translation">Agent 正在催生大量健康的软件习惯：开放 API、文档(skills)、测试(evals)、Unix(CLI)、支付与商业协议，甚至广泛采用 markdown/json/html。这种「宽 Accept」模式降低了 Agent 的接入门槛。</div>
+<div class="tweet-metrics">
+<span>♥ 1244</span>
+<span>↺ 85</span>
+<span>💬 86</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2068120572673077274" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">Remote / local handoff in Codex! Removing boundaries one at a time. 
+
+When you let the model be in the driver seat, you actually need less infrastructure. https://t.co/sfFYixfXPl</div>
+<div class="tweet-translation">Codex 支持远程/本机交接了！逐个消除边界。当你让模型坐在驾驶位时，其实需要的基础设施更少——Agent 越自主，工程复杂度越低。</div>
+<div class="tweet-metrics">
+<span>♥ 1138</span>
+<span>↺ 71</span>
+<span>💬 95</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2068144722460475527" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">Late to this one, but follow @danshipper for S-tier codex tips. These days I spend more time in the codex app than all other apps combined on my Mac. https://t.co/fVTA5vLGy3</div>
+<div class="tweet-translation">关注 @danshipper 获取顶级的 Codex 使用技巧。我现在在 Codex 上花的时间比 Mac 上所有其他应用加起来还多——这工具已经成了我的主界面。</div>
+<div class="tweet-metrics">
+<span>♥ 962</span>
+<span>↺ 47</span>
+<span>💬 50</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/AmandaAskell/status/2068162191740764622" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-AmandaAskell.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amanda Askell</span>
+<span class="tweet-handle">@AmandaAskell</span>
+</div>
+</div>
+<div class="tweet-body">The view that we shouldn&#x27;t do more medical scans because incidental findings cause a lot of harm doesn&#x27;t sit well with me. It seems like the issue it points to isn&#x27;t the scan but the response to it. If you see something on a scan but have no other symptoms, you could ignore it.</div>
+<div class="tweet-translation">不应该因为偶然发现的病灶会造成伤害就不做更多医学扫描。问题不在于扫描本身，而在于对扫描结果的应对方式——如果发现就过度治疗那是体系的问题，不是扫描的错。</div>
+<div class="tweet-metrics">
+<span>♥ 774</span>
+<span>↺ 24</span>
+<span>💬 66</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2068165988005380478" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+</div>
+<div class="tweet-body">The next hot programming language is… markdown.
+
+A minimal eve agent:
+
+📂 𝚊𝚐𝚎𝚗𝚝/
+  📄 𝚒𝚗𝚜𝚝𝚛𝚞𝚌𝚝𝚒𝚘𝚗𝚜.𝚖𝚍
+  📂 𝚜𝚔𝚒𝚕𝚕𝚜/
+     📄 𝚢𝚘𝚞𝚛-𝚎𝚡𝚙𝚎𝚛𝚝𝚒𝚜𝚎.𝚖𝚍
+
+Deployable in one command: 𝚟𝚎𝚛𝚌𝚎𝚕.
+
+It’s the most accessible programming has ever been. And likely will ever be, at least for the generation of software fully defined and controlled by us humans.
+
+(As a fun fact, one of the initial prototypes for eve was codenamed 𝚕𝚊𝚜𝚝 by @timolins, both in homage to ‘@nextjs for agents’ but also in recognition of how enduring eve’s design feels to us.)</div>
+<div class="tweet-translation">下一个热门编程语言是……markdown。一个极简 agent：agent/instructions.md + skills/your-expertise.md，一行命令部署。这是最平易近人的编程范式——AI 时代的「Hello World」就是一份 markdown 文件。</div>
+<div class="tweet-metrics">
+<span>♥ 624</span>
+<span>↺ 33</span>
+<span>💬 66</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/AmandaAskell/status/2068218515723866477" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-AmandaAskell.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amanda Askell</span>
+<span class="tweet-handle">@AmandaAskell</span>
+</div>
+</div>
+<div class="tweet-body">I had chronic pain for most of my life until a doctor did an MRI of the pain source and found a congenital condition that was then fixed with surgery. Now I&#x27;m wondering if I had 30+ years of pain because doctors worried I was too stupid to be in the presence of scan results.</div>
+<div class="tweet-translation">我大半生受慢性疼痛折磨，直到医生对疼痛源做了 MRI 发现先天性疾病并手术治愈。现在我在想，如果早点扫描，是否就不必白白忍受 30 多年的痛苦？</div>
+<div class="tweet-metrics">
+<span>♥ 561</span>
+<span>↺ 19</span>
+<span>💬 28</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2068175172960690266" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+</div>
+<div class="tweet-body">I used to be a die-hard Claude Code user.
+
+Codex has won me over because:
+
+→ GPT-5.5 is excellent
+→ Fast mode + generous limits = more reps
+→ Little touches like steering, auto remote control on phone, etc
+
+But most of all Codex&#x27;s browser and computer use capabilities are simply goated. I built so many workflows relying on those two things alone instead of hunting for APIs.
+
+I still use Claude Code too. The app seems to be getting better and the design and frontend capability of Opus is still much better than GPT. Whenever Fable comes back that&#x27;s another reason to go back.
+
+Honestly, I hope these two compete forever and other players (Cursor/Grok, Gemini, etc) all stay competitive.
+
+This way the builder keeps winning 🙂</div>
+<div class="tweet-translation">我原来是 Claude Code 铁粉。Codex 赢走了我的心：GPT-5.5 太强了、快速模式+慷慨额度=更多迭代、还有 steering 和手机远程控制这些小细节。</div>
+<div class="tweet-metrics">
+<span>♥ 350</span>
+<span>↺ 5</span>
+<span>💬 42</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/AmandaAskell/status/2068162192927756544" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-AmandaAskell.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amanda Askell</span>
+<span class="tweet-handle">@AmandaAskell</span>
+</div>
+</div>
+<div class="tweet-body">A counter to this is &quot;yes but people *don&#x27;t* ignore it&quot;. But not ignoring things on scans is our norm because, until recently, we only did scans if there was a clear need. If we move to a scan-more-often paradigm, the norms of what we do with that information will surely adjust.</div>
+<div class="tweet-translation">反驳观点是「问题在于人们不会忽略它」。但不忽略扫描结果是我们的常态——因为以前只在有明确需求时才做扫描。如果转向「多扫描一切」的模式，医疗体系的应对方式也必须随之改变。</div>
+<div class="tweet-metrics">
+<span>♥ 332</span>
+<span>↺ 11</span>
+<span>💬 26</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2068068247413694532" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+</div>
+<div class="tweet-body">The main variable in getting success with agents is whether you can get the agent the context it needs to do its work; and a major factor in that is if you can create a shared working area for that agent that a human can understand as well. 
+
+This is one of the reasons why agents using file systems is such a big deal. It creates a unified system that both the person and the agent can work within to pass around data. 
+
+“What they need is a working set: plans, notes, task lists, policies, drafts, summaries, logs, corrections,  decisions, etc. For that layer, a filesystem-shaped interface tends to be more legible to both the model and the humans supervising it.”
+
+It turns out giving agents access to the systems we already know how to use, but in a way that is best optimized for them, is the perfect primitive for agents to work.</div>
+<div class="tweet-translation">Agent 成功的主要变量在于能否为 agent 提供所需上下文；其中一个关键因素是你能否为该 agent 创建一个共享工作区——让它能看、能写、能迭代。上下文供给决定了 Agent 能力的上限。</div>
+<div class="tweet-metrics">
+<span>♥ 308</span>
+<span>↺ 30</span>
+<span>💬 46</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2068084391260426345" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-06-21/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+</div>
+<div class="tweet-body">Anthropic is going to IPO at $2T https://t.co/SHYMaH3v9q</div>
+<div class="tweet-translation">Anthropic 即将以 2 万亿美元估值 IPO——这个数字本身就说明了一切。</div>
+<div class="tweet-metrics">
+<span>♥ 269</span>
+<span>↺ 2</span>
+<span>💬 18</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2068094591220531583" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/zarazhangrui" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+</div>
+<div class="tweet-body">The 3 most important things that set someone apart in the AI age:
+
+- Agency
+- Taste
+- Distribution</div>
+<div class="tweet-translation">AI 时代让一个人脱颖而出的三件事：主动性(Agency)、品味(Taste)、传播力(Distribution)。</div>
+<div class="tweet-metrics">
+<span>♥ 227</span>
+<span>↺ 30</span>
+<span>💬 45</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+
+<div class="vitem">
+<a href="https://github.com/palmier-io/palmier-pro" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/palmier-io?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">palmier-io</span><span class="gh-sep">/</span><span class="gh-name">palmier-pro</span>
+</div>
+<span class="gh-stars">⭐ 3.4k</span>
+</div>
+<div class="gh-body">macOS video editor built for AI</div>
+<div class="gh-translation">面向 AI 的 macOS 视频编辑器</div>
+<div class="gh-meta"><span class="gh-lang">● Swift</span> <span class="gh-forks">🍴 283</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/penpot/penpot" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/penpot?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">penpot</span><span class="gh-sep">/</span><span class="gh-name">penpot</span>
+</div>
+<span class="gh-stars">⭐ 51.5k</span>
+</div>
+<div class="gh-body">Penpot: The open-source design tool for design and code collaboration</div>
+<div class="gh-translation">开源设计工具，实现设计与代码的无缝协作</div>
+<div class="gh-meta"><span class="gh-lang">● Clojure</span> <span class="gh-forks">🍴 3.3k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/calesthio/OpenMontage" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/calesthio?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">calesthio</span><span class="gh-sep">/</span><span class="gh-name">OpenMontage</span>
+</div>
+<span class="gh-stars">⭐ 7.1k</span>
+</div>
+<div class="gh-body">World&#x27;s first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.</div>
+<div class="gh-translation">全球首个开源的 agentic 视频制作系统——12 条流水线、52 个工具、500+ agent 技能，把编程助手变成完整视频工作室</div>
+<div class="gh-meta"><span class="gh-lang">● Python</span> <span class="gh-forks">🍴 1.2k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/tursodatabase/turso" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/tursodatabase?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">tursodatabase</span><span class="gh-sep">/</span><span class="gh-name">turso</span>
+</div>
+<span class="gh-stars">⭐ 20.4k</span>
+</div>
+<div class="gh-body">Turso is an in-process SQL database, compatible with SQLite.</div>
+<div class="gh-translation">进程内 SQL 数据库，兼容 SQLite，零配置嵌入</div>
+<div class="gh-meta"><span class="gh-lang">● Rust</span> <span class="gh-forks">🍴 1.0k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/DeusData?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">DeusData</span><span class="gh-sep">/</span><span class="gh-name">codebase-memory-mcp</span>
+</div>
+<span class="gh-stars">⭐ 9.4k</span>
+</div>
+<div class="gh-body">High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.</div>
+<div class="gh-translation">高性能代码智能 MCP 服务器——将代码库索引为持久化知识图谱，158 种语言，亚毫秒查询，减少 99% token 消耗</div>
+<div class="gh-meta"><span class="gh-lang">● C</span> <span class="gh-forks">🍴 710</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/google-research/timesfm" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/google-research?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">google-research</span><span class="gh-sep">/</span><span class="gh-name">timesfm</span>
+</div>
+<span class="gh-stars">⭐ 24.6k</span>
+</div>
+<div class="gh-body">TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting.</div>
+<div class="gh-translation">谷歌研究院开发的时间序列基础模型 TimesFM，专为时序预测设计</div>
+<div class="gh-meta"><span class="gh-lang">● Python</span> <span class="gh-forks">🍴 2.3k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/twentyhq/twenty" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/twentyhq?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">twentyhq</span><span class="gh-sep">/</span><span class="gh-name">twenty</span>
+</div>
+<span class="gh-stars">⭐ 50.9k</span>
+</div>
+<div class="gh-body">The open alternative to Salesforce, designed for AI.</div>
+<div class="gh-translation">Salesforce 的开源替代品，AI 原生设计</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span> <span class="gh-forks">🍴 7.4k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/Kong/insomnia" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/Kong?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Kong</span><span class="gh-sep">/</span><span class="gh-name">insomnia</span>
+</div>
+<span class="gh-stars">⭐ 39.3k</span>
+</div>
+<div class="gh-body">The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC. With Cloud, Local and Git storage.</div>
+<div class="gh-translation">跨平台 API 客户端，支持 GraphQL/REST/WebSocket/SSE/gRPC，支持云端和 Git 存储</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span> <span class="gh-forks">🍴 2.3k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/tw93/Pake" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/tw93?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">tw93</span><span class="gh-sep">/</span><span class="gh-name">Pake</span>
+</div>
+<span class="gh-stars">⭐ 54.9k</span>
+</div>
+<div class="gh-body">🤱🏻 Turn any webpage into a desktop app with one command.</div>
+<div class="gh-translation">一键将任意网页转为桌面应用</div>
+<div class="gh-meta"><span class="gh-lang">● Rust</span> <span class="gh-forks">🍴 10.9k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/chopratejas/headroom" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/chopratejas?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">chopratejas</span><span class="gh-sep">/</span><span class="gh-name">headroom</span>
+</div>
+<span class="gh-stars">⭐ 42.0k</span>
+</div>
+<div class="gh-body">Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.</div>
+<div class="gh-translation">压缩工具输出、日志、文件和 RAG 块——减少 60-95% token，答案质量不变。支持库、代理、MCP 服务器三种模式</div>
+<div class="gh-meta"><span class="gh-lang">● Python</span> <span class="gh-forks">🍴 2.9k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/jamiepine/voicebox" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/jamiepine?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">jamiepine</span><span class="gh-sep">/</span><span class="gh-name">voicebox</span>
+</div>
+<span class="gh-stars">⭐ 31.0k</span>
+</div>
+<div class="gh-body">The open-source AI voice studio. Clone, dictate, create.</div>
+<div class="gh-translation">开源 AI 声音工作室：声音克隆、听写、创作一站式</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span> <span class="gh-forks">🍴 3.8k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/Kilo-Org/kilocode" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/Kilo-Org?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Kilo-Org</span><span class="gh-sep">/</span><span class="gh-name">kilocode</span>
+</div>
+<span class="gh-stars">⭐ 23.4k</span>
+</div>
+<div class="gh-body">Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent.</div>
+<div class="gh-translation">一体化 agentic 工程平台，用最流行的开源编程 agent 更快构建、发布和迭代</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span> <span class="gh-forks">🍴 2.7k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/mattpocock?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattpocock</span><span class="gh-sep">/</span><span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 138.3k</span>
+</div>
+<div class="gh-body">Skills for Real Engineers. Straight from my .claude directory.</div>
+<div class="gh-translation">给真正工程师的 Skills——来自 Matt Pocock 的 Claude 配置目录，138k Star 验证</div>
+<div class="gh-meta"><span class="gh-lang">● Shell</span> <span class="gh-forks">🍴 12.0k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/withastro/flue" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/withastro?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">withastro</span><span class="gh-sep">/</span><span class="gh-name">flue</span>
+</div>
+<span class="gh-stars">⭐ 6.1k</span>
+</div>
+<div class="gh-body">The sandbox agent framework.</div>
+<div class="gh-translation">沙盒 agent 框架，为 AI Agent 提供安全运行环境</div>
+<div class="gh-meta"><span class="gh-lang">● TypeScript</span> <span class="gh-forks">🍴 344</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/owainlewis/awesome-artificial-intelligence" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/owainlewis?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">owainlewis</span><span class="gh-sep">/</span><span class="gh-name">awesome-artificial-intelligence</span>
+</div>
+<span class="gh-stars">⭐ 14.8k</span>
+</div>
+<div class="gh-body">A curated list of Artificial Intelligence (AI) courses, books, video lectures and papers.</div>
+<div class="gh-translation">精选 AI 课程、书籍、视频讲座和论文合集</div>
+<div class="gh-meta"><span class="gh-forks">🍴 2.4k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/pppscn/SmsForwarder" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/pppscn?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">pppscn</span><span class="gh-sep">/</span><span class="gh-name">SmsForwarder</span>
+</div>
+<span class="gh-stars">⭐ 26.5k</span>
+</div>
+<div class="gh-body">短信转发器——监控Android手机短信、来电、APP通知，并根据指定规则转发到其他手机</div>
+<div class="gh-translation">短信转发器——监控 Android 手机短信、来电、通知并转发到钉钉/飞书/Telegram 等</div>
+<div class="gh-meta"><span class="gh-lang">● Kotlin</span> <span class="gh-forks">🍴 3.3k</span></div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/1jehuang/jcode" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/1jehuang?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">1jehuang</span><span class="gh-sep">/</span><span class="gh-name">jcode</span>
+</div>
+<span class="gh-stars">⭐ 7.4k</span>
+</div>
+<div class="gh-body">Coding Agent Harness</div>
+<div class="gh-translation">编程 Agent 控制框架 (Coding Agent Harness)</div>
+<div class="gh-meta"><span class="gh-lang">● Rust</span> <span class="gh-forks">🍴 828</span></div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Thought -->
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+
+<p class="subtitle">今天最值得深思的来自 Amanda Askell：她因一次偶然的 MRI 扫描发现先天性疾病并治愈，终结了 30 多年的慢性疼痛。这个 Anthropic 内部哲学家的亲身经历，正在挑战「少做医学扫描」的主流医学观念。而当 AI 被用于破译 3500 年古文字时，我们也许应该重新思考：技术到底是用于「少做」还是「多做」——不是在效率维度，而是在发现维度。</p>
+</section>
+
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+
+<a href="https://x.com/bcherny/status/2068064304503660962" target="_blank">@bcherny — Boris Cherny</a>
+<a href="https://x.com/rauchg/status/2067936390285807940" target="_blank">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/thsottiaux/status/2068120572673077274" target="_blank">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/thsottiaux/status/2068144722460475527" target="_blank">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/AmandaAskell/status/2068162191740764622" target="_blank">@AmandaAskell — Amanda Askell</a>
+<a href="https://x.com/rauchg/status/2068165988005380478" target="_blank">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/AmandaAskell/status/2068218515723866477" target="_blank">@AmandaAskell — Amanda Askell</a>
+<a href="https://x.com/petergyang/status/2068175172960690266" target="_blank">@petergyang — Peter Yang</a>
+<a href="https://x.com/AmandaAskell/status/2068162192927756544" target="_blank">@AmandaAskell — Amanda Askell</a>
+<a href="https://x.com/levie/status/2068068247413694532" target="_blank">@levie — Aaron Levie</a>
+<a href="https://x.com/swyx/status/2068084391260426345" target="_blank">@swyx — Swyx</a>
+<a href="https://x.com/zarazhangrui/status/2068094591220531583" target="_blank">@zarazhangrui — Zara Zhang</a>
+<a href="https://www.youtube.com/watch?v=asCgCv2XB4s" target="_blank">YouTube — Re-engineering the Semiconductor Supply Chain with Intel CEO Lip Bu Tan</a>
+</div>
+</section>
+
+</main>
+</body>
+</html>
