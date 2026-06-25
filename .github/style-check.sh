@@ -123,6 +123,98 @@ check "All daily HTML image paths are correct (no docs/daily/ prefix, no pbs.twi
 
 println
 
+# ── Part 0.6: Waterfall Balance (vlist-2col) ─────────────────────────────
+bold "【Waterfall Balance】"
+
+# 0.6a. styles.css must have tweet-body + tweet-translation height constraints
+if grep -q 'tweet-body.*max-height:260px.*overflow:hidden\|tweet-body.*overflow:hidden.*max-height:260px' docs/styles.css 2>/dev/null; then
+  green "  ✓ styles.css has .tweet-body { max-height:260px; overflow:hidden }"
+else
+  red "  ✗ styles.css missing .tweet-body { max-height:260px; overflow:hidden } — waterfall will be severely unbalanced!"
+  ERRORS=$((ERRORS + 1))
+fi
+
+if grep -q 'tweet-translation.*max-height:100px.*overflow:hidden\|tweet-translation.*overflow:hidden.*max-height:100px' docs/styles.css 2>/dev/null; then
+  green "  ✓ styles.css has .tweet-translation { max-height:100px; overflow:hidden }"
+else
+  red "  ✗ styles.css missing .tweet-translation { max-height:100px; overflow:hidden } — long translations will unbalance waterfall!"
+  ERRORS=$((ERRORS + 1))
+fi
+
+# 0.6b. Each daily HTML must have the same constraints in its inline <style>
+#     (inline <style> appears AFTER styles.css <link>, so it overrides)
+#     Files from 2026-06-19 onwards: ERROR if missing. Older: WARN only (historical).
+DAILY_WATERFALL_ERRORS=0
+DAILY_WATERFALL_WARNINGS=0
+CUTOFF_DATE="2026-06-19"
+for f in docs/daily/ai-news-*.html; do
+  [ -f "$f" ] || continue
+  fname=$(basename "$f")
+  # Extract date from filename
+  fdate=$(echo "$fname" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+  is_recent=false
+  if [ -n "$fdate" ] && [[ "$fdate" > "$CUTOFF_DATE" || "$fdate" == "$CUTOFF_DATE" ]]; then
+    is_recent=true
+  fi
+
+  # Check tweet-body constraint in inline <style>
+  if grep -q '<style>' "$f" 2>/dev/null; then
+    # Extract inline style block and check both constraints
+    if "$PYTHON_BIN" -c "
+import re, sys
+with open('$f') as fh:
+    html = fh.read()
+m = re.search(r'<style>(.*?)</style>', html, re.DOTALL)
+if not m:
+    sys.exit(1)
+css = m.group(1)
+# Check tweet-body: must have max-height AND overflow:hidden
+has_body = bool(re.search(r'\.tweet-body\s*\{[^}]*max-height\s*:\s*260px', css))
+has_body_ov = bool(re.search(r'\.tweet-body\s*\{[^}]*overflow\s*:\s*hidden', css))
+# Check tweet-translation: must have max-height AND overflow:hidden
+has_trans = bool(re.search(r'\.tweet-translation\s*\{[^}]*max-height\s*:\s*100px', css))
+has_trans_ov = bool(re.search(r'\.tweet-translation\s*\{[^}]*overflow\s*:\s*hidden', css))
+if not (has_body and has_body_ov):
+    print(f'tweet-body constraint MISSING')
+    sys.exit(1)
+if not (has_trans and has_trans_ov):
+    print(f'tweet-translation constraint MISSING')
+    sys.exit(1)
+print('OK')
+" 2>/dev/null; then
+      green "  ✓ $fname inline style has waterfall constraints"
+    else
+      if $is_recent; then
+        red "  ✗ $fname inline <style> missing waterfall constraints (.tweet-body max-height:260px + overflow:hidden, .tweet-translation max-height:100px + overflow:hidden)"
+        DAILY_WATERFALL_ERRORS=$((DAILY_WATERFALL_ERRORS + 1))
+      else
+        yellow "  ⚠ $fname (pre-06-19) missing waterfall constraints — backfill recommended but not blocking"
+        DAILY_WATERFALL_WARNINGS=$((DAILY_WATERFALL_WARNINGS + 1))
+      fi
+    fi
+  fi
+done
+[ "$DAILY_WATERFALL_ERRORS" -eq 0 ]
+check "Recent daily HTML files (06-19+) have waterfall height constraints in inline <style>"
+[ "$DAILY_WATERFALL_WARNINGS" -gt 0 ] && warn "$DAILY_WATERFALL_WARNINGS older daily file(s) missing waterfall constraints — backfill recommended"
+
+# 0.6c. Verify vlist-2col grid layout exists in styles.css (multiline — use Python)
+if "$PYTHON_BIN" -c "
+import re
+with open('docs/styles.css') as f:
+    css = f.read()
+m = re.search(r'\.vlist-2col\s*\{[^}]*grid-template-columns\s*:\s*repeat\(2', css, re.DOTALL)
+if not m:
+    sys.exit(1)
+" 2>/dev/null; then
+  green "  ✓ styles.css has vlist-2col 2-column grid layout"
+else
+  red "  ✗ styles.css missing vlist-2col grid-template-columns: repeat(2, ...)"
+  ERRORS=$((ERRORS + 1))
+fi
+
+println
+
 # ── Part 0.5: Shared Stylesheet Integrity ─────────────────────────────
 bold "【Design System (docs/styles.css)】"
 
