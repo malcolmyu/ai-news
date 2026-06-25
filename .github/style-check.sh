@@ -198,6 +198,21 @@ done
 check "Recent daily HTML files (06-19+) have waterfall height constraints in inline <style>"
 [ "$DAILY_WATERFALL_WARNINGS" -gt 0 ] && warn "$DAILY_WATERFALL_WARNINGS older daily file(s) missing waterfall constraints — backfill recommended"
 
+# 0.6d. Daily HTML must load site.js (initDailyMasonry in site.js is what creates true masonry columns)
+SITEJS_MISSING=0
+for f in docs/daily/ai-news-2026-06-*.html; do
+  [ -f "$f" ] || continue
+  fname=$(basename "$f")
+  if grep -q 'site\.js' "$f" 2>/dev/null; then
+    green "  ✓ $fname loads site.js"
+  else
+    red "  ✗ $fname missing <script src=\"../site.js\"> — initDailyMasonry() will NOT run, waterfall will be broken!"
+    SITEJS_MISSING=$((SITEJS_MISSING + 1))
+  fi
+done
+[ "$SITEJS_MISSING" -eq 0 ]
+check "All June 2026 daily HTML files load site.js (waterfall masonry)"
+
 # 0.6c. Verify vlist-2col grid layout exists in styles.css (multiline — use Python)
 if "$PYTHON_BIN" -c "
 import re

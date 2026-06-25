@@ -63,6 +63,9 @@ ai-news/
     <section class="card span-4"><!-- GitHub Trending --></section>
     <section class="card span-4"><!-- 今日思考 --></section>
   </main>
+  <!-- ⛔ 强制：必须包含 site.js 和 search.js，否则 initDailyMasonry() 不会运行，瀑布流失效 -->
+  <script src="../search.js?v={YYYYMMDD}" defer></script>
+  <script src="../site.js?v={YYYYMMDD}" defer></script>
   <!-- footer -->
 </body>
 </html>
