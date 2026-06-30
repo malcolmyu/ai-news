@@ -35,6 +35,7 @@ ai-news/
 8. **无 ALL-CAPS**：`label-sm`、`section-label` 等不使用全大写。
 9. **首页 Featured Card**：`docs/index.html` 的深度报告区第一条必须用 `class="featured-card"`，禁止改成 `daily-entry`。有 `<!-- FEATURED-CARD-START -->` / `<!-- FEATURED-CARD-END -->` 守卫注释，不可删除。
 10. **首页日报列表三天限制**：`docs/index.html` 的「今日日报」区域只保留 3 条（今日 + 昨日 + 前日）+ 历史日报链接。禁止出现第 4 条日报条目——多了就打乱与右侧日历的高度对齐。
+11. **首页研究区三天限制**：`docs/index.html` 的「深度调研报告」区域只保留 3 条（1 featured-card + 2 daily-entry）。禁止出现第 4 条——与日报区保持一致的视觉节奏。
 11. **RSS 卡片质量**：`.rss-desc` 和 `.vitem-desc` 内容必须干净——无裸 HTML entity（`&lt;`/`&gt;`/`&quot;`）、有 summarize（非原始 200 字截断）、无横向溢出。CSS 已加 `overflow-wrap: break-word; word-break: break-word`。脚本 `gen_rss_cards.py` 的 `strip_tag_text()` 已内置 `html.unescape()`。
 12. **推文高度限制**：`.tweet-body` 必须含 `max-height:260px;overflow:hidden`；`.tweet-translation` 必须含 `max-height:100px;overflow:hidden`。日报内联 `<style>` 会覆盖 styles.css，两个地方都必须写。防止长推文/长翻译导致 vlist-2col 瀑布流两列高度严重失衡（阈值 300px，实测过长推文可致 484px 差距）。
 13. **首页日报条目必须放在 `.daily-left` 内**：新增日报链接必须插入 `.container > .daily-layout > .daily-left` 内部，使用 `.daily-entry` + `.daily-entry-today` class，格式与既有条目一致（`padding:18px 20px` + flex 布局 + `→` 箭头）。禁止在 `HOMEPAGE-DAILY-START` 后、`.container` 外层放置游离 `daily-entry`——脱离布局容器会丢失样式，裸挂在 section 里导致视觉崩坏；同时会与 `.daily-left` 内条目重复。已犯过一次（2026-06-27），修复耗时。
