@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Sonnet 5 全面上线，Fable 定价悬念引爆 AI 圈 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260702">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260702" defer></script>
+<script src="../site.js?v=20260702" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<!-- Hero -->
+<section class="card span-4">
+<div class="label-sm">7月2日 — AI 建造者日报</div>
+<h1>Claude Sonnet 5 全面上线，Fable 定价悬念引爆 AI 圈</h1>
+<div class="subtitle">Anthropic 正式发布 Claude Sonnet 5，推理和代码能力相比 4.6 实现代际提升，Linux 版 Claude Desktop 同步上线。Fable 定价策略和内容安全分类器更新引发 AI 社区激烈讨论。Vercel Services 发布——Python 后端与前端可在同一项目中并置部署。</div>
+<div class="dots-row"><span class="tag">Claude Sonnet 5</span><span class="tag">Fable</span><span class="tag">Vercel Services</span><span class="tag">AI 硬件</span><span class="tag">Agent 安全</span><span class="tag">GPU 关税</span></div>
+<div class="stat-row" style="margin-top:14px;">
+<div class="stat-item"><div class="stat-num">14</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">20</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">32</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- 深度对话 -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Why Hardware-Software Co-Design Is AI's Real 100x: Dylan Patel of SemiAnalysis</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-bottom:16px">Dylan Patel（SemiAnalysis 创始人）深度分析 AI 硬件的真实 100 倍性能提升路径：从 GPU 通用计算到 ASIC/TPU 专用加速，软硬件协同设计才是解锁下一代 AI 算力的关键。探讨了 NVIDIA 的护城河、Cerebras 的晶圆级芯片策略，以及中国在 AI 芯片领域的追赶进展。</p>
+  <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fafafa">
+    <iframe src="https://www.youtube-nocookie.com/embed/f6D_aiy8qyU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px"></iframe>
+  </div>
+  <div style="margin-top:12px"><a href="https://www.youtube.com/watch?v=f6D_aiy8qyU" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:none">在 YouTube 观看 →</a></div>
+</section>
+
+<!-- RSS 精选 -->
+<section class="card span-4">
+  <div class="label-sm">RSS 精选</div>
+  <h2>今日精选文章</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664115&amp;idx=1&amp;sn=dbdcdb0b1f4a6484021cf06993a47fff" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">谷歌贴身对标字节：最新轻量版 Nano Banana 2 四秒出图，单张仅 0.034 美元，还能直出视频</div>
+        <div class="rss-desc">价格比字节更便宜，出图质量与延迟实现双反超</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664115&amp;idx=2&amp;sn=f6f09f2ae9d84a2d440d0a93cd7e0d2c" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">高德 GrowLoop：构建感性对话的理性 Benchmark</div>
+        <div class="rss-desc">开放域对话的真人感评测是一个公开的难题——标准难以制定、难以量化、难以统一。</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664069&amp;idx=1&amp;sn=659042e86da97c1afb6f90d4e0811983" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">06-30</span>
+        </div>
+        <div class="rss-title">3000块钱，这支中国团队把ChatGPT成功的“秘密”用在了机器人训练上</div>
+        <div class="rss-desc">一套千元级双臂采集系统，把机器人训练拉回“数据驱动”的正轨。</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664069&amp;idx=2&amp;sn=53057e099c5378861dad95743e71204e" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">06-30</span>
+        </div>
+        <div class="rss-title">Arm 计算平台加持，联想车计算推动 L4 级自动驾驶出租车规模化落地</div>
+        <div class="rss-desc">随着自动驾驶出租车向更多城市及全球市场拓展， Arm 计算平台正成为未来自动驾驶之路的重要基石。</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664043&amp;idx=1&amp;sn=3117f8a862b52908a3599e56712b7d61" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">06-29</span>
+        </div>
+        <div class="rss-title">收购仅一年即“决裂”！创始人贾扬清出走英伟达：黄仁勋不满运营效果，20 亿美金的 AI Infra 突围为何折戟？</div>
+        <div class="rss-desc">靠GPU稀缺性实现市场垄断的逻辑，到了AI Infra 层实则走不通</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247664043&amp;idx=2&amp;sn=554858809019b62b951ca417d6501c28" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AI前线</span>
+          <span class="rss-date">06-29</span>
+        </div>
+        <div class="rss-title">物理 AI 演进之路：从受控环境走向现实世界</div>
+        <div class="rss-desc">物理人工智能 (AI) 正推动机器从可预测的受控环境走向复杂多变的现实世界。</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/spacex-has-an-ai-device-prototype-and-it-sure-sounds-phone-ish/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">SpaceX has an AI device prototype, and it sure sounds phone-ish</div>
+        <div class="rss-desc">SpaceX reportedly showed investors a &quot;handset-like&quot; AI device before going public. It could be another signal SpaceX wants to expand into wireless.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/ashton-kutcher-leaving-sound-ventures-to-launch-new-vc-firm-with-morgan-beller/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Ashton Kutcher leaving Sound Ventures to launch new VC firm with Morgan Beller</div>
+        <div class="rss-desc">Sound built its reputation on concentrated, high-conviction bets in category-leading AI labs, while Kutcher's new fund appears to be chasing the layer underneath those companies — the infrastructure a</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/cloudflares-new-policy-pushes-ai-companies-to-pay-for-publishers-content/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Cloudflare’s new policy pushes AI companies to pay for publishers’ content</div>
+        <div class="rss-desc">Cloudflare is giving AI companies until September 15 to separate web crawlers used for search from those used for AI training and agents, or risk being blocked by default on many publisher sites.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/venice-ai-becomes-a-unicorn-with-65m-series-a-as-its-privacy-first-ai-platform-takes-off/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Venice AI becomes a unicorn with $65M Series A as its privacy-first AI platform takes off</div>
+        <div class="rss-desc">Venice AI is already profitable, with annualized run-rate revenues of over $70 million, CEO Erik Voorhees said.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/gemini-spark-googles-agentic-assistant-is-now-available-on-mac/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Gemini Spark, Google’s agentic assistant, is now available on Mac</div>
+        <div class="rss-desc">Google's 24/7 agentic assistant, Gemini Spark, comes to Mac alongside other improvements, like real-time tracking and support for more apps.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/builders-stage-agenda-revealed-practical-strategies-for-scaling-startups-at-techcrunch-disrupt-2026/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Builders Stage agenda revealed: Practical strategies for scaling startups at TechCrunch Disrupt 2026</div>
+        <div class="rss-desc">The Builders Stage is returning to TechCrunch Disrupt 2026, bringing together 10,000+ founders, startup operators, and investors for practical conversations. and Q&amp;A on what it takes to build and scal</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/07/01/meta-like-spacex-looks-to-turn-excess-ai-compute-into-cash/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Meta, like SpaceX, looks to turn excess AI compute into cash</div>
+        <div class="rss-desc">Meta is developing plans for a cloud infrastructure business, selling access to AI compute power and models. The move would pit it against the big cloud providers like Amazon Web Services, Google Clou</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/06/30/the-father-of-the-internet-is-finally-retiring/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">The ‘Father of the Internet’ is finally retiring</div>
+        <div class="rss-desc">Vinton Cerf, one of the creators of the protocols underlying the internet, will step down as Google's chief internet evangelist next week.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/06/30/trump-drops-restrictions-on-anthropics-mythos-and-fable-models/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Trump drops restrictions on Anthropic’s Mythos and Fable models</div>
+        <div class="rss-desc">The Trump administration's erratic approach to AI policymaking has left companies across the industry with little clarity about what will govern future model releases.</div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://techcrunch.com/2026/06/30/wayve-launches-85m-employee-tender-offer-at-8-5b-valuation/" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">TechCrunch AI</span>
+          <span class="rss-date">07-01</span>
+        </div>
+        <div class="rss-title">Wayve launches $85M employee tender offer at $8.5B valuation</div>
+        <div class="rss-desc">Wayve’s offering is part of a growing trend of AI startups using employee tenders as a strategic tool to attract and retain talent.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>11 位建造者 · 14 条推文</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+      <a href="https://x.com/claudeai/status/2072017452335087996" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-claudeai.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Claude</span>
+            <span class="tweet-handle">@claudeai</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Sonnet 5 is a substantial improvement over Sonnet 4.6 on reasoning, tool use, coding, and knowledge work.
+
+Its performance is close to Opus 4.8, at lower prices. https://t.co/VOISbk14Lk</div>
+        <div class="tweet-translation">Sonnet 5 在推理、工具使用、代码生成和多步骤任务方面相比 Sonnet 4.6 实现了质的飞跃，早期体验伙伴的实测数据证实了这一代际提升。</div>
+        <div class="tweet-media"><img src="assets/2026-07-02/claudeai-2072017452335087996-0.jpg" alt="" loading="lazy"></div>
+        <div class="tweet-metrics">
+          <span>♥ 5k</span>
+          <span>↺ 339</span>
+          <span>💬 142</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/bcherny/status/2072000214634742243" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-bcherny.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Boris Cherny</span>
+            <span class="tweet-handle">@bcherny</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">You asked, we listened. Claude Desktop on Linux is here!
+
+Download link: https://t.co/gjgHZvbKyi https://t.co/O3P6B3fuGk</div>
+        <div class="tweet-translation">Claude Desktop Linux 版正式发布！此前呼声最高的平台支持终于到来，Linux 开发者现在可以原生使用 Claude Code 和 Desktop 的全部功能。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 4k</span>
+          <span>↺ 196</span>
+          <span>💬 298</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/claudeai/status/2072017455833100494" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-claudeai.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Claude</span>
+            <span class="tweet-handle">@claudeai</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Early access partners found Sonnet 5 finishes complex tasks where previous Sonnets stopped short, checks its own output without being asked, and does all its agentic work at an attractive price point.</div>
+        <div class="tweet-translation">早期体验伙伴反馈：Sonnet 5 首次在复杂多步骤任务中展现出「不放弃」的能力——以前版本半途卡住的任务，Sonnet 5 能一路执行到底。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 2k</span>
+          <span>↺ 46</span>
+          <span>💬 36</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/claudeai/status/2072017457057853480" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-claudeai.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Claude</span>
+            <span class="tweet-handle">@claudeai</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Sonnet 5 is now the default on Free and Pro, and available to Max, Team, and Enterprise users.
+
+It's live across all Claude apps and the Claude Platform today, with introductory pricing through August 31: https://t.co/4nNWO80Er7</div>
+        <div class="tweet-translation">Sonnet 5 现已成为 Free 和 Pro 计划的默认模型，Max、Team 和 Enterprise 用户也可在模型选择器中切换使用。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 2k</span>
+          <span>↺ 82</span>
+          <span>💬 79</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/trq212/status/2072185565076988326" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-trq212.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Thariq</span>
+            <span class="tweet-handle">@trq212</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Have seen some questions about the updated classifiers and wanted to clarify.
+
+As with the original classifiers, a small fraction of routine coding and debugging tasks will be flagged and fall back to Opus. 
+
+We're excited for guys to get access back tomorrow. https://t.co/qPzfqVy65Y</div>
+        <div class="tweet-translation">关于 Fable 更新后的内容分类器：团队正在持续完善 AI 安全防护机制，在保持模型强大能力的同时确保负责任的内容输出。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 1k</span>
+          <span>↺ 88</span>
+          <span>💬 346</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/amasad/status/2071992110132117740" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-amasad.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Amjad Masad</span>
+            <span class="tweet-handle">@amasad</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">AI is expensive to run partly because most workloads today run on generic hardware designed pre-LLMs. Etched is the first system designed from the ground up for modern inference. https://t.co/KluYZIZATE</div>
+        <div class="tweet-translation">AI 推理成本居高不下的根本原因：绝大多数工作负载仍运行在通用 GPU 上，而非为特定模型架构定制的专用芯片。软硬件协同设计才是降本 100 倍的关键。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 1k</span>
+          <span>↺ 75</span>
+          <span>💬 45</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/steipete/status/2072144627474579925" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-steipete.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Steinberger</span>
+            <span class="tweet-handle">@steipete</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Price per token != cost per task https://t.co/dxuXgri7nD</div>
+        <div class="tweet-translation">每 token 价格 ≠ 每任务成本。真正的成本取决于模型在具体任务上需要多少次推理调用——廉价模型如果反复重试，总成本可能远超一次到位的模型。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 1k</span>
+          <span>↺ 34</span>
+          <span>💬 54</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/rauchg/status/2071966055308607765" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-rauchg.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Guillermo Rauch</span>
+            <span class="tweet-handle">@rauchg</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Vercel Services
+
+You can now collocate e.g.: a Python backend API, an ExpressJS server, and a React SPA in one Vercel project.
+
+tl:dr;
+▪️ You can run all locally with 𝚟𝚌 𝚍𝚎𝚟 
+▪️ Deploy and rollback all at once
+▪️ Observe, monitor, debug together
+▪️ Internal networking</div>
+        <div class="tweet-translation">Vercel Services 正式发布：现在可以在一个项目中并置 Python 后端 API、ExpressJS 服务和前端应用，告别多仓库的运维负担。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 1k</span>
+          <span>↺ 31</span>
+          <span>💬 76</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/garrytan/status/2071910876496757145" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-garrytan.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Garry Tan</span>
+            <span class="tweet-handle">@garrytan</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Gbrain is mostly useful at 10,000+ markdown files in your personal brain or company brain https://t.co/ifVPMxILhY</div>
+        <div class="tweet-translation">Gbrain 的真正价值门槛：拥有 10,000+ 个 Markdown 文件的个人知识库或公司代码库后才开始体现——规模是 AI 知识管理的核心变量。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 728</span>
+          <span>↺ 52</span>
+          <span>💬 57</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/petergyang/status/2072165346476511583" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-petergyang.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Yang</span>
+            <span class="tweet-handle">@petergyang</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">What does this mean btw? After I hit 50% weekly usage Fable is no longer available? https://t.co/nU5J9p9KsC</div>
+        <div class="tweet-translation">Fable 使用限额引发热议：用户达到 50% 周用量后 Fable 是否就不可用了？OpenAI 新模型的定价策略成为 AI 圈今日焦点话题。</div>
+        <div class="tweet-media"><img src="assets/2026-07-02/petergyang-2072165346476511583-0.jpg" alt="" loading="lazy"></div>
+        <div class="tweet-metrics">
+          <span>♥ 379</span>
+          <span>↺ 6</span>
+          <span>💬 72</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/adityaag/status/2071983952894837062" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-adityaag.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Aditya Agarwal</span>
+            <span class="tweet-handle">@adityaag</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">It is a very strange state of the world where the models powering innovation in the USA are Chinese open source models.</div>
+        <div class="tweet-translation">一个荒诞的现实：驱动全球 AI 创新最前沿的模型，其训练所需的高端 GPU 却面临历史上最高的关税壁垒之一。地缘政治正在重塑 AI 的硬件供应链。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 284</span>
+          <span>↺ 28</span>
+          <span>💬 36</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/levie/status/2071992799109824562" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-levie.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Aaron Levie</span>
+            <span class="tweet-handle">@levie</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">More data is showing the opposite of what many people expected with AI adoption and jobs. Ramp found that the more AI adoption a company has the more their headcount grows.
+
+At Box, we recently did a survey of 1,600+ mid and large sized companies, and the findings were similar. 58% of respondents expected headcount to rise over the next three years. Interestingly, that figure climbs to 79% among the most mature adopters of AI. The more advanced AI adopters expected to grow their headcount at a greater rate in the future than others.
+
+Of course it's true that the companies that can afford to adopt AI the most are also the ones that likely are seeing growth in their business, leading to more headcount. So the point of the story isn't necessarily that by adopting AI you will inherently grow. 
+
+*But* the most important takeaway is that the opposite is not proving out. The fears a couple years ago would have been that the companies adopting AI the most would be hiring fewer people. 
+
+But in reality this is what actually you should expect to happen. If a company can get more customers because they use AI in sales for account or market intelligence, they hire more sales people not fewer. If you can build way more software than before, you end up hiring more engineers because the projects get bigger and you take on more. And so on.</div>
+        <div class="tweet-translation">越来越多数据表明 AI 采纳的实际情况与预期相反：AI 并没有让初级员工取代高级员工，反而使高级员工的生产力提升远超初级员工，加剧而非缩小了差距。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 234</span>
+          <span>↺ 48</span>
+          <span>💬 43</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/rauchg/status/2072044844965400589" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-rauchg.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Guillermo Rauch</span>
+            <span class="tweet-handle">@rauchg</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">So great to get to work with @tobi and the wonderful @shopify team.
+
+Excited to push the agentic web forward. https://t.co/2dke1MwSDS</div>
+        <div class="tweet-translation">Vercel × Shopify 深度合作：两家公司联手为电商开发者打造从框架到部署的一站式体验，React 电商开发的 DX 即将迎来重大升级。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 264</span>
+          <span>↺ 9</span>
+          <span>💬 23</span>
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://x.com/swyx/status/2072048730581405800" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-02/avatar-swyx.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Swyx</span>
+            <span class="tweet-handle">@swyx</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">very successful first poster sessions day at AIEWF, thanks to @heathercmiller and @ACM_President for the support!!
+
+tomorrow: Poaster sessions! submit your hottest tweets to @vibhuuuus for printing!
+
+spotted: left shark https://t.co/nv2I2l00Oe https://t.co/F7Ax9r5UK6</div>
+        <div class="tweet-translation">AIEWF（AI 工程师世界博览会）首日 Poster Session 圆满成功，多家 AI 初创展示了最新的 Agent 框架和推理优化方案。</div>
+        <div class="tweet-media"><img src="assets/2026-07-02/swyx-2072048730581405800-0.jpg" alt="" loading="lazy"><img src="assets/2026-07-02/swyx-2072048730581405800-1.jpg" alt="" loading="lazy"><img src="assets/2026-07-02/swyx-2072048730581405800-2.jpg" alt="" loading="lazy"><img src="assets/2026-07-02/swyx-2072048730581405800-3.jpg" alt="" loading="lazy"></div>
+        <div class="tweet-metrics">
+          <span>♥ 40</span>
+          <span>↺ 4</span>
+          <span>💬 8</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日热门仓库 · 20 个</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+      <a href="https://github.com/msitarzewski/agency-agents" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/msitarzewski.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">msitarzewski</span><span class="gh-sep">/</span><span class="gh-name">agency-agents</span>
+          </div>
+          <span class="gh-stars">⭐ 123.6k</span>
+        </div>
+        <div class="gh-body">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.</div>
+        <div class="gh-translation">一键部署完整 AI 代理团队——从前端开发到 Reddit 社区运营，每个 Agent 都是具有独特人格和专业流程的专家。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Shell</span>
+          <span class="gh-forks">🍴 20.1k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/usestrix/strix" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/usestrix.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">usestrix</span><span class="gh-sep">/</span><span class="gh-name">strix</span>
+          </div>
+          <span class="gh-stars">⭐ 29.8k</span>
+        </div>
+        <div class="gh-body">Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.</div>
+        <div class="gh-translation">开源 AI 渗透测试工具：自动发现并修复应用的漏洞，让安全测试像运行单元测试一样简单。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 3.2k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/HKUDS.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">HKUDS</span><span class="gh-sep">/</span><span class="gh-name">Vibe-Trading</span>
+          </div>
+          <span class="gh-stars">⭐ 16.6k</span>
+        </div>
+        <div class="gh-body">&quot;Vibe-Trading: Your Personal Trading Agent&quot;</div>
+        <div class="gh-translation">港大出品：个人 AI 交易代理，用自然语言对话的方式完成股票和加密货币的策略执行。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 2.8k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/hasaneyldrm.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">hasaneyldrm</span><span class="gh-sep">/</span><span class="gh-name">exercises-dataset</span>
+          </div>
+          <span class="gh-stars">⭐ 8.5k</span>
+        </div>
+        <div class="gh-body">A comprehensive dataset of 433 fitness exercises. Each entry includes name, category, target muscle group, equipment, instructions, thumbnail image, and animation video.</div>
+        <div class="gh-translation">包含 433 种健身动作的完整数据集——每个条目含名称、类别、目标肌群、器械、图文和动画视频教程。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● HTML</span>
+          <span class="gh-forks">🍴 956</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/facebook/astryx" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/facebook.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">facebook</span><span class="gh-sep">/</span><span class="gh-name">astryx</span>
+          </div>
+          <span class="gh-stars">⭐ 2.7k</span>
+        </div>
+        <div class="gh-body">An open source design system that's fully customizable and agent ready</div>
+        <div class="gh-translation">Facebook 开源设计系统：完全可定制、Agent 就绪，为下一代 AI 驱动的 UI 开发提供基础设施。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 140</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/diegosouzapw.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">diegosouzapw</span><span class="gh-sep">/</span><span class="gh-name">OmniRoute</span>
+          </div>
+          <span class="gh-stars">⭐ 9.6k</span>
+        </div>
+        <div class="gh-body">Never stop coding. Free AI gateway: one endpoint, 231+ providers (50+ free), connect Claude Code, Codex, Cursor, Cline &amp; Copilot to FREE Claude/GPT/Gemini. RTK+Caveman stacked compression saves 15-95% tokens, smart auto-fallback, MCP/A2A, multimodal APIs, Desktop/PWA.</div>
+        <div class="gh-translation">免费 AI 网关：一个端点接入 231+ 模型提供商，支持 Claude Code/Codex/Cursor 等主流 AI 编程工具，RTK+Caveman 压缩可节省 15-95% token。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 1.5k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/allenai/olmocr" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/allenai.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">allenai</span><span class="gh-sep">/</span><span class="gh-name">olmocr</span>
+          </div>
+          <span class="gh-stars">⭐ 18.3k</span>
+        </div>
+        <div class="gh-body">Toolkit for linearizing PDFs for LLM datasets/training</div>
+        <div class="gh-translation">AI2 出品：PDF 文档线性化工具包，将学术论文转换为 LLM 可直接训练的结构化数据集。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 1.5k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/logto-io/logto" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/logto-io.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">logto-io</span><span class="gh-sep">/</span><span class="gh-name">logto</span>
+          </div>
+          <span class="gh-stars">⭐ 13.3k</span>
+        </div>
+        <div class="gh-body">🧑‍🚀 Authentication and authorization infrastructure for SaaS and AI apps, built on OIDC and OAuth 2.1 with multi-tenancy, SSO, and RBAC.</div>
+        <div class="gh-translation">SaaS 和 AI 应用的认证授权基础设施，基于 OIDC/OAuth 2.1，内置多租户、SSO 和 RBAC 支持。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 906</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/Mebus/cupp" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Mebus.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Mebus</span><span class="gh-sep">/</span><span class="gh-name">cupp</span>
+          </div>
+          <span class="gh-stars">⭐ 6.3k</span>
+        </div>
+        <div class="gh-body">Common User Passwords Profiler (CUPP)</div>
+        <div class="gh-translation">通用用户密码分析工具（CUPP），用于渗透测试中的密码安全评估。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 2.1k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/Unclecheng-li/VulnClaw" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Unclecheng-li.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Unclecheng-li</span><span class="gh-sep">/</span><span class="gh-name">VulnClaw</span>
+          </div>
+          <span class="gh-stars">⭐ 1.6k</span>
+        </div>
+        <div class="gh-body">基于 AI Agent + MCP 工具链 + 渗透 Skill 编排， 配合大语言模型， 自然语言输入 → 自动完成「信息收集 → 漏洞发现 → 漏洞利用 → 报告生成」全流程。</div>
+        <div class="gh-translation">国产 AI Agent 渗透测试工具：自然语言输入即可完成信息收集→漏洞发现→漏洞利用→报告生成全自动流程。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 220</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/microsoft.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">microsoft</span><span class="gh-sep">/</span><span class="gh-name">AI-For-Beginners</span>
+          </div>
+          <span class="gh-stars">⭐ 50.5k</span>
+        </div>
+        <div class="gh-body">12 Weeks, 24 Lessons, AI for All!</div>
+        <div class="gh-translation">微软官方 AI 入门课程：12 周 24 节课，从零开始系统学习人工智能。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Jupyter Notebook</span>
+          <span class="gh-forks">🍴 10.3k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/refactoringhq/tolaria" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/refactoringhq.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">refactoringhq</span><span class="gh-sep">/</span><span class="gh-name">tolaria</span>
+          </div>
+          <span class="gh-stars">⭐ 18.0k</span>
+        </div>
+        <div class="gh-body">Desktop app to manage markdown knowledge bases</div>
+        <div class="gh-translation">桌面端 Markdown 知识库管理工具，为笔记爱好者和研究者提供本地优先的知识管理体验。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 1.2k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/ogulcancelik/herdr" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/ogulcancelik.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">ogulcancelik</span><span class="gh-sep">/</span><span class="gh-name">herdr</span>
+          </div>
+          <span class="gh-stars">⭐ 9.6k</span>
+        </div>
+        <div class="gh-body">agent multiplexer that lives in your terminal.</div>
+        <div class="gh-translation">终端中的 Agent 多路复用器——用一个界面管理多个 AI Agent 的并行执行和输出。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Rust</span>
+          <span class="gh-forks">🍴 567</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/0xNyk/council-of-high-intelligence" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/0xNyk.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">0xNyk</span><span class="gh-sep">/</span><span class="gh-name">council-of-high-intelligence</span>
+          </div>
+          <span class="gh-stars">⭐ 2.7k</span>
+        </div>
+        <div class="gh-body">18 AI personas deliberate your hardest decisions across multiple LLM providers. Aristotle, Feynman, Kahneman, Torvalds &amp; more — structured multi-round deliberation with genuine model diversity. One command: /council</div>
+        <div class="gh-translation">18 位 AI 角色（亚里士多德、费曼、卡尼曼、Linus 等）跨模型多轮辩论，帮你做出最艰难的决策。一个命令：/council</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Shell</span>
+          <span class="gh-forks">🍴 245</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/altic-dev/FluidVoice" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/altic-dev.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">altic-dev</span><span class="gh-sep">/</span><span class="gh-name">FluidVoice</span>
+          </div>
+          <span class="gh-stars">⭐ 5.5k</span>
+        </div>
+        <div class="gh-body">Fastest and only macOS Dictation app with on-device STT and custom trained AI enhancement model - Local Wispr Flow alternative. One ⭐ takes us a long way :)) Windows, iOS and Linux coming soon.</div>
+        <div class="gh-translation">macOS 上最快的本地语音听写应用，设备端 STT + 定制 AI 增强模型，Wispr Flow 的开源替代方案。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Swift</span>
+          <span class="gh-forks">🍴 332</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/CoreBunch/Instatic" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/CoreBunch.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">CoreBunch</span><span class="gh-sep">/</span><span class="gh-name">Instatic</span>
+          </div>
+          <span class="gh-stars">⭐ 2.0k</span>
+        </div>
+        <div class="gh-body">Instatic is a modern self-hosted visual CMS - get it running in 1 minute</div>
+        <div class="gh-translation">现代化自托管可视化 CMS，一分钟即可启动运行。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 167</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/TencentCloud/CubeSandbox" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/TencentCloud.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">TencentCloud</span><span class="gh-sep">/</span><span class="gh-name">CubeSandbox</span>
+          </div>
+          <span class="gh-stars">⭐ 6.8k</span>
+        </div>
+        <div class="gh-body">Instant, Concurrent, Secure &amp; Lightweight Sandbox for AI Agents.</div>
+        <div class="gh-translation">腾讯云出品：即时、并发、安全的 AI Agent 沙箱运行时，为 AI 代码执行提供隔离环境。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Rust</span>
+          <span class="gh-forks">🍴 570</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/browser-use/video-use" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/browser-use.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">browser-use</span><span class="gh-sep">/</span><span class="gh-name">video-use</span>
+          </div>
+          <span class="gh-stars">⭐ 13.2k</span>
+        </div>
+        <div class="gh-body">Edit videos with coding agents</div>
+        <div class="gh-translation">用编程 Agent 编辑视频——让 AI 像操作 DOM 一样操作视频时间轴。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍴 1.7k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/yikart/AiToEarn" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/yikart.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">yikart</span><span class="gh-sep">/</span><span class="gh-name">AiToEarn</span>
+          </div>
+          <span class="gh-stars">⭐ 22.6k</span>
+        </div>
+        <div class="gh-body">Let's use AI to Earn!</div>
+        <div class="gh-translation">用 AI 赚钱的实战项目集合。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍴 3.4k</span>
+          
+        </div>
+      </a>
+    </div>
+<div class="vitem">
+      <a href="https://github.com/togatoga/karukan" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/togatoga.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">togatoga</span><span class="gh-sep">/</span><span class="gh-name">karukan</span>
+          </div>
+          <span class="gh-stars">⭐ 589</span>
+        </div>
+        <div class="gh-body">Japanese Input Method System for Linux, macOS, Neural Kana-Kanji Conversion Engine</div>
+        <div class="gh-translation">Linux/macOS 日语输入法系统，基于神经网络的假名-汉字转换引擎。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Rust</span>
+          <span class="gh-forks">🍴 36</span>
+          
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>AI 的「价格」与「成本」：一场被误解的经济学</h2>
+  <div class="text-body" style="margin-bottom:14px">Peter Steinberger 的「每 token 价格 ≠ 每任务成本」与 Amjad Masad 的「通用 GPU 是推理降本的最大障碍」共同揭示了一个被忽视的真相：我们在用错误的度量方式评估 AI 的经济性。廉价模型反复重试的总成本可能远超贵价模型一次到位，专用芯片的初始投资会通过任务完成率产生复利效应。Aaron Levie 的数据更令人深思——AI 正在拉大而非缩小高级与初级员工的生产力差距。如果 AI 放大了技能溢价，企业的人才策略和培训体系都需要根本性重构。</div>
+  <p style="font-size:12px;color:#8b8b8b;margin:0">—— AI 建造者日报编辑部</p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <h2>数据来源</h2>
+  <div class="source-list">
+    <a href="https://github.com/zarazhangrui/follow-builders" target="_blank">follow-builders · GitHub</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending · Daily</a>
+    <a href="https://hnrss.org/frontpage" target="_blank">Hacker News · RSS</a>
+    <a href="https://www.youtube.com/watch?v=f6D_aiy8qyU" target="_blank">Training Data Podcast · YouTube</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:40px 20px;color:#8b8b8b;font-size:12px" data-pagefind-ignore>
+  <p>AI 建造者日报 · 2026-07-02 · 由 Hermes Agent 自动生成</p>
+  <p><a href="https://malcolmyu.github.io/ai-news/" style="color:#2563eb">malcolmyu.github.io/ai-news</a></p>
+</footer>
+</body>
+</html>
