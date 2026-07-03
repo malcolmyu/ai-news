@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic 挖角伯克利系主任 + Fable 5 全量开放，AI Agent 开发生态进入军备竞赛 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260703">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260703" defer></script>
+<script src="../site.js?v=20260703" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">7月3日 — AI 建造者日报</div>
+<h1>Anthropic 挖角伯克利系主任 + Fable 5 全量开放，AI Agent 开发生态进入军备竞赛</h1>
+<div class="subtitle">Anthropic 挖角 UC Berkeley EECS 系主任，Claude Fable 5 向全部付费用户开放至 7 月 7 日。AI Agent 开发生态进入爆发期：agency-agents 突破 12.5 万 Star、superpowers 逼近 25 万、ECC 超 22 万。GitHub Trending 被 AI 代理工具和开发者基础设施全面占领。</div>
+<div class="dots-row"><span class="tag">Anthropic</span><span class="tag">Fable 5</span><span class="tag">AI Agent</span><span class="tag">Agent Skills</span><span class="tag">Claude Code</span><span class="tag">GitHub Trending</span></div>
+<div class="stat-row" style="margin-top:14px;">
+<div class="stat-item"><div class="stat-num">12</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">0</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>The AI Workflows Behind Every&#x27;s Consulting Team</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-bottom:16px">Every 咨询团队背后的 AI 工作流揭秘——如何用 AI 赋能专业服务团队提效</p>
+  <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fafafa">
+    <iframe src="https://www.youtube-nocookie.com/embed/IiGt2_-NmbI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px"></iframe>
+  </div>
+  <div style="margin-top:12px"><a href="https://www.youtube.com/watch?v=IiGt2_-NmbI" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:none">在 YouTube 观看 →</a></div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <h2>核心动态</h2>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>🔥 Anthropic 人才+模型双线出击</strong></p>
+      <p>UC Berkeley EECS 系主任加盟 Anthropic（Garry Tan 称为「整个科技界最被低估的故事」），同时 Claude Fable 5 向全部付费用户开放至 7 月 7 日。Alex Albert 发推「欢迎回到世界 Fable」，Claude 官方密集发布安全反馈机制和使用指引。</p>
+    </div>
+    <div class="feature-card">
+      <p><strong>🤖 AI Agent 开发生态军备竞赛</strong></p>
+      <p>GitHub Trending 被 Agent 生态全面占领：superpowers（24.4 万⭐）、ECC（22.5 万⭐）、agency-agents（12.5 万⭐）霸榜前三。agentskills 规范发布、OpenAI 推出 codex-plugin-cc 让 Claude Code 调用 Codex，代理互操作已成新战场。</p>
+    </div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>X 上的 AI 建造者们</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2072331451270606933" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-garrytan.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Mega get, head of UC Berkeley EECS omg
+
+Anthropic is on a tear https://t.co/6lTQhG7BIo</div>
+    <div class="tweet-translation">重磅！UC Berkeley EECS 系主任加盟 Anthropic，这家公司势不可挡</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 2.4k</span>
+      <span>↺ 75</span>
+      <span>💬 50</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/trq212/status/2072360902964511171" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-trq212.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thariq</span>
+        <span class="tweet-handle">@trq212</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">hello from AI engineer! https://t.co/J8sFn5pbyC</div>
+    <div class="tweet-translation">来自 AI Engineer 大会现场的问候！</div>
+    <div class="tweet-media" style="margin-top:10px"><img src="assets/2026-07-03/trq212-2072360902964511171-0.jpg" alt="" loading="lazy" style="width:100%;height:auto;border-radius:8px;display:block"></div>
+    <div class="tweet-metrics">
+      <span>♥ 1.7k</span>
+      <span>↺ 12</span>
+      <span>💬 93</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2072402517397573717" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-garrytan.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Most underreported story in all of tech https://t.co/IfhGLmHwuL</div>
+    <div class="tweet-translation">整个科技界最被低估的故事</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 1.6k</span>
+      <span>↺ 250</span>
+      <span>💬 60</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/trq212/status/2072366310416425053" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-trq212.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thariq</span>
+        <span class="tweet-handle">@trq212</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">HTML mentioned https://t.co/lWYyfXjmWS</div>
+    <div class="tweet-translation">HTML 被点名了</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 1.5k</span>
+      <span>↺ 34</span>
+      <span>💬 81</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/thsottiaux/status/2072410623380468190" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-thsottiaux.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Thibault Sottiaux</span>
+        <span class="tweet-handle">@thsottiaux</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">It&#x27;s happening https://t.co/PtS0ZoYL09</div>
+    <div class="tweet-translation">终于来了！</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 1.5k</span>
+      <span>↺ 35</span>
+      <span>💬 176</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/garrytan/status/2072461457195950446" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-garrytan.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Garry Tan</span>
+        <span class="tweet-handle">@garrytan</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">https://t.co/gTrjV7mcxf https://t.co/7r4wY0VvO0</div>
+    <div class="tweet-translation">两条链接分享</div>
+    <div class="tweet-media" style="margin-top:10px"><img src="assets/2026-07-03/garrytan-2072461457195950446-0.jpg" alt="" loading="lazy" style="width:100%;height:auto;border-radius:8px;display:block"></div>
+    <div class="tweet-metrics">
+      <span>♥ 1.2k</span>
+      <span>↺ 72</span>
+      <span>💬 48</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2072402639644766602" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-claudeai.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">All paid plans with usage included can access Fable 5 through July 7. You can use Fable 5 up to 50% of your weekly usage limit, after which you can switch to another model for the remainder of your usage. You can also continue using Fable via usage credits.
+
+More here: https://t.co/5reBCfXAqy</div>
+    <div class="tweet-translation">所有付费用户可在 7 月 7 日前使用 Fable 5，最多消耗 50% 周用量额度，之后可用用量积分继续使用</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 1.1k</span>
+      <span>↺ 66</span>
+      <span>💬 175</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2072402640907162072" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-claudeai.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">If one of your requests is mistakenly flagged in Claude Code, run /feedback to file a report. On https://t.co/XSKiQaAUU9 and Cowork, you can share feedback through the thumbs buttons. 
+
+This feedback helps us further tune these classifiers and reduce false positives over time.</div>
+    <div class="tweet-translation">Claude Code 中被误标记？运行 /feedback 提交报告，帮助优化安全分类器减少误报</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 717</span>
+      <span>↺ 35</span>
+      <span>💬 45</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/claudeai/status/2072402642836615273" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-claudeai.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Claude</span>
+        <span class="tweet-handle">@claudeai</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Read the Fable 5 blog post here: https://t.co/iQymY0jQvY</div>
+    <div class="tweet-translation">阅读 Fable 5 完整博文</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 715</span>
+      <span>↺ 48</span>
+      <span>💬 72</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/steipete/status/2072475858435276840" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-steipete.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Peter Steinberger</span>
+        <span class="tweet-handle">@steipete</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">I’m looking for a semi-private hack space for a few days in SF for me and some of the OpenClaw maintainers. We need to cook. DM leads my way 🙏🦞</div>
+    <div class="tweet-translation">寻找 SF 半私密黑客空间，与 OpenClaw 维护者们闭关开发</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 513</span>
+      <span>↺ 14</span>
+      <span>💬 66</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/alexalbert__/status/2072404717490360727" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-alexalbert__.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Alex Albert</span>
+        <span class="tweet-handle">@alexalbert__</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Welcome back to the world Fable!! https://t.co/krcdkuYId8</div>
+    <div class="tweet-translation">欢迎回到世界，Fable！！</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 508</span>
+      <span>↺ 9</span>
+      <span>💬 24</span>
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://x.com/amasad/status/2072385092824260748" target="_blank" class="tweet-card">
+    <div class="tweet-header">
+      <img class="tweet-avatar" src="assets/2026-07-03/avatar-amasad.jpg" alt="" loading="lazy">
+      <div class="tweet-author">
+        <span class="tweet-name">Amjad Masad</span>
+        <span class="tweet-handle">@amasad</span>
+      </div>
+      <span class="tweet-date"></span>
+    </div>
+    <div class="tweet-body">Now that building is easy, we’ve been increasingly focused on getting entrepreneurs to market, helping them reach their first customer and first dollar.
+
+Whop is one of the best places on the internet to monetize your creations — and now you can sell your Replit apps on there. https://t.co/lEGZGn51Wg</div>
+    <div class="tweet-translation">构建变容易了，现在重心是帮创业者触达市场——Whop 是最佳变现平台之一，Replit 应用可直接上架销售</div>
+    
+    <div class="tweet-metrics">
+      <span>♥ 498</span>
+      <span>↺ 32</span>
+      <span>💬 27</span>
+    </div>
+  </a>
+</div>
+  </div>
+</section>
+
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日热门仓库</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/usestrix/strix" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/usestrix.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">usestrix</span><span class="gh-sep">/</span><span class="gh-name">strix</span>
+      </div>
+      <span class="gh-stars">⭐ 32.4k</span>
+    </div>
+    <div class="gh-body">Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.</div>
+    <div class="gh-translation">开源 AI 渗透测试工具，自动发现并修复应用安全漏洞</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 3.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/JuliusBrussee/caveman" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/JuliusBrussee.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">JuliusBrussee</span><span class="gh-sep">/</span><span class="gh-name">caveman</span>
+      </div>
+      <span class="gh-stars">⭐ 81.1k</span>
+    </div>
+    <div class="gh-body">🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman</div>
+    <div class="gh-translation">🪨 用穴居人语言风格削减 65% token 用量——Claude Code 极简沟通技能</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 4.5k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/msitarzewski/agency-agents" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/msitarzewski.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">msitarzewski</span><span class="gh-sep">/</span><span class="gh-name">agency-agents</span>
+      </div>
+      <span class="gh-stars">⭐ 125.6k</span>
+    </div>
+    <div class="gh-body">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.</div>
+    <div class="gh-translation">完整 AI 代理公司触手可及——从前端魔法师到 Reddit 社区忍者，每位代理都是拥有独特性格与流程的专家</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Shell</span>
+      <span class="gh-forks">🍴 20.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/hasaneyldrm.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">hasaneyldrm</span><span class="gh-sep">/</span><span class="gh-name">exercises-dataset</span>
+      </div>
+      <span class="gh-stars">⭐ 9.3k</span>
+    </div>
+    <div class="gh-body">A comprehensive dataset of 433 fitness exercises. Each entry includes name, category, target muscle group, equipment, instructions, thumbnail image, and animation video.</div>
+    <div class="gh-translation">433 个健身动作综合数据集：含名称、类别、目标肌群、器械、说明、缩略图及动画视频</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● HTML</span>
+      <span class="gh-forks">🍴 1.0k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/santifer/career-ops" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/santifer.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">santifer</span><span class="gh-sep">/</span><span class="gh-name">career-ops</span>
+      </div>
+      <span class="gh-stars">⭐ 57.9k</span>
+    </div>
+    <div class="gh-body">AI-powered job search system built on Claude Code. 14 skill modes, Go dashboard, PDF generation, batch processing.</div>
+    <div class="gh-translation">基于 Claude Code 的 AI 求职系统：14 种技能模式、Go 仪表盘、PDF 生成、批量处理</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 11.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/obra.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">obra</span><span class="gh-sep">/</span><span class="gh-name">superpowers</span>
+      </div>
+      <span class="gh-stars">⭐ 244.5k</span>
+    </div>
+    <div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+    <div class="gh-translation">真正实用的代理技能框架与软件开发方法论</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Shell</span>
+      <span class="gh-forks">🍴 21.7k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/ChromeDevTools.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">ChromeDevTools</span><span class="gh-sep">/</span><span class="gh-name">chrome-devtools-mcp</span>
+      </div>
+      <span class="gh-stars">⭐ 45.1k</span>
+    </div>
+    <div class="gh-body">Chrome DevTools for coding agents</div>
+    <div class="gh-translation">面向编码代理的 Chrome DevTools 工具集成</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 2.9k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/browser-use/video-use" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/browser-use.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">browser-use</span><span class="gh-sep">/</span><span class="gh-name">video-use</span>
+      </div>
+      <span class="gh-stars">⭐ 13.8k</span>
+    </div>
+    <div class="gh-body">Edit videos with coding agents</div>
+    <div class="gh-translation">用编码代理编辑视频</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1.7k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/actions/checkout" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/actions.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">actions</span><span class="gh-sep">/</span><span class="gh-name">checkout</span>
+      </div>
+      <span class="gh-stars">⭐ 8.2k</span>
+    </div>
+    <div class="gh-body">Action for checking out a repo</div>
+    <div class="gh-translation"></div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 2.5k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/affaan-m/ECC" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/affaan-m.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">affaan-m</span><span class="gh-sep">/</span><span class="gh-name">ECC</span>
+      </div>
+      <span class="gh-stars">⭐ 225.2k</span>
+    </div>
+    <div class="gh-body">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+    <div class="gh-translation">代理性能优化系统——技能、本能、记忆、安全及研究优先开发，支持 Claude Code/Codex/Opencode/Cursor</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 34.5k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/HKUDS.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">HKUDS</span><span class="gh-sep">/</span><span class="gh-name">Vibe-Trading</span>
+      </div>
+      <span class="gh-stars">⭐ 17.4k</span>
+    </div>
+    <div class="gh-body">&quot;Vibe-Trading: Your Personal Trading Agent&quot;</div>
+    <div class="gh-translation">「Vibe-Trading」你的 AI 个人交易代理</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 2.9k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/agentskills/agentskills" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/agentskills.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">agentskills</span><span class="gh-sep">/</span><span class="gh-name">agentskills</span>
+      </div>
+      <span class="gh-stars">⭐ 21.6k</span>
+    </div>
+    <div class="gh-body">Specification and documentation for Agent Skills</div>
+    <div class="gh-translation">Agent Skills 规范与官方文档</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/openai/codex-plugin-cc" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/openai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">openai</span><span class="gh-sep">/</span><span class="gh-name">codex-plugin-cc</span>
+      </div>
+      <span class="gh-stars">⭐ 22.7k</span>
+    </div>
+    <div class="gh-body">Use Codex from Claude Code to review code or delegate tasks.</div>
+    <div class="gh-translation">从 Claude Code 调用 Codex 进行代码审查或任务委托</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 1.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/langflow-ai/langflow" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/langflow-ai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">langflow-ai</span><span class="gh-sep">/</span><span class="gh-name">langflow</span>
+      </div>
+      <span class="gh-stars">⭐ 150.8k</span>
+    </div>
+    <div class="gh-body">Langflow is a powerful tool for building and deploying AI-powered agents and workflows.</div>
+    <div class="gh-translation">构建和部署 AI 代理及工作流的强大低代码平台</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 9.4k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/pytorch/pytorch" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/pytorch.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">pytorch</span><span class="gh-sep">/</span><span class="gh-name">pytorch</span>
+      </div>
+      <span class="gh-stars">⭐ 101.2k</span>
+    </div>
+    <div class="gh-body">Tensors and Dynamic neural networks in Python with strong GPU acceleration</div>
+    <div class="gh-translation">Python 张量与动态神经网络框架，强力 GPU 加速</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 28.2k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/harvard-edge/cs249r_book" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/harvard-edge.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">harvard-edge</span><span class="gh-sep">/</span><span class="gh-name">cs249r_book</span>
+      </div>
+      <span class="gh-stars">⭐ 25.6k</span>
+    </div>
+    <div class="gh-body">Machine Learning Systems</div>
+    <div class="gh-translation">哈佛大学机器学习系统课程教材</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 3.1k</span>
+      
+    </div>
+  </a>
+</div>
+<div class="vitem">
+  <a href="https://github.com/ryanmcdermott/clean-code-javascript" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/ryanmcdermott.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">ryanmcdermott</span><span class="gh-sep">/</span><span class="gh-name">clean-code-javascript</span>
+      </div>
+      <span class="gh-stars">⭐ 94.6k</span>
+    </div>
+    <div class="gh-body">Clean Code concepts adapted for JavaScript</div>
+    <div class="gh-translation">适用于 JavaScript 的 Clean Code 原则</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 12.5k</span>
+      
+    </div>
+  </a>
+</div>
+  </div>
+</section>
+
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>Agent 互操作：下一个万亿级战场</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a">
+    今天的 GitHub Trending 提供了一个罕见的横截面：superpowers（24.4 万⭐）、ECC（22.5 万⭐）、agency-agents（12.5 万⭐）分别代表了 Agent Skills 框架、Agent 性能优化、Agent 协作三种范式。更引人注目的是 <strong>codex-plugin-cc</strong>——OpenAI 官方推出的 Claude Code 插件，让 Codex 和 Claude Code 可以互相调用。这标志着 Agent 互操作时代正式开启：未来的开发者不会绑定于某个单一 Agent 平台，而是根据任务动态调度最合适的 Agent。与此同时，Anthropic 挖角伯克利系主任 + 全力推广 Fable 5 的双线出击显示：上一轮是模型能力之争，下一轮是 Agent 平台生态之争。
+  </p>
+</section>
+
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <h2>今日内容来源</h2>
+  <div class="source-list">
+    <a href="https://github.com/trending?since=daily">GitHub Trending</a>
+    <a href="https://github.com/zarazhangrui/follow-builders">Follow Builders (feed-x.json)</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:36px 20px;font-size:12px;color:#8b8b8b;border-top:1px solid #e8e8e6;margin-top:0">
+  <p>AI 建造者日报 · 2026年7月3日 · 由 Hermes 自动生成</p>
+</footer>
+</body>
+</html>
