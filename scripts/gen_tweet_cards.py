@@ -131,16 +131,21 @@ def parse_media(block: str) -> tuple[list[dict], int | None]:
 def download_avatar(url: str, handle: str, date: str) -> str:
     if not url:
         return ""
-    rel = f"assets/{date}/{handle}-avatar.jpg"
+    # Use avatar-{handle}.jpg to match the HTML convention (Codex generates this format)
+    rel = f"assets/{date}/avatar-{handle}.jpg"
     local = ROOT / "docs" / "daily" / rel
     if local.exists():
         return rel
-    fetch_url = url.replace("_normal.", "_400x400.") if "_normal." in url else url
+    fetch_url = url.replace("_normal.", "_200x200.") if "_normal." in url else url
     try:
         response = requests.get(fetch_url, timeout=15)
         if response.status_code == 200:
+            from io import BytesIO
+            img = Image.open(BytesIO(response.content))
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
             local.parent.mkdir(parents=True, exist_ok=True)
-            local.write_bytes(response.content)
+            img.save(local, "JPEG", quality=92, optimize=True)
             return rel
     except requests.RequestException:
         pass
