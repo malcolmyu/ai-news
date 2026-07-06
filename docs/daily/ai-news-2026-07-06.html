@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex 生态大爆发：OpenAI 反攻 Claude Code，Vercel 万亿 Token 网关动画揭密 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260706">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260706" defer></script>
+<script src="../site.js?v=20260706" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+/* Tweet card styles */
+.tweet-card{display:block;text-decoration:none;background:#fff;border:1px solid #e8e8e6;border-radius:12px;padding:14px;transition:box-shadow .15s}
+.tweet-card:hover{box-shadow:0 2px 8px rgba(28,28,28,.06)}
+.tweet-header{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.tweet-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0}
+.tweet-author{display:flex;flex-direction:column;min-width:0;flex:1}
+.tweet-name{font-size:13px;font-weight:600;color:#1c1c1c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tweet-handle{font-size:11px;color:#8b8b8b}
+.tweet-date{font-size:11px;color:#8b8b8b;flex-shrink:0}
+.tweet-metrics{display:flex;gap:12px;font-size:11px;color:#8b8b8b;margin-top:8px;padding-top:8px;border-top:1px solid #f0f0ef}
+.tweet-media{margin-top:8px;border-radius:8px;overflow:hidden}
+.tweet-media img{max-width:100%;height:auto;display:block}
+/* gh-card */
+.gh-card{display:block;text-decoration:none;background:#fff;border:1px solid #e8e8e6;border-radius:12px;padding:14px;transition:box-shadow .15s}
+.gh-card:hover{box-shadow:0 2px 8px rgba(28,28,28,.06)}
+.gh-header{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.gh-avatar{width:26px;height:26px;border-radius:50%;flex-shrink:0}
+.gh-repo{font-size:13px;font-weight:600;color:#1c1c1c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.gh-sep{color:#8b8b8b;font-weight:400}
+.gh-name{color:#1c1c1c}
+.gh-owner{color:#4a4a4a;font-weight:400}
+.gh-stars{font-size:12px;color:#8b8b8b;flex-shrink:0}
+.gh-body,.gh-translation{font-size:13px;line-height:1.55;margin-bottom:4px}
+.gh-body{color:#4a4a4a}
+.gh-translation{color:#2563eb;font-size:12px}
+.gh-meta{display:flex;gap:10px;font-size:11px;color:#8b8b8b;margin-top:6px;flex-wrap:wrap}
+.gh-topic{display:inline-block;background:rgba(37,99,235,.06);color:#2563eb;border-radius:999px;padding:2px 8px;font-size:10px;margin-right:4px;margin-top:4px}
+/* RSS card */
+.rss-card{display:block;text-decoration:none;background:#fff;border:1px solid #e8e8e6;border-radius:12px;padding:14px;transition:box-shadow .15s}
+.rss-card:hover{box-shadow:0 2px 8px rgba(28,28,28,.06)}
+.rss-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.rss-source{font-size:11px;color:#2563eb;font-weight:600}
+.rss-date{font-size:11px;color:#8b8b8b}
+.rss-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.4;margin-bottom:5px}
+.rss-desc{font-size:12px;color:#4a4a4a;line-height:1.55;overflow-wrap:break-word;word-break:break-word}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a class="nav-link" href="../index.html">首页</a>
+<a class="nav-link" href="archive.html">归档</a>
+<a class="nav-link" href="../research" target="_blank">研究报告</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">📰 AI 建造者日报</div>
+<h1>Codex 生态大爆发：OpenAI 反攻 Claude Code，Vercel 万亿 Token 网关动画揭密</h1>
+<p class="subtitle">2026年7月6日 · 8 位建造者 · 21 个热门仓库 · 含 RSS</p>
+<div class="dots-row">
+<span class="tag">🏗️ 建造者动态</span>
+<span class="tag">📈 GitHub Trending</span>
+<span class="tag">📡 RSS 精选</span>
+<span class="tag">🎙️ 深度对话</span>
+</div>
+</section>
+
+<!-- 今日要点 -->
+<section class="card span-4">
+<div class="label-sm">✨ 今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>Codex 生态双向扩张</strong> OpenAI 发布 Codex for Claude Code 插件，同时 ChatGPT 原生集成 Codex 能力。Thibault 在社区征集 Codex 短板引发 2000+ 条回复，Peter 预告 TokenMaxxing 额度可视化</p>
+</div>
+<div class="feature-card">
+<p><strong>Agent 工具链基建化</strong> Caveman 砍词技能 8.5 万星领跑，Herdr 终端 Agent 多路复用器异军突起（650+ 星/日），Claude Code 技能市场持续膨胀——337 个技能包覆盖工程到合规全场景</p>
+</div>
+</div>
+</section>
+
+<section class="card span-4">
+<div class="label-sm">🎙️ 深度对话</div>
+<h2>Cloudflare CEO: The Internet's Business Model Is Dead</h2>
+<iframe width="100%" height="480" src="https://www.youtube-nocookie.com/embed/UN47z_opfmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;max-width:100%"></iframe>
+<div class="vlist" style="margin-top:14px">
+<div class="vitem">
+<div class="vitem-title">💡 要点</div>
+<div class="vitem-desc">Cloudflare CEO Matthew Prince 谈论互联网商业模式的根本性变革，AI 爬虫正在改变网站运营的经济学</div>
+</div>
+</div>
+</section>
+
+<section class="card span-4">
+<div class="label-sm">📡 RSS 精选</div>
+<div class="vlist-2col">
+
+<div class="vitem"><a href="https://aigc-weekly.agi.li/weekly/Y26W26" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AIGC Weekly</span><span class="rss-date">2026-07-05</span></div>
+<div class="rss-title">Agili 的 AIGC 周刊（Y26W26）</div>
+<div class="rss-desc">本周的关键词是「信任」。Claude Code 被发现在系统提示中注入隐写标记，Fable 5 出口管制在三周封禁后解除，Sonnet 5 发布但收获「晚了一代」的争议评价——Anthropic 在光与影之间度过了极不寻常的一周。</div>
+</a></div>
+
+</div>
+</section>
+
+<section class="card span-4">
+<div class="label-sm">🏗️ 建造者动态</div>
+<div class="vlist-2col">
+
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2073551549494596079" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">What is something that you feel is surprising that Codex still can't do well and we should have gotten right a while ago?</div>
+<div class="tweet-translation">关于 Codex，你觉得有什么令人惊讶地做得还不够好的地方，而我们本该早就搞定的？——Thibault 抛出灵魂拷问，引发激烈讨论</div>
+<div class="tweet-metrics">
+<span>♥ 1.8K</span>
+<span>↺ 29</span>
+<span>💬 1969</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/steipete/status/2073482942513565713" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+</div>
+<div class="tweet-body">In the next version of https://t.co/B1RkFJhhSH - see exactly when you resets expire so you can up your  ̶t̶o̶k̶e̶n̶m̶a̶x̶x̶i̶n̶g̶ valuemaxxing game! https://t.co/04q26JVtiC</div>
+<div class="tweet-translation">下一版 TokenMaxxing 将显示你的 token 重置倒计时，让你可以最大化利用额度——Peter 预告产品更新</div>
+<div class="tweet-media"><img src="assets/2026-07-06/steipete-2073482942513565713-0.jpg" alt="" loading="lazy" width="616" height="472"></div>
+<div class="tweet-metrics">
+<span>♥ 1.4K</span>
+<span>↺ 42</span>
+<span>💬 87</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2073554978053005607" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">A silly, but made me laugh interaction with Sol
+
+-----------------
+
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+
+&gt; 🫡 Salute received, loud and clear. Carry on!
+
+* 12
+
+&gt; 39 × 12 = 468 🫡
+
+- 800
+
+&gt; 468 − 800 = −332 🫡
+
+?
+
+&gt; There were 39 🫡 emojis.
+&gt; (39 × 12) − 800 = 468 − 800 = −332.
+
+how can you have negative emojis
+
+&gt; You can’t physically. −332 🫡 means you’re short 332 salutes or ... owe 332 salutes.
+&gt; Actual emojis remaining: 0 🫡, with a 332-salute debt.
+
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡🫡
+
+&gt; Payment received: 39 🫡
+&gt; Remaining salute debt: 293 🫡
+
+hahaha
+
+&gt; The salute economy is ruthless. 🫡📉</div>
+<div class="tweet-translation">和 Sol（AI 浏览器助手）的一次搞笑互动——一堆 🫡 敬礼 emoji 把 Sol 逗乐了</div>
+<div class="tweet-metrics">
+<span>♥ 1.1K</span>
+<span>↺ 24</span>
+<span>💬 116</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2073565412336308699" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+</div>
+<div class="tweet-body">iykyk https://t.co/irvzysRIpT</div>
+<div class="tweet-translation"></div>
+<div class="tweet-media"><img src="assets/2026-07-06/thsottiaux-2073565412336308699-0.jpg" alt="" loading="lazy" width="1200" height="622"></div>
+<div class="tweet-metrics">
+<span>♥ 893</span>
+<span>↺ 29</span>
+<span>💬 114</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/rauchg/status/2073563586270781674" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+</div>
+<div class="tweet-body">🏁 I animated the token 💰 spend race, from ~lifetime Vercel AI Gateway usage, which aggregates trillions of tokens from millions of developers a month.
+
+Fascinating to see the fluctuations among the labs, Anthropic's dominance, and the rise of open weight AI. https://t.co/iX8oRA4SBP</div>
+<div class="tweet-translation">🏁 我动画化了 Vercel AI Gateway 的 token 消费竞赛，该网关聚合数百万开发者每月数万亿 token 的使用量</div>
+<div class="tweet-metrics">
+<span>♥ 769</span>
+<span>↺ 34</span>
+<span>💬 64</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/sama/status/2073636003215249515" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+</div>
+<div class="tweet-body">they really nailed it with "life, liberty, and the pursuit of happiness"</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 601</span>
+<span>↺ 23</span>
+<span>💬 64</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/_catwu/status/2073439890482794966" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="https://unavatar.io/x/_catwu" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Cat Wu</span>
+<span class="tweet-handle">@_catwu</span>
+</div>
+</div>
+<div class="tweet-body">One of the things I love about Claude Fable 5 is that it knew to use propensity score matching (matching users on activity so you compare like with like) in my retention analysis without me asking.
+
+It’s exciting to see Fable 5’s improved judgment across all of its work, from writing emails and docs in Cowork to debugging complex errors in Claude Code</div>
+<div class="tweet-translation">Claude Fable 5 最让我喜欢的一点是它懂得用倾向得分匹配（按用户活跃度匹配对照组），让你能正确对比分析实验数据</div>
+<div class="tweet-metrics">
+<span>♥ 484</span>
+<span>↺ 9</span>
+<span>💬 58</span>
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://x.com/steipete/status/2073450886698070282" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-06/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+</div>
+<div class="tweet-body">What a ride. https://t.co/63vW2TpQA4</div>
+<div class="tweet-translation">真是段奇妙的旅程——Peter 回顾产品发展历程</div>
+<div class="tweet-metrics">
+<span>♥ 456</span>
+<span>↺ 12</span>
+<span>💬 36</span>
+</div>
+</a></div>
+
+</div>
+</section>
+
+<section class="card span-4">
+<div class="label-sm">📈 GitHub Trending</div>
+<div class="vlist-2col">
+
+<div class="vitem"><a href="https://github.com/Zackriya-Solutions/meetily" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Zackriya-Solutions.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Zackriya-Solutions</span><span class="gh-sep">/</span><span class="gh-name">meetily</span>
+</div>
+<span class="gh-stars">⭐ 17.2k</span>
+</div>
+<div class="gh-body">Privacy first, AI meeting assistant with 4x faster Parakeet/Whisper live transcription, speaker diarization, and Ollama summarization built on Rust. 100% local processing. no cloud required.</div>
+<div class="gh-translation">隐私优先的 AI 会议助手，基于 Rust 构建，Parakeet/Whisper 实时转录 4 倍加速，Ollama 本地摘要——完全离线，无需云端</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍴 1.8k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/openai/codex-plugin-cc" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/openai.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">openai</span><span class="gh-sep">/</span><span class="gh-name">codex-plugin-cc</span>
+</div>
+<span class="gh-stars">⭐ 25.5k</span>
+</div>
+<div class="gh-body">Use Codex from Claude Code to review code or delegate tasks.</div>
+<div class="gh-translation">OpenAI 官方发布 Codex 插件，让你在 Claude Code 中使用 Codex 进行代码审查和任务委派</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 1.5k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/asgeirtj/system_prompts_leaks" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/asgeirtj.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">asgeirtj</span><span class="gh-sep">/</span><span class="gh-name">system_prompts_leaks</span>
+</div>
+<span class="gh-stars">⭐ 50.0k</span>
+</div>
+<div class="gh-body">Extracted system prompts from Anthropic - Claude Fable 5, Opus 4.8, Claude Code, Claude Design. OpenAI - ChatGPT 5.5 Thinking, GPT 5.5 Instant, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more.</div>
+<div class="gh-translation">收集并公开了 Anthropic Claude Fable 5、OpenAI ChatGPT 5.5、Google Gemini 3.5 等主流模型的系统提示词——持续更新中</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 8.2k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Leonxlnx.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Leonxlnx</span><span class="gh-sep">/</span><span class="gh-name">taste-skill</span>
+</div>
+<span class="gh-stars">⭐ 57.6k</span>
+</div>
+<div class="gh-body">Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop</div>
+<div class="gh-translation">Taste-Skill — 给你的 AI 注入审美，阻止它生成无聊、千篇一律的「AI 味」内容</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 3.9k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/alirezarezvani/claude-skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/alirezarezvani.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">alirezarezvani</span><span class="gh-sep">/</span><span class="gh-name">claude-skills</span>
+</div>
+<span class="gh-stars">⭐ 20.6k</span>
+</div>
+<div class="gh-body">337 Claude Code skills &amp; agent skills &amp; plugins for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents</div>
+<div class="gh-translation">337 个 Claude Code 技能与代理插件合集，覆盖工程、营销、产品、合规等多个领域</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.8k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/ogulcancelik/herdr" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ogulcancelik.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ogulcancelik</span><span class="gh-sep">/</span><span class="gh-name">herdr</span>
+</div>
+<span class="gh-stars">⭐ 12.1k</span>
+</div>
+<div class="gh-body">agent multiplexer that lives in your terminal.</div>
+<div class="gh-translation">终端里的 Agent 多路复用器——在一个终端窗口中管理多个 AI Agent</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍴 705</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/alibaba/page-agent" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/alibaba.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">alibaba</span><span class="gh-sep">/</span><span class="gh-name">page-agent</span>
+</div>
+<span class="gh-stars">⭐ 23.9k</span>
+</div>
+<div class="gh-body">JavaScript in-page GUI agent. Control web interfaces with natural language.</div>
+<div class="gh-translation">阿里巴巴开源 JavaScript 页面 GUI Agent，用自然语言控制网页界面</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 2.1k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/harvard-edge/cs249r_book" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/harvard-edge.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">harvard-edge</span><span class="gh-sep">/</span><span class="gh-name">cs249r_book</span>
+</div>
+<span class="gh-stars">⭐ 26.9k</span>
+</div>
+<div class="gh-body">Machine Learning Systems</div>
+<div class="gh-translation">哈佛大学机器学习系统课程教材</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 3.2k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/usestrix/strix" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/usestrix.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">usestrix</span><span class="gh-sep">/</span><span class="gh-name">strix</span>
+</div>
+<span class="gh-stars">⭐ 37.2k</span>
+</div>
+<div class="gh-body">Open-source AI penetration testing tool to find and fix your app's vulnerabilities.</div>
+<div class="gh-translation">开源 AI 渗透测试工具，自动发现并修复应用安全漏洞</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 3.8k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/hesreallyhim.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">hesreallyhim</span><span class="gh-sep">/</span><span class="gh-name">awesome-claude-code</span>
+</div>
+<span class="gh-stars">⭐ 48.4k</span>
+</div>
+<div class="gh-body">A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code</div>
+<div class="gh-translation">精心挑选的 Claude Code 资源合集——顶级技能、代理、开发工具和插件一网打尽</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 4.2k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/coreyhaines31/marketingskills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/coreyhaines31.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">coreyhaines31</span><span class="gh-sep">/</span><span class="gh-name">marketingskills</span>
+</div>
+<span class="gh-stars">⭐ 36.5k</span>
+</div>
+<div class="gh-body">Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.</div>
+<div class="gh-translation">Claude Code 和 AI Agent 的营销技能包——CRO、文案、SEO、分析和增长工程</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 5.9k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/JuliusBrussee/caveman" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/JuliusBrussee.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">JuliusBrussee</span><span class="gh-sep">/</span><span class="gh-name">caveman</span>
+</div>
+<span class="gh-stars">⭐ 84.9k</span>
+</div>
+<div class="gh-body">why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman</div>
+<div class="gh-translation">🪨 为什么要用很多 token？——Claude Code 技能，用原始人说话方式砍掉 65% token 消耗</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 4.7k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/CoplayDev/unity-mcp" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/CoplayDev.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">CoplayDev</span><span class="gh-sep">/</span><span class="gh-name">unity-mcp</span>
+</div>
+<span class="gh-stars">⭐ 12.0k</span>
+</div>
+<div class="gh-body">Unity MCP acts as a bridge between AI assistants and your Unity Editor.</div>
+<div class="gh-translation">Unity MCP 桥接 AI 助手与 Unity 编辑器，让 LLM 管理资产、控制场景、编辑脚本</div>
+<div class="gh-meta">
+<span class="gh-lang">● C#</span>
+<span class="gh-forks">🍴 1.3k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/facebook/astryx" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/facebook.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">facebook</span><span class="gh-sep">/</span><span class="gh-name">astryx</span>
+</div>
+<span class="gh-stars">⭐ 5.9k</span>
+</div>
+<div class="gh-body">An open source design system that's fully customizable and agent ready</div>
+<div class="gh-translation">Facebook 开源设计系统，完全可定制且 Agent 就绪</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 376</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/immich-app/immich" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/immich-app.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">immich-app</span><span class="gh-sep">/</span><span class="gh-name">immich</span>
+</div>
+<span class="gh-stars">⭐ 106.1k</span>
+</div>
+<div class="gh-body">High performance self-hosted photo and video management solution.</div>
+<div class="gh-translation">高性能自托管照片和视频管理方案——Google Photos 的开源替代</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 6.1k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/ruvnet/RuView" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ruvnet.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ruvnet</span><span class="gh-sep">/</span><span class="gh-name">RuView</span>
+</div>
+<span class="gh-stars">⭐ 76.7k</span>
+</div>
+<div class="gh-body">Turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.</div>
+<div class="gh-translation">将普通 WiFi 信号转化为实时空间智能——无需摄像头即可实现生命体征监测和存在检测</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍴 10.3k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/gastownhall/gastown" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/gastownhall.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">gastownhall</span><span class="gh-sep">/</span><span class="gh-name">gastown</span>
+</div>
+<span class="gh-stars">⭐ 16.4k</span>
+</div>
+<div class="gh-body">Gas Town - multi-agent workspace manager</div>
+<div class="gh-translation">Gas Town — 多 Agent 工作区管理器</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍴 1.5k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/dotnet/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/dotnet.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">dotnet</span><span class="gh-sep">/</span><span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 4.1k</span>
+</div>
+<div class="gh-body">Repository for skills to assist AI coding agents with .NET and C#</div>
+<div class="gh-translation">.NET 官方 AI 编码 Agent 技能仓库</div>
+<div class="gh-meta">
+<span class="gh-lang">● C#</span>
+<span class="gh-forks">🍴 302</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/OthmanAdi/planning-with-files" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/OthmanAdi.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">OthmanAdi</span><span class="gh-sep">/</span><span class="gh-name">planning-with-files</span>
+</div>
+<span class="gh-stars">⭐ 24.7k</span>
+</div>
+<div class="gh-body">Persistent file-based planning for AI coding agents and long-running agentic tasks.</div>
+<div class="gh-translation">为 AI 编程 Agent 设计的持久化文件规划系统——支持崩溃恢复、多 Agent 共享状态</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.1k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/steipete/CodexBar" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/steipete.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">steipete</span><span class="gh-sep">/</span><span class="gh-name">CodexBar</span>
+</div>
+<span class="gh-stars">⭐ 16.3k</span>
+</div>
+<div class="gh-body">Show usage stats for OpenAI Codex and Claude Code, without having to login.</div>
+<div class="gh-translation">无需登录即可查看 OpenAI Codex 和 Claude Code 的使用统计——macOS 菜单栏应用</div>
+<div class="gh-meta">
+<span class="gh-lang">● Swift</span>
+<span class="gh-forks">🍴 1.4k</span>
+
+</div>
+</a></div>
+
+<div class="vitem"><a href="https://github.com/anthropics/claude-code" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span><span class="gh-sep">/</span><span class="gh-name">claude-code</span>
+</div>
+<span class="gh-stars">⭐ 136.3k</span>
+</div>
+<div class="gh-body">Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster</div>
+<div class="gh-translation">Anthropic 官方 Claude Code——终端中的代理编码工具，理解代码库，帮你更快编码</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 21.9k</span>
+
+</div>
+</a></div>
+
+</div>
+</section>
+
+<section class="card span-4 card-highlight">
+<div class="label-sm">💭 今日思考</div>
+<p class="text-body">今天最有趣的现象是「Codex 双向渗透」：OpenAI 一边把 Codex 插件装进 Claude Code，一边在 ChatGPT 里原生集成 Codex。Agent 工具链不再画地为牢——跨平台互操作成了新的默认。同时，Herdr（终端 Agent 多路复用器）和 Caveman（砍 65% token 消耗）的火爆说明：开发者正在狂热地优化「怎么用 Agent」，而不只是「用哪个 Agent」。基础设施层的机会在急剧膨胀。</p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">🔗 参考来源</div>
+<div class="source-list">
+<a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+<a href="https://github.com/zarazhangrui/follow-builders" target="_blank">Follow Builders</a>
+<a href="https://x.com" target="_blank">X (Twitter)</a>
+</div>
+</section>
+</main>
+
+<footer style="text-align:center;padding:40px 20px" data-pagefind-ignore>
+<div style="font-size:13px;color:#8b8b8b">
+AI 建造者日报 · 2026年7月6日 · 由 AI 自动生成
+</div>
+<div style="margin-top:10px;font-size:12px;color:#c0bfbc">
+<a href="../index.html" style="color:#2563eb">← 返回首页</a>
+</div>
+</footer>
+<script src="../search.js?v=20260706" defer></script>
+<script src="../site.js?v=20260706" defer></script>
+</body>
+</html>
