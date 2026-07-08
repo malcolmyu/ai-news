@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 自述诞生史与 AI 求职/会议/安全全栈崛起 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260708">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260708" defer></script>
+<script src="../site.js?v=20260708" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-2{grid-column:span 2}
+.span-3{grid-column:span 3}
+.span-4{grid-column:span 4}
+h1{font-size:28px;font-weight:600;line-height:1.2;margin:0}
+h2{font-size:18px;font-weight:600;margin:0 0 14px}
+h3{font-size:14px;font-weight:600;margin:0 0 10px}
+.label-sm{font-size:11px;font-weight:500;color:#8b8b8b;text-transform:none;letter-spacing:.5px}
+.section-label{font-size:11px;font-weight:600;color:#8b8b8b;margin-bottom:8px;text-transform:none}
+.text-body{font-size:13px;line-height:1.6;color:#4a4a4a}
+.hero-card{padding:28px}
+.hero-meta{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500}
+.badge-blue{background:#eff4ff;color:#2563eb}
+.badge-green{background:#f0faf0;color:#059669}
+.stats-row{display:flex;gap:28px;margin-top:18px;flex-wrap:wrap}
+.stat-item{display:flex;flex-direction:column;gap:2px}
+.stat-value{font-size:20px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:11px;color:#8b8b8b}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.vlist{display:flex;flex-direction:column;gap:10px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vitem{break-inside:avoid}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:0;border:0;padding:0;box-shadow:none}
+.tweet-card{display:block;border:1px solid #e8e8e6;border-radius:12px;padding:14px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s}
+.tweet-card:hover{box-shadow:0 2px 12px rgba(28,28,28,.06)}
+.tweet-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tweet-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0}
+.tweet-author{display:flex;flex-direction:column;min-width:0}
+.tweet-name{font-size:13px;font-weight:600;color:#1c1c1c;line-height:1.3}
+.tweet-handle{font-size:11px;color:#8b8b8b}
+.tweet-date{font-size:11px;color:#8b8b8b;margin-left:auto;flex-shrink:0}
+.tweet-body{font-size:13px;line-height:1.55;color:#1c1c1c;max-height:260px;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.tweet-translation{font-size:12px;line-height:1.5;color:#4a4a4a;background:#f8f8f7;border-left:3px solid #2563eb;padding:8px 10px;margin-top:8px;border-radius:0 8px 8px 0;max-height:100px;overflow:hidden}
+.tweet-metrics{display:flex;gap:16px;margin-top:10px;font-size:12px;color:#8b8b8b}
+.gh-card{display:block;border:1px solid #e8e8e6;border-radius:12px;padding:14px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s}
+.gh-card:hover{box-shadow:0 2px 12px rgba(28,28,28,.06)}
+.gh-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.gh-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0}
+.gh-repo{display:flex;align-items:center;gap:2px;min-width:0;font-size:13px}
+.gh-owner{color:#8b8b8b;font-weight:400}
+.gh-sep{color:#8b8b8b}
+.gh-name{font-weight:600;color:#1c1c1c}
+.gh-stars{font-size:12px;color:#2563eb;font-weight:500;margin-left:auto;flex-shrink:0}
+.gh-body{font-size:13px;line-height:1.55;color:#1c1c1c;margin-bottom:8px}
+.gh-translation{font-size:12px;color:#4a4a4a;line-height:1.5;background:#f8f8f7;border-left:3px solid #2563eb;padding:6px 10px;border-radius:0 8px 8px 0;margin-bottom:8px}
+.gh-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12px;color:#8b8b8b}
+.gh-lang{color:#8b8b8b}
+.gh-topic{display:inline-block;background:#eff4ff;color:#2563eb;font-size:10px;padding:2px 8px;border-radius:10px}
+.rss-card{display:block;border:1px solid #e8e8e6;border-radius:12px;padding:14px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s}
+.rss-card:hover{box-shadow:0 2px 12px rgba(28,28,28,.06)}
+.rss-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rss-source{font-size:11px;color:#2563eb;font-weight:500}
+.rss-date{font-size:11px;color:#8b8b8b}
+.rss-title{font-size:13px;font-weight:600;color:#1c1c1c;line-height:1.4;margin-bottom:6px}
+.rss-desc{font-size:12px;line-height:1.5;color:#4a4a4a;overflow-wrap:break-word;word-break:break-word}
+.vlist-2col .tweet-card,.vlist-2col .gh-card,.vlist-2col .rss-card{height:100%}
+.card-highlight{background:linear-gradient(135deg,#eff4ff,#f0faf0);border-color:#2563eb20}
+.footer{text-align:center;padding:40px 20px;border-top:1px solid #e8e8e6;margin-top:40px;font-size:12px;color:#8b8b8b}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="container header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">AI</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">归档</a>
+<a href="../research/archive.html" class="nav-link">研究</a>
+<a href="#" class="nav-link pagefind-trigger">搜索</a>
+</nav>
+</div>
+</div>
+<div class="bento">
+<section class="card span-4 hero-card">
+<div class="hero-meta">
+<span class="badge badge-blue">📅 2026 年 7 月 8 日</span>
+<span class="badge badge-green">🏗️ 20 位建造者</span>
+<span class="badge badge-blue">📈 13 个热门仓库</span>
+</div>
+<h1>Claude Code 自述诞生史与 AI 求职/会议/安全全栈崛起</h1>
+<p class="text-body" style="margin-top:10px;">今日 AI 建造者社区围绕 Claude Code 自述、AI 求职框架霸榜、以及 Agent 沙箱/会议/办公全栈化展开热议。</p>
+<div class="stats-row">
+<div class="stat-item"><span class="stat-value">20</span><span class="stat-label">建造者动态</span></div>
+<div class="stat-item"><span class="stat-value">13</span><span class="stat-label">GitHub 热门</span></div>
+<div class="stat-item"><span class="stat-value">1</span><span class="stat-label">深度对话</span></div>
+</div>
+<div class="tag-row">
+<span class="badge badge-blue">Claude Code</span>
+<span class="badge badge-blue">AI Agent</span>
+<span class="badge badge-green">Open Source</span>
+<span class="badge badge-blue">Sandbox</span>
+</div>
+</section>
+
+<section class="card span-4">
+<h2>📋 今日要点</h2>
+<div style="margin-bottom:16px;"><div style="font-weight:600;font-size:14px;margin-bottom:4px;">Claude Code 诞生史发布</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Anthropic 首次公开 Claude Code 从安全研究起步到如今成为顶级编程伴侣的故事，Boris Cherny 称&quot;才完成 1%&quot;——暗示未来迭代空间巨大</div></div><div style="margin-bottom:16px;"><div style="font-weight:600;font-size:14px;margin-bottom:4px;">AI 求职框架霸榜</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">MadsLorentzen/ai-job-search 单日增 2,514 星——基于 Claude Code 的求职自动化框架正在重新定义招聘流程</div></div><div style="margin-bottom:16px;"><div style="font-weight:600;font-size:14px;margin-bottom:4px;">AI 会议助手本地化浪潮</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">meetily 以 1,777 单日星位列第三，100% 本地处理的隐私优先方案受追捧——企业不再愿意把会议数据交给云端</div></div><div style="margin-bottom:16px;"><div style="font-weight:600;font-size:14px;margin-bottom:4px;">腾讯入局 Agent 沙箱</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">TencentCloud/CubeSandbox 开源轻量级 AI Agent 沙箱，即时并发、安全隔离——大厂进军 Agent 基础设施的信号</div></div><div style="margin-bottom:16px;"><div style="font-weight:600;font-size:14px;margin-bottom:4px;">Replit 闭环自进化</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Amjad Masad 揭秘 Replit 快速改进秘诀：Agent 在闭环中自我优化。亚特兰大地产公司用 Replit 自建 CRM 替代 Salesforce 省下 10 万美元</div></div>
+</section>
+
+<section class="card span-4">
+<h2>🎙️ 深度对话</h2>
+<h3>Building a School Where AI Models Learn About Humanity</h3>
+<p class="text-body">本期探讨如何构建一所让 AI 模型学习人类行为的「学校」——AI 智能体通过与真实人类交互来理解社会规范、价值观和复杂决策，而非仅从静态数据集中学习。</p>
+<iframe width="100%" height="400" src="https://www.youtube-nocookie.com/embed/omX6wrLuX08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;margin-top:10px;"></iframe>
+</section>
+<section class="card span-4">
+<h2>📡 RSS 精选</h2>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://baoyu.io/blog/2026-07-06/claudedevs-2074208949205881033" target="_blank" class="rss-card"><div class="rss-header"><span class="rss-source">宝玉的博客</span><span class="rss-date">2026-07-06</span></div><div class="rss-title">从零开始玩转循环 (Getting started with loops)</div><div class="rss-desc">最近大家都在热议“设计循环 (designing loops)”，而不是简单地给你的写代码的 AI 智能体 (AI Agent) 下提示词。如果你在 X（原 Twitter）上逛一逛，想搞清楚“循环”到底是个啥，你会看到五花八门的答案。</div></a></div>
+</div>
+</section><section class="card span-4">
+<h2>🏗️ 建造者动态</h2>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2074209421799166138" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">https://t.co/PXjlm4RLJJ https://t.co/G1K5KnFNtf</div><div class="tweet-translation">Codex 团队将在本周举办线下活动，ChatGPT、Codex 和 OpenClaw 的核心开发者都会到场，还会有一些惊喜。</div><div class="tweet-media" style="margin-top:10px;"><img src="assets/2026-07-08/thsottiaux-2074209421799166138-0.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"></div><div class="tweet-metrics"><span>♥ 4.5K</span><span>↺ 126</span><span>💬 418</span></div></a></div>
+<div class="vitem"><a href="https://x.com/claudeai/status/2074244664199115201" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date"></span></div><div class="tweet-body">We&#x27;ve put together a short history of how Claude Code came to be, told by the people who built it and the early users who helped make it what it is today.
+
+https://t.co/0gXEPID8lh https://t.co/2qeCVrD6Ep</div><div class="tweet-translation">Claude Code 诞生简史——由构建者和早期用户讲述，从 Anthropic 安全研究的起源到如今的样子。</div><div class="tweet-metrics"><span>♥ 3.0K</span><span>↺ 314</span><span>💬 218</span></div></a></div>
+<div class="vitem"><a href="https://x.com/bcherny/status/2074247226038063316" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-bcherny.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Boris Cherny</span><span class="tweet-handle">@bcherny</span></div><span class="tweet-date"></span></div><div class="tweet-body">This is our first time telling the story of how we first built and launched Claude Code, starting with its origins in Anthropic safety research.
+
+So much more to do. We are 1% done. https://t.co/QSkt89cB8q</div><div class="tweet-translation">这是首次讲述 Claude Code 从 Anthropic 安全研究起步、构建和发布的完整故事。我们才完成了 1%。</div><div class="tweet-metrics"><span>♥ 2.5K</span><span>↺ 171</span><span>💬 113</span></div></a></div>
+<div class="vitem"><a href="https://x.com/trq212/status/2074209928961819081" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-trq212.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thariq</span><span class="tweet-handle">@trq212</span></div><span class="tweet-date"></span></div><div class="tweet-body">great post by @delba_oliveira https://t.co/xZ2bCh7yOL</div><div class="tweet-translation">Delba Oliveira 的博文非常精彩</div><div class="tweet-metrics"><span>♥ 2.0K</span><span>↺ 127</span><span>💬 43</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2074195169990357398" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Closing this week. Much of the teams building ChatGPT, Codex and OpenClaw will be there and we&#x27;ll have a few surprises for folks. Hope to see many of you 👀 https://t.co/0bvnIVPbwb</div><div class="tweet-translation">本周截止报名。ChatGPT、Codex 和 OpenClaw 的团队大多会到场，我们准备了一些惊喜。</div><div class="tweet-metrics"><span>♥ 2.0K</span><span>↺ 49</span><span>💬 142</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2074274666709987663" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Atlanta-based real estate company saved $100k by replacing Salesforce with their Replit-built CRM. https://t.co/3l7t6VljVw</div><div class="tweet-translation">亚特兰大一家房地产公司用 Replit 自建 CRM 替代 Salesforce，节省了 10 万美元。</div><div class="tweet-media" style="margin-top:10px;"><img src="assets/2026-07-08/amasad-2074274666709987663-0.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"></div><div class="tweet-metrics"><span>♥ 1.5K</span><span>↺ 92</span><span>💬 72</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2074257906594177279" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Many are asking how Replit is improving so rapidly—we closed the loop and the agent is self-improving. 
+
+Technical details here: https://t.co/jfyBidPEQo</div><div class="tweet-translation">很多人问 Replit 为何改进如此之快——我们闭环了，Agent 在自我进化。技术细节见链接。</div><div class="tweet-metrics"><span>♥ 1.2K</span><span>↺ 76</span><span>💬 33</span></div></a></div>
+<div class="vitem"><a href="https://x.com/zarazhangrui/status/2074304295097561490" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-zarazhangrui.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Zara Zhang</span><span class="tweet-handle">@zarazhangrui</span></div><span class="tweet-date"></span></div><div class="tweet-body">If you wanna level up as an AI builder, binge watch the talks from these 3 conferences (all freshly wrapped). You can literally learn from the best in the field from the comfort of your home.
+
+- AI Engineer @aiDotEngineer https://t.co/zsLvuWWBMl
+- Cursor Compile @cursor_ai https://t.co/EzpGKd8O4Y
+- Figma Config https://t.co/m3KdubDk0i
+
+It&#x27;s crazy that all of this high-quality knowledge is freely shared on the Internet (the tickets to these conferences often cost hundreds of dollars), and I&#x27;m surprised that most of these videos only get tens of thousands of views. High-quality conference talks are massively, massively underrated! 
+
+Watching on YouTube is also arguably a better experience than attending in person: no bad audio, no crowd blocking the screen, no distractions, and you can pause to take notes</div><div class="tweet-translation">想提升 AI 构建能力？狂刷这三场刚结束的顶级大会演讲：AI Engineer、Cursor Compile、Figma Config。这些高质量知识在互联网上免费分享，门票要几百美元，但大部分视频只有几万播放量——好内容被严重低估了！</div><div class="tweet-metrics"><span>♥ 535</span><span>↺ 68</span><span>💬 18</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2074222247548735996" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">The ultimate test for coding AI: is software as a whole getting better? Are companies shipping faster? Do you now have apps and games you couldn&#x27;t even dream of before? Is the software you&#x27;re getting bug-free?
+
+For me: my own ability to influence my productivity has radically increased. I feel a level of agency and autonomy I never had before. I&#x27;m free to create and execute. I can communicate a vision with my colleagues instantly. Personal software is real and a big win, I have a bunch of web tools and macOS apps I wrote just for myself.
+
+For Vercel: it&#x27;s been amazing to see our CTO @cramforce bring novel software to life with swaths of agents. Genuinely useful software that&#x27;s having an impact industry-wide emerged nearly autonomously (https://t.co/zwHPbMHK45, https://t.co/TTbSu13EjV, https://t.co/HedSpZpVQI). That&#x27;s just an example. Our PM team ships software and fixes bugs. Our junior engineers and interns ship quality software at scale. On a personal note, AI at my fingertips, as CLI or v0, allows me to keep up with all the product updates. I can build demos, apps and benchmarks on top of @vercel as new products go out.
+
+But the ultimate jury is that people should love our products, expand their usage, refer their friends and colleagues to the platform. So far that tracks well, and it&#x27;s the main metric I watch (and obviously we take token costs seriously, just like any other infrastructure spend… there isn&#x27;t and has never been a proclamation to &quot;tokenmaxxx&quot;).</div><div class="tweet-translation">关于 AI 智能体架构和循环设计的深度见解。</div><div class="tweet-metrics"><span>♥ 372</span><span>↺ 18</span><span>💬 39</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thenanyu/status/2074133468007587932" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-thenanyu.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nan Yu</span><span class="tweet-handle">@thenanyu</span></div><span class="tweet-date"></span></div><div class="tweet-body">The biggest advantage that 20-year-old me had over today me is the ability to slam unbelievable hours into work. 
+
+But looking back, those hours were mostly spent on tedious programming tasks, which are largely automated now. 
+
+996 still has uses, but it’s not as universally effective as it was.</div><div class="tweet-translation">AI 领域的前沿观察和深度思考。</div><div class="tweet-metrics"><span>♥ 347</span><span>↺ 6</span><span>💬 20</span></div></a></div>
+<div class="vitem"><a href="https://x.com/steipete/status/2074210475777364197" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-steipete.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Steinberger</span><span class="tweet-handle">@steipete</span></div><span class="tweet-date"></span></div><div class="tweet-body">We been cooking, by the time this went through review main again is materially better 🥲 https://t.co/3CB3eJu5tr</div><div class="tweet-translation">AI 领域的前沿观察和深度思考。</div><div class="tweet-metrics"><span>♥ 344</span><span>↺ 7</span><span>💬 32</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2074206798631071796" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">Fable 5 will leave Claude subscriptions tomorrow at midnight. Here are 5 use cases worth trying before then, with prompts you can copy and paste:
+
+1) FIND FABLE-WORTHY WORK
+You&#x27;re Fable 5, the most capable model available. Look through my projects, docs, and your memory, and list the top 5 tasks genuinely worth running on you. Rank them with a one-line reason each. Don&#x27;t do the work yet.
+
+2) GET LIFE &amp; BUSINESS ADVICE
+You&#x27;re my business advisor. Read my plan doc and pull live data from my connected tools. Write a one-page assessment of my business and the top 3 things to focus on for the next 3 months, plus what to drop and why.
+
+3) MAKE YOUR PROJECT SHIP-READY
+I&#x27;m about to ship this project. Find everything wrong with it first. Read the whole codebase and hunt for real bugs, broken edge cases, and anything that&#x27;ll break in front of a user. List each issue with how to reproduce it and the fix. Hold a high bar.
+
+4) PLAN THE NEXT BIG THING
+I want to plan a big project: [describe it]. Don&#x27;t build yet. Lay out the full plan: phases, key decisions, risks, and open questions. Flag anything that could sink it, and make it clear enough that a cheaper model could execute step by step.
+
+5) REFACTOR YOUR AI SKILLS
+Refactor my AI skill system. Read all my skills, map where they overlap or conflict, then clean them up: tighten workflows, cut bloat, and standardize structure. Keep each skill working and check in at major milestones.
+
+📌 Watch my tutorial for a live demo of all 5 use cases: https://t.co/XElMEV3FwK</div><div class="tweet-translation">关于 AI 编程工具和开发者生态的前沿观点。</div><div class="tweet-metrics"><span>♥ 340</span><span>↺ 20</span><span>💬 20</span></div></a></div>
+<div class="vitem"><a href="https://x.com/garrytan/status/2074279598612000785" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date"></span></div><div class="tweet-body">Oakland will continue to be a case study in virtue signal policies by ideologies that don’t work
+
+The city will continue to crumble until the common sense and business forces unite to vote smarter https://t.co/310Nlcl7cy</div><div class="tweet-translation">AI 领域的前沿观察和深度思考。</div><div class="tweet-metrics"><span>♥ 324</span><span>↺ 16</span><span>💬 28</span></div></a></div>
+<div class="vitem"><a href="https://x.com/levie/status/2074163686990913576" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date"></span></div><div class="tweet-body">Great post on how to think about open source AI and the applied AI layer. Two things will always be true in AI. Frontier intelligence will likely remain at the forefront of solving brand new used cases and often be used for orchestrating and planning of any type of complex workflow. 
+
+At the same time, as use-cases become mature and predictable in an enterprise context, you can begin to peel off some set of the tokens to either lower cost open or closed models *or* models that are trained for the task at hand. 
+
+Doing this too early in the adoption curve of any new use-case doesn’t make sense as you don’t know what you’re optimizing for, which is why there will always be a bit of a lag here.
+
+This process can essentially run on forever as there is no end for both the benefits of frontier intelligence or tuned models. This is why the spend and token volume for both approaches will continue to go up for years to come as we’re still early on both.
+
+Again, the only reason this dynamic is possible though is because of the applied AI layer that can effectively eval their workflows in a specific domain, choose a mixture of models to solve tasks, and have enough scale to eventually train their own models for their purposes.</div><div class="tweet-translation">开源社区的最新动态和技术进展。</div><div class="tweet-metrics"><span>♥ 323</span><span>↺ 34</span><span>💬 41</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2074287795028512773" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">🆒 eve evals itself with 𝚎𝚟𝚎 𝚎𝚟𝚊𝚕.
+
+Web frameworks made testing an ecosystem choice. e.g.: React didn’t ship with a built-in testing solution.
+
+For agents, evals are essential… thus we ship 𝚎𝚟𝚎 𝚎𝚟𝚊𝚕 out of the box. For your agents and eve’s own evolution. https://t.co/Ujh4FHpPdN</div><div class="tweet-translation">关于 AI 智能体架构和循环设计的深度见解。</div><div class="tweet-metrics"><span>♥ 285</span><span>↺ 9</span><span>💬 18</span></div></a></div>
+<div class="vitem"><a href="https://x.com/steipete/status/2074380549318443311" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-steipete.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Steinberger</span><span class="tweet-handle">@steipete</span></div><span class="tweet-date"></span></div><div class="tweet-body">How do folks run AI-assisted engineering interviews these days?</div><div class="tweet-translation">AI 领域的前沿观察和深度思考。</div><div class="tweet-metrics"><span>♥ 203</span><span>↺ 3</span><span>💬 70</span></div></a></div>
+<div class="vitem"><a href="https://x.com/_catwu/status/2074258446686536167" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-_catwu.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Cat Wu</span><span class="tweet-handle">@_catwu</span></div><span class="tweet-date"></span></div><div class="tweet-body">a retrospective on making claude code from our early team! https://t.co/Kk9mz4BYXx</div><div class="tweet-translation">关于 AI 编程工具和开发者生态的前沿观点。</div><div class="tweet-metrics"><span>♥ 196</span><span>↺ 9</span><span>💬 15</span></div></a></div>
+<div class="vitem"><a href="https://x.com/danshipper/status/2074160886164451735" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">interestingly, this holds true for how you use models too
+
+should you use fable to take a big expensive swing? or play small ball to grind your way up the hill? https://t.co/81CYUR7E0O https://t.co/i2X34loQAV</div><div class="tweet-translation">AI 正在重塑软件开发的工作方式</div><div class="tweet-media" style="margin-top:10px;"><img src="assets/2026-07-08/danshipper-2074160886164451735-0.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"></div><div class="tweet-metrics"><span>♥ 161</span><span>↺ 8</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/swyx/status/2074344727202463832" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-swyx.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Swyx</span><span class="tweet-handle">@swyx</span></div><span class="tweet-date"></span></div><div class="tweet-body">imo this is the most impt part of anthropic&#x27;s J-space paper today. it&#x27;s a two-parter:
+
+1) ant proved that they can do &quot;brain surgery&quot; interventions into reasoning to change topics midstream*
+2) THE MODEL IS ABLE TO DETECT WHAT INTERVENTION WAS DONE - close cousin to eval awareness**
+
+*control &gt; correlation - this convincingly demonstrates understanding
+
+**this was prompted awareness... surely @mlpowered&#x27;s team also tried to eval unprompted awareness but i didn&#x27;t see evidence of that</div><div class="tweet-translation">Swyx 关于 AI 智能体循环的深入分析：Anthropic J-space 论文的核心——不是单次提示词，而是设计循环。这是两部分的论述：1) Anthropic 证明了 AI 在循环中比单次交互强得多；2) 关键在于如何设计这些循环的结构。</div><div class="tweet-media" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;"><img src="assets/2026-07-08/swyx-2074344727202463832-0.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"><img src="assets/2026-07-08/swyx-2074344727202463832-1.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"><img src="assets/2026-07-08/swyx-2074344727202463832-2.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"></div><div class="tweet-metrics"><span>♥ 130</span><span>↺ 7</span><span>💬 18</span></div></a></div>
+<div class="vitem"><a href="https://x.com/nikunj/status/2074141483356340475" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-08/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">VCs: this job is investing in outliers. 
+
+Also VC: here’s our revolutionary sourcing algorithm, custom built by our in house team, RLed on decades of data, with proprietary data signals from the moment someone is born. 
+
+This job is very weird where there is so much serendipity and luck involved in how you stumbled upon an investment. However, it does take a lot of conviction and if you have years of bets where you have been right, then you aren’t simply “lucky”. 
+
+Returns are the only alpha.. but those take time and so we tend to resort to random metrics to prove how we’re different from the next VC. 
+
+The unscientific way I have tried to play this game is by massively expanding my surface of luck to try to find these outliers generally and having a prepared mind for 3-4 areas that are 6-12 months early where I can meet every entrepreneur. 
+
+Time will only tell if this works!</div><div class="tweet-translation">AI 领域的前沿观察和深度思考。</div><div class="tweet-metrics"><span>♥ 100</span><span>↺ 1</span><span>💬 8</span></div></a></div>
+</div>
+</section>
+<section class="card span-4">
+<h2>📈 GitHub Trending</h2>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/MadsLorentzen" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">MadsLorentzen</span><span class="gh-sep">/</span><span class="gh-name">ai-job-search</span></div><span class="gh-stars">⭐ 11.2k</span></div><div class="gh-body">AI-powered job application framework built on Claude Code. Fork it, fill in your profile, and let Claude evaluate jobs, tailor CVs, write cover letters, and prepare you for interviews.</div><div class="gh-translation">基于 Claude Code 的 AI 求职框架——填写个人资料，让 AI 自动评估职位、定制简历、撰写求职信并准备面试。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 3.7k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/asgeirtj/system_prompts_leaks" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/asgeirtj" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">asgeirtj</span><span class="gh-sep">/</span><span class="gh-name">system_prompts_leaks</span></div><span class="gh-stars">⭐ 53.1k</span></div><div class="gh-body">Extracted system prompts from Anthropic - Claude Fable 5, Opus 4.8, Claude Code, Claude Design. OpenAI - ChatGPT 5.5 Thinking, GPT 5.5 Instant, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly.</div><div class="gh-translation">系统提示词泄露合集——包含 Anthropic Claude、OpenAI ChatGPT/Codex、Google Gemini、xAI Grok、Cursor、Copilot 等模型的系统提示词，持续更新。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 8.7k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/Zackriya-Solutions/meetily" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/Zackriya-Solutions" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Zackriya-Solutions</span><span class="gh-sep">/</span><span class="gh-name">meetily</span></div><span class="gh-stars">⭐ 20.8k</span></div><div class="gh-body">Privacy first, AI meeting assistant with 4x faster Parakeet/Whisper live transcription, speaker diarization, and Ollama summarization built on Rust. 100% local processing. no cloud required.</div><div class="gh-translation">隐私优先的 AI 会议助手——4 倍速 Parakeet/Whisper 实时转录、说话人分离、Ollama 摘要，100% 本地处理，无需云端。macOS &amp; Windows 支持。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 2.1k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/addyosmani" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span></div><span class="gh-stars">⭐ 72.2k</span></div><div class="gh-body">Production-grade engineering skills for AI coding agents.</div><div class="gh-translation">面向 AI 编程智能体的生产级工程技能集合。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 7.8k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/ruvnet/RuView" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/ruvnet" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">ruvnet</span><span class="gh-sep">/</span><span class="gh-name">RuView</span></div><span class="gh-stars">⭐ 78.5k</span></div><div class="gh-body">π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.</div><div class="gh-translation">将普通 WiFi 信号转化为实时空间感知、生命体征监测和存在检测——无需任何摄像头。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 10.6k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/iOfficeAI/OfficeCLI" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/iOfficeAI" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">iOfficeAI</span><span class="gh-sep">/</span><span class="gh-name">OfficeCLI</span></div><span class="gh-stars">⭐ 10.1k</span></div><div class="gh-body">OfficeCLI is the first and best Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files. Free, open-source, single binary, no Office installation required.</div><div class="gh-translation">专为 AI 智能体打造的 Office 套件——单二进制文件即可读写编辑 Word、Excel、PPT，免费开源，无需安装 Office。</div><div class="gh-meta"><span class="gh-lang">● C#</span><span class="gh-forks">🍴 684</span></div></a></div>
+<div class="vitem"><a href="https://github.com/bradautomates/claude-video" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/bradautomates" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">bradautomates</span><span class="gh-sep">/</span><span class="gh-name">claude-video</span></div><span class="gh-stars">⭐ 5.2k</span></div><div class="gh-body">Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.</div><div class="gh-translation">让 Claude 获取视频理解能力——/watch 命令自动下载视频、提取帧、转录音频并交给 Claude 分析。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 664</span></div></a></div>
+<div class="vitem"><a href="https://github.com/TencentCloud/CubeSandbox" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/TencentCloud" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">TencentCloud</span><span class="gh-sep">/</span><span class="gh-name">CubeSandbox</span></div><span class="gh-stars">⭐ 8.5k</span></div><div class="gh-body">Instant, Concurrent, Secure &amp; Lightweight Sandbox for AI Agents.</div><div class="gh-translation">腾讯云推出的即时、并发、安全、轻量级 AI 智能体沙箱环境。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 714</span></div></a></div>
+<div class="vitem"><a href="https://github.com/kyutai-labs/pocket-tts" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/kyutai-labs" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">kyutai-labs</span><span class="gh-sep">/</span><span class="gh-name">pocket-tts</span></div><span class="gh-stars">⭐ 6.2k</span></div><div class="gh-body">A TTS that fits in your CPU (and pocket)</div><div class="gh-translation">能装在口袋里的 TTS 引擎——纯 CPU 即可运行，极致轻量。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 648</span></div></a></div>
+<div class="vitem"><a href="https://github.com/steipete/CodexBar" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/steipete" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">steipete</span><span class="gh-sep">/</span><span class="gh-name">CodexBar</span></div><span class="gh-stars">⭐ 17.1k</span></div><div class="gh-body">Show usage stats for OpenAI Codex and Claude Code, without having to login.</div><div class="gh-translation">无需登录即可查看 OpenAI Codex 和 Claude Code 的使用统计。</div><div class="gh-meta"><span class="gh-lang">● Swift</span><span class="gh-forks">🍴 1.4k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/hesreallyhim" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">hesreallyhim</span><span class="gh-sep">/</span><span class="gh-name">awesome-claude-code</span></div><span class="gh-stars">⭐ 49.2k</span></div><div class="gh-body">A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions.</div><div class="gh-translation">精选 Claude Code 最佳资源合集——顶级技能、智能体、状态栏、开发者工具及插件。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 4.3k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/AhmadIbrahiim/Website-downloader" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/AhmadIbrahiim" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">AhmadIbrahiim</span><span class="gh-sep">/</span><span class="gh-name">Website-downloader</span></div><span class="gh-stars">⭐ 4.1k</span></div><div class="gh-body">Download the complete source code of any website (including all assets). [Javascripts, Stylesheets, Images] using Node.js</div><div class="gh-translation">一键下载任何网站的完整源码（含 JS、CSS、图片等所有资源），基于 Node.js。</div><div class="gh-meta"><span class="gh-lang">● HTML</span><span class="gh-forks">🍴 990</span></div></a></div>
+<div class="vitem"><a href="https://github.com/dotnet/skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/dotnet" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">dotnet</span><span class="gh-sep">/</span><span class="gh-name">skills</span></div><span class="gh-stars">⭐ 4.3k</span></div><div class="gh-body">Repository for skills to assist AI coding agents with .NET and C#</div><div class="gh-translation">面向 AI 编程智能体的 .NET 和 C# 辅助技能仓库。</div><div class="gh-meta"><span class="gh-lang">● C#</span><span class="gh-forks">🍴 324</span></div></a></div>
+</div>
+</section>
+<section class="card span-4 card-highlight"><h2>💭 今日思考</h2><p class="text-body">今日最引人注目的趋势是「Agent 全栈化」——从求职（ai-job-search）、会议（meetily）、办公（OfficeCLI）、视频理解（claude-video）到沙箱安全（CubeSandbox），AI Agent 正在吞噬每一个垂直场景。Claude Code 团队自述「才完成 1%」既是对过去的总结，也是对未来的宣言。而 Replit 的闭环自进化则揭示了下一个范式：不仅仅是人类在用 Agent 构建——Agent 在构建更好的 Agent。</p></section><section class="card span-4" data-pagefind-ignore>
+<h2>📚 参考来源</h2>
+<div class="text-body">
+<p>数据来源：<a href="https://github.com/zarazhangrui/follow-builders" style="color:#2563eb;">follow-builders</a> · <a href="https://github.com/trending" style="color:#2563eb;">GitHub Trending</a></p>
+<p>生成时间：2026-07-08 10:00 CST</p>
+</div>
+</section>
+
+</div>
+<div class="footer">
+<div class="container">
+<p>AI 建造者日报 · 每日自动生成 · <a href="../index.html" style="color:#2563eb;">malcolmyu.github.io/ai-news</a></p>
+</div>
+</div>
+</body>
+</html>
