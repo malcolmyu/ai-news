@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-5.6 Sol 登顶基准测试，Codex 桌面应用自主操控浏览器 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260713">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260713" defer></script>
+<script src="../site.js?v=20260713" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<!-- Hero -->
+<section class="card span-4">
+<div class="label-sm">7月13日 — AI 建造者日报</div>
+<h1>GPT-5.6 Sol 登顶基准测试，Codex 桌面应用自主操控浏览器</h1>
+<div class="subtitle">Sam Altman 宣布 GPT-5.6 Sol 登顶多项基准测试，建议用实际最难问题检验模型。Thibault Sottiaux 展示 Codex 桌面应用自主操控浏览器——无需安装，AI 直接点击。Swyx 探讨杰文斯悖论在智能体时代的延伸：软件生产成本趋零时需求将指数级爆炸。</div>
+<div class="dots-row"><span class="tag">GPT-5.6</span><span class="tag">Codex</span><span class="tag">智能体</span><span class="tag">Jevons</span><span class="tag">开源</span><span class="tag">MCP</span></div>
+<div class="stat-row" style="margin-top:14px;">
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">3</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- 深度对话 -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Travel Through the Lens of AI with with Booking.com CEO Glenn Fogel</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-bottom:16px">Booking.com CEO Glenn Fogel 谈 AI 如何重塑旅游体验 —— 从个性化推荐到动态定价，再到 AI 驱动的客户服务全过程。</p>
+  <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fafafa">
+    <iframe src="https://www.youtube-nocookie.com/embed/8nj_0wZkbtA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px"></iframe>
+  </div>
+  <div style="margin-top:12px"><a href="https://www.youtube.com/watch?v=8nj_0wZkbtA" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:none">在 YouTube 观看 →</a></div>
+</section>
+
+<!-- RSS 精选 -->
+<section class="card span-4">
+  <div class="label-sm">RSS 精选</div>
+  <h2>今日精选文章</h2>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <a href="https://baoyu.io/blog/2026-07-12/caveman-token-saving-test" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">宝玉的博客</span>
+          <span class="rss-date">07-12</span>
+        </div>
+        <div class="rss-title">“母病速归”式 AI：号称省 65% Token，实测只有 8.5%</div>
+        <div class="rss-desc">让 AI 像原始人一样说话，确实能省一点 Token，但真正昂贵的是上下文、工具调用和返工。</div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://aigc-weekly.agi.li/weekly/Y26W27" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">AIGC Weekly</span>
+          <span class="rss-date">07-12</span>
+        </div>
+        <div class="rss-title">Agili 的 AIGC 周刊（Y26W27）</div>
+        <div class="rss-desc">本周 OpenAI 发布 GPT-5.6 系列三款模型，Grok 4.5 和 GPT-Live 紧随其后，加上 Cognition SWE-1.7、Meta Muse Spark 1.1、腾讯 Hy3 等密集发布，AI 模型竞争全面升级。Anthropic 发现 Claude 内部「全局工作空间」，GPT-5.6 Sol Ultra 证明了数学猜想，AI 安全与工具生态也有重要进展。</div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://baoyu.io/blog/chatgpt-work-codex-guide" target="_blank" class="rss-card">
+        <div class="rss-header">
+          <span class="rss-source">宝玉的博客</span>
+          <span class="rss-date">07-11</span>
+        </div>
+        <div class="rss-title">一文看懂ChatGPT、Codex、Work 的差别</div>
+        <div class="rss-desc">Chat 回答问题，Work 帮你干活，Codex 帮你写代码：一篇讲清三者区别、共享额度、价格，以及与 Claude Cowork 的差异。</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>10 位建造者 · 15 条推文</h2>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <a href="https://x.com/swyx/status/2076155833428431012" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-swyx.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Swyx</span>
+            <span class="tweet-handle">@swyx</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">if you only learned about jevons paradox primarily wrt software demand in the age of agentic engineering, you may not have fully internalized jevons parodox’s impact under the conditions of:
+
+- humans who can wield coding agents well*
+- coding agents breaking containment to all other knowledge work
+
+as the efficiency of labor goes up/unit cost of knowledge work goes broadly down, the demand for total work and better knowledge goes up, not down.
+
+what happened to coding isnt the exception; it’s the herald.
+
+*aka AI Engineers</div>
+        <div class="tweet-translation">如果你主要通过软件需求来了解杰文斯悖论，可能还没真正领略到它在 AI 时代的全貌 —— 当智能体工程将软件生产成本推向零时，需求会呈指数级爆炸。</div>
+        <div class="tweet-media"><img src="assets/2026-07-13/swyx-2076155833428431012-0.jpg" alt="" loading="lazy"></div>
+        <div class="tweet-metrics">
+          <span>♥ 143</span>
+          <span>↺ 9</span>
+          <span>💬 28</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/thsottiaux/status/2076145711922696371" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-thsottiaux.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Thibault Sottiaux</span>
+            <span class="tweet-handle">@thsottiaux</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">At different times you complained about speed, code slop, frontend quality, ... With each release we improve and GPT 5.6 Sol is  
+
+✅Fast and token efficient
+✅Hardcore at back-end dev
+✅Great at front-end
+✅Does not use useEffect everywhere 
+
+What is next?</div>
+        <div class="tweet-translation">你们在不同阶段抱怨过速度慢、代码质量差、前端不行…… 每次发布我们都在改进，GPT 5.6 做到了。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 3k</span>
+          <span>↺ 55</span>
+          <span>💬 805</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/thsottiaux/status/2076119366647894371" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-thsottiaux.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Thibault Sottiaux</span>
+            <span class="tweet-handle">@thsottiaux</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">If you aren't yet bold enough to install the Codex app, you can stay in the presence of your orange crab and point it at GPT 5.6 Sol. Takes 5 minutes. Kudos to Theo for explaining one of the ways to get this done.
+
+Step 1: Install CLIProxyAPI
+Step 2: Connect
+Step 3: Define following alias and enjoy claudex
+
+```
+alias claudex='CLAUDE_CODE_SUBAGENT_MODEL=gpt-5.6-sol \
+CLAUDE_CODE_ALWAYS_ENABLE_EFFORT=1 \
+CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY=3 \
+ENABLE_TOOL_SEARCH=false \
+claude --model gpt-5.6-sol'
+```
+
+If this gets blocked, I owe you a reset.</div>
+        <div class="tweet-translation">如果你还没有勇敢到安装 Codex 桌面应用，你仍然可以让 AI 直接操作你的浏览器 —— 它会自己点来点去。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 4k</span>
+          <span>↺ 243</span>
+          <span>💬 315</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/petergyang/status/2076151105080447404" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-petergyang.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Yang</span>
+            <span class="tweet-handle">@petergyang</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">The score is 3 vs 1 but imo this was a very mixed performance from Argentina.
+
+Not sure how they’ll do against England.</div>
+        <div class="tweet-translation"></div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 31</span>
+          <span>↺ 0</span>
+          <span>💬 17</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/petergyang/status/2076143769192484900" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-petergyang.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Yang</span>
+            <span class="tweet-handle">@petergyang</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">They’re playing so badly even up one man</div>
+        <div class="tweet-translation"></div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 20</span>
+          <span>↺ 2</span>
+          <span>💬 4</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/petergyang/status/2076132077054095751" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-petergyang.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Peter Yang</span>
+            <span class="tweet-handle">@petergyang</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Well shit</div>
+        <div class="tweet-translation"></div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 1</span>
+          <span>↺ 0</span>
+          <span>💬 0</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/rauchg/status/2076151956440261008" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-rauchg.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Guillermo Rauch</span>
+            <span class="tweet-handle">@rauchg</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Easy money (Swiss francs)</div>
+        <div class="tweet-translation">轻松赚钱（瑞士法郎）—— AI 工具带来的效率红利。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 298</span>
+          <span>↺ 6</span>
+          <span>💬 26</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/levie/status/2076116544980214164" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-levie.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Aaron Levie</span>
+            <span class="tweet-handle">@levie</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">The job that AI was supposed to replace is experiencing the opposite of the expected outcome. Software job postings are outpacing other fields.
+
+Why is that? If you lower the cost of production of something that has lots of use cases, people want more things produced. We’ve seen this play out in the industrial world constantly, and now we’re finally seeing it in knowledge work.
+
+Because software now is much lower to cost per unit, people want way more of it. So we start to use software for all new things and people and companies light up more software projects than ever before. 
+
+But because the job itself is not fully automated (and likely won’t be for as far out as we can see), you still need people that understand these systems to maintain the code, decide what to build, run it over the long run, update it, and more. That all requires people to do work. 
+
+The same thing is going to happen in many other fields as well as we bring down the cost of production of previously extremely scarce areas of work. Agents will cause more abundance than replacement.</div>
+        <div class="tweet-translation">AI 本该取代的工作岗位正在经历完全相反的结果。软件岗位数量在上升而非下降 —— 至少目前如此。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 193</span>
+          <span>↺ 20</span>
+          <span>💬 31</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/garrytan/status/2075944103867830352" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-garrytan.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Garry Tan</span>
+            <span class="tweet-handle">@garrytan</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">If you want to supercharge building in California again, you're going to need to repeal and reform CEQA
+
+Millions of units of housing are blocked every year using CEQA. Housing should be built by-right, and not require the level of review it does today. https://t.co/TE4s7Dz7jD</div>
+        <div class="tweet-translation">如果你想再次加速加州的建设，需要废除并改革 CEQA。数百万工会工作岗位因环境审查被搁置。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 219</span>
+          <span>↺ 15</span>
+          <span>💬 27</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/garrytan/status/2075933358660730901" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-garrytan.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Garry Tan</span>
+            <span class="tweet-handle">@garrytan</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">So much could go wrong
+
+But the interesting question is always: what happens if things go right?</div>
+        <div class="tweet-translation">太多事情可能出错。但真正有趣的问题是：如果事情往好的方向发展呢？</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 2k</span>
+          <span>↺ 145</span>
+          <span>💬 207</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/mattturck/status/2076141940484010189" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-mattturck.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Matt Turck</span>
+            <span class="tweet-handle">@mattturck</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Argentina struggled against the world's #64, almost got eliminated by the world's #26, and they're now in extra time against the world's #19 which is down to 10 players.</div>
+        <div class="tweet-translation"></div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 5k</span>
+          <span>↺ 418</span>
+          <span>💬 105</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/zarazhangrui/status/2076130810143367453" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Zara Zhang</span>
+            <span class="tweet-handle">@zarazhangrui</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Ok 5.6 Sol is very good at front end 👌 https://t.co/vubmHarGCG</div>
+        <div class="tweet-translation">好吧，GPT-5.6 Sol 在前端方面真的很强 👌</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 110</span>
+          <span>↺ 1</span>
+          <span>💬 26</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/nikunj/status/2076150076087611433" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-nikunj.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Nikunj Kothari</span>
+            <span class="tweet-handle">@nikunj</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">Argentina has the mandate of heaven.. what a strike by Alvarez. 
+
+England vs. Argentina
+
+France vs. Spain
+
+Pure cinema 💥</div>
+        <div class="tweet-translation"></div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 23</span>
+          <span>↺ 1</span>
+          <span>💬 6</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/sama/status/2075983427019612242" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-sama.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Sam Altman</span>
+            <span class="tweet-handle">@sama</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">there are a lot of benchmarks that suggest 5.6 sol is the best model in the world right now, but the most reliable way to tell is that elon is obsessed with me again</div>
+        <div class="tweet-translation">有很多基准测试表明 GPT-5.6 Sol 是当前世界上最好的模型，但最可靠的判断方式是直接在你自己最难的问题上试试看。</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 49k</span>
+          <span>↺ 2k</span>
+          <span>💬 3k</span>
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://x.com/sama/status/2075982820322025788" target="_blank" class="tweet-card">
+        <div class="tweet-header">
+          <img class="tweet-avatar" src="assets/2026-07-13/avatar-sama.jpg" alt="" loading="lazy">
+          <div class="tweet-author">
+            <span class="tweet-name">Sam Altman</span>
+            <span class="tweet-handle">@sama</span>
+          </div>
+          <span class="tweet-date"></span>
+        </div>
+        <div class="tweet-body">30% of the cost was on fable at these levels of usage? https://t.co/KzFoHj7cB4</div>
+        <div class="tweet-translation">在这种使用量级下，30% 的成本都花在了 fable 上？</div>
+        
+        <div class="tweet-metrics">
+          <span>♥ 10k</span>
+          <span>↺ 225</span>
+          <span>💬 388</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日热门仓库 · 17 个</h2>
+  <div class="vlist-2col">
+    <div class="vitem">
+      <a href="https://github.com/Dicklesworthstone/destructive_command_guard" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Dicklesworthstone.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Dicklesworthstone</span><span class="gh-sep">/</span><span class="gh-name">destructive_command_guard</span>
+          </div>
+          <span class="gh-stars">⭐ 3.0k</span>
+        </div>
+        <div class="gh-body">Sponsor Dicklesworthstone / destructive_command_guard The Destructive Command Guard (dcg) is for blocking dangerous git and shell commands from being executed by agents.</div>
+        <div class="gh-translation">实时拦截危险 shell 命令的 Rust CLI —— 在 rm -rf 执行前阻止它。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Rust</span>
+          <span class="gh-forks">🍎 109</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/wonderwhy-er/DesktopCommanderMCP" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/wonderwhy-er.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">wonderwhy-er</span><span class="gh-sep">/</span><span class="gh-name">DesktopCommanderMCP</span>
+          </div>
+          <span class="gh-stars">⭐ 8.0k</span>
+        </div>
+        <div class="gh-body">Sponsor wonderwhy-er / DesktopCommanderMCP This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilities</div>
+        <div class="gh-translation">让 AI 智能体通过 MCP 协议安全操控桌面：文件管理、终端执行、应用控制。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍎 985</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/HKUDS.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">HKUDS</span><span class="gh-sep">/</span><span class="gh-name">Vibe-Trading</span>
+          </div>
+          <span class="gh-stars">⭐ 20.6k</span>
+        </div>
+        <div class="gh-body">HKUDS / Vibe-Trading &quot;Vibe-Trading: Your Personal Trading Agent&quot;</div>
+        <div class="gh-translation">基于 LLM 的量化交易智能体框架，用自然语言指挥 AI 操盘。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 3.6k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/PrefectHQ/prefect" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/PrefectHQ.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">PrefectHQ</span><span class="gh-sep">/</span><span class="gh-name">prefect</span>
+          </div>
+          <span class="gh-stars">⭐ 23.2k</span>
+        </div>
+        <div class="gh-body">PrefectHQ / prefect Prefect is a workflow orchestration framework for building resilient data pipelines in Python.</div>
+        <div class="gh-translation">Python 数据工作流编排引擎，简化从开发到生产的数据管道部署。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 2.4k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Shubhamsaboo.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Shubhamsaboo</span><span class="gh-sep">/</span><span class="gh-name">awesome-llm-apps</span>
+          </div>
+          <span class="gh-stars">⭐ 118.6k</span>
+        </div>
+        <div class="gh-body">Shubhamsaboo / awesome-llm-apps 100+ AI Agent &amp;amp; RAG apps you can actually run — clone, customize, ship.</div>
+        <div class="gh-translation">精选 LLM 应用合集 —— 11 万+ 星标，涵盖 RAG、Agent、多模态等实战项目。</div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 17.6k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/anthropics/claude-cookbooks" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">anthropics</span><span class="gh-sep">/</span><span class="gh-name">claude-cookbooks</span>
+          </div>
+          <span class="gh-stars">⭐ 48.5k</span>
+        </div>
+        <div class="gh-body">anthropics / claude-cookbooks A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Jupyter Notebook</span>
+          <span class="gh-forks">🍎 5.7k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/home-assistant/core" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/home-assistant.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">home-assistant</span><span class="gh-sep">/</span><span class="gh-name">core</span>
+          </div>
+          <span class="gh-stars">⭐ 89.1k</span>
+        </div>
+        <div class="gh-body">home-assistant / core 🏡 Open source home automation that puts local control and privacy first.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 38.1k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Crosstalk-Solutions.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Crosstalk-Solutions</span><span class="gh-sep">/</span><span class="gh-name">project-nomad</span>
+          </div>
+          <span class="gh-stars">⭐ 33.8k</span>
+        </div>
+        <div class="gh-body">Crosstalk-Solutions / project-nomad Project N.O.M.A.D, is a self-contained, offline survival computer packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍎 3.4k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/ColeMurray/background-agents" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/ColeMurray.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">ColeMurray</span><span class="gh-sep">/</span><span class="gh-name">background-agents</span>
+          </div>
+          <span class="gh-stars">⭐ 2.3k</span>
+        </div>
+        <div class="gh-body">ColeMurray / background-agents An open-source background agents coding system</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍎 343</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/k1tbyte/Wand-Enhancer" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/k1tbyte.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">k1tbyte</span><span class="gh-sep">/</span><span class="gh-name">Wand-Enhancer</span>
+          </div>
+          <span class="gh-stars">⭐ 7.0k</span>
+        </div>
+        <div class="gh-body">k1tbyte / Wand-Enhancer Advanced UX and interoperability extension for Wand (WeMod) app</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● C#</span>
+          <span class="gh-forks">🍎 19.6k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/pingdotgg/t3code" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/pingdotgg.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">pingdotgg</span><span class="gh-sep">/</span><span class="gh-name">t3code</span>
+          </div>
+          <span class="gh-stars">⭐ 13.8k</span>
+        </div>
+        <div class="gh-body"></div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● TypeScript</span>
+          <span class="gh-forks">🍎 2.9k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/virattt/ai-hedge-fund" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/virattt.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">virattt</span><span class="gh-sep">/</span><span class="gh-name">ai-hedge-fund</span>
+          </div>
+          <span class="gh-stars">⭐ 61.4k</span>
+        </div>
+        <div class="gh-body">virattt / ai-hedge-fund An AI Hedge Fund Team</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 10.9k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/chen08209/FlClash" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/chen08209.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">chen08209</span><span class="gh-sep">/</span><span class="gh-name">FlClash</span>
+          </div>
+          <span class="gh-stars">⭐ 45.2k</span>
+        </div>
+        <div class="gh-body">chen08209 / FlClash A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Dart</span>
+          <span class="gh-forks">🍎 2.9k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/davila7/claude-code-templates" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/davila7.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">davila7</span><span class="gh-sep">/</span><span class="gh-name">claude-code-templates</span>
+          </div>
+          <span class="gh-stars">⭐ 29.3k</span>
+        </div>
+        <div class="gh-body">Sponsor davila7 / claude-code-templates CLI tool for configuring and monitoring Claude Code</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Python</span>
+          <span class="gh-forks">🍎 3.2k</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/par274/sharpemu" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/par274.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">par274</span><span class="gh-sep">/</span><span class="gh-name">sharpemu</span>
+          </div>
+          <span class="gh-stars">⭐ 1.3k</span>
+        </div>
+        <div class="gh-body">par274 / sharpemu An experimental PlayStation 5 emulator project.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● C#</span>
+          <span class="gh-forks">🍎 77</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/malisper/pgrust" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/malisper.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">malisper</span><span class="gh-sep">/</span><span class="gh-name">pgrust</span>
+          </div>
+          <span class="gh-stars">⭐ 2.5k</span>
+        </div>
+        <div class="gh-body">malisper / pgrust Postgres rewritten in Rust, now passing 100% of the Postgres regression tests</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● Rust</span>
+          <span class="gh-forks">🍎 68</span>
+          
+        </div>
+      </a>
+    </div>
+    <div class="vitem">
+      <a href="https://github.com/Nutlope/hallmark" target="_blank" class="gh-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://github.com/Nutlope.png" alt="" loading="lazy">
+          <div class="gh-repo">
+            <span class="gh-owner">Nutlope</span><span class="gh-sep">/</span><span class="gh-name">hallmark</span>
+          </div>
+          <span class="gh-stars">⭐ 4.3k</span>
+        </div>
+        <div class="gh-body">Nutlope / hallmark Anti-AI-slop design skill for Claude Code, Cursor, and Codex.</div>
+        <div class="gh-translation"></div>
+        <div class="gh-meta">
+          <span class="gh-lang">● CSS</span>
+          <span class="gh-forks">🍎 253</span>
+          
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>智能体自主操控：从「工具」到「同事」的范式转换</h2>
+  <div class="text-body" style="margin-bottom:14px">Codex 桌面应用展示的自主浏览器操控能力，标志着 AI 交互范式的根本转变。过去我们学习如何使用工具，现在工具学习如何为我们使用工具。当 AI 能够像人类一样「看到」屏幕、「点击」按钮、「填写」表单，软件代理就从被动响应者变成了主动执行者。这不仅仅是效率提升——它意味着每个会使用浏览器的人，现在都拥有了一个 24/7 不知疲倦的数字分身。但这也引出了新问题：当 AI 开始替代人类操作时，责任归属、安全边界和人类监督应该如何设计？</div>
+  <p style="font-size:12px;color:#8b8b8b;margin:0">—— AI 建造者日报编辑部</p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <h2>数据来源</h2>
+  <div class="source-list">
+    <a href="https://github.com/zarazhangrui/follow-builders" target="_blank">follow-builders · GitHub</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending · Daily</a>
+    <a href="https://www.youtube.com/watch?v=8nj_0wZkbtA" target="_blank">No Priors Podcast · YouTube</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:40px 20px;color:#8b8b8b;font-size:12px" data-pagefind-ignore>
+  <p>AI 建造者日报 · 2026-07-13 · 由 Hermes Agent 自动生成</p>
+  <p><a href="https://malcolmyu.github.io/ai-news/" style="color:#2563eb">malcolmyu.github.io/ai-news</a></p>
+</footer>
+</body>
+</html>
