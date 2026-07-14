@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Fable 5 扩展访问 + GPT 5.6 Sol 更新：AI 模型能力军备竞赛白热化 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260714">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260714" defer></script>
+<script src="../site.js?v=20260714" defer></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:34px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){
+.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}
+.nav{order:3;flex-basis:100%;gap:16px}
+.bento{grid-template-columns:1fr;margin-top:18px}
+.span-4{grid-column:span 1}
+.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}
+h1{font-size:28px}
+h2{font-size:20px}
+.source-list{columns:1}
+}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">AI 建造者日报</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main class="bento">
+<!-- Hero -->
+<section class="card span-4">
+<div class="label-sm">7月14日 — AI 建造者日报</div>
+<h1>Claude Fable 5 扩展访问 + GPT 5.6 Sol 更新：AI 模型能力军备竞赛白热化</h1>
+<div class="subtitle">Claude Fable 5 扩展至全部付费计划，Claude Code 保持频率限制。 GPT 5.6 Sol 推理加速落地，Codex Work 支持定时任务。 开源视频编辑工具 OpenCut 替代 CapCut；Vibe-Trading 用自然语言驱动量化交易。 Swyx 探讨 AI 时代杰文斯悖论；Sam Altman 悬赏 GPT 5.6 Sol 最佳用例。</div>
+<div class="dots-row"><span class="tag">Claude Fable 5</span><span class="tag">GPT-5.6</span><span class="tag">OpenCut</span><span class="tag">Codex</span><span class="tag">核能</span><span class="tag">开源</span><span class="tag">Spec-Driven</span></div>
+<div class="stat-row" style="margin-top:14px;">
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">建造者</div></div>
+<div class="stat-item"><div class="stat-num">30</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">10</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+
+<!-- 深度对话 -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>How Nuclear Will Unlock Energy Abundance with Valar Atomics Founder Isaiah Taylor</h2>
+  <p style="font-size:13px;line-height:1.78;color:#4a4a4a;margin-bottom:16px">Valar Atomics 创始人 Isaiah Taylor 深入探讨核能如何解锁能源丰裕时代——从微型反应堆到工业级部署，核能复兴正当时。</p>
+  <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fafafa">
+    <iframe src="https://www.youtube-nocookie.com/embed/5Xvbq_zvOQ4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px"></iframe>
+  </div>
+  <div style="margin-top:12px"><a href="https://www.youtube.com/watch?v=5Xvbq_zvOQ4" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:none">在 YouTube 观看 →</a></div>
+</section>
+
+<!-- 建造者动态 -->
+<section class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>15 位建造者 · 30 条推文</h2>
+  <div class="vlist-2col">
+    <div class="vitem"><a href="https://x.com/swyx/status/2076345087634620528" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-swyx.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Swyx</span><span class="tweet-handle">@swyx</span></div><span class="tweet-date"></span></div><div class="tweet-body">btw the difference is introspection/backpropagation
+
+as einstein famously said, the definition of insanity is doing multiple rollouts with no expectation of advantage https://t.co/G7WLxbYWda https://t.co/SeX47bVrOW</div><div class="tweet-translation">爱因斯坦名言的内省/反向传播对比——智能的本质差异在于自我修正能力。</div><div class="tweet-media"><img src="assets/2026-07-14/swyx-2076345087634620528-0.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 186</span><span>↺ 8</span><span>💬 14</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/swyx/status/2076216180529156097" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-swyx.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Swyx</span><span class="tweet-handle">@swyx</span></div><span class="tweet-date"></span></div><div class="tweet-body">more on @latentspacepod writeup
+
+https://t.co/PlM8rvF2jD</div><div class="tweet-metrics"><span>♥ 11</span><span>↺ 0</span><span>💬 8</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/thsottiaux/status/2076495156757577895" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Updates for Codex and ChatGPT Work users. No nerfing, only good stuff!
+
+- We have landed inference optimizations and are passing down savings to all the subscriptions for GPT-5.6 Sol. That should result in around 10% more usage on its own.
+- We noticed that by changing the context size limit in the product to 372k for GPT-5.6 Sol, up from 272k for GPT-5.5, it resulted in more usage being charged than intended. We have reverted to 272k and will work to roll back out to 372k in the days to come. You should notice that usage drains significantly less after this change.
+- To understand where the extra usage was coming from, we ran some experiments where reasoning efforts were changed (referred to as juice values under the hood) and have reverted this.
+- There is slightly more usage of multi-agent than intended in high and xhigh reasoning effort, we are fixing this going forward. Also fixing a small other thing we noticed with auto-review where we can be more efficient.
+
+And we continue to have the 5h limit temporarily not apply. Enjoy the rest of the weekend!</div><div class="tweet-metrics"><span>♥ 6.5k</span><span>↺ 442</span><span>💬 694</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/thsottiaux/status/2076460408437887268" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Team, Edu, ... and any other paid subscription too. Quite simple really.</div><div class="tweet-metrics"><span>♥ 891</span><span>↺ 5</span><span>💬 40</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/thsottiaux/status/2076459871021736245" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Rest assured that GPT 5.6 Sol will stay in the ChatGPT subscription you pay for. Including Go, Plus and Pro subscriptions. At least until we ship an even better model.</div><div class="tweet-metrics"><span>♥ 10.1k</span><span>↺ 394</span><span>💬 581</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/petergyang/status/2076519927843000448" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">Seeing this quite often today. 
+
+My wild guess is 90%+ of people are using GPT 5.6 Sol and &amp;lt;10% are using Terra or Luna. https://t.co/uiCunQ1sLK</div><div class="tweet-metrics"><span>♥ 33</span><span>↺ 1</span><span>💬 16</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/petergyang/status/2076512796481880270" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">There's a tendancy when community sentiment turns to communicate less and in a more corporate way.
+
+I think it's important to do the reverse - communicate in a more human way, be transparent with the community about what's going on, figure out solutions together, etc.</div><div class="tweet-metrics"><span>♥ 10</span><span>↺ 2</span><span>💬 1</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/petergyang/status/2076510899490480228" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">Anthropic makes great models too but I don't understand why they communicate like this. 
+
+I think they need to engage the community more directly like what OpenAI is doing. https://t.co/BqYu5FglYV</div><div class="tweet-metrics"><span>♥ 142</span><span>↺ 1</span><span>💬 26</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/_catwu/status/2076358263688569314" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-_catwu.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Cat Wu</span><span class="tweet-handle">@_catwu</span></div><span class="tweet-date"></span></div><div class="tweet-body">Enjoy! https://t.co/WJTkdBv6qM</div><div class="tweet-metrics"><span>♥ 2.0k</span><span>↺ 43</span><span>💬 367</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/amasad/status/2076356893736673507" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Fun to see Replit's computer use model play against my new chess engine https://t.co/SQmN4NamlR https://t.co/INdb7rojHU</div><div class="tweet-metrics"><span>♥ 197</span><span>↺ 11</span><span>💬 17</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/amasad/status/2076227936202662357" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Vibe Research
+
+Fine-tuning a Qwen-8b model to play chess on Replit. Running 3 parallel branches with different experiments and making real progress.
+
+It's amazing how far models have come in their ability to do ML (they used to be really bad at it). So now someone with good intuition to guide the process could do interesting ML work, even if they have never done it before.</div><div class="tweet-translation">看着 Replit 的 computer use 模型与我的新国际象棋引擎对弈，真有趣。</div><div class="tweet-media"><img src="assets/2026-07-14/amasad-2076227936202662357-0.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 529</span><span>↺ 39</span><span>💬 47</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/rauchg/status/2076364176252191222" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">Make the model a cog in a machine you own.
+
+◾ AI SDK → open model API
+◾ https://t.co/O7y9dmUqk5 → open Agent API
+◾ AI Gateway → open ZDR inference
+
+Startups and enterprises must own their data, evals, model choices, software layer. Don't outsource your brain. https://t.co/EpiBG1GD59</div><div class="tweet-metrics"><span>♥ 793</span><span>↺ 51</span><span>💬 54</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/levie/status/2076338364635287637" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date"></span></div><div class="tweet-body">One of the key architectural questions of the 21st century in business will be how you maximize your corporate IP in the form of decisions, insights, workflow patterns, and best practices in a world where so much intelligence is packed into AI models.
+
+One might think these questions could just get bitter lessoned out of existence, but in reality they become even more germane as intelligence becomes more powerful. In a world where any firm also has access to frontier intelligence, understanding how you leverage it uniquely becomes a critical question.
+
+That’s why so much value is left to be created between the enterprise and the underlying AI itself. Having evals for your workflows, ensuring that you can route models from different tiers of intelligence, capturing traces in a way that improve your own workflows, and making sure the value of your information compounds as AI gets better all become critical considerations.
+
+Which is also why there’s so much opportunity right now in the applied AI layer. The companies that help figure this out for other enterprises will be in the best position to win the next enterprise workloads.</div><div class="tweet-metrics"><span>♥ 413</span><span>↺ 51</span><span>💬 51</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/garrytan/status/2076534860064416115" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date"></span></div><div class="tweet-body">Craven politicians who disable public safety technology for virtue signal and culture war purposes will always get blood on their hands https://t.co/TPydLBqavh</div><div class="tweet-metrics"><span>♥ 111</span><span>↺ 9</span><span>💬 8</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/mattturck/status/2076343266291626064" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-mattturck.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Matt Turck</span><span class="tweet-handle">@mattturck</span></div><span class="tweet-date"></span></div><div class="tweet-body">And Argentina will get to play Monaco, Easter Island and Willy Wonka’s Chocolate Factory https://t.co/sr7IPu1ToP</div><div class="tweet-metrics"><span>♥ 6.1k</span><span>↺ 548</span><span>💬 28</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/mattturck/status/2076311766049374598" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-mattturck.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Matt Turck</span><span class="tweet-handle">@mattturck</span></div><span class="tweet-date"></span></div><div class="tweet-body">me when they say anyone can now build apps with an agentic coding tool https://t.co/PtL1Mu0yS0</div><div class="tweet-metrics"><span>♥ 49</span><span>↺ 3</span><span>💬 4</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/zarazhangrui/status/2076300222884626754" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-zarazhangrui.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Zara Zhang</span><span class="tweet-handle">@zarazhangrui</span></div><span class="tweet-date"></span></div><div class="tweet-body">Try &quot;meeting transcript as PRD&quot;, it's amazing
+
+I discuss a feature's implementation with a colleague, send transcript to Codex, and it builds the prototype as we discussed. The meeting is the prompt</div><div class="tweet-metrics"><span>♥ 222</span><span>↺ 8</span><span>💬 21</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/zarazhangrui/status/2076284012339843546" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-zarazhangrui.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Zara Zhang</span><span class="tweet-handle">@zarazhangrui</span></div><span class="tweet-date"></span></div><div class="tweet-body">Passion is the biggest moat</div><div class="tweet-metrics"><span>♥ 342</span><span>↺ 33</span><span>💬 56</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/nikunj/status/2076458876816540144" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">What’s funny is I’ll meet so many people in SF who’ll claim they are tokenmaxxing and have all of these subagents looping things for them..
+
+But when I ask them “what” and for “whom” are they building, very few can give me a straight answer. 
+
+Shows that even in this insane AI era, simplicity and direction are still ridiculously important. 
+
+So before you let your tokens go brrr, take some time to think if what you’re building (for a living) is actually important. 
+
+Time is literally the only thing you don’t get back!</div><div class="tweet-metrics"><span>♥ 235</span><span>↺ 12</span><span>💬 20</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/nikunj/status/2076416145255731677" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">Reminder to get out if you haven’t on this gorgeous day! https://t.co/NrvyXPpeLy</div><div class="tweet-translation">有趣的是，在旧金山遇到很多人声称自己是 tokenmaxxing，掌握了所有提示技巧，但实际用 AI 的方式却很平庸。</div><div class="tweet-media"><img src="assets/2026-07-14/nikunj-2076416145255731677-0.jpg" alt="" loading="lazy"></div><div class="tweet-media"><img src="assets/2026-07-14/nikunj-2076416145255731677-1.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 11</span><span>↺ 0</span><span>💬 1</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/nikunj/status/2076370608833827124" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">There’s nothing more humbling than outbound sales. 
+
+Like any skill, it’s learnable. 
+
+But man, when you see the really great ones do it, you can’t help but walk away a bit envious. 
+
+Going to be even more important as time progresses!</div><div class="tweet-metrics"><span>♥ 175</span><span>↺ 7</span><span>💬 38</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/steipete/status/2076553742883930455" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-steipete.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Steinberger</span><span class="tweet-handle">@steipete</span></div><span class="tweet-date"></span></div><div class="tweet-body">I shard my work over ~5 machines via Jump Desktop, this is just my beefiest machine.</div><div class="tweet-metrics"><span>♥ 54</span><span>↺ 0</span><span>💬 7</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/steipete/status/2076552605262872904" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-steipete.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Steinberger</span><span class="tweet-handle">@steipete</span></div><span class="tweet-date"></span></div><div class="tweet-body">That's about as many sessions as my Mac Studio can take. https://t.co/4OCiZUwqHt</div><div class="tweet-translation">这大概就是我的 Mac Studio 能够承受的极限会话数了。</div><div class="tweet-media"><img src="assets/2026-07-14/steipete-2076552605262872904-0.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 487</span><span>↺ 7</span><span>💬 82</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/steipete/status/2076551622227095828" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-steipete.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Steinberger</span><span class="tweet-handle">@steipete</span></div><span class="tweet-date"></span></div><div class="tweet-body">Spent the weekend on a little facelift. https://t.co/STWHLV5OMy</div><div class="tweet-translation">花了一个周末做了一次小小的改头换面。</div><div class="tweet-media"><img src="assets/2026-07-14/steipete-2076551622227095828-0.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 347</span><span>↺ 8</span><span>💬 49</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/danshipper/status/2076455432546066826" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">a spectacularly questionable result tbh https://t.co/9aaf8H4jMs</div><div class="tweet-metrics"><span>♥ 107</span><span>↺ 0</span><span>💬 10</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/danshipper/status/2076351869782286707" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">capitalism stays winning! https://t.co/J3sQVyvCB8</div><div class="tweet-metrics"><span>♥ 1.1k</span><span>↺ 23</span><span>💬 29</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/danshipper/status/2076340879787237562" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">extremely relatable https://t.co/s6EK2fnmCO</div><div class="tweet-translation">坦白说，这结果值得商榷。</div><div class="tweet-media"><img src="assets/2026-07-14/danshipper-2076340879787237562-0.jpg" alt="" loading="lazy"></div><div class="tweet-metrics"><span>♥ 47</span><span>↺ 2</span><span>💬 2</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/sama/status/2076398253332140410" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-sama.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Sam Altman</span><span class="tweet-handle">@sama</span></div><span class="tweet-date"></span></div><div class="tweet-body">i'd love to see interesting things people have built with 5.6 sol.
+
+i will send the person who made the coolest thing a special gift from the openai archives.</div><div class="tweet-metrics"><span>♥ 13.2k</span><span>↺ 434</span><span>💬 2514</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/claudeai/status/2076351401006154204" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date"></span></div><div class="tweet-body">As before, you can use up to half of your weekly usage limit on Fable 5. After that, you can continue using Fable 5 with usage credits, or switch to another model to keep working within your remaining limits.
+
+More details here: https://t.co/5inr3k2VM5</div><div class="tweet-metrics"><span>♥ 2.3k</span><span>↺ 126</span><span>💬 208</span></div></a></div>
+    <div class="vitem"><a href="https://x.com/claudeai/status/2076351399999557669" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-07-14/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date"></span></div><div class="tweet-body">We're extending Claude Fable 5 access on all paid plans, as well as keeping Claude Code’s weekly rate limits 50% higher, through July 19.</div><div class="tweet-metrics"><span>♥ 66.4k</span><span>↺ 6.8k</span><span>💬 5897</span></div></a></div>
+  </div>
+</section>
+
+<!-- GitHub Trending -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>10 个热门仓库</h2>
+  <div class="vlist-2col">
+    <div class="vitem"><a href="https://github.com/OpenCut-app/OpenCut" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/OpenCut-app.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">OpenCut-app</span><span class="gh-sep">/</span><span class="gh-name">OpenCut</span></div><span class="gh-stars">⭐ 66.6k</span></div><div class="gh-body">The open-source CapCut alternative</div><div class="gh-translation">开源的 CapCut 替代品——免费的视频编辑工具，支持多轨时间线、特效和导出。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 7.0k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/HKUDS.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">HKUDS</span><span class="gh-sep">/</span><span class="gh-name">Vibe-Trading</span></div><span class="gh-stars">⭐ 21.8k</span></div><div class="gh-body">&quot;Vibe-Trading: Your Personal Trading Agent&quot;</div><div class="gh-translation">你的个人交易代理——Vibe-Trading 让你用自然语言驱动量化交易策略。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 3.8k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/Graphify-Labs/graphify" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Graphify-Labs.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Graphify-Labs</span><span class="gh-sep">/</span><span class="gh-name">graphify</span></div><span class="gh-stars">⭐ 84.8k</span></div><div class="gh-body">AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable</div><div class="gh-translation">AI 编程助手技能包（Claude Code, Codex, OpenCode, Cursor, Gemini CLI 等），将任何想法转化为可执行计划。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 8.3k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Shubhamsaboo.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Shubhamsaboo</span><span class="gh-sep">/</span><span class="gh-name">awesome-llm-apps</span></div><span class="gh-stars">⭐ 119.7k</span></div><div class="gh-body">100+ AI Agent &amp;amp; RAG apps you can actually run — clone, customize, ship.</div><div class="gh-translation">100+ AI Agent 和 RAG 应用——克隆、定制、部署，开箱即用。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 17.7k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/Nutlope/hallmark" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Nutlope.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Nutlope</span><span class="gh-sep">/</span><span class="gh-name">hallmark</span></div><span class="gh-stars">⭐ 5.2k</span></div><div class="gh-body">Anti-AI-slop design skill for Claude Code, Cursor, and Codex.</div><div class="gh-translation">反 AI 设计糊弄技能——为 Claude Code、Cursor 和 Codex 提供高质量设计标准。</div><div class="gh-meta"><span class="gh-lang">● CSS</span><span class="gh-forks">🍴 274</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/github/spec-kit" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/github.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">github</span><span class="gh-sep">/</span><span class="gh-name">spec-kit</span></div><span class="gh-stars">⭐ 120.6k</span></div><div class="gh-body">💫 Toolkit to help you get started with Spec-Driven Development</div><div class="gh-translation">Spec-Driven Development 工具包——帮你用规格驱动的方式启动开发。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 10.7k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/hasaneyldrm.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">hasaneyldrm</span><span class="gh-sep">/</span><span class="gh-name">exercises-dataset</span></div><span class="gh-stars">⭐ 12.7k</span></div><div class="gh-body">1,324-exercise fitness dataset — animation GIFs, 180×180 thumbnails, muscle-group &amp;amp; equipment data, and step-by-step instructions in 6 languages. The exercise data layer behind the LogPress app.</div><div class="gh-translation">1324 个健身动作数据集——含动画 GIF、180×180 缩略图、肌群和设备标签。</div><div class="gh-meta"><span class="gh-lang">● HTML</span><span class="gh-forks">🍴 1.5k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/coreyhaines31/marketingskills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/coreyhaines31.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">coreyhaines31</span><span class="gh-sep">/</span><span class="gh-name">marketingskills</span></div><span class="gh-stars">⭐ 38.6k</span></div><div class="gh-body">Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.</div><div class="gh-translation">AI 智能体营销技能包——CRO、文案、SEO、分析和增长工程。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 6.2k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/Raphire/Win11Debloat" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Raphire.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Raphire</span><span class="gh-sep">/</span><span class="gh-name">Win11Debloat</span></div><span class="gh-stars">⭐ 50.9k</span></div><div class="gh-body">A simple, lightweight PowerShell script that allows you to remove pre-installed apps, disable telemetry, as well as perform various other changes to declutter and customize your Windows experience. Wi</div><div class="gh-translation">轻量 PowerShell 脚本——移除预装应用、禁用遥测，让 Windows 11 回归清爽。</div><div class="gh-meta"><span class="gh-lang">● PowerShell</span><span class="gh-forks">🍴 2.0k</span></div></a></div>
+    <div class="vitem"><a href="https://github.com/moeru-ai/airi" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/moeru-ai.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">moeru-ai</span><span class="gh-sep">/</span><span class="gh-name">airi</span></div><span class="gh-stars">⭐ 41.9k</span></div><div class="gh-body">💖🧸 Self hosted, you-owned Grok Companion, a container of souls of waifu, cyber livings to bring them into our worlds, wishing to achieve Neuro-sama's altitude. Capable of realtime voice chat, Minecraf</div><div class="gh-translation">自托管、你拥有的 Grok 伴侣——waifu 灵魂容器，赛博生命带回家。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 4.2k</span></div></a></div>
+  </div>
+</section>
+
+<!-- 今日思考 -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>AI 模型能力扩散与工具民主化</h2>
+  <p class="text-body">
+    今日两条主线交织：<strong>模型能力军备竞赛</strong>持续升温——Claude Fable 5 扩展访问、GPT 5.6 Sol 推理加速落地，两大阵营都在将尖端模型推向更广泛的用户群。与此同时，<strong>开源工具民主化</strong>暗流涌动——OpenCut 替代 CapCut、Vibe-Trading 让量化交易平民化、hallmark 对抗 AI 设计糊弄。
+  </p>
+  <p class="text-body" style="margin-top:8px">
+    Sam Altman 悬赏征集 GPT 5.6 Sol 最佳用例，Swyx 重申杰文斯悖论在智能体时代的深远影响——当软件生产成本趋零，需求不是减少而是爆炸。而 Isaiah Taylor 的核能愿景则提醒我们：AI 的终极瓶颈不在算法，在能源。
+  </p>
+</section>
+
+<!-- 参考来源 -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <h2>数据来源</h2>
+  <div class="source-list">
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+    <a href="https://github.com/zarazhangrui/follow-builders" target="_blank">Follow Builders (Zara Zhang)</a>
+  </div>
+</section>
+</main>
+
+<footer data-pagefind-ignore style="text-align:center;padding:40px 20px;color:#8b8b8b;font-size:12px;border-top:1px solid #e8e8e6;margin-top:40px">
+  <p>AI 建造者日报 · 每日 10:00 自动生成</p>
+  <p style="margin-top:4px">数据来源：X/Twitter 建造者动态 · GitHub Trending</p>
+</footer>
+</body>
+</html>
