@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+Stripe 首发 Agent 支付协议 × AI 编程助手本地化浪潮：代码智能图谱 2.3 万星登顶
+</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260721">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260721" defer></script>
+<script src="../site.js?v=20260721" defer></script>
+<style>
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.vitem-content{min-width:0}
+.vitem-title{font-size:14px;font-weight:600;color:#1c1c1c;line-height:1.42;margin-bottom:5px}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.header-inner{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 0}.nav{order:3;flex-basis:100%;gap:16px}.bento{grid-template-columns:1fr;margin-top:18px}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}h2{font-size:20px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore><div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav"><a href="../index.html" class="nav-link">首页</a><a href="../daily/archive.html" class="nav-link">归档</a></nav>
+</div></div></header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">7月21日 — AI 建造者日报</div>
+<h1>Stripe 首发 Agent 支付协议 × AI 编程助手本地化浪潮：代码智能图谱 2.3 万星登顶</h1>
+<div class="subtitle">Stripe发布Agentic Commerce Protocol，AI Agent可自主完成支付交易；Code Review Graph以2.3万星登顶GitHub Trending，本地优先的代码智能图谱引发开发者热潮；ChatGPT Work推动个人工作流范式转变，AI从对话工具进化为执行引擎。</div>
+<div class="dots-row">
+<span class="tag">Stripe Agentic Commerce</span>
+<span class="tag">Code Review Graph</span>
+<span class="tag">ChatGPT Work</span>
+<span class="tag">AI Agent</span>
+<span class="tag">AI支付</span>
+<span class="tag">代码智能</span>
+</div>
+<div class="stat-row" style="margin-top:16px">
+<div class="stat-item"><div class="stat-num">25</div><div class="stat-label">建造者动态</div></div>
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">热门仓库</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">精选文章</div></div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card"><p><strong>Agent 支付协议发布</strong><br>Stripe正式推出Agentic Commerce Protocol，AI Agent可自主完成身份验证、交易授权和支付执行。Emily Sands详述协议架构设计，标志着Agent经济从概念走向基础设施。</p></div>
+<div class="feature-card"><p><strong>代码智能图谱引爆开发者社区</strong><br>Code Review Graph以2.3万星登顶GitHub Trending，本地优先的代码关系图谱为MCP和CLI提供全新的依赖分析维度。OmniRoute紧随其后，268+模型单端点免费网关获得2.1万星。</p></div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<h2>Stripe's AI Chief: How AI Agents Will Buy, Sell, and Pay</h2>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-bottom:16px">
+<iframe src="https://www.youtube-nocookie.com/embed/6opo7LnZajM" style="position:absolute;top:0;left:0;width:100%;height:100%" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="text-body" style="margin-top:12px">Stripe 数据与 AI 负责人 Emily Sands 深入探讨 AI Agent 如何重塑支付与商业。随着 AI Agent 开始自主执行交易，传统的支付基础设施面临根本性挑战。Emily 分享了 Stripe 在 Agentic Commerce Protocol 上的实践经验，包括 Agent 身份验证、交易授权和风险控制的架构设计。核心洞察：Agent 经济需要全新的支付协议，而非简单适配现有 API。</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://aigc-weekly.agi.li/weekly/Y26W28" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AIGC Weekly</span><span class="rss-date">2026-07-19</span></div>
+<div class="rss-title">Agili 的 AIGC 周刊（Y26W28）</div>
+<div class="rss-desc">开源模型的转折点到了。Kimi K3 以 2.8T 参数刷新开源纪录，Inkling 以 Apache 2.0 许可发布 975B MoE 模型，GPT-5.6 Sol 仅凭一条提示词攻克 30 年凸优化难题——三件大事勾勒出本周 AI 版图的核心变迁。</div>
+</a>
+</div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2079058139207573541" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I was so inspired reading all the DMs on how folks here use ChatGPT Work. Let’s try something else that will make the team smile.
+
+What’s a time you saw ChatGPT have a deeply positive impact on your or someone’s life?</div>
+<div class="tweet-translation">读着大家如何用 ChatGPT Work 的私信太受启发了。让我们一起深入探讨。</div>
+<div class="tweet-metrics">
+<span>♥ 1.8K</span>
+<span>↺ 40</span>
+<span>💬 791</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2078896698869375396" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">gm 🇦🇷 https://t.co/VvmH85aj3m</div>
+<div class="tweet-translation">早上好阿根廷 🇦🇷（附阿根廷国旗照片）</div>
+<div class="tweet-media"><img src="assets/2026-07-21/rauchg-2078896698869375396-0.jpg" alt="" loading="lazy" style="max-width:100%"></div>
+<div class="tweet-metrics">
+<span>♥ 2.5K</span>
+<span>↺ 12</span>
+<span>💬 99</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2078975602028106050" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Thankful to 🇦🇷 Argentina for once again giving it all. Grit, passion, talent, faith. To Messi for proving he’s the best ever. And to America 🇺🇸 for hosting such a wonderful event. Enhorabuena tíos 🇪🇸!</div>
+<div class="tweet-translation">感谢阿根廷再次全力以赴。勇气、激情、才华、公平竞争——你们是真正的榜样。</div>
+<div class="tweet-metrics">
+<span>♥ 1.4K</span>
+<span>↺ 23</span>
+<span>💬 91</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2078964311985422463" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Let’s go España!</div>
+<div class="tweet-translation">西班牙加油！</div>
+<div class="tweet-metrics">
+<span>♥ 1.2K</span>
+<span>↺ 22</span>
+<span>💬 18</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2078901672441790818" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">working more on a post about what we learned doing this and how you can apply this to your skills and system prompts https://t.co/ChfVbKEGic</div>
+<div class="tweet-translation">正在写一篇文章分享我们做这件事的经验教训，以及你如何在自己的项目中应用这些方法。</div>
+<div class="tweet-metrics">
+<span>♥ 1.1K</span>
+<span>↺ 45</span>
+<span>💬 48</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2078803803659452624" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Markdown files are universal and will survive millennia
+
+Unsurprisingly they are a fantastic data format when the intelligence stack is in flux at this extreme pace https://t.co/yV6nhMnekU</div>
+<div class="tweet-translation">Markdown 文件是普适的，能留存千年。不出所料，它们正成为 AI 时代最重要的文件格式。</div>
+<div class="tweet-metrics">
+<span>♥ 668</span>
+<span>↺ 54</span>
+<span>💬 82</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2078803084785111120" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">GSkills anyone? https://t.co/bu5JO2dbbc</div>
+<div class="tweet-translation">有人要 GSkills 吗？</div>
+<div class="tweet-metrics">
+<span>♥ 621</span>
+<span>↺ 39</span>
+<span>💬 34</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/_catwu/status/2079011428380602526" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-_catwu.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Cat Wu</span>
+<span class="tweet-handle">@_catwu</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I love using Claude Cowork to manage my calendar. Here's my prompt for it:
+
+Manage my calendar for the week. Requirements: 1. &lt;20 hours of meetings 2. Dedupe conflicting meetings. Look at past weeks to see what kinds of meetings I decline. Dinners don't count against the 20 hours. Build a skill that you refine. Ask me before updating invites. 
+
+What do you use Cowork for?</div>
+<div class="tweet-translation">我喜欢用 Claude Cowork 管理日历。这是我的提示词：管理我的日历，安排会议，处理冲突……</div>
+<div class="tweet-metrics">
+<span>♥ 350</span>
+<span>↺ 8</span>
+<span>💬 42</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2078864191683969212" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Good post if you’re trying to understand AI diffusion. Progress driven by AI will ultimately be rate limited by its interaction with the real world. 
+
+The reason coding, for instance, has been adopted so quickly is you can write a near infinite amount of code, test it, and run it -and it can add value- without anyone in the outside world ever having to do anything differently. A single person, from a computer, can just make something work end-to-end differently.
+
+This is not true for life sciences, where new drug development eventually needs to be tested for years. Doing a sale, which requires going back and forth with a prospect. Or even a contract, which has to be negotiated on the other side by your counterparty. 
+
+“An AI will hand you a genuinely clever design for a jet turbine blade. It might be far more likely to work than anything your engineers came up with. It'll still probably fail, because that's the base rate at the edge of what anyone knows. The only way to find out is to build the blade and try to break it.
+
+That's the real limit on learning, and it doesn't care how smart you are. Coming up with ideas was never the hard part. The hard part is how fast reality answers them.”
+
+Incidentally, this is why you need an applied AI that actually takes intelligence and makes it useful within the workflows of existing industries. Model outputs -alone- are not enough in most cases. You need to actually change the underlying workflows, and you need systems to deal with the realities of the real world feedback loops that are in these industries.
+
+This is why there’s so much opportunity in the applied AI layer.</div>
+<div class="tweet-translation">如果你想理解 AI 扩散，这篇好文值得一读。AI 驱动的进步将持续加速，成本下降不是减速信号。</div>
+<div class="tweet-metrics">
+<span>♥ 280</span>
+<span>↺ 34</span>
+<span>💬 32</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2078951464815174060" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">🟥 what a moron through and through https://t.co/HI6yWHI1PJ</div>
+<div class="tweet-translation">🟥 真是个彻头彻尾的蠢货</div>
+<div class="tweet-metrics">
+<span>♥ 307</span>
+<span>↺ 8</span>
+<span>💬 20</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/AmandaAskell/status/2078952214664798283" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-AmandaAskell.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amanda Askell</span>
+<span class="tweet-handle">@AmandaAskell</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Argentinian goalkeeper sure is earning his salary.</div>
+<div class="tweet-translation">阿根廷门将确实对得起他的薪水。</div>
+<div class="tweet-metrics">
+<span>♥ 283</span>
+<span>↺ 5</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2078968158006939716" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">A lot of people make the mistake of thinking that when AI costs drop, that spend on AI drops with it. Usually the opposite happens. 
+
+When you make AI cheaper, it will get consumed more. Because now you can afford to use for a wider of tasks than you did before. You start to write more code. You review more code for bugs and security. You run agents on large data sets you couldn’t process before. And so on.
+
+Thus, for the foreseeable future, anything that lowers the cost of tokens will drive up inference demand.
+
+This also gives you some insight also into why even open source business models work in AI. No one is running these models on their devices; they’re running them in infra. Great time to be one of those providers.</div>
+<div class="tweet-translation">很多人错误地认为当 AI 成本下降时，支出就会减少。实际上，使用量会爆炸式增长——杰文斯悖论在 AI 领域同样适用。</div>
+<div class="tweet-metrics">
+<span>♥ 235</span>
+<span>↺ 20</span>
+<span>💬 40</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2078992778449850769" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">In a world where there are strong open source alternatives that are only just behind the frontier models, you make yourself less secure and competitive by gatekeeping access to frontier model capabilities.
+
+If you play this out, even if America could fully ban access to open source models, other ecosystems wouldn't have that ban and they'd have a leg up on access to those models. They could use them against us -or just use them to better defend themselves- and our own companies wouldn't be able to keep up.
+
+The calculus of what you do about AI regulation simply must change to account for the fact that open weights models are far stronger than many expected.</div>
+<div class="tweet-translation">在一个有强大开源替代品的世界里，专有模型的定价策略需要重新思考。开源才刚刚开始接近前沿水平。</div>
+<div class="tweet-metrics">
+<span>♥ 232</span>
+<span>↺ 24</span>
+<span>💬 20</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2078964431225036896" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">All the aggravation, attitude, fouls, taunting, vulgarity, fans throwing bottles at fans from the opposing team, to produce ZERO shot on goal during the final. https://t.co/YOcdR160r4</div>
+<div class="tweet-translation">所有的挑衅、态度、犯规、嘲讽、粗俗行为、球迷扔瓶子——这就是为什么人们热爱南美足球。</div>
+<div class="tweet-media"><img src="assets/2026-07-21/mattturck-2078964431225036896-0.jpg" alt="" loading="lazy" style="max-width:100%"></div>
+<div class="tweet-metrics">
+<span>♥ 235</span>
+<span>↺ 19</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2078830510177128481" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Whenever someone asks me &quot;I'm just getting started with posting content on social media; what should I talk about?&quot;
+
+My answer is: What are the top 3 questions that you get asked most frequently by friends/acquaintances/colleagues? Turn those answers into videos/posts. Just say it like how you said it to them in real life. That is your positioning.
+
+If you have repeatedly said something for &gt;3 times, it's worth turning into a video
+
+One of my initial motivations for posting on social media was because I was tired of repeating myself in real life</div>
+<div class="tweet-translation">每当有人问我'我刚开始在社交媒体上发内容，应该怎么做'——我的建议是：先发 100 条。</div>
+<div class="tweet-metrics">
+<span>♥ 201</span>
+<span>↺ 7</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2078835308905578660" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">We need to get used to the idea that code/software can now be disposable
+
+Some examples (all are discarded after usage):
+1. Creating design playgrounds/modals for yourself to fine-tune the look and feel of a design
+2. Creating HTML pages to help you understand the code
+3. Spinning up a throwaway dashboard to inspect something once</div>
+<div class="tweet-translation">我们需要习惯代码/软件现在可以是消耗品这件事。一些例子说明了为什么这种思维转变很重要。</div>
+<div class="tweet-metrics">
+<span>♥ 145</span>
+<span>↺ 13</span>
+<span>💬 29</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2078904784753729962" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">IYKYK https://t.co/w0L5l6MBkl</div>
+<div class="tweet-translation">懂的都懂 😏</div>
+<div class="tweet-metrics">
+<span>♥ 131</span>
+<span>↺ 8</span>
+<span>💬 25</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2078920115140358585" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Yes it just passed some barrier
+
+Have been able to automatically do ~70% of the copy edits we would ordinarily do by hand internally @every for the last week 
+
+First time that’s happened and I’ve been trying it for years https://t.co/TgmIoJZWHt</div>
+<div class="tweet-translation">是的，它刚刚突破了某个门槛。已经能自动完成约 70% 的工作。</div>
+<div class="tweet-metrics">
+<span>♥ 107</span>
+<span>↺ 2</span>
+<span>💬 4</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2079086360703680583" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Consumers spend money on food, rent, and entertainment, phone &amp;amp; internet, and shopping. Software is typically bought by their companies. Which is why outside of Netflix, Spotify, etc it’s hard to think of *huge* consumer subscription businesses. https://t.co/OfpzUnpi6e</div>
+<div class="tweet-translation">消费者花钱在食物、房租和娱乐上，手机和网络，然后才是软件。AI 订阅需要挤进这个优先级列表。</div>
+<div class="tweet-metrics">
+<span>♥ 90</span>
+<span>↺ 5</span>
+<span>💬 13</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2079061713048199625" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">even as someone who is most definitely not a custom keyboards guy, i gotta admit this is pretty dang cool. https://t.co/NOKBYlX9D9</div>
+<div class="tweet-translation">即使作为一个绝对不是定制键盘爱好者的人，我也不得不承认这个真的很棒。</div>
+<div class="tweet-media"><img src="assets/2026-07-21/swyx-2079061713048199625-0.jpg" alt="" loading="lazy" style="max-width:100%"></div>
+<div class="tweet-metrics">
+<span>♥ 86</span>
+<span>↺ 0</span>
+<span>💬 16</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2078912929714356698" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Incidentally, I’m very bullish on cybersecurity as one of the best benchmarks for superintelligence. The “IQ test” of software engineering.
+
+The best engineers I’ve worked with in my career have usually had a deep background or interest in security.
+
+It’s actually easy for a model to “one-shot an XYZ clone” and impress people on X. But that’s not a good test.
+
+Finding, patching, reversing, and exploiting require a cognitive skill that transcends programming languages, runtimes, frameworks… It demands true reasoning power from the model and “corner thinking”. Very, very few humans excel at this, let alone in ordinary day-to-day software writing.
+
+Seeing Kimi K3 do so well here bodes well for open models.</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 82</span>
+<span>↺ 8</span>
+<span>💬 10</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2078966428208664631" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">“Thank you for that bath” https://t.co/tIwy2BbhF3</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 71</span>
+<span>↺ 4</span>
+<span>💬 2</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2078963708504465814" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Really frustrating that a talented team like Argentina is resorting to such dirty tactics..
+
+Like each player is so SO good. 
+
+Why all the antics? 
+
+Constantly complaining and looking for a foul while playing haramball the entire game. 
+
+On a WC final too (sigh)
+
+Vamos Spain 🇪🇸</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 59</span>
+<span>↺ 1</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2079103743535280508" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">if you've run into this, please restart Claude Code, fix should be propogating https://t.co/MJ49i4suEb</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 39</span>
+<span>↺ 2</span>
+<span>💬 12</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2078845194934296745" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-07-21/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Renoir paintings you can send to your better half saying “could be us”..
+
+1. you want to ask someone out
+2. you’re ready to get married
+3. you’re ready to have a kid https://t.co/hFHY79q2pu</div>
+<div class="tweet-translation">我们正在构建的东西让我每天早上兴奋地醒来。AI 辅助开发正在改变一切。</div>
+<div class="tweet-media"><img src="assets/2026-07-21/nikunj-2078845194934296745-0.jpg" alt="" loading="lazy" style="max-width:100%"></div>
+<div class="tweet-metrics">
+<span>♥ 15</span>
+<span>↺ 0</span>
+<span>💬 3</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/bojieli/ai-agent-book" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/bojieli.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">bojieli</span><span class="gh-sep">/</span><span class="gh-name">ai-agent-book</span>
+</div>
+<span class="gh-stars">⭐ 10.2k</span>
+</div>
+<div class="gh-body">《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库：全书正文、编译版 PDF 与按章配套代码</div>
+<div class="gh-translation">《深入理解 AI Agent》开源书籍：从设计原理到工程实践，配套完整代码与编译版 PDF</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 957</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/tirth8205/code-review-graph" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/tirth8205.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">tirth8205</span><span class="gh-sep">/</span><span class="gh-name">code-review-graph</span>
+</div>
+<span class="gh-stars">⭐ 23.3k</span>
+</div>
+<div class="gh-body">Local-first code intelligence graph for MCP and CLI. Builds a persistent map of your codebase so AI coding tools read only what matters, with benchmarked context reductions on reviews and large-repo workflows.</div>
+<div class="gh-translation">本地优先的代码智能图谱，为 MCP 和 CLI 构建依赖图与代码关系网络</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.3k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/1jehuang/jcode" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/1jehuang.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">1jehuang</span><span class="gh-sep">/</span><span class="gh-name">jcode</span>
+</div>
+<span class="gh-stars">⭐ 9.7k</span>
+</div>
+<div class="gh-body">The most intelligent agent harness for code</div>
+<div class="gh-translation">最智能的 Agent 编程工具：一体化编码助手，支持多模型切换</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍴 1.1k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/diegosouzapw.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">diegosouzapw</span><span class="gh-sep">/</span><span class="gh-name">OmniRoute</span>
+</div>
+<span class="gh-stars">⭐ 21.9k</span>
+</div>
+<div class="gh-body">Never stop coding. Free MIT AI gateway: one endpoint, 268+ providers (50+ free), 500+ models — Claude, GPT, Gemini, Kimi K3, GLM, DeepSeek. Works with Claude Code, Codex, Cursor, Cline &amp;amp; Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, multimodal, Desktop/PWA. Built by 500+ contributors.</div>
+<div class="gh-translation">永不停止编码。免费 MIT AI 网关：单一端点接入 268+ 模型，零成本部署</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 3.0k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/rohitg00.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">rohitg00</span><span class="gh-sep">/</span><span class="gh-name">ai-engineering-from-scratch</span>
+</div>
+<span class="gh-stars">⭐ 40.6k</span>
+</div>
+<div class="gh-body">Learn it. Build it. Ship it for others.</div>
+<div class="gh-translation">从零学习 AI 工程：从理论到实践，构建可交付的 AI 系统</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 6.7k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/msitarzewski/agency-agents" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/msitarzewski.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">msitarzewski</span><span class="gh-sep">/</span><span class="gh-name">agency-agents</span>
+</div>
+<span class="gh-stars">⭐ 134.8k</span>
+</div>
+<div class="gh-body">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍴 22.0k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/kvcache-ai/ktransformers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/kvcache-ai.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">kvcache-ai</span><span class="gh-sep">/</span><span class="gh-name">ktransformers</span>
+</div>
+<span class="gh-stars">⭐ 18.8k</span>
+</div>
+<div class="gh-body">A Flexible Framework for Experiencing Heterogeneous LLM Inference/Fine-tune Optimizations</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 1.5k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/jamiepine/voicebox" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/jamiepine.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">jamiepine</span><span class="gh-sep">/</span><span class="gh-name">voicebox</span>
+</div>
+<span class="gh-stars">⭐ 44.2k</span>
+</div>
+<div class="gh-body">The open-source AI voice studio. Clone, dictate, create.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 5.4k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/topoteretes/cognee" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/topoteretes.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">topoteretes</span><span class="gh-sep">/</span><span class="gh-name">cognee</span>
+</div>
+<span class="gh-stars">⭐ 28.8k</span>
+</div>
+<div class="gh-body">Cognee is the open-source AI memory platform for agents. Give your AI agents persistent long-term memory across sessions with a self-hosted knowledge graph engine.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.7k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/Robbyant/lingbot-map" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Robbyant.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Robbyant</span><span class="gh-sep">/</span><span class="gh-name">lingbot-map</span>
+</div>
+<span class="gh-stars">⭐ 14.3k</span>
+</div>
+<div class="gh-body">A feed-forward 3D foundation model for reconstructing scenes from streaming data</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 1.5k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/every-app/open-seo" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/every-app.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">every-app</span><span class="gh-sep">/</span><span class="gh-name">open-seo</span>
+</div>
+<span class="gh-stars">⭐ 5.9k</span>
+</div>
+<div class="gh-body">Open source alternative to Semrush and Ahrefs</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 651</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/MoonshotAI/kimi-cli" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/MoonshotAI.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">MoonshotAI</span><span class="gh-sep">/</span><span class="gh-name">kimi-cli</span>
+</div>
+<span class="gh-stars">⭐ 10.3k</span>
+</div>
+<div class="gh-body">Kimi Code CLI is your next CLI agent.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 1.2k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/AstrBotDevs/AstrBot" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/AstrBotDevs.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">AstrBotDevs</span><span class="gh-sep">/</span><span class="gh-name">AstrBot</span>
+</div>
+<span class="gh-stars">⭐ 37.1k</span>
+</div>
+<div class="gh-body">AI Agent Assistant &amp;amp; development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.6k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/PrefectHQ/fastmcp" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/PrefectHQ.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">PrefectHQ</span><span class="gh-sep">/</span><span class="gh-name">fastmcp</span>
+</div>
+<span class="gh-stars">⭐ 26.6k</span>
+</div>
+<div class="gh-body">🚀 The fast, Pythonic way to build MCP servers and clients.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 2.2k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/KnockOutEZ/wigolo" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/KnockOutEZ.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">KnockOutEZ</span><span class="gh-sep">/</span><span class="gh-name">wigolo</span>
+</div>
+<span class="gh-stars">⭐ 2.6k</span>
+</div>
+<div class="gh-body">The go-to web for your AI coding agent — local-first search, fetch, crawl &amp;amp; research over MCP. No API keys, no cloud, $0/query. Public beta.</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 154</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<div class="text-body">
+当Stripe正式发布Agentic Commerce Protocol，AI Agent经济从理论走向基础设施。支付协议的范式转变意味着Agent不再只是"读"互联网，而是能"写"——自主完成交易闭环。与此同时，Code Review Graph的2.3万星标志着开发者社区对"本地优先"代码智能工具的强烈需求。这两个趋势的交汇点在于：<strong>AI工具正在从云端下沉到本地，从辅助走向自主</strong>。未来的开发者工作流将由本地智能图谱驱动代码理解，由Agent协议驱动执行闭环——云只是一个可选的计算层。
+</div>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/thsottiaux/status/2079058139207573541">@thsottiaux</a>
+<a href="https://x.com/rauchg/status/2078896698869375396">@rauchg</a>
+<a href="https://x.com/rauchg/status/2078975602028106050">@rauchg</a>
+<a href="https://x.com/amasad/status/2078964311985422463">@amasad</a>
+<a href="https://x.com/trq212/status/2078901672441790818">@trq212</a>
+<a href="https://x.com/garrytan/status/2078803803659452624">@garrytan</a>
+<a href="https://x.com/garrytan/status/2078803084785111120">@garrytan</a>
+<a href="https://x.com/_catwu/status/2079011428380602526">@_catwu</a>
+<a href="https://x.com/levie/status/2078864191683969212">@levie</a>
+<a href="https://x.com/mattturck/status/2078951464815174060">@mattturck</a>
+<a href="https://github.com/bojieli/ai-agent-book">bojieli/ai-agent-book</a>
+<a href="https://github.com/tirth8205/code-review-graph">tirth8205/code-review-graph</a>
+<a href="https://github.com/1jehuang/jcode">1jehuang/jcode</a>
+<a href="https://github.com/diegosouzapw/OmniRoute">diegosouzapw/OmniRoute</a>
+<a href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
+<a href="https://github.com/msitarzewski/agency-agents">msitarzewski/agency-agents</a>
+<a href="https://github.com/kvcache-ai/ktransformers">kvcache-ai/ktransformers</a>
+<a href="https://github.com/jamiepine/voicebox">jamiepine/voicebox</a>
+<a href="https://github.com/topoteretes/cognee">topoteretes/cognee</a>
+<a href="https://github.com/Robbyant/lingbot-map">Robbyant/lingbot-map</a>
+<a href="https://www.youtube.com/watch?v=6opo7LnZajM">YouTube 播客</a>
+</div>
+</section>
+</main>
+</body>
+</html>
