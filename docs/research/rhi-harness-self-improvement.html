@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-07-23">
+<title>RHI：Harness 递归自改进 — Prompt 级优化超越系统级 Scaling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260723">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260723" defer></script>
+<script src="../site.js?v=20260723" defer></script>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · July 2026 · Sakana AI × UC Berkeley</div>
+    <h1>RHI：Harness 递归自改进 — Prompt 级优化超越系统级 Scaling</h1>
+    <div class="subtitle" style="margin-top:6px;">把 multi-agent harness 写成一段 prompt，让它通过与自身历史对比来自我迭代。仅 2-3 轮即可让低推理努力度 Agent 击败 ultracode，推理成本降 60%。</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">88</div>
+        <div class="stat-label">页论文</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">30</div>
+        <div class="stat-label">合成 ML 研究任务</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Claude 模型验证</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">-60%</div>
+        <div class="stat-label">推理成本降低</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 Core Problem: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">01 · Core Problem</div>
+    <h2>Model–Harness 协同演化中的瓶颈</h2>
+    <div class="text-body">
+      论文提出了一个关键框架：AI 能力的进步不止靠更大的模型和更多的训练计算，更来自 <strong>foundation model 与其 harness（推理脚手架）的协同演化</strong>。
+    </div>
+    <div class="text-body" style="margin-top:12px;">
+      这个协同演化形成一个递归循环——<strong>固定基础模型 → 更强的 harness 组织更有效的 agent 工作流 → 产生高质量 execution traces → 作为训练数据训练未来的基础模型 → 循环</strong>。在这个循环中，harness 不只是「用模型」的方式，更是「为模型产生训练数据」的工厂。
+    </div>
+    <div class="text-body" style="margin-top:12px;">
+      但现有 harness 优化方法（Meta-Harness、AFlow、DSPy 等）都是 <strong>population-based search</strong>——每多一个候选 harness 就需要一次完整的 black-box agent 执行和评估，计算复杂度 Θ(m²)。对于日常用户持续为多个任务优化 harness，这个成本不可承受。
+    </div>
+  </div>
+
+  <!-- 02 RHI Algorithm: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">02 · Method</div>
+    <h2>RHI 算法：Trajectory-Local 松弛</h2>
+    <div class="text-body">
+      RHI 的核心创新是把优化目标从<strong>全局比较</strong>松弛为<strong>局部自比较</strong>。每轮只把当前 harness 的输出与上一轮输出（已缓存）做一次 pairwise 比较，而非与整个候选种群对比。
+    </div>
+    <div class="text-body" style="margin-top:12px;">
+      <strong>三步闭环：</strong>
+    </div>
+    <div class="text-body" style="margin-top:8px;padding-left:16px;">
+      ① Agent 用当前 harness Hⁱ 求解任务 → 得到 outputⁱ<br>
+      ② Evaluator 对比 outputⁱ vs 上一轮 outputⁱ⁻¹ → 产生偏好信号<br>
+      ③ Harness Optimizer 根据 (Hⁱ + 累积偏好历史 D) 生成 Hⁱ⁺¹
+    </div>
+    <div class="text-body" style="margin-top:12px;">
+      关键设计：<strong>每轮只需 1 次 agent 执行 + 1 次 pairwise 对比</strong>（Θ(1)），而现有方法需要 Θ(m²)。偏好历史 D 压缩了所有先前比较的信息，作为「动量语义信号」防止优化震荡。
+    </div>
+
+    <div class="text-body" style="margin-top:16px;font-weight:600;">Harness 的结构化定义</div>
+    <div class="text-body" style="margin-top:6px;">
+      RHI 把 harness 分解为四个组件，<strong>优先优化 contract 和 hop</strong>：
+    </div>
+    <table class="comparison-table" style="margin-top:12px;">
+      <thead>
+        <tr><th>组件</th><th>含义</th><th>优化优先级</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Role</strong></td><td>Agent 的角色定义</td><td>低</td></tr>
+        <tr><td><strong>Instruction</strong></td><td>Agent 的行为指令</td><td>中</td></tr>
+        <tr><td><strong>Contract</strong></td><td>Agent 间通信接口规范（传什么信息）</td><td><strong>高</strong></td></tr>
+        <tr><td><strong>Hop</strong></td><td>工作流控制结构（谁在什么时候做什么）</td><td><strong>高</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="text-body" style="margin-top:8px;">
+      Harness 表示为 prompt 级别的文本规范（含候选 agent 列表 + 工作流 + 辅助规则），直接拼接到任务 prompt 前注入 black-box agent。无需改代码、无需重新部署。
+    </div>
+  </div>
+
+  <!-- 03 Key Results: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">03 · Experimental Results</div>
+    <h2>三条核心发现</h2>
+
+    <h3 style="margin-top:16px;">Claim 1：2-3 轮 RHI 超越系统级 test-time scaling</h3>
+    <table class="comparison-table" style="margin-top:8px;">
+      <thead>
+        <tr><th>Base Model</th><th>RHI 迭代</th><th>击败对象</th><th>赢率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sonnet 4.6 (high)</td><td>2 轮</td><td>4.6-max</td><td>20/30</td></tr>
+        <tr><td>Opus 4.7 (high)</td><td><strong>仅 1 轮</strong></td><td>4.7-xhigh + 4.7-max</td><td>显著超越</td></tr>
+        <tr><td>Opus 4.8 (high)</td><td>2 轮</td><td><strong>4.8-xhigh / max / ultracode 全家桶</strong></td><td>全面超越</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:20px;">Claim 2：性能提升 ≠ 更长输出</h3>
+    <div class="text-body" style="margin-top:6px;">
+      RHI 的性能提升<strong>不伴随 output token 增加</strong>（保持在 baseline 1.4-1.8x 的恒定区间）。输出 token 几乎不变，说明 RHI 不是简单的「多写几行代码」，而是更好地组织了 agent 的思考和工作流。
+    </div>
+
+    <h3 style="margin-top:20px;">Claim 3：成本效率大幅提升</h3>
+    <table class="comparison-table" style="margin-top:8px;">
+      <thead>
+        <tr><th>对比</th><th>成本节省</th><th>Cache Read/Write 节省</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sonnet 4.6 RHI[2] vs max</td><td>-7%</td><td><strong>-33%</strong></td></tr>
+        <tr><td>Opus 4.7 RHI[1] vs max</td><td>-18%</td><td><strong>-37%</strong></td></tr>
+        <tr><td>Opus 4.8 RHI[2] vs ultracode</td><td><strong>-60%</strong></td><td><strong>-64%</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="text-body" style="margin-top:8px;">
+      成本节省来自更高效的上下文管理——RHI 学习到的 contract 指定了 agent 间应传递什么信息，避免了全量交互历史的冗余传播。这在概念上类似于在 harness 层面学习一个<strong>任务特定的稀疏通信模式</strong>（类比 sparse attention）。
+    </div>
+  </div>
+
+  <!-- 04 Ablation: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">04 · Ablation Studies</div>
+    <h2>什么在驱动性能提升？</h2>
+
+    <h3 style="margin-top:16px;">Harness 组件演化分析</h3>
+    <div class="text-body" style="margin-top:6px;">
+      通过 embedding + t-SNE/UMAP 投影和余弦相似度分析，发现 <strong>contract 的 task-dependent clustering 最清晰</strong>——说明最大的语义变化发生在 orchestrator-subagent 信息接口上。Contract 在 2-3 次迭代后快速稳定（cos similarity 从 0.48 → 0.72），而 role 变化最慢。
+    </div>
+
+    <h3 style="margin-top:20px;">内置 Multi-Agent 是纸老虎</h3>
+    <div class="text-body" style="margin-top:6px;">
+      论文在 Q&A 做了额外实验，对比四种执行设置：
+    </div>
+    <table class="comparison-table" style="margin-top:8px;">
+      <thead>
+        <tr><th>Setting</th><th>Elo</th><th>Cost</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>single(default) — 无任何 harness</td><td>中</td><td>低</td></tr>
+        <tr><td>multi(default) — Claude 内置 "create agent team"</td><td><strong>更低</strong></td><td>更高</td></tr>
+        <tr><td>multi(ours) = 显式 harness H⁰</td><td><strong>最高</strong></td><td>更低</td></tr>
+      </tbody>
+    </table>
+    <div class="text-body" style="margin-top:8px;">
+      Claude 内置的 multi-agent 功能<strong>不仅没提升反而降低了性能</strong>（Elo 更低，成本更高）。只有配上显式的 harness 设计才能逆转。这证明了<strong>prompt-level harness 可以超越系统级方案</strong>。
+    </div>
+
+    <h3 style="margin-top:20px;">RHI 不能替代训练时扩展</h3>
+    <div class="text-body" style="margin-top:6px;">
+      实验显示 RHI 可以让较弱的 Sonnet 4.6 接近但<strong>无法稳定超越</strong>更强的 Opus 4.7。RHI 和更强模型是<strong>互补关系</strong>——可以先在廉价模型上用 RHI 打磨 harness，然后切换到更强模型获得叠加收益。
+    </div>
+  </div>
+
+  <!-- 05 Information Theory: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">05 · Implicit Optimization Hypothesis</div>
+    <h2>RHI 隐式优化了什么？一个信息论假说</h2>
+    <div class="text-body" style="margin-top:12px;">
+      虽然 RHI 没有显式的 scalar reward，但实验表明其更新轨迹遵循可预测的模式。论文提出了信息论假说：
+    </div>
+    <blockquote style="margin-top:12px;">
+      "RHI 的隐式目标 = <strong>最大化 contract/hop 与任务的互信息</strong>（让信息流组件编码更多任务知识）− <strong>惩罚 harness 组件间的条件冗余</strong>（防止各组件重复编码相同信息）。"
+    </blockquote>
+    <div class="text-body" style="margin-top:12px;">
+      <strong>实证证据：</strong>
+    </div>
+    <table class="comparison-table" style="margin-top:8px;">
+      <thead>
+        <tr><th>指标</th><th>趋势 (迭代 1→4)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>I(contract; task) — debiased</td><td><strong>↑ 0.99 → 1.34 nats</strong></td></tr>
+        <tr><td>I(hop; task) — debiased</td><td><strong>↑ 1.96 → 2.54 nats</strong></td></tr>
+        <tr><td>I(role; task)</td><td>↓ 0.47 → 0.33 nats</td></tr>
+        <tr><td>TC(role,instr,cont,hop | task) — debiased</td><td><strong>↓ 4.84 → 3.63 nats</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="text-body" style="margin-top:8px;">
+      这说明 RHI 在让 contracts 和 hops 更加任务特定的同时，减少了不同组件之间的信息冗余——每个组件各司其职，不重复编码相同信息。
+    </div>
+  </div>
+
+  <!-- 06 Practical Takeaways: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">06 · Practical Takeaways</div>
+    <h2>核心结论与迁移启示</h2>
+    <div class="tips-grid" style="margin-top:12px;">
+      <div class="tip-card">
+        <h3>🔑 Harness-as-Prompt 可行</h3>
+        <div class="text-muted">不用写代码，纯文本 harness 就能超越系统级方案。把 harness 当作可优化的 prompt 变量而非固定代码。</div>
+      </div>
+      <div class="tip-card">
+        <h3>🎯 优先改 Contract 而非 Role</h3>
+        <div class="text-muted">Agent 间的通信接口（传什么信息）是最大杠杆点。反复调整角色描述远不如明确「谁把什么信息传给谁」。</div>
+      </div>
+      <div class="tip-card">
+        <h3>🔄 自比较信号足够</h3>
+        <div class="text-muted">不需要 benchmark、不需要人工标注。昨天自己的输出就是最好的基线。Pairwise 偏好即可驱动有效优化。</div>
+      </div>
+      <div class="tip-card">
+        <h3>💰 稀疏通信降成本</h3>
+        <div class="text-muted">精心设计的 contract 可以显著减少 context 传递量，cache read/write 降 33-64%，直接降低 API 成本。</div>
+      </div>
+      <div class="tip-card">
+        <h3>⚖️ 与更强模型互补</h3>
+        <div class="text-muted">先在小模型上打磨 harness，再切换到更强模型获得叠加收益。RHI 不会让弱模型秒变强，但能让每个模型用得更充分。</div>
+      </div>
+      <div class="tip-card">
+        <h3>⚠️ 内置系统不一定更好</h3>
+        <div class="text-muted">Claude 的 "create agent team" 反而是倒退。显式结构化的 prompt-level harness 比黑盒系统方案更可控。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 Limitations: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">07 · Limitations & Caveats</div>
+    <h2>局限与未解问题</h2>
+    <div class="text-body" style="margin-top:12px;">
+      <strong>① 合成 benchmark 的代表性：</strong>30 个合成任务覆盖三个领域，但与真实世界的 open-ended coding 仍有差距。所有任务都是结构化研究任务，有明确的 deliverables。
+    </div>
+    <div class="text-body" style="margin-top:8px;">
+      <strong>② 单模型族测试：</strong>仅验证了 Claude 家族（Sonnet 4.6 / Opus 4.7 / 4.8），未测试 GPT、Gemini 等模型。跨模型泛化性待验证。
+    </div>
+    <div class="text-body" style="margin-top:8px;">
+      <strong>③ Harness optimizer 开销未计入：</strong>每次 harness 更新需调用 LLM 生成新版本。这部分成本在成本对比中未详细分析。
+    </div>
+    <div class="text-body" style="margin-top:8px;">
+      <strong>④ 信息论假说是相关性非因果性：</strong>embedding-based 估计的 mutual information 和 total correlation 是代理指标，不能证明 Lharness 内部真的在优化这些量。
+    </div>
+    <div class="text-body" style="margin-top:8px;">
+      <strong>⑤ 只完成了循环的前半段：</strong>论文只验证了「harness 改进 → 产生更好 traces」，后半段「traces → 训练更好的 foundation model」未实现。
+    </div>
+  </div>
+
+  <!-- Sources: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://arxiv.org/abs/2607.15524" target="_blank" style="color:#2563eb;text-decoration:none;">arXiv:2607.15524 — Recursive Harness Self-Improvement</a> ·
+      <a href="https://arxiv.org/abs/2603.28052" target="_blank" style="color:#2563eb;text-decoration:none;">Meta-Harness (Lee et al., 2026)</a> ·
+      <a href="https://arxiv.org/abs/2603.03329" target="_blank" style="color:#2563eb;text-decoration:none;">AutoHarness (Lou et al., 2026)</a> ·
+      <a href="https://arxiv.org/abs/2607.08124" target="_blank" style="color:#2563eb;text-decoration:none;">TTHE (Nie et al., 2026)</a>
+      <br>
+      调研日期：2026-07-23 · 论文 v1 (2026-07-17) · Sakana AI × UC Berkeley
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
