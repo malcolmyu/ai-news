@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-08-01">
+<title>HarnessX：小米开源可组合、自进化的 Agent 运行时框架，打破静态脚手架天花板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · August 2026</div>
+    <h1>HarnessX：小米开源可组合、自进化的 Agent 运行时框架</h1>
+    <div class="subtitle" style="margin-top:6px;">把 Agent Harness 变成可序列化的乐高积木 + AEGIS 轨迹驱动进化引擎 + 模型/Harness 协同优化闭环</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">+14.5%</div>
+        <div class="stat-label">5 基准平均提升</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+44.0%</div>
+        <div class="stat-label">最高单场景提升</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">生命周期钩子</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">9</div>
+        <div class="stat-label">行为分类维度</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 问题背景: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">01 · 问题背景</div>
+    <h2>被忽视的中间层：Harness 才是 Agent 表现的关键</h2>
+    <div class="text-body">过去 Agent 开发者几乎把全部注意力放在基座大模型上，认为模型越强，Agent 越强。但近期研究发现，<strong>真正决定 Agent 表现的往往是中间那层运行时 Harness</strong>——它负责把模型、提示词、工具、记忆和控制流串起来，决定任务如何拆解、工具如何调用、决策如何流转。</div>
+    <div class="text-body" style="margin-top:10px;">当前主流 Agent 框架（LangChain、AutoGen、Claude Code、DeerFlow）的 Harness 全部靠人工静态开发。换模型、换工具、换领域就要重写脚手架。更严重的是<strong>提示词、工具封装、重试、记忆全搅在同一条代码里</strong>，改一处牵一发动全身，跨场景复用只能靠复制粘贴。</div>
+  </div>
+
+  <!-- 核心洞察: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 核心洞察</div>
+    <h2>双重天花板：模型与 Harness 优化互不连通</h2>
+    <div class="text-body">更大的问题是，Harness 产出的运行轨迹数据被白白浪费，模型提升也无法同步更新调度策略——两者优化互不连通，形成<strong>双重性能天花板</strong>。小米 Darwin Agent Team 的目标就是打破这个天花板：让 Harness 从「手工一次性搭建」变成「可组合、可观测、可演化的工程系统」。</div>
+    <blockquote style="margin-top:12px;">"把 AI Agent 的运行时框架变成可序列化、可哈希、可直接替换的一等公民。"<cite>— HarnessX 论文</cite></blockquote>
+    <div class="text-muted" style="font-size:11px;margin-top:8px;">论文：arxiv.org/abs/2606.14249 · GitHub：darwin-agent.github.io/HarnessX</div>
+  </div>
+
+  <!-- 三大创新: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">03 · 架构设计</div>
+    <h2>HarnessX 三大创新组件</h2>
+
+    <!-- Component 1 -->
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">1. 可组合 Harness：像搭乐高一样插拔</h3>
+      <div class="text-body">研究团队把 Harness 提升为一等公民——<strong>能序列化、能哈希、能直接替换</strong>。最小积木块是 Processor，通过八个生命周期钩子把控制点精确卡死，配合九维行为分类覆盖模型选择、上下文管理、记忆系统、工具调用、沙箱环境、奖励信号、安全边界、追踪日志到训练桥接的全链路。想加功能、换逻辑、删组件？就像搭乐高一样直接安全插拔——冲突自动拦住，其他代码一行都不用动。</div>
+      <div class="text-body" style="margin-top:8px;font-size:12px;color:var(--text-muted);">
+        <strong>8 个生命周期钩子：</strong>on_start → on_tool_select → on_tool_execute → on_observe → on_reason → on_act → on_error → on_stop<br>
+        <strong>9 维行为分类：</strong>模型选择、上下文工程、记忆管理、工具封装、沙箱编排、奖励设计、安全策略、可观测追踪、训练桥接
+      </div>
+    </div>
+
+    <!-- Component 2 -->
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">2. AEGIS 进化引擎：让 Harness 自己看轨迹、学教训、越跑越聪明</h3>
+      <div class="text-body">AEGIS（Adaptive Evolutionary Generation & Improvement System）把 Harness 演化直接映射成强化学习 MDP：</div>
+      <div class="text-body" style="margin-top:8px;">
+        <strong>状态 =</strong> 当前 Harness 配置 + 历史轨迹库<br>
+        <strong>动作 =</strong> 安全编辑（加工具、改提示词、重构控制流）<br>
+        <strong>奖励 =</strong> 任务得分 + 完整轨迹质量
+      </div>
+      <div class="text-body" style="margin-top:10px;"><strong>四阶段流水线</strong>全由同一个元大模型驱动：</div>
+      <div class="text-body" style="margin-top:4px;">
+        ① <strong>压缩</strong> — 将海量原始轨迹压缩为关键故障摘要，过滤噪声<br>
+        ② <strong>规划</strong> — 识别哪些坑踩过、哪些方向还没探索<br>
+        ③ <strong>生成</strong> — 产出类型安全的候选 Harness 修改方案<br>
+        ④ <strong>Critic 审核</strong> — 盯着奖励欺骗（reward hacking），<strong>确定性闸门强制要求「新方案不能让任何已解决任务变差」</strong>，彻底解决灾难性遗忘
+      </div>
+    </div>
+
+    <!-- Component 3 -->
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">3. 协同进化闭环：模型和 Harness 一起越变越强</h3>
+      <div class="text-body">Harness 演化和模型 RL 训练<strong>共享同一个回放缓冲区</strong>：Harness 端用 AEGIS 做无参数符号化编辑（修改的是脚手架，不动模型权重），模型端用跨 Harness 的 GRPO 做参数微调。同一个任务在不同 Harness 下跑出的轨迹放在一组比较相对优势，模型就能学会在各种执行流程中都能找到最优策略，而不是死磕单一固定套路。</div>
+      <div class="text-body" style="margin-top:8px;"><strong>关键优势：</strong>离线复用轨迹，几乎零额外环境交互成本。Harness 和模型可以在同一个闭环中共同提升，突破各自独立优化的天花板。</div>
+    </div>
+  </div>
+
+  <!-- 实验结果: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">04 · 实验评估</div>
+    <h2>5 基准 × 3 模型 × 变体隔离的全面验证</h2>
+
+    <div class="text-body" style="margin-bottom:16px;">实验在 GAIA、ALFWorld、WebShop、τ³-Bench 和 SWE-bench Verified 上，使用 Claude Sonnet 4.6、GPT-5.4、Qwen3.5-9B 作为任务模型（固定 Claude Opus 4.6 做元进化），对比 Static Harness 和 Claude Code SDK。</div>
+
+    <!-- 结果表格 -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">实验</th>
+        <th style="padding:10px;text-align:center;font-weight:600;border-bottom:1px solid #e8e8e6;">关键发现</th>
+        <th style="padding:10px;text-align:center;font-weight:600;border-bottom:1px solid #e8e8e6;">指标</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">主实验：仅进化 Harness</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">15 组「模型+基准」中 14 组性能提升；弱模型受益更大（Qwen ALFWorld 53%→97%）</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">+14.5% avg<br>+44.0% max</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">消融 1：变体隔离 vs 全局单 Harness</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">全局单 Harness 峰值 73.8% 后暴跌至 49.5%（严重灾难性遗忘）；变体隔离峰值 87.4%，无退化</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">隔离胜<br>算力省 25%</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">消融 2：AEGIS 四阶段 vs 单阶段进化器</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">最终精度接近（87.4% vs 86.4%），但 AEGIS 节省 14% token，轨迹压缩带来可解释性</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">-14% token</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;font-weight:500;">协同进化：Harness + 模型联合优化</td>
+        <td style="padding:10px;">单独进化 Harness 在 GAIA/WebShop 最高 37.4%/49.0%；启用联合优化后 41.7%/54.0%</td>
+        <td style="padding:10px;text-align:center;color:#2563eb;font-weight:600;">GAIA +4.3pp<br>WebShop +5.0pp</td>
+      </tr>
+    </table>
+
+    <div class="text-body" style="margin-top:8px;"><strong>关键洞察：</strong>基座模型越弱，HarnessX 的提升幅度越大。这意味着对使用较弱模型（如 Qwen3.5-9B）的场景，优化 Harness 比换更强的模型更具性价比。</div>
+  </div>
+
+  <!-- 对比分析: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">05 · 深度分析</div>
+    <h2>HarnessX 与当前 Agent 生态的对比</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">维度</th>
+        <th style="padding:10px;text-align:center;font-weight:600;border-bottom:1px solid #e8e8e6;">传统 Agent 框架</th>
+        <th style="padding:10px;text-align:center;font-weight:600;border-bottom:1px solid #e8e8e6;">HarnessX</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">Harness 地位</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">代码中的隐式结构，不可序列化</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">一等公民，可序列化/可哈希/可直接替换</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">组件化</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">提示词/工具/重试/记忆耦合</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">8 钩子 × 9 维度原子化 Processor</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">优化方式</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">人工手动调整</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">AEGIS 轨迹驱动自动进化</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">灾难性遗忘</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">无保护机制</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">确定性闸门 + 变体隔离</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">模型联动</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">互不连通</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">共享回放缓冲区，协同进化</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">环境交互成本</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;">每次优化需重新运行任务</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;">离线复用轨迹，几乎零额外成本</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 局限与展望: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">06 · 当前局限</div>
+    <h2>三个待解决的短板</h2>
+    <div class="tips-grid" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">⚠️ 域外泛化未验证</h3>
+        <div class="text-muted" style="font-size:12px;">进化过程仅在同分布任务上测试，跨域迁移能力未知</div>
+      </div>
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">⚠️ 文本动作空间限制</h3>
+        <div class="text-muted" style="font-size:12px;">面向离散文本动作的 Agent，连续控制或多模态场景是空白</div>
+      </div>
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">⚠️ 强元模型依赖</h3>
+        <div class="text-muted" style="font-size:12px;">AEGIS 高度依赖 Claude Opus 4.6 级别的元模型驱动进化，成本约束明显</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 展望与意义: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">07 · 意义与展望</div>
+    <h2>HarnessX 对 Agent 研发范式的影响</h2>
+    <div class="text-body">HarnessX 的贡献不只是性能数字。它首次系统性地证明了<strong>Agent 运行时层可以像模型权重一样被精确定义、序列化和自动优化</strong>。</div>
+    <div class="text-body" style="margin-top:10px;">对实际工程的意义：</div>
+    <div class="text-body" style="margin-top:6px;">
+      <strong>① 不再需要人工反复调 Harness —</strong> AEGIS 自动从轨迹中学习，专注力放在任务定义上<br>
+      <strong>② 弱模型 + 好 Harness 可能胜过强模型 + 烂 Harness —</strong> Qwen ALFWorld 53%→97% 就是证明<br>
+      <strong>③ 跨场景复用不再是复制粘贴 —</strong> Processor 原子化后，跨项目插拔像搭乐高<br>
+      <strong>④ Harness 层优化是新的工程杠杆 —</strong> 比换更大的模型更具成本效益
+    </div>
+    <div class="text-body" style="margin-top:10px;">随着后续跨域泛化、多模态动作空间和弱元模型方案的探索，这条路径有机会真正把 Agent 运行时层从「手工搭建」推向「持续自我进化」。</div>
+  </div>
+
+  <!-- 内部相关: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">08 · 站内延伸</div>
+    <h2>相关调研与日报</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+      <a href="rhi-harness-self-improvement.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">RHI：Harness 递归自改进</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Sakana AI × UC Berkeley — Prompt 级优化超越系统级 Scaling</span>
+      </a>
+      <a href="ai-native-benchmark.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">AI Native Benchmark 三层能力框架</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">D3 工程化实践力 + Agent 调度带宽</span>
+      </a>
+      <a href="multi-agent-research.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">多智能体系统架构与工程实践</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Agent 编排与协作范式</span>
+      </a>
+      <a href="verifiability-first-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">可验证性优先：Harness 到移动 Agent 集群</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">生产级 Harness 工程实践</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 来源: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://arxiv.org/abs/2606.14249" target="_blank" style="color:#2563eb;text-decoration:none;">HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry</a> ·
+      <a href="https://darwin-agent.github.io/HarnessX/" target="_blank" style="color:#2563eb;text-decoration:none;">GitHub</a> ·
+      <a href="https://mp.weixin.qq.com/s/V3xPmsQzTiHql5bbCHsLQg" target="_blank" style="color:#2563eb;text-decoration:none;">智猩猩AI 报道</a>
+      <br>
+      调研日期：2026-08-01 · 小米 Darwin Agent Team
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
