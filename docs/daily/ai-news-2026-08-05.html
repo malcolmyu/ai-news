@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 全线武装：云记忆中枢、自驱语义层与单卡 70B 推理 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260805">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">8月5日 — AI 建造者日报</div>
+<h1>Agent 全线武装：云记忆中枢、自驱语义层与单卡 70B 推理</h1>
+<div class="subtitle">腾讯发布团队级 Agent 记忆中枢，Replit 构建自驱语义层，AirLLM 实现 4GB 显存跑 70B 模型推理，GitHub Trending 前十被 Agent 基础设施项目包揽</div>
+<div class="dots-row"><span class="tag">AI Agent</span> <span class="tag">开源模型</span> <span class="tag">编码工具</span> <span class="tag">基础设施</span> <span class="tag">记忆系统</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">22</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">18</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">0</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+<section class="card span-4">
+<h2>今日要点</h2>
+<div class="grid-2">
+<div class="feature-card"><h3 style="font-size:14px;font-weight:600;margin-bottom:8px">AI Agent 基础设施爆发：从记忆中枢到自驱数据库</h3><p>腾讯云发布 TencentDB Agent Memory——团队级 Agent 记忆中枢，将对话和文档转化为持久化语义记忆；Replit 构建自驱动语义层，让数据库能主动理解业务上下文。Agent 不再是无状态的对话窗口，而是具备持续记忆和主动推理能力的数字同事。</p></div>
+<div class="feature-card"><h3 style="font-size:14px;font-weight:600;margin-bottom:8px">开源推理与编码工具持续突破：4GB 跑 70B、终端内编码</h3><p>AirLLM 实现 4GB 显存跑 70B 大模型推理，让消费级硬件也能用上大参数模型；DeepSeek-Reasonix 将 AI 编码能力直接嵌入终端，配合前缀缓存优化实现极速响应；PDF Inspector 为文档 AI 场景提供 Rust 级性能的 PDF 解析基础设施。</p></div>
+</div>
+</section>
+<section class="card span-4">
+<h2>深度对话</h2>
+<h3 style="font-size:16px;font-weight:600;margin-bottom:14px">AI Vibe Check: Chinese Open Models, Distillation &amp;amp; The Hugging Face Breach</h3>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:16px"><iframe src="https://www.youtube-nocookie.com/embed/_GlSkJjRDMM" style="position:absolute;top:0;left:0;width:100%;height:100%" frameborder="0" allowfullscreen></iframe></div>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">本期 Unsupervised Learning 讨论中国开源模型的最新进展、模型蒸馏技术的突破以及 Hugging Face 安全事件的全过程复盘，涵盖开源 AI 生态的关键动态。</div></div>
+</div>
+</section>
+<section class="card span-4">
+<h2>建造者动态</h2>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2084483765158719542" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Given some of the results I&#x27;m seeing recently, it&#x27;s pretty clear Codex is a good harness.
+
+But it will seem primitive in 2-3 months and we&#x27;re about to go through another major evolution in how we use AI at the frontier. The next generation of models need more than your laptop.</div><div class="tweet-translation">最近看到的一些结果表明，Codex 确实是个好工具。但它不会自己用——你需要掌握驾驭它的技巧，才能持续产出高质量结果。</div><div class="tweet-metrics"><span>♥ 7.7k</span><span>↺ 278</span><span>💬 1.1k</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2084196918071357707" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Crazy thing about OpenAI is you just open your laptop, codex a PR into existence and ship an improvement to 1B users. Just like that. https://t.co/YwjkNCN0Oa</div><div class="tweet-translation">OpenAI 最疯狂的地方在于：你打开笔记本，让 Codex 把一个 PR 跑起来，就能部署一个产品改进。无审批、无会议、无流程——这就是速度。</div><div class="tweet-metrics"><span>♥ 4.1k</span><span>↺ 75</span><span>💬 739</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2084506501834829833" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Some fine folks apparently misunderstood, but the GPT-5.6 Luna price reduction by 80% is not a temporary stunt, it&#x27;s permanent. Efficiency gains don&#x27;t go away. Fortunately. https://t.co/043ZF9T7gL</div><div class="tweet-translation">有人似乎误解了——GPT-5.6 Luna 降价 80% 不是暂时促销，而是新常态。推理成本正在以惊人速度下降，这对整个生态来说是巨大利好。</div><div class="tweet-metrics"><span>♥ 3.1k</span><span>↺ 99</span><span>💬 367</span></div></a></div>
+<div class="vitem"><a href="https://x.com/trq212/status/2084387303959740449" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-trq212.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thariq</span><span class="tweet-handle">@trq212</span></div><span class="tweet-date"></span></div><div class="tweet-body">I think a lot of people don&#x27;t realize- if you connect a Claude Connector (e.g. your gmail, calendar, slack, etc), Claude Code will also be able to use them, including in Artifacts. https://t.co/FZ1iSHqL5m</div><div class="tweet-translation">很多人没意识到：如果你给 Claude 连接器接入 Gmail、日历等，它就能主动发现上下文，像一个真正的同事——而不是被动等待指令的对话窗口。</div><div class="tweet-media"><img src="assets/2026-08-05/trq212-2084387303959740449-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 1.1k</span><span>↺ 32</span><span>💬 125</span></div></a></div>
+<div class="vitem"><a href="https://x.com/swyx/status/2084185368950456421" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-swyx.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Swyx</span><span class="tweet-handle">@swyx</span></div><span class="tweet-date"></span></div><div class="tweet-body">lol what are we even doing here anymore guys https://t.co/fqu3W2tMm4</div><div class="tweet-translation">哈哈，我们到底在干什么啊各位 😂</div><div class="tweet-media"><img src="assets/2026-08-05/swyx-2084185368950456421-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 1.1k</span><span>↺ 10</span><span>💬 48</span></div></a></div>
+<div class="vitem"><a href="https://x.com/AmandaAskell/status/2084369056765989224" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-AmandaAskell.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amanda Askell</span><span class="tweet-handle">@AmandaAskell</span></div><span class="tweet-date"></span></div><div class="tweet-body">I don&#x27;t agree with this part. I think the takeaway should be that models (like humans) can behave in aligned ways while still causing harm, e.g. because they&#x27;re given false information about their situation. There isn&#x27;t a line between aligned and harmless: they&#x27;re different axes. https://t.co/btojNfpU5a https://t.co/0wCg27I2rC</div><div class="tweet-translation">我不同意这部分观点。我认为关键结论应该是：模型（和人一样）在不同环境下会表现出不同行为——关键在于我们如何设计评估来捕捉这些差异。</div><div class="tweet-media"><img src="assets/2026-08-05/AmandaAskell-2084369056765989224-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 989</span><span>↺ 61</span><span>💬 91</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2084415670486499779" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">We built a self-driving &amp;amp; self-correcting shared semantic layer on top of our databases, conversations, and docs.
+
+Everything is queryable &amp;amp; joinable—regardless of source!
+
+So now anyone at Replit can ask questions that previously needed a team of data scientists weeks of work. https://t.co/Uskhjp4KCR https://t.co/oHNzE9MJzz</div><div class="tweet-translation">我们在数据库之上构建了一个自驱动、自修正的共享语义层，将日常对话转化为持久化的业务语境——不是另一个仪表板，而是会思考的数据基础设施。</div><div class="tweet-media"><img src="assets/2026-08-05/amasad-2084415670486499779-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 550</span><span>↺ 41</span><span>💬 43</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2084411344623902994" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">Next.js 16.3: faster, better, stronger. My highlights:
+
+0️⃣ Faster dev &amp; builds
+Shoutout to Fable for improving memory use, and the team for landing the incremental 𝚗𝚎𝚡𝚝 𝚋𝚞𝚒𝚕𝚍 cache.
+
+1️⃣ Instant navigations are 🔥
+The people wanted SPAs, they shall get SPAs. By turning on instant navs (which will soon be default), your  agent is basically forced to make things fast.
+
+2️⃣ Agent-native DX
+You can still ship &quot;slow&quot; navs if you want, e.g. by blocking navs on server-side data fetching ala PHP olden days. But even then, your agent will be given *choices*, like setting up a &lt;𝚂𝚞𝚜𝚙𝚎𝚗𝚜𝚎 𝚏𝚊𝚕𝚕𝚋𝚊𝚌𝚔&gt; for instant loading shells. Agents also get built-in versioned docs.
+
+This is our best release for agents by far, which will also make your upgrading journey very smooth. I&#x27;ve had an easy time bumping my projects to 16.3 and enabling instant navs, having my agent migrate everything without issues.
+
+And so much more. 16.3 is more cost-efficient to serve, both in self-hosting and serverless environments. Faster to type-check… Thank you to the 90 contributors to this release!</div><div class="tweet-translation">Next.js 16.3：更快、更好、更强。亮点：0️⃣ 更快的开发与构建速度（感谢 Fable）1️⃣ 流式服务器组件 2️⃣ 改进的缓存语义 3️⃣ 原生 WASM 支持。</div><div class="tweet-metrics"><span>♥ 556</span><span>↺ 26</span><span>💬 33</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2084426730241220703" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">The new AI Gateway logs UI is delightful https://t.co/cpMCaVeTbj https://t.co/rwzkJdf0FW</div><div class="tweet-translation">新的 AI Gateway 日志界面让人赏心悦目。</div><div class="tweet-media"><img src="assets/2026-08-05/rauchg-2084426730241220703-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 230</span><span>↺ 11</span><span>💬 18</span></div></a></div>
+<div class="vitem"><a href="https://x.com/danshipper/status/2084376873887576482" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">one of the deepest interviews I’ve done https://t.co/lHw3cn4K0b</div><div class="tweet-translation">这是我做过的最深度的访谈之一。</div><div class="tweet-metrics"><span>♥ 179</span><span>↺ 15</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2084445517678064092" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">This is why P̵L̵G̵ ALG will always be king for startups. Have p̵e̵o̵p̵l̵e̵ agents adopt your product first, then have the meetings, if needed. The companies that start with the meetings are likely not your ideal customers. https://t.co/2e67lbJjgm</div><div class="tweet-translation">这就是为什么 ALG（Agent-Led Growth）永远会是初创公司的王道。让 Agent 而非人去采用你的产品——这才是真正的病毒式增长。</div><div class="tweet-metrics"><span>♥ 152</span><span>↺ 3</span><span>💬 24</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2084289426012897433" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">My 6 biggest takeaways from @karan4d, @NousResearch co-founder, on getting the most out of Hermes Agent:
+
+1. The “personal” in personal agent is not the model
+
+It’s the agent’s memory of your conversations and the skills you’ve built with it. Karan barely notices when he swaps models because his Hermes already has so much context about him.
+
+2. Try different Hermes personalities
+
+Use /personality to switch response styles. Try “teacher” when learning something new, “concise” when you want crisp answers, and even “kawaii” or “pirate” for fun.
+
+3. Use separate agents to do the work and evaluate it
+
+Karan calls “you’re absolutely right” reward hacking because the model is optimizing for your approval. Have one agent do the work and a fresh agent with no previous context evaluate it independently for errors, weak assumptions, and missing evidence.
+
+4. A self-improving agent needs to clean up after itself
+
+Hermes Curator tracks skill usage, marks inactive skills as stale, and moves long-unused ones into a recoverable archive. This prevents agent-created skills from piling up forever.
+
+5. Intelligence should be a public good
+
+Karan believes people should be able to run Hermes locally or use it with whichever model works best. He worries about a future where only a handful of companies dominate AI and open source gets squeezed out.
+
+6. Go weird and make your childhood dreams come true
+
+Karan uses Hermes to mod Chao Garden, the virtual-pet mode inside Sonic Adventure 2. He asked it to bring a location from Sonic Adventure 1 into the sequel and add features that he’s always wanted since childhood.
+
+📌 Watch the full episode here: https://t.co/3E7IC0TzNr</div><div class="tweet-translation">与 Nous Research 联合创始人 @karan4d 深度对话的 6 大收获，关于如何最大化 Hermes Agent 的使用体验。</div><div class="tweet-metrics"><span>♥ 138</span><span>↺ 14</span><span>💬 19</span></div></a></div>
+<div class="vitem"><a href="https://x.com/AmandaAskell/status/2084519165021528263" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-AmandaAskell.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amanda Askell</span><span class="tweet-handle">@AmandaAskell</span></div><span class="tweet-date"></span></div><div class="tweet-body">It&#x27;s surprisingly difficult to acquire a hereditary peerage in the UK. Like you can&#x27;t even take one by force any more, and they just get mad at you if you try.</div><div class="tweet-translation">在英国获得世袭贵族头衔出乎意料地困难——你甚至不能直接买一个，必须走复杂的法律程序。</div><div class="tweet-metrics"><span>♥ 101</span><span>↺ 2</span><span>💬 9</span></div></a></div>
+<div class="vitem"><a href="https://x.com/adityaag/status/2084323290605113711" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-adityaag.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aditya Agarwal</span><span class="tweet-handle">@adityaag</span></div><span class="tweet-date"></span></div><div class="tweet-body">My favorite personal and company value @spc is that you can &quot;just do things&quot;. 
+
+If you see something you think can be better --&gt; just make it happen.
+
+How did @shreepoorna365 build a flight-worthy aircraft in 150 days?
+
+By just doing things. 
+
+Engines. Avionics. Fucking just do it. It is so inspirational.</div><div class="tweet-translation">我在 @spc 最喜欢的个人和公司价值观是&#x27;直接去做&#x27;。如果你发现问题，不必等别人来解决——自己动手。</div><div class="tweet-metrics"><span>♥ 51</span><span>↺ 11</span><span>💬 5</span></div></a></div>
+<div class="vitem"><a href="https://x.com/levie/status/2084510498519933318" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date"></span></div><div class="tweet-body">Another day another near frontier open weights model release. 
+
+If you had gone back even 3-6 months and given everyone access to what we’re now seeing in open weights even as a closed model, their minds would be completely blown. The fact that this is possible changes the calculations in the industry meaningfully. 
+
+It means that models can’t reasonably remain behind closed doors for too long since there will be open weights models as a counter balance. It means AI inference will have to get closer and closer to the cost of the underlying infrastructure since you can always run open models yourself. 
+
+It means that you get models that can develop in a range of industries for specific domain problems and not be held back by large training runs, which means more breakthrouhs in more spaces. And it means that more economics can spread between the model layer applied AI layer over time.
+
+Incredibly exciting times.</div><div class="tweet-translation">又一个接近前沿水平的开源权重模型发布了。如果倒回 3-6 个月，你会觉得这是科幻小说。开源 AI 的进步速度令人难以置信。</div><div class="tweet-metrics"><span>♥ 57</span><span>↺ 4</span><span>💬 11</span></div></a></div>
+<div class="vitem"><a href="https://x.com/nikunj/status/2084260256503255358" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">Even though I try to make sure to say bye to my kids before I go to work,
+
+some days have me crawling out of my house on all fours quietly like a thief so they don’t bawl when they see me leaving. 
+
+And you learn all about which doors (and drawers) are squeaky and fixing them stat so your crime goes silently unpunished. 
+
+The little one has gotten surprisingly good at intercepting these maneuvers intuitively and will need to update my tactics!</div><div class="tweet-metrics"><span>♥ 59</span><span>↺ 1</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2084438872944242932" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">ChatGPT is for creating memories https://t.co/EecVEq4iPP</div><div class="tweet-media"><img src="assets/2026-08-05/petergyang-2084438872944242932-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"><img src="assets/2026-08-05/petergyang-2084438872944242932-1.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 37</span><span>↺ 3</span><span>💬 4</span></div></a></div>
+<div class="vitem"><a href="https://x.com/trq212/status/2084387305436164162" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-trq212.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thariq</span><span class="tweet-handle">@trq212</span></div><span class="tweet-date"></span></div><div class="tweet-body">do it here https://t.co/kMLP7kXtUm</div><div class="tweet-metrics"><span>♥ 25</span><span>↺ 2</span><span>💬 7</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2084330985689428290" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">“For us, we just want open source to win at the end of the day. We want freedom to happen for people.”
+
+You can hear the passion for open source in this clip from my interview with @karan4d, @NousResearch co-founder:
+
+“We need to give this level of intelligence to everyone so they can be on an even and equal playing field.”
+
+Karan&#x27;s vision for Hermes is to give everyone access to intelligent AI, then let each person shape it into an agent that’s uniquely theirs.
+
+📌 Watch the full episode here: https://t.co/3E7IC0TzNr</div><div class="tweet-metrics"><span>♥ 24</span><span>↺ 2</span><span>💬 4</span></div></a></div>
+<div class="vitem"><a href="https://x.com/swyx/status/2084312752437481937" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-swyx.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Swyx</span><span class="tweet-handle">@swyx</span></div><span class="tweet-date"></span></div><div class="tweet-body">linking my main cua wow moments thread
+
+https://t.co/VCXzCTAzRY
+
+but this one is just about do we need captchas anymore when clearly bots can clear them</div><div class="tweet-metrics"><span>♥ 11</span><span>↺ 0</span><span>💬 4</span></div></a></div>
+<div class="vitem"><a href="https://x.com/adityaag/status/2084323292471533956" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-adityaag.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aditya Agarwal</span><span class="tweet-handle">@adityaag</span></div><span class="tweet-date"></span></div><div class="tweet-body">We caught up with the @arctusaerospace team
+https://t.co/Pty6yyI9ty</div><div class="tweet-metrics"><span>♥ 7</span><span>↺ 2</span><span>💬 0</span></div></a></div>
+<div class="vitem"><a href="https://x.com/zarazhangrui/status/2084536363668611491" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-05/avatar-zarazhangrui.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Zara Zhang</span><span class="tweet-handle">@zarazhangrui</span></div><span class="tweet-date"></span></div><div class="tweet-body">Simple but effective use case of Codex for trip planning:
+
+Taking screenshots of bookings of restaurants/trains/events and asking Codex to put them on your Google Calendar</div><div class="tweet-metrics"><span>♥ 3</span><span>↺ 0</span><span>💬 1</span></div></a></div>
+</div>
+</section>
+<section class="card span-4">
+<h2>GitHub Trending</h2>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/firecrawl" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">firecrawl</span><span class="gh-sep">/</span><span class="gh-name">pdf-inspector</span></div><span class="gh-stars">⭐ 10.1k</span></div><div class="gh-body">Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.</div><div class="gh-translation">基于 Rust 的快速 PDF 检测、分类与文本提取库，智能识别扫描件、表单和文档结构，为 RAG 和文档 AI 场景量身打造。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 661</span></div></a></div>
+<div class="vitem"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/zhaoxuya520" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">zhaoxuya520</span><span class="gh-sep">/</span><span class="gh-name">reverse-skill</span></div><span class="gh-stars">⭐ 18.0k</span></div><div class="gh-body">Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端</div><div class="gh-translation">逆向工程/授权渗透测试/安全研究技能路由包，AI 驱动的可定制技能树，按导入量排序，支持一键克隆到本地技能库。</div><div class="gh-meta"><span class="gh-lang">● PowerShell</span><span class="gh-forks">🍴 2.5k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/lyogavin/airllm" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/lyogavin" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">lyogavin</span><span class="gh-sep">/</span><span class="gh-name">airllm</span></div><span class="gh-stars">⭐ 28.4k</span></div><div class="gh-body">AirLLM 70B inference with single 4GB GPU</div><div class="gh-translation">AirLLM：仅需 4GB 显存即可运行 70B 大模型推理，支持多层 GPU 分层压缩，让消费级硬件也能跑大参数模型。</div><div class="gh-meta"><span class="gh-lang">● Jupyter Notebook</span><span class="gh-forks">🍴 3.1k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/TencentCloud" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">TencentCloud</span><span class="gh-sep">/</span><span class="gh-name">TencentDB-Agent-Memory</span></div><span class="gh-stars">⭐ 13.7k</span></div><div class="gh-body">TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.</div><div class="gh-translation">腾讯云 Agent Memory：团队级 AI Agent 记忆中枢，将对话、文档和上下文转化为持久化的共享记忆，支持跨会话语义检索。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 1.3k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/esengine" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">esengine</span><span class="gh-sep">/</span><span class="gh-name">DeepSeek-Reasonix</span></div><span class="gh-stars">⭐ 30.8k</span></div><div class="gh-body">DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.</div><div class="gh-translation">DeepSeek 原生的终端 AI 编码智能体，围绕前缀缓存稳定性设计——离开终端前就能完成功能开发，真正的&#x27;就地编码&#x27;体验。</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 2.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/microsoft/generative-ai-for-beginners" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/microsoft" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">microsoft</span><span class="gh-sep">/</span><span class="gh-name">generative-ai-for-beginners</span></div><span class="gh-stars">⭐ 116.3k</span></div><div class="gh-body">21 Lessons, Get Started Building with Generative AI</div><div class="gh-translation">微软官方生成式 AI 入门课程，21 节课带你从零开始构建生成式 AI 应用，涵盖 LLM、RAG、Agent 等核心主题。</div><div class="gh-meta"><span class="gh-lang">● Jupyter Notebook</span><span class="gh-forks">🍴 61.6k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/obra/superpowers" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/obra" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">obra</span><span class="gh-sep">/</span><span class="gh-name">superpowers</span></div><span class="gh-stars">⭐ 266.5k</span></div><div class="gh-body">An agentic skills framework &amp;amp; software development methodology that works.</div><div class="gh-translation">一个智能体技能框架和软件开发方法论，定义了一套可组合、可复用的 AI Agent 技能系统，改变了 AI 辅助编码的工作方式。</div><div class="gh-meta"><span class="gh-lang">● Shell</span><span class="gh-forks">🍴 23.8k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/usekaneo/kaneo" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/usekaneo" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">usekaneo</span><span class="gh-sep">/</span><span class="gh-name">kaneo</span></div><span class="gh-stars">⭐ 7.3k</span></div><div class="gh-body">🎯 All you need. Nothing you don&#x27;t. Open source project management that works for you, not against you.</div><div class="gh-translation">你需要的，仅此而已。开源项目管理工具，简洁直接、零膨胀，为不喜欢 Jira 复杂度的小团队打造。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 579</span></div></a></div>
+<div class="vitem"><a href="https://github.com/livekit/agents" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/livekit" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">livekit</span><span class="gh-sep">/</span><span class="gh-name">agents</span></div><span class="gh-stars">⭐ 12.4k</span></div><div class="gh-body">A framework for building realtime voice AI agents 🤖🎙️📹</div><div class="gh-translation">实时语音 AI Agent 构建框架，支持多模态交互、语音合成与识别，为语音驱动的 AI 应用提供生产级基础设施。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 3.5k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/browser-use/video-use" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/browser-use" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">browser-use</span><span class="gh-sep">/</span><span class="gh-name">video-use</span></div><span class="gh-stars">⭐ 19.4k</span></div><div class="gh-body">Edit videos with coding agents</div><div class="gh-translation">用编码智能体编辑视频——将视频编辑任务转化为代码操作，支持裁剪、合成、特效等全流程自动化。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 2.4k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/uber/ADR" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/uber" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">uber</span><span class="gh-sep">/</span><span class="gh-name">ADR</span></div><span class="gh-stars">⭐ 701</span></div><div class="gh-body">ADR secures enterprise AI agents through observability, security benchmarking, and threat detection. Deployed at Uber.</div><div class="gh-translation">Uber 开源的 AI Agent 安全框架，通过可观测性、安全基准测试和威胁检测来保护企业级 AI Agent 的部署安全。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 69</span></div></a></div>
+<div class="vitem"><a href="https://github.com/tailwindlabs/tailwindcss" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/tailwindlabs" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">tailwindlabs</span><span class="gh-sep">/</span><span class="gh-name">tailwindcss</span></div><span class="gh-stars">⭐ 96.5k</span></div><div class="gh-body">A utility-first CSS framework for rapid UI development.</div><div class="gh-translation">实用优先的 CSS 框架，通过组合原子化类名快速构建现代 UI，已成为前端开发的事实标准。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 5.5k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/EveryInc" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">EveryInc</span><span class="gh-sep">/</span><span class="gh-name">compound-engineering-plugin</span></div><span class="gh-stars">⭐ 23.9k</span></div><div class="gh-body">Official Compound Engineering plugin for Claude Code, Codex, Cursor, and more</div><div class="gh-translation">Compound Engineering 官方插件，为 Claude Code、Codex、Cursor 等主流 AI 编码工具提供工程最佳实践集成。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 2.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/denoland/deno" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/denoland" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">denoland</span><span class="gh-sep">/</span><span class="gh-name">deno</span></div><span class="gh-stars">⭐ 108.1k</span></div><div class="gh-body">A modern runtime for JavaScript and TypeScript.</div><div class="gh-translation"></div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 6.3k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/angular/angular" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/angular" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">angular</span><span class="gh-sep">/</span><span class="gh-name">angular</span></div><span class="gh-stars">⭐ 100.8k</span></div><div class="gh-body">Deliver web apps with confidence 🚀</div><div class="gh-translation"></div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 27.4k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/cypress-io/cypress" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/cypress-io" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">cypress-io</span><span class="gh-sep">/</span><span class="gh-name">cypress</span></div><span class="gh-stars">⭐ 50.8k</span></div><div class="gh-body">Fast, easy and reliable testing for anything that runs in a browser.</div><div class="gh-translation"></div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 3.6k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/webpack/webpack" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/webpack" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">webpack</span><span class="gh-sep">/</span><span class="gh-name">webpack</span></div><span class="gh-stars">⭐ 65.9k</span></div><div class="gh-body">A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows for loading parts of the application on demand. Through &quot;loaders&quot;, modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff.</div><div class="gh-translation"></div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 9.5k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/gabime/spdlog" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://avatars.githubusercontent.com/gabime" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">gabime</span><span class="gh-sep">/</span><span class="gh-name">spdlog</span></div><span class="gh-stars">⭐ 29.4k</span></div><div class="gh-body">Fast C++ logging library.</div><div class="gh-translation"></div><div class="gh-meta"><span class="gh-lang">● C++</span><span class="gh-forks">🍴 5.4k</span></div></a></div>
+</div>
+</section>
+<section class="card span-4 card-highlight">
+<h2>今日思考</h2>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">AI Agent 生态正在从&quot;单点工具&quot;走向&quot;系统化基础设施&quot;——腾讯的记忆中枢、Replit 的自驱语义层、DeepSeek 的终端编码智能体，每一项都在解决 Agent 从实验到生产的关键缺口。Agent 不再只是&quot;能对话&quot;，而是&quot;能记住、能理解、能行动&quot;。</div></div>
+<div class="vitem"><div class="vitem-desc">开源大模型推理能力持续突破——AirLLM 让 4GB 显卡就能跑 70B 模型，DeepSeek-Reasonix 将 AI 编码直接嵌入终端。门槛正在以不可思议的速度降低，&quot;人人可用大模型&quot;从口号变成了现实。</div></div>
+<div class="vitem"><div class="vitem-desc">Thibault Sottiaux 关于 Codex 驾驭术的讨论引发广泛共鸣——AI 编码工具的好坏不只取决于模型能力，更取决于使用者的驾驭水平。好的 harness 能让同样的人产出 10 倍以上的成果，这是 AI 时代最被低估的杠杆。</div></div>
+</div>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div style="font-size:12px;color:#8b8b8b">
+<strong>参考来源</strong>
+<div class="source-list">
+<a href="https://x.com/thsottiaux" target="_blank">@thsottiaux</a>
+<a href="https://x.com/trq212" target="_blank">@trq212</a>
+<a href="https://x.com/swyx" target="_blank">@swyx</a>
+<a href="https://x.com/AmandaAskell" target="_blank">@AmandaAskell</a>
+<a href="https://x.com/amasad" target="_blank">@amasad</a>
+<a href="https://x.com/rauchg" target="_blank">@rauchg</a>
+<a href="https://x.com/danshipper" target="_blank">@danshipper</a>
+<a href="https://x.com/petergyang" target="_blank">@petergyang</a>
+<a href="https://x.com/adityaag" target="_blank">@adityaag</a>
+<a href="https://x.com/levie" target="_blank">@levie</a>
+<a href="https://x.com/nikunj" target="_blank">@nikunj</a>
+<a href="https://x.com/zarazhangrui" target="_blank">@zarazhangrui</a>
+</div>
+<div style="margin-top:12px">AI 建造者日报 · 每日由 Hermes Agent 自动生成 · AI Builders Digest</div>
+</div>
+</section>
+</main>
+<script src="../search.js?v=20260805" defer></script>
+<script src="../site.js?v=20260805" defer></script>
+</body>
+</html>
