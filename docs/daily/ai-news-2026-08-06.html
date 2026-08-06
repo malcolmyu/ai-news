@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent基础设施大爆发：Cloudflare Computer发布，Sama万赞论乐观，技能生态26万星 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260806">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">8月6日 — AI 建造者日报</div>
+<h1>Agent基础设施大爆发：Cloudflare Computer发布，Sama万赞论乐观，技能生态26万星</h1>
+<div class="subtitle">AI Agent 从&quot;能说会道&quot;迈向&quot;拥有电脑&quot;——Cloudflare推出Agent计算机，Agent技能框架引爆开源社区，Sama万字长文论证乐观主义</div>
+<div class="dots-row"><span class="tag">Agent基础设施</span> <span class="tag">Cloudflare Computer</span> <span class="tag">开源框架</span> <span class="tag">Sama</span> <span class="tag">药物发现</span> </div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">35</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">13</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">0</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<h3>Cloudflare Computer：给AI代理一台真正的电脑</h3>
+<p>Cloudflare 发布 Computer 产品，让 AI Agent 能够像人类一样操作完整的计算环境。TypeScript 实现，首日即获 3.1K 星、891 star today，标志着 Agent 基础设施从 API 调用迈向桌面交互。</p>
+</div>
+<div class="feature-card">
+<h3>Agent 技能框架引爆开源：superpowers 26万星，agent-skills 8万星</h3>
+<p>obra/superpowers（267K 星）和 addyosmani/agent-skills（82K 星）两大 Agent 技能框架持续霸榜，定义了 AI 编程代理的生产级工程实践。技能即代码的理念正在成为 Agent 开发的标准范式。</p>
+</div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe style="width:100%;aspect-ratio:16/9;border-radius:12px;margin-bottom:16px" src="https://www.youtube-nocookie.com/embed/wv53mDmY-k0" allowfullscreen></iframe>
+<h2>Chai Discovery&#x27;s Bitter Lesson: Drug Design Is Another Scaling Problem</h2>
+<p class="text-body">Chai Discovery 的「苦涩教训」：药物设计本质上是一个规模缩放问题。就像大语言模型一样，更多的计算和数据带来更好的结果。</p>
+</section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/sama/status/2084663673570971990" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">i would rather be an optimist and work hard than a pessimist posting about why things won&#x27;t work.
+
+it&#x27;s much more difficult and the most likely path is failure, but society fails if people don&#x27;t try.
+
+no amount of &quot;it will never work&quot; essays will drive society forward. https://t.co/951QDCikV2</div>
+<div class="tweet-translation">我宁愿做一个乐观主义者努力奋斗，也不愿做一个悲观主义者整天发帖说为什么行不通。这条路难得多，失败的概率很大，但如果人们不去尝试，社会就会失败。</div>
+<div class="tweet-metrics">
+<span>♥ 10.1k</span>
+<span>↺ 755</span>
+<span>💬 1.0k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2084738022650892544" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">What is my title at OpenAI</div>
+<div class="tweet-translation">我在 OpenAI 的职位头衔是什么？</div>
+<div class="tweet-metrics">
+<span>♥ 1.5k</span>
+<span>↺ 27</span>
+<span>💬 1.7k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2084704793432588435" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">It&#x27;s insane that the CA Dem Party is endorsing yes on Prop 40, the asset seizure tax that will destroy the California tax base https://t.co/17m33X6WmK</div>
+<div class="tweet-translation">加州民主党居然支持第40号提案——这项资产没收税将摧毁加州的税基，简直疯了。</div>
+<div class="tweet-metrics">
+<span>♥ 1.1k</span>
+<span>↺ 65</span>
+<span>💬 92</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2084859308165271658" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Better Cyber. Excited to welcome Halvar Flake to the team soon. https://t.co/5ZWQ6yydY4</div>
+<div class="tweet-translation">Better Cyber。很高兴宣布 Halvar Flake 即将加入团队。</div>
+<div class="tweet-metrics">
+<span>♥ 467</span>
+<span>↺ 16</span>
+<span>💬 228</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2084682618927558811" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">𝟸𝟶𝟸𝟼 𝟷,𝟶𝟿𝟹,𝟷𝟿𝟿,𝟿𝟾𝟽+ https://t.co/RG3Lv9rURD</div>
+<div class="tweet-translation">2026 年：1,093,199,987+ 次请求。</div>
+<div class="tweet-metrics">
+<span>♥ 398</span>
+<span>↺ 9</span>
+<span>💬 51</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/joshwoodward/status/2084746170576892342" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-joshwoodward.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Josh Woodward</span>
+<span class="tweet-handle">@joshwoodward</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Notebook is built for thinking, not toggling.
+
+While others add more modes, Notebook keeps everything in a single, unified prompt bar and just does the things you want.
+
+Ultra and Pro subscribers can jump in now, rolling out to everyone next. https://t.co/X02sfCEnCI</div>
+<div class="tweet-translation">Notebook 是为思考而设计的，不是为了来回切换模式。当其他人不断增加新模式时，Notebook 将所有功能整合到一个统一的提示栏中，直接做你想做的事。Ultra 和 Pro 订阅用户可用。</div>
+<div class="tweet-metrics">
+<span>♥ 341</span>
+<span>↺ 23</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2084650011288375751" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">If you want housing prices to go down, you build more housing. Markets work. 
+
+If you want housing prices to go up, you try to abolish rent and foment mass asset seizure and expropriation. The revolution only serves those who foment it. https://t.co/1CTz9fsHV3 https://t.co/dWY6o46A6C</div>
+<div class="tweet-translation">想让房价下降？多盖房子就行了。市场是有效的。想让房价上涨？试试废除租金、煽动大规模资产没收和征收——革命者就是这么干的。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/garrytan-2084650011288375751-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 241</span>
+<span>↺ 38</span>
+<span>💬 31</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2084779435866398801" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">1 line of code in @aisdk saves you 90% or more in DeepSeek v4 Flash AI Gateway tokens https://t.co/bcT8sqF120</div>
+<div class="tweet-translation">@aisdk 中只需一行代码，就能在 DeepSeek v4 Flash AI Gateway 上节省 90% 以上的 token 消耗。</div>
+<div class="tweet-metrics">
+<span>♥ 238</span>
+<span>↺ 8</span>
+<span>💬 32</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2084687833516691844" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">the best vibey, air conditioned, quiet coffee shop to meet founders discretely does not exi- https://t.co/wRvjeA9096</div>
+<div class="tweet-translation">那个环境好、有空调、安静、能低调会见创始人的咖啡店……根本不存在——</div>
+<div class="tweet-media"><img src="assets/2026-08-06/nikunj-2084687833516691844-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 221</span>
+<span>↺ 1</span>
+<span>💬 25</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2084804138169446449" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Vercel is the Vercel for backends.
+
+@FactoryAI powers their API services with Fluid compute, with billions of requests per month. https://t.co/Xmgrgd3qjz</div>
+<div class="tweet-translation">Vercel 就是后端领域的 Vercel。@FactoryAI 使用 Fluid Compute 驱动其 API 服务，每月处理数十亿请求。</div>
+<div class="tweet-metrics">
+<span>♥ 188</span>
+<span>↺ 8</span>
+<span>💬 17</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2084692896696111243" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">so freaking cool https://t.co/1UoApZ2C2O</div>
+<div class="tweet-translation">太酷了！</div>
+<div class="tweet-metrics">
+<span>♥ 189</span>
+<span>↺ 7</span>
+<span>💬 1</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2084843512496034002" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">One might say, the investigation was Bari’d. https://t.co/YhdfHFSB2j</div>
+<div class="tweet-translation">可以说，这场调查被 Bari 了。</div>
+<div class="tweet-metrics">
+<span>♥ 168</span>
+<span>↺ 6</span>
+<span>💬 11</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2084828773808239080" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">One fun benefit of spending so much time with enterprises is you get to see the array of AI implementation strategies that exist in companies right now. 
+
+Unlike the early innings of cloud where there were really only a couple deployment patterns available -including being limited by only a couple infra vendors existing- AI actually has a much wider range of approaches in the enterprise.
+
+If you ask 10 IT leaders what their coding agent strategy looks like, you get at least 5 different answers. If you ask about their end-user productivity agents, some have standardized on ChatGPT or Claude, others offer a choice of multiple solutions, and many have built their own orchestration layers for employees to use any model. 
+
+For models, we know the big ones, but increasingly enterprises are experimenting with OSS models, or are at least immensely curious about OSS and would jump at the right offering that felt safe. And increasingly there’s a set of vertical models and agents that equally show up in enterprises for a range of tailored use-cases.
+
+For accessing data, some enterprises just have agents take on the role of the user, and others are setting up agent users that have their own identities. Some companies are setting up substantial guardrails on what agents can do, and others are putting responsibility on the user.
+
+Given this heterogeneity this early on at the start, it means we’re in for years of landscape changes. Anyone who’s predicting ultimate market outcomes already probably will be wrong as nothing has formally settled in yet. Lots of opportunity ahead.</div>
+<div class="tweet-translation">花大量时间与企业打交道的一个有趣的收获是，能看到目前企业内存在的各种 AI 实施策略。与云计算的早期不同——</div>
+<div class="tweet-metrics">
+<span>♥ 145</span>
+<span>↺ 14</span>
+<span>💬 34</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/joshwoodward/status/2084698846609682675" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-joshwoodward.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Josh Woodward</span>
+<span class="tweet-handle">@joshwoodward</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Nice use case! https://t.co/EZlX8axJt0</div>
+<div class="tweet-translation">很棒的用例！</div>
+<div class="tweet-metrics">
+<span>♥ 145</span>
+<span>↺ 11</span>
+<span>💬 12</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2084635916480450888" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">What the world              What Europeans 
+thinks Europeans            in tech actually in tech do in the               do in the 
+Summer.                             Summer. https://t.co/q1xFKyBwdt</div>
+<div class="tweet-translation">世界认为欧洲科技人夏天在做什么 vs 欧洲科技人夏天实际在做什么。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/mattturck-2084635916480450888-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-media"><img src="assets/2026-08-06/mattturck-2084635916480450888-1.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 110</span>
+<span>↺ 10</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2084759190195536202" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Everyone on X: &quot;damn, Airtable sold for so low!&quot;
+
+Many SaaS founders, secretly: &quot;damn, I&#x27;d take that any day, at least they had an exit&quot;</div>
+<div class="tweet-translation">X 上所有人：「该死，Airtable 卖得这么便宜！」许多 SaaS 创始人心里：「该死，要是我能卖这个价就好了，至少人家有退出。」</div>
+<div class="tweet-metrics">
+<span>♥ 117</span>
+<span>↺ 2</span>
+<span>💬 18</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2084828855404294266" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Contrary to popular perception, most people will not adopt a new technology just because it makes them more efficient.
+
+Instead, they’ll adopt new technology because:
+- Someone they know who’s similar to them on some dimension adopted the technology, and got positive results (eg became cooler, richer, more popular/respected), and they wanna become like that person 
+- They feel like everyone around them has adopted the technology, and if they don’t, they’ll be left behind
+
+Notice that it’s not entirely a rational decision. It’s more of an EMOTIONAL decision.
+
+So if you’re trying to make someone adopt a new technology, the messaging shouldn’t be “this will make you 10x more efficient!” It should be “So-and-so, someone you can relate to, has adopted this and look how much better their life has become; wouldn’t it be nice to be like them?”
+
+This book reminds you of that. It can be distilled in one sentence: “The diffusion of technology is a SOCIAL process”</div>
+<div class="tweet-translation">与普遍认知相反，大多数人不会仅仅因为新技术能提高效率就采用它。相反，他们会因为看到与自己相似的人在用、或者因为新技术让他们能做以前做不到的事而采用。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/zarazhangrui-2084828855404294266-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 90</span>
+<span>↺ 10</span>
+<span>💬 13</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2084719029575647660" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">the best founders know there is no spoon https://t.co/2RRfeYCxnR https://t.co/VhBI2g7CdQ</div>
+<div class="tweet-translation">最好的创始人知道根本没有所谓的「勺子」。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/danshipper-2084719029575647660-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 97</span>
+<span>↺ 2</span>
+<span>💬 7</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2084698630653641092" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">yes https://t.co/yWb8PQwaxS https://t.co/dQwnFxZxqO</div>
+<div class="tweet-translation">是的。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/swyx-2084698630653641092-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-media"><img src="assets/2026-08-06/swyx-2084698630653641092-1.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-media"><img src="assets/2026-08-06/swyx-2084698630653641092-2.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 89</span>
+<span>↺ 2</span>
+<span>💬 17</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2084601752817729811" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">How to judge if a meeting is efficient:
+
+An efficient meeting has no to-do list left behind, because all the actions are done DURING the meeting (either by agents who listen to the meeting in real time or by humans)
+
+The gap between saying and doing should be zero, and meetings become work sessions where things actually get DONE</div>
+<div class="tweet-translation">如何判断一场会议是否高效：高效会议结束后不会留下待办清单，因为所有行动在会议期间就已经完成了（由实时听取会议的 AI 代理完成）。</div>
+<div class="tweet-metrics">
+<span>♥ 74</span>
+<span>↺ 3</span>
+<span>💬 21</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2084634391079469390" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">agree except they’ll still be heroes
+
+once the agency rupture heals and the AI goes back to being invisible, we’ll think only about the humans and what they’ve done. AI use will be assumed and unimportant 
+
+https://t.co/rbs7OcBLqV https://t.co/dRD6hGl59G</div>
+<div class="tweet-translation">同意，但他们依然是英雄。一旦代理裂痕愈合、AI 回归隐形，我们只会关注人类和他们的成就。AI 的使用将被视为理所当然且不重要。</div>
+<div class="tweet-metrics">
+<span>♥ 70</span>
+<span>↺ 1</span>
+<span>💬 16</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2084849701351035182" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Hearing that GPT 5.6 Luna High is much cheaper and basically unlimited usage and I&#x27;m running low on Sol :P 
+
+Can it do complex browser automation tasks? That&#x27;s 50% of my Codex usage. https://t.co/v6nEn0z9Rc</div>
+<div class="tweet-translation">听说 GPT 5.6 Luna High 大幅降价且基本无限制使用，我的 Sol 快用完了 :P 它能做复杂的浏览器自动化任务吗？那占了 Codex 用量的 50%。</div>
+<div class="tweet-media"><img src="assets/2026-08-06/petergyang-2084849701351035182-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 58</span>
+<span>↺ 3</span>
+<span>💬 19</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2084855632029774167" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I think if you vibe code a SaaS these days it can just be a self-serve funnel into a more expensive services offering vs. trying to make alot of money with the SaaS itself.
+
+But the only thing about services is it feels like consulting and selling &quot;time for money&quot; again.</div>
+<div class="tweet-translation">我觉得现在 vibe code 一个 SaaS，可以把它当作自助引流漏斗，导向更贵的咨询服务，而不是指望 SaaS 本身赚大钱。但关于自主代理……</div>
+<div class="tweet-metrics">
+<span>♥ 49</span>
+<span>↺ 1</span>
+<span>💬 13</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2084635984164237792" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The best AI training isn&#x27;t a course. It&#x27;s pulling an agent into your team&#x27;s group chat &amp;amp; letting people watch it work
+
+Every company rolling out &quot;AI enablement programs&quot; should try that first https://t.co/L1jub0HgYw</div>
+<div class="tweet-translation">最好的 AI 培训不是课程。而是拉一个 AI 代理进入团队群聊，让大家看着它工作。每个推行「AI 赋能计划」的公司都应该先试试这个。</div>
+<div class="tweet-metrics">
+<span>♥ 44</span>
+<span>↺ 3</span>
+<span>💬 12</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2084667443046502631" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The best model for early product validation is almost never the best model for production.
+
+Talked to a bunch of founders this weekend. There’s a standard playbook emerging :
+
+1/ Prototype with the best frontier models. Max quality. Ignore cost and latency.
+Learn what users actually want and iterate. 
+
+2/ Once the workflow and UX is validated, optimize like crazy for cost and latency - prompt eng, model routing, harnesses, smaller models, fine tuning. 
+
+I see most teams get stuck in step 1.</div>
+<div class="tweet-translation">早期产品验证的最佳模型几乎从来不是生产环境的最佳模型。周末和一群创始人聊了聊，一个标准的做法正在形成：1/ 用最好的模型做原型验证 PMF；2/ 一旦验证通过，切换到更便宜、更快的模型做生产。</div>
+<div class="tweet-metrics">
+<span>♥ 40</span>
+<span>↺ 1</span>
+<span>💬 6</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2084676740924764625" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The right way to deploy AI at scale is to be able to understand how it works.
+
+It does NOT need to be a black box.
+
+This is a key step in helping us understand what is going in these LLMs. https://t.co/waRRR1WmTS</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 27</span>
+<span>↺ 3</span>
+<span>💬 0</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2084846191456751725" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Easier to make more money from @X payouts than from a micro SaaS these days</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 25</span>
+<span>↺ 1</span>
+<span>💬 12</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2084832553895444570" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">smol aha moment at @_chenglou’s @midjourney meetup today - 
+
+one reason that ontologies and graph knowledge are finally trending now rather than 3 years ago is  that “good enough” intelligence is finally too cheap to meter
+
+this is why talks like @coyle_frankp and @emileifrem’s are on fire.  the hardest part of KGs is cheap now. intelligence is commoditized so complements are increasing in value</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 23</span>
+<span>↺ 1</span>
+<span>💬 14</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2084625658173415726" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">My SF brain shudders at the thought of how much collective time is lost waiting for New York elevators.. 
+
+Hotel elevators are simply the worst. Who designed two elevators for 30+ floors? I spent 12 mins recently just trying to get down from my room 😅</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 22</span>
+<span>↺ 0</span>
+<span>💬 10</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2084809416105472070" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Ok builders, here’s your playbook. 
+
+Prototype your product with the best frontier model. Cost be damned. 
+Validate the user experience.
+
+Then, 6-8 weeks later when open-weight models catch up - move your production workloads there, and to smaller models where possible.
+
+In that order. Don’t start with the cheapest model.</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 17</span>
+<span>↺ 0</span>
+<span>💬 3</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2084691244496625793" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">.@TryRivo is building self-driving finance.
+
+Agents connect to the checking account you already have, learn your cash flow, sweep dollars into Treasury-backed yield, and bring them back before your bills hit.
+
+Every dollar earns until the moment you spend it.
+
+Why is this hard? Prediction under asymmetric cost.
+
+Money returned a day early costs you a little yield. 
+
+Money returned a day late bounces a bill and destroys trust.
+
+@AmbrishTweets is one of the few people who has shipped this class of system before. 
+
+PhD in AI, 7,000+ citations, built consumer AI at Amazon, and led the L4 autonomy work at Cruise that launched robotaxis, before he came through @spc as a Founder Fellow.
+
+Self-driving cars took two decades because the last edge cases were the hard ones.
+
+Self-driving money is the same problem with a friendlier failure mode, and the founder building it has already solved the harder version once.</div>
+<div class="tweet-translation"></div>
+<div class="tweet-media"><img src="assets/2026-08-06/adityaag-2084691244496625793-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:10px"></div>
+<div class="tweet-metrics">
+<span>♥ 13</span>
+<span>↺ 4</span>
+<span>💬 4</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thenanyu/status/2084800235474178138" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-thenanyu.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nan Yu</span>
+<span class="tweet-handle">@thenanyu</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Old heads remember Will Smith eating noodles https://t.co/ay1A5ahaEV</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 11</span>
+<span>↺ 0</span>
+<span>💬 1</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/thenanyu/status/2084772618314428627" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-thenanyu.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nan Yu</span>
+<span class="tweet-handle">@thenanyu</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The real ones remember https://t.co/uKcctkLFNK</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 6</span>
+<span>↺ 0</span>
+<span>💬 0</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2084738591109038187" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">confirmation here https://t.co/gTKw1zNLzd</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 3</span>
+<span>↺ 0</span>
+<span>💬 0</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2084691249332649995" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-06/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">More on why we invested: https://t.co/tdLh5WXW7e</div>
+<div class="tweet-translation"></div>
+<div class="tweet-metrics">
+<span>♥ 3</span>
+<span>↺ 0</span>
+<span>💬 0</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/cloudflare/computer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/cloudflare" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">computer</span>
+</div>
+<span class="gh-stars">⭐ 3.1k</span>
+</div>
+<div class="gh-body">Give your agent a computer 👾</div>
+<div class="gh-translation">给你的 AI 代理一台电脑 👾 — Cloudflare 推出的 Agent 计算机基础设施。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 143</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/huangruiteng/loopx" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/huangruiteng" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">huangruiteng</span><span class="gh-sep">/</span><span class="gh-name">loopx</span>
+</div>
+<span class="gh-stars">⭐ 2.2k</span>
+</div>
+<div class="gh-body">Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence logs, and verifiable handoffs.</div>
+<div class="gh-translation">轻量级循环工程状态内核，专为长时间运行的 AI Agent 设计。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 164</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/TencentCloud" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">TencentCloud</span><span class="gh-sep">/</span><span class="gh-name">TencentDB-Agent-Memory</span>
+</div>
+<span class="gh-stars">⭐ 15.1k</span>
+</div>
+<div class="gh-body">TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.</div>
+<div class="gh-translation">腾讯云推出的团队级 AI Agent 记忆中枢，为 AI 时代打造的共享记忆基础设施。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 1.4k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/donnemartin/system-design-primer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/donnemartin" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">donnemartin</span><span class="gh-sep">/</span><span class="gh-name">system-design-primer</span>
+</div>
+<span class="gh-stars">⭐ 361.6k</span>
+</div>
+<div class="gh-body">Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.</div>
+<div class="gh-translation">系统设计入门经典：学习如何设计大规模系统，备战系统设计面试。含 Anki 闪卡。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 57.7k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/firecrawl/pdf-inspector" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/firecrawl" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">firecrawl</span><span class="gh-sep">/</span><span class="gh-name">pdf-inspector</span>
+</div>
+<span class="gh-stars">⭐ 11.5k</span>
+</div>
+<div class="gh-body">Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.</div>
+<div class="gh-translation">快速 Rust 库，用于 PDF 检查、分类和文本提取。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍴 773</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/esengine" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">esengine</span><span class="gh-sep">/</span><span class="gh-name">DeepSeek-Reasonix</span>
+</div>
+<span class="gh-stars">⭐ 31.7k</span>
+</div>
+<div class="gh-body">DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.</div>
+<div class="gh-translation">DeepSeek 原生 AI 编程代理，专为终端打造。工程化设计，开箱即用。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍴 2.0k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/addyosmani" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span>
+</div>
+<span class="gh-stars">⭐ 82.0k</span>
+</div>
+<div class="gh-body">Production-grade engineering skills for AI coding agents.</div>
+<div class="gh-translation">生产级工程技能框架，面向 AI 编程代理。82K 星。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 8.8k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/obra" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">obra</span><span class="gh-sep">/</span><span class="gh-name">superpowers</span>
+</div>
+<span class="gh-stars">⭐ 267.3k</span>
+</div>
+<div class="gh-body">An agentic skills framework &amp;amp; software development methodology that works.</div>
+<div class="gh-translation">Agent 技能框架与软件开发方法论，26.7 万星。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍴 23.9k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/roboflow/supervision" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/roboflow" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">roboflow</span><span class="gh-sep">/</span><span class="gh-name">supervision</span>
+</div>
+<span class="gh-stars">⭐ 48.9k</span>
+</div>
+<div class="gh-body">We write your reusable computer vision tools. 💜</div>
+<div class="gh-translation">可复用的计算机视觉工具集，帮你写视觉相关代码。💜</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 4.6k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/vercel/next.js" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/vercel" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">vercel</span><span class="gh-sep">/</span><span class="gh-name">next.js</span>
+</div>
+<span class="gh-stars">⭐ 141.6k</span>
+</div>
+<div class="gh-body">The React Framework</div>
+<div class="gh-translation">React 框架 — 生产级全栈 Web 开发框架。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍴 31.7k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/tailwindlabs/tailwindcss" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/tailwindlabs" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">tailwindlabs</span><span class="gh-sep">/</span><span class="gh-name">tailwindcss</span>
+</div>
+<span class="gh-stars">⭐ 96.9k</span>
+</div>
+<div class="gh-body">A utility-first CSS framework for rapid UI development.</div>
+<div class="gh-translation">实用优先的 CSS 框架，用于快速 UI 开发。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍴 5.5k</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/uber/ADR" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/uber" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">uber</span><span class="gh-sep">/</span><span class="gh-name">ADR</span>
+</div>
+<span class="gh-stars">⭐ 1.1k</span>
+</div>
+<div class="gh-body">ADR secures enterprise AI agents through observability, security benchmarking, and threat detection. Deployed at Uber.</div>
+<div class="gh-translation">ADR 通过可观测性、安全和治理为企业 AI 代理保驾护航。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍴 85</span>
+</div>
+</a>
+</div>
+<div class="vitem">
+<a href="https://github.com/lyogavin/airllm" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/lyogavin" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">lyogavin</span><span class="gh-sep">/</span><span class="gh-name">airllm</span>
+</div>
+<span class="gh-stars">⭐ 29.1k</span>
+</div>
+<div class="gh-body">AirLLM 70B inference with single 4GB GPU</div>
+<div class="gh-translation">AirLLM：用单张 4GB GPU 做 70B 模型推理。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Jupyter Notebook</span>
+<span class="gh-forks">🍴 3.1k</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">AI 基础设施正在从"模型层"下沉到"代理层"。Cloudflare Computer 给了 Agent 一双能操作电脑的手，agent-skills 和 superpowers 给了 Agent 一套工程方法论。当 Agent 拥有完整的计算环境和可复用的技能库时，"AI 帮人写代码"和"AI 替人工作"之间的界限正在模糊。Sama 的乐观主义宣言——"宁可努力尝试而失败，也不坐等社会失败"——或许正是这个转折年代最好的注脚。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/i/lists/1894276880255164790" target="_blank">X/Twitter — AI Builders List</a>
+<a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+<a href="https://www.youtube.com/@TrainingDataPodcast" target="_blank">Training Data Podcast</a>
+</div>
+</section>
+</main>
+<script src="../search.js?v=20260806" defer></script>
+<script src="../site.js?v=20260806" defer></script>
+</body>
+</html>
