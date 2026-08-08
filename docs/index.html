@@ -13,16 +13,25 @@
 <script src="site.js?v=20260531f" defer></script>
 <script>
 // Calendar — report dates from daily/ file listing
-const REPORTS = ["2026-08-07","2026-08-06","2026-08-05","2026-08-02","2026-08-01","2026-07-31","2026-07-29","2026-07-28","2026-07-27","2026-07-26","2026-07-25","2026-07-24","2026-07-23","2026-07-22","2026-07-21","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14", "2026-07-13", "2026-07-12", "2026-07-11", "2026-07-10","2026-07-09","2026-07-08","2026-07-07","2026-07-06","2026-07-05","2026-07-04","2026-07-03","2026-07-02","2026-06-30","2026-06-29",'2026-06-28',
-  '2026-06-27',
-  '2026-06-26',
+const REPORTS = [
   '2026-03-26','2026-03-27','2026-03-28','2026-03-29','2026-03-30','2026-03-31',
   '2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06',
   '2026-04-09','2026-04-15','2026-05-11','2026-05-13','2026-05-14','2026-05-15',
   '2026-05-16','2026-05-17','2026-05-18','2026-05-19','2026-05-20','2026-05-21',
   '2026-05-22','2026-05-23','2026-05-24','2026-05-25','2026-05-26','2026-05-27',
   '2026-05-28','2026-05-29','2026-05-30','2026-05-31','2026-06-01','2026-06-02',
-  '2026-06-03','2026-06-04','2026-06-05','2026-06-06','2026-06-07','2026-06-08','2026-06-09','2026-06-10','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16','2026-06-17','2026-06-18','2026-06-19','2026-06-20','2026-06-21','2026-06-22','2026-06-23','2026-06-24','2026-06-25','2026-06-26'];
+  '2026-06-03','2026-06-04','2026-06-05','2026-06-06','2026-06-07','2026-06-08',
+  '2026-06-09','2026-06-10','2026-06-12','2026-06-13','2026-06-14','2026-06-15',
+  '2026-06-16','2026-06-17','2026-06-18','2026-06-19','2026-06-20','2026-06-21',
+  '2026-06-22','2026-06-23','2026-06-24','2026-06-25','2026-06-26','2026-06-27',
+  '2026-06-28','2026-06-29','2026-06-30','2026-07-01','2026-07-02','2026-07-03',
+  '2026-07-04','2026-07-05','2026-07-06','2026-07-07','2026-07-08','2026-07-09',
+  '2026-07-10','2026-07-11','2026-07-12','2026-07-13','2026-07-14','2026-07-15',
+  '2026-07-16','2026-07-17','2026-07-18','2026-07-19','2026-07-20','2026-07-21',
+  '2026-07-22','2026-07-23','2026-07-24','2026-07-25','2026-07-26','2026-07-27',
+  '2026-07-28','2026-07-29','2026-07-31','2026-08-01','2026-08-02','2026-08-05',
+  '2026-08-06','2026-08-07','2026-08-08'
+];
 const REPORT_SET = new Set(REPORTS);
 const DAY_NAMES = ['一','二','三','四','五','六','日'];
 
@@ -154,47 +163,42 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 <div class="daily-layout">
 <div class="daily-left">
-<a href="daily/ai-news-2026-08-07.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<a href="daily/ai-news-2026-08-08.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
 <div style="flex:1;min-width:0;">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span class="featured-badge">最新</span>
+<span style="font-size:12px;color:var(--text-muted);">8月8日</span>
+</div>
+<div style="font-weight:500;font-size:15px;margin-bottom:6px;">GPT-5.6 Sol 开放免费无限对话，Agent Skills 项目霸榜 GitHub</div>
+<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">ChatGPT 免费用户获无限使用新模型；Claude 生物安全误拦降 85%；GitHub Trending 前五被 Agent Skills 包揽；Atlassian 财报反击 Agent 利空论</div>
+</div>
+<div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
+</a><a href="daily/ai-news-2026-08-07.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<div style="flex:1;min-width:0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span style="font-size:12px;color:var(--text-muted);">8月7日</span>
 </div>
 <div style="font-weight:500;font-size:15px;margin-bottom:6px;">AI Agent 进入主流时刻：Codex 被 DM 淹没，Agent Skills 成新基建</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;"><strong>Thibault 每6分钟收到一条 Codex 重置请求；Cloudflare 推出虚拟电脑让 Agent 上网；Agent 技能生态从配套变成标配，6个项目霸榜 GitHub Trending</strong></div>
+<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Thibault 每6分钟收到一条 Codex 重置请求，Cloudflare 推出虚拟电脑让 Agent 上网，Agent 技能生态从配套变成标配——AI 的产品化拐点正在到来</div>
 </div>
 <div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
-</a>
-<a href="daily/ai-news-2026-08-06.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
-<div style="flex:1;min-width:0;">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-<span style="font-size:12px;color:var(--text-muted);">8月6日</span>
+</a><a href="daily/ai-news-2026-08-06.html" class="daily-entry daily-entry-today">
+<div class="entry-icon">📰</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:3px;">Agent基础设施大爆发：Cloudflare Computer发布，Sama万赞论乐观，技能生态26万星</div>
+<div style="font-size:12px;color:var(--text-muted);">8月6日 · AI Agent 从&quot;能说会道&quot;迈向&quot;拥有电脑&quot;——Cloudflare推出Agent计算机，Agent技能框架引爆开源社区，Sama万字长文论证乐观主义</div>
 </div>
-<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Agent基础设施大爆发：Cloudflare Computer发布，Sama万赞论乐观，技能生态26万星</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;"><strong>Cloudflare 发布 Computer 给 Agent 配电脑；Sama 乐观宣言获万赞；Agent 技能框架 superpowers 26 万星、agent-skills 8 万星霸榜 GitHub</strong></div>
-</div>
-<div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
-</a>
-<a href="daily/ai-news-2026-08-05.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
-<div style="flex:1;min-width:0;">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-<span style="font-size:12px;color:var(--text-muted);">8月5日</span>
-</div>
-<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Agent 全线武装：云记忆中枢、自驱语义层与单卡 70B 推理</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;"><strong>腾讯发布团队级 Agent 记忆中枢；Replit 构建自驱语义层；AirLLM 实现 4GB 显存跑 70B 模型；GitHub Trending 前十被 Agent 基础设施包揽</strong></div>
-</div>
-<div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
-</a>
-  <a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
+<div style="font-size:16px;color:var(--accent);">→</div>
+</a><a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
 <span style="font-size:12px;font-weight:500;color:var(--text-secondary);">历史日报</span>
-<span style="font-size:11px;color:var(--text-muted);">共 96 期归档 →</span>
+<span style="font-size:11px;color:var(--text-muted);">共 99 期归档 →</span>
 </a>
 </div>
 <div class="daily-right">
 <div class="calendar-card">
 <div class="cal-header">
 <button class="cal-nav-btn" onclick="calPrev()" title="上个月">◀</button>
-<span class="cal-month-label" id="cal-month-label">2026年 6月</span>
+<span class="cal-month-label" id="cal-month-label">2026年 8月</span>
 <button class="cal-nav-btn" onclick="calNext()" title="下个月">▶</button>
 </div>
 <div class="cal-day-names">
@@ -240,8 +244,8 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 <a href="research/harnessx-composable-agent-harness.html" class="featured-card">
 <div class="featured-content">
 <div class="featured-meta"><span class="featured-badge">最新</span><span>2026/8/1</span></div>
-<h3 class="featured-title">HarnessX：小米开源可组合、自进化的 Agent 运行时框架，打破静态脚手架天花板</h3>
-<p class="featured-desc">把 Agent Harness 变成可序列化的乐高积木 + AEGIS 轨迹驱动进化引擎 + 模型/Harness 协同优化闭环。5 基准平均 +14.5%，弱模型 Qwen ALFWorld 53%→97%。</p>
+<h3 class="featured-title">HarnessX：小米开源可组合、自进化的 Agent 运行时框架</h3>
+<p class="featured-desc">把 Agent Harness 变成可序列化的乐高积木 + AEGIS 轨迹驱动进化引擎 + 模型/Harness 协同优化闭环</p>
 </div>
 <div class="featured-arrow">→</div>
 </a><a href="research/ai-native-benchmark.html" class="daily-entry">

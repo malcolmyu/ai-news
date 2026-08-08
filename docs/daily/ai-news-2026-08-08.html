@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-5.6 Sol 免费开放无限对话，AI Agent 框架与开发工具全面爆发 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260808">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">8月8日 — AI 建造者日报</div>
+<h1>GPT-5.6 Sol 免费开放无限对话，AI Agent 框架与开发工具全面爆发</h1>
+<div class="subtitle">Sam Altman 宣布 ChatGPT 免费用户无限使用 GPT-5.6 Sol；Claude 生物安全误拦降低 85%；GitHub Trending 前五被 Agent Skills 项目包揽；Atlassian 财报反击 Agent 利空论</div>
+<div class="dots-row"><span class="tag">GPT-5.6</span> <span class="tag">Agent Skills</span> <span class="tag">长周期Agent</span> <span class="tag">Claude Fable</span> <span class="tag">Atlassian</span> <span class="tag">GitHub Trending</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">25</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">0</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>GPT-5.6 Sol 发布：免费用户获无限对话</strong></p>
+<p>Sam Altman 宣布 GPT-5.6 Sol 聊天体验大幅提升，免费用户获得无限文本聊天权限。Thibault Sottiaux 实测 Codex + GPT-5.6 Sol：连续口述五分钟需求，起身去冰箱拿东西、撸狗，回来时代码和测试已全部跑完。Anthropic 同步更新 Claude Fable 5 生物安全机制，生物学相关误拦降低约 85%。</p>
+</div>
+<div class="feature-card">
+<p><strong>Agent Skills 框架霸榜 GitHub，开发工具生态迎来标准之争</strong></p>
+<p>GitHub Trending 前五名被 Agent Skills 项目横扫：Matt Pocock 的 skills（20.8 万星）、Superpowers（26.8 万星）、Addy Osmani 的 agent-skills（8.3 万星）、PrimeIntellect 的 prime-agent（6.5k 星）和 Cloudflare 的 computer（5.7k 星）。Guillermo Rauch 强调：开源和可扩展是开发者工具的底线，Plugin 标准将统一 Agent 能力层。</p>
+</div>
+<div class="feature-card">
+<p><strong>长周期 Agent 实践：Basis 的方法论与 Atlassian 的 Agent 红利</strong></p>
+<p>Basis 联合创始人 Mitch Troyanovsky 与 Matt Turck 对谈，拆解长周期 Agent 的工程方法：用行为规约和流程监督替代简单提示词，让 Agent 自主运行数小时甚至数天。Atlassian 季度业绩大超预期，Aaron Levie 指出 Agent 不是 SaaS 的威胁——在代码量暴增百倍的世界里，管理数据和流程的平台反而更值钱。跟 Agent 协作也更像管理人而非向 AI 提问。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/54pwkcp48Lg" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc"><strong>How to Build Long-Horizon AI Agents — Mitch Troyanovsky, Basis</strong></div>
+<div class="vitem-quote">Basis 联合创始人 Mitch Troyanovsky 与 FirstMark 的 Matt Turck 对谈长周期自主 Agent 的工程实践。核心洞察：人类早已习惯与非确定性系统协作，只是那些系统通常是人而非计算机。Basis 的 Agent 能自主运行数小时甚至数天，已完成端到端复杂报税等真实任务。构建可靠 Agent 的方法不是更好的模型，而是行为规约、本体论和流程监督。Mitch 提到一个细节：当记者走进 Basis 办公室时，所有人都在对 AI 窃窃私语——不是在做演示，这就是他们的日常工作方式。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://x.com/sama/status/2085454964814753990" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-sama.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Sam Altman</span><span class="tweet-handle">@sama</span></div><span class="tweet-date"></span></div><div class="tweet-body">5.6 Sol much better in chat now
+
+and unlimited text chat for free users! https://t.co/zgqGqI9qfR</div><div class="tweet-translation">GPT-5.6 Sol 聊天好多了。免费用户无限文本聊天也放开了。</div><div class="tweet-metrics"><span>♥ 6.7k</span><span>↺ 276</span><span>💬 611</span></div></a></div>
+<div class="vitem"><a href="https://x.com/claudeai/status/2085563808773189680" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date"></span></div><div class="tweet-body">We’re updating Claude Fable 5’s biology safeguards to reduce false positives. In our testing, this update reduced biology-related fallbacks by about 85% across our product surfaces.
+
+Fable can now assist on a wider range of everyday health and educational questions.
+
+We believe the biggest positive impacts of AI will be in biology and medicine, and we’re committed to putting frontier intelligence safely into the hands of as many researchers as possible. Fable will continue to fallback to Opus 5 for requests we consider dual-use—including virology, toxicology, and molecular design—so it isn't yet usable for professional biology research and drug development.
+
+We're committed to closing that gap through trusted access pathways for frontier biology capabilities.
+
+https://t.co/zbjxPhc909</div><div class="tweet-translation">Claude Fable 5 更新生物安全防护机制，测试显示生物学相关误拦减少约 85%，现在能安全协助更广泛的日常健康和教育问题。Anthropic 相信 AI 最大的正面影响将在生物学和医学领域。</div><div class="tweet-metrics"><span>♥ 3.7k</span><span>↺ 291</span><span>💬 516</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2085597685948813610" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">You can just ask Codex with GPT-5.6 Sol the wildest things and it will just do it.
+
+I talk to it for 5 minutes straight with things that just seem to require weeks of work, get up to get something in the fridge, pet the dog, come back and ... it's done.</div><div class="tweet-translation">你只管对 Codex + GPT-5.6 Sol 连讲五分钟需求——那种听起来要几周才能搞定的活——去冰箱拿点东西、撸个狗，回来就全做好了。</div><div class="tweet-metrics"><span>♥ 2.3k</span><span>↺ 64</span><span>💬 803</span></div></a></div>
+<div class="vitem"><a href="https://x.com/levie/status/2085474309943030032" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date"></span></div><div class="tweet-body">Huge Atlassian quarterly beat. There was a misplaced thesis over the past 6 months that somehow agents would be bad for certain software categories. There’s definitely truth in this in some areas, but many were parsing this poorly.
+
+In a world where agents are generating 100X more code, processing massive amounts of data, or making decisions across your systems, the role of the platforms that manage this data and  these workflows becomes more important, not less.
+
+Enterprises care about governance, security, compliance, guardrails, safe access to data, and many more critical capabilities that go into these systems of record.</div><div class="tweet-translation">Atlassian 季报大超预期。过去半年市场流行一个说法：Agent 会吃掉某些软件品类。这话部分对，但很多人理解偏了。Agent 生成百倍代码、处理海量数据、跨系统决策——在这个世界里，管理数据和流程的平台不是更没用，而是更关键。企业关心的是治理和控制。</div><div class="tweet-media"><img src="assets/2026-08-08/levie-2085474309943030032-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 903</span><span>↺ 39</span><span>💬 64</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2085451197323034902" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Airtable bookends the rise and fall of “no code.”
+
+I remember arguing endlessly with investors about this.
+
+UI can never let you build arbitrary software. The way to make software accessible was always to solve code itself.
+
+For a long time, that sounded delusional.
+
+Not anymore.</div><div class="tweet-translation">Airtable 标记了「无代码」浪潮的兴衰。UI 永远无法让你构建任意软件——让开发变得普及的正确路径从来都是解决编程本身的问题。曾几何时这被人当作妄想，如今不再如此。</div><div class="tweet-metrics"><span>♥ 595</span><span>↺ 33</span><span>💬 59</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2085610005768945984" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">I meant to say &quot;ghiblify&quot;, but I said &quot;gimlify&quot; https://t.co/ZibIfuX99D</div><div class="tweet-translation">我本来想说 &quot;ghiblify&quot;（吉卜力化），结果说成了 &quot;gimlify&quot; 😂</div><div class="tweet-media"><img src="assets/2026-08-08/thsottiaux-2085610005768945984-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 513</span><span>↺ 9</span><span>💬 165</span></div></a></div>
+<div class="vitem"><a href="https://x.com/nikunj/status/2085382457457828153" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date"></span></div><div class="tweet-body">Alright August fundraising season is here (got 9 intros this week) so here’s a brain dump of tips that no VC will tell you.. 
+
+&gt; who you talk to and get to an intro at a VC firm really matters. associates and principals ARE really great. i genuinely mean it BUT you have to see what they have backed recently to understand what kind of leverage they have. what’s their standing in the firm. new, worked on a few great recent deals and understand your space, talk to them. if not, they might be on the way out. always get a warm intro to them as well. understand quickly if the fund will actually be interested vs. lip service. also know once you are assigned to someone in the CRM, you’re stuck with that person. wars have been fought on deal attribution (you think I’m joking but no)
+
+&gt; you got to talk to the GP or capital P partners (these are folks who have actual authority and not just the title, caveat below). and you could cold email, but try to get a warm intro. angels are great for this. ideally from a founder they have already backed. they’ll run on a plane to talk to you with that intro. all schedules vanish and you don’t get passed to an associate (usually).
+
+&gt; on the raise, now here’s where it gets tricky. ask for too much, then they look at you skeptically unless you’re Elon. ask for too little and then you’re not ambitious enough. ask for too little dilution it’s not worth it, ask for too much it’s too good of a deal. and this is the number one thing founders don’t understand: VCs don’t want a “deal”. Like if the price is too good it begets even more questions like why is the price not high. It’s weird but it’s true. there’s no science here.. but be prepared to come up with a resemblance of a plan on why you’re raising that much. 
+
+&gt; ok on numbers, no established good lead VC fund will do under 10% dilution. so don’t even ask? obviously there are exceptions and if you have insane leverage go for it. but generally the floor is set since someone is showing how this returns the fund. on valuation, never compare on what your competitor got. it’s the single best way to tank the deal. you have no idea how that deal got done but it’s good to have as a comp. 
+
+&gt; don’t lie. the valley and NY especially is insanely small. if you tell them you have a term sheet from someone, it’s literally a text away. it’s a co-opetition so everyone talks to everyone. this is why all decks leak and news spreads like wildfire. and this is why don’t share anything you don’t want to be shared. even if it’s not shared by an upstanding VC, another one will. 
+
+&gt; vibes are really important. be you? showcase what you’re excited by and highlight where you need help (we thrive on helping). you can play the silly game of trying to neg and act like someone you’re not - but trust me it works far less then you can think. hype can buy you eyeballs and attention but it’s not the end all be all. 
+
+&gt; finally, this is the most consensus market I’ve seen in a while. so if you’re not in a hot sector, strap in. share what makes you a great contrarian bet. everyone is looking to balance their portfolio so you never know where you find champions even if you strike out of the top 100. goes without saying figure out the default alive path. 
+
+Good luck to all - and obligatory if you’re raising a seed or series A round - I’d love to meet IRL!</div><div class="tweet-translation">八月融资季到了（这周收到 9 个投资人引荐），分享一些 VC 不会告诉你的实话：你在 VC 公司找谁聊、谁帮你引荐，真的很重要。Associate 和 Principal 都挺好，但你要看他们最近投了什么、在公司内部有多大话语权。</div><div class="tweet-metrics"><span>♥ 484</span><span>↺ 15</span><span>💬 31</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2085403169551790359" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">Devtools must be 1️⃣ open source and 2️⃣ universally extensible.
+
+AI coding agents are the most important devtools in the history of our industry. The Plugin standard lets anybody extend them uniformly.
+
+This is huge for the ecosystem. Build a Plugin → get exposure to the tidal wave of software creation from every agent: CLIs, IDEs, cloud agents, and even personal assistants.</div><div class="tweet-translation">开发工具必须 1️⃣ 开源 2️⃣ 可通用扩展。AI 编程 Agent 是行业史上最重要的开发工具。Plugin 标准让任何人都能统一扩展它们——写一个 Plugin，在 CLI、IDE、云端 Agent 甚至个人助理里都能触达用户。</div><div class="tweet-metrics"><span>♥ 410</span><span>↺ 13</span><span>💬 51</span></div></a></div>
+<div class="vitem"><a href="https://x.com/garrytan/status/2085446068461043722" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date"></span></div><div class="tweet-body">Here's what I think you need to know about personal AGI - not a chatbot that anyone can have, but one that knows you uniquely, now and into the future https://t.co/3LVEyZ6LE3</div><div class="tweet-translation">关于「个人 AGI」你应该知道的：不是人人都能用的聊天机器人，而是一个独特了解你、贯穿现在与未来的 AI。</div><div class="tweet-metrics"><span>♥ 277</span><span>↺ 32</span><span>💬 41</span></div></a></div>
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2085610231707623750" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date"></span></div><div class="tweet-body">Free users of ChatGPT now have unlimited text chats, powered by GPT-5.6 Luna https://t.co/eZq1e1hTQX</div><div class="tweet-translation">ChatGPT 免费用户现在可以无限文本聊天了，由 GPT-5.6 Luna 驱动。</div><div class="tweet-media"><img src="assets/2026-08-08/thsottiaux-2085610231707623750-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 210</span><span>↺ 7</span><span>💬 33</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2085427222836658600" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">Consumer is basically ChatGPT and Google's market to lose in my opinion.
+
+ChatGPT already has 1B users and needs to get them to connect their favorite apps and use agents to do work. OpenAI is already pioneering new interaction patterns like voice. The biggest barriers to overcome are:
+
+1) Normies not trusting AI and ChatGPT with full access to their apps and data. 
+
+2) Normies not realizing what ChatGPT is now capable of. 
+
+In both cases, I think marketing and the right messaging are just as important as improving the product.
+
+Google Gemini also has almost 1B users and my gut is normies trust it more to connect to email, calendar, Workspace, Chrome, etc since it's all the same login. 
+
+But Google is behind on 3rd plugins, browser use, and alot of other critical features. They need to make the Gemini app best in class and friendly for normies. They can just copy ChatGPT tbh except make improvements like not have 3 separate modes (ChatGPT/Work/Codex) that ChatGPT and Claude are stuck in.
+
+fwiw I don't think having acess to the best model is that important to normies vs. getting the user onboarding right. My non-AI pilled friends could care less about Sol vs Fable as long as the pricing is fair and the model can get their work done reliably.</div><div class="tweet-translation">消费级 AI 市场基本就是 ChatGPT 和 Google 的天下。ChatGPT 已有 10 亿用户，下一步是让用户连接常用应用、用 Agent 干活。最大障碍：普通人不信任 AI、不了解 ChatGPT 现在的能力边界——营销和信息传递跟技术同样重要。</div><div class="tweet-metrics"><span>♥ 158</span><span>↺ 5</span><span>💬 35</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2085520904398999901" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">damn where's the ping Tibo to reset button https://t.co/GHYWCERnsB</div><div class="tweet-translation">我去，Tibo 的重置按钮在哪 😂</div><div class="tweet-media"><img src="assets/2026-08-08/petergyang-2085520904398999901-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 153</span><span>↺ 0</span><span>💬 31</span></div></a></div>
+<div class="vitem"><a href="https://x.com/adityaag/status/2085364323707150758" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-adityaag.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aditya Agarwal</span><span class="tweet-handle">@adityaag</span></div><span class="tweet-date"></span></div><div class="tweet-body">A good day to apply to @spc https://t.co/shHNhfaqmI https://t.co/K6ditqKJrd</div><div class="tweet-translation">今天是申请 SPC 的好日子。</div><div class="tweet-metrics"><span>♥ 114</span><span>↺ 9</span><span>💬 13</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2085544020424716723" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">It’s true, in 21/22 I went around the valley asking everyone to train coding specific models with us: Google, Meta, everyone — no one thought it was as important as NLP use cases — eventually we trained our own: Replit-code-3b and then everyone got code pilled. https://t.co/BqVr3xFYML</div><div class="tweet-translation">确实，21/22 年我跑遍硅谷邀请所有人跟我们一起训练编程专用模型——Google、Meta 都没人觉得这比 NLP 重要——最后我们自己训了 Replit-code-3b，然后所有人都被代码能力震撼了。</div><div class="tweet-metrics"><span>♥ 102</span><span>↺ 9</span><span>💬 16</span></div></a></div>
+<div class="vitem"><a href="https://x.com/realmadhuguru/status/2085390240899043406" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-realmadhuguru.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Madhu Guru</span><span class="tweet-handle">@realmadhuguru</span></div><span class="tweet-date"></span></div><div class="tweet-body">I’ve noticed people are much clearer when they speak through new ideas than writing a doc on it.
+
+Somewhere between their mouth and the doc, the core idea gets buried as they try to add context, polish it and make it sound smart.
+
+So here’s what I ask my teams to do: record yourself explaining the idea exactly as you would to a friend, use ai to do basic cleanup but keep the rough original structure and flow. 
+
+Share that doc.</div><div class="tweet-translation">我发现人们口头讲述新想法时比写文档清晰得多。嘴巴和文档之间的某个环节，核心想法被埋没了——人们试图添加上下文、润色、显得更聪明。所以我现在让团队这样做：录下自己像对朋友解释一样的讲述，用 AI 做基础清理但保留原始结构和流畅度，分享那个文档。</div><div class="tweet-metrics"><span>♥ 100</span><span>↺ 5</span><span>💬 11</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2085422692799570171" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date"></span></div><div class="tweet-body">FreeAI https://t.co/ZU2hTh5aQM</div><div class="tweet-translation">FreeAI 🆓</div><div class="tweet-metrics"><span>♥ 94</span><span>↺ 3</span><span>💬 17</span></div></a></div>
+<div class="vitem"><a href="https://x.com/mattturck/status/2085402933579964730" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-mattturck.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Matt Turck</span><span class="tweet-handle">@mattturck</span></div><span class="tweet-date"></span></div><div class="tweet-body">How to build long-horizon AI agents: behavior specs, ontologies, process supervision - my conversation with @mitch_troy, co-founder of @trybasis 
+
+01:09 Why Everyone at Basis Was Whispering to AI when @steph_palazzolo walked in 
+04:12 Accounting as &quot;an Intelligence Over the Economy&quot;
+06:11 What Makes an Agent Truly Long-Horizon
+08:24 Inside an Autonomous, Multi-Day Tax Return
+10:19 Agents That Hand Off Like Senior Engineers
+11:17 A Brief History of Agents: From ReAct to Today
+12:33 Why LLMs Have No Long-Term Memory
+14:13 Why AutoGPT Didn't Live Up to Its Promise
+15:51 The Three Breakthroughs: Opus 3, o1, o3
+17:07 Why Reasoning Models Unlocked Agents
+18:23 &quot;Let's Verify Step by Step&quot;: The Road Not Taken
+20:32 Pushing Back on the METR Chart
+22:09 Why Coding Agents Won First
+25:14 Why Real-World Agents Are Harder
+26:55 How Accountants Verify Non-Deterministic Work
+29:18 You Can't Scale Tax Returns Like Math
+33:16 100 Evals Pass - So What?
+35:53 Right Answer, Wrong Process
+36:37 Behavior Specs, Explained
+39:58 How Specific Should Behaviors Be?
+42:18 Context Is Runtime Training Data
+44:21 Who Judges the Judge?
+46:45 The Move 37 Objection
+50:02 The Magic Box Mental Model
+52:41 &quot;Nothing Has Changed Since o3&quot;
+54:56 Open-Sourcing Behavior Specs with @ankrgyl  @braintrust 
+59:45 Ontologies: A World for Agents to Live In
+01:04:20 Documentation as Codebase
+01:06:33 Why the Founding Fathers Were Context Engineers
+01:09:05 Onboarding 300 Brilliant Alien Employees
+01:11:10 Self-Improving Agent Systems
+01:12:50 The Context Mistake Agent Builders Make
+01:14:29 RL on Behavior Adherence
+01:17:01 Will the Bitter Lesson Swallow the Harness
+01:18:46 &quot;Technical Moats Are Not Real Moats&quot;
+01:21:03 Advice for AI Builders</div><div class="tweet-translation">如何构建长周期 AI Agent：行为规约、本体论、流程监督——Matt Turck 与 Basis 联合创始人 Mitch Troyanovsky 的深度对话。要点包括：为什么 Basis 全员在记者到访时都在对 AI 窃窃私语、会计作为&quot;经济体之上的智能层&quot;、自主完成多日报税、像高级工程师一样交接任务的 Agent。</div><div class="tweet-metrics"><span>♥ 58</span><span>↺ 13</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/levie/status/2085587079405425146" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date"></span></div><div class="tweet-body">If you’re trying to understand the dynamic of real world agent adoption this post is a great place to start.
+
+Everyone got so hooked on talking to chatbots that there’s limited recognition still that working with an agent is much more like managing someone in a process vs. just asking an ai some questions and getting a response back. 
+
+“prompting an agent is closer to writing a spec than asking a question. you have to scope the task extensively and define what &quot;done&quot; looks like.”
+
+Ultimately, the real upside of agents is when you start to change the underlying workflow itself instead of just treating it as another system you ask questions of.
+
+This means getting the agents the right data to work with, crossing organizational boundaries, and evolving the human in the loop steps for when people actually review the work. All of this has to change about today’s processes for the big upside to occur.
+
+The end result is that it’s most likely that the vast majority of token usage in an enterprise will be agents that are “deployed” to go execute tasks inside of workflows.</div><div class="tweet-translation">要理解真实世界的 Agent 采用情况，这个帖子是最好的起点。大家都沉迷于跟聊天机器人对话，没意识到跟 Agent 协作更像管人——「给 Agent 写提示词更接近写规格说明，你得大量定义范围和完成标准。」说到底，跟 Agent 打交道不是聊天，是管理。</div><div class="tweet-metrics"><span>♥ 61</span><span>↺ 3</span><span>💬 19</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2085544577415696405" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date"></span></div><div class="tweet-body">Guinness world record for collaborative coding. https://t.co/BxlH4f3WKh</div><div class="tweet-translation">协作编程吉尼斯世界纪录！🏆</div><div class="tweet-metrics"><span>♥ 45</span><span>↺ 2</span><span>💬 8</span></div></a></div>
+<div class="vitem"><a href="https://x.com/danshipper/status/2085420793400316270" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date"></span></div><div class="tweet-body">your boy made it into @axios today! 
+
+https://t.co/dIHwkhHsnj https://t.co/7ow1PpmC0V https://t.co/uOMt3xM0cg</div><div class="tweet-translation">你兄弟上 Axios 了！📰</div><div class="tweet-media"><img src="assets/2026-08-08/danshipper-2085420793400316270-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 43</span><span>↺ 2</span><span>💬 2</span></div></a></div>
+<div class="vitem"><a href="https://x.com/zarazhangrui/status/2085371310042169630" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-zarazhangrui.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Zara Zhang</span><span class="tweet-handle">@zarazhangrui</span></div><span class="tweet-date"></span></div><div class="tweet-body">Question: is anyone using Claude Tag (or other equivalent team agents) heavily in your team? What have been the top use cases/aha moments?</div><div class="tweet-translation">提问：有人在团队中重度使用 Claude Tag（或类似团队 Agent）吗？最常用的场景和顿悟时刻是什么？</div><div class="tweet-metrics"><span>♥ 26</span><span>↺ 1</span><span>💬 16</span></div></a></div>
+<div class="vitem"><a href="https://x.com/realmadhuguru/status/2085534442781868128" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-realmadhuguru.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Madhu Guru</span><span class="tweet-handle">@realmadhuguru</span></div><span class="tweet-date"></span></div><div class="tweet-body">https://t.co/FaFmnyjbZa https://t.co/3S0TEdXsn2</div><div class="tweet-media"><img src="assets/2026-08-08/realmadhuguru-2085534442781868128-0.jpg" alt="" loading="lazy" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 18</span><span>↺ 0</span><span>💬 2</span></div></a></div>
+<div class="vitem"><a href="https://x.com/adityaag/status/2085315202237546603" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-adityaag.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aditya Agarwal</span><span class="tweet-handle">@adityaag</span></div><span class="tweet-date"></span></div><div class="tweet-body">I have learnt an incredible amount from Tom and I could not be more proud that @GoodfireAI was born at SPC. https://t.co/xGc6ckx5PO</div><div class="tweet-metrics"><span>♥ 16</span><span>↺ 1</span><span>💬 2</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2085423674073751813" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date"></span></div><div class="tweet-body">This is (of course) a massive distraction but the game I dream of building with AI is a roguelike deckbuilder that has great graphics, gameplay, and story.</div><div class="tweet-metrics"><span>♥ 15</span><span>↺ 0</span><span>💬 8</span></div></a></div>
+<div class="vitem"><a href="https://x.com/mattturck/status/2085419899078295979" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-08-08/avatar-mattturck.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Matt Turck</span><span class="tweet-handle">@mattturck</span></div><span class="tweet-date"></span></div><div class="tweet-body">Quite the group of investors in Basis, btw
+
+@rabois, @Mkclements , @amasad, @ClementDelangue, @jaltma, @JeffDean, @polynoamial, @kvogt, @lennysan, @azeem, @LHSummers, @douwekiela, @pirroh , @scottbelsky, @natfriedman, @danielgross, @lloydblankfein, @vkhosla, @khoslaventures, @Accel, @GVteam, @BoxGroupVC</div><div class="tweet-metrics"><span>♥ 8</span><span>↺ 0</span><span>💬 2</span></div></a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/PrimeIntellect-ai.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">PrimeIntellect-ai</span><span class="gh-sep">/</span><span class="gh-name">prime-agent</span></div><span class="gh-stars">⭐ 6.6k</span></div><div class="gh-body">A self-improving RLM agent for coding workflows and long-running autonomous tasks.</div><div class="gh-translation">自进化的 RLM Agent，用于编程工作流和长时间自主任务执行</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 522</span></div></a></div>
+<div class="vitem"><a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/addyosmani.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span></div><span class="gh-stars">⭐ 83.9k</span></div><div class="gh-body">Production-grade engineering skills for AI coding agents.</div><div class="gh-translation">面向 AI 编程 Agent 的生产级工程技能集合，来自 Google 工程师 Addy Osmani</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 9.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/cloudflare/computer" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">computer</span></div><span class="gh-stars">⭐ 5.7k</span></div><div class="gh-body">Give your agent a computer 👾</div><div class="gh-translation">给你的 Agent 一台虚拟电脑——Cloudflare 出品的 Agent 计算环境</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 290</span></div></a></div>
+<div class="vitem"><a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">mattpocock</span><span class="gh-sep">/</span><span class="gh-name">skills</span></div><span class="gh-stars">⭐ 208.8k</span></div><div class="gh-body">Skills for Real Engineers. Straight from my .agents directory.</div><div class="gh-translation">给真正工程师用的 Skills——直接来自 Matt Pocock 的 .agents 目录，TypeScript 生态必备</div><div class="gh-meta"><span class="gh-lang">● Shell</span><span class="gh-forks">🍴 18.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/obra/superpowers" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/obra.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">obra</span><span class="gh-sep">/</span><span class="gh-name">superpowers</span></div><span class="gh-stars">⭐ 268.7k</span></div><div class="gh-body">An agentic skills framework &amp;amp; software development methodology that works.</div><div class="gh-translation">Agent Skills 框架与软件开发方法论，目前最完整的 Agent 能力扩展体系</div><div class="gh-meta"><span class="gh-lang">● Shell</span><span class="gh-forks">🍴 24.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/goauthentik/authentik" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/goauthentik.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">goauthentik</span><span class="gh-sep">/</span><span class="gh-name">authentik</span></div><span class="gh-stars">⭐ 23.6k</span></div><div class="gh-body">The authentication glue you need.</div><div class="gh-translation">你需要的认证粘合剂——开源身份认证与授权平台</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 1.8k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/semantica-agi/semantica" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/semantica-agi.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">semantica-agi</span><span class="gh-sep">/</span><span class="gh-name">semantica</span></div><span class="gh-stars">⭐ 2.3k</span></div><div class="gh-body">Graph-Native Infrastructure for Context and Accountable AI Systems</div><div class="gh-translation">图原生基础设施，为上下文感知和可问责的 AI 系统提供知识图谱底层</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 305</span></div></a></div>
+<div class="vitem"><a href="https://github.com/666ghj/MiroFish" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/666ghj.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">666ghj</span><span class="gh-sep">/</span><span class="gh-name">MiroFish</span></div><span class="gh-stars">⭐ 70.5k</span></div><div class="gh-body">A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物</div><div class="gh-translation">简洁通用的群体智能引擎，预测万物</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 11.0k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/chenyme/grok2api" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/chenyme.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">chenyme</span><span class="gh-sep">/</span><span class="gh-name">grok2api</span></div><span class="gh-stars">⭐ 7.1k</span></div><div class="gh-body">Multi-account API gateway for Grok Build, Grok Web, and Grok Console</div><div class="gh-translation">Grok Build/Web/Console 多账号 API 网关，统一接入 Grok 各版本</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 2.2k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/jdx/mise" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/jdx.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">jdx</span><span class="gh-sep">/</span><span class="gh-name">mise</span></div><span class="gh-stars">⭐ 32.1k</span></div><div class="gh-body">dev tools, env vars, task runner</div><div class="gh-translation">开发工具、环境变量、任务运行器一站式管理（Rust 实现）</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 1.3k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/Significant-Gravitas/AutoGPT" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Significant-Gravitas.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Significant-Gravitas</span><span class="gh-sep">/</span><span class="gh-name">AutoGPT</span></div><span class="gh-stars">⭐ 186.3k</span></div><div class="gh-body">AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.</div><div class="gh-translation">AutoGPT 的愿景是让每个人都能使用和构建 AI。使命是提供工具，让 AI 真正可及</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 46.1k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/google/guava" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/google.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">google</span><span class="gh-sep">/</span><span class="gh-name">guava</span></div><span class="gh-stars">⭐ 51.8k</span></div><div class="gh-body">Google core libraries for Java</div><div class="gh-translation">Google 核心 Java 库，包含集合、缓存、并发、字符串处理等基础工具</div><div class="gh-meta"><span class="gh-lang">● Java</span><span class="gh-forks">🍴 11.2k</span></div></a></div>
+<div class="vitem"><a href="https://github.com/unclebob/swarm-forge" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/unclebob.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">unclebob</span><span class="gh-sep">/</span><span class="gh-name">swarm-forge</span></div><span class="gh-stars">⭐ 1.8k</span></div><div class="gh-body">A simple tool for coordinating several AI agents.</div><div class="gh-translation">协调多个 AI Agent 的简洁工具——来自 Bob 大叔（Clean Code 作者）</div><div class="gh-meta"><span class="gh-lang">● Clojure</span><span class="gh-forks">🍴 201</span></div></a></div>
+<div class="vitem"><a href="https://github.com/denoland/celld" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/denoland.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">denoland</span><span class="gh-sep">/</span><span class="gh-name">celld</span></div><span class="gh-stars">⭐ 2.2k</span></div><div class="gh-body">self-hosted, distributed Durable Objects</div><div class="gh-translation">自托管的分布式 Durable Objects 实现，来自 Deno 团队</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 62</span></div></a></div>
+<div class="vitem"><a href="https://github.com/K2SOsint/Legendary_OSINT" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/K2SOsint.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">K2SOsint</span><span class="gh-sep">/</span><span class="gh-name">Legendary_OSINT</span></div><span class="gh-stars">⭐ 1.4k</span></div><div class="gh-body">A list of OSINT tools &amp;amp; resources for (fraud-)investigators, CTI-analysts, KYC, AML and more.</div><div class="gh-translation">面向调查人员、CTI 分析师、KYC/AML 的 OSINT 工具和资源合集</div><div class="gh-meta"><span class="gh-forks">🍴 189</span></div></a></div>
+<div class="vitem"><a href="https://github.com/pranshuparmar/witr" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/pranshuparmar.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">pranshuparmar</span><span class="gh-sep">/</span><span class="gh-name">witr</span></div><span class="gh-stars">⭐ 19.8k</span></div><div class="gh-body">Why is this running? Trace any process, port, container, or file back to what started it - CLI + TUI.</div><div class="gh-translation">&quot;这进程为什么在跑？&quot;——追踪任意进程、端口、容器或文件回到其启动来源的 CLI+TUI 工具</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 639</span></div></a></div>
+<div class="vitem"><a href="https://github.com/google/skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/google.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">google</span><span class="gh-sep">/</span><span class="gh-name">skills</span></div><span class="gh-stars">⭐ 16.3k</span></div><div class="gh-body">Agent Skills for Google products and technologies</div><div class="gh-translation">Google 产品与技术的 Agent Skills 官方集合</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 1.3k</span></div></a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">今天 GitHub Trending 前五被 Agent Skills 项目包揽，不是偶然。过去一年，AI 编程 Agent 从「能写代码」走到了「需要被组织起来」——Skills 框架本质上是在给 Agent 建立能力目录。但真正的护城河不在 Skills 数量，而在 Agent 能否在没有人类提示的情况下自主判断该调用哪个 Skill。Mitch Troyanovsky 在播客里说得对：没人会因为拿着维基百科就被会计师事务所录用。长周期 Agent 的核心挑战不是模型更强，而是流程监督和本体论设计——这些在今天还没人做得好。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/sama">@sama — Sam Altman</a>
+<a href="https://x.com/claudeai">@claudeai — Claude</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/levie">@levie — Aaron Levie</a>
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/nikunj">@nikunj — Nikunj Kothari</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/adityaag">@adityaag — Aditya Agarwal</a>
+<a href="https://x.com/realmadhuguru">@realmadhuguru — Madhu Guru</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=54pwkcp48Lg">AI & I Podcast</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260808" defer></script>
+<script src="../site.js?v=20260808" defer></script>
+</body></html>
