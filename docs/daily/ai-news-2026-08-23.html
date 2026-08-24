@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>机器超越人类三十年后，国际象棋反而更火了 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260823">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">8月23日 — AI 建造者日报</div>
+<h1>机器超越人类三十年后，国际象棋反而更火了</h1>
+<div class="subtitle">棋是被 AI 攻克最久的领域，人类热情却不减反增；另一边，Codex 限流风波与 Anthropic 的 ELI5、Mythos 成为建造者圈焦点。</div>
+<div class="dots-row"><span class="tag">国际象棋</span> <span class="tag">超人类能力</span> <span class="tag">Codex</span> <span class="tag">Anthropic</span> <span class="tag">Mythos</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">22</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>深度对话｜Chess.com CEO：机器超越人类后，人类活动反而更盛</strong></p>
+<p>用 55 美元从破产拍卖买下域名，如今坐拥 2.5 亿会员、年营收约 2 亿美元。30 年前深蓝击败卡斯帕罗夫，当时人们预言“棋已死”；如今人们对棋的热情却比当年更高。</p>
+</div>
+<div class="feature-card">
+<p><strong>建造者｜Codex 上线 banked reset，限流与缓存命中率成为焦点</strong></p>
+<p>OpenAI 的 Thibault Sottiaux 连发推文宣告 Codex/ChatGPT Work 付费用户的“banked reset”上线，并坦承本周部分用户缓存命中率走低、正在排查。另一边，Anthropic 的 ELI5 技能与 Mythos 安全扫描也在建造者圈传开。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/hplb9IHWuw0" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>What Chess.com Teaches US About Superhuman Capabilities, with CEO Erik Allebest</strong>
+</div>
+<div class="vitem-quote">本期嘉宾是 Chess.com CEO Erik Allebest。2005 年，他用 55 美元从破产拍卖中买下 chess.com 域名，如今它已是全球最大的国际象棋平台——2.5 亿注册会员、约 2 亿美元年收入。访谈核心是：国际象棋是“机器超越人类后，人类活动会怎样”这一命题中运行时间最长的实验。自 30 年前深蓝击败卡斯帕罗夫，无数人预言“国际象棋已死”，但今天人们对棋的热情反而比 30 年前更高。Allebest 的洞见是：当机器在某领域超越人类，反而会推动人类在自己领域变得更强——人们真正在意的是“人与人之间的竞技”，而非与机器比较。他还谈到如何把棋类的评分体系复制到扑克等新游戏，以及 AGI 时代“能力评估”本身会变成一个文化命题。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247665951&amp;idx=1&amp;sn=9ec247fed8c9255ef5556a07f8588b9b" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">08-22</span>
+</div>
+<div class="rss-title">美团反思“养虾”日耗上千万元、干扰真实经营，龙虾之父自曝：爆火后差点删掉整个项目</div>
+<div class="rss-desc">OpenClaw 从意外爆红到“无人问津”：一个开源 AI Agent 的八个月过山车</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247665951&amp;idx=2&amp;sn=e00eca52925e5846c1baa4c0b9e2c40c" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">08-22</span>
+</div>
+<div class="rss-title">npm 正式上线分阶段发布功能，软件包上架前新增人工审核环节</div>
+<div class="rss-desc">npm 上线分阶段发布功能，软件包对外开放安装前必须经过维护者人工审批。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247665930&amp;idx=1&amp;sn=ae0d2e5258f41efc952052e9ac7a938c" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">08-21</span>
+</div>
+<div class="rss-title">神秘新模型“Ox Alpha”突袭 OpenRouter，性能超过 Fable 5？全网盲猜智谱或小米</div>
+<div class="rss-desc">Ox Alpha 目前在 OpenRouter 上的输入和输出价格均为零。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247665930&amp;idx=2&amp;sn=696ecaae7574cb5b95899c95f77e8b7f" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">08-21</span>
+</div>
+<div class="rss-title">Cloudflare Computer 发布：让 AI 智能体拥有持久化运行环境</div>
+<div class="rss-desc">Cloudflare 为智能体推出持久化、有状态的类计算机环境。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247665892&amp;idx=1&amp;sn=e53f46d01075705577b9720c6a7a5ac7" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">08-20</span>
+</div>
+<div class="rss-title">Github热榜第二：仅靠“自验证”框架让 DeepSeek V4 Flash 反超 Fable 5，成本不到 1/11</div>
+<div class="rss-desc">不换模型，不微调，开源击穿闭源防线</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/trq212/status/2090884854590382515" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">a skill people at Anthropic have been using a lot recently: ELI5
+
+/eli5 &lt;what you want explained&gt;
+
+&quot;explain like I&#x27;m someone who knows nothing about this topic, using a HTML artifact with big pictures and few words&quot; https://t.co/OZqzjAyFdT</div>
+<div class="tweet-translation">Anthropic 内部最近高频使用的一个技能：ELI5。
+
+/eli5 &lt;你想了解的内容&gt;
+
+“给我解释一下，就像我对这个话题一无所知，用带大图、少文字的 HTML artifact 来解释。”</div>
+<div class="tweet-media"><img src="assets/2026-08-23/trq212-2090884854590382515-0.jpg" alt="" loading="lazy" width="1200" height="908" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 7.5k</span><span>↺ 563</span><span>💬 227</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2090947196107764189" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The banked reset will be there by 8pm PST. For all paid users of ChatGPT Work and Codex. Do with this information what you may.</div>
+<div class="tweet-translation">banked reset 将在太平洋时间晚上 8 点上线，面向所有 ChatGPT Work 和 Codex 的付费用户。接下来就看你们怎么利用这个信息了。</div>
+<div class="tweet-metrics"><span>♥ 6.1k</span><span>↺ 269</span><span>💬 617</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2090964822422949999" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The banked reset has landed, I repeat, the banked reset has landed. Have an amazing weekend. https://t.co/s9FYCLNYKz</div>
+<div class="tweet-translation">banked reset 已上线，我再说一遍，banked reset 已上线。祝大家周末愉快。</div>
+<div class="tweet-metrics"><span>♥ 6.1k</span><span>↺ 258</span><span>💬 1.0k</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2091033630147854385" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Update on rate limits in Codex. We do see that for some users the cache hit rate has been worse this week than the stable state the weeks before. This could explain that usage is draining somewhat faster for those users as hitting the cache consistently is an important component of being efficient.
+
+We are investigating and will have an update tomorrow.</div>
+<div class="tweet-translation">关于 Codex 限流的最新进展。我们确实发现，部分用户本周的缓存命中率比前几周的稳定状态更差。这或许能解释为什么这些用户的用量消耗得稍快——稳定命中缓存是高效使用的重要一环。我们正在调查，明天会有更新。</div>
+<div class="tweet-metrics"><span>♥ 2.9k</span><span>↺ 132</span><span>💬 539</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2090801607894344047" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">This is a UC Berkeley CS professor 😳 https://t.co/I1YBnMTiDC</div>
+<div class="tweet-translation">这是加州大学伯克利分校的计算机系教授 😳</div>
+<div class="tweet-metrics"><span>♥ 2.7k</span><span>↺ 136</span><span>💬 189</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2090858571613470919" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">This was wild to watch unfold. We ran 𝚒𝚜-𝚊𝚐𝚎𝚗𝚝𝚒𝚌 in a loop against https://t.co/bnjggVrBDj until it got to 100/100.
+
+It made us close quite a few gaps. We worked hard to make sure the criteria is high quality and worth your time &amp; tokens. https://t.co/cpZMKv6XVN</div>
+<div class="tweet-translation">整个过程看着很过瘾。我们把 is-agentic 在目标站点上循环跑，直到它拿到 100/100 满分。这让我们补齐了不少差距。我们花了很大功夫确保评测标准足够高质量，值得你花时间和 token。</div>
+<div class="tweet-metrics"><span>♥ 1.4k</span><span>↺ 52</span><span>💬 88</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2090884855798407576" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">debating whether we should make it an official plugin, but you can try installing it here to try with these commands:
+
+claude plugin marketplace add anthropics/claude-plugins-community
+
+claude plugin install eli5@claude-community</div>
+<div class="tweet-translation">我们还在纠结要不要把它做成官方插件，不过你现在就可以用以下命令安装试用：
+
+claude plugin marketplace add anthropics/claude-plugins-community
+
+claude plugin install eli5@claude-community</div>
+<div class="tweet-metrics"><span>♥ 493</span><span>↺ 18</span><span>💬 25</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2090852316328902930" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Point Claude Security at a GitHub repo and Mythos scans for vulnerabilities tracing data across files and reasoning about how components interact. Each finding comes back with a CWE category, confidence and severity ratings, and a suggested fix.</div>
+<div class="tweet-translation">把 Claude Security 指向一个 GitHub 仓库，Mythos 就会扫描漏洞、跨文件追踪数据流，并推理组件之间如何交互。每一条发现都会附上 CWE 分类、置信度和严重性评级，以及建议的修复方案。</div>
+<div class="tweet-metrics"><span>♥ 417</span><span>↺ 19</span><span>💬 12</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2090953806624489501" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">https://t.co/G0UyDr4xgg now supports your @Grok &amp; Codex subs
+Test it out on a sandbox. Instant to install: https://t.co/ogzI7TeKQ4 https://t.co/DzGu67GnJF</div>
+<div class="tweet-translation">这款工具现在支持你的 @Grok 和 Codex 订阅了。可以在沙盒上试试，一键安装。</div>
+<div class="tweet-media"><img src="assets/2026-08-23/rauchg-2090953806624489501-0.jpg" alt="" loading="lazy" width="1200" height="712" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 373</span><span>↺ 30</span><span>💬 31</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2090948945753076141" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I think its easy to say &quot;Simulation is a new scaling law&quot; and treat it as marketing hyperbole, but midway along this interview you can hear me go from somewhat shitposting to very very serious. 
+
+I am 2 years late to this but finally understand why @karpathy and @drfeifei backed @joon_s_pk @msbernst @percyliang et al - Smallville at the time had zero commercial applications, but if you take RSI seriously, from models automating increasingly large parts of ML research and AI engineering, the last* barrier is simulating humans and human feedback, and Simile is obviously the team to do this and already finding PMF at Fortune 100s even at this early stage.
+
+I&#x27;ve never been so happy to be so wrong.
+
+*or second last ! :) more soon on the Science pod</div>
+<div class="tweet-translation">很容易把“模拟是新的扩展定律”这句话当成营销话术，但这次访谈进行到一半时，你会听到我从半开玩笑变得非常非常认真。我晚了两年才明白，为什么 @karpathy 和 @drfeifei 会押注 @joon_s_pk、@msbernst、@percyliang 等人——当年的 Smallville 没有任何商业应用，但如果你认真对待 RSI（递归自我改进），当模型自动化越来越多的 ML 研究和 AI 工程，最后一道障碍就是模拟人类和人类反馈，而 Simile 显然是做这件事的团队，即便在这个早期阶段，他们已经在一众财富 100 强里找到了产品市场契合。我从未如此高兴自己错了。</div>
+<div class="tweet-metrics"><span>♥ 111</span><span>↺ 6</span><span>💬 10</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2090852318527033804" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Suggested patches open in Claude Code on the web, using the models your team already uses. These updates are part of our work to give defenders greater access to Mythos results without requiring direct access to the model: the model runs behind the scan and returns findings only. Scans are billed as standard token usage under your existing plan.</div>
+<div class="tweet-translation">建议补丁会在 Web 版 Claude Code 中打开，使用你团队已经在用的模型。这些更新是我们工作的一部分：让防守方无需直接访问模型也能更多使用 Mythos 的结果——模型在扫描背后运行，只返回发现结果。扫描按你现有套餐的标准 token 用量计费。</div>
+<div class="tweet-metrics"><span>♥ 261</span><span>↺ 6</span><span>💬 6</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2090852320128938319" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">It&#x27;s one of several steps to bring frontier capability to more defenders: we’re working with partners to integrate Mythos 5 into their security products and services, our new Defender Advantage Fund provides $35M in credits for open-source security, and we’re expanding our Cyber Verification Program in the coming weeks. Read more: https://t.co/xgu4d9yrwm</div>
+<div class="tweet-translation">这是把前沿能力带给更多防守方的若干步骤之一：我们正与合作伙伴一起，把 Mythos 5 集成到他们的安全产品和服务中；新推出的 Defender Advantage Fund 为开源安全提供 3500 万美元额度；我们还将在未来几周扩展 Cyber Verification Program。</div>
+<div class="tweet-metrics"><span>♥ 212</span><span>↺ 3</span><span>💬 3</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2090936583814025417" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Hey Instinct, it&#x27;s not cool to index and retain my emails without my permission and not let me delete them from your records? 
+
+I can&#x27;t recommend this to anyone until this is figured out. Thanks @clairevo for spotting this. https://t.co/J2qhYVqwxN</div>
+<div class="tweet-translation">嗨 Instinct，未经我许可就索引和保留我的邮件、还不让我从你们的记录里删除，这可不太厚道吧？在这件事解决之前，我没法把它推荐给任何人。谢谢 @clairevo 发现了这一点。</div>
+<div class="tweet-media"><img src="assets/2026-08-23/petergyang-2090936583814025417-0.jpg" alt="" loading="lazy" width="742" height="870" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 200</span><span>↺ 8</span><span>💬 36</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2090890394880155888" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I like to use this for explainers and diving into a problem, e.g.
+
+/eli5 how does this module work
+
+/eli5 why did we make this tradeoff
+
+/eli5 what caused this incident</div>
+<div class="tweet-translation">我喜欢用它来做解释和深入问题，比如：
+
+/eli5 这个模块是怎么工作的
+
+/eli5 我们当初为什么做这个权衡
+
+/eli5 这次事故是怎么发生的</div>
+<div class="tweet-metrics"><span>♥ 195</span><span>↺ 4</span><span>💬 8</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2090898421108605078" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I had the pleasure of speaking at the Agentic AI Summit in Berkeley alongside an incredible bunch of folks. My talk was about &quot;No Doors for Agents&quot; https://t.co/2drgrK1pia https://t.co/NkLTNOaFdT</div>
+<div class="tweet-translation">很荣幸在伯克利的 Agentic AI Summit 上，和一群了不起的人同台演讲。我的分享主题是“No Doors for Agents”（不给智能体设门）。</div>
+<div class="tweet-metrics"><span>♥ 166</span><span>↺ 11</span><span>💬 15</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/zarazhangrui/status/2090702627206214081" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-zarazhangrui.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Zara Zhang</span>
+<span class="tweet-handle">@zarazhangrui</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Show up every day
+Always be launching
+And don&#x27;t be afraid of repeating yourself, over and over and over again https://t.co/Da13FQmYmv</div>
+<div class="tweet-translation">每天都要出现，永远保持发布，别害怕一遍又一遍地重复自己。</div>
+<div class="tweet-metrics"><span>♥ 162</span><span>↺ 10</span><span>💬 9</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2090946181564440727" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">dropping new skill brb https://t.co/JuKdTVVNzW https://t.co/yFq6bGpckM</div>
+<div class="tweet-translation">马上发布一个新技能，稍等。</div>
+<div class="tweet-media"><img src="assets/2026-08-23/steipete-2090946181564440727-0.jpg" alt="" loading="lazy" width="480" height="416" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 162</span><span>↺ 4</span><span>💬 10</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2090930137885774324" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">How to build great evals - part 5
+
+Stop dumbing down the results from your beautiful, complex eval suite into one single score. This often happens because some senior wants a simplified number to make decisions. Happened to us in the early days of Gemini.
+
+And I see it happening with a lot of teams.
+
+This is the tyranny of the average.
+AI systems do not have a simple dimension of quality.
+
+Imagine a model that goes from:
+85% -&gt; 89% on simple summarization
+80% -&gt; 85% on basic factual QA
+70% -&gt; 63% on complex financial analysis
+
+A single score obscures the fact that the model got worse on your frontier use case.
+
+The immediate reaction to this is to come up with a weighted score. The problem with this is that you have  created false, mathematical procession around a judgment call.
+
+So what should you do?
+- keep a prioritized list of your evals per the ladder we discussed in part 4 yesterday.
+- get people who can look at the details and don’t look for abstracted simplicity.
+- Understand all the critical eval results in depth, where they fail, where they shine and make a decision on whether your new AI system is better or worse for your users.
+
+Next post tomorrow!
+
+Drop your eval questions below and I will answer in future posts.
+
+Share this with your teammates. And your managers who run from complexity.</div>
+<div class="tweet-translation">如何构建优秀的评测——第五篇。
+
+别再把你这套漂亮、复杂的评测套件的结论，简化为一个单一的分数了。这种情况经常发生，因为某个高层想要一个简化后的数字来做决策。我们在 Gemini 早期就遇到过。而且我看到很多团队也在重蹈覆辙——这就是“平均数的暴政”。AI 系统没有一个简单的质量维度。想象一个模型从：简单摘要 85% → 89%，基础事实问答 80% → 85%，复杂金融分析 70% → 63%——一个单一分数掩盖了模型在你的前沿用例上变差的事实。直觉反应是搞一个加权分数，但问题在于，你为一次主观判断披上了虚假的、数学的精确外衣。那么应该怎么做？——按昨天第四篇讨论的阶梯，维护一份评测的优先级清单；找那些能看细节、不追求抽象简化的人；深入理解所有关键评测结果，在哪里失败、在哪里发光，然后决定你的新 AI 系统对用户是更好还是更差。下一篇明天见！</div>
+<div class="tweet-metrics"><span>♥ 143</span><span>↺ 11</span><span>💬 9</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2090814910720835633" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Instinct is very well done.
+
+I&#x27;m particularly impressed by how smooth the onboarding experience is to connect iMessages, Google Workspace, and my MCPs. The best builder prioritize onboarding and new user needs :)
+
+Instinct also feels more proactive than some of the other assistants - it&#x27;ll suggest things it can do right away after connecting a MCP.
+
+However, I can&#x27;t see myself doing real work with Instinct since it&#x27;s all just in one thread. This is the same issue I have with @bot, the UX is very clean but often I want to have multiple threads going with the same bot.
+
+I think I&#x27;ll use Instinct more as an assistant for random chores and tasks.
+
+For actual work, I&#x27;m still sticking to ChatGPT Work and Codex.
+
+P.S. I asked Instinct if I have any invites to give out and it says invites are paused, so don&#x27;t ask me for any (yet) 🙂</div>
+<div class="tweet-translation">Instinct 做得非常好。尤其让我印象深刻的是，连接 iMessages、Google Workspace 和我的 MCP 的引导体验非常顺畅。最好的建造者都会优先考虑引导和新用户需求 :) Instinct 也感觉比其他一些助手更主动——连接一个 MCP 后，它会立刻建议自己能做什么。不过，我还没法用 Instinct 做真正的工作，因为所有东西都挤在一个线程里。这是我和 @bot 同样的问题——UI 很干净，但我常常想和同一个 bot 同时开多个线程。我想我会更多把 Instinct 当作处理零散杂事的助手。真正的工作，我还是坚持用 ChatGPT Work 和 Codex。</div>
+<div class="tweet-media"><img src="assets/2026-08-23/petergyang-2090814910720835633-0.jpg" alt="" loading="lazy" width="555" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-08-23/petergyang-2090814910720835633-1.jpg" alt="" loading="lazy" width="689" height="1199" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 131</span><span>↺ 4</span><span>💬 34</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2090856968407978031" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Our Python team is making rapid progress https://t.co/91E442WbNu</div>
+<div class="tweet-translation">我们的 Python 团队进展神速。</div>
+<div class="tweet-metrics"><span>♥ 123</span><span>↺ 5</span><span>💬 11</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2091038566260539574" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The rate of progress in AI right now is unlike any other period in tech history. Models are getting cheaper on a like for like task basis, more generally capable, faster, and they’re going deeper in almost every domain. 
+
+As intelligence becomes too cheap to meter, then the big opportunity is driving diffusion of AI into the economy. 
+
+This is a great time to be applied AI company because there’s an incredible amount of innovation and competition acting as a tailwind to your own progress. Huge moment for startups right now that can take advantage of this.</div>
+<div class="tweet-translation">眼下 AI 的进步速度，是科技史上任何时期都无法比拟的。模型在同等任务上越来越便宜、能力越来越全面、速度越来越快，而且几乎在每个领域都在不断深入。当智能变得便宜到无法计量，最大的机会就在于推动 AI 向经济各领域扩散。现在正是做应用型 AI 公司的好时机，因为海量的创新和竞争，会成为你自身进步的巨大顺风。对能抓住这个机会的初创公司来说，这是巨大的时刻。</div>
+<div class="tweet-metrics"><span>♥ 35</span><span>↺ 2</span><span>💬 11</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2090908959590740033" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-08-23/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">i have another saas to kill
+
+(will share results of Kill My SaaS 1 next week!!) https://t.co/zS59XXgYDG https://t.co/nj2Fluq947</div>
+<div class="tweet-translation">我又有一个 SaaS 要“杀死”了。（Kill My SaaS 第一期的结果下周分享！！）</div>
+<div class="tweet-media"><img src="assets/2026-08-23/swyx-2090908959590740033-0.jpg" alt="" loading="lazy" width="850" height="1199" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-08-23/swyx-2090908959590740033-1.jpg" alt="" loading="lazy" width="967" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-08-23/swyx-2090908959590740033-2.jpg" alt="" loading="lazy" width="952" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 77</span><span>↺ 8</span><span>💬 17</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/openai/codex" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/14957082?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">openai</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">codex</span>
+</div>
+<span class="gh-stars">⭐ 113.5k</span>
+</div>
+<div class="gh-body">Lightweight coding agent that runs in your terminal</div>
+<div class="gh-translation">在终端里运行的轻量级编程智能体。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 17.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/28293365?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattpocock</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 232.2k</span>
+</div>
+<div class="gh-body">Skills for Real Engineers. Straight from my .agents directory.</div>
+<div class="gh-translation">面向真正工程师的技能集，直接来自我的 .agents 目录。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 19.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/affaan-m/ECC" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/124439313?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">affaan-m</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ECC</span>
+</div>
+<span class="gh-stars">⭐ 242.2k</span>
+</div>
+<div class="gh-body">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+<div class="gh-translation">智能体编排性能优化系统，为 Claude Code、Codex、Opencode、Cursor 等提供技能、直觉、记忆、安全与科研优先的开发体验。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 36.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/45416?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">obra</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">superpowers</span>
+</div>
+<span class="gh-stars">⭐ 276.2k</span>
+</div>
+<div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+<div class="gh-translation">一套行之有效的智能体技能框架与软件开发方法论。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 24.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Wei-Shaw/sub2api" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/26101719?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Wei-Shaw</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">sub2api</span>
+</div>
+<span class="gh-stars">⭐ 38.8k</span>
+</div>
+<div class="gh-body">Sub2API 一站式开源中转服务，让 Claude、Openai 、Gemini、Grok订阅统一接入，支持拼车共享，更高效分摊成本，原生工具无缝使用。</div>
+<div class="gh-translation">Sub2API 一站式开源中转服务：Claude、OpenAI、Gemini、Grok 订阅统一接入，支持拼车共享、高效分摊成本，原生工具无缝使用。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 8.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/makeplane/plane" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/115727700?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">makeplane</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">plane</span>
+</div>
+<span class="gh-stars">⭐ 57.2k</span>
+</div>
+<div class="gh-body">🔥🔥🔥 Open-source Jira, Linear, Monday, and ClickUp alternative. Plane is a modern project management platform to manage tasks, sprints, docs, and triage.</div>
+<div class="gh-translation">开源的 Jira、Linear、Monday 和 ClickUp 替代品。Plane 是一个现代化项目管理平台，用于管理任务、冲刺、文档和分诊。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 5.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/n8n-io/n8n" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/45487711?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">n8n-io</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">n8n</span>
+</div>
+<span class="gh-stars">⭐ 201.8k</span>
+</div>
+<div class="gh-body">Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.</div>
+<div class="gh-translation">带原生 AI 能力的工作流自动化平台。可视化搭建结合自定义代码，可自托管或上云，400+ 集成。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 60.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anthropics/claude-code" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/76263028?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">claude-code</span>
+</div>
+<span class="gh-stars">⭐ 142.6k</span>
+</div>
+<div class="gh-body">Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.</div>
+<div class="gh-translation">Claude Code 是一款在终端里运行的智能体编程工具，能理解你的代码库，通过执行日常任务、解释复杂代码、处理 git 工作流，帮你更快地写代码——一切都用自然语言指令完成。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 22.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/AprilNEA/OpenLogi" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/37977109?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">AprilNEA</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">OpenLogi</span>
+</div>
+<span class="gh-stars">⭐ 14.0k</span>
+</div>
+<div class="gh-body">⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.</div>
+<div class="gh-translation">用 Rust 写的原生、本地优先的 Logitech Options+ 替代品——通过 HID++ 重映射按键、DPI 和 SmartShift。无账号、无遥测。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 375</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/modular/modular" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/150859076?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">modular</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">modular</span>
+</div>
+<span class="gh-stars">⭐ 28.9k</span>
+</div>
+<div class="gh-body">The Modular Platform (includes MAX &amp; Mojo)</div>
+<div class="gh-translation">Modular 平台（包含 MAX 与 Mojo）。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Mojo</span>
+<span class="gh-forks">🍎 3.1k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/254743058?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">multica-ai</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">andrej-karpathy-skills</span>
+</div>
+<span class="gh-stars">⭐ 205.3k</span>
+</div>
+<div class="gh-body">A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy&#x27;s observations on LLM coding pitfalls.</div>
+<div class="gh-translation">一个 CLAUDE.md 文件，用来改进 Claude Code 的行为，源自 Andrej Karpathy 对 LLM 编程陷阱的观察。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Markdown</span>
+<span class="gh-forks">🍎 21.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mahlernim/google-timeline-visualizer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/33252024?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mahlernim</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">google-timeline-visualizer</span>
+</div>
+<span class="gh-stars">⭐ 2.6k</span>
+</div>
+<div class="gh-body">Visualize your year in travel using your Google Location History (Timeline) data</div>
+<div class="gh-translation">用你的 Google 位置历史（Timeline）数据，可视化你一年的旅行轨迹。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Kotlin</span>
+<span class="gh-forks">🍎 303</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/ripienaar/free-for-dev" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/82342?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ripienaar</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">free-for-dev</span>
+</div>
+<span class="gh-stars">⭐ 133.9k</span>
+</div>
+<div class="gh-body">A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev</div>
+<div class="gh-translation">一份对开发者和基础设施开发者有用的、带免费额度的 SaaS、PaaS 和 IaaS 服务清单。</div>
+<div class="gh-meta">
+<span class="gh-lang">● HTML</span>
+<span class="gh-forks">🍎 14.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/microsoft/TypeScript" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/6154722?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">microsoft</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">TypeScript</span>
+</div>
+<span class="gh-stars">⭐ 110.5k</span>
+</div>
+<div class="gh-body">TypeScript is a superset of JavaScript that compiles to clean JavaScript output.</div>
+<div class="gh-translation">TypeScript 是 JavaScript 的超集，编译为干净的 JavaScript 输出。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 13.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/cursor/plugins" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/126759922?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">cursor</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">plugins</span>
+</div>
+<span class="gh-stars">⭐ 4.7k</span>
+</div>
+<div class="gh-body">Cursor plugin specification and official plugins</div>
+<div class="gh-translation">Cursor 插件规范与官方插件。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 382</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/PostHog/posthog" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/60330232?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">PostHog</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">posthog</span>
+</div>
+<span class="gh-stars">⭐ 38.6k</span>
+</div>
+<div class="gh-body">🦔 PostHog is the leading platform for building self-driving products. Our developer tools – AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more – capture all the context agents need to diagnose problems, uncover opportunities, and ship fixes. Steer it all from Slack, web, desktop, or the MCP.</div>
+<div class="gh-translation">PostHog 是构建自驱产品的领先平台。我们的开发者工具——AI 可观测性、分析、会话回放、功能开关、实验、错误追踪、日志等——捕捉智能体诊断问题、发现机会、发布修复所需的全部上下文。可从 Slack、Web、桌面或 MCP 统一驾驭。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Tencent/AI-Infra-Guard" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://avatars.githubusercontent.com/u/18461506?v=4" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Tencent</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">AI-Infra-Guard</span>
+</div>
+<span class="gh-stars">⭐ 5.5k</span>
+</div>
+<div class="gh-body">A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation.</div>
+<div class="gh-translation">全栈 AI 红队测试平台，通过智能体扫描、技能扫描、MCP 扫描、AI 基础设施扫描和 LLM 越狱评估来守护 AI 生态。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 521</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">国际象棋给出了一个反直觉的答案：机器在一个领域超过人类之后，这个领域没有死掉，人反而更在意了。今天从 Codex 的限流到 Anthropic 的 ELI5 与 Mythos，AI 工具正在把同一个问题搬进软件开发——价值不在于「能做」，更在于怎么被衡量、被信任、被协作。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/claudeai">@claudeai — Claude</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/levie">@levie — Aaron Levie</a>
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/realmadhuguru">@realmadhuguru — Madhu Guru</a>
+<a href="https://x.com/steipete">@steipete — Peter Steinberger</a>
+<a href="https://x.com/swyx">@swyx — Swyx</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://x.com/zarazhangrui">@zarazhangrui — Zara Zhang</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=hplb9IHWuw0">No Priors</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260823" defer></script>
+<script src="../site.js?v=20260823" defer></script>
+</body></html>
