@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-08-25">
+<title>快手 AI 生产力：从研发提效到组织跃迁 — 深度调研</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · August 2026</div>
+    <h1>快手 AI 生产力：从研发提效到组织跃迁</h1>
+    <div class="subtitle" style="margin-top:6px;">三年三步，快手如何撞上「个人提效 ≠ 组织提效」的墙后，用银行 60 年信息化史推导出 L0→L3 演化模型，把命题从「研发效能」整体切换为「AI 生产力」</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">64.87%</div>
+        <div class="stat-label">L2+ 需求占比（自 13.23%）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">60%+</div>
+        <div class="stat-label">AI 代码生成率（自 30%）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">AI-Native 组织公理</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4 天</div>
+        <div class="stat-label">直播礼物上新周期（自 20 天）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心论点: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">01 · 核心论点</div>
+    <h2>命题换了：不是「研发更快」，是「重塑业务和组织」</h2>
+    <div class="text-body">2026 年 2 月，快手发表《万人组织 AI 研发范式跃迁之路》，首次提出 AI 提效的陷阱——<strong>「用 AI 开发工具 ≠ 个人提效 ≠ 组织提效」</strong>。到 2025 年底，快手基于标杆团队交出了「AI 研发范式实践框架」，并把 2026 年的 L2 需求占比目标设为 80%。</div>
+    <div class="text-body" style="margin-top:10px;">但进入 Q1 后，团队发现<strong>规模复制比预想难得多</strong>：L2 需求占比每往上推一个层次，付出的力气呈几何级数增长，且 L2+ 占比并不像预期那样与人均需求交付数成正比。深挖之后，快手意识到卡点不在工具、不在度量，而在<strong>此前框架完全没覆盖的「人、流程、分工、组织结构」</strong>。</div>
+  </div>
+
+  <!-- 问题诊断: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 三大卡点</div>
+    <h2>灯照得见的地方做得不错，卡住的是灯照不见的地方</h2>
+    <div class="text-body" style="margin-top:6px;">
+      <strong>① 人：</strong>AI 开发能力两极分化——2025.12 时 30% 人员 AI 代码生成率已超 40%，但仍有 32% 人员低于 10%<br>
+      <strong>② 流程与分工：</strong>参与一个需求的开发人员越多，提效幅度越小<br>
+      <strong>③ 业务特点与组织结构：</strong>业产研闭环型团队容易跑出来，烟筒型组织（业务/产品/研发分属独立团队）极难复制
+    </div>
+    <div class="text-body" style="margin-top:10px;">三个卡点背后是三种摩擦：<strong>人与人协作</strong>（开发时间只占一天 30%，其余耗在需求对齐与交接）、<strong>人与研发流程</strong>（估分与角色切换仍按老习惯）、<strong>人与 AI 协作</strong>（人工补位、上下文对齐、验证纠偏、能力边界判断四类黑洞）。</div>
+    <blockquote style="margin-top:12px;">"我们一直在研究 AI 研发范式，在规律的右边找方案，但更关键的瓶颈却出现在左边。"<cite>— 快手 AI 生产力团队</cite></blockquote>
+  </div>
+
+  <!-- 银行60年镜子: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">03 · 历史镜子</div>
+    <h2>银行 60 年，已经把这条路提前走完了</h2>
+    <div class="text-body" style="margin-bottom:14px;">快手用银行业做镜子，因为它把「AI 研发范式」面对的问题 60 年前完整走了一遍。核心规律：<strong>业务特点决定软件架构和组织形态，又决定研发范式，研发范式再影响开发过程、方法与工具</strong>。</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">层级</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">银行对应</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">本质</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">AI 研发映射</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">L0 → L1</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">1960s IBM 大型计算机</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">机器代替手工，组织没变（「更快的算盘」）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">用 AI 工具提效，流程/角色/分工不变</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">L1 → L2</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">1970s ATM</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">机器直接服务用户，组织必须跟着变</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">AI 承担更多开发/测试，组织适配程度决定提效程度</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">L2 → L3</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">1990s-2010s 网银 + 移动支付</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">系统自主干活，业务形态 + 组织同时重构</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">交付物本身从「软件功能」变成「Agent/AI 服务」</td>
+      </tr>
+    </table>
+
+    <div class="text-body" style="margin-top:14px;"><strong>关键案例：花旗银行。</strong>1977 年纽约大雪，多数银行网点关门，花旗 ATM 照常运转，大量储户当周转入。1977–1981 年，花旗纽约零售存款市场份额从 4% 涨到 13%。而那些只砍编制不调组织的区域储蓄银行，1980 年代多家被兼并或倒闭。</div>
+    <div class="text-body" style="margin-top:8px;"><strong>一句话判断：</strong>L3 不是 L2 的延续，是命题换了——L2 是组织形态变了、业务本质没变；L3 是业务形态和组织形态<strong>同时变、互相倒逼、螺旋上升</strong>。</div>
+  </div>
+
+  <!-- 三道鸿沟: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">04 · 三道鸿沟</div>
+    <h2>为什么全行业这么多头部公司，没人真正跑出来</h2>
+    <div class="text-body" style="margin-bottom:14px;">不是不想走，是每个阶段有不同性质的鸿沟挡着——每道沟需要完全不同的解法，这迫使命题必须从「研发效能」转换到「AI 生产力」。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">1. 工具鸿沟（L0 → L1）</h3>
+      <div class="text-body">各大厂内部 AI 产品「百团大战」，靠功能和运营争夺用户量，难以形成合力。带来三层问题：AI 基建杂而不精、无法积累公司级 Skill 与知识资产；无人为每个角色研究该怎样用 AI 提效；<strong>Token 成本与用户量成正比，却讲不清提效价值，成本摊不到业务线，每个 AI 产品都是自持的「成本负债」</strong>。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">2. 组织鸿沟（L1 → L2）</h3>
+      <div class="text-body">即便工具统一了，组织问题成为第二瓶颈。最要命的仍是 Token 成本——AI 基建团队想把成本分摊给业务线，业务线却想用业界最好的工具，一旦这么做，公司 AI 基建与资产统一进程被阻断。此外，大厂普遍是烟筒型组织，产品/运营/前后端各有一个高阶 Leader，要打通部门墙重组协作流程，需要极强的组织能力与管理魄力。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">3. 业务鸿沟（L2 → L3）</h3>
+      <div class="text-body">解决组织鸿沟后，业务怎么 AI 化才会被提上日程——这对成熟大厂「难于登天」。跨越这三道鸿沟，需要的不是更好的工具，而是<strong>从命题到体系的全面重构</strong>，这就是快手「AI 生产力」体系诞生的原因。</div>
+    </div>
+
+    <div class="text-body" style="margin-top:4px;"><strong>命题的实质转换：</strong>类比人力外包把「人力」商品化，AI 生产力做的是把<strong>「AI 能力」商品化</strong>，按需供给给组织里的每个人、每个团队、每个组织。目标变了、供给方变了，路径、产品形态、组织形态都得跟着重构。</div>
+  </div>
+
+  <!-- 四个公理: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">05 · 核心结论</div>
+    <h2>AI-Native 组织的四个公理</h2>
+    <div class="text-body" style="margin-bottom:14px;">2026 年 3 月，快手把「研发效能中心」升级为「AI 生产力中心」，先拿自己开刀做实验田。半年后回看 30+ 先锋团队，这四条公理<strong>「无往不利」</strong>——每一个跑出来的团队都满足它，每一个卡住的团队都能在这里找到缺失的一环。</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:22%;">公理</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:36%;">定义</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">原因</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">公理一（目标）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">要成为 AI 系统，因为 AI 系统优于机械系统</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">AI 系统有三个自闭环：<strong>自反思 + 自进化 + 自服务</strong>（适用于产品、技术、组织）</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">公理二（因果）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">AI-Native 团队，才可能构建出好的 AI 系统/服务</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">组织自身 AI 化程度，与它提供的 AI 服务成<strong>映射关系</strong></td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">公理三（构成）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">每个成员都是 AI 超级个体，才可能构成好的 AI-Native 团队</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">团队是每个成员的<strong>函数</strong></td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;font-weight:500;color:#2563eb;">公理四（起点）</td>
+        <td style="padding:10px;">团队负责人自己必须是 AI 超级个体</td>
+        <td style="padding:10px;">负责人是<strong>一切递归的启动条件</strong></td>
+      </tr>
+    </table>
+
+    <div class="text-body" style="margin-top:14px;"><strong>递归飞轮：</strong>负责人深入理解并亲自用 AI → 团队更好 AI 化 → 交付业务更好 AI 化 → 负责人进一步加深理解……每转一圈，所有变量都在增强。</div>
+  </div>
+
+  <!-- 落地路径与案例: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">06 · 落地路径与案例</div>
+    <h2>双轨策略 + 四象限 + 三个实战案例</h2>
+    <div class="text-body" style="margin-bottom:14px;">快手采用<strong>「主航道 + 快速路」双轨策略</strong>：主航道各业务线规模推进、L2+ 占比冲 80%（提高下限）；快速路挑 30+ 个「AI 先锋团队」（10~100 人）不设边界探索 L2 上限与 L3 图景（探索上限）。再按「团队类型 × 交付类型」把研发团队分四象限，各自在象限内探索，避免一刀切。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">案例 1：商业化风控团队 — L2 → L3 交付模式</h3>
+      <div class="text-body">高对抗业务，黑产已用 AI 升级攻击手段。三步转型：梳理价值链路 → SaaS 工具 <strong>CLI 化再 Skill 化</strong> → 建团队 AI 知识库。最终以 <strong>crc-dev-flow</strong> 这个 Skill 作为统一入口，打通「需求理解 → 代码生成 → 部署 → 自测 → 状态流转」全链路，研发只剩两件事：<strong>输入需求 + Review 产出</strong>。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">案例 2：企业应用团队 — 业务 + 组织同时变</h3>
+      <div class="text-body">内部行政服务团队（会议室/班车）。<strong>业务形态</strong>从 SaaS Web+小程序切换为 Skill 接入通用 Agent；<strong>组织形态</strong>从产品/前端/后端/测试四职能重构为 <strong>FDE + PDE + 全栈</strong> 的 AI-Native 三角，团队从 50+ 精简到 20 人左右。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">案例 3：主站技术部 — 千人级组织</h3>
+      <div class="text-body">千人规模实践，直面「AI 个人提效 ≠ 组织提效」核心矛盾，提出「信息-流程-组织」三层重构框架。以直播礼物业务验证：<strong>礼物上新周期从 20 天压缩到 4 天</strong>。</div>
+    </div>
+
+    <div class="text-body" style="margin-top:4px;"><strong>平台演进线：</strong>Kwaipilot（编码辅助）→ CodeFlicker + KATE（AI 工程师，人为主 AI 为辅）→ <strong>MyFlicker</strong>（AI 全能工作伙伴，AI 为主推全流程、人在每个环节校验）+ AgentOS + Skill/CLI。</div>
+  </div>
+
+  <!-- 关键数据: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">07 · 关键数据</div>
+    <h2>数字背后的，是交付模式与组织形态的重构</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">指标</th>
+        <th style="padding:10px;text-align:center;font-weight:600;border-bottom:1px solid #e8e8e6;">变化</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">L2+ 需求占比</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">13.23% → 64.87%（近 4 倍）</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">AI 代码生成率（全公司）</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">30% → 60%+（翻倍）</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">AI 代码生成率 &gt;40% 的人员占比</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">30% → 47% → 77%</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">人均需求交付数</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">↑ 10%</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">需求平均交付周期</td>
+        <td style="padding:10px;text-align:center;border-bottom:1px solid #e8e8e6;color:#2563eb;font-weight:600;">↓ 11%+</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;font-weight:500;">直播礼物上新周期（案例 3）</td>
+        <td style="padding:10px;text-align:center;color:#2563eb;font-weight:600;">20 天 → 4 天</td>
+      </tr>
+    </table>
+
+    <div class="text-body" style="margin-top:12px;"><strong>结论：</strong>这些数字的背后不是工具更好用了，而是交付模式、角色分工、组织形态甚至业务形态在同步重构。文中点明终极判断——<strong>「研发效能的终局，是没有研发效能」</strong>：当 AI 能力真正成为供给品，没有人再叫它「AI 生产力」，它只是基础设施，就像今天没人说「我们在用计算机提效」。</div>
+  </div>
+
+  <!-- 启示: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">08 · 延伸思考</div>
+    <h2>对 AI-Native 组织转型的启示</h2>
+    <div class="tips-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;">
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">① 先判断自己处于 L2 还是 L3</h3>
+        <div class="text-muted" style="font-size:12px;">「人为主 AI 为辅」是 L2，「AI 主导推全流程、人在每个环节校验」才是 L3。命题定位错了，后面全是白费。</div>
+      </div>
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">② 负责人是递归的启动条件</h3>
+        <div class="text-muted" style="font-size:12px;">公理四：负责人自己必须是 AI 超级个体。负责人不亲自走通一次闭环，整套体系大概率复制不动。</div>
+      </div>
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">③ 落地路径有现成模板</h3>
+        <div class="text-muted" style="font-size:12px;">CLI 化 → Skill 化 → 知识库 → 统一入口（crc-dev-flow）。把工具层「技能化」是让 AI 自主干活的前提。</div>
+      </div>
+      <div class="tip-card" style="background:#f8f9fc;border-radius:10px;padding:14px;">
+        <h3 style="font-size:13px;">④ 别从「加工具」开始</h3>
+        <div class="text-muted" style="font-size:12px;">工具鸿沟最容易也最容易卡住人（Token 成本 + 百团大战）。规模小、无历史包袱时，应从组织形态与负责人能力先启动。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 站内延伸: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">09 · 站内延伸</div>
+    <h2>相关调研与日报</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+      <a href="ai-native-engineering-org.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">Running an AI-native Engineering Org</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Anthropic — AI 原生工程团队的流程变革与硬指标</span>
+      </a>
+      <a href="ai-native-benchmark.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">AI Native Benchmark 三层能力框架</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">从碎片化 AI 使用者到系统整合者</span>
+      </a>
+      <a href="verifiability-first-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">可验证性优先：从 Harness 到移动 Agent 集群</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">生产级 Harness 工程实践</span>
+      </a>
+      <a href="rhi-harness-self-improvement.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">RHI：Harness 递归自改进</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Prompt 级优化超越系统级 Scaling</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 来源: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://mp.weixin.qq.com/s/VJty9To_Bt9N18jMnDK_7A" target="_blank" style="color:#2563eb;text-decoration:none;">快手技术：AI 研发范式升级新路径 — 从研发提效到组织跃迁</a> ·
+      <a href="https://mp.weixin.qq.com/s?__biz=Mzg2NzU4MDM0MQ==&mid=2247500939&idx=1&sn=78945729bfbaef75fd16d2546910b396" target="_blank" style="color:#2563eb;text-decoration:none;">迈向 AI Native：技术团队的范式跃迁与组织进化</a>
+      <br>
+      调研日期：2026-08-25 · 快手技术 · 全文提取 + 四公理图像识别
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
