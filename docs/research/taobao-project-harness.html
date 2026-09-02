@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-09-02">
+<title>淘天项目 Harness：AI 驱动研发体系的上下文引擎 — 深度调研</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · September 2026</div>
+    <h1>淘天项目 Harness：AI 驱动研发体系的上下文引擎</h1>
+    <div class="subtitle" style="margin-top:6px;">阿里大淘宝 Price360-KB 实践 4 个月：真正的瓶颈不是模型能力而是上下文，「Agent = Model + Harness」如何用一个 Git 工作空间把业务知识、项目规则与验证证据组织成可执行、可追溯的研发闭环</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">4 个月</div>
+        <div class="stat-label">从 AI 辅助编程到 AI 驱动</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3 层</div>
+        <div class="stat-label">项目 Harness 结构</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8 阶段</div>
+        <div class="stat-label">迭代即知识飞轮</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2 类</div>
+        <div class="stat-label">wiki + tech 知识底座</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心命题: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">01 · 核心命题</div>
+    <h2>瓶颈换了：不是模型，是上下文</h2>
+    <div class="text-body">作者（默达，淘天集团营销&交易技术团队）给出三个递进判断，构成全文骨架。模型能力在快速提升，但它进入一个真实业务系统后仍会遭遇大量信息缺口——它不知道历史设计动机、某规则只适用哪些业务、某段代码是当前链路还是已废弃实现。</div>
+    <blockquote style="margin-top:12px;">"业务 AI 研发的上限不只由模型决定。模型决定通用能力，上下文决定它在具体项目中能走多远。"<cite>— 淘天 Price360-KB 团队</cite></blockquote>
+  </div>
+
+  <!-- 公式: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 核心公式</div>
+    <h2>Agent = Model + Harness</h2>
+    <div class="text-body" style="margin-top:6px;">当 AI 能操作文件、代码、Git 和外部工具，它就从「生成内容」走向「执行任务」。作者把它拆成两层，并在其上再加一层：</div>
+    <div class="text-body" style="margin-top:10px;">
+      <strong>Agent = Model + Harness</strong>（模型之外都是 Harness）<br>
+      <strong>业务研发 Agent = Model + Coding Agent 通用 Harness + 项目 Harness</strong>
+    </div>
+    <div class="text-body" style="margin-top:10px;">通用 Harness 提供 AgentLoop、文件操作、工具与环境，但缺业务知识、流程约束、完成标准——会把「命令执行成功」误判为「业务交付完成」。项目 Harness 补上的正是这三样。</div>
+  </div>
+
+  <!-- 演进脉络: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">03 · 演进脉络</div>
+    <h2>从「辅助编程」到「驱动研发」的三级跳</h2>
+    <div class="text-body" style="margin-bottom:14px;">今年 4 月受 Karpathy LLM Wiki 思路启发，4 个月后团队从 AI 辅助编程转向 AI 驱动的研发体系。三个阶段的本质区别在于：<strong>上下文从「每次靠人重复输入」变成了「随项目自带」</strong>。</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:20%;">阶段</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:32%;">交互方式</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">局限</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">AI 辅助编程</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">人在提示框里喂「代码 + 要求」</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">业务规则靠提示词重复输入，换会话就丢</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">Coding Agent</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">能检索/改文件/Git/外部工具</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">缺业务上下文与完成标准，仍需人反复补背景</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;color:#2563eb;">项目 Harness</td>
+        <td style="padding:10px;">Agent 打开项目文件夹即带全套上下文</td>
+        <td style="padding:10px;">需持续治理知识，但换来端到端闭环</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 本地优先: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">04 · 核心原则</div>
+    <h2>本地优先：Agent + 文件夹 + Git</h2>
+    <div class="text-body" style="margin-bottom:14px;">把项目需要的所有稳定信息放进同一个文件夹，用 Git 管版本、分支、评审、来源、回滚。不建设复杂平台和操作界面，一切通过 Agent 打开文件夹对话进行——作者的原话是「不要尝试手动修改任何一个字」。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">稳定上下文进 Git，动态事实留权威系统</h3>
+      <div class="text-body">业务知识、项目规则、源代码、迭代文档进 Git；Aone 工作项状态、测试环境、日志、数据库、配置中心等动态事实从权威系统实时查询，通过 MCP / CLI 提供给 Agent。两者在 Agent 执行时汇合。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">老系统冷启动：先关联，再清洗</h3>
+      <div class="text-body">代码仓库用 Git submodule 关联到 <code style="font-size:12px;">src/</code>，人工旧文档关联到 <code style="font-size:12px;">raw/</code>；设计一个<strong>清洗 SKILL</strong>从代码和凌乱资料中洗出结构化知识；再用钉钉 AI 听记采访核心开发/产品，把「只存在人脑里的业务知识」整理进知识库。</div>
+    </div>
+
+    <blockquote style="margin-top:12px;">"不要等到知识库非常完善才开始使用起来，核心是在 AI 研发体系的每次需求迭代过程中去完善知识库，形成一个知识飞轮。"<cite>— 淘天 Price360-KB 团队</cite></blockquote>
+  </div>
+
+  <!-- 知识飞轮: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">05 · 核心图一</div>
+    <h2>迭代即知识飞轮</h2>
+    <div class="text-body" style="margin-bottom:14px;">主流程是一条 8 阶段交付链，底部三个知识底座反向加速上游环节，归档环节把「确认后的长期知识」回流，再从归档闭环回需求。副题概括了全部逻辑：<strong>每次交付沉淀知识，知识继续加速下一次交付</strong>。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:10px;font-size:12px;">
+      <div style="font-weight:600;color:#1c1c1c;margin-bottom:8px;">主流程（8 阶段）</div>
+      <div style="color:#4a4a4a;line-height:1.8;">需求 → PRD → 技术方案 → 代码 → 测试 → 预发验证 → 发布 → 归档</div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:34%;">知识底座</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:22%;">反哺环节</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">效果</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">Wiki · 业务规则与口径</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">→ PRD</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;color:#2563eb;">写得更快</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">Tech · 跨系统链路与运行态</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">→ 技术方案</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;color:#2563eb;">改得更准</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;">验证证据 · 历史用例与观测方式</td>
+        <td style="padding:10px;">→ 测试</td>
+        <td style="padding:10px;color:#2563eb;">验得更实</td>
+      </tr>
+    </table>
+
+    <div class="text-body" style="margin-top:14px;"><strong>闭环逻辑：</strong>「归档」→「确认后的长期知识」→ 回流三个底座；同时「归档」→「需求」构成全局飞轮。项目开始时不需要完美知识库，知识建设是真实产品迭代的副产物，再逐步变成后续迭代的加速器。</div>
+  </div>
+
+  <!-- 为什么文件Wiki: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">06 · 知识底座</div>
+    <h2>为什么先做「文件 Wiki」，而不是 RAG / 本体论</h2>
+    <div class="text-body" style="margin-bottom:14px;">LLM Wiki、RAG、本体论不是三个互斥方案，而是解决不同问题：文件 Wiki 管「知识如何维护/评审/版本化」，RAG 管「如何检索」，本体管「实体关系语义」。作者优先选文件 Wiki，理由是<strong>知识更新路径最短</strong>——代码、文档、测试、索引进同一个 MR，一起评审、共享同一版本，一次迭代同时更新功能和知识，避免代码已变、文档还停在旧版。</div>
+
+    <div class="text-body" style="margin-bottom:14px;">如果把外部 RAG 平台或本体图谱当主知识源，代码变化后还要同步-切片-萃取-索引-发布，拉长更新链路、加剧知识与代码的漂移。作者的完整知识工程闭环（核心图二）是把 RAG 和本体论<strong>降级为「可重建的派生层」</strong>——主知识源是文件底座，派生层随时可从底座重建，所以不担心漂移。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">知识库保存什么：wiki 与 tech 的分工</h3>
+      <div class="text-body"><strong>wiki</strong> 面向产品/运营/测试/Agent，存业务概念、规则、口径、角色、流程、异常处理；<strong>tech</strong> 存代码无法独立表达但影响 Agent 判断的技术上下文——跨系统上下游链路、接口/数据关系、新旧链路切换、废弃状态、运行态拓扑、观测方式。方法逻辑以代码为准，文档只写调用哪个接口、在链路中的位置。</div>
+    </div>
+
+    <blockquote style="margin-top:12px;">"知识库不应该复制代码。它保存的，是代码之外会影响业务和技术判断的信息。"<cite>— 淘天 Price360-KB 团队</cite></blockquote>
+  </div>
+
+  <!-- 三层结构 + 目录树: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">07 · 项目结构</div>
+    <h2>三层结构：协议、能力、门禁分开维护</h2>
+    <div class="text-body" style="margin-bottom:14px;">项目 Harness 不是一份越来越长的提示词。Price360-KB 把它分成三层：<strong>AGENTS.md</strong>（项目级协作协议：事实源、研发阶段、人工决策点、授权边界、完成条件）、<strong>.agents/skills</strong>（可组合领域能力：PRD/技术方案/测试/回放/排障/归档）、<strong>.agents/scripts</strong>（确定性门禁：检查工作区、校验产物、同步状态、提交推送、发布回查）。规则说明「应该怎样做」，Skill 组织一类任务，脚本把不能靠语言自觉保证的门禁执行到底。</div>
+
+    <pre style="background:#f8f9fc;border-radius:12px;padding:20px;font-size:12px;line-height:1.7;overflow-x:auto;color:#4a4a4a;margin:0 0 14px 0;">price360-kb/
+├── AGENTS.md                  # 项目协作协议与总入口
+├── iterations/                # 每个需求的 PRD、方案、测试与归档
+├── wiki/                      # 业务知识（面向产品/运营/测试）
+├── tech/                      # 跨系统链路与关键技术上下文
+├── raw/                       # 未经改写的原始事实材料
+├── src/                       # 关联的业务代码仓库（submodule）
+├── olap/                      # 指标、表结构与分析 SQL
+├── briefs/                    # 基于事实源生成的专题说明
+├── outputs/                   # 可重建的索引和分析结果
+└── .agents/
+    ├── skills/                # PRD/方案/测试/排障/归档等领域能力
+    ├── scripts/               # 工作区、校验、同步和发布门禁
+    ├── repositories.json      # 项目关联代码仓库声明
+    └── skill-dependencies.json # 公共 Skill 依赖声明</pre>
+
+    <div class="text-body" style="margin-bottom:10px;">这棵目录树同时表达了<strong>事实边界</strong>（知识、代码、迭代证据各有固定位置）和<strong>执行边界</strong>（AGENTS.md 统一规则，.agents 把规则变成可执行能力）。Agent 打开项目后沿相同结构检索上下文、推进任务、留下证据。</div>
+
+    <div class="text-body"><strong>知识文件 = 正文 + Metadata + 链接 + 事实来源 + Git 版本。</strong>每份业务规则文档带 <code style="font-size:12px;">title / category / tags / status / version / source</code> 元数据，<code style="font-size:12px;">source</code> 字段指向原始材料或技术分析，让每条知识可追溯；tech 文档通过 <code style="font-size:12px;">wiki_ref</code> 关联业务规则，形成「业务规则 → 技术链路 → 源代码」的双向路径。</div>
+  </div>
+
+  <!-- 机器可读协议: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">08 · 迭代协议</div>
+    <h2>把一次迭代写成机器可读协议</h2>
+    <div class="text-body" style="margin-bottom:14px;">每个需求一个迭代目录，保存 <code style="font-size:12px;">prd.md / solution.md / test/design.md / test/cases*.md / test/report.md / archive.md</code>。这些文件不是交付后的总结，而是<strong>阶段之间的接口</strong>。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <div class="text-body">PRD 用 <strong>REQ / AC</strong> 描述需求与验收标准；技术方案把它们映射到实现任务与可观测点；测试设计与用例用 <strong>TC</strong> 建立覆盖关系。状态、版本、依赖、证据字段采用固定格式，Agent 能程序化检查「某条 AC 是否有方案承接、是否有测试覆盖、用例是否对应当前方案版本」，而不是靠人通读文档凭印象判断。</div>
+    </div>
+
+    <div class="text-body" style="margin-bottom:14px;"><strong>阶段不自动越过：</strong>PRD 未确认不写技术方案；方案与测试设计未确认不进代码实现；没有真实测试证据不进发布准备。上游内容实质变化时，下游产物必须更新，旧证据不得沿用。</div>
+
+    <div class="text-body" style="margin-bottom:6px;"><strong>Git 保存资产，外部系统提供动态事实。</strong>工作项平台保存需求状态与负责人，代码平台保存分支/提交/评审，测试环境、日志、数据库、配置中心提供运行时现场。这一区分很重要——配置文件写着某环境 ≠ 代码已部署；接口返回成功 ≠ 异步消费/落库副作用已发生。所以：</div>
+    <div class="text-body">测试先绑定当前分支对应的真实环境，按场景验证返回值、日志、调用链或数据库结果，把 traceId、执行时间和断言结果回填到测试资产；无法取得稳定证据的场景保留为人工验证，<strong>不包装成自动化通过</strong>。发布同理：代码合入主干只是第一步，还要回查工作项与协同状态，代码版本、业务状态、交付证据三者一致才算一次迭代真正结束。</div>
+  </div>
+
+  <!-- 人机分工: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">09 · 人机分工</div>
+    <h2>人负责决策，Agent 负责把决策执行完整</h2>
+    <div class="text-body" style="margin-bottom:14px;">Agent 负责检索上下文、生成产物、执行检查、调用工具、收集证据；人负责描述需求、选择方案、确认测试设计、验收预发结果、授权合并与生产发布。高风险动作<strong>不会</strong>因为前面得到过一次概括性同意就自动执行；缺证据或越授权边界时，Harness 阻断流程。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Harness 的演进方式：把事故变成规则</h3>
+      <div class="text-body">多需求并行污染目录后，增加工作区隔离；接口成功却无法证明异步链路完成后，增加可观测性契约；外部状态提前更新造成不一致后，把发布改成合并后回查。作者的原话：<strong>「把每次真实交付暴露的问题，变成下一次可以复用的规则、检查或工具。」</strong>项目在交付业务功能的同时，也在改进自己下一次交付的方式。</div>
+    </div>
+
+    <blockquote style="margin-top:12px;">"人负责决策，Agent 负责把决策执行完整。"<cite>— 淘天 Price360-KB 团队</cite></blockquote>
+  </div>
+
+  <!-- 度量与共性能力: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">10 · 共性能力与度量</div>
+    <h2>业务 Harness 与公共能力如何协同</h2>
+    <div class="text-body" style="margin-bottom:14px;">业务系统差异大（知识结构、测试方法、运行环境、发布风险各不相同），很难用一套实现覆盖所有项目。作者判断更合理的边界是：<strong>复用已验证的共性能力，同时允许业务团队保留贴合领域的项目 Harness</strong>——AI 正在降低生成、修改和维护 Harness 的成本，不必为了形式统一牺牲领域适配性。</div>
+
+    <div class="text-body" style="margin-bottom:14px;">真正需要形成共识的，是工作项、代码、测试、发布之间的<strong>数据协议</strong>，以及状态、证据、安全、度量口径。只有数据基础一致，后续才能衡量效率、Harness 质量、人的能力。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">对「AI 代码采纳率」的批判</h3>
+      <div class="text-body">作者直言，现在的 AI 代码采纳率受太多因素影响，<strong>无法体现人的工作质量和对 AI 的驾驭程度，更像是不得已的妥协方式</strong>。若能建立统一 AI 研发体系数据协议，用 Aone 工作项串联从需求到上线的所有 AI Trace，就能用 AI 分析一个需求上线的质量——跨对话反复补充上下文是效率低的信号，反复纠正之前的错误说明项目 Harness 有待完善。</div>
+    </div>
+  </div>
+
+  <!-- 未来趋势: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">11 · 未来趋势</div>
+    <h2>当 Harness 不断收缩，技术人员走向 FDE</h2>
+    <div class="text-body" style="margin-bottom:14px;">回到公式 <code style="font-size:12px;">Agent = Model + Harness</code>：模型和通用 Coding Agent 的 Harness 能力都在扩大，今天项目自维护的 Prompt、规则、工具会逐步被吸收（文件搜索、代码理解、Git、浏览器、工具调用、多 Agent 协作变成通用能力），<strong>项目 Harness 会随之收缩</strong>。</div>
+
+    <div class="text-body" style="margin-bottom:14px;">但有几类东西<strong>不会自动消失</strong>：① 业务知识及其事实治理；② 项目规则与决策边界；③ 领域工具和系统适配；④ 项目自己的验证标准与质量责任。</div>
+
+    <div class="text-body" style="margin-bottom:6px;">这会重新定义业务技术人员的价值。产品与技术的边界继续模糊，技术人员的角色将更接近 <strong>FDE（Forward Deployed Engineer）</strong>——深入业务现场，把问题、知识、系统、交付结果连接起来，对端到端交付结果负责。</div>
+    <div class="text-body" style="margin-top:10px;"><strong>一句话总结：</strong>上下文是上限、知识要可追溯、迭代即飞轮、证据才算完成、决策归人执行归 Agent——这五条，正是项目 Harness 需要固化的底层协议。</div>
+  </div>
+
+  <!-- 站内延伸: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">12 · 站内延伸</div>
+    <h2>相关调研与日报</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+      <a href="kuaishou-ai-productivity.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">快手 AI 生产力：从研发提效到组织跃迁</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">银行 60 年镜子推导 L0→L3，四公理与三道鸿沟</span>
+      </a>
+      <a href="harnessx-composable-agent-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">HarnessX：小米开源可组合、自进化的 Agent 运行时</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Agent Harness · 自进化 · Darwin Team</span>
+      </a>
+      <a href="verifiability-first-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">可验证性优先：从 Harness 到移动 Agent 集群</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">生产级 Harness 工程实践</span>
+      </a>
+      <a href="rhi-harness-self-improvement.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">RHI：Harness 递归自改进</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Prompt 级优化超越系统级 Scaling</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 来源: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://mp.weixin.qq.com/s/OSYCiNajJw6c5-hGFSAfYw" target="_blank" style="color:#2563eb;text-decoration:none;">大淘宝技术：AI 驱动研发体系的实践和思考</a>
+      <br>
+      调研日期：2026-09-02 · 淘天集团-营销&交易技术团队 · 作者 默达 · 全文提取 + 两张核心架构图识别
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
