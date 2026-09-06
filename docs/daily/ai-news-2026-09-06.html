@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-6 Astra 全量开放，Agent 层开始骑上原生 Web — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260906">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月6日 — AI 建造者日报</div>
+<h1>GPT-6 Astra 全量开放，Agent 层开始骑上原生 Web</h1>
+<div class="subtitle">Astra 向全部付费用户放开，团队生产力提前半年；WebMCP 让 Agent 骑上原生 Web，Harness 层密集迭代。</div>
+<div class="dots-row"><span class="tag">GPT-6 Astra</span> <span class="tag">WebMCP</span> <span class="tag">AI Harness</span> <span class="tag">Chai Discovery</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">6</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>GPT-6 Astra 全量开放</strong></p>
+<p>OpenAI 把 GPT-6 Astra 开放给全部 Pro、Enterprise、Business 用户，随后推向 Plus/Business，API 同步可用。thsottiaux 说 Astra 曾是最大竞争优势，用上后团队生产力涨得太快，把一部分计划提前 6 个月、改在 DevDay 发布。</p>
+</div>
+<div class="feature-card">
+<p><strong>WebMCP 让 Agent 骑上原生 Web</strong></p>
+<p>rauchg 力挺 WebMCP：Agent 应像特斯拉 FSD 跑在真实街道上一样，直接运行在现有 WWW 基础设施上。Next.js 页面可直接向正在调试的 Agent 暴露工具，省去单独配置 MCP 服务器。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/Qp5xklyJySI" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>The BioAI Phase Shift — Matt McPartlon &amp; Neil Patil, Chai Discovery</strong>
+</div>
+<div class="vitem-quote">Latent Space 对话 Chai Discovery 联合创始人 Matt McPartlon 与产品负责人 Neil Patil。这家 OpenAI 投资的 AI 制药公司成立两年、估值 40 亿美元。今年 1 月的 JPM 制药大会上一口气出现四笔 AI×制药工具大单，Chai Discovery 正处核心。转折在于：AI 药物设计工具好到让研发团队敢信任了，这解锁了规模化发现——更多、更好的候选分子更快进实验室和动物试验，进临床的成功率也随之提高。工具还带来实验室方法做不出的机制设计，比如精确触发特定分子级联的双特异性抗体。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666662&amp;idx=1&amp;sn=7f666db703118a609c9eaea87c5531cc" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-05</span>
+</div>
+<div class="rss-title">人人都能整个「自己的 DeepSeek Harness」，那我们为啥还在给 Claude Code 们充会员？</div>
+<div class="rss-desc">模型已经卷不动了，Harness 也卷不动了，Coding Agent 还能卷什么？</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666662&amp;idx=2&amp;sn=6999ffc1c9244aa4bd9b9767bc13a367" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-05</span>
+</div>
+<div class="rss-title">Agent 时代，为什么有人开始重新造 Google？</div>
+<div class="rss-desc">当 Google 已经索引了几乎整个开放互联网，还有必要从头再造一个搜索引擎吗？</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666603&amp;idx=1&amp;sn=32b7eb5104a2bc645bdb4ec0563373d6" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-03</span>
+</div>
+<div class="rss-title">GPT-6 Astra 正式登场：烧了 10 万块 GPU、多项跑分逼近满分</div>
+<div class="rss-desc">OpenAI 把旗舰模型开放给全部付费用户，多项跑分逼近满分。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666603&amp;idx=2&amp;sn=f9069f447c17f42777122f63737171ed" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-03</span>
+</div>
+<div class="rss-title">智能体请求暴增 9.4 倍，token 账单却没涨：Uber 公开 AI 软件工厂省钱方法</div>
+<div class="rss-desc">AI 工具现已嵌入 Uber 软件开发的每个阶段。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666492&amp;idx=1&amp;sn=ca2ad0f20465029552d3f64fd7080bc1" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-03</span>
+</div>
+<div class="rss-title">独家｜前 DeepSeek 核心研究员魏浩然出任百度文心多模态算法负责人</div>
+<div class="rss-desc">曾是 DeepSeek-OCR 与 DeepSeek-OCR 2 两篇论文的一作。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666492&amp;idx=2&amp;sn=13ede612578a4c2a6ca8c7e1c47fc2fb" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-03</span>
+</div>
+<div class="rss-title">OpenClaw 迎来史上最大更新，龙虾之父在线答网友问</div>
+<div class="rss-desc">在连续发布 106 个版本之后，OpenClaw 罕见地沉寂了近七周。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2096035437299237298" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Because we are beyond happy to have Astra rolled out today ahead of schedule and you have been super patient with us (not really, but it’s ok!)… we will do the full banked reset today too for all Plus, Pro and Business users. Lands end of day. Happy Astra day and enjoy a phenomenal weekend. PS: If you create the account or upgrade before 8pm PT you will get it too. Still time!</div>
+<div class="tweet-translation">我们太高兴了，Astra 今天提前上线，谢谢大家一直以来的耐心（其实没那么耐心，但没关系）……今天还会给所有 Plus、Pro 和 Business 用户做一次完整的额度重置，今天晚些时候落地。Astra 日快乐，周末愉快。附：如果你在太平洋时间晚上 8 点前创建账号或升级，也能拿到它，还有时间。</div>
+<div class="tweet-metrics"><span>♥ 17.7k</span><span>↺ 848</span><span>💬 1.7k</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/sama/status/2095973658867171733" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">GPT-6 Astra is now available to all Pro, Enterprise, and Business Premium users in Work/Codex, and is available in the API. We will start rollout to Plus and Business users next. Thank you for the patience.</div>
+<div class="tweet-translation">GPT-6 Astra 现已向 Work/Codex 里的所有 Pro、Enterprise 和 Business Premium 用户开放，API 也已可用。接下来开始向 Plus 和 Business 用户推送。感谢大家的耐心。</div>
+<div class="tweet-metrics"><span>♥ 16.0k</span><span>↺ 711</span><span>💬 722</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/sama/status/2096008528834244741" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Now out to all Plus and Business users. Happy building!</div>
+<div class="tweet-translation">现已向所有 Plus 和 Business 用户开放。祝你构建愉快！</div>
+<div class="tweet-metrics"><span>♥ 12.9k</span><span>↺ 549</span><span>💬 805</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2096101429832552872" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Astra was probably our biggest competitive advantage while it wasn’t generally available. Since we’ve had it our productivity jumped so much that we shifted some of our plans 6 months ahead and will ship them at DevDay instead of mid next year.</div>
+<div class="tweet-translation">在 Astra 全面开放之前，它一直是我们最大的竞争优势。用上它之后，我们的生产力涨得太快，以至于把一部分计划提前了 6 个月，改在 DevDay 发布，而不是明年年中。</div>
+<div class="tweet-metrics"><span>♥ 7.4k</span><span>↺ 296</span><span>💬 537</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2095926173293572467" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">AI software factories will yield bug-free, self-improving software</div>
+<div class="tweet-translation">AI 软件工厂会产出没有 bug、能自我改进的软件。</div>
+<div class="tweet-metrics"><span>♥ 780</span><span>↺ 29</span><span>💬 49</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2096065378598441431" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Super bullish on WebMCP. Much like Tesla FSD meets the world where it is (streets, stoplights, potholes and all), agents *need* to ride the existing WWW infrastructure… WebMCP makes it more efficient. Some pretty unique wins too. e.g: Next.js dev pages could expose debugging tools directly to agents in the specific tab they’re testing, with page-specific context, instead of sifting through server logs. No separate MCP server to find and configure because the page directly exposes its own &#x27;agent tools&#x27;. e.g: in this world 𝚏𝚡 + 𝚊𝚐𝚎𝚗𝚝-𝚋𝚛𝚘𝚠𝚜𝚎𝚛 is a complete web dev stack with zero loss in debugging depth</div>
+<div class="tweet-translation">对 WebMCP 超级看好。就像特斯拉 FSD 是在真实世界（街道、红绿灯、坑洼）里跑一样，agent 也需要骑在现有的 WWW 基础设施上……WebMCP 让这件事更高效。还有一些很独特的收益：比如 Next.js 的开发页面可以直接把调试工具暴露给正在测试那个标签页的 agent，带上页面专属的上下文，而不是去翻服务器日志。不用再单独找和配置 MCP 服务器，因为页面自己就把 agent 工具暴露出来。在这个世界里，fx + agent-browser 就是一个完整的 web 开发栈，调试深度零损失。</div>
+<div class="tweet-metrics"><span>♥ 550</span><span>↺ 23</span><span>💬 46</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2096022087035195647" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The singularity is here, it’s just not evenly distributed</div>
+<div class="tweet-translation">奇点已经到了，只是分布还不均匀。</div>
+<div class="tweet-metrics"><span>♥ 512</span><span>↺ 17</span><span>💬 25</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2095971990645755941" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Absolutely insane experience using @AsideAI as an AI harness - trying to setup OpenClaw with Slack was a 2 hour experience. Aside&#x27;s harness with full integrations AND browser integration did it in less than 3 minutes, and it&#x27;s fully featured with smart access control defaults</div>
+<div class="tweet-translation">用 @AsideAI 当 AI 编排框架的体验太离谱了——之前想用 Slack 搭 OpenClaw，折腾了 2 个小时。Aside 的框架带完整集成和浏览器集成，不到 3 分钟就搞定，功能齐全，还带智能的访问控制默认设置。</div>
+<div class="tweet-media"><img src="assets/2026-09-06/garrytan-2095971990645755941-0.jpg" alt="" loading="lazy" width="1200" height="1069" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-06/garrytan-2095971990645755941-1.jpg" alt="" loading="lazy" width="812" height="1154" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 296</span><span>↺ 17</span><span>💬 38</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2095792059647234204" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">It’s coming 🤗</div>
+<div class="tweet-translation">它要来了 🤗</div>
+<div class="tweet-media"><img src="assets/2026-09-06/amasad-2095792059647234204-0.jpg" alt="" loading="lazy" width="1169" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 285</span><span>↺ 15</span><span>💬 31</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2095948689823121872" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">GStack now uses @AsideAI browser as it&#x27;s preferred remote session browser Does your AI agent need access to web and credentials as you? Aside is now the #1 absolute best way to do it I&#x27;ve found out of all AI agent tools. Aside is a/ an amazing browser, b/ great at credentials, c/ has all the integrations you need and c/ actually an amazing harness and memory system in its own right It&#x27;s my new favorite AI browser</div>
+<div class="tweet-translation">GStack 现在用 @AsideAI 浏览器作为它首选的远程会话浏览器。你的 AI agent 需要像你一样访问网页和凭据吗？在所有的 AI agent 工具里，Aside 现在是我找到的最好方式。Aside 是 a/ 一个出色的浏览器，b/ 擅长处理凭据，c/ 有你需要的所有集成，c/ 本身还是一个出色的编排框架和记忆系统。它是我新的最爱 AI 浏览器。</div>
+<div class="tweet-media"><img src="assets/2026-09-06/garrytan-2095948689823121872-0.jpg" alt="" loading="lazy" width="1198" height="256" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 271</span><span>↺ 13</span><span>💬 42</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2095986658185453928" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Astra on Replit ✨</div>
+<div class="tweet-translation">Astra 上线 Replit 了 ✨</div>
+<div class="tweet-metrics"><span>♥ 233</span><span>↺ 17</span><span>💬 17</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2095907570540335174" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Here’s one practical thing you can do this weekend to get better at building AI products. Pick a workflow you know well - from your personal life or your work. Automate the whole thing with AI. Use the AI product you’re comfortable with - you’ll probably have to experiment with a few. This exercise will force you to think about 1/ What does a great end-to-end experience look like? 2/ How should you use MCPs and tools? 3/ Where should humans stay in the loop? 4/ How do you evaluate it? Then keep expanding the ambition. You’ll learn more by doing this once than by reading about AI product building for a month. The only way to learn is to build.</div>
+<div class="tweet-translation">这个周末你可以做一件很实用的事来提升构建 AI 产品的能力：挑一个你很熟的工作流——来自你的生活或工作，用 AI 把整个流程自动化，用你觉得顺手的 AI 产品（可能得多试几个）。这个练习会逼你想清楚几件事：1/ 什么是真正好的端到端体验？2/ 该怎么用 MCP 和工具？3/ 人类该留在循环里的哪些环节？4/ 如何评估它？然后不断放大野心。做一次这个练习，比读一个月 AI 产品构建文章学到的还多。唯一的学法是动手做。</div>
+<div class="tweet-metrics"><span>♥ 129</span><span>↺ 9</span><span>💬 3</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2095910036652577028" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Me: I totally understand how RL, inference time scaling, modern data-verification loops work. Also Me: These models are total sorcery. There is no way that they should be able to do what they do.</div>
+<div class="tweet-translation">我：我完全理解 RL、推理时扩展、现代数据验证循环是怎么工作的。另一个我：这些模型完全是魔法。它们没道理能做到现在做的事。</div>
+<div class="tweet-metrics"><span>♥ 88</span><span>↺ 3</span><span>💬 5</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2095882683729490108" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">i&#x27;ve got Astra doing film study for our @every fantasy football draft we going to take over this league 😤</div>
+<div class="tweet-translation">我让 Astra 给我们的 @every 梦幻橄榄球选秀做录像分析，我们要接管这个联赛了 😤</div>
+<div class="tweet-media"><img src="assets/2026-09-06/danshipper-2095882683729490108-0.jpg" alt="" loading="lazy" width="1200" height="864" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 62</span><span>↺ 1</span><span>💬 9</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2096086845159563476" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">OpenAI should ship an app for Apple Watch where I can just voice dictate to my Codex threads and it&#x27;ll reply back with voice too. Then I won&#x27;t have to carry my phone around and have screen addiction. Or maybe this is what the rumored OpenAI device does.</div>
+<div class="tweet-translation">OpenAI 应该出一个 Apple Watch 应用，让我能直接语音口述给我的 Codex 线程，它也能用语音回复。这样我就不用一直拿着手机，也不会染上屏幕瘾。或者，这可能就是传闻中那个 OpenAI 设备要做的事。</div>
+<div class="tweet-metrics"><span>♥ 58</span><span>↺ 1</span><span>💬 12</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2095885284801982779" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-06/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Hugging Face and @Thom_Wolf cannot stop winning, first the acquisition and now this comment lol</div>
+<div class="tweet-translation">Hugging Face 和 @Thom_Wolf 真是停不下来地赢，先是收购，现在又是这条评论哈哈</div>
+<div class="tweet-media"><img src="assets/2026-09-06/mattturck-2095885284801982779-0.jpg" alt="" loading="lazy" width="1166" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 58</span><span>↺ 1</span><span>💬 6</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattpocock</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 252.7k</span>
+</div>
+<div class="gh-body">Skills for Real Engineers. Straight from my .agents directory.</div>
+<div class="gh-translation">面向真正工程师的 Skills 技能库，直接来自我的 .agents 目录。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 21.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/affaan-m/ECC" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/affaan-m.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">affaan-m</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ECC</span>
+</div>
+<span class="gh-stars">⭐ 250.0k</span>
+</div>
+<div class="gh-body">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+<div class="gh-translation">Agent 编排框架的性能优化系统：为 Claude Code、Codex、Opencode、Cursor 等提供技能、直觉、记忆、安全与研究优先的开发能力。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 37.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/DietrichGebert/ponytail" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/DietrichGebert.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">DietrichGebert</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ponytail</span>
+</div>
+<span class="gh-stars">⭐ 128.0k</span>
+</div>
+<div class="gh-body">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</div>
+<div class="gh-translation">让你的 AI agent 像房间里最懒的资深工程师一样思考——最好的代码是你根本不用写的代码。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 6.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/NousResearch/hermes-agent" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/NousResearch.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">NousResearch</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">hermes-agent</span>
+</div>
+<span class="gh-stars">⭐ 242.0k</span>
+</div>
+<div class="gh-body">The agent that grows with you</div>
+<div class="gh-translation">与你一同成长的 agent。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 49.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/fmtlib/fmt" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/fmtlib.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">fmtlib</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">fmt</span>
+</div>
+<span class="gh-stars">⭐ 25.6k</span>
+</div>
+<div class="gh-body">A modern formatting library</div>
+<div class="gh-translation">现代 C++ 格式化库。</div>
+<div class="gh-meta">
+<span class="gh-lang">● C++</span>
+<span class="gh-forks">🍎 3.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anthropics/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 174.6k</span>
+</div>
+<div class="gh-body">Public repository for Agent Skills</div>
+<div class="gh-translation">Anthropic 官方的 Agent Skills 公共仓库。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 20.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/cathrynlavery/diagram-design" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/cathrynlavery.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">cathrynlavery</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">diagram-design</span>
+</div>
+<span class="gh-stars">⭐ 31.7k</span>
+</div>
+<div class="gh-body">38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.</div>
+<div class="gh-translation">面向 Claude Code、Codex 和 Pi 的 38 种编辑级图表类型，自包含 HTML + SVG，无阴影、无 Mermaid 俗套。</div>
+<div class="gh-meta">
+<span class="gh-lang">● HTML</span>
+<span class="gh-forks">🍎 2.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anomalyco/opencode" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anomalyco.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anomalyco</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">opencode</span>
+</div>
+<span class="gh-stars">⭐ 204.7k</span>
+</div>
+<div class="gh-body">The open source coding agent.</div>
+<div class="gh-translation">开源编码 agent。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 26.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/ruvnet/ruflo" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ruvnet.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ruvnet</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ruflo</span>
+</div>
+<span class="gh-stars">⭐ 70.7k</span>
+</div>
+<div class="gh-body">The original agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, RAG integration, and native Claude Code / Codex / Hermes and many more Integrated</div>
+<div class="gh-translation">最早的 agent 元编排框架：部署智能多智能体集群、协调自主工作流、构建对话式 AI 系统，支持自适应记忆、自学习智能、RAG 集成，原生兼容 Claude Code / Codex / Hermes 等。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 8.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/blader/humanizer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/blader.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">blader</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">humanizer</span>
+</div>
+<span class="gh-stars">⭐ 43.5k</span>
+</div>
+<div class="gh-body">Agent skill that removes signs of AI-generated writing from text</div>
+<div class="gh-translation">去除文本中 AI 生成痕迹的 agent 技能。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/BraveOPotato/FckSignups" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/BraveOPotato.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">BraveOPotato</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">FckSignups</span>
+</div>
+<span class="gh-stars">⭐ 2.9k</span>
+</div>
+<div class="gh-body">A list of tools that are open-source, in-browser, and require no-signups!</div>
+<div class="gh-translation">一份开源、浏览器内运行、无需注册的工具清单。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 199</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/WorldFlowAI/everything-claude-code" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/WorldFlowAI.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">WorldFlowAI</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">everything-claude-code</span>
+</div>
+<span class="gh-stars">⭐ 2.4k</span>
+</div>
+<div class="gh-body">Claude Code toolkit - agents, commands, skills, rules, and hooks for productive AI-assisted development</div>
+<div class="gh-translation">Claude Code 工具箱：agent、命令、技能、规则和 hooks，用于高效的 AI 辅助开发。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 363</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/magnitudedev/magnitude" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/magnitudedev.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">magnitudedev</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">magnitude</span>
+</div>
+<span class="gh-stars">⭐ 3.2k</span>
+</div>
+<div class="gh-body">Open source inference server that runs the best local models for your hardware, plugged into the agent you already use. Works with Pi, OpenCode, Hermes, OpenClaw, Codex, Claude Code, Oh My Pi, and Cline.</div>
+<div class="gh-translation">开源推理服务器，为你的硬件运行最佳本地模型，接入你已在用的 agent（Pi、OpenCode、Hermes、Codex、Claude Code 等）。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 232</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/bikini/exploitarium" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/bikini.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">bikini</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">exploitarium</span>
+</div>
+<span class="gh-stars">⭐ 4.7k</span>
+</div>
+<div class="gh-body">A single archive of public exploit PoCs and vulnerability research writeups.</div>
+<div class="gh-translation">公开漏洞利用 PoC 与漏洞研究分析文章的统一归档。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/nvm-sh/nvm" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/nvm-sh.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">nvm-sh</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">nvm</span>
+</div>
+<span class="gh-stars">⭐ 94.9k</span>
+</div>
+<div class="gh-body">Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions.</div>
+<div class="gh-translation">Node 版本管理器：符合 POSIX 规范的 bash 脚本，用于管理多个 node.js 版本。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 10.4k</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">当 OpenAI 把旗舰模型 Astra 全量开放的那一刻，竞争的重点就从「谁先拿到模型」转向「谁能把模型接进产品」。WebMCP 让 Agent 骑上现有 Web，AsideAI 把浏览器、凭据和记忆打包成 Harness——这一层不再是配角，而是下一阶段的主战场。模型越来越像水电煤，真正的差异化发生在它落地的接口处。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/adityaag">@adityaag — Aditya Agarwal</a>
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/danshipper">@danshipper — Dan Shipper</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/mattturck">@mattturck — Matt Turck</a>
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/realmadhuguru">@realmadhuguru — Madhu Guru</a>
+<a href="https://x.com/sama">@sama — Sam Altman</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=Qp5xklyJySI">Latent Space</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260906" defer></script>
+<script src="../site.js?v=20260906" defer></script>
+</body></html>
