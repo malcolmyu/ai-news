@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-09-07">
+<title>天猫 MDI：AI 研发协同从「超级个体」到「全员赋能」的四级进化 — 深度调研</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · September 2026</div>
+    <h1>天猫 MDI：AI 研发协同从「超级个体」到「全员赋能」的四级进化</h1>
+    <div class="subtitle" style="margin-top:6px;">淘天集团天猫技术团队在「天猫新品 MDI」项目上的 collar SDD 体系实践：用 AGENTS.md 入口地图 + 六模块知识库打造「超级个体」，用站点地图与上下文缝补横向复刻出团队，再用一台零依赖「技术哨兵机」还原预发合并态（冲突发现率 &gt;70%），最终以 NekoCollar 云端协作平台把研发能力辐射到非研发角色。</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">4 阶段</div>
+        <div class="stat-label">超级个体→小队→超稳→项目组</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6 模块</div>
+        <div class="stat-label">docs/ 知识库六层级</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">&gt;70%</div>
+        <div class="stat-label">哨兵机冲突有效发现率</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">每周发现的隐形问题</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心命题: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">01 · 核心命题</div>
+    <h2>效率要从「个人偶得」变成「团队可复制」</h2>
+    <div class="text-body">作者开篇给出一个判断：AI 作为生产力工具，带来的不是一次从顶层发生的效率革命，而是<strong>一条从一线生长、向组织逐级放大的生产力曲线</strong>。只有把效率从「个人偶得」变成「团队可复制」，AI Native 的成熟实践才有可能跨团队、跨业务复制，形成组织乃至集团层面的规模效应。</div>
+    <blockquote style="margin-top:12px;">"AI 作为生产力工具，带来的不是一次从顶层发生的效率革命，而是一条从一线生长、向组织逐级放大的生产力曲线。"<cite>— 天猫技术团队 · 卡狸</cite></blockquote>
+  </div>
+
+  <!-- 项目规模: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 项目背景</div>
+    <h2>一个横跨 4 角色端、约 40 模块的全栈平台</h2>
+    <div class="text-body" style="margin-top:6px;">天猫新品 MDI 是一个全新的业务项目：不是单点功能，而是横跨 <strong>4 个角色端、约 40 个功能模块</strong>的全栈平台，再叠加外部智能投放系统、算法内核与自动化评测体系、阿里云百炼全模态等外部依赖。</div>
+    <div class="text-body" style="margin-top:10px;">多位同学并行采用 <strong>SDD（规格驱动）</strong>高频敏捷开发，严格每周线上迭代一个大版本。最夸张的一次上线时，同时存在 <strong>8 个仓库、十几个分支</strong>在预发集成开发。它几乎完整命中了「AI 时代项目」的所有显著特点。</div>
+  </div>
+
+  <!-- 能力放大主线: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">03 · 能力放大主线</div>
+    <h2>个体 → 团队 → 可持续 → 全员</h2>
+    <div class="text-body" style="margin-bottom:14px;">四个阶段串起来，要解决的是一条朴素的「能力放大」问题：先让一个开发者成为「超级个体」，再让超级个体组成「超级研发团队」，再让这支团队可持续地跑下去，最后把研发能力辐射到项目组的每个非研发人员。</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:22%;">阶段</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:34%;">要解决的问题</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">核心手段</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">单兵攻坚期</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">AI 不知道这个项目是什么</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">结构化知识库 + collar 三层约束</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">加人提速期</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">多人协同的冲突与上下文断裂</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">站点地图物理隔离 + Spec 变更规则 + MCP 缝补</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">高速迭代期</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">效率上来了，质量开始劣化</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">技术哨兵机还原预发合并态 + 云端 Agent 冲突检测</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;color:#2563eb;">稳定运作期</td>
+        <td style="padding:10px;">非研发角色如何共享上下文</td>
+        <td style="padding:10px;">NekoCollar 云端协作平台 + 软硬双锁</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 单兵攻坚期: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">04 · 单兵攻坚期</div>
+    <h2>构建极具纵深的「超级个体」编码上下文</h2>
+    <div class="text-body" style="margin-bottom:14px;">单兵作战时最大的痛点不是「不会写代码」，而是<strong>AI 不知道这个项目是什么</strong>——不知道业务地图、踩过的坑、为什么选了这个技术方案。每开一个新会话，上下文都要重新灌一遍。解题思路是用一个结构化知识库把整个全栈项目集成在一起，这就是他们称之为 <strong>collar（项圈）</strong>的 SDD 研发体系——给自由奔放的 AI Agent 套上一个边界与知识的项圈。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">命名渊源：neko（猫）与 collar（项圈）</h3>
+      <div class="text-body">团队有一系列以 <code style="font-size:12px;">neko</code>（日语「猫」）命名的产品——neko、nekoClaw、NekoCollar，而 collar 正是给「猫」戴的项圈/牵引具（harness）。这跟开篇提到的「AI 上下文是效率关键」一脉相承：约束不是束缚，而是让 Agent 在边界内高效驰骋的牵引绳。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段一：AGENTS.md —— 每个会话必加载的入口地图</h3>
+      <div class="text-body">根目录一份 AGENTS.md，是 Agent 进入项目的<strong>唯一入口</strong>，铁律写在开头：<strong>「本文件是 Agent 的入口地图（≤120 行）。不放细节，只告诉你去哪里找。」</strong>它用几个精炼板块串起一个多仓库聚合工作区（前端主应用 + 5 个微应用/H5 + Java DDD 四层后端 + Node 评测执行端 + 评测服务端）：</div>
+      <ul style="margin:10px 0 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+        <li><strong>仓库地图</strong>：带注释的目录树，一眼看清 7 个子仓库各自是什么、端口多少、哪个是唯一开发入口、哪个已废弃禁止改动</li>
+        <li><strong>快速命令</strong>：每个应用怎么启动、怎么 build/lint，AI 不用翻各仓 README</li>
+        <li><strong>关键约定速查表</strong>：把「踩过坑才总结出的强约定」浓缩成「一句话 + 详见链接」</li>
+        <li><strong>当前状态表</strong>：每个应用「完成度 + 已具备能力」的实时快照</li>
+      </ul>
+      <div class="text-body" style="margin-top:10px;">AGENTS.md 的行数由 collar-runbook skill 主动「守卫」——一旦逼近 115 行就提醒把详情迁到 docs/，入口地图永远精简可信。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段二：六个 Skill 管理知识库的六个层级</h3>
+      <div class="text-body">知识库拆成 docs/ 下的六个模块，每个模块配一个唯一对应的 Skill（统一 collar- 前缀），构成「模块 ↔ Skill ↔ README」三位一体：</div>
+      <pre style="background:#fff;border-radius:8px;padding:16px;font-size:12px;line-height:1.7;overflow-x:auto;color:#4a4a4a;margin:10px 0 0 0;">docs/
+├── specs/        业务地图（要做什么）        → collar-specs
+├── changelog/    做了什么 + 将做什么（时间线） → collar-changelog
+├── architecture/ 系统怎么连的（8 类连接点）    → collar-architecture
+├── runbook/      零散过程知识（8 类）          → collar-runbook
+├── vendor/       外部源码选择性同步           → collar-vendor
+└── wiki/         自由知识库（人工维护，中文）   → collar-wiki</pre>
+      <div class="text-body" style="margin-top:10px;">最关键的是一条底层信念：<strong>「对 Agent 来说，看不到的知识等于不存在。」</strong>所以所有知识必须版本化落到仓库文件里，一旦发生就自动沉淀进 docs/，下一个会话或下一个人拉取仓库就能获得完整上下文。</div>
+      <div class="text-body" style="margin-top:10px;">单个 Skill 好做，难的是让多个 Skill 不打架还能配合。办法是把 <strong>git commit 设计成统一的触发关卡</strong>——一次提交，三个 Skill 从三个正交维度同时喂养知识库：changelog 记「做了什么」，runbook 抽「学到了什么」，specs 检「代码是否偏离了意图」。这里的「强制」是真强制——知识沉淀从「靠自觉」变成「流程门禁」，杜绝「这次先算了、下次一定」的滑坡。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段三：人工与自动双方式实现知识库冷启</h3>
+      <div class="text-body">知识分两类各归其位：<strong>人工维护</strong>（设计理念、竞品分析、blue-print 蓝图调研）进 wiki/；<strong>自动维护</strong>（changelog / architecture / runbook 三层）由 AI 从 git、代码、对话中自动提取沉淀。官方 demo 代码走 vendor/ 模块，核心原则是「只做减法、只下载我们所需要的」。vendor 不只是「存代码」，它还是 collar-specs 的实证参考源——specs 生成技术方案时会自动扫描相关 vendor，提取代码模板、API 用法、架构模式，融入方案并标注来源。一句话点睛：<strong>「用户放进 vendor 的代码不一定完整阅读过，这一步帮用户『读』并提炼要点。」</strong></div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段四：给 AI 套一个「项圈」——三层心智模型</h3>
+      <div class="text-body">根目录还有一份 collar.yaml（在 NekoCollar 上渐进落地中），把「项圈」抽象成三层值得记住的心智模型：</div>
+      <div class="text-body" style="margin-top:10px;">
+        <strong>Identity</strong>（身份/知识入口）：告诉 AI「你是谁、去哪读知识」<br>
+        <strong>Boundary</strong>（边界/约束）：明确 AI「能碰什么、不能碰什么」，核心逻辑是默认拒绝（deny-by-default）<br>
+        <strong>Validation</strong>（验证）：改完代码必须过的门禁（lint / typecheck）
+      </div>
+      <div class="text-body" style="margin-top:10px;">一句话：<strong>Identity 管知道什么、Boundary 管能改什么、Validation 管改得对不对。</strong>即便 collar.yaml 还在完善，这套三层模型已通过 AGENTS.md、pre-commit hook、以及后文 NekoCollar 的软硬双锁在各处启用了。</div>
+    </div>
+  </div>
+
+  <!-- 加人提速期: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">05 · 加人提速期</div>
+    <h2>基于能力分发，横向复刻出「超级研发小分队」</h2>
+    <div class="text-body" style="margin-bottom:14px;">单人攻坚一个月后加人，核心问题变成：如何把单人的效率复刻到多人协同。多人协同最怕两件事——<strong>一是冲突</strong>（大家改到同一处），<strong>二是上下文断裂</strong>（为了工程规范把逻辑外置，结果 AI 看不懂了）。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段一：借鉴 Web2.0 的站点地图，物理隔离分工</h3>
+      <div class="text-body">站点地图（sitemap）的价值在于：动工之前就把整个系统的疆域横向铺开、切分清楚。docs/specs/ 就是 MDI 的站点地图，按业务地图铺开：管理端 16 个功能模块、用户端 6 个、小二端 14 个、专家端 1 个、评测端 2 个。一个业务地图 = 站点的一个分区，一个功能模块 = 分区里的一个页面/功能区，数字前缀保证目录天然有序。</div>
+      <div class="text-body" style="margin-top:10px;">「目录即认领单元」——A 认领「创建项目」、B 认领「项目循环」，各自的 spec 目录物理隔离，冲突面降到最低。进入开发前就确认清楚每个人负责的产品前台路由、后台 API 领域、产品模块和 spec 范围。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段二：四种变更类型满足所有需求演进行为</h3>
+      <div class="text-body">一个 feature 的三级结构：<code style="font-size:12px;">raw提示词.md</code>（原始需求，只追加）→ 主 spec <code style="font-size:12px;">[技术方案]xxx.md</code> → patches/（挂载的 PATCH 集）。四种类型覆盖完整生命周期：</div>
+      <ul style="margin:10px 0 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+        <li><strong>blueprint</strong>：放在 docs/wiki/blue-print/（自由探索层），是「还没确认如何沉淀成 spec 的基础能力构思」，命名前缀体现成熟度阶梯 [调研]→[讨论稿]→[技术方案]…V4-MVP，成熟后才「毕业」迁入 specs</li>
+        <li><strong>feature</strong>：稳定功能，活在 docs/specs/（正式规格层）</li>
+        <li><strong>patch</strong>：小改动走 PATCH 补丁，多人可在同一 feature 下并行提交，主 spec 只在稳定后收敛</li>
+        <li><strong>sunset</strong>：旧功能优雅退场</li>
+      </ul>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">关键规格一：patch 的双向指针解决「主文档与补丁」的语义二义性</h3>
+      <div class="text-body">当一个 patch 要替代主方案里的某段内容时，如果只在 patch 里说「我改了 X」，读主文档的人不知道；如果只在主文档划掉「X」，读 patch 的人不知道来龙去脉。所以强制<strong>双向建立指针</strong>：Patch 开头用「覆盖范围」表声明替代了主方案的哪段；主文档被替代段落加删除线 + superseded 指针指向 patch。核心要求是 <strong>Patch 自身必须可独立阅读，不依赖读者先读主文档</strong>——这对 AI 尤其友好，从任何文件切入都能拼出当前生效的真相，不被过期描述误导。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">关键规格二：sunset 让旧功能优雅日落</h3>
+      <div class="text-body">旧功能下线如果直接 git rm，那段历史上下文就永久丢失了，未来排查灰度期线上问题会抓瞎。sunset（日落）让旧 spec 优雅退场——真实案例是用户核心循环从 V1 自建 LLM Agent 迁移到算法团队的 TPP 服务：V1 文档进入「凝固期」，不修订、不新增 PATCH、仍可阅读用于排查，直到 V2 全量切换且稳定 1 周后整体 git rm。sunset 不是「把文件删掉」，而是一份<strong>带状态机的可执行迁移剧本</strong>。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段三：提交时，代码到 spec 的反向提醒</h3>
+      <div class="text-body">站点地图把疆域切好了，但代码写着写着可能偏离 spec。设计哲学非常关键：</div>
+      <blockquote style="margin:10px 0;">"Spec 是意图源，比代码更早期。代码偏离 Spec 不一定是错误——可能是编码过程中发现了更好的方案。"<cite>— 天猫技术团队</cite></blockquote>
+      <div class="text-body">所以提交时不自动反向更新 Spec，而是<strong>输出差异清单，把决策权交给人</strong>：每个差异点列「Spec 描述 vs 代码实现 + 建议」，用户逐条决策——反向更新 Spec / 保持 Spec 不变（记 TODO）/ 暂时搁置。这把「文档变化」从静默忽略变成了显式决策，配合 lint 质量门禁 + collar-changelog 强制约束，构成「Agent 语义检查 + git hook 质量检查」的双保险。</div>
+    </div>
+  </div>
+
+  <!-- 上下文缝补: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">06 · 上下文缝补</div>
+    <h2>工程优化不能捅破 AI 上下文——这是全文最有价值的部分</h2>
+    <div class="text-body" style="margin-bottom:14px;">多人协作到一定阶段，一定会为了发布效率把某些硬编码（比如 prompt 逻辑）迁移到 Diamond、DB 或其它持久化介质上。这在传统研发时代是标准「最佳实践」（配置与代码分离），但在 AI 研发时代是<strong>一个隐蔽的陷阱</strong>：Agent 的行为逻辑写在代码里时，codeAgent 一读代码就知道它会怎么干；一旦提示词挪到 DB，代码里只剩一个 <code style="font-size:12px;">promptService.load(agentCode)</code> 调用框架，codeAgent 再读代码就完全不知道这个 Agent 的具体行为——它会在关键决策上误判，或给出那句让人血压升高的话：「但我不知道这个 Agent 的具体行为，请你去对应平台修改相关的提示词。」这就是<strong>推理链断裂</strong>：你以为做了工程优化，实际上把 AI 的上下文捅了个窟窿，研发效率断崖式下跌。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">一条原则 + 一个更根本的认知</h3>
+      <div class="text-body">项目组立下的原则：<strong>任何导致上下文异常的研发架构变动，都必须用适合的方式缝补缺损的上下文。</strong>背后的认知是——<strong>AI 时代 human in the loop 越少效率越高，所以 AI 上下文始终是效率的关键（注意：这里说的是效率，不是质量）。</strong>DB 相关的 MCP 为什么好用？就是让业务逻辑链路重新完整、让 codeAgent 上下文齐全。</div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:26%;">案例</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">上下文缺损点</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">缝补方式</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">外置动态提示词/skill</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">Prompt 工作台动态管理、独立发布，代码只有调用框架</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">MDI 专属 MCP Server 暴露 20 个只读查询工具 + 一个使用说明书 skill</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;">预发/线上环境差异</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">「隐藏地形」，排查预发问题出现无法解释的现象</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">在 AGENTS.md「关键约定速查」显式声明，细节沉淀成 ADR</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;">Transform 脚本（Groovy）</td>
+        <td style="padding:10px;">运营逻辑外置到平台，AI 读脚本不知脚本是什么</td>
+        <td style="padding:10px;">//! 声明式注释保留上下文锚点——Groovy 眼里是普通注释，对平台却是元数据</td>
+      </tr>
+    </table>
+
+    <div class="text-body">其中案例一是完整闭环的典型：光有 MCP 还不够——工具「能查」不等于 AI「知道该查」。所以额外配了一个 skill 作为 MCP 的使用说明书，明确回答三个问题：<strong>何时查</strong>（定义触发条件，主动调 MCP 而非等人提醒）、<strong>怎么查</strong>（固定四步调用链，锚点 = 场景码 + Agent 码）、<strong>查到后怎么用</strong>（补充 MCP 数据含义）。MCP 提供「只读可达」的通道（能力层），skill 提供「何时/如何取用」的协议（认知层）——两者合起来，codeAgent 才会主动按正确锚点把外置到 DB 的上下文拉回视野。</div>
+  </div>
+
+  <!-- 高速迭代期: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">07 · 高速迭代期</div>
+    <h2>引入「技术哨兵机」，从更高维维稳</h2>
+    <div class="text-body" style="margin-bottom:14px;">进入第三阶段，节奏变成每周一个大版本、预发同时十几个分支。新问题浮现：<strong>效率提升后，人与人之间对新输入的上下文交换效率成了瓶颈</strong>——上午改了后端接口签名，下午改了前端调用，各自本地都跑得通，合到预发业务逻辑一冲突，甚至要延续很久之后才炸。这种「隐形冲突」在多人高速迭代下指数级增长，是 AI 研发质量劣化的头号杀手。</div>
+
+    <div style="background:#fff5f3;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;color:#b02a1f;">手段一（失败的尝试）：Agent Manage 编码态监控</h3>
+      <div class="text-body">最初的想法很直觉：直接读取大家本地编码阶段的输入和 Agent 输出（监听 cursor、qoder、claude code 等进程），在编码阶段就把冲突扼杀。结果遇到两个致命问题：<strong>噪音太多、信噪比极低</strong>（没 release 前的本地编码态充满了写了又删、试了又改的无用噪音），<strong>成本过高</strong>（监控每个人本地编码态 token 消耗惊人）。失败的根因事后复盘很清楚：<strong>介入时机放错了——编码态是「意图尚未定型」的阶段，信息熵最高、确定性最低。</strong></div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">手段二（这次有戏）：把触发节点后移到「预发集成态」</h3>
+      <div class="text-body">复盘后把触发节点从「编码态」后移到「预发集成态」，<strong>collar-daemon</strong> 登场：一个跑在独立机器（目标形态 Mac mini）上长驻的守护进程，本质是「团队研发质量的哨兵」。技术栈极简——原生 Node.js、零第三方依赖，只用 child_process/https/net/fs 内置模块。它做三件事构成闭环：</div>
+      <ol style="margin:10px 0 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+        <li><strong>代码环境还原</strong>：持续把「线上」和「预发」两套工作区的所有子仓库同步到各环境的最终态（预发每 300s 轮询，自动发现最新 release 分支，前端走 def_releases_*、后端走 releases/*）</li>
+        <li><strong>业务逻辑冲突检测</strong>：预发一拉到新提交，就把「谁改了什么」喂给云端 AI Agent 做隐形冲突分析</li>
+        <li><strong>告警闭环</strong>：Agent 发现冲突，通过钉钉机器人 + AI 表格告警到群里</li>
+      </ol>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">为什么「始终维护一份 release 集成分支」如此关键</h3>
+      <div class="text-body">每个开发者本地只有自己那一部分的改动，分支各不相同——除了集成环境本身，<strong>没有任何一台开发机拥有「所有人最新提交合在一起」的完整环境</strong>，而恰恰是这个「合在一起」的环境才是冲突真正暴露的地方。哨兵机在工作区层面模拟出了「预发合并态」：一个可运行、可被 AI 通读的完整快照。典型冲突只有在集成态才现形——A 改了接口签名 B 恰好在调用、甲改了共享 Prompt 的槽位 key 乙依赖旧 key、DB 字段变更、并发时序、共享配置……这些在任何单一开发分支上都「一定不存在」。</div>
+      <div class="text-body" style="margin-top:10px;">几个细节：daemon 代码<strong>不做任何规则判断、不内联任何 prompt</strong>，只把结构化上下文 POST 给云端的 <strong>QoderWake Automation Agent</strong> 判定冲突——易变的智能（prompt 编排）放云端，本地进程零依赖、长期稳定。信息采集时精确提取每个新提交的作者、message、变更文件，按仓库分组、每条突出提交人名字——因为多人协同排查冲突时，「谁改的」是第一线索。还有个工程小巧思：QoderWake 管理界面硬编码绑定 127.0.0.1，daemon 用 net.Server + pipe() 做了同端口不同 IP 的 TCP 透明转发，让全团队远程看哨兵机界面。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">北极星指标：周冲突有效发现率 &gt;70%</h3>
+      <div class="text-body">如果冲突检测只停留在「群里发条告警」价值会大打折扣——告警会被刷走、没人跟进、无法度量。所以把 Agent 每轮产出的冲突沉淀成一张钉钉 AI 表格，做状态流转管理（待回复 → 问题存在/误报/已修复），既闭环问题、又反向校准 Agent 准确率。<strong>北极星指标是「周冲突有效发现率」</strong>。真实成效：业务冲突有效发现率稳定超过 70%（Agent 报出的冲突七成以上是真问题），每周发现 40+ 个单人视角根本看不见的隐形业务埋雷。更有意思的是团队心态变化——如果哪天哨兵机没有发冲突检测，大家普遍心理不安，担心哪里悄悄埋了雷。<strong>团队会对一个 AI 工具产生「没有它就不踏实」的依赖，说明它真正嵌进了研发流程。</strong></div>
+    </div>
+  </div>
+
+  <!-- 稳定运作期: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">08 · 稳定运作期</div>
+    <h2>NekoCollar：把效率和稳定性平权给非研发角色</h2>
+    <div class="text-body" style="margin-bottom:14px;">研发的效率和质量上来了，那测试、产品、设计这些非研发同学呢？他们同样需要理解代码、基于当前系统提出改动、需要「所见即所得」的编辑体验。作者指出一个深层原因：<strong>代码是距离用户真实体验最近的一份「可执行事实」</strong>——产品文档、设计稿、测试用例都是最终系统的不同投影，用户最终体验的是代码与配置实际运行出来的行为。围绕代码协作，不是让所有人进 Git，而是让所有角色都基于最终可执行事实工作。</div>
+
+    <div class="text-body" style="margin-bottom:14px;">但直接把 git 权限、AI 编码能力交给非研发角色风险极高。本章与前三章最本质的区别在于：前三章的参与者都懂代码、懂 git、有工程素养，约束可以相对「软」；当参与者扩展到测试、产品、设计，约束就必须从「软」变「硬」——<strong>「参与者的工程素养越低，系统的约束就必须越硬。」</strong>NekoCollar 的设计哲学一句话概括：<strong>在效率上做加法，在稳定性上做物理约束。</strong></div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">效率线：云端沙箱 + 所见即所得的真实页面编辑</h3>
+      <div class="text-body">非研发同学不需要本地配环境：系统用一套异步编排（WorkspaceProvisionOrchestrator，@Async 五步流水线）在云端 Aone 沙箱一键拉起工作环境。关键在 Step3——<strong>先 clone 知识库作外层目录，再把代码仓 clone 进知识库内部</strong>，这就是研发态实际用到的真实「上下文」环境。</div>
+      <div class="text-body" style="margin-top:10px;">最不一样的一点是「所见即所得」：市面上多数「AI 改前端」产品要么在隔离沙盒预览页看效果、要么给一段 diff 让你想象，都不是「真实页面」。NekoCollar 的完整链路是：沙箱内跑真实 dev server（npm run start）→ 端口通过 Aone Sandbox SDK 映射成外部 URL 注册 → 浏览器插件（nekocollar-extension）打开预发/线上真实页面时，自动把该页从 CDN（g.alicdn.com）加载的前端资源实时重定向到沙箱 dev server 的 endpoint。于是产品/设计同学在沙箱里跟 codeAgent 对话改页面，真实页面上即时看到 AI 编辑的结果——不是仿真、不是预览、不是 diff，就是那个真实页面本身实时变化。原本只有研发用 whistle/charles 代理才能做的「调试真实页面」，现在无门槛交给非研发同学。服务端改动（接口返回结构变化）目前规划用浏览器插件 mock 方式就地拦截（前端静态资源代理已扎实落地，接口 mock 属规划中）。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">稳定性线：软硬双锁把危险操作变成「物理不可能」</h3>
+      <div class="text-body"><strong>硬约束（协议层，不可绕过）</strong>：沙箱 clone 完代码后，第一件事就是遍历所有 git 仓库，把 push URL 改写成一个不存在的仓库名（PUSH_DISABLED）——此后任何 git push 都会报 fatal，沙箱里的代码只能进、不能推出去污染主干。</div>
+      <div class="text-body" style="margin-top:10px;"><strong>软约束（行为层，减少无谓尝试）</strong>：写入沙箱 ~/.claude/settings.json，permissions.allow 白名单只放行拉取类 git 命令（fetch/pull/merge/rebase/checkout/add/status/log/diff），push/remote 不在白名单，ACCEPT_EDITS 模式下审批直接失败被拦截。</div>
+      <div class="text-body" style="margin-top:10px;">两道锁都已真实落地，在此基础上还规划了第三道锁——<strong>提案审阅兜底</strong>（开发中）：非研发同学在沙箱里改得满意后，这些改动不直接落库，而是先沉淀为一份结构化提案（已验收净 diff + 需求 + 决策 + 验收证据），经审阅后才被智能 cherry pick 应用。三道锁合起来，非研发角色才可能安全地基于代码库表达意图。</div>
+    </div>
+  </div>
+
+  <!-- 结语: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">09 · 结语</div>
+    <h2>AI 时代研发协同发展的四条必经之路</h2>
+    <div class="text-body" style="margin-bottom:14px;">回望四个阶段，四条可直接复用的经验，每条都对应一个「解法 + 原因」：</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:20%;">阶段</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:40%;">解法</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">原因</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">单人起步</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">构建核心全栈上下文</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">知识库深度直接决定原子单位研发效率</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">多人扩张</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">构建 spec 变更规则和站点地图</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">权责划分清晰度决定效率能否横向扩散</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">敏捷迭代</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">构建比传统研发更高维的 AI 监控机制</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">传统维度手段无法让质量与效率同步提升</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;color:#2563eb;">项目稳定</td>
+        <td style="padding:10px;">构建更多易用的协同链路 + harness 工程</td>
+        <td style="padding:10px;">新链路设计决定能否把效率和质量辐射至非研发人员</td>
+      </tr>
+    </table>
+
+    <blockquote style="margin-top:14px;">"把 AI 带来的研发能力一层层往外放大：个体 → 团队 → 可持续 → 全员。"<cite>— 天猫技术团队</cite></blockquote>
+    <div class="text-body" style="margin-top:10px;">先让一个开发者成为超级个体，再让超级个体组成能协同的超级团队，再让这支团队可持续地高速跑下去，最后把这份能力辐射到非研发的每一个人。作者最后一句收束：<strong>AI 能力普惠后，人心中那些不固步自封、追求和创新的特质才是最宝贵的。</strong></div>
+  </div>
+
+  <!-- 站内延伸: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">10 · 站内延伸</div>
+    <h2>相关调研与日报</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+      <a href="taobao-project-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">淘天项目 Harness：AI 驱动研发体系的上下文引擎</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">同系列前篇 · Agent = Model + Harness · 知识飞轮</span>
+      </a>
+      <a href="kuaishou-ai-productivity.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">快手 AI 生产力：从研发提效到组织跃迁</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">银行 60 年镜子推导 L0→L3，四公理与三道鸿沟</span>
+      </a>
+      <a href="harnessx-composable-agent-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">HarnessX：小米开源可组合、自进化的 Agent 运行时</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Agent Harness · 自进化 · Darwin Team</span>
+      </a>
+      <a href="verifiability-first-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">可验证性优先：从 Harness 到移动 Agent 集群</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">生产级 Harness 工程实践</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 来源: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://mp.weixin.qq.com/s/0wnFz3G6niLetSQptUi-SA" target="_blank" style="color:#2563eb;text-decoration:none;">大淘宝技术：天猫技术大型 AI 项目的研发协同实践</a>
+      <br>
+      调研日期：2026-09-07 · 淘天集团-天猫技术团队 · 作者 卡狸 · 全文提取
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
