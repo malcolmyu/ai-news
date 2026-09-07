@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-6 Astra 能力跃升，Tworek 却称 Transformer 已到顶 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260907">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月7日 — AI 建造者日报</div>
+<h1>GPT-6 Astra 能力跃升，Tworek 却称 Transformer 已到顶</h1>
+<div class="subtitle">GPT-6 Astra 的「低」档已超过 GPT-5.6 Sol 的「高」档；OpenAI 前推理负责人 Tworek 与 Gemini 预训练联合负责人 Anil 则主张，瓶颈不再是规模，而是架构本身。</div>
+<div class="dots-row"><span class="tag">GPT-6 Astra</span> <span class="tag">Agent Harness</span> <span class="tag">持续学习</span> <span class="tag">GitHub Trending</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">6</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">4</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>GPT-6 Astra 的「低」档已超过旧模型的「高」档</strong></p>
+<p>Thibault Sottiaux 帮大家校准 Astra 的推理档位：GPT-6 Astra 的「低」档已经比 GPT-5.6 Sol 的「高」档表现更好，建议从高推理强度降到低档或中档。这条推文收获 1.1 万赞、480 转推、1212 评论。</p>
+</div>
+<div class="feature-card">
+<p><strong>Tworek 与 Anil：瓶颈不是规模，是架构本身</strong></p>
+<p>深度对话：Jerry Tworek（OpenAI 前推理负责人）与 Rohan Anil（Gemini 预训练联合负责人）在 Core Automation 提出反共识论断——Transformer 已到极限，通往更智能系统的瓶颈不再是规模，而是架构本身，缺失的是持续学习能力。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/2RJiaf0SY8s" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>Building the Automated AGI Lab: Core Automation&#x27;s Jerry Tworek and Rohan Anil</strong>
+</div>
+<div class="vitem-quote">Jerry Tworek 曾在 OpenAI 领导推理团队，坚信规模化强化学习是通往 AGI 的路径；Rohan Anil 则联合主导了 Gemini 预训练、并打造了 Shampoo 优化器。如今两人在 Core Automation 汇合，提出一个反主流的前提：Transformer 已经把我们带到了它能到达的极限，通往更智能系统的瓶颈不再是规模，而是架构本身。缺失的能力是持续学习——能够在测试时自适应调整的模型，而 Transformer 做不到。上下文学习很快失效（Codex 约 20 分钟后就需要压缩上下文），微调又会招致灾难性遗忘。Rohan 主张预训练与强化学习应当端到端联合优化，并认为 Transformer 在计算上低效。他们还解释了为什么大型实验室在困于编程 Agent 竞赛期间不会追逐替代架构，以及为什么打造世界上最自动化的实验室要从自动化内核生成开始——那是前沿模型目前唯一仍会输给高品味人类的地方。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666675&amp;idx=1&amp;sn=5e0b3b4adf737c5c4e4a15d5566d5aeb" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-06</span>
+</div>
+<div class="rss-title">阿里前销售总监在美失踪逾半月后确认身亡；5天10万元！外国高管涌入中国“工厂游”；传DeepSeek计划采购16万颗昇腾芯片｜AI周报</div>
+<div class="rss-desc">AI 周报：阿里前销售总监在美失踪逾半月后确认身亡；外国高管 5 天 10 万元涌入中国「工厂游」；传 DeepSeek 计划采购 16 万颗昇腾芯片。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666675&amp;idx=2&amp;sn=a829423e88c3a3f849e7cc86cd8b7958" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-06</span>
+</div>
+<div class="rss-title">3 名开发者做出来的副业项目，半年冲进 4 万人！亚马逊云科技把内部 Agent 工作台开源了</div>
+<div class="rss-desc">一年前，亚马逊云科技推出 AI 编程工具 Kiro 时，试图解决的是「生成代码之后怎么办」的问题；如今它把内部 Agent 工作台开源了。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666662&amp;idx=1&amp;sn=7f666db703118a609c9eaea87c5531cc" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-05</span>
+</div>
+<div class="rss-title">人人都能整个“自己的DeepSeek Harness”，那我们为啥还在给Claude Code们充会员？</div>
+<div class="rss-desc">模型已经卷不动了，Harness 也卷不动了，Coding Agent 还能卷什么？</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666662&amp;idx=2&amp;sn=6999ffc1c9244aa4bd9b9767bc13a367" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-05</span>
+</div>
+<div class="rss-title">Agent 时代，为什么有人开始重新造 Google？</div>
+<div class="rss-desc">当 Google 已经索引了几乎整个开放互联网，还有必要从头再造一个搜索引擎吗？</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2096688770523467947" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">To calibrate you all on which reasoning effort to use for Astra, know that GPT-6 Astra on low performs better than GPT-5.6 Sol on high.
+
+If you were using high reasoning efforts with Sol and were happy, I suggest you move down to low or medium for Astra.</div>
+<div class="tweet-translation">帮大家校准 Astra 该用哪档推理强度：GPT-6 Astra 的「低」档已经比 GPT-5.6 Sol 的「高」档表现更好。如果你之前用 Sol 的高推理强度还觉得满意，建议你在 Astra 上直接降到低档或中档。</div>
+<div class="tweet-metrics"><span>♥ 11.0k</span><span>↺ 480</span><span>💬 1.2k</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2096403459579015374" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Can’t remember last time we had such a large jump in capabilities. https://t.co/iGxVUYmGHj</div>
+<div class="tweet-translation">我都不记得上一次能力有这么大的跃迁是什么时候了。</div>
+<div class="tweet-metrics"><span>♥ 1.8k</span><span>↺ 59</span><span>💬 66</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2096400749869830325" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">One step closer in building the harness I wanna use. The one thing that’s not yet there are cloud sessions, goal is seconds, which requires clever snapshotting. (Right now it still clones repos fresh which isn’t fast enough.)
+
+Will have that next week. https://t.co/lpiszOtVGP</div>
+<div class="tweet-translation">离我想用的那个 harness 又近了一步。唯一还缺的是云会话——目标是秒级启动，这需要巧妙的快照机制（现在还是重新克隆仓库，不够快）。下周就能补上。</div>
+<div class="tweet-metrics"><span>♥ 755</span><span>↺ 35</span><span>💬 54</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thenanyu/status/2096438571838370096" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-thenanyu.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nan Yu</span>
+<span class="tweet-handle">@thenanyu</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Every tech startup logo https://t.co/52Prjggey0</div>
+<div class="tweet-translation">所有科技创业公司的 logo（都长一个样）。</div>
+<div class="tweet-metrics"><span>♥ 101</span><span>↺ 1</span><span>💬 3</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2096466888935276719" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I’ve been sleeping on Widow’s Bay and in general Apple’s shows are so much better any other streamer</div>
+<div class="tweet-translation">我一直忽略了《寡妇湾》，总的来说 Apple 的剧集比任何其他流媒体都好太多了。</div>
+<div class="tweet-metrics"><span>♥ 59</span><span>↺ 1</span><span>💬 22</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2096612718098911590" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-07/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">“Cheating and explaining the answer [to your child] are closer than you’d think.”
+
+Here’s my new episode with @suekhim, co-founder of @brilliantorg, who showed me how AI can help kids think for themselves. We talked about:
+
+→ Why better grades don’t always mean more learning
+
+→ How to help kids enjoy doing hard things vs. only trying to please adults
+
+→ Why her #1 product principle is “Never tell the learner the answer”</div>
+<div class="tweet-translation">「（给孩子）作弊和直接告诉他答案，这两件事比你想象的更接近。」这是我与 Brilliant 联合创始人 Sue Khim 的新一期节目，她展示了 AI 如何帮助孩子独立思考。我们聊了：为什么成绩更好不等于学得更多；如何帮孩子享受做难事、而不是只讨好大人；为什么她的第一产品原则是「永远别直接告诉学习者答案」。</div>
+<div class="tweet-media"><img src="assets/2026-09-07/petergyang-2096612718098911590-0.jpg" alt="" loading="lazy" width="1200" height="675" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 36</span><span>↺ 7</span><span>💬 11</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/affaan-m/ECC" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/affaan-m.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">affaan-m</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ECC</span>
+</div>
+<span class="gh-stars">⭐ 251.4k</span>
+</div>
+<div class="gh-body">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+<div class="gh-translation">代理 harness 性能优化系统。为 Claude Code、Codex、Opencode、Cursor 等提供技能、本能、记忆、安全和研究优先的开发能力。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 37.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattpocock</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 254.7k</span>
+</div>
+<div class="gh-body">Skills for Real Engineers. Straight from my .agents directory.</div>
+<div class="gh-translation">给真正工程师的技能包，直接来自我的 .agents 目录。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 21.5k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/cathrynlavery/diagram-design" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/cathrynlavery.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">cathrynlavery</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">diagram-design</span>
+</div>
+<span class="gh-stars">⭐ 32.5k</span>
+</div>
+<div class="gh-body">38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.</div>
+<div class="gh-translation">面向 Claude Code、Codex 和 Pi 的 38 种编辑风图表。自包含 HTML+SVG，无阴影，无 Mermaid 那种糊弄。</div>
+<div class="gh-meta">
+<span class="gh-lang">● HTML</span>
+<span class="gh-forks">🍎 2.1k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/NousResearch/hermes-agent" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/NousResearch.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">NousResearch</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">hermes-agent</span>
+</div>
+<span class="gh-stars">⭐ 242.6k</span>
+</div>
+<div class="gh-body">The agent that grows with you</div>
+<div class="gh-translation">一个与你一起成长的智能体。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 49.9k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/openai/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/openai.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">openai</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 25.6k</span>
+</div>
+<div class="gh-body">Skills Catalog for Codex</div>
+<div class="gh-translation">Codex 的技能目录。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anomalyco/opencode" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anomalyco.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anomalyco</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">opencode</span>
+</div>
+<span class="gh-stars">⭐ 205.3k</span>
+</div>
+<div class="gh-body">The open source coding agent.</div>
+<div class="gh-translation">开源的编程智能体。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 26.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/blader/humanizer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/blader.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">blader</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">humanizer</span>
+</div>
+<span class="gh-stars">⭐ 44.3k</span>
+</div>
+<div class="gh-body">Agent skill that removes signs of AI-generated writing from text</div>
+<div class="gh-translation">从文本中移除 AI 生成痕迹的智能体技能。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/llvm/llvm-project" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/llvm.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">llvm</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">llvm-project</span>
+</div>
+<span class="gh-stars">⭐ 40.2k</span>
+</div>
+<div class="gh-body">The LLVM Project is a collection of modular and reusable compiler and toolchain technologies.</div>
+<div class="gh-translation">LLVM 项目是一套模块化、可复用的编译器和工具链技术合集。</div>
+<div class="gh-meta">
+<span class="gh-lang">● LLVM</span>
+<span class="gh-forks">🍎 18.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/DietrichGebert/ponytail" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/DietrichGebert.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">DietrichGebert</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ponytail</span>
+</div>
+<span class="gh-stars">⭐ 129.5k</span>
+</div>
+<div class="gh-body">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</div>
+<div class="gh-translation">让你的 AI 智能体像房间里最懒的资深开发者一样思考。最好的代码是你从未写过的代码。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 6.9k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/ruvnet/ruflo" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ruvnet.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ruvnet</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ruflo</span>
+</div>
+<span class="gh-stars">⭐ 71.0k</span>
+</div>
+<div class="gh-body">The original agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, RAG integration, and native Claude Code / Codex / Hermes and many more Integrated</div>
+<div class="gh-translation">最初的 agent 元 harness。部署智能多智能体集群、协调自主工作流、构建对话式 AI 系统，支持自适应记忆、自学习智能、RAG 集成等。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 8.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/magnitudedev/magnitude" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/magnitudedev.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">magnitudedev</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">magnitude</span>
+</div>
+<span class="gh-stars">⭐ 3.7k</span>
+</div>
+<div class="gh-body">Open source inference server that runs the best local models for your hardware, plugged into the agent you already use. Works with Pi, OpenCode, Hermes, OpenClaw, Codex, Claude Code, Oh My Pi, and Cline.</div>
+<div class="gh-translation">开源推理服务器，为你的硬件运行最佳本地模型，接入你已在用的智能体。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 261</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/BraveOPotato/FckSignups" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/BraveOPotato.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">BraveOPotato</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">FckSignups</span>
+</div>
+<span class="gh-stars">⭐ 3.3k</span>
+</div>
+<div class="gh-body">A list of tools that are open-source, in-browser, and require no-signups!</div>
+<div class="gh-translation">一份开源、在浏览器内运行、无需注册的工具清单。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 210</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/coreyhaines31/marketingskills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/coreyhaines31.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">coreyhaines31</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">marketingskills</span>
+</div>
+<span class="gh-stars">⭐ 47.6k</span>
+</div>
+<div class="gh-body">Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.</div>
+<div class="gh-translation">面向 Claude Code 和 AI 智能体的营销技能：转化率优化、文案、SEO、分析、增长工程。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 7.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/aipoch/open-science" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/aipoch.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">aipoch</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">open-science</span>
+</div>
+<span class="gh-stars">⭐ 3.9k</span>
+</div>
+<div class="gh-body">Open Science by AIPOCH is an open-source, local-first, model-agnostic AI research workbench for macOS, Windows, and Linux, with scientific agents, Python/R notebooks, data connectors, and reproducible provenance.</div>
+<div class="gh-translation">AIPOCH 的 Open Science 是一个开源、本地优先、模型无关的 AI 研究工作台，带科研智能体、Python/R 笔记本、数据连接器等。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 239</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/OpenWhispr/openwhispr" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/OpenWhispr.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">OpenWhispr</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">openwhispr</span>
+</div>
+<span class="gh-stars">⭐ 7.4k</span>
+</div>
+<div class="gh-body">Voice-to-text dictation app with local (Nvidia Parakeet/Whisper) and cloud models (BYOK). Privacy-first and available cross-platform.</div>
+<div class="gh-translation">语音转文字听写应用，支持本地（Nvidia Parakeet/Whisper）和云端模型（自带密钥），隐私优先、跨平台。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 932</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/The-Swarm-Corporation/AutoHedge" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/The-Swarm-Corporation.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">The-Swarm-Corporation</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">AutoHedge</span>
+</div>
+<span class="gh-stars">⭐ 4.8k</span>
+</div>
+<div class="gh-body">Build your autonomous hedge fund in minutes. AutoHedge harnesses the power of swarm intelligence and AI agents to automate market analysis, risk management, and trade execution.</div>
+<div class="gh-translation">几分钟内搭建你的自动对冲基金。AutoHedge 用群体智能和 AI 智能体自动化市场分析、风险管理和交易执行。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 779</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Stremio/stremio-web" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Stremio.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Stremio</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">stremio-web</span>
+</div>
+<span class="gh-stars">⭐ 13.5k</span>
+</div>
+<div class="gh-body">Stremio - Freedom to Stream</div>
+<div class="gh-translation">Stremio——自由串流。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 1.5k</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">同一天看到两件事：Astra 的低档超过了旧模型的高档，规模红利还没耗尽；Tworek 和 Anil 却断言 Transformer 已经到头，下一程靠架构而不是规模。这并不矛盾——规模把旧架构榨到极限，也把「换架构」从论文问题变成了工程问题。另一边，GitHub 前排清一色是 agent skills 和 harness：大家都在给现有智能体加技能，很少人在造新的智能体。真正的分水岭，也许藏在「内核生成」这种最不起眼的地方。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/steipete">@steipete — Peter Steinberger</a>
+<a href="https://x.com/thenanyu">@thenanyu — Nan Yu</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=2RJiaf0SY8s">Training Data (Sequoia Capital)</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260907" defer></script>
+<script src="../site.js?v=20260907" defer></script>
+</body></html>
