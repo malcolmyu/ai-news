@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="date" content="2026-09-11">
+<title>HL-Mem：让 Agent 像人一样记忆的本地长期记忆系统 — 深度调研</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">AI 日报</a>
+<a href="archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">Search</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">Search</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+
+
+<div class="bento">
+
+  <!-- HERO: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">Research · September 2026</div>
+    <h1>HL-Mem：让 Agent 像人一样记忆的本地长期记忆系统</h1>
+    <div class="subtitle" style="margin-top:6px;">淘天集团直播 AIGC 团队作者「子安」开源的本地化 Agent 长期记忆系统（Apache-2.0）。它把记忆看作一套受治理的认知系统而非数据存储：事实与经验双通道架构，保留不可变原始事件（Event）与可更新的结构化事实（Claim），用 valid time / recorded time 双时钟区分「何时为真」与「何时得知」，把去重、冲突消解、衰减、归档与显式遗忘做成一条默认主链路，底层仅依赖 SQLite 单文件 + 后台 Worker，专为个人 Agent 与中文场景设计。</div>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item">
+        <div class="stat-num">双通道</div>
+        <div class="stat-label">事实 + 经验分离演化</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5 层</div>
+        <div class="stat-label">接入/写入/认知/召回/治理</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">86%</div>
+        <div class="stat-label">LongMemEval holdout50</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3105</div>
+        <div class="stat-label">项发布门禁测试</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心命题: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">01 · 核心命题</div>
+    <h2>记忆是受治理的认知系统，不是数据存储</h2>
+    <div class="text-body">作者用一个病例开场：1953 年，代号 H.M. 的病人为治癫痫切除了海马体，智力、语言、性格全部正常，却再也无法形成新的长期记忆——每天醒来护士都是陌生人。作者给出的判断是：<strong>今天的 LLM 就是数字版的 H.M.</strong>，单轮对话里聪明惊人，会话一关，一切归零。</div>
+    <div class="text-body" style="margin-top:10px;">HL-Mem 补的不是「存下来」「搜出来」或「形成关系」中的某一环，而是它们之间断开的那条链路：<strong>原始事件怎样变成事实、事实怎样被新证据修正、旧记忆怎样退出召回</strong>。这套闭环默认只需要一个 SQLite 文件和一个后台 Worker。</div>
+    <blockquote style="margin-top:12px;">"没有长期记忆，再聪明的大脑也只能活在当下。"<cite>— HL-Mem 作者 · 子安</cite></blockquote>
+  </div>
+
+  <!-- 长上下文: span-2 -->
+  <div class="card span-2">
+    <div class="label-sm">02 · 为什么长上下文治不了失忆</div>
+    <h2>装得下 ≠ 用得好，检索之上还要一层治理</h2>
+    <div class="text-body" style="margin-top:6px;">一个自然的反驳是「模型有 1M 上下文，把历史全塞进去不就行了」。作者指出这是两个不同的问题：长上下文解决的是「这一次请求能带多少材料」，长期记忆解决的是「跨越很多次交互后，什么值得留下、怎样更新、何时再想起来」。</div>
+    <div class="text-body" style="margin-top:10px;">LongMemEval（ICLR 2025）系统测过：长上下文 LLM 在持续交互记忆任务上有明显精度衰减——<strong>lost in the middle、新旧信息互相干扰、跨会话聚合失败</strong>。而 RAG 也不够，因为记忆的数据是活的：会重复（同一件事说了八遍）、会矛盾（上个月喜欢的这个月不喜欢了）、会过期（「明天开会」三天后就是垃圾）、会被要求删除。</div>
+  </div>
+
+  <!-- 认知科学: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">03 · 人类记忆的设计智慧</div>
+    <h2>从认知科学里「抄作业」：六条精妙设计</h2>
+    <div class="text-body" style="margin-bottom:14px;">作者认真读了一遍认知科学对人类记忆的研究，发现人脑早就把记忆系统的每个难题都解过一遍，工程上照着抄就行。他声明这里的「像人一样」只是工程抽象——复现的是记忆的<strong>行为</strong>，不是神经系统仿真。六条设计及对应工程实现：</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:24%;">认知科学原理</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:36%;">人脑的设计</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">HL-Mem 的翻译</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">gist / verbatim 双痕迹</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">逐字痕迹几小时就衰减，长期留下的是结构化要义</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">LLM 提取 Claim，原始对话归档为不可变 Event——要义用来思考，原文用来举证</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">海马体是挑剔的编辑</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">一天约两万个心理瞬间，选择性编码发生在写入时</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">AdmissionPolicy 准入规则：不够格的直接不入库</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">遗忘是免疫系统</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">不被使用的记忆自然衰减，为高价值记忆腾检索带宽</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">TTL、衰减、归档与显式遗忘</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">改口不删历史</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">旧版本留有痕迹但不再被引用；「何时发生」与「何时得知」是两条独立时间轴</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">supersede 链 + valid / recorded 双时间模型</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">睡眠中的整理工</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">白天快速记录，夜里海马体把碎片回放给皮层归并抽象</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">后台 Worker 维护循环——去重、冲突归并、TTL 清理、归档全部异步</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;font-weight:500;color:#2563eb;">源记忆错误</td>
+        <td style="padding:10px;">记得一件事却记错从哪听来——人脑的著名弱点</td>
+        <td style="padding:10px;">每条 Claim 挂完整证据链，recall 结果一路追溯到原话——机器可以做得比人更好</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 设计原点: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">04 · 设计原点</div>
+    <h2>把「经历」与「认知」分开：双通道事实链</h2>
+    <div class="text-body" style="margin-bottom:14px;">HL-Mem 最核心的设计是一条可追溯的事实链，同时保留一条独立的经验通道。两条通道共享 Event 起点，却按不同规则演化——<strong>一条维护认知，一条积累经验</strong>。</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">事实通道（认知）</h3>
+      <pre style="background:#fff;border-radius:8px;padding:16px;font-size:12px;line-height:1.7;overflow-x:auto;color:#4a4a4a;margin:0;">Event（经历） → Claim（原子事实） → Observation（观察） → Mental Model（心智模型）
+        └── Evidence Link 把 Claim 指回原始 Event；模型生成的文字本身不能充当事实来源</pre>
+      <div class="text-body" style="margin-top:10px;">Event 是不可变的原始事件（一轮对话、一次工具结果）；Claim 是提取出的最小事实单元（如「用户当前偏好浅色模式」）；Observation / Mental Model 是更高层理解，但始终保留来源关系——底层事实失效时，派生理解会被标记为需要重新计算。这样做看起来比「存一段摘要」麻烦，但换来了三件重要的事：<strong>可验证、可更新、可解释</strong>。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">经验通道（做事）</h3>
+      <pre style="background:#fff;border-radius:8px;padding:16px;font-size:12px;line-height:1.7;overflow-x:auto;color:#4a4a4a;margin:0;">Event（经历） → Episode（任务级经验） → Trace / Reward（过程与反馈） → Policy（策略） → Procedure / Skill（可复用做法）</pre>
+      <div class="text-body" style="margin-top:10px;">Episode 把围绕同一目标的一组 Event 组织成任务级经验；Trace / Reward 分别保存执行轨迹与结果反馈；Policy 表示「在什么情况下优先采用哪种做法」；Procedure / Skill 把稳定有效的做法沉淀成可复用步骤。事实会被新证据纠正，经验会被反馈强化或淘汰——把两者都压成同一种「记忆文本」，系统既解释不了为什么相信一件事，也解释不了为什么选择一种做法。</div>
+    </div>
+  </div>
+
+  <!-- 整体架构: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">05 · 整体架构</div>
+    <h2>五层受治理的记忆核心，底层只有 SQLite</h2>
+    <div class="text-body" style="margin-bottom:14px;">事件从接入层进入，沿事实与经验双通道演化，最终由同一个治理核心约束。展开成五层：</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:14%;">层级</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">职责</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">接入层</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">CLI、REST API、MCP 与 Hermes Provider 接口，让不同 Agent 运行时使用同一套记忆</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">写入层</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">事实型输入先成为不可变 Event，再经可持久化 Job 进入抽取、准入、去重、冲突和证据提交流程；关键状态按事务提交，失败可重试</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">认知层</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">事实通道形成 Claim / Observation / Mental Model；经验通道聚合 Episode、Trace、Policy、Procedure</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">召回层</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">先理解问题所指的主体、实体和时间，融合中文 FTS 与向量候选，高置信实体约束隔离同名对象，新近度/重要性/反馈效用参与排序，组装成有 Token 预算的 Context Packet</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;color:#2563eb;">治理层</td>
+        <td style="padding:10px;">来源准入、反馈、TTL、衰减、归档、纠正、遗忘、解释与运行统计；后台 Worker 扮演「睡眠」，hl-mem explain 与 hl-mem ops report 让记忆形成与调用成本都可被看见</td>
+      </tr>
+    </table>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">为什么没有变成复杂部署</h3>
+      <div class="text-body">证据链、双时间和生命周期增加的是数据语义，不必同时增加三套外部基础设施。<strong>SQLite 负责权威存储，确定性规则先处理可以证明的事实，LLM 只做语言理解，后台 Worker 承担抽取与维护</strong>。复杂度没有消失，而是被关进了明确边界：在线召回不等待维护任务，基础数据面不依赖外部向量库或图数据库。底层默认只依赖 SQLite WAL + FTS5 + 向量 BLOB，小规模数据可直接精确扫描向量，数据增大时可选 sqlite-vec。</div>
+    </div>
+  </div>
+
+  <!-- 一条记忆的一生: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">06 · 一条记忆怎样度过一生</div>
+    <h2>深色模式的完整生命周期 + 双重时间感</h2>
+    <div class="text-body" style="margin-bottom:14px;">回到开头「深色模式」的例子，把管线串起来走一遍：</div>
+
+    <ol style="margin:0 0 14px 0;padding-left:20px;font-size:12px;line-height:1.9;color:#4a4a4a;">
+      <li>「主要用深色模式」先被保存为不可变 <strong>Event A</strong>，同时记录来源坐标，并提取出 <strong>Claim A</strong></li>
+      <li>「暂时换成浅色模式」成为 <strong>Event B</strong>，提取出带时间和「暂时」限定词的 <strong>Claim B</strong></li>
+      <li>系统判断二者指向同一事实槽位但取值冲突，于是让 B <strong>supersede</strong> A，同时保留 A 的历史与证据</li>
+      <li>问「现在偏好什么」时，当前时间过滤只返回 B；问「之前偏好什么」时，历史查询仍能找到 A</li>
+      <li>如果用户显式遗忘 B，对应记忆对象、向量和专属依赖按删除闭环清理，派生理解失效；tombstone 账本继续阻止旧备份把它重新带回</li>
+    </ol>
+
+    <div style="background:#fff5f3;border-radius:12px;padding:20px;border-left:3px solid #d1453b;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;color:#b02a1f;">容易被忽略的细节：两种时间戳</h3>
+      <div class="text-body"><strong>valid time</strong>——这件事在现实中什么时候为真？<strong>recorded time</strong>——系统在什么时候知道并记录了它？</div>
+      <div class="text-body" style="margin-top:8px;">例如用户 3 月说「我在杭州工作」，8 月才说「其实 5 月就搬去北京了」——系统既能回答「你 4 月时以为我在哪」（杭州，当时的认知），也能回答「我 4 月实际在哪」（北京，事后修正的事实）。单时间戳的系统只能留一个值，这类问题必然答错。这对迟到数据、纠正、审计和历史回放都很重要——它让记忆不再只是一张当前状态表，而变成一段可以回放的认知历史。</div>
+    </div>
+  </div>
+
+  <!-- 五个设计取舍: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">07 · 五个关键设计取舍</div>
+    <h2>如果这条记忆错了、旧了、重复了、太贵了，怎么办？</h2>
+    <div class="text-body" style="margin-bottom:14px;">五个真实的设计取舍，几乎都来自同一个问题：如果这条记忆错了、旧了、重复了，或者太贵了，系统准备怎么办？</div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">取舍一：先保存「案发现场」，再允许系统形成看法</h3>
+      <div class="text-body">第一条硬规则：<strong>Event 不可修改，Claim 只是系统对 Event 的解读</strong>。原话作为 Event 留下，抽取器可以升级、Prompt 可以变化、Claim 可以被纠正，但原始 Event 不会跟着改写。这就像保留案卷：即使系统后来理解错了，仍能回答「它当时到底听到了什么」「哪一步把原话解释错了」。</div>
+      <div class="text-body" style="margin-top:8px;">v1.1 又把「案卷从哪里来」纳入准入规则——Event 携带 <code style="font-size:12px;">origin_class</code> 与 <code style="font-size:12px;">session_kind</code>：用户直接表达、外部网页、cron 任务、heartbeat 或 subagent 会话可以被保存，但不再默认拥有同样的事实权威。在 <code style="font-size:12px;">provenance.mode = "enforce"</code> 下，系统会在调用模型之前拦住不适合自动形成 Claim 的来源，把提示词注入、外部噪声和系统自说自话挡在长期认知之外。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">取舍二：一句「我改主意了」，背后有两个时钟</h3>
+      <div class="text-body">很多记忆系统遇到新事实会直接覆盖旧值，但对长期 Agent 来说，<strong>「旧值不再有效」和「旧值从未存在」完全是两回事</strong>。所以纠正不是一条简单的 UPDATE，而是让新 Claim 通过 supersede 链替代旧 Claim——旧 Claim 退出当前召回，却仍能在历史查询和审计里出现，配合 valid / recorded 双时钟，系统不仅能回答「现在是什么」，还能回答「站在当时，系统知道什么」。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">取舍三：相似度 0.99 的两句话，可能差一个事故</h3>
+      <div class="text-body">「部署 v1.2」和「部署 v1.3」只差一个字符；「允许删除」和「不允许删除」也高度相似。对向量检索它们几乎一样，对执行任务却是完全相反的指令。所以去重没有停在一个 cosine threshold，而是做成一个<strong>漏斗</strong>：精确哈希先处理完全重复 → 确定性安全门检查主体、数字、版本、日期、路径、极性、引语、姓名和实体等 protected atoms，关键原子必须全部一致才可能合并 → 只有规则无法判断的灰区，才允许进入 LLM 审计。</div>
+      <div class="text-body" style="margin-top:8px;">同样的约束延伸到召回：语义相似回答「像不像」，实体约束回答「是不是在说这个对象」。当查询中出现高置信实体时，默认 <code style="font-size:12px;">entity_constraint_mode = "enforce"</code> 会隔离其他实体的相似记忆。在 v1.1 的冻结门禁中，<strong>15 个高置信实体案例全部进入 Top-5，跨实体错误 Top-1 从 15 个降到 0</strong>——提升召回质量并不总要换更大的模型，把对象边界设计清楚往往更直接。</div>
+      <div class="text-body" style="margin-top:8px;">作者在这条上选择了一种很保守的偏差：多留一条重复记忆通常只是浪费一点空间，错误合并却可能永久改写事实。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;margin-bottom:14px;border-left:3px solid #c4842f;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">取舍四：把遗忘当成新陈代谢，而不是一个 Delete API</h3>
+      <div class="text-body">会删除数据不等于会遗忘。真正的遗忘应该回答「什么先忘、什么时候忘、重新用到后会不会更耐久、忘掉后派生结论怎么办」。HL-Mem 把「忘」拆成三层，一层比一层彻底：</div>
+      <ul style="margin:10px 0 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+        <li><strong>自然衰减</strong>：根据 scope 与 importance 计算 TTL；激活度按半衰期衰减，访问和正向反馈会延长有效生命。衰减只影响「多容易被想起」，不改写事实置信度</li>
+        <li><strong>归档（archived）</strong>：继续沉寂的记忆退出普通召回、清理向量，但事实和证据仍留在历史中可查证</li>
+        <li><strong>显式遗忘（Forget）</strong>：用户主动要求时，沿依赖关系执行物理删除闭环，清理记忆对象与向量、让派生理解失效；tombstone 账本阻止备份恢复或历史重放让旧记忆复活</li>
+      </ul>
+      <div class="text-body" style="margin-top:8px;">这套一键级联的显式遗忘，在裸 RAG 里很难补齐，在被遗忘权与本地隐私场景里却是硬需求。遗忘在这里承担的是记忆质量控制——一个什么都不忘的 Agent，最后会被旧偏好、一次性计划和无关细节填满。</div>
+    </div>
+
+    <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">取舍五：让 LLM 少跑几趟，让中文当一等公民</h3>
+      <div class="text-body">作者从一开始就不想让「记一次东西」触发一串看不见的昂贵调用。同一 Session 的 Event 形成有界窗口（默认最多 5 条、最长等待 120 秒），用一次结构化抽取理解这一小段上下文；超长内容才继续分块；显式写入的结构化记忆甚至可以绕过 LLM 抽取。后面的去重、冲突和维护同样是<strong>确定性规则优先</strong>——关系发现默认关闭，主链路不会为了构建图谱再请求一次实体/边关系 LLM，因为一条错误关系会沿多跳检索和派生推理继续扩散，形成连锁污染。</div>
+      <div class="text-body" style="margin-top:8px;">v1.1 把这笔账变成可治理的工程能力：Provider 经稳定插件契约接入、必须显式 allowlist；<code style="font-size:12px;">hl-mem ops report</code> 汇总调用量、Token、费用、延迟、失败率，发送前预留预算、完成后按实际结算，无法可靠定价时 fail-closed。「让 LLM 少跑」不再是一句优化原则，而是一条能观测、能预算、能回归的运行约束。</div>
+      <div class="text-body" style="margin-top:8px;">中文这边：中文没有天然分词，通用 FTS 对中文近乎失效。HL-Mem 用 <strong>Jieba 领域词典做预分词全文索引</strong>，原文不翻译，提取语义中英双语对齐；模型层兼容百炼 / DashScope、智谱和 OpenAI-compatible 接口。作者说得很实在：没有戏剧性的算法突破，更多是分词、Provider、配置和默认值上的工程耐心——也正是这些琐碎工作，决定中文用户能不能把系统真正用起来。</div>
+    </div>
+  </div>
+
+  <!-- 竞品对比: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">08 · 竞品对比</div>
+    <h2>不同路线，不同工程代价</h2>
+    <div class="text-body" style="margin-bottom:14px;">赛道上有几条成熟路线，不按功能逐项判输赢，而是看它们各自优先解决什么问题、又接受了什么默认工程代价：</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:16%;">路线</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:28%;">代表系统的设计心</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:26%;">默认工程形态</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">HL-Mem 的选择</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">轻量记忆与认知分层</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">Mem0 擅长低门槛 Add / Search；Hindsight 擅长 Retain / Recall / Reflect 与 Mental Model</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">优先缩短接入路径，由服务或上层应用承接更多治理</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">把 Event 证据、双时间事实账本，以及 TTL、衰减、归档和遗忘放进同一条主链路</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">时序知识图谱</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">Graphiti / Zep 擅长实体关系、事件演化和历史状态查询</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">通常需要图存储，以及持续的实体/关系抽取、消歧、合并和重算链路</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">保留时间语义与可选关系发现，但默认关闭自动建图，避免错误边沿多跳推理扩散</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;font-weight:500;color:#2563eb;">Memory OS 与有状态 Agent</td>
+        <td style="padding:10px;">MemOS 擅长统一多种记忆形态；Letta 擅长把 Memory Blocks、Files 和 Archival Memory 融进 Agent Runtime</td>
+        <td style="padding:10px;">记忆与 Agent Runtime 深度协同，一体化体验更强</td>
+        <td style="padding:10px;">有意把记忆收窄为独立服务，让 CLI、REST、MCP 和不同 Agent 运行时共享同一份本地记忆</td>
+      </tr>
+    </table>
+
+    <div class="text-body">Mem0 先解决低门槛个性化记忆，Graphiti / Zep 先解决关系推理，Letta 先解决有状态 Agent。HL-Mem 选择把四件事绑在同一条主链路：<strong>记忆能追溯来源、能回放历史、能按生命周期退出、又不依赖某个 Agent Runtime，中文检索走默认路径</strong>。这组组合解释了它的工程取向——Agent 框架还在快速变化，记忆却是最需要长期保存的数据，把记忆独立于 Runtime 可以降低迁移成本；关系推理有价值，但不必每次个人偏好召回都启动图存储与额外抽取。</div>
+  </div>
+
+  <!-- 评测结果: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">09 · 跑出来的效果</div>
+    <h2>理念没有停在结构图里</h2>
+    <div class="text-body" style="margin-bottom:14px;">评测分三层：发布门禁回答工程实现是否稳定，确定性基线回答关键召回行为能否重复，真实模型 Benchmark 回答整条链路最终表现如何。它们回答的不是同一个问题，也不能互相替代。</div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;">
+      <tr style="background:#f8f9fc;">
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:18%;">测试</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:30%;">来源</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;width:22%;">当前结果</th>
+        <th style="padding:10px;text-align:left;font-weight:600;border-bottom:1px solid #e8e8e6;">怎么理解</th>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">v1.1 发布门禁</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">HL-Mem 自建工程门禁</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">3105 passed, 4 skipped；108 个 subtests；覆盖率 88.16%</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">覆盖事务、迁移、并发、双时间、来源治理、冲突、召回、生命周期、API/MCP 和 Provider 契约</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">公开确定性召回基线</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">HL-Mem 自建 + 公开合成数据</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">32 cases；Recall@1 91.67%，Recall@5 95.83%，MRR 93.06%，no-answer F1 88.89%</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">零网络、固定数据的回归门禁，快速发现召回、实体隔离和拒答退化</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">LongMemEval holdout50</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">UCLA、腾讯 AI Lab Seattle、UC San Diego（ICLR 2025）；HL-Mem 固定 50 题</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;"><strong>43/50（86%）</strong>；全上下文 46/50（92%）；Native RAG 45/50（90%）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">同一 reader 下三角对照：结构化证据链距离全上下文少 3 题，距离原始会话 RAG 少 2 题</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">MemDaily</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">人大高瓴、华为诺亚方舟、华为（NeurIPS 2025）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">accuracy 97.2%，F1 0.9855，R@5 97.5%（v0.26.0）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">检查中文日记记忆问答的端到端表现</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;font-weight:500;color:#2563eb;">PerLTQA</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">港中文、教育部高可信软件重点实验室、华为诺亚（SIGHAN 2024）；10 个角色 / 378 题</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">R@5 96.8%，MRR 82.8%（v0.26.0）</td>
+        <td style="padding:10px;border-bottom:1px solid #e8e8e6;">检查跨角色、长期信息的召回能力</td>
+      </tr>
+      <tr style="background:#fafaf8;">
+        <td style="padding:10px;font-weight:500;color:#2563eb;">中文 E2E</td>
+        <td style="padding:10px;">HL-Mem 自建 40 题，deterministic-rubric-v2</td>
+        <td style="padding:10px;">38/40（95.0%）；R@5 100%（v0.26.0）</td>
+        <td style="padding:10px;">检查中文提取 → 召回 → QA 短程全链路</td>
+      </tr>
+    </table>
+
+    <div class="text-body">作者最看重的不是 LongMemEval 的 86% 本身，而是旁边两个对照：全上下文可以直接看到全部历史，Native RAG 可以从原始会话中检索，HL-Mem 则先把历史整理成可更新、可追溯的 Claim 与 Evidence。最终只相差 3 题和 2 题，说明<strong>证据、时间与生命周期治理没有换来不可接受的信息损失</strong>。结构化记忆把抽取成本放在写入阶段，后续每轮只携带当前问题真正需要的事实和证据——一次整理、多次复用，Agent 使用得越久，反复携带全部历史的成本越高，结构化记忆的复用价值越明显。</div>
+  </div>
+
+  <!-- 边界: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">10 · 边界与定位</div>
+    <h2>边界决定了 HL-Mem 更擅长什么</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px;">
+      <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #2563eb;">
+        <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;color:#2563eb;">更适合</h3>
+        <ul style="margin:0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+          <li>本地个人 Agent、桌面助手，以及中文知识与偏好记忆</li>
+          <li>需要追问记忆来源、处理事实修正与历史回放，或执行用户遗忘请求的场景</li>
+          <li>希望记忆独立于 Agent Runtime，先低成本落地、再随规模增强的团队</li>
+        </ul>
+      </div>
+      <div style="background:#f8f9fc;border-radius:12px;padding:20px;border-left:3px solid #c4842f;">
+        <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;color:#c4842f;">不应该被误解为</h3>
+        <ul style="margin:0;padding-left:20px;font-size:12px;line-height:1.8;color:#4a4a4a;">
+          <li>面向不可信多租户的完整 RBAC 或托管平台；namespace 目前只提供逻辑分区</li>
+          <li>默认开启的大规模图推理系统；关系发现只在需要时显式开启</li>
+          <li>一次性自动运行所有「类大脑」能力；Observation、Mental Model、Policy 和 Procedure 按真实使用证据逐步开放</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-body">这些边界换来的不是功能少，而是<strong>故障半径小</strong>：高成本、高不确定性的能力必须显式开启；证据、时间、生命周期和数据主权始终留在默认主链路。v1.1 把这条边界固定成一套可运行的基线——来源有准入、记忆可解释、Provider 可替换、模型费用可统计、核心召回有冻结门禁。下一轮功能先看真实 Agent 工作流里哪里反复失败，再决定加什么。</div>
+  </div>
+
+  <!-- 尾声: span-4 -->
+  <div class="card span-4" style="padding:32px;">
+    <div class="label-sm">11 · 尾声</div>
+    <h2>记忆给 Agent 的，其实是时间</h2>
+    <div class="text-body" style="margin-bottom:14px;">作者把记忆提到 AGI 基础设施的高度：scaling、test-time compute、长上下文、agentic loop 几条路走到深处会撞上同一堵墙——<strong>智能需要时间维度上的连续性</strong>。一个每次醒来都失忆的系统，参数再多也只是一个聪明的陌生人，无法从自己的错误里学习，无法积累对你的理解，无法形成「它自己」。</div>
+    <blockquote style="margin-bottom:14px;">"自我就是记忆的叙事——「我是谁」是用一段段记忆串起来的连续故事。"<cite>— 认知科学观点 · 子安 引述</cite></blockquote>
+    <div class="text-body" style="margin-bottom:14px;">回到那位切掉海马体的 H.M.：手术后他又活了五十多年，却记不住其中任何一天，晚年照镜子仍会被自己的白发吓到——在他自己的故事里，他永远是 1953 年那个 27 岁的年轻人。他失去的远不止记忆，还有继续成为自己的能力。对 Agent 同理：推理能力（LLM）解决的是「此刻多聪明」，工具调用解决的是「能做什么」，而记忆解决的是「它是谁」——偏好的积累、错误的修正、经验的沉淀、承诺的延续，全部长在记忆上。</div>
+    <div class="text-body">但连续性也不等于把一切永久保存。没有证据的记忆会制造幻觉，不会更新的记忆会固守旧认知，什么都不忘的记忆最终会淹没在自己积累的噪声里。一个长期存在的 Agent，需要的不只是「记住」，还要能选择、解释、修正和遗忘。</div>
+    <blockquote style="margin-top:14px;">"人类记忆的伟大之处从来不在于存得多，而在于忘得聪明、改得干净、想起来的时候还能说出为什么。模型赋予 Agent 智力，工具赋予 Agent 双手，记忆才让它在时间里成为同一个自己。"<cite>— HL-Mem 作者 · 子安</cite></blockquote>
+  </div>
+
+  <!-- 站内延伸: span-4 -->
+  <div class="card span-4">
+    <div class="label-sm">12 · 站内延伸</div>
+    <h2>相关调研与日报</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+      <a href="claude-code-homunculus-memory-system.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">Claude Code 记忆自进化系统深度解析</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">Agent 记忆自进化 · Homunculus 心智模型</span>
+      </a>
+      <a href="agent-memory-research.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">Agent Memory 全面调研：6 大范式 × 4 种采集策略</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">记忆范式 · 采集策略 · 全景地图</span>
+      </a>
+      <a href="taobao-project-harness.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">淘天项目 Harness：AI 驱动研发体系的上下文引擎</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">同系列 · Agent = Model + Harness · 知识飞轮</span>
+      </a>
+      <a href="tmall-mdi-ai-collab.html" style="display:block;padding:12px 14px;background:#f8f9fc;border-radius:8px;text-decoration:none;color:inherit;font-size:13px;">
+        <span style="color:#2563eb;">天猫 MDI：AI 研发协同的四级进化</span>
+        <span style="color:var(--text-muted);display:block;margin-top:2px;font-size:11px;">淘天系 · 超级个体 · 哨兵机 · NekoCollar</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 来源: span-4 -->
+  <div class="card span-4">
+    <div class="divider"></div>
+    <div class="text-muted" style="text-align:center;font-size:11px;">
+      <div style="margin-bottom:6px;font-weight:500;color:#6b6b6b;">📚 参考来源</div>
+      <a href="https://mp.weixin.qq.com/s/kNUoqHRWapbDYVtlej_bzg" target="_blank" style="color:#2563eb;text-decoration:none;">大淘宝技术：让 Agent 像人一样记忆——本地长期记忆系统 HL-Mem 的设计与取舍</a>
+      <br>
+      调研日期：2026-09-11 · 淘天集团-直播 AIGC 团队 · 作者 子安 · 全文提取
+      <br>
+      <span style="color:#8b8b8b;">项目仓库 github.com/lohr13/hl_mem（Apache-2.0）· 评测口径见仓库 evaluation/results/README.md</span>
+    </div>
+  </div>
+
+</div>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+</body>
+</html>
