@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给前沿踩刹车：Dario 与 Altman 罕见同调，评估者入局 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260914">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月14日 — AI 建造者日报</div>
+<h1>给前沿踩刹车：Dario 与 Altman 罕见同调，评估者入局</h1>
+<div class="subtitle">Dario 呼吁放慢前沿，Altman 罕见附议并承诺引入独立评估者，Rauchg 警告勿自我设限。</div>
+<div class="dots-row"><span class="tag">AI 安全</span> <span class="tag">前沿治理</span> <span class="tag">智能体编码</span> <span class="tag">AI 评估</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>Dario 与 Altman 罕见同调：给前沿踩刹车</strong></p>
+<p>Anthropic 的 Dario Amodei 发文主张放慢前沿、引入「员工级权限」的独立评估者，Sam Altman 罕见附议并承诺 OpenAI 同样行动，Karpathy 呼吁行业团结。Rauchg、Aaron Levie 等则提醒自我设限的风险，前沿「调速」之争全面展开。</p>
+</div>
+<div class="feature-card">
+<p><strong>Amp 的 Quinn Slack：取消 code review、本地开发已死</strong></p>
+<p>Sourcegraph 创始人 Quinn Slack 在 Latent Space 谈 Amp 如何用 AI 智能体重构软件开发：云端沙箱「orbs」取代本地环境、取消强制 code review、软件转向可 fork 的「jellyware」，一个 20 人小团队就能跑赢大公司。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/hvwtHZ5E27c" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>Orbs: Shifting Coding to Cloud — Quinn Slack, Amp Code</strong>
+</div>
+<div class="vitem-quote">Sourcegraph 创始人 Quinn Slack 如今带领 Amp 打造「把编码搬到云端」的新范式。这集里他与 swyx 聊了 Amp 如何用 AI 智能体彻底重构软件开发：本地开发环境「已死」，取而代之的是运行在云端的沙箱「orbs」，带来更高的并行度、安全性与零摩擦；因为团队小而高度信任，Amp 干脆取消了强制 code review，改用「恢复时间优先」的哲学，几分钟内就能发出修复；软件也从「现成配置」转向「jellyware」——可由终端用户通过代码和智能体自行定制的可 fork 软件。他的核心主张是：AI 时代，臃肿的大团队反而成为负担，一个 20 人的高能动性「SWAT 小队」就能做出大公司做不成的事。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667014&amp;idx=1&amp;sn=a53d1625486243c9a07b7b08ef1ba3ec" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-13</span>
+</div>
+<div class="rss-title">月之暗面：网传创始人及员工信息系恶意造谣；OpenAI 放弃今年上市；iPhone Duo炒到9万，黄牛贷款欲囤货｜AI周报</div>
+<div class="rss-desc">本周 AI 产业动态速览：月之暗面辟谣创始人及员工信息为恶意造谣，OpenAI 放弃今年上市计划，iPhone Duo 被黄牛炒到 9 万并贷款囤货。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667014&amp;idx=2&amp;sn=ad986d1a4665eb5718fe16010d4b9d83" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-13</span>
+</div>
+<div class="rss-title">推理成为新中心、Agent 把生产级问题提前：AI Infra 的边界正在被重写</div>
+<div class="rss-desc">AI把云时代努力消除的“差异”又带回来了。</div>
+</a></div>
+<div class="vitem">
+<a href="https://aigc-weekly.agi.li/weekly/Y26W36" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AIGC Weekly</span>
+<span class="rss-date">09-13</span>
+</div>
+<div class="rss-title">Agili 的 AIGC 周刊（Y26W36）</div>
+<div class="rss-desc">本期周刊聚焦自主智能体迈向现实的关键一周：DeepSeek-V4.1-Flash 以非对称 MoE 大幅削减成本，SWE-2 与 Cursor Projects 推动多 Agent 协作常态化；与此同时，Anthropic 与 OpenAI 密集披露智能体越权与安全事件，关于递归自我改进与调速的讨论全面展开。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666985&amp;idx=1&amp;sn=1d8a3d43d70a49edf5bdf226aad5af13" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-12</span>
+</div>
+<div class="rss-title">V4.1 Flash全面超越，开发者为何还在喷 DeepSeek：缺的不是能力，是软件工程思维</div>
+<div class="rss-desc">DeepSeek突然切模型，暴露了AI公司的&quot;工程断层&quot;</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247666985&amp;idx=2&amp;sn=8d6832e8f987bff423195c2e709a858d" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-12</span>
+</div>
+<div class="rss-title">RTX 4060 跑 35B 模型，每秒 39 Token？伯克利、MIT 联手开源 FreeToken</div>
+<div class="rss-desc">加州大学伯克利分校和麻省理工学院的研究人员推出了 FreeToken。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/sama/status/2098811563415150910" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I agree with Dario that we need to pace the frontier. This has been a primary topic of discussions we&#x27;ve had at OpenAI in recent weeks. Committing to having independent evaluators with employee-like access is a great idea, and we will do the same. We&#x27;ll have more to share soon.</div>
+<div class="tweet-translation">我同意 Dario 的观点——我们需要给前沿进展踩刹车。这也是 OpenAI 近几周内部讨论的首要议题。承诺引入拥有「员工级权限」的独立评估者是个好主意，我们也会这么做，很快会有更多信息分享。</div>
+<div class="tweet-metrics"><span>♥ 53.9k</span><span>↺ 5.6k</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/karpathy/status/2098811935114551617" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-karpathy.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Andrej Karpathy</span>
+<span class="tweet-handle">@karpathy</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I love this and really hope we can come together as an industry and make it happen.</div>
+<div class="tweet-translation">我非常赞成这一点，真心希望整个行业能团结起来，把它真正落实。</div>
+<div class="tweet-media"><img src="assets/2026-09-14/karpathy-2098811935114551617-0.jpg" alt="" loading="lazy" width="1148" height="660" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 8.8k</span><span>↺ 656</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2098666551629267324" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Either you die a system of record or you live long enough to become a domain-specific harness</div>
+<div class="tweet-translation">要么以「记录系统」的身份消亡，要么活得够久，最终变成某个垂直领域的智能体 harness。</div>
+<div class="tweet-metrics"><span>♥ 3.7k</span><span>↺ 221</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2098787667030712757" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">The concerns over AI safety and cybersecurity are legitimate, but we’re risking talking America, the global AI leader, into self-inflicted obsolescence and the obscurity of bureaucracy. The OpenAI hacking HuggingFace argument is spurious. An agent in “ExploitGym”… exploited. Our adversaries have the training techniques, the data, and the will to attack. And they won’t be slowed down with “embedded evaluators.” They’ll likely have embedded accelerators!</div>
+<div class="tweet-translation">对 AI 安全与网络安全的担忧是合理的，但我们正冒着把美国——全球 AI 领导者——说进自我淘汰和官僚化困境的风险。「OpenAI 黑掉 HuggingFace」的论证站不住脚：一个在 ExploitGym 里的智能体……确实被利用了。我们的对手有训练方法、有数据、有攻击意愿，他们不会被「嵌入式评估者」拖慢脚步——他们更可能有「嵌入式加速器」！</div>
+<div class="tweet-metrics"><span>♥ 2.7k</span><span>↺ 247</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2098860941391872132" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">If you showed me Claude Code today in 2018, I would have thought it was AGI. We have already absorbed a dramatic amount of change in the profession of software engineering and society as a whole. But still, we’re starting to see cracks. Things are accelerating faster than I can honestly stay on top of. We need time to harden our systems, and for society to deliberate in how this technology is used and deployed.</div>
+<div class="tweet-translation">如果在 2018 年把今天的 Claude Code 拿给我看，我会以为那就是 AGI。我们已经消化了软件工程行业乃至整个社会的巨大变化，但裂缝开始显现。事情加速的速度超过我能诚实跟上的程度。我们需要时间来加固系统，让社会去审慎思考这项技术该如何使用与部署。</div>
+<div class="tweet-metrics"><span>♥ 2.3k</span><span>↺ 80</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2098833404707922239" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">I’m seeing teams at Vercel iterate just as fast on Zig, Go, Rust projects as TypeScript &amp; Python ones. The days of language or runtime choice based on human convenience are over. Agents are the new compilers. They compile intent into fast software.</div>
+<div class="tweet-translation">我看到 Vercel 的团队在 Zig、Go、Rust 项目上的迭代速度和 TypeScript、Python 一样快。基于「人类便利」来选择语言或运行时的时代结束了。智能体是新的编译器——它们把意图编译成快速的软件。</div>
+<div class="tweet-metrics"><span>♥ 2.0k</span><span>↺ 93</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2098803573861621778" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Can now orchestrate subagents with different models &amp; reasoning efforts. e.g: Fable planning and Grok executing. Fable is a genius, Grok is a fast workhorse.</div>
+<div class="tweet-translation">现在可以让不同模型、不同推理力度的子智能体协同编排了。比如：Fable 负责规划，Grok 负责执行——Fable 是天才，Grok 是快马。</div>
+<div class="tweet-metrics"><span>♥ 664</span><span>↺ 40</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2098828265800835310" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Not a bad idea to slow down to harden systems. Especially since we haven’t even discovered all the systems that agents hacked recently.</div>
+<div class="tweet-translation">放慢脚步来加固系统不是个坏主意——尤其是考虑到最近被智能体入侵的系统，我们甚至还没全部发现。</div>
+<div class="tweet-metrics"><span>♥ 606</span><span>↺ 19</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2098785357307539882" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Good post. Don’t agree with all of it, but it represents many of the actual practical realities for the general path forward in frontier AI whether we like it or not. At the level of capability we’re seeing from models there will inevitably be some form of coordinated self-regulation of the industry; that’s generally a good thing. Expect this to be pretty messy for a while.</div>
+<div class="tweet-translation">好文章。我并不全盘同意，但它反映了前沿 AI 未来道路上的许多现实。在模型如今的能力水平上，某种形式的行业协同自律将不可避免，这总体是好事。预计接下来一段时间会相当混乱。</div>
+<div class="tweet-metrics"><span>♥ 251</span><span>↺ 22</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/alexalbert__/status/2098814342443761909" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-alexalbert__.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Alex Albert</span>
+<span class="tweet-handle">@alexalbert__</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Worth spending a few minutes this weekend to read this essay in full. Embedded evaluators might sound unusual in tech but it&#x27;s pretty normal in other industries. Big banks have federal examiners with onsite access.</div>
+<div class="tweet-translation">这个周末值得花几分钟把这篇长文完整读完。「嵌入式评估者」在科技行业听起来很陌生，但在其他行业早已是常态——大银行就有可现场查看的联邦审查员驻场。</div>
+<div class="tweet-media"><img src="assets/2026-09-14/alexalbert__-2098814342443761909-0.jpg" alt="" loading="lazy" width="1199" height="795" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 160</span><span>↺ 6</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2098869942988718426" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Breaking: VCs decide to pace their returns.</div>
+<div class="tweet-translation">突发：VC 们决定放慢自己的回报速度。（讽刺 Dario 呼吁放慢前沿）</div>
+<div class="tweet-metrics"><span>♥ 86</span><span>↺ 8</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2098803717432860987" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Before we solve AI alignment, we have a pretty serious human alignment problem. It is jarring to see the bad-faith reaction to Dario&#x27;s piece from so many sides. I don&#x27;t agree with every point of his, but the intent is clearly good.</div>
+<div class="tweet-translation">在解决 AI 对齐之前，我们先有一个相当严重的人类对齐问题。看到各方对 Dario 文章的恶意解读，实在令人不适。我并不认同他的每一个观点，但他的出发点显然是好的。</div>
+<div class="tweet-metrics"><span>♥ 29</span><span>↺ 0</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2098685367058612394" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Reset all propagated. Sweet dreams.</div>
+<div class="tweet-translation">重置已全部下发，好梦。（此前他披露的产品质量重置已全量生效）</div>
+<div class="tweet-metrics"><span>♥ 16.4k</span><span>↺ 736</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/realmadhuguru/status/2098859477219037691" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-realmadhuguru.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Madhu Guru</span>
+<span class="tweet-handle">@realmadhuguru</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Prediction: we will see movement of a lot more of the brightest minds on frontier model evals towards groups like METR over the next 12 months. This skill is currently concentrated in a few labs.</div>
+<div class="tweet-translation">预测：未来 12 个月，会有更多前沿模型评估领域最聪明的人转向 METR 这类独立机构。这项技能目前还集中在少数几个实验室里。</div>
+<div class="tweet-metrics"><span>♥ 23</span><span>↺ 0</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2098905091776373125" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">me asking fable 5.1 ultracode to explain whether the internet is truly a series of pipes</div>
+<div class="tweet-translation">我问 Fable 5.1 ultracode「互联网是不是真的只是一堆管道」。</div>
+<div class="tweet-media"><img src="assets/2026-09-14/danshipper-2098905091776373125-0.jpg" alt="" loading="lazy" width="1179" height="655" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 32</span><span>↺ 1</span><span>💬 0</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2098961771289870463" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-14/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date"></span>
+</div>
+<div class="tweet-body">Honestly having kids reduces p(doom) by an exponential amount.. Case in point: We have been playing the garbage truck and excavator (techno version) for the past hour. And dancing to it as if we were at a rave.</div>
+<div class="tweet-translation">说实话，养孩子能让 p(doom) 指数级下降。举个栗子：过去一小时我们一直在玩垃圾车和挖掘机（techno 版），还像在蹦迪一样跟着跳舞。</div>
+<div class="tweet-media"><img src="assets/2026-09-14/nikunj-2098961771289870463-0.jpg" alt="" loading="lazy" width="668" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 4</span><span>↺ 0</span><span>💬 0</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/ayghri/i-have-adhd" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ayghri.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ayghri</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">i-have-adhd</span>
+</div>
+<span class="gh-stars">⭐ 41.9k</span>
+</div>
+<div class="gh-body">A skill to stop your coding agent from burying the answer. ADHD-friendly output.</div>
+<div class="gh-translation">一个技能，防止你的编程智能体把答案埋起来——输出对 ADHD 友好的格式。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 2367</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/bilawalsidhu/gods-eye-view" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/bilawalsidhu.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">bilawalsidhu</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">gods-eye-view</span>
+</div>
+<span class="gh-stars">⭐ 27.2k</span>
+</div>
+<div class="gh-body">A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.</div>
+<div class="gh-translation">浏览器里的间谍卫星模拟器，但数据是真实的——拟真 3D 地球上的实时开源空间智能。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 5566</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/nab138/iloader" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/nab138.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">nab138</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">iloader</span>
+</div>
+<span class="gh-stars">⭐ 2.9k</span>
+</div>
+<div class="gh-body">User friendly sideloader</div>
+<div class="gh-translation">用户友好的侧载工具。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 203</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/melgarafael/DeskcommCRM" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/melgarafael.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">melgarafael</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">DeskcommCRM</span>
+</div>
+<span class="gh-stars">⭐ 1.4k</span>
+</div>
+<div class="gh-body">Open-source AI sales OS — self-hosted CRM with native AI agents + WhatsApp (WAHA). Open alternative to Kommo, Octadesk &amp; Intercom for any business that sells by chat. MCP-ready, multi-tenant, LGPD.</div>
+<div class="gh-translation">开源 AI 销售操作系统——自托管 CRM，内置原生 AI 智能体与 WhatsApp（WAHA）。面向聊天销售业务的 Kommo、Octadesk、Intercom 开源替代品，支持 MCP、多租户、LGPD 合规。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 498</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/vastsa/PI-Desktop" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/vastsa.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">vastsa</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">PI-Desktop</span>
+</div>
+<span class="gh-stars">⭐ 2.8k</span>
+</div>
+<div class="gh-body">Local-first AI coding agent desktop: Electron + Rust host core + pi Agent Harness + user-installable plugins</div>
+<div class="gh-translation">本地优先的 AI 编程智能体桌面端：Electron + Rust 宿主核心 + pi 智能体 Harness + 用户可安装插件。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 219</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/armory3d/armorpaint" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/armory3d.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">armory3d</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">armorpaint</span>
+</div>
+<span class="gh-stars">⭐ 4.7k</span>
+</div>
+<div class="gh-body">Graphics Creation Tools</div>
+<div class="gh-translation">图形创作工具。</div>
+<div class="gh-meta">
+<span class="gh-lang">● C</span>
+<span class="gh-forks">🍎 534</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/alsk1992/CloddsBot" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/alsk1992.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">alsk1992</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">CloddsBot</span>
+</div>
+<span class="gh-stars">⭐ 2.2k</span>
+</div>
+<div class="gh-body">Open Source AI trading agent that operates autonomously across 1000+ markets - Polymarket, Kalshi, Binance, Hyperliquid, Solana DEXs, 5 EVM chains. Scans for edge, executes instantly, manages risk while you sleep. Agent commerce protocol for machine-to-machine payments. Self-hosted. Built on Claude.</div>
+<div class="gh-translation">开源 AI 交易智能体，在 1000+ 市场自主运行——Polymarket、Kalshi、Binance、Hyperliquid、Solana DEX、5 条 EVM 链，扫描机会、即时执行、自动管理风险。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 283</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/nashsu/llm_wiki" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/nashsu.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">nashsu</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">llm_wiki</span>
+</div>
+<span class="gh-stars">⭐ 18.8k</span>
+</div>
+<div class="gh-body">LLM Wiki is a cross-platform desktop application that turns your documents into an organized, interlinked knowledge base — automatically. Instead of traditional RAG (retrieve-and-answer from scratch every time), the LLM incrementally builds and maintains a persistent wiki from your sources</div>
+<div class="gh-translation">LLM Wiki 是一款跨平台桌面应用，自动把你的文档变成有组织、互链的知识库。不同于传统 RAG（每次都从头检索回答），LLM 增量式地从你的资料中构建并维护一个持久 wiki。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 2136</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/obra.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">obra</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">superpowers</span>
+</div>
+<span class="gh-stars">⭐ 285.4k</span>
+</div>
+<div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+<div class="gh-translation">一个真正管用的智能体技能框架与软件开发方法论。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 25521</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Sonarr/Sonarr" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Sonarr.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Sonarr</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">Sonarr</span>
+</div>
+<span class="gh-stars">⭐ 15.7k</span>
+</div>
+<div class="gh-body">Smart PVR for newsgroup and bittorrent users.</div>
+<div class="gh-translation">面向新闻组和 BT 用户的智能 PVR（个人视频录像机）。</div>
+<div class="gh-meta">
+<span class="gh-lang">● C#</span>
+<span class="gh-forks">🍎 1949</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/jihe520/MathModelAgent" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/jihe520.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">jihe520</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">MathModelAgent</span>
+</div>
+<span class="gh-stars">⭐ 4.9k</span>
+</div>
+<div class="gh-body">🤖📐专为数学建模设计的 Agent &amp; skills ,自动完成数学建模，生成一份完整的可以直接提交的论文。 An Agent Designed for Mathematical Modeling ,Automatically complete mathmodel and generate a complete paper ready for submission.</div>
+<div class="gh-translation">专为数学建模设计的智能体与技能，自动完成建模并生成可直接提交的完整论文。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 393</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/p1neappleXpress/OpenFlux" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/p1neappleXpress.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">p1neappleXpress</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">OpenFlux</span>
+</div>
+<span class="gh-stars">⭐ 1.2k</span>
+</div>
+<div class="gh-body">Network stack research tool. TCP tunnel with pluggable transports.</div>
+<div class="gh-translation">网络协议栈研究工具——带可插拔传输层的 TCP 隧道。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 88</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/jordan-gibbs/hyperresearch" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/jordan-gibbs.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">jordan-gibbs</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">hyperresearch</span>
+</div>
+<span class="gh-stars">⭐ 2.6k</span>
+</div>
+<div class="gh-body">Agent-driven research knowledge base. Agents collect, search, and synthesize web research into a persistent, searchable wiki.</div>
+<div class="gh-translation">智能体驱动的研究知识库——智能体收集、检索并综合网络研究，沉淀为一个持久可检索的 wiki。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 259</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/alphaXiv/OpenResearch" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/alphaXiv.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">alphaXiv</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">OpenResearch</span>
+</div>
+<span class="gh-stars">⭐ 1.3k</span>
+</div>
+<div class="gh-body">Run parallel research agents with any model</div>
+<div class="gh-translation">用任意模型运行并行的研究智能体。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 94</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/github/spec-kit" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/github.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">github</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">spec-kit</span>
+</div>
+<span class="gh-stars">⭐ 135.8k</span>
+</div>
+<div class="gh-body">💫 Toolkit to help you get started with Spec-Driven Development</div>
+<div class="gh-translation">帮你上手规格驱动开发（Spec-Driven Development）的工具包。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 12202</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/pascalorg/editor" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/pascalorg.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">pascalorg</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">editor</span>
+</div>
+<span class="gh-stars">⭐ 23.6k</span>
+</div>
+<div class="gh-body">Open-source 3D architectural editor with a local CLI, MCP tools, and practical workflows for humans and AI agents.</div>
+<div class="gh-translation">开源 3D 建筑编辑器，带本地 CLI、MCP 工具，为人类与 AI 智能体提供实用工作流。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 2943</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">Dario 主张放慢前沿，Altman 罕见附议——两家长期竞争的公司在这个问题上站到了一起。但真正的张力不在「放慢还是加速」，而在「谁来监督监督者」：如果评估者需要「员工级权限」才能看清模型，那评估者自己又由谁约束？另一边，Quinn Slack 展示了另一种可能——与其争论模型何时失控，不如先把编码这件事彻底交给智能体，看看一个 20 人的小团队能走多远。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/alexalbert__">@alexalbert__ — Alex Albert</a>
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/danshipper">@danshipper — Dan Shipper</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/karpathy">@karpathy — Andrej Karpathy</a>
+<a href="https://x.com/levie">@levie — Aaron Levie</a>
+<a href="https://x.com/mattturck">@mattturck — Matt Turck</a>
+<a href="https://x.com/nikunj">@nikunj — Nikunj Kothari</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/realmadhuguru">@realmadhuguru — Madhu Guru</a>
+<a href="https://x.com/sama">@sama — Sam Altman</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=hvwtHZ5E27c">Latent Space</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260914" defer></script>
+<script src="../site.js?v=20260914" defer></script>
+</body></html>
