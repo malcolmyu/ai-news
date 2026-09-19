@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Projects 用「项目」取代会话，扩散模型向自回归叫板 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260919">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月19日 — AI 建造者日报</div>
+<h1>Claude Projects 用「项目」取代会话，扩散模型向自回归叫板</h1>
+<div class="subtitle">Anthropic 用 Projects 让 Claude 记住工作方式，Google 的 CC 带 agent 进家庭，Ermon 押注扩散架构取代自回归。</div>
+<div class="dots-row"><span class="tag">Claude Projects</span> <span class="tag">扩散模型</span> <span class="tag">AI Agent</span> <span class="tag">推理效率</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">25</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>Claude Projects 上线：从「管会话」到「养项目」</strong></p>
+<p>Anthropic 发布 Projects，把 Claude Tag 的架构带进 Claude Code：每个项目有一个 agent 管理记忆、按需派生 subagent，线程在云端运行、共享长期记忆。Boris Cherny、Thariq、Cat Wu 等一线开发者表示「写代码的方式变了」。</p>
+</div>
+<div class="feature-card">
+<p><strong>扩散模型叫板自回归：Ermon 押注新推理范式</strong></p>
+<p>斯坦福教授、扩散先驱 Stefano Ermon 在 No Priors 解读 Inception 的 Mercury 模型——把扩散架构从图像延伸到文本与代码生成，用并行 token 生成换取更优的推理扩展与 GPU 利用率，称 AI 竞争的下一个时代由效率定义。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/N1rjtDs8blY" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc"><strong>Why Diffusion Will Win AI Inference with Inception Co-Founder and CEO Stefano Ermon</strong></div>
+<div class="vitem-quote">当生成式 AI 撞上硬件与延迟瓶颈，斯坦福教授、扩散模型先驱、Inception 联合创始人兼 CEO Stefano Ermon 押注一种全新架构。他与 Sarah Guo 畅谈 Inception，以及团队如何把扩散架构从图像、视频延伸到离散的文本与代码生成。Stefano 解释了自回归 LLM 的局限，以及为什么扩散模型里的并行 token 生成能在标准 GPU 上带来更优的推理扩展与硬件利用率。他还分享了 Inception 的 Mercury 模型、真实世界的语音 agent 应用、规模化服务扩散模型所需的软件栈、学术界在 AI 前沿的角色，以及为什么 AI 竞争的下一个时代将由「效率」来定义。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667338&amp;idx=1&amp;sn=34dabc90c9c642866b73c2a82bd44fa5" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AI前线</span><span class="rss-date">09-18</span></div>
+<div class="rss-title">谷歌终于支棱起来了？Gemini 4 Pro疑空降Arena榜单，13项跑分碾压GPT-6和Fable</div>
+<div class="rss-desc">13 项跑分全面碾压 GPT-6 和 Fable，成本近五分之一。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667338&amp;idx=2&amp;sn=0286e2e69a86ccd632632115f1bf6eee" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AI前线</span><span class="rss-date">09-18</span></div>
+<div class="rss-title">6.5亿美元押注“AI研究AI”：一群顶级研究员想造出“自我进化”的超级智能</div>
+<div class="rss-desc">6.5 亿美元、八位顶级 AI 研究者，押注让 AI 自动提出想法、写代码、跑实验并改进 AI。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667236&amp;idx=1&amp;sn=243e085a1cd7fae38cbd702f28521847" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AI前线</span><span class="rss-date">09-17</span></div>
+<div class="rss-title">神秘模型 Union Alpha 突袭！上线首日跑掉20亿Token，部分网友实测称性能直逼 Astra</div>
+<div class="rss-desc">上线首日跑掉 20 亿 token，实测性能直逼 Astra，却没人知道它来自哪家。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667236&amp;idx=2&amp;sn=deb676e99de46f690e43b4000c786d50" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AI前线</span><span class="rss-date">09-17</span></div>
+<div class="rss-title">实测 Vibe Key：开口使唤 AI，真有当甲方的感觉</div>
+<div class="rss-desc">给 AI 配一根「指挥棒」，到底好不好使？</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667159&amp;idx=1&amp;sn=9d75b95e780b90a7df2874b755dd7aa0" target="_blank" class="rss-card">
+<div class="rss-header"><span class="rss-source">AI前线</span><span class="rss-date">09-16</span></div>
+<div class="rss-title">刚刚！OpenAI与Anthropic CEO罕见同台，黄仁勋当场唱反调：AI到底要不要踩刹车？</div>
+<div class="rss-desc">台前争安全伦理，台下是各自的利益算盘。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://x.com/thsottiaux/status/2100645454245720513" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-thsottiaux.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thibault Sottiaux</span><span class="tweet-handle">@thsottiaux</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Has anyone yet tried to get Astra and Fable to agree on the perfect styleguide? And then host it somewhere with a web mcp.</div><div class="tweet-translation">有没有人试过让 Astra 和 Fable 就一份完美的 styleguide（风格规范）达成一致？然后用一个 web MCP 把它托管到某个地方。</div><div class="tweet-metrics"><span>♥ 5.5k</span><span>↺ 88</span><span>💬 1800</span></div></a></div>
+<div class="vitem"><a href="https://x.com/bcherny/status/2100669598995816511" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-bcherny.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Boris Cherny</span><span class="tweet-handle">@bcherny</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Projects have changed not only how I interact with Claude but how I code.
+
+I stopped managing sessions. I just send thoughts as they come, Claude splits them into threads, and the project remembers how I work. It's where I do a ton of my coding now.
+
+[screenshot: my actual prompts for claude code cli yesterday]</div><div class="tweet-translation">Projects 改变的不只是我和 Claude 的交互方式，还有我写代码的方式。我不再管理一个个会话了——想到什么就直接发出去，Claude 会自己分线程，而项目会记住我的工作习惯。我现在大量的代码都是在这里写的。</div><div class="tweet-media"><img src="assets/2026-09-19/bcherny-2100669598995816511-0.jpg" alt="" loading="lazy" width="1200" height="883" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 2.4k</span><span>↺ 85</span><span>💬 211</span></div></a></div>
+<div class="vitem"><a href="https://x.com/bcherny/status/2100639991244427490" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-bcherny.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Boris Cherny</span><span class="tweet-handle">@bcherny</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Projects are how I write a lot of my code these days. Really excited for everyone to try the new experience! Rolling out now https://t.co/bpaufmEweL</div><div class="tweet-translation">Projects 现在是我写大量代码的方式。非常期待大家来体验这个新功能！正在全量推送中。</div><div class="tweet-metrics"><span>♥ 1.9k</span><span>↺ 50</span><span>💬 136</span></div></a></div>
+<div class="vitem"><a href="https://x.com/garrytan/status/2100612808568172830" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">The future is already here
+
+We just have to choose it and spread it faster https://t.co/zmLEsXQU65</div><div class="tweet-translation">未来已经到来了。我们只需要选择它，并更快地把它传播出去。</div><div class="tweet-metrics"><span>♥ 1.3k</span><span>↺ 70</span><span>💬 56</span></div></a></div>
+<div class="vitem"><a href="https://x.com/trq212/status/2100638355872706571" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-trq212.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Thariq</span><span class="tweet-handle">@trq212</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Projects brings the architecture of Claude Tag to Claude Code.
+
+It has one agent per project that manages memory and spins off subagents for tasks. 
+
+You can ask it to be proactive, to do things on a schedule, etc.
+
+It feels a lot nicer than a bunch of sessions, try it out! https://t.co/qzyEgLUyN4</div><div class="tweet-translation">Projects 把 Claude Tag 的架构带进了 Claude Code。每个项目有一个 agent 负责管理记忆，并为具体任务派生 subagent。你可以让它主动工作、按计划执行任务等等。比起一堆零散会话，体验好太多了，试试看！</div><div class="tweet-metrics"><span>♥ 1.0k</span><span>↺ 51</span><span>💬 115</span></div></a></div>
+<div class="vitem"><a href="https://x.com/GoogleLabs/status/2100653821907366366" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-GoogleLabs.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Google Labs</span><span class="tweet-handle">@GoogleLabs</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">CC the entire fam 🤝!
+
+Today, we’re announcing the new CC – an AI agent built for families to spend less time on logistics and more time together.
+
+You can now:
+
+👤 Add up to 5 members to your CC agent
+☀️ Start mornings aligned with a shared &quot;Your Day Ahead&quot; brief email
+🗓️ Autosync schedules &amp; to-dos with a shared Google Calendar and Tasks
+💬 Coordinate in Google Chat with CC to offload relevant tasks (ie., crafting weekly meal plans, school supply shopping lists, etc)
+📝 Delegate paperwork (ie., permission slips, forms, and more) for CC to complete under your direction
+📌 Keep tabs on the details – CC remembers what applies to everyone (ie., family grocery lists, favorite restaurants) versus what applies to one person (ie., dietary restrictions, local timezones)
+
+Ready to keep everybody on the same page? Join the waitlist or upgrade your existing CC (US only, 18+): https://t.co/6Id5GRBrVc</div><div class="tweet-translation">全家都用 CC 🤝！今天我们发布全新的 CC——一个为家庭打造的 AI agent，让家人少花时间在杂务上、多花时间在一起。现在你可以：添加最多 5 名成员；用共享的「Your Day Ahead」晨间简报邮件开启一天；把日程与待办自动同步到共享的 Google Calendar 和 Tasks；在 Google Chat 里和 CC 协作分担任务；把文书工作交给 CC 在你的指导下完成；让 CC 记住哪些信息属于全家、哪些只属于某个人。</div><div class="tweet-media"><img src="assets/2026-09-19/GoogleLabs-2100653821907366366-0.jpg" alt="" loading="lazy" width="1200" height="675" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 539</span><span>↺ 54</span><span>💬 46</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2100698591417499972" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">It's likely that more software will be produced next year than in all of the history of computing. It took Vercel 10 years to get to 1 billion deployments, but then we added another 1.4 billion in the last 10 months alone.
+
+Some of this will be tiny, personal and even disposable software. An HTML file with some javascript (&quot;artifacts&quot;), a report, a pricing calculator, a slide deck, all the way to sophisticated apps, agents and platforms.
+
+Deployment speed is one of our obsessions. We've brought down the time to deploy, upload, assign a domain and globally propagate an artifact to 1 second.
+
+This is quite a feat considering we serve these artifacts with uncompromising performance and security. This sub-second deployments include our global CDN, Firewall, immutable deployments, domain assignment, observability, rollbacks…
+
+And we're not done yet. Follow @melkeydev for more.</div><div class="tweet-translation">明年产出的软件很可能比整个计算史累计的还要多。Vercel 花了 10 年才做到 10 亿次部署，但仅仅过去 10 个月我们又新增了 14 亿次。其中一些会是微小、个人化、甚至一次性使用的软件。我们把部署、上传、分配域名到全球分发一个 artifact 的时间压缩到了 1 秒。</div><div class="tweet-metrics"><span>♥ 508</span><span>↺ 31</span><span>💬 44</span></div></a></div>
+<div class="vitem"><a href="https://x.com/garrytan/status/2100668489178456268" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Memorable found a way to optimize memory with embeddings instead of more tokens which is a powerful new way to do memory https://t.co/Y8wowo41WF</div><div class="tweet-translation">Memorable 找到了一种用 embeddings 而非更多 token 来优化记忆的方法，这是一种强大的记忆新范式。</div><div class="tweet-metrics"><span>♥ 477</span><span>↺ 20</span><span>💬 32</span></div></a></div>
+<div class="vitem"><a href="https://x.com/danshipper/status/2100587802748440581" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-danshipper.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Dan Shipper</span><span class="tweet-handle">@danshipper</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">it's happening! https://t.co/vCy2XqNGYb</div><div class="tweet-translation">它来了！</div><div class="tweet-metrics"><span>♥ 437</span><span>↺ 11</span><span>💬 16</span></div></a></div>
+<div class="vitem"><a href="https://x.com/_catwu/status/2100641163120423057" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-_catwu.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Cat Wu</span><span class="tweet-handle">@_catwu</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">In the new Projects experience, Claude coordinates all of your sessions. 
+
+I've been using it every day since it lets me operate at a higher level of abstraction. I fire off a batch of tasks and move on. Claude has context on everything I'm working on and can give me an aggregated status update whenever I ask. It also has long-lived memory that evolves as I use it. 
+
+We're rolling this out over the coming weeks. Let me know what you think!</div><div class="tweet-translation">在新的 Projects 体验中，Claude 会统筹你所有的会话。我每天都在用它，因为它让我能在更高的抽象层次上工作：一口气派发一批任务然后走开，Claude 对我手头的一切都有上下文，随时能给我一份汇总的状态更新。它还拥有随使用不断演化的长期记忆。我们会在未来几周逐步推出。</div><div class="tweet-metrics"><span>♥ 356</span><span>↺ 10</span><span>💬 41</span></div></a></div>
+<div class="vitem"><a href="https://x.com/claudeai/status/2100632684074549309" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">A project builds over time. Every thread adds to and draws from its shared memory, so Claude can remember that the release moved to Friday, or who to ask before touching the billing service.
+
+The project's library keeps the files you add and the ones Claude creates. https://t.co/jtzVie3DB7</div><div class="tweet-translation">一个项目会随着时间不断生长。每个线程都会往共享记忆里添加内容、也从中读取内容，所以 Claude 能记住「发布推迟到了周五」、或「改 billing 服务前该先问谁」。</div><div class="tweet-media"><img src="assets/2026-09-19/claudeai-2100632684074549309-0.jpg" alt="" loading="lazy" width="1200" height="675" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 346</span><span>↺ 9</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/claudeai/status/2100632687316730327" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Threads run in the cloud, so they keep working even when your computer is offline, but they can't reach files or tools on your computer or your internal network yet. Local support is coming very soon.</div><div class="tweet-translation">线程在云端运行，即使你的电脑离线也会继续工作，但目前还无法访问你电脑上的文件、工具或内网。本地支持很快会来。</div><div class="tweet-metrics"><span>♥ 244</span><span>↺ 6</span><span>💬 4</span></div></a></div>
+<div class="vitem"><a href="https://x.com/claudeai/status/2100632688625348890" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-claudeai.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Claude</span><span class="tweet-handle">@claudeai</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Existing projects on Pro and Max plans keep working as they do today. We'll upgrade them as the rollout expands across Claude.
+
+Read more: https://t.co/veHKrtOLtr
+
+Join the waitlist for earlier access: https://t.co/s0RrhrolEm</div><div class="tweet-translation">现有 Pro 和 Max 计划上的项目会照常工作。随着 rollout 扩展到整个 Claude，我们会把它们升级。</div><div class="tweet-metrics"><span>♥ 232</span><span>↺ 13</span><span>💬 6</span></div></a></div>
+<div class="vitem"><a href="https://x.com/joshwoodward/status/2100665648825483726" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-joshwoodward.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Josh Woodward</span><span class="tweet-handle">@joshwoodward</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Have a family? We ❤️ this in ours. https://t.co/qGXb6Xtl9J</div><div class="tweet-translation">有家庭吗？我们全家超爱这个。</div><div class="tweet-metrics"><span>♥ 185</span><span>↺ 14</span><span>💬 16</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2100745015362552312" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date">23h</span></div><div class="tweet-body">Vercel is the Vercel for Java https://t.co/ecDvMhqppr</div><div class="tweet-translation">Vercel 就是 Java 界的 Vercel。</div><div class="tweet-metrics"><span>♥ 182</span><span>↺ 0</span><span>💬 22</span></div></a></div>
+<div class="vitem"><a href="https://x.com/garrytan/status/2100636443127210112" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-garrytan.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Garry Tan</span><span class="tweet-handle">@garrytan</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Be careful what you wish for
+
+This is why we need alignment to humankind vs any other goal https://t.co/E3dxymT1aV</div><div class="tweet-translation">许愿要小心。这就是为什么我们需要对齐到「人类」这个目标，而不是其他任何目标。</div><div class="tweet-metrics"><span>♥ 140</span><span>↺ 8</span><span>💬 43</span></div></a></div>
+<div class="vitem"><a href="https://x.com/joshwoodward/status/2100616682431807860" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-joshwoodward.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Josh Woodward</span><span class="tweet-handle">@joshwoodward</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">If you're not using @Gemini_Notebook on your phone yet, you're missing out. This is such a cool story! https://t.co/UZdm9Knj1f</div><div class="tweet-translation">如果你还没在手机上用 Gemini Notebook，那真的错过了。这个故事太酷了！</div><div class="tweet-metrics"><span>♥ 131</span><span>↺ 8</span><span>💬 14</span></div></a></div>
+<div class="vitem"><a href="https://x.com/levie/status/2100799668573946191" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-levie.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aaron Levie</span><span class="tweet-handle">@levie</span></div><span class="tweet-date">19h</span></div><div class="tweet-body">Agents already make up the majority of inference. This will quickly trend toward nearly all inference over the next year or two.
+
+The vast majority of tokens used in the world will be agents that are executing unbelievable amounts of tasks for us in the background 24/7. 
+
+Agents will be deployed to read all code changes to secure our software, process all of our data inside of workflows, handle a significant majority of the research that goes into recruiting and customer prospecting, review every event stream and log from every system in the world, go out and execute tasks for us in our personal lives, and hundreds of other use cases. 
+
+The rate of new agents coming online that will be consuming insane amounts of tokens is not slowing down. Just in the past week I’ve introduced multiple completely new workflows that would not have been possible technically even a month ago.
+
+Incredible time to be doing anything in inference and of course building on top of all of this.</div><div class="tweet-translation">Agent 已经占了推理的大头，未来一两年会迅速逼近几乎全部的推理。世界上绝大多数 token 将是被在后台 24/7 为我们执行海量任务的 agent 消耗掉的。就在过去一周，我引入了多个在一个月前技术上根本做不到的全新工作流。</div><div class="tweet-metrics"><span>♥ 79</span><span>↺ 7</span><span>💬 20</span></div></a></div>
+<div class="vitem"><a href="https://x.com/rauchg/status/2100682030170489160" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-rauchg.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Guillermo Rauch</span><span class="tweet-handle">@rauchg</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">This is really cool. When you pressure your agent to ship a hotfix really fast, it can now 𝚟𝚎𝚛𝚌𝚎𝚕 --𝚝𝚞𝚛𝚋𝚘 --𝚙𝚛𝚘𝚍 😊
+
+It'll use the fastest available build machine. h/t @garberchov for tweeting this idea to us https://t.co/iLXPsP2m3R</div><div class="tweet-translation">这真的很酷。当你催着你的 agent 尽快上线一个 hotfix 时，它现在可以直接 `vercel --turbo --prod`，用最快的可用构建机器。</div><div class="tweet-metrics"><span>♥ 79</span><span>↺ 2</span><span>💬 18</span></div></a></div>
+<div class="vitem"><a href="https://x.com/nikunj/status/2100714665571737885" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">I have been obsessed with self driving companies  for more than a year now.. tried a LOT of products, none of them met the bar and decided to just build one myself with &quot;claude&quot; in the loop.
+
+Introducing my first experiment: nosugarforkids (dot com) 🙅‍♂️
+
+&gt; catalog of only healthy snacks for kids (surprisingly this didn't exist)
+&gt; you can chat to get recommendations for school, lunches, snack boxes
+&gt; built a &quot;tier&quot; list based on the nutrients and what's actually good
+
+On the autonomous side, I have a Claude agent that wakes up once a day to do the following things:
+
+&gt; checks catalog for new additions
+&gt; prunes any products that may be dead
+&gt; finds new content ideas to help increase reach
+&gt; checks dataforSEO and Google Search Console for performance
+&gt; writes and edits new pieces that might be useful to help
+&gt; keeps quality high, and tries to not introduce slop
+&gt; (new) reaches out to publications to get backlinks
+
+Even with ZERO backlinks today and no social presence whatsoever, site has organically grown to ~6k impressions a day and 60 clicks. 
+
+Lots of rough edges still, but parents give it a try and tell me if it's helpful!</div><div class="tweet-translation">我已经痴迷「自驱公司」一年多了，试过很多产品都不达标，干脆自己用 Claude 在环路上搭了一个。这是我第一个实验：nosugarforkids.com——一个只收录健康儿童零食的目录（没想到这居然不存在），可以聊天获取学校、午餐、零食盒的推荐，还按营养成分建了分级榜单。自主侧，我有一个 Claude agent 每天醒来执行：检查目录新收录、清理可能死掉的商品、找新选题、查 SEO 数据、写新内容、主动找媒体换外链。零外链、零社交运营的情况下，站点已经自然增长到每天约 6k 展示、60 次点击。</div><div class="tweet-media"><img src="assets/2026-09-19/nikunj-2100714665571737885-0.jpg" alt="" loading="lazy" width="1200" height="567" style="max-width:100%;border-radius:8px;margin-top:8px"><img src="assets/2026-09-19/nikunj-2100714665571737885-1.jpg" alt="" loading="lazy" width="1199" height="754" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 69</span><span>↺ 1</span><span>💬 20</span></div></a></div>
+<div class="vitem"><a href="https://x.com/amasad/status/2100829093923320083" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-amasad.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Amjad Masad</span><span class="tweet-handle">@amasad</span></div><span class="tweet-date">17h</span></div><div class="tweet-body">This is why we need a gazillion data centers (worth it) https://t.co/2KWTPFSy0i</div><div class="tweet-translation">这就是为什么我们需要海量的数据中心（值了）。</div><div class="tweet-metrics"><span>♥ 62</span><span>↺ 1</span><span>💬 8</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2100740523539751337" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date">23h</span></div><div class="tweet-body">My little @Muse red panda is both cute and saving me money - a winning combination https://t.co/c6nLKL53MC</div><div class="tweet-translation">我的 Muse 小熊猫既可爱又能帮我省钱——双赢组合。</div><div class="tweet-media"><img src="assets/2026-09-19/petergyang-2100740523539751337-0.jpg" alt="" loading="lazy" width="494" height="373" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 17</span><span>↺ 0</span><span>💬 2</span></div></a></div>
+<div class="vitem"><a href="https://x.com/adityaag/status/2100746235426836708" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-adityaag.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Aditya Agarwal</span><span class="tweet-handle">@adityaag</span></div><span class="tweet-date">23h</span></div><div class="tweet-body">This is the right way to solve alignment and safety.
+
+@GoodfireAI is the leading non-frontier-lab company that is working on this.
+
+This is generationally important. https://t.co/BkufCYX1Qb</div><div class="tweet-translation">这才是解决对齐与安全的正确方式。GoodfireAI 是前沿实验室之外在这个方向上最领先的公司。这件事影响一代人。</div><div class="tweet-metrics"><span>♥ 8</span><span>↺ 2</span><span>💬 1</span></div></a></div>
+<div class="vitem"><a href="https://x.com/petergyang/status/2100683741878468768" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-petergyang.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Peter Yang</span><span class="tweet-handle">@petergyang</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Aww it's so cute https://t.co/YKbSkYVrbG</div><div class="tweet-translation">啊这也太可爱了。</div><div class="tweet-media"><img src="assets/2026-09-19/petergyang-2100683741878468768-0.jpg" alt="" loading="lazy" width="522" height="446" style="max-width:100%;border-radius:8px;margin-top:8px"></div><div class="tweet-metrics"><span>♥ 8</span><span>↺ 0</span><span>💬 1</span></div></a></div>
+<div class="vitem"><a href="https://x.com/nikunj/status/2100718806004064730" target="_blank" class="tweet-card"><div class="tweet-header"><img class="tweet-avatar" src="assets/2026-09-19/avatar-nikunj.jpg" alt="" loading="lazy"><div class="tweet-author"><span class="tweet-name">Nikunj Kothari</span><span class="tweet-handle">@nikunj</span></div><span class="tweet-date">1d</span></div><div class="tweet-body">Website here: https://t.co/KSiodPdZHT
+
+PS: There's a full blown MCP (and WebMCP) for this as well if you want to direct your agent towards it. 
+
+https://t.co/eo0oIkJUX2</div><div class="tweet-translation">网站在这里。PS：这个还带一个完整的 MCP（以及 WebMCP），你可以让你的 agent 直接对接它。</div><div class="tweet-metrics"><span>♥ 4</span><span>↺ 0</span><span>💬 1</span></div></a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem"><a href="https://github.com/cloudflare/security-audit-skill" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">security-audit-skill</span></div><span class="gh-stars">⭐ 13.8k</span></div><div class="gh-body">A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings</div><div class="gh-translation">面向编码 agent 的审计技能：多阶段安全审计，发现结果独立验证、机器可读。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 740</span></div></a></div>
+<div class="vitem"><a href="https://github.com/anthropics/claude-code" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">anthropics</span><span class="gh-sep">/</span><span class="gh-name">claude-code</span></div><span class="gh-stars">⭐ 146k</span></div><div class="gh-body">Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.</div><div class="gh-translation">住在终端里的 agentic 编码工具：理解代码库，用自然语言指令执行例行任务、解释复杂代码、处理 git 工作流。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 23796</span></div></a></div>
+<div class="vitem"><a href="https://github.com/alibaba/open-code-review" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/alibaba.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">alibaba</span><span class="gh-sep">/</span><span class="gh-name">open-code-review</span></div><span class="gh-stars">⭐ 36.7k</span></div><div class="gh-body">Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI &amp; Anthropic compatible.</div><div class="gh-translation">安全、快速、高效，在阿里的规模上久经考验。混合架构的代码评审工具：确定性流水线 + LLM Agent，精确到行级的评论，内置多语言规则集。</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 2616</span></div></a></div>
+<div class="vitem"><a href="https://github.com/affaan-m/ECC" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/affaan-m.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">affaan-m</span><span class="gh-sep">/</span><span class="gh-name">ECC</span></div><span class="gh-stars">⭐ 262k</span></div><div class="gh-body">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div><div class="gh-translation">agent harness 性能优化系统。为 Claude Code、Codex、Opencode、Cursor 等提供技能、本能、记忆、安全与研究优先的开发能力。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 39220</span></div></a></div>
+<div class="vitem"><a href="https://github.com/Tencent/BrowserSkill" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Tencent.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Tencent</span><span class="gh-sep">/</span><span class="gh-name">BrowserSkill</span></div><span class="gh-stars">⭐ 5.3k</span></div><div class="gh-body">Let AI agents use your real, logged-in browser without interrupting your work. CLI + extension for browser automation across any shell-capable AI agent.</div><div class="gh-translation">让 AI agent 使用你真实登录的浏览器而不打断工作。CLI + 扩展，面向任何有 shell 能力的 AI agent 的浏览器自动化。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 370</span></div></a></div>
+<div class="vitem"><a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/addyosmani.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span></div><span class="gh-stars">⭐ 96.4k</span></div><div class="gh-body">Production-grade engineering skills for AI coding agents.</div><div class="gh-translation">面向 AI 编码 agent 的生产级工程技能。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 10197</span></div></a></div>
+<div class="vitem"><a href="https://github.com/TencentCloud/Octop" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/TencentCloud.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">TencentCloud</span><span class="gh-sep">/</span><span class="gh-name">Octop</span></div><span class="gh-stars">⭐ 4.0k</span></div><div class="gh-body">A smarter, self-hosted AI assistant — multi-user, multi-agent.</div><div class="gh-translation">一个更智能、可自托管的 AI 助手——多用户、多 agent。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 412</span></div></a></div>
+<div class="vitem"><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/Fission-AI.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">Fission-AI</span><span class="gh-sep">/</span><span class="gh-name">OpenSpec</span></div><span class="gh-stars">⭐ 69.4k</span></div><div class="gh-body">Spec-driven development (SDD) for AI coding assistants.</div><div class="gh-translation">面向 AI 编码助手的规范驱动开发（SDD）。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 4750</span></div></a></div>
+<div class="vitem"><a href="https://github.com/ankitects/anki" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/ankitects.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">ankitects</span><span class="gh-sep">/</span><span class="gh-name">anki</span></div><span class="gh-stars">⭐ 31.2k</span></div><div class="gh-body">Anki is a smart spaced repetition flashcard program</div><div class="gh-translation">智能间隔重复闪卡程序。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 3237</span></div></a></div>
+<div class="vitem"><a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">anthropics</span><span class="gh-sep">/</span><span class="gh-name">knowledge-work-plugins</span></div><span class="gh-stars">⭐ 24.9k</span></div><div class="gh-body">Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork</div><div class="gh-translation">开源插件仓库，主要面向知识工作者在 Claude Cowork 中使用。</div><div class="gh-meta"><span class="gh-lang">● Python</span><span class="gh-forks">🍴 2972</span></div></a></div>
+<div class="vitem"><a href="https://github.com/supermemoryai/supermemory" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/supermemoryai.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">supermemoryai</span><span class="gh-sep">/</span><span class="gh-name">supermemory</span></div><span class="gh-stars">⭐ 30.3k</span></div><div class="gh-body">Memory and context engine + app that is extremely fast, scalable, and can be run fully locally. The Memory API for the AI era.</div><div class="gh-translation">记忆与上下文引擎 + 应用：极快、可扩展、可完全本地运行。AI 时代的 Memory API。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 2641</span></div></a></div>
+<div class="vitem"><a href="https://github.com/tradesdontlie/tradingview-mcp" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/tradesdontlie.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">tradesdontlie</span><span class="gh-sep">/</span><span class="gh-name">tradingview-mcp</span></div><span class="gh-stars">⭐ 6.5k</span></div><div class="gh-body">AI-assisted TradingView chart analysis — connect Claude Code to your TradingView Desktop for personal workflow automation</div><div class="gh-translation">AI 辅助的 TradingView 图表分析——把 Claude Code 连到 TradingView 桌面端，实现个人工作流自动化。</div><div class="gh-meta"><span class="gh-lang">● JavaScript</span><span class="gh-forks">🍴 2717</span></div></a></div>
+<div class="vitem"><a href="https://github.com/rustfs/rustfs" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/rustfs.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">rustfs</span><span class="gh-sep">/</span><span class="gh-name">rustfs</span></div><span class="gh-stars">⭐ 33.2k</span></div><div class="gh-body">RustFS is an open-source, S3-compatible high-performance object storage system supporting migration and coexistence with other S3-compatible platforms such as MinIO and Ceph.</div><div class="gh-translation">开源、兼容 S3 的高性能对象存储系统，支持与 MinIO、Ceph 等其他 S3 兼容平台迁移与共存。</div><div class="gh-meta"><span class="gh-lang">● Rust</span><span class="gh-forks">🍴 1483</span></div></a></div>
+<div class="vitem"><a href="https://github.com/supabase/supabase" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/supabase.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">supabase</span><span class="gh-sep">/</span><span class="gh-name">supabase</span></div><span class="gh-stars">⭐ 110k</span></div><div class="gh-body">The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.</div><div class="gh-translation">Postgres 开发平台。给你一个专属的 Postgres 数据库，构建 Web、移动和 AI 应用。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 14308</span></div></a></div>
+<div class="vitem"><a href="https://github.com/coder/coder" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/coder.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">coder</span><span class="gh-sep">/</span><span class="gh-name">coder</span></div><span class="gh-stars">⭐ 15.3k</span></div><div class="gh-body">Secure environments for developers and their agents</div><div class="gh-translation">面向开发者及其 agent 的安全环境。</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 1504</span></div></a></div>
+<div class="vitem"><a href="https://github.com/ahmedkhaleel2004/gitdiagram" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/ahmedkhaleel2004.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">ahmedkhaleel2004</span><span class="gh-sep">/</span><span class="gh-name">gitdiagram</span></div><span class="gh-stars">⭐ 16.5k</span></div><div class="gh-body">Free, simple, fast interactive diagrams for any GitHub repository</div><div class="gh-translation">为任何 GitHub 仓库生成免费、简单、快速的交互式架构图。</div><div class="gh-meta"><span class="gh-lang">● TypeScript</span><span class="gh-forks">🍴 1255</span></div></a></div>
+<div class="vitem"><a href="https://github.com/asciimoo/hister" target="_blank" class="gh-card"><div class="gh-header"><img class="gh-avatar" src="https://github.com/asciimoo.png" alt="" loading="lazy"><div class="gh-repo"><span class="gh-owner">asciimoo</span><span class="gh-sep">/</span><span class="gh-name">hister</span></div><span class="gh-stars">⭐ 5.0k</span></div><div class="gh-body">Your own search engine</div><div class="gh-translation">属于你自己的搜索引擎。</div><div class="gh-meta"><span class="gh-lang">● Go</span><span class="gh-forks">🍴 205</span></div></a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">当交互从「会话」变成「项目」，模型从「自回归」走向「扩散」，两件事在压缩同一个东西：注意力的单位。Claude Projects 把记忆外置到项目里，让你不必每次重新解释自己；Ermon 的扩散模型把生成从逐词串行变成整块并行，让推理不再被时间顺序绑死。它们共同指向一点——「上下文」本身正在变成资产，无论是一个人的工作方式，还是一次推理的并行度。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/bcherny">@bcherny — Boris Cherny</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://x.com/GoogleLabs">@GoogleLabs — Google Labs</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/danshipper">@danshipper — Dan Shipper</a>
+<a href="https://x.com/_catwu">@_catwu — Cat Wu</a>
+<a href="https://x.com/claudeai">@claudeai — Claude</a>
+<a href="https://x.com/joshwoodward">@joshwoodward — Josh Woodward</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=N1rjtDs8blY">No Priors</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260919" defer></script>
+<script src="../site.js?v=20260919" defer></script>
+</body></html>
