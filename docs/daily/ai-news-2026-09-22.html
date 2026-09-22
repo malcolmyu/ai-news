@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jev 现象：TypeSafe 用 9B「System One」模型重写智能体经济学 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260922">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月22日 — AI 建造者日报</div>
+<h1>Jev 现象：TypeSafe 用 9B「System One」模型重写智能体经济学</h1>
+<div class="subtitle">不做聊天、不刷公开榜单——TypeSafe 押注「为代码而生的机器原生 AI」，只优化每一美元能买到的智能。</div>
+<div class="dots-row"><span class="tag">Jev</span> <span class="tag">TypeSafe</span> <span class="tag">System One</span> <span class="tag">个人智能体</span> <span class="tag">GitHub Trending</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">13</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">11</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>Jev 爆火：9B 小模型跑通 79 毫秒快决策</strong></p>
+<p>AI前线独家对话全球首批复现者，撬开 Jev 黑箱。TypeSafe 的 Jev 以极致性价比席卷硅谷——swyx 主持的 Latent Space 深度访谈上线，Matt Turck 感叹「现在人人都追捧 Jev」，AIGC Weekly 也把 TypeSafe 的极速决策架构列入本周要点。</p>
+</div>
+<div class="feature-card">
+<p><strong>个人智能体竞赛进入混战：Muse、ChatGPT、Grok、Google、Apple 五强</strong></p>
+<p>Peter Yang 的长文断言 Muse 有望成为 Meta 继 Facebook 后最成功的自研应用，但「多人协作」是所有人都没攻下的下一个大突破；Google 的 Spark 仍是黑马，Apple 则被年度发布节奏拖住了脚。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/cFx9Z3ZXca0" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>Why We Made Jev — Diogo Almeida, TypeSafe Co-founder &amp; CEO</strong>
+</div>
+<div class="vitem-quote">从在 OpenAI 参与构建指令遵循模型，到多年追问「为什么 AI 能解出极难的问题、却自动化不了真实工作」，Diogo Almeida 押注 AI 的下一波不再长得像聊天。在这期 Jev 爆火发布后几天的访谈里，这位 TypeSafe 创始人兼 CEO 向 swyx 阐释了「System One 模型」——为代码而生的机器原生 AI，面向校准决策、可靠性与「每一美元的智能」。两人深入聊了 Jev 与 RLCD、RLHF 的失败模式、为什么 TypeSafe 拒绝围着公开基准优化，以及为什么在 Diogo 看来，正确的数据和正确的任务比单纯堆算力更重要。他还解释了为何离开 OpenAI、当 AI 成为基础设施后拒答与安全对齐为何变成根本不同的问题、Jev 如何改变编码智能体的架构，以及为什么即便手握十亿美元他也不会从零预训练一个模型。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667542&amp;idx=1&amp;sn=bed6b37cc3d148fe8cade3bc6511c9e6" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-21</span>
+</div>
+<div class="rss-title">独家｜撬开Jev黑箱，对话全球首批复现者：9B小模型跑通79毫秒“快决策”</div>
+<div class="rss-desc">火爆硅谷的 Jev 模型如何低成本复现。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667542&amp;idx=2&amp;sn=ba1dd886094ed301ec59178746d095d6" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-21</span>
+</div>
+<div class="rss-title">Linux Foundation CEO：AI 史上最大投资潮背后，真正托底的是开源</div>
+<div class="rss-desc">在今年的华为 HC2026 大会上，Linux Foundation CEO Jim Zemlin 发表主题演讲，谈 AI 投资潮与开源的托底作用。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667426&amp;idx=1&amp;sn=6be5278df67e22e91832ab9da50bb7ea" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-20</span>
+</div>
+<div class="rss-title">智谱ZCode被曝偷传代码，官方道歉并补偿；MiniMax Code CLI开源；DeepSeek闲时计费调整｜AI周报</div>
+<div class="rss-desc">智谱 ZCode 被曝偷传代码后官方道歉补偿，MiniMax Code CLI 开源，DeepSeek 调整闲时计费——本周 AI 产业动态汇总。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667426&amp;idx=2&amp;sn=6fde589e5c5ee7ff8dd052b176d76e20" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-20</span>
+</div>
+<div class="rss-title">OpenAI 详解 GPT-Live 架构如何实现了连续的有状态语音交互</div>
+<div class="rss-desc">OpenAI 发布 GPT-Live 工程报告，说明如何将延迟敏感的媒体处理与更广泛的应用工作分离，同时保持语音交互的连续性。</div>
+</a></div>
+<div class="vitem">
+<a href="https://aigc-weekly.agi.li/weekly/Y26W37" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AIGC Weekly</span>
+<span class="rss-date">09-20</span>
+</div>
+<div class="rss-title">Agili 的 AIGC 周刊（Y26W37）</div>
+<div class="rss-desc">本期聚焦全模态交互与软件工程智能体的工程化落地：GitHub 披露单人借助 AI 将 Copilot 运行时重写为 80 万行 Rust；DeepMind 与千问带来低延迟语音与百万上下文全模态模型；涵盖三值量化、TypeSafe 极速决策架构等。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/levie/status/2101731574668747081" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Literally impenetrable from agent swarms https://t.co/tg7SZ4d0xu</div>
+<div class="tweet-translation">对智能体蜂群来说，这简直固若金汤。</div>
+<div class="tweet-metrics"><span>♥ 2.7k</span><span>↺ 121</span><span>💬 111</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2101748820237500557" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">New benchmark dropped https://t.co/5lFZNcDNCh</div>
+<div class="tweet-translation">新基准测试发布了。</div>
+<div class="tweet-metrics"><span>♥ 1.4k</span><span>↺ 136</span><span>💬 98</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2101852258468299182" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Built my son his first computer https://t.co/9tQWZFSkku</div>
+<div class="tweet-translation">给儿子装了他人生第一台电脑。</div>
+<div class="tweet-media"><img src="assets/2026-09-22/amasad-2101852258468299182-0.jpg" alt="" loading="lazy" width="1200" height="900" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 944</span><span>↺ 13</span><span>💬 54</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2101728091710341176" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">https://t.co/mioa6FKIqK https://t.co/JyaI4gQMYW</div>
+<div class="tweet-translation"></div>
+<div class="tweet-media"><img src="assets/2026-09-22/rauchg-2101728091710341176-0.jpg" alt="" loading="lazy" width="633" height="1116" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-22/rauchg-2101728091710341176-1.jpg" alt="" loading="lazy" width="633" height="1116" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-22/rauchg-2101728091710341176-2.jpg" alt="" loading="lazy" width="633" height="1116" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 860</span><span>↺ 16</span><span>💬 70</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2101748928274419843" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Your claw can now FaceTime you! https://t.co/bUFzBG4e7h</div>
+<div class="tweet-translation">你的机械爪现在能跟你打 FaceTime 了！</div>
+<div class="tweet-metrics"><span>♥ 646</span><span>↺ 30</span><span>💬 48</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2101844435353145452" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">there is something about video games that give high stakes and responsibilities to young people who couldn’t really get them irl
+
+but it is a fine line and at some point you need to graduate https://t.co/wwRAmV7Sce</div>
+<div class="tweet-translation">电子游戏有种魔力，能把现实里得不到的高风险与责任感交到年轻人手上。但这是一条很细的线，总得在某个时刻毕业。</div>
+<div class="tweet-metrics"><span>♥ 627</span><span>↺ 12</span><span>💬 50</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2101862331345154469" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date">23h</span>
+</div>
+<div class="tweet-body">My “armchair” thoughts on the personal agent race:
+
+1. Muse is poised to become the leader. The app is intuitive, and Meta is aggressively promoting it across all its properties. Once you use the Muse app, you realize that it makes little sense for an agent to live in an existing messaging app like iMessage. Unless Meta runs out of compute or something, I think this will become the company’s most successful homegrown app after Facebook. It will be much bigger than Threads.
+
+2. ChatGPT is probably still the personal agent leader because it already has 1B+ users. OpenAI’s models, computer use, and voice are arguably better than Muse feature by feature. But it’s hard to build one product for both work and personal use, and harder still to serve enterprises and consumers with the same UX. Even for work, I started using Grok Bot because the Work/Codex split remains too confusing. I’m sure the team is cooking, and we’ll see something good in the next few weeks.
+
+3. Grok Bot isn’t really a Muse competitor because it’s focused on work. Multiple bots naturally fit team-based knowledge work IMO. My bull case for Grok Bot is that it&#x27;s a few features away from becoming multiplayer agentic Slack for both bots and humans.
+
+4. Google is obviously the dark horse candidate. All these personal agents live off Gmail, Google Calendar, and your Google app&#x27;s data. Google has their own personal agent in Spark but the last I checked it&#x27;s a secondary tab in Gemini. I think Google needs to be far more aggressive in making Spark the primary experience and making it intuitive and competitive with Muse. Google however doesn&#x27;t have a great track record in multiplayer AI...
+
+5. Speaking of multiplayer, nobody has figured this out yet. I can’t easily add my spouse to a Muse chat to plan a vacation. I also can’t loop coworkers into ChatGPT or Grok Bot threads. Multiplayer AI today mostly means tagging bots in Slack. Every major provider is probably working on this, and I think it will be the next big unlock.
+
+My personal AI stack right now is Muse for personal, Grok Bot for cloud tasks, Claude for specific use cases, and ChatGPT for everything else.
+
+But I think we’re going to see some major updates this week.
+
+Everyone should design their personal skills and files so they’re easy to port between harnesses and agents. Otherwise, you’ll spend half your time moving from one tool to another.</div>
+<div class="tweet-translation">关于个人智能体竞赛的几点「纸上谈兵」：1. Muse 有望成为领跑者——应用很直觉，Meta 又在全产品线大力推广；用过之后你会发现，让智能体寄居在 iMessage 这类聊天应用里其实没道理。它很可能成为 Meta 继 Facebook 之后最成功的自研应用，比 Threads 大得多。2. ChatGPT 大概仍是领头羊（已有 10 亿+ 用户），但很难用一个产品同时服务工作与个人、企业与消费者。连我自己工作场景都转向了 Grok Bot，因为 Work/Codex 的切分还是太乱。3. Grok Bot 专注工作，不算是 Muse 的直接对手；我的看多理由是它离「多人协作的智能体版 Slack」只差几个功能。4. Google 显然是黑马——这些个人智能体都靠 Gmail、日历和 Google 应用的数据吃饭，Google 手里的 Spark 却还只是 Gemini 里的一个二级标签，需要更大胆。5. 说到多人协作，目前还没人搞定：我既不能把伴侣拉进 Muse 一起规划旅行，也没法把同事拉进 ChatGPT 或 Grok Bot 的线程，这会是下一个大突破。我现在的组合是 Muse（个人）+ Grok Bot（云端任务）+ Claude（特定场景）+ ChatGPT（其余）。</div>
+<div class="tweet-metrics"><span>♥ 591</span><span>↺ 29</span><span>💬 97</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2101846262840799251" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">The thoroughness with which agents can test and QA software is unrivaled. I pointed out something wasn&#x27;t rendering right in a mobile (in-app) browser. The thing goes to the depths of Mordor to reproduce, simulate, fix, deploy, verify. It created an ephemeral vercel deployment to throw at an iPhone simulator! The absolute grind on these things.
+
+Humans could simply never match this level of intensity. We&#x27;d run of energy, we&#x27;d extrapolate, we&#x27;d hope it&#x27;d work out. The software of the future will be of a quality and performance we&#x27;ve never experienced before. It&#x27;s amazing to watch this shift.</div>
+<div class="tweet-translation">智能体测试和 QA 软件的彻底程度无人能及。我随口说了一句移动端应用内浏览器渲染有问题，它就一路挖到摩多的深渊去复现、模拟、修复、部署、验证，还专门建了一个临时 Vercel 部署丢给 iPhone 模拟器跑。这种死磕劲儿人类根本做不到——我们会没电、会外推、会心存侥幸。未来的软件质量与性能会是我们从未体验过的水准。看着这场转变，真是震撼。</div>
+<div class="tweet-media"><img src="assets/2026-09-22/rauchg-2101846262840799251-0.jpg" alt="" loading="lazy" width="1199" height="556" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 376</span><span>↺ 19</span><span>💬 53</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2101873256097804529" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date">22h</span>
+</div>
+<div class="tweet-body">Jev pod tomorrow
+
+subscribe on apple /youtube @latentspacepod 
+
+thanks to @allenpark and Ke for making this happen! https://t.co/5kDekuLbuS https://t.co/vgkesXELrf</div>
+<div class="tweet-translation">Jev 播客明天上线。可在 Apple / YouTube 的 @latentspacepod 订阅。感谢 @allenpark 和 Ke 促成这期节目！</div>
+<div class="tweet-media"><img src="assets/2026-09-22/swyx-2101873256097804529-0.jpg" alt="" loading="lazy" width="900" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 173</span><span>↺ 5</span><span>💬 29</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2101820308009206077" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Everyone is obsessed with Jev now, but I&#x27;m old enough to remember when people couldn&#x27;t shut up about Instinct, all the way back to mid last week.  Simpler times.</div>
+<div class="tweet-translation">现在人人都追捧 Jev，但我这年纪还记得，就在上周中，大家还停不下来地聊 Instinct。那时的日子更简单。</div>
+<div class="tweet-metrics"><span>♥ 62</span><span>↺ 0</span><span>💬 10</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2101816740741329218" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">highly recommend
+
+this is my favorite book https://t.co/H4wpR6eQ5O</div>
+<div class="tweet-translation">强烈推荐，这是我最爱的一本书。</div>
+<div class="tweet-metrics"><span>♥ 53</span><span>↺ 0</span><span>💬 5</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2101742225906655315" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Jokingly thinking of starting a new cloud kitchen called “next day curry”.. 
+
+Where I order the best curries, store it overnight and serve it the next day. 
+
+Saying this as I devour my leftover Manchurian. Have the exact same experience with Ramen, Indian food, Thai curry and others. 
+
+Might be blasphemous to the purists but they taste so much better!</div>
+<div class="tweet-translation">开玩笑说想开一家叫「隔夜咖喱」的云厨房——把最好吃的咖喱点回来，放一晚上，第二天再端出来。说这话时我正在大快朵颐昨天的剩满洲菜。拉面、印度菜、泰式咖喱都是同款体验。可能对纯正主义者是亵渎，但隔夜真的更好吃！</div>
+<div class="tweet-metrics"><span>♥ 36</span><span>↺ 0</span><span>💬 15</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2101865476145959373" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-22/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date">23h</span>
+</div>
+<div class="tweet-body">6. I forgot to mention Apple and Siri. They have all the devices and a great reputation on privacy. 
+
+They can easily win this race but what holds them back imo is their annual release cycle for major updates and not being on @X and all the other platforms seeking user feedback. The iteration speed for Siri (from the outside) just feels far too slow to compete.</div>
+<div class="tweet-translation">第 6 点，我漏了 Apple 和 Siri。他们握有全部设备、隐私口碑也好，本来很容易赢；拖后腿的是年度大版本发布节奏，以及不上 X 和其他平台收集用户反馈。从外部看，Siri 的迭代速度实在太慢，难以竞争。</div>
+<div class="tweet-metrics"><span>♥ 21</span><span>↺ 0</span><span>💬 2</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/BuilderIO/agent-native" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/BuilderIO.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">BuilderIO</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">agent-native</span>
+</div>
+<span class="gh-stars">⭐ 6.0k</span>
+</div>
+<div class="gh-body">A framework for building agentic apps</div>
+<div class="gh-translation">一个用于构建智能体应用的框架。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 542</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/trycua/cua" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/trycua.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">trycua</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">cua</span>
+</div>
+<span class="gh-stars">⭐ 25.7k</span>
+</div>
+<div class="gh-body">Scale computer-use 2.0 with open-source drivers, cross-OS fleets, and benchmarks for training, evaluation, and data generation.</div>
+<div class="gh-translation">用开源驱动、跨操作系统集群和基准来扩展「计算机使用 2.0」，覆盖训练、评估与数据生成。</div>
+<div class="gh-meta">
+<span class="gh-lang">● HTML</span>
+<span class="gh-forks">🍎 1.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Open-Dev-Society/OpenStock" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Open-Dev-Society.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Open-Dev-Society</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">OpenStock</span>
+</div>
+<span class="gh-stars">⭐ 17.8k</span>
+</div>
+<div class="gh-body">OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.</div>
+<div class="gh-translation">OpenStock 是昂贵行情平台的开源替代品：追踪实时价格、设置个性化提醒、探索公司深度洞察——公开构建、面向所有人、永久免费。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 2.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/akitaonrails/ai-memory" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/akitaonrails.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">akitaonrails</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ai-memory</span>
+</div>
+<span class="gh-stars">⭐ 7.7k</span>
+</div>
+<div class="gh-body">Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors</div>
+<div class="gh-translation">为智能体编码 CLI 提供长期记忆，并在不同智能体厂商之间实现顺畅交接的解决方案。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 523</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/coder/coder" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/coder.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">coder</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">coder</span>
+</div>
+<span class="gh-stars">⭐ 16.4k</span>
+</div>
+<div class="gh-body">Secure environments for developers and their agents</div>
+<div class="gh-translation">为开发者及其智能体提供的安全环境。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 1.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/cloudflare/quiche" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">cloudflare</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">quiche</span>
+</div>
+<span class="gh-stars">⭐ 12.4k</span>
+</div>
+<div class="gh-body">🥧 Savoury implementation of the QUIC transport protocol and HTTP/3</div>
+<div class="gh-translation">QUIC 传输协议与 HTTP/3 的「美味」实现。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 1.1k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mvt-project/mvt" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/mvt-project.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mvt-project</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">mvt</span>
+</div>
+<span class="gh-stars">⭐ 13.6k</span>
+</div>
+<div class="gh-body">MVT (Mobile Verification Toolkit) helps with conducting forensics of mobile devices in order to find signs of a potential compromise.</div>
+<div class="gh-translation">MVT（移动验证工具包）用于对移动设备做取证分析，寻找可能被入侵的迹象。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/zhouxiaoka/autoclip" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/zhouxiaoka.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">zhouxiaoka</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">autoclip</span>
+</div>
+<span class="gh-stars">⭐ 8.3k</span>
+</div>
+<div class="gh-body">AutoClip : AI-powered video clipping and highlight generation · 一款智能高光提取与剪辑的二创工具</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/ruanyf/weekly" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/ruanyf.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">ruanyf</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">weekly</span>
+</div>
+<span class="gh-stars">⭐ 104.0k</span>
+</div>
+<div class="gh-body">科技爱好者周刊，每周五发布</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-forks">🍎 4.5k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Crosstalk-Solutions.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Crosstalk-Solutions</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">project-nomad</span>
+</div>
+<span class="gh-stars">⭐ 37.9k</span>
+</div>
+<div class="gh-body">Project NOMAD is an offline-first knowledge and education server. Wikipedia, thousands of books, courses, maps, and optional local AI, all running on hardware you own with no internet required.</div>
+<div class="gh-translation">Project NOMAD 是一个离线优先的知识与教育服务器：维基百科、数千本书、课程、地图，以及可选的本地 AI，全部跑在你自己的硬件上，无需联网。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 3.8k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/yynxxxxx/Codex-X" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/yynxxxxx.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">yynxxxxx</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">Codex-X</span>
+</div>
+<span class="gh-stars">⭐ 3.7k</span>
+</div>
+<div class="gh-body">OpenAI Codex 桌面端/CLI 的可视化管理工具，具有Provider/API 切换、会话同步、提示词注入、Skills/MCP 管理、TOML 配置可视化的跨平台工具。</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Rust</span>
+<span class="gh-forks">🍎 464</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">当整个行业还在比谁的模型更大、上下文更长，TypeSafe 反着来——一个 9B 的小模型，靠「只做对的事、不做聊天」，用 79 毫秒的快决策把智能体的单位成本打到地板价。这背后是个被反复提起、却很少被认真对待的问题：AI 能解出极难的问题，却自动化不了日常的琐碎工作。Jev 给出的答案是 System One——不靠堆算力，靠把任务和数据选对。如果这条路走得通，「模型越大越好」的叙事也许第一次真正松动。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/danshipper">@danshipper — Dan Shipper</a>
+<a href="https://x.com/levie">@levie — Aaron Levie</a>
+<a href="https://x.com/mattturck">@mattturck — Matt Turck</a>
+<a href="https://x.com/nikunj">@nikunj — Nikunj Kothari</a>
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/steipete">@steipete — Peter Steinberger</a>
+<a href="https://x.com/swyx">@swyx — Swyx</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=cFx9Z3ZXca0">Latent Space</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260922" defer></script>
+<script src="../site.js?v=20260922" defer></script>
+</body></html>
