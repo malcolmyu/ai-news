@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-6 与 Opus 5.5 同日发布，前沿模型进入价格战 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260924">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月24日 — AI 建造者日报</div>
+<h1>GPT-6 与 Opus 5.5 同日发布，前沿模型进入价格战</h1>
+<div class="subtitle">OpenAI 把 GPT-6 API 价格永久下调 50% 并派发额度重置，Anthropic 让 Opus 5.5 成为全产品线默认模型，token 成本骤降。</div>
+<div class="dots-row"><span class="tag">GPT-6</span> <span class="tag">Opus 5.5</span> <span class="tag">模型价格战</span> <span class="tag">Agent</span> <span class="tag">形式化验证</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">22</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">17</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">4</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>GPT-6 Sol/Luna 发布，API 价格永久下调 50%</strong></p>
+<p>OpenAI 发布 GPT-6 的 Sol 与 Luna 两个版本，称其在写作与整体能力上大幅提升，并把 API 价格永久下调 50%，同时为 Plus、Pro 和 Business 用户账户加载一次额度重置（banked reset）。Thibault Sottiaux 的发布推文获 2.3 万赞、1512 次转发。</p>
+</div>
+<div class="feature-card">
+<p><strong>Claude Opus 5.5 上线，成 Claude Code 与应用默认模型</strong></p>
+<p>Anthropic 让 Opus 5.5 成为 Claude Code、Claude 应用（含 Cowork）的默认模型，覆盖 Pro/Max/Team 套餐，速率额度比 Opus 5 提升 25%。Boris Cherny 用它对 Claude Agent SDK 做 Lean 形式化验证，产出 16 个修复 PR。</p>
+</div>
+<div class="feature-card">
+<p><strong>第三方评测印证：Next.js 跑分 Opus 5.5 与 GPT-6 并列 97%</strong></p>
+<p>Guillermo Rauch 公布 Next.js 最新评测：Opus 5.5、GPT-6 Sol、Fable 5.1 均得 97%，Grok 4.7 得 94% 但便宜 2-7 倍。Aaron Levie 指出 token 成本正以史无前例的速度下降，把 Agent 用例推向规模化。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/B7DdNj_VjcU" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>Bio-security is an AI Arms Race - Eric Nguyen (CEO, Radical Numerics)</strong>
+</div>
+<div class="vitem-quote">在 OpenAI→Hugging Face 事件后，人们开始追问「还有什么需要担心」，而 Anthropic 的过滤机制把网络安全和生物安全列为两大重点。Radical Numerics 联合创始人 Eric Nguyen 认为：让生物能力增强的那批模型，同样也能守住防御不落后。他在斯坦福长期推进基因组语言模型（GLM），一度无人相信，最终主导了 Arc Institute 的 Evo 与 Evo 2，这些模型后来被用于合成出真正有功能的噬菌体基因组。DNA 字母表只有 4 个字符（ACTG），序列却极长（基因平均 6 万、最长 230 万、人类全基因组约 30 亿），正是三年前的长上下文突破让这一切成为可能——早于前沿实验室构建百万级上下文模型。如今 Radical Numerics 正把 GLM 扩展到远超 DNA 生成的更广生物学问题，且已能自然地泛化到 RNA 和蛋白质。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667619&amp;idx=1&amp;sn=d6aa40bb6150376457cc070eac4c3d5b" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-22</span>
+</div>
+<div class="rss-title">罗福莉押注大规模RL、小米最强开源模型亮相：6天烧掉2000多万，多个 Agent 基准比肩闭源旗舰</div>
+<div class="rss-desc">罗福莉押注大规模强化学习，小米最强开源模型亮相，多个 Agent 基准比肩闭源旗舰。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667619&amp;idx=2&amp;sn=31434e6e975586e706984b32a198b802" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-22</span>
+</div>
+<div class="rss-title">黄仁勋把矛头对准 AI 实验室：别先谈末日，先为已经发生的事故负责</div>
+<div class="rss-desc">「末日风险」之外，眼前的问题已经足够现实。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667542&amp;idx=1&amp;sn=bed6b37cc3d148fe8cade3bc6511c9e6" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-21</span>
+</div>
+<div class="rss-title">独家｜撬开Jev黑箱，对话全球首批复现者：9B小模型跑通79毫秒「快决策」</div>
+<div class="rss-desc">火爆硅谷的 Jev 模型如何低成本复现。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667542&amp;idx=2&amp;sn=ba1dd886094ed301ec59178746d095d6" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-21</span>
+</div>
+<div class="rss-title">Linux Foundation CEO：AI 史上最大投资潮背后，真正托底的是开源</div>
+<div class="rss-desc">在华为 HC2026 大会上，Linux Foundation CEO Jim Zemlin 发表主题演讲。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2102463847714247142" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">GPT-6 Sol and Luna are out. Not only are they a very significant improvement across the board, but also in writing and general &quot;you know when you try it&quot; quality. 
+
+We are also permanently reducing the API price by 50% making both of them viable for a ton of new usecases and making your usage go further too, even on the subscriptions.
+
+And one more thing. We are loading a banked reset into all accounts of our Plus, Pro and Business users. Let&#x27;s go!
+
+https://t.co/00DRh1sRrO</div>
+<div class="tweet-translation">GPT-6 的 Sol 和 Luna 模型正式发布。不仅各项能力大幅提升，写作和那种「一试便知」的整体质感也进步明显。我们还把 API 价格永久下调 50%，让两款模型在大量新场景中都能用得起，订阅用户的额度也更经用。另外，我们正为所有 Plus、Pro 和 Business 用户的账户加载一次额度重置（banked reset）。出发吧！</div>
+<div class="tweet-metrics"><span>♥ 23.3k</span><span>↺ 1.5k</span><span>💬 2.8k</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2102440619616682120" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">We have been focusing on efficiency and intelligence for all. 
+
+Very proud of the team. Only possible when you have incredible models at the top end of the capability that you can then use to make a big difference in everything else.</div>
+<div class="tweet-translation">我们一直在专注于为所有人提升效率和智能。为团队感到骄傲。只有当你在能力顶端拥有出色的模型，才能用它去改变其他一切时，这一切才成为可能。</div>
+<div class="tweet-metrics"><span>♥ 12.6k</span><span>↺ 317</span><span>💬 1.7k</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/bcherny/status/2102439069053747549" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-bcherny.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Boris Cherny</span>
+<span class="tweet-handle">@bcherny</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Opus 5.5 is a really good model. It&#x27;s been my daily driver the last few weeks.
+
+We had Opus 5.5 and Fable 5.1 each port HAProxy from C to Rust. Both passed nearly all of HAProxy&#x27;s tests, but Opus 5.5 finished in 9.5 hours compared to Fable 5.1&#x27;s 12 hours, and for 51% less cost. https://t.co/GJ9FaS3Erx</div>
+<div class="tweet-translation">Opus 5.5 确实是个好模型，过去几周我一直在用它。我们让 Opus 5.5 和 Fable 5.1 分别把 HAProxy 从 C 移植到 Rust。两者几乎都通过了 HAProxy 的全部测试，但 Opus 5.5 只用了 9.5 小时，而 Fable 5.1 用了 12 小时，成本还低 51%。</div>
+<div class="tweet-metrics"><span>♥ 6.8k</span><span>↺ 228</span><span>💬 312</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/thsottiaux/status/2102509507415048245" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-thsottiaux.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thibault Sottiaux</span>
+<span class="tweet-handle">@thsottiaux</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Maybe our cutest launch so far. But still packing the biggest punch. https://t.co/LVYOxpH0Wi</div>
+<div class="tweet-translation">也许是我们迄今为止最可爱的一次发布，但依然力道十足。</div>
+<div class="tweet-metrics"><span>♥ 6.0k</span><span>↺ 134</span><span>💬 817</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2102548686303854790" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">the right way to use model capabilities is not to ship 10x more features to prod
+
+it&#x27;s to spend more time understanding your users, trying experiments, building prototypes, learning about things you don&#x27;t understand so that you can ship things that actually work</div>
+<div class="tweet-translation">善用模型能力的正确方式，不是把多十倍的功能堆上生产环境，而是花更多时间去理解你的用户、做实验、搭原型、去学习那些你还不懂的东西，从而交付真正能跑起来的作品。</div>
+<div class="tweet-metrics"><span>♥ 4.5k</span><span>↺ 313</span><span>💬 160</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/sama/status/2102469008079679640" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Startups are naturally good at this; it is hard to keep a bigger company good at this and i think an underexplored space. https://t.co/Sr48wgC0lL</div>
+<div class="tweet-translation">创业公司天然擅长这件事；让一家更大的公司持续保持这种能力很难，我认为这是一个被低估的空间。</div>
+<div class="tweet-metrics"><span>♥ 3.7k</span><span>↺ 123</span><span>💬 272</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/bcherny/status/2102543349102338309" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-bcherny.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Boris Cherny</span>
+<span class="tweet-handle">@bcherny</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">I used Opus 5.5 to formally verify the Claude Agent SDK using Lean. A couple short prompts = 16 PRs fixing various bugs and race conditions. Video attached.
+
+TLA+ also works well. I sometimes combine Lean and TLA+ to look for issues around data flow, concurrency, and state mgmt.
+
+I don&#x27;t know either language well, but Claude is excellent at both. This approach is super useful for formally modeling your code and finding bugs that a human probably wouldn&#x27;t have spotted.
+
+Is formal verification the future of coding (or at least, bug finding)?</div>
+<div class="tweet-translation">我用 Opus 5.5 借助 Lean 对 Claude Agent SDK 做了形式化验证。几条简短的提示词就产出了 16 个修复各类 bug 和竞态条件的 PR（附视频）。TLA+ 也很好用，我有时会把 Lean 和 TLA+ 结合，排查数据流、并发和状态管理方面的问题。这两种语言我都不太熟，但 Claude 都很擅长。这种方法对形式化建模你的代码、发现人类通常注意不到的 bug 非常有用。形式化验证会是编程（至少是找 bug）的未来吗？</div>
+<div class="tweet-media"><img src="assets/2026-09-24/bcherny-2102543349102338309-0.jpg" alt="" loading="lazy" width="1200" height="909" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 3.3k</span><span>↺ 165</span><span>💬 258</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/sama/status/2102468713866055872" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-sama.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Sam Altman</span>
+<span class="tweet-handle">@sama</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">michelle embodies this as much as anyone
+
+openai is so, so lucky to have benefited from everything she has done so far and i think people will be quite pleased to see what she + team have cooking next! https://t.co/AVZAtyk6Uc</div>
+<div class="tweet-translation">Michelle 比任何人都更完美地诠释了这一点。OpenAI 能有幸受惠于她迄今所做的一切，真的非常幸运。我相信大家会很期待看到她和团队接下来在酝酿什么。</div>
+<div class="tweet-metrics"><span>♥ 2.1k</span><span>↺ 58</span><span>💬 121</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2102438365455167883" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Love the tastefulness with which anthropic ships. 
+
+Main reason I got excited about &#x27;headless&#x27; for the web is that any given page could take whatever whimsical or unique shape you wanted. With AI, there&#x27;s no excuse not to push the design frontier.
+
+This is @nextjs at its finest:
+https://t.co/uXM96EijiW</div>
+<div class="tweet-translation">喜欢 Anthropic 交付产品的这份克制与品味。当初让我对 Web 的「headless（无头）」感到兴奋的主因，是任何页面都可以随心所欲地呈现出奇思妙想、独一无二的形态。有了 AI，没有理由不去突破设计的前沿。这是 Next.js 的最佳状态：</div>
+<div class="tweet-media"><img src="assets/2026-09-24/rauchg-2102438365455167883-0.jpg" alt="" loading="lazy" width="1200" height="684" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 1.4k</span><span>↺ 34</span><span>💬 63</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/_catwu/status/2102437713781944397" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-_catwu.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Cat Wu</span>
+<span class="tweet-handle">@_catwu</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Claude Opus 5.5 is now the default model in Claude Code and the Claude app, including Cowork, for Pro, Max, and Team plans. I’ve been using Opus 5.5 as a daily driver and love its clear communication skills and ability to write in my style.
+
+We’re defaulting to effort medium across products, which is comparable to Fable 5.1 on intelligence but faster. Your rate limits will go 25% further on Opus 5.5 compared to Opus 5.
+
+Give Opus 5.5 an ambitious task and let us know what you think!</div>
+<div class="tweet-translation">Claude Opus 5.5 现已成为 Claude Code 和 Claude 应用（含 Cowork）的默认模型，覆盖 Pro、Max 和 Team 套餐。我一直把 Opus 5.5 当日常主力，很喜欢它清晰的沟通能力和按我的风格写作的本事。我们在全产品线默认采用 medium 推理强度，智能上与 Fable 5.1 相当但更快。相比 Opus 5，Opus 5.5 的速率额度可多用 25%。给 Opus 5.5 派一个雄心勃勃的任务，告诉我们你的感受吧！</div>
+<div class="tweet-metrics"><span>♥ 1.3k</span><span>↺ 35</span><span>💬 72</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2102519097770885231" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">We ran fresh Next.js evals. The tally:
+① Opus 5.5    [𝟿𝟽%]
+② GPT 6 Sol   [𝟿𝟽%]
+③ Fable 5.1     [𝟿𝟽%]
+④ Grok 4.7     [𝟿𝟺%]
+
+Notably, Grok is 2x-7x cheaper https://t.co/BAUg14981G</div>
+<div class="tweet-translation">我们跑了最新的 Next.js 评测，结果如下：① Opus 5.5 [97%] ② GPT-6 Sol [97%] ③ Fable 5.1 [97%] ④ Grok 4.7 [94%]。Grok 4.7 要便宜 2 到 7 倍。</div>
+<div class="tweet-metrics"><span>♥ 1.1k</span><span>↺ 55</span><span>💬 133</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2102594015669756323" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">23h</span>
+</div>
+<div class="tweet-body">Software will never die again. You liked Google Reader? Cool, you can generate and deploy your own. Yours, forever.</div>
+<div class="tweet-translation">软件再也不会消亡了。你喜欢 Google Reader？没问题，你可以自己生成并部署一个属于你自己的，永远属于你。</div>
+<div class="tweet-metrics"><span>♥ 1.0k</span><span>↺ 33</span><span>💬 76</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/amasad/status/2102489320766800002" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Your intelligence is fake. It’s artificial.
+
+Mine? It’s super. Super Intelligence. Aka SI. https://t.co/oTWHfUUpDP</div>
+<div class="tweet-translation">你的智能是假的，是人工的。我的呢？是超级的。超级智能，简称 SI。</div>
+<div class="tweet-metrics"><span>♥ 935</span><span>↺ 37</span><span>💬 107</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/alexalbert__/status/2102466523164274839" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-alexalbert__.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Alex Albert</span>
+<span class="tweet-handle">@alexalbert__</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">I&#x27;ve been on a Blender kick with Opus 5.5. Its better 3D modeling and vision mean you can build an entire world from a single prompt.
+
+Historically accurate San Francisco Market street in 1906, pre-earthquake https://t.co/aisvFLFGy3</div>
+<div class="tweet-translation">我最近用 Opus 5.5 迷上了 Blender。它更强的 3D 建模和视觉能力意味着，你只需一句提示就能构建整个世界。这是 1906 年大地震前、还原历史的旧金山 Market Street。</div>
+<div class="tweet-media"><img src="assets/2026-09-24/alexalbert__-2102466523164274839-0.jpg" alt="" loading="lazy" width="960" height="680" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 890</span><span>↺ 40</span><span>💬 54</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2102501642176528743" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Had ChatGPT sometimes crashing on me after updating to macOS 27 and... Astra found a ~14 year old bug in libuv. https://t.co/JE8GssiRXJ</div>
+<div class="tweet-translation">升级到 macOS 27 后，ChatGPT 有时会崩溃……Astra 在 libuv 里发现了一个大约 14 年的老 bug。</div>
+<div class="tweet-metrics"><span>♥ 850</span><span>↺ 33</span><span>💬 54</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2102477253070430322" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">What an insane day in AI. The frontier models just became substantially cheaper, with the Opus 5.5 price cuts, and now with GPT-6 Sol and Luna dropping token prices by 50%.
+
+The rate at which the cost per task (on a like-for-like basis) drops in AI is unlike any other type of technology in history. And every time the cost of AI drops, the use-cases you can deploy agents against dramatically increase. This is Jevons paradox applied to agents.
+
+These improvements will directly lead to broader diffusion of AI in the economy as we can use agents to process all of our data, scan our code for security issues, read through all log data to make decisions, have agent swarms in workflows, and much more. The cost of tokens is directly correlated to these use-cases being opened up at scale.</div>
+<div class="tweet-translation">AI 领域疯狂的一天。先是 Opus 5.5 降价，接着 GPT-6 的 Sol 和 Luna 又把 token 价格下调 50%，前沿模型价格大幅下降。AI 中「单个任务成本（同口径下）」下降的速度，是人类历史上任何技术都无法比拟的。而每当 AI 成本下降一次，可以部署 Agent 的用例就急剧扩张——这就是作用于 Agent 的杰文斯悖论。这些改进将直接推动 AI 在经济中的更广泛扩散：用 Agent 处理全部数据、扫描代码找安全漏洞、通读日志做决策、在工作流中部署 Agent 集群等等。token 成本与这些用例能否规模化落地直接相关。</div>
+<div class="tweet-metrics"><span>♥ 655</span><span>↺ 69</span><span>💬 68</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2102471889092276516" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">An algorithmic drawing program created by @kevin_t_ngo. Every drawing is based on a different seed. https://t.co/3qZFPs9mGc</div>
+<div class="tweet-translation">一个由 @kevin_t_ngo 创作的算法绘画程序。每一幅画都基于不同的随机种子生成。</div>
+<div class="tweet-media"><img src="assets/2026-09-24/claudeai-2102471889092276516-0.jpg" alt="" loading="lazy" width="1199" height="747" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 261</span><span>↺ 7</span><span>💬 4</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2102471885061812714" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">A toy brick-building app. Turn a photo or a description into a buildable model with custom instructions. https://t.co/zDFMIKuXLP</div>
+<div class="tweet-translation">一个玩具积木搭建应用。上传一张照片或一句描述，就能生成可搭建的模型，还能自定义搭建说明。</div>
+<div class="tweet-media"><img src="assets/2026-09-24/claudeai-2102471885061812714-0.jpg" alt="" loading="lazy" width="1200" height="675" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 257</span><span>↺ 7</span><span>💬 4</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2102549030303867257" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">if you want to make games, 3d generation is a great capability to help you imagine your game come to life
+
+but you should figure out how to make a good, satisfying game loop first
+
+(talking to myself here)</div>
+<div class="tweet-translation">如果你想做游戏，3D 生成是一个帮你把游戏想象成真的绝佳能力。但你应该先想清楚怎么做出一个好玩的、令人满足的核心循环。（这段话是写给我自己的）</div>
+<div class="tweet-metrics"><span>♥ 254</span><span>↺ 5</span><span>💬 10</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/levie/status/2102448415775051790" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-levie.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aaron Levie</span>
+<span class="tweet-handle">@levie</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">At Box, we&#x27;ve been testing Opus 5.5 on a variety of complex enterprise knowledge work tasks dealing with unstructured data with the Box Agent.  
+
+Overall, we saw frontier capability levels, with major performance improvements over Opus 5. 63% fewer tokens used, 42% less verbosity, and 30% faster vs. Opus 5. And the model itself is cheaper, so this is a major win for any agentic computer use, coding, analytics, or data work that enterprises will be doing.
+
+Here are some examples of the task wins and performance gains across a variety of industry tests that we performed:
+
+• Financial services - due diligence (+39% task accuracy): A year of transaction records, with the job of finding every miscalculation in an acquisition target&#x27;s pricing tool. Opus 5.5 scored a perfect result on every  attempt in half the words Opus 5 used, consuming 82% fewer tokens overall.
+
+• Technology - cloud cost analysis (+65% task accuracy): Work out what a company should actually change about its cloud spend. Opus 5.5 picked the right basis for the retention calculation and kept the source data&#x27;s unit conventions straight all the way through, so the number at the end actually holds up. It took half the time Opus 5 took, with 70% fewer tokens.
+
+• Consumer products - client account analysis (+17% task accuracy): Set the onboarding targets for a client account, reading across the signed contract, a satisfaction tracker and a team metrics sheet. The contract never states a senior/junior split, so Opus 5.5 derived it from the 18-person roster and showed the rule it used; several clients had a perfect 10 on individual survey questions, so it averaged each client&#x27;s responses instead of crowning the single 10. It finished this one in half the time, on 78% fewer tokens. 
+
+• Clinical diagnostics - data analysis (+15% task accuracy): Malaria rapid-test performance across a dry and a wet season: build the patient records out of two clinical PDFs, compute positive test rates by season and gender, and test whether parasite counts really differ between test-positive and test-negative patients. Opus 5.5 caught that the two groups&#x27; standard deviations differed more than 100-fold, re-ran it the right way, and found the dry-season difference didn&#x27;t hold up after all. This accuracy gain came with a final answer that was half the length of Opus 5&#x27;s, and also needed 78% fewer tokens end to end. 
+
+Customers will be able to build AI Agents with Opus 5.5 shortly in the Box AI Studio.</div>
+<div class="tweet-translation">在 Box，我们正用 Box Agent 在各种处理非结构化数据的复杂企业知识工作上测试 Opus 5.5。总体来看，它达到了前沿能力水平，相比 Opus 5 有显著提升：token 用量减少 63%、冗长度降低 42%、速度快 30%，而且模型本身更便宜——对企业的 Agent 计算机使用、编码、分析和数据工作来说都是重大利好。举例：金融尽调任务准确率 +39%；科技云成本分析准确率 +65%；消费品客户账户分析 +17%；临床诊断数据分析 +15%。客户很快就能在 Box AI Studio 中用 Opus 5.5 构建 AI Agent。</div>
+<div class="tweet-metrics"><span>♥ 232</span><span>↺ 23</span><span>💬 40</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/claudeai/status/2102471892099866883" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-claudeai.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Claude</span>
+<span class="tweet-handle">@claudeai</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Claude Opus 5.5 is available today. What will you explore?</div>
+<div class="tweet-translation">Claude Opus 5.5 今日正式上线。你想探索点什么？</div>
+<div class="tweet-metrics"><span>♥ 226</span><span>↺ 5</span><span>💬 28</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/garrytan/status/2102501556348440983" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-24/avatar-garrytan.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Garry Tan</span>
+<span class="tweet-handle">@garrytan</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">We need to teach the world to prompt and maximally use AI: to help all people see the way it can give you wings in all your pursuits 
+
+Then we need yearn to solve more problems for ourselves and for one another https://t.co/e7yOADOf6s</div>
+<div class="tweet-translation">我们需要教会全世界如何写提示词、如何最大化地使用 AI：让所有人都看到，它能给你的一切追求插上翅膀。然后，我们需要渴望为自己、也为彼此解决更多问题。</div>
+<div class="tweet-metrics"><span>♥ 144</span><span>↺ 17</span><span>💬 31</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/anthropics/financial-services" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">financial-services</span>
+</div>
+<span class="gh-stars">⭐ 37.0k</span>
+</div>
+<div class="gh-body">Reference agents, skills, and data connectors for the financial-services workflows we see most — investment banking, equity research, private equity, and wealth management.</div>
+<div class="gh-translation">面向最常见的金融服务工作流——投行、股票研究、私募和财富管理——的参考 Agent、技能与数据连接器。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 5.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/google/ax" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/google.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">google</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ax</span>
+</div>
+<span class="gh-stars">⭐ 9.1k</span>
+</div>
+<div class="gh-body">Google&#x27;s open agentic orchestration runtime</div>
+<div class="gh-translation">Google 开源的 Agent 编排运行时。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 438</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/davila7/claude-code-templates" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/davila7.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">davila7</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">claude-code-templates</span>
+</div>
+<span class="gh-stars">⭐ 31.5k</span>
+</div>
+<div class="gh-body">CLI tool for configuring and monitoring Claude Code</div>
+<div class="gh-translation">用于配置和监控 Claude Code 的 CLI 工具。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/BuilderIO/agent-native" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/BuilderIO.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">BuilderIO</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">agent-native</span>
+</div>
+<span class="gh-stars">⭐ 6.6k</span>
+</div>
+<div class="gh-body">A framework for building agentic apps</div>
+<div class="gh-translation">一个用于构建 Agent 原生应用的框架。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 587</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/obra.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">obra</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">superpowers</span>
+</div>
+<span class="gh-stars">⭐ 290.7k</span>
+</div>
+<div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+<div class="gh-translation">一套行之有效的 Agent 技能框架与软件开发方法论。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 26.0k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/dream-num/univer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/dream-num.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">dream-num</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">univer</span>
+</div>
+<span class="gh-stars">⭐ 16.4k</span>
+</div>
+<div class="gh-body">The Office Harness for AI Agents — Spreadsheets, Docs, Slides, Canvas, Relational Tables, and PDF in one runtime.</div>
+<div class="gh-translation">AI Agent 的办公底座——在一个运行时内集成电子表格、文档、幻灯片、画布、关系表和 PDF。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 1.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/Open-Dev-Society/OpenStock" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/Open-Dev-Society.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">Open-Dev-Society</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">OpenStock</span>
+</div>
+<span class="gh-stars">⭐ 18.9k</span>
+</div>
+<div class="gh-body">OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.</div>
+<div class="gh-translation">OpenStock 是昂贵行情平台的开源替代：实时价格追踪、个性化提醒、详尽的公司洞察——公开构建、面向所有人、永远免费。</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 2.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/agent-substrate/substrate" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/agent-substrate.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">agent-substrate</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">substrate</span>
+</div>
+<span class="gh-stars">⭐ 3.5k</span>
+</div>
+<div class="gh-body">Agent Substrate: the core system</div>
+<div class="gh-translation">Agent Substrate：核心系统。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 415</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/strands-agents/harness-sdk" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/strands-agents.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">strands-agents</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">harness-sdk</span>
+</div>
+<span class="gh-stars">⭐ 7.9k</span>
+</div>
+<div class="gh-body">Build an agent harness and control it end-to-end. Open-source SDK for production AI agents in Python &amp; TypeScript - any model, any cloud.</div>
+<div class="gh-translation">构建 Agent 底座并实现端到端管控。面向生产级 AI Agent 的开源 SDK，支持 Python 与 TypeScript——任意模型、任意云。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/HKUDS/CLI-Anything" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/HKUDS.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">HKUDS</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">CLI-Anything</span>
+</div>
+<span class="gh-stars">⭐ 50.0k</span>
+</div>
+<div class="gh-body">&quot;CLI-Anything: Making ALL Software Agent-Native&quot; -- CLI-Hub: https://clianything.cc/</div>
+<div class="gh-translation">「CLI-Anything：让所有软件都具备 Agent 原生能力」——配套 CLI-Hub。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 4.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/superdesigndev/treg" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/superdesigndev.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">superdesigndev</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">treg</span>
+</div>
+<span class="gh-stars">⭐ 2.7k</span>
+</div>
+<div class="gh-body">OpenRouter for agent tools. Join community here: https://discord.gg/6mQYYfFMAn</div>
+<div class="gh-translation">Agent 工具的 OpenRouter，欢迎加入社区。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 242</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/pbakaus/impeccable" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/pbakaus.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">pbakaus</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">impeccable</span>
+</div>
+<span class="gh-stars">⭐ 70.4k</span>
+</div>
+<div class="gh-body">The design language that makes your AI harness better at design.</div>
+<div class="gh-translation">让 AI 底座更擅长设计的设计语言。</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 4.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mvt-project/mvt" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/mvt-project.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mvt-project</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">mvt</span>
+</div>
+<span class="gh-stars">⭐ 14.5k</span>
+</div>
+<div class="gh-body">MVT (Mobile Verification Toolkit) helps with conducting forensics of mobile devices in order to find signs of a potential compromise.</div>
+<div class="gh-translation">MVT（移动设备取证工具包）帮助对移动设备进行取证分析，以发现潜在入侵的痕迹。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.4k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/DeusData.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">DeusData</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">codebase-memory-mcp</span>
+</div>
+<span class="gh-stars">⭐ 44.6k</span>
+</div>
+<div class="gh-body">High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.</div>
+<div class="gh-translation">高性能代码智能 MCP 服务器。将代码库索引为持久化知识图谱——普通仓库毫秒级完成。支持 158 种语言、亚毫秒查询、减少 99% token。单一静态二进制、零依赖。</div>
+<div class="gh-meta">
+<span class="gh-lang">● C</span>
+<span class="gh-forks">🍎 3.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/harry7557558/spirula-studio" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/harry7557558.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">harry7557558</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">spirula-studio</span>
+</div>
+<span class="gh-stars">⭐ 752</span>
+</div>
+<div class="gh-body">Cross-vendor 3D Gaussian Splatting trainer - video to splat to mesh, Vulkan or CUDA.</div>
+<div class="gh-translation">跨厂商的 3D 高斯泼溅训练器——从视频到泼溅再到网格，支持 Vulkan 或 CUDA。</div>
+<div class="gh-meta">
+<span class="gh-lang">● C++</span>
+<span class="gh-forks">🍎 56</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/browser-use/video-use" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/browser-use.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">browser-use</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">video-use</span>
+</div>
+<span class="gh-stars">⭐ 26.5k</span>
+</div>
+<div class="gh-body">Edit videos with coding agents</div>
+<div class="gh-translation">用编程 Agent 编辑视频。</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/TNT-Likely/PanWatch" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/TNT-Likely.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">TNT-Likely</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">PanWatch</span>
+</div>
+<span class="gh-stars">⭐ 1.5k</span>
+</div>
+<div class="gh-body">盯盘侠 PanWatch · 自托管 AI 盯盘助手，集成 TradingAgents 多 Agent 投资决策 | A股/港股/美股实时监控、持仓管理、智能分析、全渠道推送</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 300</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">两家前沿实验室在同一天发布旗舰模型。但更值得注意的也许是价格：OpenAI 把 API 价格永久下调 50%。Aaron Levie 管这叫「作用于 Agent 的杰文斯悖论」——token 成本每降一次，能部署 Agent 的用例就成倍扩张，做尽调、扫代码漏洞、通读日志做决策。任务成本正以人类历史上任何技术都没有过的速度往下掉。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/_catwu">@_catwu — Cat Wu</a>
+<a href="https://x.com/alexalbert__">@alexalbert__ — Alex Albert</a>
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/bcherny">@bcherny — Boris Cherny</a>
+<a href="https://x.com/claudeai">@claudeai — Claude</a>
+<a href="https://x.com/garrytan">@garrytan — Garry Tan</a>
+<a href="https://x.com/levie">@levie — Aaron Levie</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/sama">@sama — Sam Altman</a>
+<a href="https://x.com/steipete">@steipete — Peter Steinberger</a>
+<a href="https://x.com/thsottiaux">@thsottiaux — Thibault Sottiaux</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=B7DdNj_VjcU">Latent Space</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260924" defer></script>
+<script src="../site.js?v=20260924" defer></script>
+</body></html>
