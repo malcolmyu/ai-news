@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenAI 支出逼近 Anthropic，Kimi 与 DeepSeek 分走流失份额 — AI 建造者日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260926">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f5f4;color:#1c1c1c;font-family:Inter,Geist,system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.header{position:sticky;top:0;z-index:30;background:rgba(245,245,244,.88);backdrop-filter:blur(18px);border-bottom:1px solid #e8e8e6}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.header-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;color:#1c1c1c}
+.logo-icon{width:30px;height:30px;border-radius:9px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-family:Geist,Inter,sans-serif;font-size:15px}
+.nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-link{font-size:13px;color:#4a4a4a;text-decoration:none}
+.nav-link:hover{color:#2563eb}
+.bento{max-width:1160px;margin:28px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e8e8e6;border-radius:14px;padding:22px;box-shadow:0 1px 2px rgba(28,28,28,.03)}
+.span-4{grid-column:span 4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.label-sm{font-size:12px;line-height:1.2;color:#2563eb;font-weight:600;margin-bottom:9px;letter-spacing:.02em}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Geist,Inter,sans-serif;font-size:38px;line-height:1.12;letter-spacing:0;font-weight:600;margin-bottom:10px;max-width:920px}
+h2{font-family:Geist,Inter,sans-serif;font-size:22px;line-height:1.28;font-weight:600;margin-bottom:10px;color:#1c1c1c}
+h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.subtitle,.text-body{font-size:13px;line-height:1.78;color:#4a4a4a}
+.dots-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:500;background:rgba(37,99,235,.08);color:#2563eb}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat-item{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:12px}
+.stat-num{font-family:Geist,Inter,sans-serif;font-size:22px;font-weight:600;color:#1c1c1c}
+.stat-label{font-size:12px;color:#8b8b8b;margin-top:2px}
+.feature-card{background:#fafafa;border:1px solid #e8e8e6;border-radius:10px;padding:16px}
+.feature-card p{margin:0;font-size:13px;line-height:1.68;color:#4a4a4a}
+.feature-card strong{color:#1c1c1c}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vlist-2col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vitem{background:#fafafa;border:1px solid #e8e8e6;border-radius:12px;padding:14px}
+.vitem:has(.tweet-card),.vitem:has(.gh-card),.vitem:has(.rss-card){background:transparent;border:none;padding:0}
+.vitem-desc{font-size:13px;color:#4a4a4a;line-height:1.65;overflow-wrap:break-word;word-break:break-word}
+.vitem-quote{font-size:12px;color:#2563eb;line-height:1.55;border-left:2px solid #2563eb;padding-left:9px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+.card-highlight{background:linear-gradient(180deg,rgba(37,99,235,.06),#fff);border-color:rgba(37,99,235,.18)}
+.source-list{columns:2;column-gap:22px;font-size:12px;line-height:1.9}
+.source-list a{display:block;color:#2563eb;text-decoration:none;break-inside:avoid}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.span-4{grid-column:span 1}.grid-2,.vlist-2col,.stat-row{grid-template-columns:1fr}h1{font-size:28px}.source-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="header" data-pagefind-ignore>
+<div class="container"><div class="header-inner">
+<a href="../index.html" class="logo"><div class="logo-icon">🤖</div><span class="logo-text">AI 建造者日报</span></a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="../daily/archive.html" class="nav-link">归档</a>
+</nav></div></div>
+</header>
+<main class="bento">
+<section class="card span-4">
+<div class="label-sm">9月26日 — AI 建造者日报</div>
+<h1>OpenAI 支出逼近 Anthropic，Kimi 与 DeepSeek 分走流失份额</h1>
+<div class="subtitle">Vercel AI Gateway 数据显示 Anthropic 从 69% 滑到 40%、OpenAI 涨到 24%；GitHub Trending 仍是 Agent 基建，深度对话聊 Runway 世界模型。</div>
+<div class="dots-row"><span class="tag">AI 支出</span> <span class="tag">Agent 基建</span> <span class="tag">世界模型</span> <span class="tag">Runway</span> <span class="tag">Muse</span></div>
+<div class="stat-row" style="margin-top:14px">
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">推文</div></div>
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">GitHub 热门</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">RSS 精选</div></div>
+<div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">今日要点</div>
+<div class="grid-2">
+<div class="feature-card">
+<p><strong>Vercel 数据：OpenAI 逼近 Anthropic</strong></p>
+<p>rauchg 公布 AI Gateway 过去两月的各家模型支出占比：Anthropic 仍是第一，但份额从 69% 降到 40%；OpenAI 从 10% 涨到 24%。Kimi K3 与 DeepSeek 拿走了 Anthropic 流失的近一半，Opus 5.5 两天内已占支出的 10%，OpenAI 占图像生成的 62%。</p>
+</div>
+<div class="feature-card">
+<p><strong>Agent 技能框架仍占 Trending，Muse 能造应用</strong></p>
+<p>mattpocock/skills 与 anthropics/skills 新进入当日 Trending，superpowers 继续在列；amasad 展示 Muse 现在能在 Replit 上做应用。智能体记忆 Hindsight、办公套件 Univer 持续升温。</p>
+</div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">深度对话</div>
+<iframe src="https://www.youtube-nocookie.com/embed/fGRd5gYhztg" style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;margin-bottom:12px" allowfullscreen></iframe>
+<div class="vlist">
+<div class="vitem"><div class="vitem-desc">
+<strong>Runway&#x27;s Bet Beyond Video: World Models, Robotics, and the Neural OS — Anastasis Germanidis</strong>
+</div>
+<div class="vitem-quote">Runway 联合创始人兼联合 CEO Anastasis Germanidis 与 Latent Space 对谈，讲 Runway 如何从最早押注生成式视频，走到构建能模拟物理、驱动机器人、渲染交互环境的世界模型。节目围绕 GWM Worlds 2 展开，它把高保真视频与音频生成变成实时交互模拟，被 Runway 称为「自回归扩散」模型。其中 WorldPrompt 是一种新的输入格式，可固定首帧等环境要素，再生成一系列带时间戳的事件，动作甚至支持实时提示。Runway 估值 53 亿美元（2 月融资 3.15 亿美元），同期竞争者有 DeepMind Genie 3、Odyssey-2 Pro 与 World Labs RTFM。Germanidis 还谈到「全神经操作系统」的愿景，以及世界模型如何走向机器人。</div></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">RSS 精选</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667747&amp;idx=1&amp;sn=ed916e27908ec5862d165217c8cc68d0" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-25</span>
+</div>
+<div class="rss-title">刚刚，DeepSeek Harness 桌面预览版上线！Mac与Windows均可下载</div>
+<div class="rss-desc">最新版本为0.1.7-rc.2，支持账号额度与API Key</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667691&amp;idx=1&amp;sn=9b6dbbac466826f6966363698a7a3dc2" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-24</span>
+</div>
+<div class="rss-title">Agent 开始接管现实任务，边缘计算需要接住什么？</div>
+<div class="rss-desc">去年站上英特尔大会舞台时，机器人“小英”的任务还是念一段重庆话 Rap。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667691&amp;idx=2&amp;sn=fb18a305a0e60f648df7b4cbf84646e1" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-24</span>
+</div>
+<div class="rss-title">招商银行训推一体云原生参考架构实践</div>
+<div class="rss-desc">2026 年 9 月，招商银行训推一体云原生平台获得 CNCF 参考架构奖，并成为 CNCF 最终用户案例大赛获奖案例。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667666&amp;idx=1&amp;sn=5b2db7bfb007dffa13bb2759e38a4c9f" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-23</span>
+</div>
+<div class="rss-title">修仙、互怼、演志怪: 千问语音模型真实测评</div>
+<div class="rss-desc">大模型的更新，已经从聊天框一路卷到了耳机里。</div>
+</a></div>
+<div class="vitem">
+<a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667666&amp;idx=2&amp;sn=356606f50a62f2eda30b65f46723bd43" target="_blank" class="rss-card">
+<div class="rss-header">
+<span class="rss-source">AI前线</span>
+<span class="rss-date">09-23</span>
+</div>
+<div class="rss-title">Meta 打造“组织第二大脑”智能体的设计思路</div>
+<div class="rss-desc">Meta 介绍了一种 AI 智能体的设计思路，可以捕获领域专家逻辑与专业知识，而非单纯存储文档或检索相关信息。</div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">建造者动态</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://x.com/amasad/status/2103129037011120525" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-amasad.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Amjad Masad</span>
+<span class="tweet-handle">@amasad</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Muse can now make apps on Replit https://t.co/AColbWFCEN</div>
+<div class="tweet-translation">Muse 现在可以在 Replit 上制作应用了</div>
+<div class="tweet-media"><img src="assets/2026-09-26/amasad-2103129037011120525-0.jpg" alt="" loading="lazy" width="1200" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 1.7k</span><span>↺ 50</span><span>💬 100</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2103212051065921632" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">lots feedback here, many of you are planning yourself &amp; don&#x27;t need plan mode
+
+others prefer the UX of entering a mode where Claude is just thinking &amp; brainstorming with you
+
+my plan is to:
+- make plan mode into a built-in mod
+- allow mods to add new modes or override shift+tab https://t.co/SL1IzLvb17</div>
+<div class="tweet-translation">收到很多反馈：很多人自己规划、并不需要 plan mode；另一些人更喜欢进入一种「Claude 只和你一起思考、头脑风暴」的模式。我的计划是：把 plan mode 做成内置 mod，并允许 mods 新增模式或覆盖 shift+tab。</div>
+<div class="tweet-metrics"><span>♥ 1.7k</span><span>↺ 29</span><span>💬 193</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/rauchg/status/2103216656747262419" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-rauchg.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Guillermo Rauch</span>
+<span class="tweet-handle">@rauchg</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Spend of OpenAI vs Anthropic vs Open 
+(Vercel AI Gateway, last 2 months)
+
+• Anthropic still #1 in spend, but went 69% → 40%
+• OpenAI: 10% → 24% in spend
+• GPT-6 Astra + GPT 5.6 Sol are ripping
+• OpenAI now leads in tokens #
+• Kimi K3 + DeepSeek took ~half of Anthropic&#x27;s loss
+• Opus 5.5 is up to 10% of spend in 2 days
+• OpenAI is 62% of image generations 
+
+Watch here: https://t.co/Gu7D9d7M8w</div>
+<div class="tweet-translation">Vercel AI Gateway 过去两个月的各家模型支出占比：Anthropic 仍是支出第一，但从 69% 降到 40%；OpenAI 从 10% 涨到 24%；GPT-6 Astra 与 GPT 5.6 Sol 势头很猛；OpenAI 现在 token 用量领先；Kimi K3 + DeepSeek 吃掉了 Anthropic 流失的近一半；Opus 5.5 两天内已占支出的 10%；OpenAI 占图像生成的 62%。</div>
+<div class="tweet-media"><img src="assets/2026-09-26/rauchg-2103216656747262419-0.jpg" alt="" loading="lazy" width="1200" height="676" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 635</span><span>↺ 34</span><span>💬 114</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2103223477130129726" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">more conferences could implement this. so much high value time wasted without thought https://t.co/jn93l7JyoH</div>
+<div class="tweet-translation">更多会议应该采用这种做法——太多高价值的时间被无谓地浪费了。</div>
+<div class="tweet-media"><img src="assets/2026-09-26/swyx-2103223477130129726-0.jpg" alt="" loading="lazy" width="900" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 504</span><span>↺ 29</span><span>💬 45</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2103259550325575806" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">incredibly thoughtful piece on AI and creativity
+
+hopefully we can make our producst better at enabling and amplifying creatives https://t.co/SeI25wbaI7</div>
+<div class="tweet-translation">关于 AI 与创造力的一篇深度好文。希望我们能做出更好的产品，去赋能和放大创作者。</div>
+<div class="tweet-metrics"><span>♥ 518</span><span>↺ 12</span><span>💬 24</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2103150483062014436" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Afghanistan is more excited about AI than we are? https://t.co/rbkSf8pUkM</div>
+<div class="tweet-translation">阿富汗比我们还更兴奋于 AI？</div>
+<div class="tweet-metrics"><span>♥ 317</span><span>↺ 14</span><span>💬 58</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2103148444701610233" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">If you just tell the agent to clean up, it will stop far too early. Give it an ambitious goal. Try &quot;remove 20% of the least useful tests while maintaining code coverage within 2%&quot;</div>
+<div class="tweet-translation">如果你只告诉 agent「清理一下」，它会过早停手。给它一个雄心勃勃的目标——比如「删掉 20% 最没用的测试，同时把代码覆盖率保持在 2% 以内」。</div>
+<div class="tweet-metrics"><span>♥ 316</span><span>↺ 10</span><span>💬 12</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/joshwoodward/status/2103182635992514569" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-joshwoodward.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Josh Woodward</span>
+<span class="tweet-handle">@joshwoodward</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">Dreambeans is one of our newer experiments in @GoogleLabs. It has a growing cult following. 
+
+It’s simple: a fixed number of “beans” brew every morning. They point you at the real world, with real people, doing things you care about together.
+
+Give it a try! https://t.co/cUVgf5wn5b</div>
+<div class="tweet-translation">Dreambeans 是 GoogleLabs 较新的一个实验，正在积累一批忠实粉丝。玩法很简单：每天早晨「煮」出固定数量的豆子，把你引向真实世界、真实的人，一起做你在乎的事。</div>
+<div class="tweet-media"><img src="assets/2026-09-26/joshwoodward-2103182635992514569-0.jpg" alt="" loading="lazy" width="539" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-26/joshwoodward-2103182635992514569-1.jpg" alt="" loading="lazy" width="539" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-26/joshwoodward-2103182635992514569-2.jpg" alt="" loading="lazy" width="539" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-26/joshwoodward-2103182635992514569-3.jpg" alt="" loading="lazy" width="539" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 149</span><span>↺ 5</span><span>💬 16</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/trq212/status/2103212052391354794" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-trq212.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Thariq</span>
+<span class="tweet-handle">@trq212</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">this should let you customize the plan mode prompt, create + share your own modes or just ignore it and rebind shift+tab to something else all together</div>
+<div class="tweet-translation">这可以让你自定义 plan mode 的提示词、创建并分享自己的模式，或者干脆无视它、把 shift+tab 重新绑定到别的东西上。</div>
+<div class="tweet-metrics"><span>♥ 137</span><span>↺ 0</span><span>💬 13</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/danshipper/status/2103283846645166283" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-danshipper.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Dan Shipper</span>
+<span class="tweet-handle">@danshipper</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">so freaking cool https://t.co/gmU7Izxyuy</div>
+<div class="tweet-translation">太酷了</div>
+<div class="tweet-metrics"><span>♥ 44</span><span>↺ 1</span><span>💬 3</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/petergyang/status/2103311956639973774" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-petergyang.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Yang</span>
+<span class="tweet-handle">@petergyang</span>
+</div>
+<span class="tweet-date">23h</span>
+</div>
+<div class="tweet-body">😂 this is love https://t.co/xUgorFN8IG</div>
+<div class="tweet-translation">😂 这就是爱</div>
+<div class="tweet-metrics"><span>♥ 39</span><span>↺ 0</span><span>💬 2</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/nikunj/status/2103276414187548791" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-nikunj.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Nikunj Kothari</span>
+<span class="tweet-handle">@nikunj</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">This is the way.. https://t.co/hwQIqAUlBC https://t.co/36ToP9fUlB</div>
+<div class="tweet-translation">就该这么干……</div>
+<div class="tweet-media"><img src="assets/2026-09-26/nikunj-2103276414187548791-0.jpg" alt="" loading="lazy" width="737" height="1024" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 31</span><span>↺ 4</span><span>💬 1</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/mattturck/status/2103167531917721866" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-mattturck.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Matt Turck</span>
+<span class="tweet-handle">@mattturck</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">In Jensen&#x27;s 5 layer cake analogy for AI (energy, chips, infrastructure, models, applications), the middle layer (esp the software infra part) is much less understood - and thats where @VAST_Data became a $30B company few people know about, powering @SpaceXAI, @CoreWeave, @nebiusai, @MistralAI, @nscale etc
+
+My conversation with Renen Hallak, CEO:
+
+00:00 Intro
+00:51 The hidden software layer in NVIDIA&#x27;s AI stack 02:28 What actually makes an &quot;AI factory&quot;?
+05:13 Should Walmart and Goldman build their own AI?
+06:20 &quot;We infer during the day, fine-tune at night&quot;
+13:16 Announcement: frontier models &amp; sensitive data
+15:32 From P vs. NP to founding VAST Data
+17:32 OpenAI, Navier–Stokes and 10,000 agents
+20:25 The pre-transformer insight behind VAST
+21:55 DASE: VAST&#x27;s &quot;shared everything&quot; architecture 
+25:18 &quot;Storage was where startups go to die&quot;
+27:39 Trillions of vectors: why old databases break
+29:01 Are S3, Snowflake and Databricks ready for AI
+31:29 Data gravity, vendor lock-in and zero churn
+33:13 Training vs. inference: why the infrastructure changes
+34:46 Model routing, KV caches, RAG &amp; agent memory
+36:59 Identity, permissions and security for AI agents 40:27 Can multi-agent systems unlock scientific discovery?
+41:55 DataEnclave: how confidential AI protects data and weights
+45:16 Who should be AI&#x27;s trust layer?
+46:37 &quot;Sometimes it scares me&quot;: 500 petabytes to 2 exabytes
+50:08 Is circular AI financing creating systemic risk
+51:32 Why VAST is profitable when AI infra isn&#x27;t
+53:24 What separates the winning neoclouds?
+55:06 &quot;Their lunch is being eaten&quot;: why hyperscalers lag
+59:10 Where will the trillions accrue across the AI stack
+1:01:18 NVIDIA: &quot;There&#x27;s no legal document between us&quot;
+1:03:59 What VAST learned from xAI and @elonmusk 
+1:05:36 &quot;Bad things loudly and often&quot;: building at AI speed
+1:06:53 More change in 10 years than the previous 1,000?
+1:08:39 VAST&#x27;s endgame: all the data in the world</div>
+<div class="tweet-translation">在 Jensen 的 AI 五层蛋糕比喻（能源、芯片、基础设施、模型、应用）里，中间层（尤其是软件基础设施）最不为人知——VAST Data 正是在这里长成了一家鲜为人知的 300 亿美元公司，支撑着 SpaceXAI、CoreWeave、nebius、MistralAI、nscale 等。我与 CEO Renen Hallak 的对话：……</div>
+<div class="tweet-media"><img src="assets/2026-09-26/mattturck-2103167531917721866-0.jpg" alt="" loading="lazy" width="1200" height="675" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 19</span><span>↺ 8</span><span>💬 9</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/swyx/status/2103361254433993165" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-swyx.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Swyx</span>
+<span class="tweet-handle">@swyx</span>
+</div>
+<span class="tweet-date">20h</span>
+</div>
+<div class="tweet-body">In Jan this year I called my content strategy shot: &quot;Scaling without Slop&quot;. 
+
+It&#x27;s finally starting to work. It took us 3 years to reach our first 100k on youtube. It only took 1.2 months for the next 100k. Similar other metrics on AEO/SEO/subscriber traction and have a lot of New Media ideas that I&#x27;m excited to pursue.
+
+officially giving notice of the next phase of Latent Space, AINews, and what the rest of swyx inc has been cooking below</div>
+<div class="tweet-translation">今年 1 月我立下内容策略的 flag：「Scaling without Slop」（规模化而不注水）。现在终于开始见效——YouTube 第一个 10 万粉花了 3 年，下一个 10 万只用了 1.2 个月……</div>
+<div class="tweet-media"><img src="assets/2026-09-26/swyx-2103361254433993165-0.jpg" alt="" loading="lazy" width="1000" height="1200" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 23</span><span>↺ 0</span><span>💬 12</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/steipete/status/2103200311641076100" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-steipete.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Peter Steinberger</span>
+<span class="tweet-handle">@steipete</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">I put Daybreak on it and found 8 more long-standing leaks. Care for your oss dependencies! https://t.co/pTwsuhEvxs</div>
+<div class="tweet-translation">我把 Daybreak 用上去，又发现了 8 个长期存在的泄漏。好好照看你的开源依赖吧！</div>
+<div class="tweet-metrics"><span>♥ 19</span><span>↺ 0</span><span>💬 7</span></div>
+</a></div>
+<div class="vitem">
+<a href="https://x.com/adityaag/status/2103230206005612661" target="_blank" class="tweet-card">
+<div class="tweet-header">
+<img class="tweet-avatar" src="assets/2026-09-26/avatar-adityaag.jpg" alt="" loading="lazy">
+<div class="tweet-author">
+<span class="tweet-name">Aditya Agarwal</span>
+<span class="tweet-handle">@adityaag</span>
+</div>
+<span class="tweet-date">1d</span>
+</div>
+<div class="tweet-body">It was great speaking with @SteveHiltonx at @spc for a conversation on California&#x27;s future.
+
+We have more work to do. Onwards. https://t.co/tEXWt8Xfhd</div>
+<div class="tweet-translation">很高兴在 @spc 与 @SteveHiltonx 聊了加州未来的话题。还有很多工作要做，继续前进。</div>
+<div class="tweet-media"><img src="assets/2026-09-26/adityaag-2103230206005612661-0.jpg" alt="" loading="lazy" width="1200" height="800" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-media"><img src="assets/2026-09-26/adityaag-2103230206005612661-1.jpg" alt="" loading="lazy" width="1200" height="800" style="max-width:100%;border-radius:8px;margin-top:8px"></div>
+<div class="tweet-metrics"><span>♥ 7</span><span>↺ 2</span><span>💬 0</span></div>
+</a></div>
+</div></section>
+<section class="card span-4">
+<div class="label-sm">GitHub Trending</div>
+<div class="vlist-2col">
+<div class="vitem">
+<a href="https://github.com/paperclipai/paperclip" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/paperclipai.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">paperclipai</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">paperclip</span>
+</div>
+<span class="gh-stars">⭐ 85k</span>
+</div>
+<div class="gh-body">The open-source app everyone uses to manage agents at work</div>
+<div class="gh-translation">人人都在用的开源应用，用于管理工作中的智能体</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 15.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anthropics/claude-plugins-official" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">claude-plugins-official</span>
+</div>
+<span class="gh-stars">⭐ 36.9k</span>
+</div>
+<div class="gh-body">Official, Anthropic-managed directory of high quality Claude Code Plugins.</div>
+<div class="gh-translation">Anthropic 官方维护的高质量 Claude Code 插件目录</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 4.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/vectorize-io/hindsight" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/vectorize-io.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">vectorize-io</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">hindsight</span>
+</div>
+<span class="gh-stars">⭐ 29.9k</span>
+</div>
+<div class="gh-body">Hindsight: Agent Memory That Learns</div>
+<div class="gh-translation">Hindsight：会学习的智能体记忆</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 3.2k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/obra/superpowers" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/obra.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">obra</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">superpowers</span>
+</div>
+<span class="gh-stars">⭐ 291.7k</span>
+</div>
+<div class="gh-body">An agentic skills framework &amp; software development methodology that works.</div>
+<div class="gh-translation">一套真能用的智能体技能框架与软件开发方法论</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 26.1k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">mattpocock</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 269.7k</span>
+</div>
+<div class="gh-body">Skills for Real Engineers. Straight from my .agents directory.</div>
+<div class="gh-translation">给真正工程师的技能，直接来自我的 .agents 目录</div>
+<div class="gh-meta">
+<span class="gh-lang">● Shell</span>
+<span class="gh-forks">🍎 22.7k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/dream-num/univer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/dream-num.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">dream-num</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">univer</span>
+</div>
+<span class="gh-stars">⭐ 18.5k</span>
+</div>
+<div class="gh-body">The Office Harness for AI Agents — Spreadsheets, Docs, Slides, Canvas, Relational Tables, and PDF in one runtime.</div>
+<div class="gh-translation">面向 AI 智能体的办公套件——表格、文档、幻灯片、画布、关系表与 PDF 集成于同一运行时</div>
+<div class="gh-meta">
+<span class="gh-lang">● TypeScript</span>
+<span class="gh-forks">🍎 1.6k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/anthropics/skills" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/anthropics.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">anthropics</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">skills</span>
+</div>
+<span class="gh-stars">⭐ 178.3k</span>
+</div>
+<div class="gh-body">Public repository for Agent Skills</div>
+<div class="gh-translation">Agent Skills 的公开仓库</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 21.1k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/androoAGI/starnet" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/androoAGI.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">androoAGI</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">starnet</span>
+</div>
+<span class="gh-stars">⭐ 492</span>
+</div>
+<div class="gh-body">A living pixel-art station where real AI agents do real work. Local-first desktop agent harness - bring your own key, watch your crew actually run.</div>
+<div class="gh-translation">一个活的像素艺术工作站，真正的 AI 智能体在这里干真活。本地优先的桌面智能体框架——自带密钥，看着你的小队真正跑起来</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 94</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/derv82/wifit3" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/derv82.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">derv82</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">wifit3</span>
+</div>
+<span class="gh-stars">⭐ 941</span>
+</div>
+<div class="gh-body">Wifite but USB-only &amp; cross-platform.</div>
+<div class="gh-translation">Wifite 的 USB-only 跨平台版本</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 87</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/kelseyhightower.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">kelseyhightower</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">kubernetes-the-hard-way</span>
+</div>
+<span class="gh-stars">⭐ 50.1k</span>
+</div>
+<div class="gh-body">Bootstrap Kubernetes the hard way. No scripts.</div>
+<div class="gh-translation">用最硬核的方式搭建 Kubernetes，不用脚本</div>
+<div class="gh-meta">
+<span class="gh-forks">🍎 15.9k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/rohitg00.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">rohitg00</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ai-engineering-from-scratch</span>
+</div>
+<span class="gh-stars">⭐ 57.5k</span>
+</div>
+<div class="gh-body">Learn it. Build it. Ship it for others.</div>
+<div class="gh-translation">学会它、构建它、为他人交付它</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 10k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/shy3130/tick-stock-panel" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/shy3130.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">shy3130</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">tick-stock-panel</span>
+</div>
+<span class="gh-stars">⭐ 5.1k</span>
+</div>
+<div class="gh-body">TSP自托管、零运维的 A 股「选股 + 监控 + 回测」量化工作台 | LLM能力驱使策略定制+个股分析+复盘 | 自由接入第三方数据源与个性化扩展数据 | 个人开源</div>
+<div class="gh-translation"></div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 1.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/google/ax" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/google.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">google</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">ax</span>
+</div>
+<span class="gh-stars">⭐ 11.5k</span>
+</div>
+<div class="gh-body">Google&#x27;s open agentic orchestration runtime</div>
+<div class="gh-translation">Google 开源的智能体编排运行时</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 554</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/NVIDIA/Model-Optimizer" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/NVIDIA.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">NVIDIA</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">Model-Optimizer</span>
+</div>
+<span class="gh-stars">⭐ 4.5k</span>
+</div>
+<div class="gh-body">A unified library of SOTA model optimization techniques like quantization, distillation, pruning, neural architecture search, speculative decoding, etc. It compresses deep learning models for downstream deployment frameworks like TensorRT-LLM, TensorRT, vLLM, etc. to optimize inference speed.</div>
+<div class="gh-translation">统一的 SOTA 模型优化技术库，涵盖量化、蒸馏、剪枝、神经架构搜索、投机解码等，把深度学习模型压缩后交给 TensorRT-LLM、TensorRT、vLLM 等下游部署框架以优化推理速度</div>
+<div class="gh-meta">
+<span class="gh-lang">● Python</span>
+<span class="gh-forks">🍎 650</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/pbakaus/impeccable" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/pbakaus.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">pbakaus</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">impeccable</span>
+</div>
+<span class="gh-stars">⭐ 71.2k</span>
+</div>
+<div class="gh-body">The design language that makes your AI harness better at design.</div>
+<div class="gh-translation">让 AI 工作台更擅长设计的设计语言</div>
+<div class="gh-meta">
+<span class="gh-lang">● JavaScript</span>
+<span class="gh-forks">🍎 4.3k</span>
+</div>
+</a></div>
+<div class="vitem">
+<a href="https://github.com/openbao/openbao" target="_blank" class="gh-card">
+<div class="gh-header">
+<img class="gh-avatar" src="https://github.com/openbao.png" alt="" loading="lazy">
+<div class="gh-repo">
+<span class="gh-owner">openbao</span>
+<span class="gh-sep">/</span>
+<span class="gh-name">openbao</span>
+</div>
+<span class="gh-stars">⭐ 7.7k</span>
+</div>
+<div class="gh-body">OpenBao is a software solution to manage, store, and distribute sensitive data including secrets, certificates, and keys.</div>
+<div class="gh-translation">管理、存储并分发敏感数据（密钥、证书、私钥）的软件解决方案</div>
+<div class="gh-meta">
+<span class="gh-lang">● Go</span>
+<span class="gh-forks">🍎 585</span>
+</div>
+</a></div>
+</div></section>
+<section class="card span-4 card-highlight">
+<div class="label-sm">今日思考</div>
+<p class="text-body">Vercel 的支出数据把模型层的竞争摆到了明面上：Anthropic 从 69% 滑到 40%，OpenAI 从 10% 涨到 24%，Kimi 与 DeepSeek 分走了 Anthropic 流失的近一半。另一边，GitHub Trending 仍被 Agent 基建占据，mattpocock/skills 与 anthropics/skills 新进榜。模型层和编排层在同一天里同时热闹起来。</p>
+</section>
+<section class="card span-4" data-pagefind-ignore>
+<div class="label-sm">参考来源</div>
+<div class="source-list">
+<a href="https://x.com/adityaag">@adityaag — Aditya Agarwal</a>
+<a href="https://x.com/amasad">@amasad — Amjad Masad</a>
+<a href="https://x.com/danshipper">@danshipper — Dan Shipper</a>
+<a href="https://x.com/joshwoodward">@joshwoodward — Josh Woodward</a>
+<a href="https://x.com/mattturck">@mattturck — Matt Turck</a>
+<a href="https://x.com/nikunj">@nikunj — Nikunj Kothari</a>
+<a href="https://x.com/petergyang">@petergyang — Peter Yang</a>
+<a href="https://x.com/rauchg">@rauchg — Guillermo Rauch</a>
+<a href="https://x.com/steipete">@steipete — Peter Steinberger</a>
+<a href="https://x.com/swyx">@swyx — Swyx</a>
+<a href="https://x.com/trq212">@trq212 — Thariq</a>
+<a href="https://github.com/trending?since=daily">GitHub Trending</a>
+<a href="https://www.youtube.com/watch?v=fGRd5gYhztg">Latent Space</a>
+</div></section>
+</main>
+<footer style="text-align:center;padding:28px 20px 40px;color:#8b8b8b;font-size:11px" data-pagefind-ignore>AI 建造者日报 · 自动生成 · CC0</footer>
+<script src="../search.js?v=20260926" defer></script>
+<script src="../site.js?v=20260926" defer></script>
+</body></html>

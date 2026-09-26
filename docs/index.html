@@ -76,7 +76,8 @@ const REPORTS = [
   '2026-09-22',
   '2026-09-23',
   '2026-09-24',
-  '2026-09-25'
+  '2026-09-25',
+  '2026-09-26'
 ];
 const REPORT_SET = new Set(REPORTS);
 const DAY_NAMES = ['一','二','三','四','五','六','日'];
@@ -209,10 +210,20 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 <div class="daily-layout">
 <div class="daily-left">
-<a href="daily/ai-news-2026-09-25.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<a href="daily/ai-news-2026-09-26.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
 <div style="flex:1;min-width:0;">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span class="featured-badge">最新</span>
+<span style="font-size:12px;color:var(--text-muted);">9月26日</span>
+</div>
+<div style="font-weight:500;font-size:15px;margin-bottom:6px;">OpenAI 支出逼近 Anthropic，Kimi 与 DeepSeek 分走流失份额</div>
+<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Vercel AI Gateway 数据显示 Anthropic 从 69% 滑到 40%、OpenAI 涨到 24%；GitHub Trending 仍是 Agent 基建，深度对话聊 Runway 世界模型。</div>
+</div>
+<div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
+</a>
+<a href="daily/ai-news-2026-09-25.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<div style="flex:1;min-width:0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span style="font-size:12px;color:var(--text-muted);">9月25日</span>
 </div>
 <div style="font-weight:500;font-size:15px;margin-bottom:6px;">Claude Marketplace 开张，Agent 摆上货架；可「速度不是意义」</div>
@@ -230,26 +241,16 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 <div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
 </a>
-<a href="daily/ai-news-2026-09-23.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
-<div style="flex:1;min-width:0;">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-<span style="font-size:12px;color:var(--text-muted);">9月23日</span>
-</div>
-<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Codex 蓄势待发，Agent 使用软件将超人类百倍</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;"><strong>Codex 创始人预告周二「reset」，据传即将把 agent 推向大众；Levie 断言 Agent 使用软件将超人类百倍；Peter Yang 预警广告市场将迎 Agent 时代冲击；Grok 4.7 逆向运行中二进制获 rauchg 盛赞</strong></div>
-</div>
-<div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
-</a>
 <a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
 <span style="font-size:12px;font-weight:500;color:var(--text-secondary);">历史日报</span>
-<span style="font-size:11px;color:var(--text-muted);">共 147 期归档 →</span>
+<span style="font-size:11px;color:var(--text-muted);">共 148 期归档 →</span>
 </a>
 </div>
 <div class="daily-right">
 <div class="calendar-card">
 <div class="cal-header">
 <button class="cal-nav-btn" onclick="calPrev()" title="上个月">◀</button>
-<span class="cal-month-label" id="cal-month-label">2026年 8月</span>
+<span class="cal-month-label" id="cal-month-label">2026年 9月</span>
 <button class="cal-nav-btn" onclick="calNext()" title="下个月">▶</button>
 </div>
 <div class="cal-day-names">
@@ -292,25 +293,25 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 <a href="research/archive.html" class="section-link">查看全部 →</a>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;">
-<a href="research/hl-mem-agent-memory.html" class="featured-card">
+<a href="research/ai-coding-gpu-production-paradigm.html" class="featured-card">
 <div class="featured-content">
-<div class="featured-meta"><span class="featured-badge">最新</span><span>2026/9/11</span></div>
-<h3 class="featured-title">HL-Mem：让 Agent 像人一样记忆的本地长期记忆系统</h3>
-<p class="featured-desc">淘天直播 AIGC 团队开源的 Agent 长期记忆系统：事实+经验双通道、Event/Claim 证据链、valid/recorded 双时钟、supersede 改口链、三层遗忘，SQLite 单文件部署，中文 FTS 一等公民</p>
+<div class="featured-meta"><span class="featured-badge">最新</span><span>2026/9/26</span></div>
+<h3 class="featured-title">从手工作坊到并行计算：AI Coding 的 GPU 化生产范式</h3>
+<p class="featured-desc">AI Coding 正在把软件生产从单人串行手工劳动，改造成由人类编排、Agent 并行生成、自动化系统验证的高吞吐工作流。本文用 CPU/GPU 类比梳理这一范式的机制、证据与边界。</p>
 </div>
 <div class="featured-arrow">→</div>
+</a><a href="research/hl-mem-agent-memory.html" class="daily-entry">
+<div class="entry-icon">📊</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:2px;">HL-Mem：让 Agent 像人一样记忆的本地长期记忆系统</div>
+<div style="font-size:12px;color:var(--text-muted);">2026/9/11 · 深度调研</div>
+</div>
+<div style="font-size:16px;color:var(--text-muted);">→</div>
 </a><a href="research/tmall-mdi-ai-collab.html" class="daily-entry">
 <div class="entry-icon">📊</div>
 <div style="flex:1;">
 <div style="font-weight:500;font-size:14px;margin-bottom:2px;">天猫 MDI：AI 研发协同从「超级个体」到「全员赋能」的四级进化</div>
 <div style="font-size:12px;color:var(--text-muted);">2026/9/7 · 深度调研</div>
-</div>
-<div style="font-size:16px;color:var(--text-muted);">→</div>
-</a><a href="research/taobao-project-harness.html" class="daily-entry">
-<div class="entry-icon">📊</div>
-<div style="flex:1;">
-<div style="font-weight:500;font-size:14px;margin-bottom:2px;">淘天项目 Harness：AI 驱动研发体系的上下文引擎</div>
-<div style="font-size:12px;color:var(--text-muted);">2026/9/2 · 深度调研</div>
 </div>
 <div style="font-size:16px;color:var(--text-muted);">→</div>
 </a>
