@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从扩散推理到 Agent 实验，AI 进展更需要证据链 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 9月28日</div>
+  <h1>从扩散推理到 Agent 实验，AI 进展更需要证据链</h1>
+  <div class="subtitle">No Priors 讨论扩散语言模型的并行推理，Builder 展示真实工作流；官方研究与开源项目提醒我们核对速度、质量和实验边界。</div>
+  <div class="dots-row">
+    <span class="tag">扩散推理</span>
+    <span class="tag">Agent 工作流</span>
+    <span class="tag">科研验证</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">热门项目</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">官方与 RSS</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">深度对话</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>Rauch 对 AI 文字质量提出警醒。</strong> 一则性能优化帖把效果归因于编译器，但其 PR 描述指向算法和数据结构变化；读者应追溯原始改动。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/rauchg/status/2103939888513274147" target="_blank" class="vitem-link">Rauch 原帖 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>路线选择需要实测。</strong> Inception 创始人在 No Priors 解释扩散语言模型的并行推理赌注；Anthropic 的生物研究展示 Agent 发现候选系统后由实验室继续验证。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.youtube.com/watch?v=N1rjtDs8blY" target="_blank" class="vitem-link">观看对谈 →</a>
+        <a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system" target="_blank" class="vitem-link">阅读研究 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>No Priors：扩散模型能否改变 AI 推理成本</h2>
+  <div class="text-body">9 月 18 日，Sarah Guo 对谈 Inception 联合创始人兼 CEO Stefano Ermon。节目讨论扩散语言模型为何可能在文本与代码生成中获得更高并行度；以下数字均为受访者对其研究的描述。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/N1rjtDs8blY" title="No Priors：扩散模型能否改变 AI 推理成本" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">顺序生成的瓶颈</div><div class="vitem-desc">Ermon 解释，自回归模型生成时逐 token 依赖此前输出，推理工作负载因此较难充分利用 GPU 并行计算。</div></div>
+    <div class="vitem"><div class="vitem-title">扩散路径的实验</div><div class="vitem-desc">他称团队在 2024 年的 GPT-2 规模研究中，以相同数据和参数量达到相近困惑度，并观察到约 10 倍的文本生成速度；这不能直接外推到更大的商用模型。</div></div>
+    <div class="vitem"><div class="vitem-title">关键判断仍待规模化检验</div><div class="vitem-desc">Inception 正尝试扩大扩散语言模型规模。Ermon 认为每美元和每瓦特获得的推理能力会成为重要竞争维度。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=N1rjtDs8blY" target="_blank" class="vitem-link">观看完整对谈 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">RSS 精选</div>
+  <h2>官方发布与订阅源</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">Anthropic｜Claude 发现候选酶系统</div>
+  <div class="vitem-desc">Anthropic 9 月 23 日披露：Claude Agent 在反转录酶相关序列中识别出重复 DNA 阵列，研究团队在实验室继续验证。官方明确表示，ART 系统的主要功能尚未确定。</div>
+  <div class="vitem-actions">
+    <a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system" target="_blank" class="vitem-link">阅读官方研究 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Google｜Gemini 扩展连接应用</div>
+  <div class="vitem-desc">Google 9 月 23 日宣布，Gemini 开始逐步接入 Airtable、Linear、Adobe、Webflow 等生产力与创作应用；可用性以实际推出范围为准。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/" target="_blank" class="vitem-link">阅读官方公告 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">AI前线｜9 月 27 日 AI 周报</div>
+  <div class="vitem-desc">AI前线 RSS 更新一期行业周报，汇集客服、模型训练与科学研究等话题；其中具体事件需从周报跳转至原始出处核查。</div>
+  <div class="vitem-actions">
+    <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667760&amp;idx=1&amp;sn=676dc5f7445a8b858f2a4a7d198b9d17" target="_blank" class="vitem-link">阅读周报 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">AIGC Weekly｜第 38 周周刊</div>
+  <div class="vitem-desc">AIGC Weekly 的 RSS 于 9 月 27 日发布第 38 周新一期。这里仅记录更新，不转述未经逐条核对的二手新闻。</div>
+  <div class="vitem-actions">
+    <a href="https://aigc-weekly.agi.li/weekly/Y26W38" target="_blank" class="vitem-link">阅读周刊 →</a>
+  </div>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">建造者动态</div>
+  <h2>Builder 观点与实践</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜AI 文字需要能经得起核对</div>
+    <div class="vitem-desc">Rauch 以一则“编译器带来性能提升”的传播案例提醒读者：当 PR 描述本身指出改进来自算法与数据结构时，应核对因果归因。他担心大量未经验证的 AI 文字会消耗读者对技术内容的信任。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2103939888513274147" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜用规划命令处理生产问题</div>
+    <div class="vitem-desc">Tan 展示自己用 Capy 与 GStack 的 /autoplan 处理生产故障，并标明使用 GPT-6 中等推理强度。这是个人工作流展示，帖子没有提供可推广的修复成功率。</div>
+  </div>
+  <div class="vitem-gallery cols-2">
+    <img src="assets/2026-09-28/garrytan-2103989902476259702-0.jpg" width="800" height="1003" loading="lazy" alt="生产问题规划截图">
+    <img src="assets/2026-09-28/garrytan-2103989902476259702-1.jpg" width="800" height="484" loading="lazy" alt="故障修复流程截图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2103989902476259702" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Yang｜用 Gemini 音频接口做日语练习</div>
+    <div class="vitem-desc">Yang 正在构建会话日语练习应用，计划安排 10 节课、每节 10 个短语。原帖配图展示了个人原型；这是一项开发中的尝试。</div>
+  </div>
+  <div class="vitem-gallery cols-2">
+    <img src="assets/2026-09-28/petergyang-2104059554204188833-0.jpg" width="620" height="1200" loading="lazy" alt="日语练习应用界面一">
+    <img src="assets/2026-09-28/petergyang-2104059554204188833-1.jpg" width="637" height="1200" loading="lazy" alt="日语练习应用界面二">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/petergyang/status/2104059554204188833" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Thariq｜回看用 Claude Code 制作视频</div>
+    <div class="vitem-desc">Thariq 回顾约一年前用 Claude Code 做视频的经历：每条成片都经过较长时间迭代，需要他指出细节错误。帖子强调成品背后的人工反馈过程。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/trq212/status/2103897226154328502" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Dan Shipper｜把《普罗泰戈拉》改编成短片</div>
+    <div class="vitem-desc">Shipper 称先写了柏拉图《普罗泰戈拉》的小说化文本，再让 Opus 5.5 生成短片；帖子发布了第二幕视频。可在原帖直接查看成片。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/danshipper/status/2103894152316645620" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>当日值得看的开源项目</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/paperclipai/paperclip" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/paperclipai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">paperclipai</span><span class="gh-sep">/</span><span class="gh-name">paperclip</span>
+      </div>
+      <span class="gh-stars">⭐ 90.1k</span>
+    </div>
+    <div class="gh-body">面向团队的开源 Agent 工作管理应用；项目自述聚焦在工作中管理多个 Agent。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 15.7k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/vectorize-io/hindsight" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/vectorize-io.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">vectorize-io</span><span class="gh-sep">/</span><span class="gh-name">hindsight</span>
+      </div>
+      <span class="gh-stars">⭐ 37.5k</span>
+    </div>
+    <div class="gh-body">面向 Agent 的可学习记忆系统，项目在当日 Trending 列表中。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 4.8k</span>
+      <span class="gh-topics"><span class="gh-topic">agentic-ai</span><span class="gh-topic">memory</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/debpalash/VoiceStudio" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/debpalash.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">debpalash</span><span class="gh-sep">/</span><span class="gh-name">VoiceStudio</span>
+      </div>
+      <span class="gh-stars">⭐ 40.3k</span>
+    </div>
+    <div class="gh-body">本地运行的语音工作台，仓库列出语音克隆、配音、转写和有声书等功能。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 4.8k</span>
+      <span class="gh-topics"><span class="gh-topic">voice-ai</span><span class="gh-topic">local-first</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/vercel-labs/scriptc" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/vercel-labs.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">vercel-labs</span><span class="gh-sep">/</span><span class="gh-name">scriptc</span>
+      </div>
+      <span class="gh-stars">⭐ 5.4k</span>
+    </div>
+    <div class="gh-body">Vercel Labs 的 TypeScript 到原生代码编译器。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 141</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/mvschwarz/openrig" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/mvschwarz.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">mvschwarz</span><span class="gh-sep">/</span><span class="gh-name">openrig</span>
+      </div>
+      <span class="gh-stars">⭐ 1k</span>
+    </div>
+    <div class="gh-body">多 Agent harness，仓库说明可把 Claude Code 与 Codex 放进同一协作系统。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 105</span>
+      <span class="gh-topics"><span class="gh-topic">multi-agent</span><span class="gh-topic">agent-harness</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/dream-num/univer" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/dream-num.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">dream-num</span><span class="gh-sep">/</span><span class="gh-name">univer</span>
+      </div>
+      <span class="gh-stars">⭐ 20.4k</span>
+    </div>
+    <div class="gh-body">提供表格、文档、幻灯片、画布、关系表与 PDF 的统一运行时。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 1.7k</span>
+      <span class="gh-topics"><span class="gh-topic">spreadsheet</span><span class="gh-topic">sdk</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    项目来自 9 月 28 日 GitHub Trending 当日列表；星标与 Fork 数为同日 10:02（北京时间）GitHub API 快照，会持续变化。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>速度、准确性和证据链要一起看</h2><div class="text-body">更快生成代码、文字和视频，可以扩大探索范围；公开传播的技术结论仍需对应原始改动、测量条件与人工复核。今天最值得带走的习惯是：先找到实验或代码中的因果证据，再复述漂亮的性能数字。<a href="https://x.com/rauchg/status/2103939888513274147" target="_blank">查看 Rauch 的原帖 →</a><br><strong>今日一问：</strong>你最近转述的一项 AI 性能结论，是否能追溯到原始实验条件？</div>
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/rauchg/status/2103939888513274147" target="_blank">Guillermo Rauch：AI 文字与性能归因</a>
+    <a href="https://x.com/garrytan/status/2103989902476259702" target="_blank">Garry Tan：生产故障工作流</a>
+    <a href="https://x.com/petergyang/status/2104059554204188833" target="_blank">Peter Yang：日语练习原型</a>
+    <a href="https://x.com/trq212/status/2103897226154328502" target="_blank">Thariq：视频制作回顾</a>
+    <a href="https://x.com/danshipper/status/2103894152316645620" target="_blank">Dan Shipper：短片第二幕</a>
+    <a href="https://www.youtube.com/watch?v=N1rjtDs8blY" target="_blank">No Priors：Stefano Ermon 对谈</a>
+    <a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system" target="_blank">Anthropic：候选酶系统研究</a>
+    <a href="https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/" target="_blank">Google：Gemini 连接应用</a>
+    <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247667760&amp;idx=1&amp;sn=676dc5f7445a8b858f2a4a7d198b9d17" target="_blank">AI前线：9 月 27 日周报</a>
+    <a href="https://aigc-weekly.agi.li/weekly/Y26W38" target="_blank">AIGC Weekly：第 38 周周刊</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub：9 月 28 日 Trending</a>
+    <a href="https://github.com/paperclipai/paperclip" target="_blank">paperclipai/paperclip</a>
+    <a href="https://github.com/vectorize-io/hindsight" target="_blank">vectorize-io/hindsight</a>
+    <a href="https://github.com/debpalash/VoiceStudio" target="_blank">debpalash/VoiceStudio</a>
+    <a href="https://github.com/vercel-labs/scriptc" target="_blank">vercel-labs/scriptc</a>
+    <a href="https://github.com/mvschwarz/openrig" target="_blank">mvschwarz/openrig</a>
+    <a href="https://github.com/dream-num/univer" target="_blank">dream-num/univer</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

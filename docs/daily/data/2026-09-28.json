@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-28",
+  "title": "从扩散推理到 Agent 实验，AI 进展更需要证据链",
+  "summary": "No Priors 讨论扩散语言模型的并行推理，Builder 展示真实工作流；官方研究与开源项目提醒我们核对速度、质量和实验边界。",
+  "heroLabel": "AI 日报 · 9月28日",
+  "tags": [
+    "扩散推理",
+    "Agent 工作流",
+    "科研验证",
+    "GitHub Trending"
+  ],
+  "stats": [
+    {
+      "num": 5,
+      "label": "Builder 动态"
+    },
+    {
+      "num": 6,
+      "label": "热门项目"
+    },
+    {
+      "num": 4,
+      "label": "官方与 RSS"
+    },
+    {
+      "num": 1,
+      "label": "深度对话"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "今日要点",
+      "items": [
+        {
+          "title": "生成效率之外还要核对因果",
+          "summary": "<strong>Rauch 对 AI 文字质量提出警醒。</strong> 一则性能优化帖把效果归因于编译器，但其 PR 描述指向算法和数据结构变化；读者应追溯原始改动。",
+          "links": [
+            {
+              "label": "Rauch 原帖 →",
+              "url": "https://x.com/rauchg/status/2103939888513274147"
+            }
+          ]
+        },
+        {
+          "title": "推理效率与科研验证走向前台",
+          "summary": "<strong>路线选择需要实测。</strong> Inception 创始人在 No Priors 解释扩散语言模型的并行推理赌注；Anthropic 的生物研究展示 Agent 发现候选系统后由实验室继续验证。",
+          "links": [
+            {
+              "label": "观看对谈 →",
+              "url": "https://www.youtube.com/watch?v=N1rjtDs8blY"
+            },
+            {
+              "label": "阅读研究 →",
+              "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "No Priors：扩散模型能否改变 AI 推理成本",
+      "intro": "9 月 18 日，Sarah Guo 对谈 Inception 联合创始人兼 CEO Stefano Ermon。节目讨论扩散语言模型为何可能在文本与代码生成中获得更高并行度；以下数字均为受访者对其研究的描述。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/N1rjtDs8blY",
+      "items": [
+        {
+          "title": "顺序生成的瓶颈",
+          "summary": "Ermon 解释，自回归模型生成时逐 token 依赖此前输出，推理工作负载因此较难充分利用 GPU 并行计算。"
+        },
+        {
+          "title": "扩散路径的实验",
+          "summary": "他称团队在 2024 年的 GPT-2 规模研究中，以相同数据和参数量达到相近困惑度，并观察到约 10 倍的文本生成速度；这不能直接外推到更大的商用模型。"
+        },
+        {
+          "title": "关键判断仍待规模化检验",
+          "summary": "Inception 正尝试扩大扩散语言模型规模。Ermon 认为每美元和每瓦特获得的推理能力会成为重要竞争维度。",
+          "links": [
+            {
+              "label": "观看完整对谈 →",
+              "url": "https://www.youtube.com/watch?v=N1rjtDs8blY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "news",
+      "layout": "rss",
+      "label": "RSS 精选",
+      "title": "官方发布与订阅源",
+      "items": [
+        {
+          "title": "Anthropic｜Claude 发现候选酶系统",
+          "summary": "Anthropic 9 月 23 日披露：Claude Agent 在反转录酶相关序列中识别出重复 DNA 阵列，研究团队在实验室继续验证。官方明确表示，ART 系统的主要功能尚未确定。",
+          "links": [
+            {
+              "label": "阅读官方研究 →",
+              "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+            }
+          ],
+          "source": "Anthropic",
+          "publishedAt": "2026-09-23"
+        },
+        {
+          "title": "Google｜Gemini 扩展连接应用",
+          "summary": "Google 9 月 23 日宣布，Gemini 开始逐步接入 Airtable、Linear、Adobe、Webflow 等生产力与创作应用；可用性以实际推出范围为准。",
+          "links": [
+            {
+              "label": "阅读官方公告 →",
+              "url": "https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/"
+            }
+          ],
+          "source": "Google",
+          "publishedAt": "2026-09-23"
+        },
+        {
+          "title": "AI前线｜9 月 27 日 AI 周报",
+          "summary": "AI前线 RSS 更新一期行业周报，汇集客服、模型训练与科学研究等话题；其中具体事件需从周报跳转至原始出处核查。",
+          "links": [
+            {
+              "label": "阅读周报 →",
+              "url": "https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247667760&idx=1&sn=676dc5f7445a8b858f2a4a7d198b9d17"
+            }
+          ],
+          "source": "AI前线 RSS",
+          "publishedAt": "2026-09-27"
+        },
+        {
+          "title": "AIGC Weekly｜第 38 周周刊",
+          "summary": "AIGC Weekly 的 RSS 于 9 月 27 日发布第 38 周新一期。这里仅记录更新，不转述未经逐条核对的二手新闻。",
+          "links": [
+            {
+              "label": "阅读周刊 →",
+              "url": "https://aigc-weekly.agi.li/weekly/Y26W38"
+            }
+          ],
+          "source": "AIGC Weekly RSS",
+          "publishedAt": "2026-09-27"
+        }
+      ]
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "建造者动态",
+      "title": "Builder 观点与实践",
+      "items": [
+        {
+          "title": "Guillermo Rauch｜AI 文字需要能经得起核对",
+          "summary": "Rauch 以一则“编译器带来性能提升”的传播案例提醒读者：当 PR 描述本身指出改进来自算法与数据结构时，应核对因果归因。他担心大量未经验证的 AI 文字会消耗读者对技术内容的信任。",
+          "links": [
+            {
+              "label": "查看原文 →",
+              "url": "https://x.com/rauchg/status/2103939888513274147"
+            }
+          ]
+        },
+        {
+          "title": "Garry Tan｜用规划命令处理生产问题",
+          "summary": "Tan 展示自己用 Capy 与 GStack 的 /autoplan 处理生产故障，并标明使用 GPT-6 中等推理强度。这是个人工作流展示，帖子没有提供可推广的修复成功率。",
+          "links": [
+            {
+              "label": "查看原文 →",
+              "url": "https://x.com/garrytan/status/2103989902476259702"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-09-28/garrytan-2103989902476259702-0.jpg",
+              "width": 800,
+              "height": 1003,
+              "alt": "生产问题规划截图"
+            },
+            {
+              "src": "assets/2026-09-28/garrytan-2103989902476259702-1.jpg",
+              "width": 800,
+              "height": 484,
+              "alt": "故障修复流程截图"
+            }
+          ],
+          "galleryCols": 2
+        },
+        {
+          "title": "Peter Yang｜用 Gemini 音频接口做日语练习",
+          "summary": "Yang 正在构建会话日语练习应用，计划安排 10 节课、每节 10 个短语。原帖配图展示了个人原型；这是一项开发中的尝试。",
+          "links": [
+            {
+              "label": "查看原文 →",
+              "url": "https://x.com/petergyang/status/2104059554204188833"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-09-28/petergyang-2104059554204188833-0.jpg",
+              "width": 620,
+              "height": 1200,
+              "alt": "日语练习应用界面一"
+            },
+            {
+              "src": "assets/2026-09-28/petergyang-2104059554204188833-1.jpg",
+              "width": 637,
+              "height": 1200,
+              "alt": "日语练习应用界面二"
+            }
+          ],
+          "galleryCols": 2
+        },
+        {
+          "title": "Thariq｜回看用 Claude Code 制作视频",
+          "summary": "Thariq 回顾约一年前用 Claude Code 做视频的经历：每条成片都经过较长时间迭代，需要他指出细节错误。帖子强调成品背后的人工反馈过程。",
+          "links": [
+            {
+              "label": "查看原文 →",
+              "url": "https://x.com/trq212/status/2103897226154328502"
+            }
+          ]
+        },
+        {
+          "title": "Dan Shipper｜把《普罗泰戈拉》改编成短片",
+          "summary": "Shipper 称先写了柏拉图《普罗泰戈拉》的小说化文本，再让 Opus 5.5 生成短片；帖子发布了第二幕视频。可在原帖直接查看成片。",
+          "links": [
+            {
+              "label": "查看原文 →",
+              "url": "https://x.com/danshipper/status/2103894152316645620"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "当日值得看的开源项目",
+      "footnote": "项目来自 9 月 28 日 GitHub Trending 当日列表；星标与 Fork 数为同日 10:02（北京时间）GitHub API 快照，会持续变化。",
+      "items": [
+        {
+          "title": "paperclipai/paperclip",
+          "summary": "面向团队的开源 Agent 工作管理应用；项目自述聚焦在工作中管理多个 Agent。",
+          "url": "https://github.com/paperclipai/paperclip",
+          "owner": "paperclipai",
+          "repoName": "paperclip",
+          "avatar": "https://github.com/paperclipai.png",
+          "stars": 90057,
+          "forks": 15681,
+          "language": "TypeScript",
+          "topics": []
+        },
+        {
+          "title": "vectorize-io/hindsight",
+          "summary": "面向 Agent 的可学习记忆系统，项目在当日 Trending 列表中。",
+          "url": "https://github.com/vectorize-io/hindsight",
+          "owner": "vectorize-io",
+          "repoName": "hindsight",
+          "avatar": "https://github.com/vectorize-io.png",
+          "stars": 37452,
+          "forks": 4850,
+          "language": "Python",
+          "topics": [
+            "agentic-ai",
+            "memory"
+          ]
+        },
+        {
+          "title": "debpalash/VoiceStudio",
+          "summary": "本地运行的语音工作台，仓库列出语音克隆、配音、转写和有声书等功能。",
+          "url": "https://github.com/debpalash/VoiceStudio",
+          "owner": "debpalash",
+          "repoName": "VoiceStudio",
+          "avatar": "https://github.com/debpalash.png",
+          "stars": 40283,
+          "forks": 4786,
+          "language": "Python",
+          "topics": [
+            "voice-ai",
+            "local-first"
+          ]
+        },
+        {
+          "title": "vercel-labs/scriptc",
+          "summary": "Vercel Labs 的 TypeScript 到原生代码编译器。",
+          "url": "https://github.com/vercel-labs/scriptc",
+          "owner": "vercel-labs",
+          "repoName": "scriptc",
+          "avatar": "https://github.com/vercel-labs.png",
+          "stars": 5423,
+          "forks": 141,
+          "language": "TypeScript",
+          "topics": []
+        },
+        {
+          "title": "mvschwarz/openrig",
+          "summary": "多 Agent harness，仓库说明可把 Claude Code 与 Codex 放进同一协作系统。",
+          "url": "https://github.com/mvschwarz/openrig",
+          "owner": "mvschwarz",
+          "repoName": "openrig",
+          "avatar": "https://github.com/mvschwarz.png",
+          "stars": 1018,
+          "forks": 105,
+          "language": "TypeScript",
+          "topics": [
+            "multi-agent",
+            "agent-harness"
+          ]
+        },
+        {
+          "title": "dream-num/univer",
+          "summary": "提供表格、文档、幻灯片、画布、关系表与 PDF 的统一运行时。",
+          "url": "https://github.com/dream-num/univer",
+          "owner": "dream-num",
+          "repoName": "univer",
+          "avatar": "https://github.com/dream-num.png",
+          "stars": 20388,
+          "forks": 1721,
+          "language": "TypeScript",
+          "topics": [
+            "spreadsheet",
+            "sdk"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "今日思考",
+      "intro": "<h2>速度、准确性和证据链要一起看</h2><div class=\"text-body\">更快生成代码、文字和视频，可以扩大探索范围；公开传播的技术结论仍需对应原始改动、测量条件与人工复核。今天最值得带走的习惯是：先找到实验或代码中的因果证据，再复述漂亮的性能数字。<a href=\"https://x.com/rauchg/status/2103939888513274147\" target=\"_blank\">查看 Rauch 的原帖 →</a><br><strong>今日一问：</strong>你最近转述的一项 AI 性能结论，是否能追溯到原始实验条件？</div>",
+      "items": [
+        {
+          "title": "今日一问",
+          "summary": "你最近转述的一项 AI 性能结论，是否能追溯到原始实验条件？"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Guillermo Rauch：AI 文字与性能归因",
+      "url": "https://x.com/rauchg/status/2103939888513274147"
+    },
+    {
+      "title": "Garry Tan：生产故障工作流",
+      "url": "https://x.com/garrytan/status/2103989902476259702"
+    },
+    {
+      "title": "Peter Yang：日语练习原型",
+      "url": "https://x.com/petergyang/status/2104059554204188833"
+    },
+    {
+      "title": "Thariq：视频制作回顾",
+      "url": "https://x.com/trq212/status/2103897226154328502"
+    },
+    {
+      "title": "Dan Shipper：短片第二幕",
+      "url": "https://x.com/danshipper/status/2103894152316645620"
+    },
+    {
+      "title": "No Priors：Stefano Ermon 对谈",
+      "url": "https://www.youtube.com/watch?v=N1rjtDs8blY"
+    },
+    {
+      "title": "Anthropic：候选酶系统研究",
+      "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+    },
+    {
+      "title": "Google：Gemini 连接应用",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/"
+    },
+    {
+      "title": "AI前线：9 月 27 日周报",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247667760&idx=1&sn=676dc5f7445a8b858f2a4a7d198b9d17"
+    },
+    {
+      "title": "AIGC Weekly：第 38 周周刊",
+      "url": "https://aigc-weekly.agi.li/weekly/Y26W38"
+    },
+    {
+      "title": "GitHub：9 月 28 日 Trending",
+      "url": "https://github.com/trending?since=daily"
+    },
+    {
+      "title": "paperclipai/paperclip",
+      "url": "https://github.com/paperclipai/paperclip"
+    },
+    {
+      "title": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight"
+    },
+    {
+      "title": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio"
+    },
+    {
+      "title": "vercel-labs/scriptc",
+      "url": "https://github.com/vercel-labs/scriptc"
+    },
+    {
+      "title": "mvschwarz/openrig",
+      "url": "https://github.com/mvschwarz/openrig"
+    },
+    {
+      "title": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer"
+    }
+  ]
+}
