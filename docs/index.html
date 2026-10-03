@@ -39,7 +39,7 @@ const REPORTS = [
   '2026-09-11','2026-09-12','2026-09-13','2026-09-14','2026-09-15','2026-09-16',
   '2026-09-17','2026-09-18','2026-09-19','2026-09-20','2026-09-21','2026-09-22',
   '2026-09-23','2026-09-24','2026-09-25','2026-09-26','2026-09-27','2026-09-28',
-  '2026-09-29','2026-09-30','2026-10-01','2026-10-02'
+  '2026-09-29','2026-09-30','2026-10-01','2026-10-02','2026-10-03'
 ];
 const REPORT_SET = new Set(REPORTS);
 const DAY_NAMES = ['一','二','三','四','五','六','日'];
@@ -172,16 +172,23 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 </div>
 <div class="daily-layout">
 <div class="daily-left">
-<a href="daily/ai-news-2026-10-02.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
+<a href="daily/ai-news-2026-10-03.html" class="daily-entry daily-entry-today" style="padding:18px 20px;">
 <div style="flex:1;min-width:0;">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
 <span class="featured-badge">最新</span>
-<span style="font-size:12px;color:var(--text-muted);">10月2日</span>
+<span style="font-size:12px;color:var(--text-muted);">10月3日</span>
 </div>
-<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Claude 进入银行工作流，Gemini Skills 接棒 Gems</div>
-<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Anthropic 披露巴克莱银行的 Claude 部署进展；Google 推出 Gemini Skills 并公布 Gems、Opal 迁移安排。Builder 动态与公开视频继续追问 Agent 如何进入真实工作流。</div>
+<div style="font-weight:500;font-size:15px;margin-bottom:6px;">Anthropic 培养企业 FDE，决策模型走向工作流</div>
+<div style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin-bottom:10px;">Anthropic 启动前沿部署工程师培养计划；Cloudflare 推出 Clef 决策模型。Builder 动态聚焦可理解的输出、设计工具与真实业务流程。</div>
 </div>
 <div style="flex-shrink:0;font-size:18px;color:var(--text-muted);">→</div>
+</a><a href="daily/ai-news-2026-10-02.html" class="daily-entry">
+<div class="entry-icon">📰</div>
+<div style="flex:1;">
+<div style="font-weight:500;font-size:14px;margin-bottom:3px;">Claude 进入银行工作流，Gemini Skills 接棒 Gems</div>
+<div style="font-size:12px;color:var(--text-muted);">10月2日 · Anthropic 披露巴克莱银行的 Claude 部署进展；Google 推出 Gemini Skills 并公布 Gems、Opal 迁移安排。Builder 动态与公开视频继续追问 Agent 如何进入真实工作流。</div>
+</div>
+<div style="font-size:16px;color:var(--accent);">→</div>
 </a><a href="daily/ai-news-2026-10-01.html" class="daily-entry">
 <div class="entry-icon">📰</div>
 <div style="flex:1;">
@@ -189,16 +196,9 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 <div style="font-size:12px;color:var(--text-muted);">10月1日 · Google 公布 Gemini 4 Argon 的长任务、编码与防御安全定位，目前只向可信测试方逐步开放；Builder 的 Agent 实践与今日 GitHub 项目补充落地视角。</div>
 </div>
 <div style="font-size:16px;color:var(--accent);">→</div>
-</a><a href="daily/ai-news-2026-09-30.html" class="daily-entry">
-<div class="entry-icon">📰</div>
-<div style="flex:1;">
-<div style="font-weight:500;font-size:14px;margin-bottom:3px;">DevDay 推出持续运行 Agent，模型选型进入任务账本</div>
-<div style="font-size:12px;color:var(--text-muted);">9月30日 · OpenAI DevDay 发布 dots 与 GPT‑6.1 Sol；官方文档给出持续任务边界和模型定价，Builder 实践与 GitHub 项目提供落地视角。</div>
-</div>
-<div style="font-size:16px;color:var(--accent);">→</div>
 </a><a href="daily/archive.html" class="daily-entry daily-entry-archive" style="justify-content:space-between;">
 <span style="font-size:12px;font-weight:500;color:var(--text-secondary);">历史日报</span>
-<span style="font-size:11px;color:var(--text-muted);">共 154 期归档 →</span>
+<span style="font-size:11px;color:var(--text-muted);">共 155 期归档 →</span>
 </a>
 </div>
 <div class="daily-right">
@@ -252,14 +252,14 @@ const MONTH_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9
 <div class="featured-content">
 <div class="featured-meta"><span class="featured-badge">最新</span><span>2026/10/2</span></div>
 <h3 class="featured-title">AtoA 实践：多 Agent 协作为什么用数据库做交接层</h3>
-<p class="featured-desc">大厂法务的邮件审核工作流：单 Agent 长链条跑不通，直接 AtoA 指令不受控，本地文件夹四道硬伤——最终用「两个 Agent + 数据库持久化交接层」的生产者-消费者模式解耦。核心洞见：交接层要传数据，不要传指令。</p>
+<p class="featured-desc">一位大厂法务在做「邮件 → 合同审核」AI 工作流时的真实踩坑与选型：单 Agent 长链条跑不通，直接 AtoA（Agent @ Agent）指令不受控，本地文件夹中转有四道硬伤——最终落到「两个 Agent + 数据库持久化交接层」的生产者-消费者模式。核心洞见一句话：交接层要传「数据」，不要传「指令」。</p>
 </div>
 <div class="featured-arrow">→</div>
 </a><a href="research/ai-coding-gpu-production-paradigm.html" class="daily-entry">
 <div class="entry-icon">📊</div>
 <div style="flex:1;">
 <div style="font-weight:500;font-size:14px;margin-bottom:2px;">从手工作坊到并行计算：AI Coding 的 GPU 化生产范式</div>
-<div style="font-size:12px;color:var(--text-muted);">2026/9/26 · 深度调研</div>
+<div style="font-size:12px;color:var(--text-muted);">2026/9/26 · AI Coding · 工程范式</div>
 </div>
 <div style="font-size:16px;color:var(--text-muted);">→</div>
 </a><a href="research/hl-mem-agent-memory.html" class="daily-entry">
