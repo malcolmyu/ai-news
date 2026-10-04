@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推理速度与 Agent 协作走向系统设计 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月4日</div>
+  <h1>推理速度与 Agent 协作走向系统设计</h1>
+  <div class="subtitle">No Priors 访谈讨论推理芯片的内存带宽瓶颈；Sam Altman 确认与 Cerebras 的合作仍在推进。Builder 们展示跨会话协作、个性化工具和可视化作品。</div>
+  <div class="dots-row">
+    <span class="tag">推理硬件</span>
+    <span class="tag">Agent 协作</span>
+    <span class="tag">Builder 动态</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">官方动态</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>No Priors 10 月 2 日访谈：</strong>Fractile 创始人 Walter Goodwin 认为，大模型推理除了算力还受内存带宽和容量制约。他介绍公司从 SRAM 方案转向高带宽 DRAM 的设计取舍；这是受访者的技术判断，产品效果尚待验证。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.youtube.com/watch?v=OpeCP4wCxkA" target="_blank" class="vitem-link">观看原视频 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Garry Tan 原帖：</strong>他展示协作者发起的修复任务如何在多个 Capy 会话间避开自己已经处理的工作，并称这套协作不绑定模型。这是单个团队的使用体验，不等同于通用能力评测。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/garrytan/status/2106092289173213444" target="_blank" class="vitem-link">查看原帖 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Walter Goodwin 谈前沿推理芯片</h2>
+  <div class="text-body">No Priors 主持人 Sarah Guo 对话 Fractile 创始人 Walter Goodwin。以下为访谈观点转述；带宽目标和时间表属于公司设想，不能当作已交付性能。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/OpeCP4wCxkA" title="Walter Goodwin 谈前沿推理芯片" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">带宽与容量要一起解决</div><div class="vitem-desc">Goodwin 认为，长上下文和更大的模型会放大数据搬运成本；单靠提升计算吞吐无法消除内存瓶颈。</div></div>
+    <div class="vitem"><div class="vitem-title">从 SRAM 转向 DRAM</div><div class="vitem-desc">他解释，SRAM 虽快但容量成本高，因此 Fractile 转而尝试从 DRAM 获得更高带宽，同时保留容纳大模型的空间。</div></div>
+    <div class="vitem"><div class="vitem-title">硬件路线需要多种押注</div><div class="vitem-desc">他预计前沿实验室仍会同时采用自研与外部芯片，以保留供应选择；芯片设计提速也无法省掉制造和量产周期。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=OpeCP4wCxkA" target="_blank" class="vitem-link">观看原视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>官方更新与背景</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜与 Cerebras 的低延迟推理合作</div>
+  <div class="vitem-desc">Sam Altman 10 月 2 日在原帖中确认 Cerebras 仍是紧密合作伙伴；OpenAI 今年 1 月的官方公告说明，双方计划分阶段把低延迟算力接入推理服务。现阶段不应把合作关系解读成新的产品发布时间。</div>
+  <div class="vitem-actions">
+    <a href="https://x.com/sama/status/2106147184693620924" target="_blank" class="vitem-link">查看原帖 →</a>
+    <a href="https://openai.com/index/cerebras-partnership/" target="_blank" class="vitem-link">查看官方背景 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Google｜九月 AI 更新回顾</div>
+  <div class="vitem-desc">Google 10 月 2 日汇总九月发布，涵盖 Gemini 4 Argon、Connected Apps 和 WeatherNext 3；这是一篇月度回顾，并非这些产品在 10 月 2 日同时首发。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Claude｜展示可交互的三维喷气发动机</div>
+  <div class="vitem-desc">Claude 官方账号发布由 Opus 5.5 制作的三维可拆解喷气发动机演示；原帖是展示样例，不构成对一般任务质量的评测。</div>
+  <div class="vitem-actions">
+    <a href="https://x.com/claudeai/status/2106125478956507480" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>一线实践与观察</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜让协作任务避开重复劳动</div>
+    <div class="vitem-desc">Tan 观察到协作者启动的修复任务会参考他在其他 Capy 会话中正处理的工作。跨会话状态可见性正在成为多 Agent 协作的关键设计点。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-04/garrytan-2106092289173213444-0.jpg" width="800" height="307" loading="lazy" alt="Garry Tan 原帖中的跨会话协作截图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2106092289173213444" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Sam Altman｜重申 Cerebras 合作</div>
+    <div class="vitem-desc">Altman 回应外界猜测，称 Cerebras 是紧密合作伙伴，双方正共同推进速度前沿；原帖没有宣布新交易条款或上线日期。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/sama/status/2106147184693620924" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Yang｜把研究工具缩到真正需要的功能</div>
+    <div class="vitem-desc">Yang 说自己为一款 YouTube 研究工具每年支付近 300 美元，随后用 Claude 在五分钟内搭出所需核心功能。这是个人经历，并非通用开发耗时。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/petergyang/status/2106072698564874410" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Nikunj Kothari｜用 Agent 盘点家中自动化机会</div>
+    <div class="vitem-desc">Kothari 分享一个让编码 Agent 识别家庭设备、研究接入方式的提示词。若实际尝试，网络探测和第三方账户访问应限定在本人授权的设备与权限内。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-04/nikunj-2106072546206773574-0.jpg" width="800" height="263" loading="lazy" alt="Nikunj Kothari 原帖所附家庭自动化图片">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/nikunj/status/2106072546206773574" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Thariq｜用提醒插件补齐 Claude Code 的发现环节</div>
+    <div class="vitem-desc">Thariq 介绍“你应该知道”插件：它会检查 Claude 输出，提示用户可能错过的重要信息。他将这视为自定义 Claude Code 的一个例子；功能描述来自其转发的官方演示。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-04/trq212-2106119299484221762-0.jpg" width="800" height="450" loading="lazy" alt="Thariq 引用帖中的插件演示视频缩略图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/trq212/status/2106119299484221762" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Claude｜把复杂结构做成可拆解三维作品</div>
+    <div class="vitem-desc">Claude 官方账号展示用 Opus 5.5 制作的交互式喷气发动机，用户可拆开结构查看内部；它提供了把模型输出转成可探索界面的案例。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-04/claudeai-2106125478956507480-0.jpg" width="800" height="443" loading="lazy" alt="Claude 三维喷气发动机演示视频缩略图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/claudeai/status/2106125478956507480" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日上榜项目</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/cloudflare/cloudflare-os" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">cloudflare-os</span>
+      </div>
+      <span class="gh-stars">⭐ 10.6k</span>
+    </div>
+    <div class="gh-body">基于 Cloudflare Workers 的 Agent 工作空间，用于创建文档、构建应用和连接企业上下文。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 1.3k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/thedotmack/claude-mem" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/thedotmack.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">thedotmack</span><span class="gh-sep">/</span><span class="gh-name">claude-mem</span>
+      </div>
+      <span class="gh-stars">⭐ 95.6k</span>
+    </div>
+    <div class="gh-body">跨会话保存并压缩编码 Agent 的上下文，在后续任务中注入相关记忆。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 8.5k</span>
+      <span class="gh-topics"><span class="gh-topic">ai-memory</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/addyosmani/agent-skills" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/addyosmani.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">addyosmani</span><span class="gh-sep">/</span><span class="gh-name">agent-skills</span>
+      </div>
+      <span class="gh-stars">⭐ 100.9k</span>
+    </div>
+    <div class="gh-body">面向 AI 编码 Agent 的工程技能集合。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 10.6k</span>
+      <span class="gh-topics"><span class="gh-topic">agent-skills</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/mksglu/context-mode" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/mksglu.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">mksglu</span><span class="gh-sep">/</span><span class="gh-name">context-mode</span>
+      </div>
+      <span class="gh-stars">⭐ 25.3k</span>
+    </div>
+    <div class="gh-body">通过工具输出隔离、会话记忆和路由约束管理编码 Agent 的上下文；节省比例是仓库自述。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 1.8k</span>
+      <span class="gh-topics"><span class="gh-topic">mcp</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/earendil-works/pi" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/earendil-works.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">earendil-works</span><span class="gh-sep">/</span><span class="gh-name">pi</span>
+      </div>
+      <span class="gh-stars">⭐ 112.2k</span>
+    </div>
+    <div class="gh-body">提供统一模型 API、Agent 循环、终端界面与编码 Agent 命令行的工具包。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 14.2k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    根据 10 月 4 日 GitHub Trending 实时榜单整理；星标数取自本次 GitHub API 快照，榜单和数字会继续变化。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  芯片访谈关注生成速度背后的内存约束，Builder 实践关注多个 Agent 如何共享状态、避免重复劳动。系统设计不能只看单次响应速度，也要观察任务交接、上下文保存和人工检查。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://www.youtube.com/watch?v=OpeCP4wCxkA" target="_blank">No Priors｜Walter Goodwin 访谈原视频</a>
+    <a href="https://x.com/sama/status/2106147184693620924" target="_blank">Sam Altman｜Cerebras 合作原帖</a>
+    <a href="https://openai.com/index/cerebras-partnership/" target="_blank">OpenAI｜Cerebras 合作背景</a>
+    <a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/" target="_blank">Google｜九月 AI 更新回顾</a>
+    <a href="https://x.com/claudeai/status/2106125478956507480" target="_blank">Claude｜三维喷气发动机演示</a>
+    <a href="https://x.com/garrytan/status/2106092289173213444" target="_blank">Garry Tan｜跨会话协作</a>
+    <a href="https://x.com/petergyang/status/2106072698564874410" target="_blank">Peter Yang｜自制研究工具</a>
+    <a href="https://x.com/nikunj/status/2106072546206773574" target="_blank">Nikunj Kothari｜家庭自动化提示词</a>
+    <a href="https://x.com/trq212/status/2106119299484221762" target="_blank">Thariq｜Claude Code 提醒插件</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜10 月 4 日 Trending</a>
+    <a href="https://github.com/cloudflare/cloudflare-os" target="_blank">cloudflare/cloudflare-os</a>
+    <a href="https://github.com/thedotmack/claude-mem" target="_blank">thedotmack/claude-mem</a>
+    <a href="https://github.com/addyosmani/agent-skills" target="_blank">addyosmani/agent-skills</a>
+    <a href="https://github.com/mksglu/context-mode" target="_blank">mksglu/context-mode</a>
+    <a href="https://github.com/earendil-works/pi" target="_blank">earendil-works/pi</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

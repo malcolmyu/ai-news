@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "title": "推理速度与 Agent 协作走向系统设计",
+  "summary": "No Priors 访谈讨论推理芯片的内存带宽瓶颈；Sam Altman 确认与 Cerebras 的合作仍在推进。Builder 们展示跨会话协作、个性化工具和可视化作品。",
+  "heroLabel": "AI 日报 · 10月4日",
+  "tags": ["推理硬件", "Agent 协作", "Builder 动态", "GitHub Trending"],
+  "stats": [
+    {"num": 6, "label": "Builder 动态"},
+    {"num": 5, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方动态"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "今日要点",
+      "items": [
+        {
+          "title": "推理速度的下一处瓶颈是内存",
+          "summary": "<strong>No Priors 10 月 2 日访谈：</strong>Fractile 创始人 Walter Goodwin 认为，大模型推理除了算力还受内存带宽和容量制约。他介绍公司从 SRAM 方案转向高带宽 DRAM 的设计取舍；这是受访者的技术判断，产品效果尚待验证。",
+          "links": [{"label": "观看原视频 →", "url": "https://www.youtube.com/watch?v=OpeCP4wCxkA"}]
+        },
+        {
+          "title": "跨会话协作进入 Agent 日常",
+          "summary": "<strong>Garry Tan 原帖：</strong>他展示协作者发起的修复任务如何在多个 Capy 会话间避开自己已经处理的工作，并称这套协作不绑定模型。这是单个团队的使用体验，不等同于通用能力评测。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/garrytan/status/2106092289173213444"}]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Walter Goodwin 谈前沿推理芯片",
+      "intro": "No Priors 主持人 Sarah Guo 对话 Fractile 创始人 Walter Goodwin。以下为访谈观点转述；带宽目标和时间表属于公司设想，不能当作已交付性能。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/OpeCP4wCxkA",
+      "items": [
+        {"title": "带宽与容量要一起解决", "summary": "Goodwin 认为，长上下文和更大的模型会放大数据搬运成本；单靠提升计算吞吐无法消除内存瓶颈。"},
+        {"title": "从 SRAM 转向 DRAM", "summary": "他解释，SRAM 虽快但容量成本高，因此 Fractile 转而尝试从 DRAM 获得更高带宽，同时保留容纳大模型的空间。"},
+        {"title": "硬件路线需要多种押注", "summary": "他预计前沿实验室仍会同时采用自研与外部芯片，以保留供应选择；芯片设计提速也无法省掉制造和量产周期。",
+         "links": [{"label": "观看原视频 →", "url": "https://www.youtube.com/watch?v=OpeCP4wCxkA"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方更新与背景",
+      "items": [
+        {
+          "title": "OpenAI｜与 Cerebras 的低延迟推理合作",
+          "summary": "Sam Altman 10 月 2 日在原帖中确认 Cerebras 仍是紧密合作伙伴；OpenAI 今年 1 月的官方公告说明，双方计划分阶段把低延迟算力接入推理服务。现阶段不应把合作关系解读成新的产品发布时间。",
+          "source": "OpenAI 官方公告及 Sam Altman 原帖", "publishedAt": "2026-10-02",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/sama/status/2106147184693620924"}, {"label": "查看官方背景 →", "url": "https://openai.com/index/cerebras-partnership/"}]
+        },
+        {
+          "title": "Google｜九月 AI 更新回顾",
+          "summary": "Google 10 月 2 日汇总九月发布，涵盖 Gemini 4 Argon、Connected Apps 和 WeatherNext 3；这是一篇月度回顾，并非这些产品在 10 月 2 日同时首发。",
+          "source": "Google 官方博客", "publishedAt": "2026-10-02",
+          "links": [{"label": "查看原文 →", "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/"}]
+        },
+        {
+          "title": "Claude｜展示可交互的三维喷气发动机",
+          "summary": "Claude 官方账号发布由 Opus 5.5 制作的三维可拆解喷气发动机演示；原帖是展示样例，不构成对一般任务质量的评测。",
+          "source": "Claude 官方账号", "publishedAt": "2026-10-03",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/claudeai/status/2106125478956507480"}]
+        }
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "一线实践与观察",
+      "items": [
+        {
+          "title": "Garry Tan｜让协作任务避开重复劳动",
+          "summary": "Tan 观察到协作者启动的修复任务会参考他在其他 Capy 会话中正处理的工作。跨会话状态可见性正在成为多 Agent 协作的关键设计点。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/garrytan/status/2106092289173213444"}],
+          "media": [{"src": "assets/2026-10-04/garrytan-2106092289173213444-0.jpg", "width": 800, "height": 307, "alt": "Garry Tan 原帖中的跨会话协作截图"}]
+        },
+        {
+          "title": "Sam Altman｜重申 Cerebras 合作",
+          "summary": "Altman 回应外界猜测，称 Cerebras 是紧密合作伙伴，双方正共同推进速度前沿；原帖没有宣布新交易条款或上线日期。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/sama/status/2106147184693620924"}]
+        },
+        {
+          "title": "Peter Yang｜把研究工具缩到真正需要的功能",
+          "summary": "Yang 说自己为一款 YouTube 研究工具每年支付近 300 美元，随后用 Claude 在五分钟内搭出所需核心功能。这是个人经历，并非通用开发耗时。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/petergyang/status/2106072698564874410"}]
+        },
+        {
+          "title": "Nikunj Kothari｜用 Agent 盘点家中自动化机会",
+          "summary": "Kothari 分享一个让编码 Agent 识别家庭设备、研究接入方式的提示词。若实际尝试，网络探测和第三方账户访问应限定在本人授权的设备与权限内。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/nikunj/status/2106072546206773574"}],
+          "media": [{"src": "assets/2026-10-04/nikunj-2106072546206773574-0.jpg", "width": 800, "height": 263, "alt": "Nikunj Kothari 原帖所附家庭自动化图片"}]
+        },
+        {
+          "title": "Thariq｜用提醒插件补齐 Claude Code 的发现环节",
+          "summary": "Thariq 介绍“你应该知道”插件：它会检查 Claude 输出，提示用户可能错过的重要信息。他将这视为自定义 Claude Code 的一个例子；功能描述来自其转发的官方演示。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2106119299484221762"}],
+          "media": [{"src": "assets/2026-10-04/trq212-2106119299484221762-0.jpg", "width": 800, "height": 450, "alt": "Thariq 引用帖中的插件演示视频缩略图"}]
+        },
+        {
+          "title": "Claude｜把复杂结构做成可拆解三维作品",
+          "summary": "Claude 官方账号展示用 Opus 5.5 制作的交互式喷气发动机，用户可拆开结构查看内部；它提供了把模型输出转成可探索界面的案例。",
+          "links": [{"label": "查看原帖 →", "url": "https://x.com/claudeai/status/2106125478956507480"}],
+          "media": [{"src": "assets/2026-10-04/claudeai-2106125478956507480-0.jpg", "width": 800, "height": 443, "alt": "Claude 三维喷气发动机演示视频缩略图"}]
+        }
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日上榜项目",
+      "footnote": "根据 10 月 4 日 GitHub Trending 实时榜单整理；星标数取自本次 GitHub API 快照，榜单和数字会继续变化。",
+      "items": [
+        {"title": "cloudflare/cloudflare-os", "summary": "基于 Cloudflare Workers 的 Agent 工作空间，用于创建文档、构建应用和连接企业上下文。", "url": "https://github.com/cloudflare/cloudflare-os", "owner": "cloudflare", "repoName": "cloudflare-os", "avatar": "https://github.com/cloudflare.png", "stars": 10582, "forks": 1283, "language": "TypeScript", "topics": []},
+        {"title": "thedotmack/claude-mem", "summary": "跨会话保存并压缩编码 Agent 的上下文，在后续任务中注入相关记忆。", "url": "https://github.com/thedotmack/claude-mem", "owner": "thedotmack", "repoName": "claude-mem", "avatar": "https://github.com/thedotmack.png", "stars": 95607, "forks": 8460, "language": "TypeScript", "topics": ["ai-memory"]},
+        {"title": "addyosmani/agent-skills", "summary": "面向 AI 编码 Agent 的工程技能集合。", "url": "https://github.com/addyosmani/agent-skills", "owner": "addyosmani", "repoName": "agent-skills", "avatar": "https://github.com/addyosmani.png", "stars": 100858, "forks": 10597, "language": "JavaScript", "topics": ["agent-skills"]},
+        {"title": "mksglu/context-mode", "summary": "通过工具输出隔离、会话记忆和路由约束管理编码 Agent 的上下文；节省比例是仓库自述。", "url": "https://github.com/mksglu/context-mode", "owner": "mksglu", "repoName": "context-mode", "avatar": "https://github.com/mksglu.png", "stars": 25255, "forks": 1807, "language": "TypeScript", "topics": ["mcp"]},
+        {"title": "earendil-works/pi", "summary": "提供统一模型 API、Agent 循环、终端界面与编码 Agent 命令行的工具包。", "url": "https://github.com/earendil-works/pi", "owner": "earendil-works", "repoName": "pi", "avatar": "https://github.com/earendil-works.png", "stars": 112176, "forks": 14229, "language": "TypeScript", "topics": []}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "让速度变成可验证的工作流",
+      "intro": "芯片访谈关注生成速度背后的内存约束，Builder 实践关注多个 Agent 如何共享状态、避免重复劳动。系统设计不能只看单次响应速度，也要观察任务交接、上下文保存和人工检查。",
+      "items": [{"title": "今日一问", "summary": "你的 Agent 流程中，哪一步最容易因上下文丢失或并行任务重叠而返工？"}]
+    }
+  ],
+  "sources": [
+    {"title": "No Priors｜Walter Goodwin 访谈原视频", "url": "https://www.youtube.com/watch?v=OpeCP4wCxkA"},
+    {"title": "Sam Altman｜Cerebras 合作原帖", "url": "https://x.com/sama/status/2106147184693620924"},
+    {"title": "OpenAI｜Cerebras 合作背景", "url": "https://openai.com/index/cerebras-partnership/"},
+    {"title": "Google｜九月 AI 更新回顾", "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/"},
+    {"title": "Claude｜三维喷气发动机演示", "url": "https://x.com/claudeai/status/2106125478956507480"},
+    {"title": "Garry Tan｜跨会话协作", "url": "https://x.com/garrytan/status/2106092289173213444"},
+    {"title": "Peter Yang｜自制研究工具", "url": "https://x.com/petergyang/status/2106072698564874410"},
+    {"title": "Nikunj Kothari｜家庭自动化提示词", "url": "https://x.com/nikunj/status/2106072546206773574"},
+    {"title": "Thariq｜Claude Code 提醒插件", "url": "https://x.com/trq212/status/2106119299484221762"},
+    {"title": "GitHub｜10 月 4 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "cloudflare/cloudflare-os", "url": "https://github.com/cloudflare/cloudflare-os"},
+    {"title": "thedotmack/claude-mem", "url": "https://github.com/thedotmack/claude-mem"},
+    {"title": "addyosmani/agent-skills", "url": "https://github.com/addyosmani/agent-skills"},
+    {"title": "mksglu/context-mode", "url": "https://github.com/mksglu/context-mode"},
+    {"title": "earendil-works/pi", "url": "https://github.com/earendil-works/pi"}
+  ]
+}
