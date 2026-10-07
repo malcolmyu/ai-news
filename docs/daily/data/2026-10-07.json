@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-07",
+  "title": "让 Agent 经得起真实任务检验",
+  "summary": "OpenAI 把合同配置工作变成可评分的研究任务，并公开模型在 11 项任务上的结果；数学成果同步提供 Lean 证明。Builder 讨论评测、权限约束与更具体的产品实践。",
+  "heroLabel": "AI 日报 · 10月7日",
+  "tags": ["Agent 评测", "企业工作流", "可验证研究", "GitHub Trending"],
+  "stats": [{"num": 7, "label": "Builder 动态"}, {"num": 5, "label": "今日上榜项目"}, {"num": 3, "label": "官方资料"}, {"num": 1, "label": "公开视频"}],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "今日要点",
+      "items": [
+        {"title": "从演示任务走向真实合同流程", "summary": "OpenAI 与 Ironclad 把保密协议、采购审批和条款更新等工作拆成 11 项研究任务。其内部评测中，GPT‑6 Astra 的平均规则得分为 55.0%，对比 GPT‑5.6 Sol 的 41.6%；每次尝试的估算时间由 37.0 分钟降至 19.2 分钟。这是特定任务和模拟时间的结果，不能当作客户实际节省时间。", "links": [{"label": "阅读研究原文 →", "url": "https://openai.com/index/advancing-computer-use-with-ironclad/"}]},
+        {"title": "数学成果把核验材料一同公开", "summary": "OpenAI 公布内部前沿模型产出的数学结果，并在 GitHub 提供多份 Lean 形式化证明、推理摘要与尝试次数等过程信息。论文质量与结论仍需要数学社区独立审阅；开放证明材料使复核有了具体入口。", "links": [{"label": "阅读官方说明 →", "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Google Cloud：给 Agent 建立可复现的评测流程",
+      "intro": "Google Cloud Tech 的公开视频中，Dani Zamora 与 Merge 的 Matthew Feroz 用 DocsHound 演示评测搭建。这是近期发布的技术演示，作为今天企业 Agent 主题的延伸阅读；视频中的分数来自演示样例。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/wPdoZRbvaF4",
+      "items": [
+        {"title": "先记录完整轨迹", "summary": "演示用 OpenTelemetry 与 OpenInference 记录多轮调用，让不同框架的 Agent 行为可以按同一套轨迹检查。"},
+        {"title": "把质量、成本和速度放在一起看", "summary": "评测组合了规则检查、定制判断标准，以及延迟、令牌用量和 API 成本；只看最终答案容易漏掉执行过程的问题。"},
+        {"title": "让失败样例推动下一轮改动", "summary": "演示中的自动评分揭示了人工抽看未发现的文档质量问题。该数字只描述视频样例，不代表普遍故障率。", "links": [{"label": "观看原视频 →", "url": "https://www.youtube.com/watch?v=wPdoZRbvaF4"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方发布与资料",
+      "items": [
+        {"title": "OpenAI｜合同工作流的 11 项研究评测", "summary": "Ironclad 专家参与设定任务和成功标准，每项任务按复杂度使用 8 至 50 条评分准则。55.0% 的平均得分说明模型有进步，也说明仍有不少要求未满足；公告明确需要人的监督。", "source": "OpenAI 官方研究", "publishedAt": "2026-10-06", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/advancing-computer-use-with-ironclad/"}]},
+        {"title": "OpenAI｜公开数学成果与 Lean 证明", "summary": "官方把数学结果放在 GitHub，并承诺补充更多形式化证明和改进引用与论证。10 份模型推理摘要及尝试次数统计有助于外部理解结果的产生过程。", "source": "OpenAI 官方研究", "publishedAt": "2026-10-06", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"}]},
+        {"title": "OpenAI × Atlassian｜把团队上下文接入工作流", "summary": "双方扩展合作，让 OpenAI 模型用于 Atlassian 平台及 Rovo。公告称逾 3,000 名 Atlassian 开发者使用 Codex；更深的 Jira Agent 分派和进度跟踪仍处探索阶段。", "source": "OpenAI 官方公告", "publishedAt": "2026-10-06", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/atlassian-partnership/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "一线实践与判断",
+      "items": [
+        {"title": "Madhu Guru｜把评测写进产品规格", "summary": "Meta AI 负责人 Guru 认为，团队常把评测当成 Agent 完成后的补充 QA；对 AI 产品来说，评测应在一开始定义产品要满足的行为。这是产品方法论，而非已验证的通用定律。", "links": [{"label": "查看原帖 →", "url": "https://x.com/realmadhuguru/status/2107292113214091355"}]},
+        {"title": "Aaron Levie｜真实环境是部署瓶颈", "summary": "Box CEO Levie 指出，企业需要在文件、CRM 与邮件等实际环境中测试和优化 Agent，并预期评测设施会成为企业长期能力。这是他对部署实践和市场的判断。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2107283615247999257"}]},
+        {"title": "Guillermo Rauch｜用类型证明收紧敏感 API", "summary": "Vercel CEO Rauch 介绍 gdp-ts：敏感函数要求调用方先提供完成授权检查的类型证明，再由 TypeScript 类型检查器验证。该工具试图把人工审查中的一部分约束变成编译期规则。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2107119811444748555"}], "media": [{"src": "assets/2026-10-07/rauchg-2107119811444748555-0.jpg", "width": 800, "height": 420, "alt": "Guillermo Rauch 原帖视频中的 gdp-ts 演示画面"}]},
+        {"title": "Thariq｜云端 Agent 借助本地文件工作", "summary": "Anthropic 的 Thariq 将云端 Claude 能访问本地文件的模式称作“local hands”，并说这种能力也将进入 Cowork。原帖是在描述方向，未提供完整可用范围和时间表。", "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2107229483015258493"}]},
+        {"title": "Peter Yang｜用实时语音做语言学习应用", "summary": "Yang 分享自己的教程：用设计规格、Gemini Live 语音 API 和图像工具制作日语练习应用。帖子提供的是构建步骤，不是学习效果评估。", "links": [{"label": "查看教程原帖 →", "url": "https://x.com/petergyang/status/2107108755699900459"}], "media": [{"src": "assets/2026-10-07/petergyang-2107108755699900459-0.jpg", "width": 800, "height": 450, "alt": "Peter Yang 原帖视频中的语言学习应用画面"}]},
+        {"title": "Ryo Lu｜为视频配双语字幕", "summary": "Ryo Lu 展示一款面向语言学习者的字幕工具，可在 Netflix 同时显示两种语言，并为日语、中文和韩语提供发音提示；帖子未说明长期维护或平台兼容范围。", "links": [{"label": "查看演示原帖 →", "url": "https://x.com/ryolu_/status/2107146629338042853"}], "media": [{"src": "assets/2026-10-07/ryolu_-2107146629338042853-0.jpg", "width": 800, "height": 491, "alt": "Ryo Lu 原帖视频中的双语字幕工具画面"}]},
+        {"title": "Garry Tan｜寻找可重复的确定性步骤", "summary": "YC 的 Garry Tan 认为，观察 Agent 的重复操作并将其替换为经过测试的确定性代码，可能减少不必要的令牌消耗。这是对工具设计价值的观点，尚不能从帖子推算实际节省比例。", "links": [{"label": "查看原帖 →", "url": "https://x.com/garrytan/status/2107129959550685660"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日上榜项目",
+      "footnote": "根据 10 月 7 日 GitHub Trending 实时榜单整理；星标与分叉为本次 GitHub API 快照，排名和数值会变化。项目用途以仓库简介为准。",
+      "items": [
+        {"title": "tester-army/e2e", "summary": "面向网页和移动应用的端到端测试框架。", "url": "https://github.com/tester-army/e2e", "owner": "tester-army", "repoName": "e2e", "avatar": "https://github.com/tester-army.png", "stars": 6393, "forks": 287, "language": "TypeScript", "topics": ["e2e", "mobile"]},
+        {"title": "earthtojake/text-to-cad", "summary": "尝试让 Agent 通过文本生成 CAD 设计的项目。", "url": "https://github.com/earthtojake/text-to-cad", "owner": "earthtojake", "repoName": "text-to-cad", "avatar": "https://github.com/earthtojake.png", "stars": 18011, "forks": 1805, "language": "Python", "topics": ["cad", "ai-agents"]},
+        {"title": "pbakaus/impeccable", "summary": "面向 AI 设计流程的设计语言与工具集合。", "url": "https://github.com/pbakaus/impeccable", "owner": "pbakaus", "repoName": "impeccable", "avatar": "https://github.com/pbakaus.png", "stars": 77726, "forks": 4629, "language": "JavaScript", "topics": []},
+        {"title": "morluto/rea", "summary": "借助 Agent 分析应用行为和原生二进制文件的逆向工程工具。", "url": "https://github.com/morluto/rea", "owner": "morluto", "repoName": "rea", "avatar": "https://github.com/morluto.png", "stars": 9641, "forks": 1068, "language": "TypeScript", "topics": ["reverse-engineering", "ai-agents"]},
+        {"title": "deepseek-ai/DeepGEMM", "summary": "DeepSeek 发布的 GPU BLAS 内核库，聚焦矩阵计算。", "url": "https://github.com/deepseek-ai/DeepGEMM", "owner": "deepseek-ai", "repoName": "DeepGEMM", "avatar": "https://github.com/deepseek-ai.png", "stars": 8725, "forks": 1374, "language": "Cuda", "topics": []}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "把“完成任务”改写成“满足条件”",
+      "intro": "今天的研究和一线讨论指向同一个实施问题：Agent 可以做出看似完整的结果，但企业真正关心的是每项规则是否被遵守、过程能否复现、权限是否可追踪。Ironclad 案例把任务细分为评分条件；数学成果提供形式化证明材料；Builder 则推动把评测和类型约束前置。<br><strong>今日一问：</strong>你手头最想交给 Agent 的流程，能否写出三条明确的成功条件与一条必须人工确认的边界？",
+      "items": [{"title": "今日一问", "summary": "你手头最想交给 Agent 的流程，能否写出三条明确的成功条件与一条必须人工确认的边界？"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜与 Ironclad 的计算机使用研究", "url": "https://openai.com/index/advancing-computer-use-with-ironclad/"},
+    {"title": "OpenAI｜公开数学研究进展", "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"},
+    {"title": "OpenAI｜与 Atlassian 扩展合作", "url": "https://openai.com/index/atlassian-partnership/"},
+    {"title": "Google Cloud Tech｜Agent 评测演示", "url": "https://www.youtube.com/watch?v=wPdoZRbvaF4"},
+    {"title": "Madhu Guru｜评测与产品规格", "url": "https://x.com/realmadhuguru/status/2107292113214091355"},
+    {"title": "Aaron Levie｜企业 Agent 真实环境", "url": "https://x.com/levie/status/2107283615247999257"},
+    {"title": "Guillermo Rauch｜gdp-ts", "url": "https://x.com/rauchg/status/2107119811444748555"},
+    {"title": "Thariq｜local hands", "url": "https://x.com/trq212/status/2107229483015258493"},
+    {"title": "Peter Yang｜语音语言学习应用", "url": "https://x.com/petergyang/status/2107108755699900459"},
+    {"title": "Ryo Lu｜双语字幕演示", "url": "https://x.com/ryolu_/status/2107146629338042853"},
+    {"title": "Garry Tan｜确定性 Agent 步骤", "url": "https://x.com/garrytan/status/2107129959550685660"},
+    {"title": "GitHub｜10 月 7 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "tester-army/e2e", "url": "https://github.com/tester-army/e2e"},
+    {"title": "earthtojake/text-to-cad", "url": "https://github.com/earthtojake/text-to-cad"},
+    {"title": "pbakaus/impeccable", "url": "https://github.com/pbakaus/impeccable"},
+    {"title": "morluto/rea", "url": "https://github.com/morluto/rea"},
+    {"title": "deepseek-ai/DeepGEMM", "url": "https://github.com/deepseek-ai/DeepGEMM"}
+  ]
+}
