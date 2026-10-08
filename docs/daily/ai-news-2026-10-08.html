@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 界面更灵活，小模型更讲成本 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月8日</div>
+  <h1>AI 界面更灵活，小模型更讲成本</h1>
+  <div class="subtitle">OpenAI 让 ChatGPT 的 GPT‑6 按问题生成交互界面，Anthropic 发布面向高频任务的 Haiku 5.5。Builder 讨论提示方式、图像编辑、模型回退和团队 Agent；播客追问何时值得后训练。</div>
+  <div class="dots-row">
+    <span class="tag">交互界面</span>
+    <span class="tag">小模型</span>
+    <span class="tag">Agent 工作流</span>
+    <span class="tag">GitHub Trending</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">官方资料</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p>OpenAI 宣布 GPT‑6 的 Intelligent UI，可在回答中组合图表、按钮、表单等组件，并逐步显示生成中的界面。10 月 7 日起向 Plus、Pro、Business 和 Enterprise 的 Chat 会话推出，Free 与 Go 计划次日开始；这次发布不改变 Work 和 Codex 所用模型。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" class="vitem-link">阅读官方发布 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p>Anthropic 发布 Claude Haiku 5.5，定位摘要、分类、查询及子 Agent 等高频任务。官方称其平均运行成本较 Haiku 4.5 低约 75%，同时下调 Sonnet 5.5 的缓存读取价格；性能与成本数字来自厂商披露，实际选择仍应按自己的任务评测。</p>
+      <div style="margin-top:12px;">
+        <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" class="vitem-link">阅读官方发布 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Applied Compute：先优化工作流，再考虑后训练</h2>
+  <div class="text-body">Redpoint Ventures 的《Unsupervised Learning》10 月 6 日采访 Applied Compute CEO Yash Patil。以下是他在访谈中的判断，不等于所有团队都应训练自己的模型。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/QeiYSLBCwD4" title="Applied Compute：先优化工作流，再考虑后训练" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-title">先找到可衡量的目标</div><div class="vitem-desc">Patil 把强化学习比作爬坡：优化器可以向目标前进，难点是定义值得攀登的目标。因此企业要先建立适合自己业务的评测。</div></div>
+    <div class="vitem"><div class="vitem-title">先榨干上下文与工具层</div><div class="vitem-desc">访谈建议先改善上下文、工具和 Agent 工作流；当这些手段已充分优化，且仍有专有数据与稳定需求时，再考虑改动模型权重。</div></div>
+    <div class="vitem"><div class="vitem-title">大规模推理才更容易摊薄训练投入</div><div class="vitem-desc">Patil 认为后训练通常先在高调用量的成熟任务上体现成本和质量价值。这是 Applied Compute 的业务判断，投入产出仍需逐项核算。</div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=QeiYSLBCwD4" target="_blank" class="vitem-link">观看原视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>官方发布与产品变化</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">Anthropic｜Claude Haiku 5.5 上线</div>
+  <div class="vitem-desc">新模型提供可调节的 effort 设置，已在 Claude Platform 及主要云平台提供。官方列出每百万输入 token 价格：10 万 token 以内的提示为 0.10 美元，超过后为 0.50 美元；价格与评测均应以发布页条件为准。</div>
+  <div class="vitem-actions">
+    <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" class="vitem-link">阅读原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">OpenAI｜GPT‑6 的回答可以包含交互组件</div>
+  <div class="vitem-desc">Intelligent UI 使用可流式显示的原生组件与编译器，让图解、比较和小工具直接出现在会话中。OpenAI 也说明，是否使用交互界面会随问题而变，简单问题仍可用纯文本回答。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" class="vitem-link">阅读原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">OpenAI｜青少年学习工具继续扩展</div>
+  <div class="vitem-desc">OpenAI 公布面向美国高中生的 College Planner 计划，并为青少年体验加入学习卡片与测验。College Planner 尚未上线；官方称未来还会扩大适用地区和教育路径。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/teens-learn-and-plan/" target="_blank" class="vitem-link">阅读原文 →</a>
+  </div>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>产品一线的六个判断</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Boris Cherny｜像给同事交任务一样说明目标</div>
+    <div class="vitem-desc">Anthropic 的 Cherny 认为，给 Claude 的提示通常不必过度搭脚手架；更重要的是说明要做什么、投入多少精力，以及怎样验证结果。这是他的实践建议，复杂任务仍需提供必要约束。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/bcherny/status/2107565388250874193" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Josh Woodward｜关注图像的蒙版编辑</div>
+    <div class="vitem-desc">Google Labs 的 Woodward 分享 Nano Banana 2.1 的蒙版编辑示例，并说这是本次更新中他最喜欢的能力。配图来自他引用的 Nano Banana 原帖；帖子展示的是产品样例，不是独立效果评测。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-08/joshwoodward-2107679061854273656-0.jpg" width="800" height="437" loading="lazy" alt="Nano Banana 原帖中用蒙版圈选羽毛区域的编辑示例">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/joshwoodward/status/2107679061854273656" target="_blank" class="vitem-link">查看原帖 →</a>
+    <a href="https://x.com/NanoBanana/status/2107521202466046453" target="_blank" class="vitem-link">查看演示来源 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜低置信度决策交给回退模型</div>
+    <div class="vitem-desc">Vercel 的 Rauch 推荐 AI Gateway 的一个测试功能：当主模型的判断置信度低于阈值，可由回退模型重做决策。原帖代码示例展示阈值设置；真实效果仍取决于任务、阈值与回退模型。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-08/rauchg-2107606246350266469-0.jpg" width="800" height="709" loading="lazy" alt="Vercel 原帖中低置信度时切换回退模型的代码示例">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2107606246350266469" target="_blank" class="vitem-link">查看原帖 →</a>
+    <a href="https://x.com/vercel_dev/status/2107603954091851883" target="_blank" class="vitem-link">查看功能来源 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Steinberger｜让团队 Agent 主动找到代码负责人</div>
+    <div class="vitem-desc">Steinberger 说他把团队 Agent 接入 X 来更快触发工作；Agent 会查找相关代码最近的贡献者，并在团队服务器中提醒他们。帖子描述的是其团队当前流程，未给出效率评测。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/steipete/status/2107697554448421160" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aaron Levie｜安全团队将面对新的 Agent 风险</div>
+    <div class="vitem-desc">Box CEO Levie 认为，AI 生成代码问题、Agent 攻击与意外的数据搜寻会增加企业安全工作量，同时也会推动安全 Agent 产品出现。这是趋势判断，不能从帖子推算事件规模。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/levie/status/2107680435644039269" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜用提示迭代图形实验</div>
+    <div class="vitem-desc">YC 的 Tan 分享一项图形实验进展：又经过约三次提示，演示在 640×480 分辨率下达到约 35 帧每秒，并使用 8 个 CPU 核心处理每帧。这是单次演示数据，不代表一般性能。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2107630303644938505" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日上榜项目</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">mattpocock</span><span class="gh-sep">/</span><span class="gh-name">skills</span>
+      </div>
+      <span class="gh-stars">⭐ 279.7k</span>
+    </div>
+    <div class="gh-body">Matt Pocock 分享的工程技能集合，来自其个人 Agent 配置目录。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Shell</span>
+      <span class="gh-forks">🍴 23.4k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/ayghri/i-have-adhd" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/ayghri.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">ayghri</span><span class="gh-sep">/</span><span class="gh-name">i-have-adhd</span>
+      </div>
+      <span class="gh-stars">⭐ 55.2k</span>
+    </div>
+    <div class="gh-body">帮助编码 Agent 缩短回答、突出结论的技能。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 3.2k</span>
+      <span class="gh-topics"><span class="gh-topic">claude-skills</span><span class="gh-topic">productivity</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/cathrynlavery/diagram-design" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/cathrynlavery.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cathrynlavery</span><span class="gh-sep">/</span><span class="gh-name">diagram-design</span>
+      </div>
+      <span class="gh-stars">⭐ 45k</span>
+    </div>
+    <div class="gh-body">为编码 Agent 提供图表设计指导，输出自包含 HTML 与 SVG。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● HTML</span>
+      <span class="gh-forks">🍴 2.9k</span>
+      <span class="gh-topics"><span class="gh-topic">diagrams</span><span class="gh-topic">svg</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/cloudflare/security-audit-skill" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">security-audit-skill</span>
+      </div>
+      <span class="gh-stars">⭐ 26.1k</span>
+    </div>
+    <div class="gh-body">Cloudflare 提供的编码 Agent 安全审计技能，强调分阶段核验与机器可读的发现。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 1.6k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/manaflow-ai/cmux" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/manaflow-ai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">manaflow-ai</span><span class="gh-sep">/</span><span class="gh-name">cmux</span>
+      </div>
+      <span class="gh-stars">⭐ 27.9k</span>
+    </div>
+    <div class="gh-body">基于 Ghostty 的 macOS 终端，提供垂直标签与通知以管理多个编码 Agent。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Swift</span>
+      <span class="gh-forks">🍴 2.5k</span>
+      <span class="gh-topics"><span class="gh-topic">coding-agents</span><span class="gh-topic">macos</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    根据 10 月 8 日 GitHub Trending 实时榜单整理；星标、分叉和语言为本次 GitHub API 快照，会持续变化。已避开昨日重点项目。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  今天的发布让两个设计问题更具体：用户究竟需要文本、图解，还是可操作的小工具？任务需要高能力模型，还是更便宜的高频小模型？播客提醒我们，回答这两个问题之前，先把任务目标、评测和工作流定义清楚。<br><strong>今日一问：</strong>你手头的一项重复任务，最值得改进的是交互方式、调用成本，还是成功标准？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank">OpenAI｜GPT‑6 与 Intelligent UI</a>
+    <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank">Anthropic｜Claude Haiku 5.5</a>
+    <a href="https://openai.com/index/teens-learn-and-plan/" target="_blank">OpenAI｜青少年学习工具</a>
+    <a href="https://www.youtube.com/watch?v=QeiYSLBCwD4" target="_blank">Redpoint Ventures｜Applied Compute CEO 访谈</a>
+    <a href="https://x.com/bcherny/status/2107565388250874193" target="_blank">Boris Cherny｜提示实践</a>
+    <a href="https://x.com/joshwoodward/status/2107679061854273656" target="_blank">Josh Woodward｜图像蒙版编辑</a>
+    <a href="https://x.com/NanoBanana/status/2107521202466046453" target="_blank">Nano Banana｜原始图像演示</a>
+    <a href="https://x.com/rauchg/status/2107606246350266469" target="_blank">Guillermo Rauch｜低置信度回退</a>
+    <a href="https://x.com/vercel_dev/status/2107603954091851883" target="_blank">Vercel Developers｜AI Gateway 功能</a>
+    <a href="https://x.com/steipete/status/2107697554448421160" target="_blank">Peter Steinberger｜团队 Agent</a>
+    <a href="https://x.com/levie/status/2107680435644039269" target="_blank">Aaron Levie｜企业安全判断</a>
+    <a href="https://x.com/garrytan/status/2107630303644938505" target="_blank">Garry Tan｜图形实验</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜10 月 8 日 Trending</a>
+    <a href="https://github.com/mattpocock/skills" target="_blank">mattpocock/skills</a>
+    <a href="https://github.com/ayghri/i-have-adhd" target="_blank">ayghri/i-have-adhd</a>
+    <a href="https://github.com/cathrynlavery/diagram-design" target="_blank">cathrynlavery/diagram-design</a>
+    <a href="https://github.com/cloudflare/security-audit-skill" target="_blank">cloudflare/security-audit-skill</a>
+    <a href="https://github.com/manaflow-ai/cmux" target="_blank">manaflow-ai/cmux</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

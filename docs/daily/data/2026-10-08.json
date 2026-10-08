@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-08",
+  "title": "AI 界面更灵活，小模型更讲成本",
+  "summary": "OpenAI 让 ChatGPT 的 GPT‑6 按问题生成交互界面，Anthropic 发布面向高频任务的 Haiku 5.5。Builder 讨论提示方式、图像编辑、模型回退和团队 Agent；播客追问何时值得后训练。",
+  "heroLabel": "AI 日报 · 10月8日",
+  "tags": ["交互界面", "小模型", "Agent 工作流", "GitHub Trending"],
+  "stats": [
+    {"num": 6, "label": "Builder 动态"},
+    {"num": 5, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方资料"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "今日要点",
+      "items": [
+        {"title": "ChatGPT 开始按问题生成可操作界面", "summary": "OpenAI 宣布 GPT‑6 的 Intelligent UI，可在回答中组合图表、按钮、表单等组件，并逐步显示生成中的界面。10 月 7 日起向 Plus、Pro、Business 和 Enterprise 的 Chat 会话推出，Free 与 Go 计划次日开始；这次发布不改变 Work 和 Codex 所用模型。", "links": [{"label": "阅读官方发布 →", "url": "https://openai.com/index/gpt-6-for-everyone/"}]},
+        {"title": "Haiku 5.5 把高频任务的成本继续压低", "summary": "Anthropic 发布 Claude Haiku 5.5，定位摘要、分类、查询及子 Agent 等高频任务。官方称其平均运行成本较 Haiku 4.5 低约 75%，同时下调 Sonnet 5.5 的缓存读取价格；性能与成本数字来自厂商披露，实际选择仍应按自己的任务评测。", "links": [{"label": "阅读官方发布 →", "url": "https://www.anthropic.com/claude-haiku-5-5"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Applied Compute：先优化工作流，再考虑后训练",
+      "intro": "Redpoint Ventures 的《Unsupervised Learning》10 月 6 日采访 Applied Compute CEO Yash Patil。以下是他在访谈中的判断，不等于所有团队都应训练自己的模型。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/QeiYSLBCwD4",
+      "items": [
+        {"title": "先找到可衡量的目标", "summary": "Patil 把强化学习比作爬坡：优化器可以向目标前进，难点是定义值得攀登的目标。因此企业要先建立适合自己业务的评测。"},
+        {"title": "先榨干上下文与工具层", "summary": "访谈建议先改善上下文、工具和 Agent 工作流；当这些手段已充分优化，且仍有专有数据与稳定需求时，再考虑改动模型权重。"},
+        {"title": "大规模推理才更容易摊薄训练投入", "summary": "Patil 认为后训练通常先在高调用量的成熟任务上体现成本和质量价值。这是 Applied Compute 的业务判断，投入产出仍需逐项核算。", "links": [{"label": "观看原视频 →", "url": "https://www.youtube.com/watch?v=QeiYSLBCwD4"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方发布与产品变化",
+      "items": [
+        {"title": "Anthropic｜Claude Haiku 5.5 上线", "summary": "新模型提供可调节的 effort 设置，已在 Claude Platform 及主要云平台提供。官方列出每百万输入 token 价格：10 万 token 以内的提示为 0.10 美元，超过后为 0.50 美元；价格与评测均应以发布页条件为准。", "source": "Anthropic 官方发布", "publishedAt": "2026-10-07", "links": [{"label": "阅读原文 →", "url": "https://www.anthropic.com/claude-haiku-5-5"}]},
+        {"title": "OpenAI｜GPT‑6 的回答可以包含交互组件", "summary": "Intelligent UI 使用可流式显示的原生组件与编译器，让图解、比较和小工具直接出现在会话中。OpenAI 也说明，是否使用交互界面会随问题而变，简单问题仍可用纯文本回答。", "source": "OpenAI 官方发布", "publishedAt": "2026-10-07", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/gpt-6-for-everyone/"}]},
+        {"title": "OpenAI｜青少年学习工具继续扩展", "summary": "OpenAI 公布面向美国高中生的 College Planner 计划，并为青少年体验加入学习卡片与测验。College Planner 尚未上线；官方称未来还会扩大适用地区和教育路径。", "source": "OpenAI 官方发布", "publishedAt": "2026-10-07", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/teens-learn-and-plan/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "产品一线的六个判断",
+      "items": [
+        {"title": "Boris Cherny｜像给同事交任务一样说明目标", "summary": "Anthropic 的 Cherny 认为，给 Claude 的提示通常不必过度搭脚手架；更重要的是说明要做什么、投入多少精力，以及怎样验证结果。这是他的实践建议，复杂任务仍需提供必要约束。", "links": [{"label": "查看原帖 →", "url": "https://x.com/bcherny/status/2107565388250874193"}]},
+        {"title": "Josh Woodward｜关注图像的蒙版编辑", "summary": "Google Labs 的 Woodward 分享 Nano Banana 2.1 的蒙版编辑示例，并说这是本次更新中他最喜欢的能力。配图来自他引用的 Nano Banana 原帖；帖子展示的是产品样例，不是独立效果评测。", "links": [{"label": "查看原帖 →", "url": "https://x.com/joshwoodward/status/2107679061854273656"}, {"label": "查看演示来源 →", "url": "https://x.com/NanoBanana/status/2107521202466046453"}], "media": [{"src": "assets/2026-10-08/joshwoodward-2107679061854273656-0.jpg", "width": 800, "height": 437, "alt": "Nano Banana 原帖中用蒙版圈选羽毛区域的编辑示例"}]},
+        {"title": "Guillermo Rauch｜低置信度决策交给回退模型", "summary": "Vercel 的 Rauch 推荐 AI Gateway 的一个测试功能：当主模型的判断置信度低于阈值，可由回退模型重做决策。原帖代码示例展示阈值设置；真实效果仍取决于任务、阈值与回退模型。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2107606246350266469"}, {"label": "查看功能来源 →", "url": "https://x.com/vercel_dev/status/2107603954091851883"}], "media": [{"src": "assets/2026-10-08/rauchg-2107606246350266469-0.jpg", "width": 800, "height": 709, "alt": "Vercel 原帖中低置信度时切换回退模型的代码示例"}]},
+        {"title": "Peter Steinberger｜让团队 Agent 主动找到代码负责人", "summary": "Steinberger 说他把团队 Agent 接入 X 来更快触发工作；Agent 会查找相关代码最近的贡献者，并在团队服务器中提醒他们。帖子描述的是其团队当前流程，未给出效率评测。", "links": [{"label": "查看原帖 →", "url": "https://x.com/steipete/status/2107697554448421160"}]},
+        {"title": "Aaron Levie｜安全团队将面对新的 Agent 风险", "summary": "Box CEO Levie 认为，AI 生成代码问题、Agent 攻击与意外的数据搜寻会增加企业安全工作量，同时也会推动安全 Agent 产品出现。这是趋势判断，不能从帖子推算事件规模。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2107680435644039269"}]},
+        {"title": "Garry Tan｜用提示迭代图形实验", "summary": "YC 的 Tan 分享一项图形实验进展：又经过约三次提示，演示在 640×480 分辨率下达到约 35 帧每秒，并使用 8 个 CPU 核心处理每帧。这是单次演示数据，不代表一般性能。", "links": [{"label": "查看原帖 →", "url": "https://x.com/garrytan/status/2107630303644938505"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日上榜项目",
+      "footnote": "根据 10 月 8 日 GitHub Trending 实时榜单整理；星标、分叉和语言为本次 GitHub API 快照，会持续变化。已避开昨日重点项目。",
+      "items": [
+        {"title": "mattpocock/skills", "summary": "Matt Pocock 分享的工程技能集合，来自其个人 Agent 配置目录。", "url": "https://github.com/mattpocock/skills", "owner": "mattpocock", "repoName": "skills", "avatar": "https://github.com/mattpocock.png", "stars": 279681, "forks": 23444, "language": "Shell", "topics": []},
+        {"title": "ayghri/i-have-adhd", "summary": "帮助编码 Agent 缩短回答、突出结论的技能。", "url": "https://github.com/ayghri/i-have-adhd", "owner": "ayghri", "repoName": "i-have-adhd", "avatar": "https://github.com/ayghri.png", "stars": 55163, "forks": 3162, "language": "Python", "topics": ["claude-skills", "productivity"]},
+        {"title": "cathrynlavery/diagram-design", "summary": "为编码 Agent 提供图表设计指导，输出自包含 HTML 与 SVG。", "url": "https://github.com/cathrynlavery/diagram-design", "owner": "cathrynlavery", "repoName": "diagram-design", "avatar": "https://github.com/cathrynlavery.png", "stars": 45039, "forks": 2894, "language": "HTML", "topics": ["diagrams", "svg"]},
+        {"title": "cloudflare/security-audit-skill", "summary": "Cloudflare 提供的编码 Agent 安全审计技能，强调分阶段核验与机器可读的发现。", "url": "https://github.com/cloudflare/security-audit-skill", "owner": "cloudflare", "repoName": "security-audit-skill", "avatar": "https://github.com/cloudflare.png", "stars": 26084, "forks": 1567, "language": "JavaScript", "topics": []},
+        {"title": "manaflow-ai/cmux", "summary": "基于 Ghostty 的 macOS 终端，提供垂直标签与通知以管理多个编码 Agent。", "url": "https://github.com/manaflow-ai/cmux", "owner": "manaflow-ai", "repoName": "cmux", "avatar": "https://github.com/manaflow-ai.png", "stars": 27868, "forks": 2463, "language": "Swift", "topics": ["coding-agents", "macos"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "界面和模型都应围绕任务选型",
+      "intro": "今天的发布让两个设计问题更具体：用户究竟需要文本、图解，还是可操作的小工具？任务需要高能力模型，还是更便宜的高频小模型？播客提醒我们，回答这两个问题之前，先把任务目标、评测和工作流定义清楚。<br><strong>今日一问：</strong>你手头的一项重复任务，最值得改进的是交互方式、调用成本，还是成功标准？",
+      "items": [{"title": "今日一问", "summary": "你手头的一项重复任务，最值得改进的是交互方式、调用成本，还是成功标准？"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜GPT‑6 与 Intelligent UI", "url": "https://openai.com/index/gpt-6-for-everyone/"},
+    {"title": "Anthropic｜Claude Haiku 5.5", "url": "https://www.anthropic.com/claude-haiku-5-5"},
+    {"title": "OpenAI｜青少年学习工具", "url": "https://openai.com/index/teens-learn-and-plan/"},
+    {"title": "Redpoint Ventures｜Applied Compute CEO 访谈", "url": "https://www.youtube.com/watch?v=QeiYSLBCwD4"},
+    {"title": "Boris Cherny｜提示实践", "url": "https://x.com/bcherny/status/2107565388250874193"},
+    {"title": "Josh Woodward｜图像蒙版编辑", "url": "https://x.com/joshwoodward/status/2107679061854273656"},
+    {"title": "Nano Banana｜原始图像演示", "url": "https://x.com/NanoBanana/status/2107521202466046453"},
+    {"title": "Guillermo Rauch｜低置信度回退", "url": "https://x.com/rauchg/status/2107606246350266469"},
+    {"title": "Vercel Developers｜AI Gateway 功能", "url": "https://x.com/vercel_dev/status/2107603954091851883"},
+    {"title": "Peter Steinberger｜团队 Agent", "url": "https://x.com/steipete/status/2107697554448421160"},
+    {"title": "Aaron Levie｜企业安全判断", "url": "https://x.com/levie/status/2107680435644039269"},
+    {"title": "Garry Tan｜图形实验", "url": "https://x.com/garrytan/status/2107630303644938505"},
+    {"title": "GitHub｜10 月 8 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "mattpocock/skills", "url": "https://github.com/mattpocock/skills"},
+    {"title": "ayghri/i-have-adhd", "url": "https://github.com/ayghri/i-have-adhd"},
+    {"title": "cathrynlavery/diagram-design", "url": "https://github.com/cathrynlavery/diagram-design"},
+    {"title": "cloudflare/security-audit-skill", "url": "https://github.com/cloudflare/security-audit-skill"},
+    {"title": "manaflow-ai/cmux", "url": "https://github.com/manaflow-ai/cmux"}
+  ]
+}
