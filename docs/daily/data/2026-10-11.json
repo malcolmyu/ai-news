@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-11",
+  "title": "开放模型遇上 Agent 流量：能力供给与使用边界同步扩张",
+  "summary": "Reflection AI 解释 Beam 的训练与开放权重计划，No Priors 访谈讨论企业为何想掌握模型。Vercel CEO 分享其平台上的 Agent 流量数据，产品团队则继续把任务委托、域名购买和个人工作流交给 Agent。",
+  "heroLabel": "AI 日报 · 10月11日",
+  "tags": ["开放权重", "Agent 流量", "任务委托", "GitHub Trending"],
+  "stats": [
+    {"num": 7, "label": "Builder 动态"},
+    {"num": 4, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方资料"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "模型供给与 Agent 需求同时变形",
+      "items": [
+        {
+          "title": "Beam 展示开放权重路线，但权重尚未发布",
+          "summary": "Reflection AI 介绍首个 Beam 模型：5010 亿总参数、每个 token 激活 230 亿参数，采用稀疏专家混合架构。官方称权重、技术报告与模型卡计划在 10 月稍晚公开；目前仍在最终红队测试和评估，不能把早期登记当成已可下载。",
+          "links": [{"label": "阅读 Reflection 原文 →", "url": "https://reflection.ai/blog/introducing-beam"}]
+        },
+        {
+          "title": "Vercel 的流量快照显示机器请求已很重",
+          "summary": "Vercel CEO Guillermo Rauch 称，其网络过去 30 天 58.18% 的流量来自机器人，超过 60% 的部署由 Agent 发起。这是他公布的平台内部口径，不能外推为全网比例；同一周 Vercel 允许 Agent 在 CLI 中寻找域名，但最终购买仍须用户确认。",
+          "links": [
+            {"label": "查看 Rauch 原帖 →", "url": "https://x.com/rauchg/status/2108733051283050964"},
+            {"label": "阅读 Vercel 更新 →", "url": "https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli"}
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Misha Laskin：开放权重模型为何要把预训练和强化学习一起做",
+      "intro": "No Priors 于 10 月 9 日发布与 Reflection AI 联合创始人兼 CEO Misha Laskin 的访谈。以下是嘉宾观点；模型能力与成本对比仍应参照公开评测和实际部署。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/up4sG9RM20M",
+      "items": [
+        {"title": "从后训练研究转向端到端建模", "summary": "Laskin 说团队起初希望在已有开放底座上扩大强化学习，后来认为预训练与后训练高度耦合，必须自己建设两端。Reflection 官方资料也将 Beam 的能力归因于预训练、训练环境和大规模强化学习共同投入。"},
+        {"title": "成本与模型控制是企业选择题", "summary": "他认为高用量企业可能更愿意持有并定制模型，而不是持续租用推理能力。这是他的商业判断，并非已经发生的行业份额变化。"},
+        {"title": "开放与安全需要分别验证", "summary": "访谈主张开放模型有助于更多研究者发现安全问题；Reflection 同时表示 Beam 正进行最终红队测试。开放权重并不自动等于安全，部署方仍需看模型卡、许可和运行控制。",
+          "links": [
+            {"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=up4sG9RM20M"},
+            {"label": "阅读 Beam 官方说明 →", "url": "https://reflection.ai/blog/introducing-beam"}
+          ]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方模型与产品更新",
+      "items": [
+        {"title": "Reflection｜Beam 仍处早期开放阶段", "summary": "官方说明写明 Beam 为 5010 亿总参数、230 亿激活参数的专家混合模型；预训练使用 23.8 万亿 token，并披露强化学习运行超过 1 亿次 rollout。上述训练量和性能均为厂商披露，权重与完整技术报告尚待发布。", "source": "Reflection AI 官方博客", "publishedAt": "2026-10-05", "links": [{"label": "阅读原文 →", "url": "https://reflection.ai/blog/introducing-beam"}]},
+        {"title": "Vercel｜Agent 可用 CLI 选购域名", "summary": "Vercel 10 月 9 日更新 CLI：Agent 可搜索域名、查询价格并发起购买流程；实际付款需要用户在交互终端或控制台核对价格、续费选项和联系人信息后确认。", "source": "Vercel 官方更新", "publishedAt": "2026-10-09", "links": [{"label": "阅读原文 →", "url": "https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli"}]},
+        {"title": "OpenAI｜订阅额度进入合作工具", "summary": "OpenAI 的 DevDay 回顾确认，符合条件的 Plus 与 Pro 用户可在包括 Devin 在内的参与工具中使用 ChatGPT 订阅额度。合作范围、额度和资格以官方说明为准；这不意味着所有 Devin 功能都免费。", "source": "OpenAI 官方回顾", "publishedAt": "2026-10-05", "links": [{"label": "阅读原文 →", "url": "https://openai.com/index/devday-2026-recap/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "七条来自模型、产品与基础设施现场的观察",
+      "items": [
+        {"title": "Thibault Sottiaux｜Dots 可以委托 Codex", "summary": "OpenAI 的 Sottiaux 指向 Dots 更新。被引用的发布帖说明，Dot 可在 Codex 新开工作并继续已有任务，同时参考聊天、Codex 任务和自动化上下文；原帖配有手机界面演示。", "links": [{"label": "查看原帖 →", "url": "https://x.com/thsottiaux/status/2108773703064657936"}, {"label": "查看发布说明 →", "url": "https://community.openai.com/t/updates-for-dots-day-5-of-28-days-of-quality-of-life-improvements-and-or-a-full-reset/1403525/31"}], "media": [{"src": "assets/2026-10-11/thsottiaux-2108773703064657936-0.jpg", "width": 800, "height": 450, "alt": "Dots 与 Codex 任务委托演示视频的原帖缩略画面"}]},
+        {"title": "Nan Yu｜连 Agent 提示词也开始补全", "summary": "OpenAI 产品负责人 Nan Yu 说，自己喜欢桌面端的 Composer predictions：从手写代码、代码补全，再到提示 Agent，现在连给 Agent 的下一句话也能获得建议。这是个人体验分享。", "links": [{"label": "查看原帖 →", "url": "https://x.com/thenanyu/status/2108671762984731037"}]},
+        {"title": "Madhu Guru｜开放权重不是降价唯一原因", "summary": "Meta AI 的 Madhu Guru 认为，单位智能价格下降还来自小模型蒸馏、基础设施效率与模型供应商竞争；开放权重模型为这一趋势助力。原帖是对成因的判断，不是量化归因研究。", "links": [{"label": "查看原帖 →", "url": "https://x.com/realmadhuguru/status/2108618266776387886"}]},
+        {"title": "Guillermo Rauch｜公布 Vercel 的 Agent 流量口径", "summary": "Rauch 称过去 30 天 Vercel 网络 58.18% 流量来自机器人，超过 60% 部署由 Agent 发起，Vercel 自有文档页最高有 83% 页面浏览来自 Agent。三项指标的范围不同，均是其平台数据。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2108733051283050964"}]},
+        {"title": "Guillermo Rauch｜Agent 触及域名购买", "summary": "Rauch 观察到 Agent 通过 CLI 购买基础设施，并宣布将流程扩展到域名。Vercel 官方更新进一步说明，最后的交易确认仍由用户完成。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2108669027363295323"}, {"label": "查看官方说明 →", "url": "https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli"}]},
+        {"title": "Aaron Levie｜预测后台 Agent 将消耗更多 token", "summary": "Box CEO Levie 预计，后台执行和多 Agent 协作会让 token 消耗远超逐条提示式聊天，并给出 1000 倍的设想。这是前瞻预测，不是已测量的市场使用量。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2108750943680630893"}]},
+        {"title": "Thariq｜新标签页项目继续由社区完善", "summary": "Anthropic 工程师 Thariq 展示自己使用的新标签页，并表示已合并其他贡献者的 PR。截图展示新闻式排版；这属于前一天公开扩展仓库后的进展。", "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2108802833986552174"}, {"label": "查看项目仓库 →", "url": "https://github.com/ThariqS/ai-newtab"}], "media": [{"src": "assets/2026-10-11/trq212-2108802833986552174-0.jpg", "width": 800, "height": 489, "alt": "Thariq 原帖展示的新闻式浏览器新标签页截图"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日上榜项目", "footnote": "根据 10 月 11 日 GitHub Trending 实时榜单整理；星标、分叉和语言为本次 GitHub API 快照，数字会持续变化。",
+      "items": [
+        {"title": "storytold/artcraft", "summary": "面向艺术家、设计师与电影创作者的创作引擎；仓库提供图像、视频和三维相关素材与代码。", "url": "https://github.com/storytold/artcraft", "owner": "storytold", "repoName": "artcraft", "avatar": "https://github.com/storytold.png", "stars": 14624, "forks": 2309, "language": "Rust", "topics": ["ai", "filmmaking"]},
+        {"title": "mksglu/context-mode", "summary": "为编码 Agent 管理上下文的工具，仓库说明包含工具输出隔离、会话记忆与跨平台路由。其节省比例为项目自述，需按工作负载验证。", "url": "https://github.com/mksglu/context-mode", "owner": "mksglu", "repoName": "context-mode", "avatar": "https://github.com/mksglu.png", "stars": 26341, "forks": 1896, "language": "TypeScript", "topics": ["agents", "context"]},
+        {"title": "hugohe3/ppt-master", "summary": "把文档或主题转成可编辑 PowerPoint 幻灯片的开源项目，仓库说明支持原生形状、表格、图表和模板。", "url": "https://github.com/hugohe3/ppt-master", "owner": "hugohe3", "repoName": "ppt-master", "avatar": "https://github.com/hugohe3.png", "stars": 59515, "forks": 4691, "language": "Python", "topics": ["powerpoint", "ai-agent"]},
+        {"title": "anthropics/knowledge-work-plugins", "summary": "Anthropic 公开的 Claude Cowork 知识工作插件仓库，供用户查看和复用插件结构。", "url": "https://github.com/anthropics/knowledge-work-plugins", "owner": "anthropics", "repoName": "knowledge-work-plugins", "avatar": "https://github.com/anthropics.png", "stars": 28837, "forks": 3278, "language": "Python", "topics": []}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "当 Agent 成为主要使用者，验证对象也要换",
+      "intro": "Beam 提醒我们，模型的权重是否可获得、推理效率和部署控制是不同问题；Vercel 的平台数据提示，Agent 已是一些基础设施的重要使用者。产品应分别核对模型可用性、机器流量质量、任务授权与最终交易确认。<br><strong>今日一问：</strong>你的产品若明天有一半操作来自 Agent，哪些动作可以自动完成，哪些仍必须由人确认？",
+      "items": [{"title": "今日一问", "summary": "你的产品若明天有一半操作来自 Agent，哪些动作可以自动完成，哪些仍必须由人确认？"}]
+    }
+  ],
+  "sources": [
+    {"title": "Reflection AI｜Beam 官方介绍", "url": "https://reflection.ai/blog/introducing-beam"},
+    {"title": "No Priors｜Misha Laskin 原频道视频", "url": "https://www.youtube.com/watch?v=up4sG9RM20M"},
+    {"title": "No Priors｜Apple Podcasts 节目页", "url": "https://podcasts.apple.com/us/podcast/beam-the-great-american-open-model-with-reflectionai/id1668002688?i=1000794029585"},
+    {"title": "Vercel｜Agent 购买域名", "url": "https://vercel.com/changelog/agents-can-now-buy-domains-with-the-vercel-cli"},
+    {"title": "OpenAI｜DevDay 2026 回顾", "url": "https://openai.com/index/devday-2026-recap/"},
+    {"title": "OpenAI 社区｜Dots 更新说明", "url": "https://community.openai.com/t/updates-for-dots-day-5-of-28-days-of-quality-of-life-improvements-and-or-a-full-reset/1403525/31"},
+    {"title": "Thibault Sottiaux｜Dots", "url": "https://x.com/thsottiaux/status/2108773703064657936"},
+    {"title": "Nan Yu｜Composer predictions", "url": "https://x.com/thenanyu/status/2108671762984731037"},
+    {"title": "Madhu Guru｜开放模型与成本", "url": "https://x.com/realmadhuguru/status/2108618266776387886"},
+    {"title": "Guillermo Rauch｜Vercel 流量", "url": "https://x.com/rauchg/status/2108733051283050964"},
+    {"title": "Guillermo Rauch｜域名购买", "url": "https://x.com/rauchg/status/2108669027363295323"},
+    {"title": "Aaron Levie｜Agent token 预测", "url": "https://x.com/levie/status/2108750943680630893"},
+    {"title": "Thariq｜新标签页", "url": "https://x.com/trq212/status/2108802833986552174"},
+    {"title": "ThariqS/ai-newtab", "url": "https://github.com/ThariqS/ai-newtab"},
+    {"title": "GitHub｜10 月 11 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "storytold/artcraft", "url": "https://github.com/storytold/artcraft"},
+    {"title": "mksglu/context-mode", "url": "https://github.com/mksglu/context-mode"},
+    {"title": "hugohe3/ppt-master", "url": "https://github.com/hugohe3/ppt-master"},
+    {"title": "anthropics/knowledge-work-plugins", "url": "https://github.com/anthropics/knowledge-work-plugins"}
+  ]
+}
