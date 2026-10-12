@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "title": "Agent 扩张之后：权限、审计与可靠判断成为关键",
+  "summary": "Builder 讨论 Agent 协作的机会与治理难题；GitHub 和 Google Cloud 的官方资料展示沙箱、身份与数据权限如何落地。Latent Space 的生物学访谈提醒我们，模型能预测结构，不代表已经理解蛋白质全部行为。",
+  "heroLabel": "AI 日报 · 10月12日",
+  "tags": ["Agent 治理", "权限与审计", "科学建模", "GitHub Trending"],
+  "stats": [
+    {"num": 5, "label": "Builder 动态"},
+    {"num": 4, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方资料"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "把能力接入真实系统，也要把边界写清楚",
+      "items": [
+        {
+          "title": "Agent 的下一步是可授权、可审计",
+          "summary": "Meta AI 的 Madhu Guru 提出“能力→信任→自主”的判断。Google Cloud 的 Gemini 工作代理说明单独身份与权限边界；GitHub 已将 Copilot 本地沙箱推至正式可用，限制文件、网络及凭据访问。前者是 Builder 观点，后两者是各厂商公布的产品机制。",
+          "links": [
+            {"label": "查看 Madhu 原帖 →", "url": "https://x.com/realmadhuguru/status/2108982858513776899"},
+            {"label": "阅读 GitHub 公告 →", "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available/"},
+            {"label": "阅读 Google Cloud 原文 →", "url": "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026"}
+          ]
+        },
+        {
+          "title": "科学模型的预测边界仍需说明",
+          "summary": "Latent Space 10 月 10 日的访谈中，Google DeepMind 的 Pushmeet Kohli 说 AlphaFold 复现的是实验数据库中的结构，不能据此宣称已掌握蛋白质的全部动态与结构分布。Biohub 的 Sal Candido 强调，要先确定科学问题和所需数据，再谈扩大计算与模型。",
+          "links": [
+            {"label": "阅读访谈与逐字稿 →", "url": "https://www.latent.space/p/biohub-deepmind"},
+            {"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=NufiHZfMwaw"}
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "AlphaFold 之后：从静态结构走向真实生物过程",
+      "intro": "Latent Space 于 10 月 10 日发布 Brandon Anderson 主持的对谈，嘉宾为 Google DeepMind 的 Pushmeet Kohli 和 Biohub 的 Sal Candido。以下概括来自节目原页逐字稿；这是研究方向讨论，不是新模型发布。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/NufiHZfMwaw",
+      "items": [
+        {"title": "先定义问题，再选择规模化路径", "summary": "Candido 认为扩展定律并非在所有生物数据中天然存在；数据若缺少目标问题所需的信息，增加算力也无法补齐。Kohli 主张在建模、采集数据和领域知识之间灵活选择。"},
+        {"title": "结构预测不是完整的蛋白质行为", "summary": "Kohli 将 AlphaFold 的原任务界定为复现实验存入 PDB 的结构。蛋白质会随环境改变形态，动态、功能与更大尺度的相互作用仍待研究；他也提出从冷冻电镜原始图像寻找更多信息的设想。"},
+        {"title": "可信度需要校准与适用范围", "summary": "Kohli 强调，用户需要知道模型何时可靠、何时不可靠；即便预测准确率很高，不校准的不确定性也会误导后续实验。讨论区分了可用于决策的行为特征与对模型内部机理的完整解释。",
+          "links": [
+            {"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=NufiHZfMwaw"},
+            {"label": "阅读完整逐字稿 →", "url": "https://www.latent.space/p/biohub-deepmind"}
+          ]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方资料：把 Agent 控制落实到运行环境",
+      "items": [
+        {"title": "GitHub｜Copilot 本地沙箱正式可用", "summary": "GitHub 10 月 7 日宣布，Copilot CLI、Copilot app 以及使用 Agent Host 的 VS Code 会话可用本地沙箱限制 Agent 对文件、网络和凭据的访问；10 月 9 日的周更再次列出该能力。具体保护范围取决于所用环境与配置。", "source": "GitHub 官方更新", "publishedAt": "2026-10-07", "links": [{"label": "阅读原文 →", "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available/"}]},
+        {"title": "Google Cloud｜工作代理有独立身份与权限", "summary": "Google Cloud 10 月 8 日介绍 Gemini 工作代理：临时子代理可有各自身份，长期协作代理有专用邮箱与存储，只能访问用户或团队授予的上下文。文章同时列出身份、策略和成本控制；这些是厂商公布的设计与早期使用情况。", "source": "Google Cloud 官方博客", "publishedAt": "2026-10-08", "links": [{"label": "阅读原文 →", "url": "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026"}]},
+        {"title": "Google Cloud｜Data Agent Kit 接入数据仍按 IAM 授权", "summary": "Google Cloud 9 月 30 日宣布 Data Agent Kit 正式可用，提供覆盖 15 个以上数据服务的 MCP 工具和技能。官方说明 Agent 以用户或其代入的服务账户权限连接，行列级安全策略继续生效；这是本期的治理背景资料。", "source": "Google Cloud 官方博客", "publishedAt": "2026-09-30", "links": [{"label": "阅读原文 →", "url": "https://cloud.google.com/blog/topics/developers-practitioners/data-agent-kit-is-now-ga-bring-google-data-cloud-to-any-coding-agent"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "五条来自产品、企业与开发现场的判断",
+      "items": [
+        {"title": "Madhu Guru｜从能力转向信任", "summary": "Meta AI 的 Madhu Guru 认为，Agent 能完成任务后，重点会转到身份、权限和可观测性：系统是否采取正确动作，能否审计并追责。这是对发展方向的判断，并非已验证的行业阶段划分。", "links": [{"label": "查看原帖 →", "url": "https://x.com/realmadhuguru/status/2108982858513776899"}]},
+        {"title": "Aaron Levie｜并行协作与企业控制要一起扩展", "summary": "Box CEO Levie 设想多 Agent 可在软件、安全和科研等大型任务中并行协作，进而拉高算力需求；其“1000 倍”说法是预测，不是实测。另一帖强调，对接企业敏感数据的 Agent 需要类似零信任的隔离、审计和故障控制。", "links": [{"label": "查看协作原帖 →", "url": "https://x.com/levie/status/2109079686286565378"}, {"label": "查看治理原帖 →", "url": "https://x.com/levie/status/2108952226714865966"}]},
+        {"title": "Nan Yu｜工程提速后，产品沟通仍受带宽限制", "summary": "OpenAI 产品负责人 Nan Yu 观察到 Agent 让工程师更有产能，但产品经理与客户对话的时间仍有限，因此提出工程与产品一比一的理想配比。这是个人组织观点，不是通用团队配置标准；配图来自其引用视频的原帖画面。", "links": [{"label": "查看原帖 →", "url": "https://x.com/thenanyu/status/2108976262698115550"}], "media": [{"src": "assets/2026-10-12/thenanyu-2108976262698115550-0.jpg", "width": 800, "height": 450, "alt": "Nan Yu 引用的视频中关于小型团队的演讲画面"}]},
+        {"title": "Garry Tan｜计划审批与合并门禁仍由人把关", "summary": "Y Combinator 的 Garry Tan 描述自己的用法：让 Agent 协调合并队列与 CI，只让完整检查通过的改动进入主分支；他会要求规划用浅显语言解释，并亲自批准方向。这是其个人工作流。", "links": [{"label": "查看合并流程原帖 →", "url": "https://x.com/garrytan/status/2108954741065879945"}, {"label": "查看计划审批原帖 →", "url": "https://x.com/garrytan/status/2108954740013043789"}]},
+        {"title": "Garry Tan｜评估应覆盖检索、延迟与成本", "summary": "Tan 分享 GBrain 任务的评估思路：把检索质量、延迟和单位计算成本放在同一套评估中；他称开源仓库包含 40 多个可自动研究和改进的类别。类别数来自作者原帖，具体有效性仍应按任务检验。", "links": [{"label": "查看原帖 →", "url": "https://x.com/garrytan/status/2108954738540863498"}, {"label": "查看项目仓库 →", "url": "https://github.com/garrytan/gbrain-evals"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日上榜项目", "footnote": "根据 10 月 12 日 GitHub Trending 实时榜单整理；星标、分叉和语言为本次 GitHub API 快照，数字会持续变化。",
+      "items": [
+        {"title": "morluto/rea", "summary": "使用 Agent 逆向分析软件行为与原生二进制的工具；仓库范围涵盖静态分析及多种反汇编工具集成。", "url": "https://github.com/morluto/rea", "owner": "morluto", "repoName": "rea", "avatar": "https://github.com/morluto.png", "stars": 108176, "forks": 23958, "language": "TypeScript", "topics": ["ai-agents", "reverse-engineering"]},
+        {"title": "cathrynlavery/diagram-design", "summary": "面向多个编码 Agent 的图表设计技能，仓库称支持 44 种图表类型，并输出独立 HTML 与 SVG。", "url": "https://github.com/cathrynlavery/diagram-design", "owner": "cathrynlavery", "repoName": "diagram-design", "avatar": "https://github.com/cathrynlavery.png", "stars": 50470, "forks": 3206, "language": "HTML", "topics": ["diagrams", "svg"]},
+        {"title": "bilawalsidhu/gods-eye-view", "summary": "在浏览器中的三维地球上呈现开源空间情报数据，项目自述包含实时卫星及航班等视角。", "url": "https://github.com/bilawalsidhu/gods-eye-view", "owner": "bilawalsidhu", "repoName": "gods-eye-view", "avatar": "https://github.com/bilawalsidhu.png", "stars": 51790, "forks": 10395, "language": "JavaScript", "topics": ["3d-globe", "osint"]},
+        {"title": "lyogavin/airllm", "summary": "通过逐层加载等方式降低大模型推理的显存门槛；仓库标题中的“70B、4GB GPU”是项目宣称，实际速度与可用性取决于环境。", "url": "https://github.com/lyogavin/airllm", "owner": "lyogavin", "repoName": "airllm", "avatar": "https://github.com/lyogavin.png", "stars": 36543, "forks": 3820, "language": "Jupyter Notebook", "topics": ["llm", "open-models"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "给 Agent 权限前，先定义可验证的结果",
+      "intro": "今天的讨论有两条共同线索：Agent 能并行做更多事，权限与审计就必须跟上；模型能给出有用答案，用户仍需知道答案适用于哪里、何时应当怀疑。对真实工作流，先列清可访问的数据、可执行的动作、运行记录和人工确认点，再评价速度提升。<br><strong>今日一问：</strong>你的 Agent 若做错一项高影响操作，团队能否还原它看到了什么、获得了哪些权限、为何做出该动作？",
+      "items": [{"title": "今日一问", "summary": "你的 Agent 若做错一项高影响操作，团队能否还原它看到了什么、获得了哪些权限、为何做出该动作？"}]
+    }
+  ],
+  "sources": [
+    {"title": "Latent Space｜蛋白质建模访谈与逐字稿", "url": "https://www.latent.space/p/biohub-deepmind"},
+    {"title": "Latent Space｜原频道公开视频", "url": "https://www.youtube.com/watch?v=NufiHZfMwaw"},
+    {"title": "GitHub｜Copilot 本地沙箱", "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available/"},
+    {"title": "Google Cloud｜Gemini 工作代理", "url": "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026"},
+    {"title": "Google Cloud｜Data Agent Kit", "url": "https://cloud.google.com/blog/topics/developers-practitioners/data-agent-kit-is-now-ga-bring-google-data-cloud-to-any-coding-agent"},
+    {"title": "Madhu Guru｜Agent 信任", "url": "https://x.com/realmadhuguru/status/2108982858513776899"},
+    {"title": "Aaron Levie｜Agent 并行协作", "url": "https://x.com/levie/status/2109079686286565378"},
+    {"title": "Aaron Levie｜企业 Agent 治理", "url": "https://x.com/levie/status/2108952226714865966"},
+    {"title": "Nan Yu｜工程与产品配比", "url": "https://x.com/thenanyu/status/2108976262698115550"},
+    {"title": "Garry Tan｜合并与 CI", "url": "https://x.com/garrytan/status/2108954741065879945"},
+    {"title": "Garry Tan｜计划审批", "url": "https://x.com/garrytan/status/2108954740013043789"},
+    {"title": "Garry Tan｜GBrain 评估", "url": "https://x.com/garrytan/status/2108954738540863498"},
+    {"title": "Garry Tan｜gbrain-evals 仓库", "url": "https://github.com/garrytan/gbrain-evals"},
+    {"title": "GitHub｜10 月 12 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "morluto/rea", "url": "https://github.com/morluto/rea"},
+    {"title": "cathrynlavery/diagram-design", "url": "https://github.com/cathrynlavery/diagram-design"},
+    {"title": "bilawalsidhu/gods-eye-view", "url": "https://github.com/bilawalsidhu/gods-eye-view"},
+    {"title": "lyogavin/airllm", "url": "https://github.com/lyogavin/airllm"}
+  ]
+}
