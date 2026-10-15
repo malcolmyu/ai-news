@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "title": "让 AI 的工作结果经得起核验",
+  "summary": "OpenAI 披露用编码 Agent 清理旧代码与实验的内部流程，Meta 展示由医学研究者主导的 AI 辅助研究。Sequoia 访谈追问从经验中学习的路径；Builder 动态提醒我们把演示、单项评测和真实工作结果分开看。",
+  "heroLabel": "AI 日报 · 10月15日",
+  "tags": ["可验证工作", "编码 Agent", "AI 科研", "经验学习"],
+  "stats": [
+    {"num": 7, "label": "Builder 动态"},
+    {"num": 4, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方原始来源"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "从自动执行走到证据与复核",
+      "items": [
+        {"title": "OpenAI 把代码维护交给 Agent 排查", "summary": "OpenAI 核心实验团队称，工程师让 Codex 汇集历史变更、运行数据与配置证据，再提出可审查的清理 PR。文章报告两周内合并超过 1,400 个 PR、删除超过 80 万行代码；这是其内部实践，不应外推为一般团队的产能。", "links": [{"label": "阅读 OpenAI 实践 →", "url": "https://developers.openai.com/blog/maintaining-software-with-the-gpt-6-family"}]},
+        {"title": "Meta 展示研究者主导的 AI 科研", "summary": "Meta 称医学研究者在四周内借助 Muse 模型和内部编程框架完成 10 份研究手稿，使用许可的去标识化病历数据。研究者负责科学判断；稿件经过同行、生物统计学家及第三方专家审阅，不能据此推断临床实践已改变。", "links": [{"label": "阅读 Meta 研究 →", "url": "https://research.meta.ai/blog/accelerating-scientific-research-in-health-data-science-with-muse-models"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "David Silver 谈从经验中学习的“超级学习者”",
+      "intro": "Sequoia Capital 的 Training Data 于 10 月 13 日发布 David Silver 与 Lasse Espeholt 访谈。两位 Ineffable Intelligence 创始人讨论不用人类预训练数据、在模拟环境中持续发现知识的研究路线；时间表与未来能力属于受访者预测。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/L4SWQebqhek",
+      "items": [
+        {"title": "目标是持续自主发现", "summary": "Silver 将“超级学习者”定义为能从经验中不断学习、跨不同环境发现新知识的系统。他明确表示现有模型虽有科学成果，仍需要大量人工参与。"},
+        {"title": "用可扩展的环境检验假设", "summary": "访谈介绍研究团队构建强化学习系统和模拟环境的思路，讨论环境设计、计算规模以及模拟到现实的边界。"},
+        {"title": "把预期与已证实结果分开", "summary": "访谈中的研究目标与时间预测尚未得到公开实验验证；当前可核对的是团队提出的研究路线和技术取舍。", "links": [{"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=L4SWQebqhek"}, {"label": "阅读原频道逐字稿 →", "url": "https://sequoiacap.com/podcast/david-silver-and-lasse-espeholt-of-ineffable-intelligence-a-superlearner-for-the-age-of-experience"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方原始来源",
+      "items": [
+        {"title": "OpenAI｜用 GPT-6 系列维护大型代码库", "summary": "案例覆盖删除无用代码、清理过期实验和改进 CI。作者强调先收集运行证据、审查小范围 PR，再逐步扩大清理范围。", "source": "OpenAI Developers", "publishedAt": "2026-10-14", "links": [{"label": "阅读原文 →", "url": "https://developers.openai.com/blog/maintaining-software-with-the-gpt-6-family"}]},
+        {"title": "Meta｜Muse 辅助健康数据研究", "summary": "Meta 发布 10 份由医学研究者主导的研究手稿；模型帮助提出假设、写与运行代码，结论仍由研究者负责。数据来自公开资料和许可的去标识化病历库。", "source": "Meta AI Research", "publishedAt": "2026-10-14", "links": [{"label": "阅读原文 →", "url": "https://research.meta.ai/blog/accelerating-scientific-research-in-health-data-science-with-muse-models"}]},
+        {"title": "Anthropic｜美国中期选举信息防护", "summary": "Anthropic 披露对美国 Claude.ai 用户 25 万段对话样本的分析，并说明将引入 Democracy Works 的官方投票信息与选举夜结果。样本比例只代表其产品和抽样时段。", "source": "Anthropic", "publishedAt": "2026-10-14", "links": [{"label": "阅读原文 →", "url": "https://www.anthropic.com/news/2026-us-midterms"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "七个关于使用、评测与落地的信号",
+      "items": [
+        {"title": "Swyx｜用真实 SaaS 检验 AI 复刻", "summary": "Swyx 介绍一场周末黑客松：参赛者尝试复刻其团队每年支付 4.3 万美元的 SaaS，采用 AI 与人工共同评估。他称收到 72 份提交；结果应以原节目公开的数据与评测条件为准。", "links": [{"label": "查看原帖 →", "url": "https://x.com/swyx/status/2110065576764686421"}]},
+        {"title": "Thibault Sottiaux｜桌面端减少磁盘占用", "summary": "OpenAI 的 Thibault Sottiaux 称，ChatGPT 与 Codex 桌面端调整状态存储方式后，磁盘保存量预计减少约 60%。这是产品团队公布的优化幅度，个人设备上的实际变化可能不同。", "links": [{"label": "查看原帖 →", "url": "https://x.com/thsottiaux/status/2110151780478927344"}]},
+        {"title": "Amjad Masad｜AI 能力扩散仍需服务商", "summary": "Replit CEO Amjad Masad 认为，即使前沿研究暂停，现有 AI 能力向经济活动扩散仍需多年；他以此说明 Replit 与解决方案伙伴合作的方向。“十年”是他的判断，并非测量结果。", "links": [{"label": "查看原帖 →", "url": "https://x.com/amasad/status/2110128937049452575"}]},
+        {"title": "Aaron Levie｜网络安全有双向 Agent 效应", "summary": "Box CEO Aaron Levie 指出，Agent 会扩大攻击者寻找软件漏洞的能力，也可能帮助防守方审查代码、测试利用路径和处理告警。他列举的是未来机会与风险，并非已验证的覆盖率提升。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2110227571090788526"}]},
+        {"title": "Dan Shipper｜单项工程评测与发布热度不同", "summary": "Every 的 Dan Shipper 分享其高级工程师基准的一项任务结果：Gemini 4 Argon 在该任务得 21%。这是其自有评测的一次比较，不能概括模型的整体编程能力。", "links": [{"label": "查看原帖及评测图 →", "url": "https://x.com/danshipper/status/2110056016872427944"}], "media": [{"src": "assets/2026-10-15/danshipper-2110056016872427944-0.jpg", "width": 800, "height": 917, "alt": "Dan Shipper 原帖附带的单任务模型评测得分图"}]},
+        {"title": "Garry Tan｜让 Agent 使用真实浏览器", "summary": "Y Combinator 的 Garry Tan 推荐让 Agent 进入真实浏览器和已有登录环境，以完成实际工作。配图为他原帖所附的 Aside 界面；授权范围与操作记录仍需使用者自行设定。", "links": [{"label": "查看原帖与界面图 →", "url": "https://x.com/garrytan/status/2110053836945756234"}], "media": [{"src": "assets/2026-10-15/garrytan-2110053836945756234-0.jpg", "width": 800, "height": 865, "alt": "Garry Tan 原帖所附的 Aside 产品界面截图"}]},
+        {"title": "Josh Woodward｜用自然语言做交互乐器", "summary": "Google 的 Josh Woodward 展示用一段 24 词提示词制作的定制合成器，演示将马蹄、水纹和手势转成音乐。原帖为单个演示视频，不能代表通用开发耗时。", "links": [{"label": "观看原帖演示 →", "url": "https://x.com/joshwoodward/status/2110179883045560674"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日榜单的四个项目", "footnote": "按 10 月 15 日 GitHub Trending 实时榜单筛选；星标、分叉和语言为本次 GitHub API 快照，会继续变化。避开昨日重点介绍的仓库。",
+      "items": [
+        {"title": "morluto/rea", "summary": "仓库自述使用 Agent 分析应用行为与原生二进制，面向逆向工程工作流；能力范围以项目文档和实际测试为准。", "url": "https://github.com/morluto/rea", "owner": "morluto", "repoName": "rea", "avatar": "https://github.com/morluto.png", "stars": 244221, "forks": 61007, "language": "TypeScript", "topics": ["ai-agents", "reverse-engineering"]},
+        {"title": "mksglu/context-mode", "summary": "为编码 Agent 管理上下文窗口和工具输出的 MCP 与 hooks 工具；仓库所称节省比例属于项目自述。", "url": "https://github.com/mksglu/context-mode", "owner": "mksglu", "repoName": "context-mode", "avatar": "https://github.com/mksglu.png", "stars": 29181, "forks": 2047, "language": "TypeScript", "topics": ["mcp", "context-mode"]},
+        {"title": "K-Dense-AI/scientific-agent-skills", "summary": "面向生物、化学与医学等科研流程的 Agent Skills 集合，并提供科学数据库接入；具体适用性需按任务验证。", "url": "https://github.com/K-Dense-AI/scientific-agent-skills", "owner": "K-Dense-AI", "repoName": "scientific-agent-skills", "avatar": "https://github.com/K-Dense-AI.png", "stars": 49414, "forks": 4425, "language": "Python", "topics": ["agent-skills", "scientific-computing"]},
+        {"title": "ifixai-ai/iFixAi", "summary": "项目提供 AI Agent 行为审计和诊断工具，用来检查其是否按预期执行；准确性与覆盖范围需要独立检验。", "url": "https://github.com/ifixai-ai/iFixAi", "owner": "ifixai-ai", "repoName": "iFixAi", "avatar": "https://github.com/ifixai-ai.png", "stars": 27509, "forks": 1507, "language": "Python", "topics": ["agent-evaluation", "ai-safety"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "证据链决定 Agent 能走多远", "intro": "代码清理需要运行数据和审查记录，医学研究需要专家负责科学判断，模型演示与单项基准也需要说明条件。把任务目标、授权范围、执行日志和人工复核点连起来，才有条件判断 Agent 是否真正完成工作。<br><strong>今日一问：</strong>你目前让 AI 完成的任务中，哪一项最缺少可复核的证据？", "items": [{"title": "今日一问", "summary": "是输入来源、执行过程、结果质量，还是人类签字确认？"}]}
+  ],
+  "sources": [
+    {"title": "OpenAI Developers｜软件维护实践", "url": "https://developers.openai.com/blog/maintaining-software-with-the-gpt-6-family"},
+    {"title": "Meta AI Research｜健康数据研究", "url": "https://research.meta.ai/blog/accelerating-scientific-research-in-health-data-science-with-muse-models"},
+    {"title": "Anthropic｜2026 美国中期选举防护", "url": "https://www.anthropic.com/news/2026-us-midterms"},
+    {"title": "Sequoia Capital｜David Silver 与 Lasse Espeholt 访谈及逐字稿", "url": "https://sequoiacap.com/podcast/david-silver-and-lasse-espeholt-of-ineffable-intelligence-a-superlearner-for-the-age-of-experience"},
+    {"title": "Training Data｜原频道公开视频", "url": "https://www.youtube.com/watch?v=L4SWQebqhek"},
+    {"title": "Swyx｜SaaS 复刻实验", "url": "https://x.com/swyx/status/2110065576764686421"},
+    {"title": "Thibault Sottiaux｜桌面端优化", "url": "https://x.com/thsottiaux/status/2110151780478927344"},
+    {"title": "Amjad Masad｜能力扩散", "url": "https://x.com/amasad/status/2110128937049452575"},
+    {"title": "Aaron Levie｜网络安全 Agent", "url": "https://x.com/levie/status/2110227571090788526"},
+    {"title": "Dan Shipper｜工程评测", "url": "https://x.com/danshipper/status/2110056016872427944"},
+    {"title": "Garry Tan｜真实浏览器", "url": "https://x.com/garrytan/status/2110053836945756234"},
+    {"title": "Josh Woodward｜交互乐器", "url": "https://x.com/joshwoodward/status/2110179883045560674"},
+    {"title": "GitHub｜10 月 15 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "morluto/rea", "url": "https://github.com/morluto/rea"},
+    {"title": "mksglu/context-mode", "url": "https://github.com/mksglu/context-mode"},
+    {"title": "K-Dense-AI/scientific-agent-skills", "url": "https://github.com/K-Dense-AI/scientific-agent-skills"},
+    {"title": "ifixai-ai/iFixAi", "url": "https://github.com/ifixai-ai/iFixAi"}
+  ]
+}
