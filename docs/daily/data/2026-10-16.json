@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "title": "AI 的边界要能被看见",
+  "summary": "Google 为 AI 搜索增加更明确的来源入口，Vercel 公开沙箱挑战发现的内核与信任边界问题。Every 访谈提醒团队在开发更快时继续追踪真实用户反馈；Builder 动态则把技术细节、隔离和产品实验带回具体场景。",
+  "heroLabel": "AI 日报 · 10月16日",
+  "tags": ["来源可见", "Agent 沙箱", "产品迭代", "原始证据"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 4, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方原始来源"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "把来源和执行边界放到明处",
+      "items": [
+        {"title": "Google 让 AI 搜索更容易回到原站", "summary": "Google 10 月 15 日宣布在 AI Mode 和 AI Overviews 中加入更清楚的正文内链接、官方网站专区、新闻视觉卡片与创作者资料入口。这是产品呈现调整；是否改善外部站点流量仍需后续观察。", "links": [{"label": "阅读 Google 公告 →", "url": "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/"}]},
+        {"title": "Vercel 公开沙箱攻防结果", "summary": "Vercel 披露两周内收到 1,285 份报告、支付 24.2 万美元奖励，发现一处 Linux 内核零日漏洞及其他隔离问题。公司称未发现客户数据被访问；部分攻击在研究者自建环境复现，适用范围须按原文区分。", "links": [{"label": "阅读 Vercel 技术复盘 →", "url": "https://vercel.com/blog/findings-from-the-1-million-dollar-vercel-sandbox-challenge"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Matt Hartman 谈技术转向与更快的产品反馈",
+      "intro": "Every 于 10 月 14 日发布 Natalia Quintero 对 Factorial Capital 创始人 Matt Hartman 的访谈。Hartman 回忆早期投资 Hugging Face 的判断，讨论团队如何从聊天应用转向开放模型生态；以下是受访者经验与观点，不是通用创业成功公式。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/RbUHf4HeBzo",
+      "items": [
+        {"title": "诚实看留存，再决定转向", "summary": "Hartman 称 Hugging Face 团队看到早期消费者产品的留存不足，随后开源 Transformers 实现，并围绕研究者与开发者需求发展模型平台。"},
+        {"title": "开发周期缩短，理解用户更重要", "summary": "他认为 AI 帮助编码后，团队可以更快把反馈变成新版本；观察真实使用、提炼产品判断的能力因此更有价值。访谈中的“两个月变两天”是说明性设想，并非行业统计。"},
+        {"title": "亲自做工具，才会看见维护成本", "summary": "Hartman 讲述自己开发本地语音转写工具 Ghost Pepper 后，对持续维护和付费软件价值有了更具体的理解。", "links": [{"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=RbUHf4HeBzo"}, {"label": "阅读 Every 逐字稿 →", "url": "https://every.to/podcast/transcript-hugging-face-s-first-investor-on-why-technical-founders-win"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方原文速览",
+      "items": [
+        {"title": "Google｜为 AI 搜索补充来源入口", "summary": "AI Mode 与 AI Overviews 的更新包括正文内链接、官方网站专区、新闻视觉卡片和创作者资料入口。", "source": "Google", "publishedAt": "2026-10-15", "links": [{"label": "阅读原文 →", "url": "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/"}]},
+        {"title": "Vercel｜公布百万美元沙箱挑战发现", "summary": "复盘分别说明生产环境中的主机内存泄漏演示，以及在匹配配置的自建机器上复现的主机崩溃与代码执行；另列出快照恢复与存储隔离问题。", "source": "Vercel", "publishedAt": "2026-10-14", "links": [{"label": "阅读原文 →", "url": "https://vercel.com/blog/findings-from-the-1-million-dollar-vercel-sandbox-challenge"}]},
+        {"title": "OpenAI｜为 AI 数学成果的人工审查提供资助", "summary": "OpenAI 在 10 月 6 日数学研究文章的 10 月 15 日更新中宣布，向 Simons Foundation 的相关计划提供 500 万美元，并为受支持研究者提供模型与算力资源。", "source": "OpenAI", "publishedAt": "2026-10-15", "links": [{"label": "阅读原文及更新 →", "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "从工程边界到小型产品实验",
+      "items": [
+        {"title": "Guillermo Rauch｜Agent 隔离要同时检查网络与虚拟化", "summary": "Vercel CEO 根据公开挑战结果，将 Agent 的越界风险分为网络通道与虚拟化边界两类。他称目前未发现客户数据受损；具体漏洞细节与演示环境应以 Vercel 技术复盘为准。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2110514201559228606"}]},
+        {"title": "Thariq｜技术参与要深入关键细节", "summary": "Anthropic Claude Code 团队成员 Thariq 认为，仅说“要懂技术”还不够：技术人员需深入代码的关键部分，非技术人员也应在适当层级理解系统如何运作。这是其个人工作建议。", "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2110488897453257169"}]},
+        {"title": "Zara Zhang｜把礼物清单做成可玩的网页", "summary": "Zara 展示个人愿望清单网站，把礼物登记做成有明显视觉风格和交互的页面。原帖附演示视频；画面只说明这一个作品的体验。", "links": [{"label": "观看原帖演示 →", "url": "https://x.com/zarazhangrui/status/2110262048819208642"}], "media": [{"src": "assets/2026-10-16/zarazhangrui-2110262048819208642-0.jpg", "width": 800, "height": 494, "alt": "Zara Zhang 原帖演示视频中的愿望清单网页画面"}]},
+        {"title": "Aditya Agarwal｜为高风险想法试验不同融资方式", "summary": "SPC 合伙人 Aditya Agarwal 宣布向少数探索大胆想法的人提供 20 万美元、估值不设上限的实验方案，并认为核能公司与 AI 应用不应套用同一种种子轮结构。条款与后续资本安排仍应以项目正式文件为准。", "links": [{"label": "查看原帖 →", "url": "https://x.com/adityaag/status/2110422584357478530"}], "media": [{"src": "assets/2026-10-16/adityaag-2110422584357478530-0.jpg", "width": 800, "height": 450, "alt": "Aditya Agarwal 原帖附带的黑底星图视觉"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日榜单的四个项目", "footnote": "按 10 月 16 日 GitHub Trending 实时榜单筛选；星标、分叉和语言为本次 GitHub API 快照，会继续变化。避开昨日重点介绍的仓库。",
+      "items": [
+        {"title": "anthropics/claude-plugins-official", "summary": "Anthropic 维护的 Claude Code 插件目录，集中展示经其管理的插件；安装前仍需检查各插件权限与代码。", "url": "https://github.com/anthropics/claude-plugins-official", "owner": "anthropics", "repoName": "claude-plugins-official", "avatar": "https://github.com/anthropics.png", "stars": 39174, "forks": 4332, "language": "Python", "topics": ["claude-code", "skills"]},
+        {"title": "debpalash/VoiceStudio", "summary": "本地运行的开源语音工作台，仓库列出语音克隆、配音、转写等功能；语言覆盖范围是项目自述，需按模型与任务测试。", "url": "https://github.com/debpalash/VoiceStudio", "owner": "debpalash", "repoName": "VoiceStudio", "avatar": "https://github.com/debpalash.png", "stars": 69204, "forks": 7575, "language": "Python", "topics": ["voice-ai", "local-first"]},
+        {"title": "ruvnet/ruflo", "summary": "面向多 Agent 协作的开源框架，仓库提供工作流、记忆和多种编码 Agent 的集成；性能和自治能力应在实际部署中验证。", "url": "https://github.com/ruvnet/ruflo", "owner": "ruvnet", "repoName": "ruflo", "avatar": "https://github.com/ruvnet.png", "stars": 75155, "forks": 8930, "language": "TypeScript", "topics": ["agentic-workflow", "multi-agent"]},
+        {"title": "obra/superpowers", "summary": "把头脑风暴、实现与验证流程组织为可复用 Agent Skills 的项目；方法可参考，具体收益取决于团队任务与执行方式。", "url": "https://github.com/obra/superpowers", "owner": "obra", "repoName": "superpowers", "avatar": "https://github.com/obra.png", "stars": 299945, "forks": 26787, "language": "Shell", "topics": ["skills", "coding"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "让人知道答案从哪里来、代码能去哪里", "intro": "AI 搜索需要让读者回到资料原站，Agent 沙箱需要明示网络、主机和存储的边界，产品团队需要持续看真实用户如何使用。三者指向同一件事：加速只有在来源、权限和反馈可见时才更容易被检验。<br><strong>今日一问：</strong>你的 AI 工作流里，哪一处边界最难被使用者看见？", "items": [{"title": "今日一问", "summary": "是内容来源、执行权限、环境隔离，还是上线后的用户反馈？"}]}
+  ],
+  "sources": [
+    {"title": "Google｜AI 搜索来源入口更新", "url": "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/"},
+    {"title": "Vercel｜沙箱挑战技术复盘", "url": "https://vercel.com/blog/findings-from-the-1-million-dollar-vercel-sandbox-challenge"},
+    {"title": "OpenAI｜AI 数学研究与 10 月 15 日更新", "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"},
+    {"title": "Every｜Matt Hartman 访谈逐字稿", "url": "https://every.to/podcast/transcript-hugging-face-s-first-investor-on-why-technical-founders-win"},
+    {"title": "Every｜原频道公开视频", "url": "https://www.youtube.com/watch?v=RbUHf4HeBzo"},
+    {"title": "Guillermo Rauch｜沙箱边界", "url": "https://x.com/rauchg/status/2110514201559228606"},
+    {"title": "Thariq｜深入技术细节", "url": "https://x.com/trq212/status/2110488897453257169"},
+    {"title": "Zara Zhang｜愿望清单网页", "url": "https://x.com/zarazhangrui/status/2110262048819208642"},
+    {"title": "Aditya Agarwal｜SPC 资助实验", "url": "https://x.com/adityaag/status/2110422584357478530"},
+    {"title": "GitHub｜10 月 16 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "anthropics/claude-plugins-official", "url": "https://github.com/anthropics/claude-plugins-official"},
+    {"title": "debpalash/VoiceStudio", "url": "https://github.com/debpalash/VoiceStudio"},
+    {"title": "ruvnet/ruflo", "url": "https://github.com/ruvnet/ruflo"},
+    {"title": "obra/superpowers", "url": "https://github.com/obra/superpowers"}
+  ]
+}
