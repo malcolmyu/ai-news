@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "title": "代码生成提速，工程系统要跟上",
+  "summary": "OpenAI 披露低资源编程语言的新评测，Anthropic 解释为何为高并发代码变更建设 Scion。Builder 则从数据工程、事故恢复和 Agent 协作谈起：写代码更快之后，测试、数据、版本控制和权限仍决定能否可靠交付。",
+  "heroLabel": "AI 日报 · 10月20日",
+  "tags": ["代码评测", "版本控制", "数据工程", "安全恢复"],
+  "stats": [{"num": 5, "label": "Builder 动态"}, {"num": 4, "label": "今日上榜项目"}, {"num": 3, "label": "原始文章"}, {"num": 1, "label": "公开视频"}],
+  "sections": [
+    {"kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "从代码能力到交付能力", "items": [
+      {"title": "低资源语言的代码评测进步", "summary": "<strong>低资源语言的代码评测进步</strong><br>OpenAI 在 20 种语言的 MultiLangBench 上报告 GPT‑6 Astra 平均测试通过率 87.4%，GPT‑5.6 Sol 为 26.8%。这是厂商定义的评测，不能直接当作生产迁移成功率；其 COBOL 迁移测试另要求可观察输出逐字节一致。", "links": [{"label": "阅读 OpenAI 原文 →", "url": "https://openai.com/index/low-resource-programming-languages/"}]},
+      {"title": "代码合并规模倒逼工具变化", "summary": "<strong>代码合并规模倒逼工具变化</strong><br>Anthropic 称内部单体仓库日合并变更从 5 月约 2,500 次升至 9 月逾 30,000 次，随后用五个月迁移至自建 Scion。作者强调这是其特殊负载，不能推断普通团队都需要替换 Git。", "links": [{"label": "阅读 Anthropic 工程文章 →", "url": "https://www.anthropic.com/engineering/redesigning-source-control"}]}
+    ]},
+    {"kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Misha Laskin：开放权重模型怎样进入企业", "intro": "No Priors 于 10 月 9 日访谈 Reflection AI 联合创始人 Misha Laskin。节目讨论 Beam、开放权重的安全取舍和企业部署路径；以下是受访者观点，尚非市场验证结果。", "embedUrl": "https://www.youtube-nocookie.com/embed/up4sG9RM20M", "items": [
+      {"title": "先搭系统，再谈微调", "summary": "Laskin 预测企业会先围绕开放模型定制 Agent 运行系统和业务流程，积累能力后才考虑微调；这是其商业判断。"},
+      {"title": "用任务评测连接数据与价值", "summary": "他认为企业若能为具体任务建立评测，就能据此生成近似数据并检验泛化；例子包括金融合规和网络防御。"},
+      {"title": "开放与安全仍需共同验证", "summary": "他主张开放权重有助于更多人发现问题，同时承认强模型访问存在取舍。节目没有证明开放会自动带来安全。", "links": [{"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=up4sG9RM20M"}]}
+    ]},
+    {"kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方文章与来源核对", "items": [
+      {"title": "OpenAI｜低资源语言评测", "summary": "新评测分别考察从零构建 SQLite 兼容引擎与保持 COBOL 程序行为的迁移；OpenAI 公开了 MultiLangBench 测试套件，实际迁移仍需专家复核。", "source": "OpenAI", "publishedAt": "2026-10-19", "links": [{"label": "阅读研究 →", "url": "https://openai.com/index/low-resource-programming-languages/"}]},
+      {"title": "Anthropic｜重设大规模源码管理", "summary": "工程文章解释自建 Scion 的在线客户端、服务器处理历史和合并等设计。作者指出其仓库体量与 Agent 负载不具普遍性。", "source": "Anthropic", "publishedAt": "2026-10-13", "links": [{"label": "阅读工程原文 →", "url": "https://www.anthropic.com/engineering/redesigning-source-control"}]},
+      {"title": "OpenAI｜Daybreak 防御访问", "summary": "Daybreak 页面介绍面向核准防御人员的访问与额度申请；Thibault 的原帖称受 OpenCode 事件影响且也是 OpenAI API 客户的用户已恢复使用并获相关额度退款，适用范围以其原帖为准。", "source": "OpenAI", "publishedAt": "2026-10-19", "links": [{"label": "查看 Daybreak →", "url": "https://openai.com/daybreak/"}, {"label": "查看团队成员原帖 →", "url": "https://x.com/thsottiaux/status/2112034063934742720"}]}
+    ]},
+    {"kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "写得更快之后，瓶颈在哪里", "items": [
+      {"title": "Swyx｜数据工程比简单 RAG 更稀缺", "summary": "Swyx 对比只做 RAG 接入与能建设数据密集型应用的人才，并分享一页涉及对象存储、向量检索与搜索引擎的工程文章目录；这是他的招聘观察，不能代表整体就业市场。", "links": [{"label": "查看原帖 →", "url": "https://x.com/swyx/status/2112073533794971941"}], "media": [{"src": "assets/2026-10-20/swyx-2112073533794971941-0.jpg", "width": 800, "height": 473, "alt": "Swyx 原帖图片：数据密集型应用工程文章目录"}]},
+      {"title": "Thibault Sottiaux｜说明 OpenCode 事故后的恢复", "summary": "OpenAI 团队成员称已协助同时使用 OpenAI API 的 OpenCode 用户恢复使用，并退还攻击中消耗的相关额度；还提示合格防御工作者可申请 Daybreak Blue。没有公布全部受影响用户范围。", "links": [{"label": "查看原帖 →", "url": "https://x.com/thsottiaux/status/2112034063934742720"}]},
+      {"title": "Guillermo Rauch｜展示模型改进小游戏", "summary": "Vercel CEO 称通过 AI Gateway 使用 DeepSeek V4.1 Flash 为汽车斜坡小游戏加上声音、碰撞和镜头跟随等功能；约 0.30 美元是他的单次体验成本，并非通用报价。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2111929486661018081"}], "media": [{"src": "assets/2026-10-20/rauchg-2111929486661018081-0.jpg", "width": 800, "height": 552, "alt": "Guillermo Rauch 原帖视频画面：汽车斜坡小游戏"}]},
+      {"title": "Aaron Levie｜Agent 群协作的规模判断", "summary": "Box CEO 认为研究、数据处理、测试等工作可能借多 Agent 并行增加投入，但同时需要规划、执行、审查与协调。他对经济影响的判断属于前瞻观点。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2112051081014649303"}]},
+      {"title": "Thariq｜把创作角色变成游戏玩法", "summary": "Thariq 正探索开放源码游戏，让玩家自行编写角色并参与平衡；原帖展示早期原型，没有宣布完成品或上线日期。", "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2111884199359897953"}]}
+    ]},
+    {"kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日榜单的四个项目", "footnote": "按 10 月 20 日 GitHub Trending 实时榜单筛选，避开昨日重点；星标、分叉与语言来自当次 GitHub API 快照，随后会变化。功能描述按仓库自述整理。", "items": [
+      {"title": "MadsLorentzen/ai-job-search", "summary": "在本机运行的求职流程框架，使用 Claude Code 评估职位、调整简历和准备面试；投递前仍需人工核对材料。", "url": "https://github.com/MadsLorentzen/ai-job-search", "owner": "MadsLorentzen", "repoName": "ai-job-search", "avatar": "https://github.com/MadsLorentzen.png", "stars": 57469, "forks": 18239, "language": "Python", "topics": ["ai-agents", "job-search"]},
+      {"title": "akitaonrails/ai-memory", "summary": "为编码 Agent CLI 提供长期记忆和跨工具交接方案；需要按实际工作流检查存储内容与保留范围。", "url": "https://github.com/akitaonrails/ai-memory", "owner": "akitaonrails", "repoName": "ai-memory", "avatar": "https://github.com/akitaonrails.png", "stars": 11398, "forks": 811, "language": "Rust", "topics": []},
+      {"title": "headroomlabs-ai/headroom", "summary": "压缩工具输出、日志、文件与 RAG 片段以减少上下文占用；仓库声称的压缩率依场景变化，应以自身任务验证答案质量。", "url": "https://github.com/headroomlabs-ai/headroom", "owner": "headroomlabs-ai", "repoName": "headroom", "avatar": "https://github.com/headroomlabs-ai.png", "stars": 76277, "forks": 5923, "language": "Python", "topics": ["context-engineering", "mcp"]},
+      {"title": "stablyai/orca", "summary": "用于调度多个编码 Agent 的桌面、移动端和远程工作空间；实际模型接入与运行权限由配置决定。", "url": "https://github.com/stablyai/orca", "owner": "stablyai", "repoName": "orca", "avatar": "https://github.com/stablyai.png", "stars": 98359, "forks": 6273, "language": "TypeScript", "topics": ["ai-agents", "orchestration"]}
+    ]},
+    {"kind": "analysis", "layout": "prose", "label": "今日思考", "title": "把瓶颈写进交付流程", "intro": "模型能写更多语言，不代表迁移可以跳过行为测试；Agent 能并行，不代表版本控制、数据质量和审查可自动扩容。今天的原始资料分别指向同一件事：产出速度提高时，交付系统需要更明确的验证入口。<br><strong>今日一问：</strong>你的下一次 Agent 改动会经过哪些可重复的测试、合并与权限检查？", "items": [{"title": "今日一问", "summary": "为每类自动修改写清输入数据、行为测试、审查人和回退方式。"}]}
+  ],
+  "sources": [
+    {"title": "OpenAI｜低资源编程语言评测", "url": "https://openai.com/index/low-resource-programming-languages/"},
+    {"title": "Anthropic｜Scion 工程文章", "url": "https://www.anthropic.com/engineering/redesigning-source-control"},
+    {"title": "OpenAI｜Daybreak", "url": "https://openai.com/daybreak/"},
+    {"title": "No Priors｜Misha Laskin 原频道视频", "url": "https://www.youtube.com/watch?v=up4sG9RM20M"},
+    {"title": "Swyx｜数据工程", "url": "https://x.com/swyx/status/2112073533794971941"},
+    {"title": "Thibault Sottiaux｜OpenCode 用户恢复", "url": "https://x.com/thsottiaux/status/2112034063934742720"},
+    {"title": "Guillermo Rauch｜小游戏演示", "url": "https://x.com/rauchg/status/2111929486661018081"},
+    {"title": "Aaron Levie｜Agent 协作", "url": "https://x.com/levie/status/2112051081014649303"},
+    {"title": "Thariq｜开放游戏原型", "url": "https://x.com/trq212/status/2111884199359897953"},
+    {"title": "GitHub｜10 月 20 日 Trending", "url": "https://github.com/trending"},
+    {"title": "MadsLorentzen/ai-job-search", "url": "https://github.com/MadsLorentzen/ai-job-search"},
+    {"title": "akitaonrails/ai-memory", "url": "https://github.com/akitaonrails/ai-memory"},
+    {"title": "headroomlabs-ai/headroom", "url": "https://github.com/headroomlabs-ai/headroom"},
+    {"title": "stablyai/orca", "url": "https://github.com/stablyai/orca"}
+  ]
+}
