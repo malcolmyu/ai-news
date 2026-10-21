@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "title": "AI 走进长期流程，恢复与协作成为关键",
+  "summary": "OpenAI 收购药物研发流程平台 Orchestra Bio；Vercel 发布用于恢复中断 Agent 任务的 durable-harness。Builder 同时讨论企业领域工作流、共享 Agent 与任务优先级：模型能力之外，持续运行、可追溯和人类决策开始成为产品核心。",
+  "heroLabel": "AI 日报 · 10月21日",
+  "tags": ["药物研发", "持久执行", "企业 Agent", "协作流程"],
+  "stats": [{"num": 4, "label": "Builder 动态"}, {"num": 4, "label": "今日上榜项目"}, {"num": 2, "label": "官方文章"}, {"num": 1, "label": "公开视频"}],
+  "sections": [
+    {"kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "从模型输出到可持续执行", "items": [
+      {"title": "OpenAI 收购 Orchestra Bio", "summary": "<strong>OpenAI 收购 Orchestra Bio</strong><br>OpenAI 10 月 20 日宣布收购药物研发协调平台 Orchestra Bio，计划把其团队与技术同 Rosalind 工具结合。公告描述的是协助跟踪研究、识别延误和整理应对方案的目标；没有给出药物获批提速的实测结果。", "links": [{"label": "阅读 OpenAI 公告 →", "url": "https://openai.com/index/openai-to-acquire-orchestra-bio/"}]},
+      {"title": "Vercel 发布 durable-harness", "summary": "<strong>Vercel 发布 durable-harness</strong><br>Vercel 10 月 19 日介绍面向 Pi、OpenCode、Codex 和 Claude Code 的持久执行适配层：逐步记录模型与工具调用，函数中断后读取日志继续。已完成调用读取记录；无法安全重放的工具会被标为可能已执行，仍需后续核对。", "links": [{"label": "阅读 Vercel 工程原文 →", "url": "https://vercel.com/blog/making-every-harness-durable"}]}
+    ]},
+    {"kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Every：从员工个人 Agent 转向公司共享 Agent", "intro": "Every 的 Dan Shipper 与平台负责人 Willie Williams 在原频道视频中回顾其内部实践。团队曾为员工配置个人机器人，后来转向在 Slack 中共享的公司 Agent；以下是团队经验与受访者判断，并非适用于所有组织的结论。", "embedUrl": "https://www.youtube-nocookie.com/embed/_pcy1_jU27k", "items": [
+      {"title": "维护负担决定组织形态", "summary": "Williams 说多个个人机器人逐渐难以维护，也不易让同事记住各自能力。共享入口让团队成员更容易看见请求、修正和复用流程。"},
+      {"title": "工作与个人场景可能分开", "summary": "他预测工作场景会偏向积累公司流程的共享 Agent，个人生活则更适合私人 Agent；这仍是受访者对产品方向的判断。"},
+      {"title": "管理工作仍需要人判断", "summary": "Williams 认为 Agent 可以汇总会议、Slack 与运行数据，帮助发现异常；团队沟通和瓶颈处理仍由人负责。", "links": [{"label": "观看 Every 原频道视频 →", "url": "https://www.youtube.com/watch?v=_pcy1_jU27k"}, {"label": "阅读原节目逐字稿 →", "url": "https://every.to/podcast/transcript-why-every-traded-personal-agents-for-one-company-agent"}]}
+    ]},
+    {"kind": "news", "layout": "rss", "label": "资讯精选", "title": "官方原文与近期讨论", "items": [
+      {"title": "OpenAI｜把 Rosalind 接入研发流程", "summary": "OpenAI 介绍 Rosalind 的研究工具与 Orchestra 的项目协调平台将如何结合；文中的药物研发时间为行业背景，不应读作此次收购带来的缩短幅度。", "source": "OpenAI", "publishedAt": "2026-10-20", "links": [{"label": "阅读公告 →", "url": "https://openai.com/index/openai-to-acquire-orchestra-bio/"}]},
+      {"title": "Vercel｜中断后续接 Agent 任务", "summary": "适配层在模型和工具调用前后记录意图与结果，并区分可安全重试和不应自动重试的工具；文章给出云端、本地与自托管用法。", "source": "Vercel", "publishedAt": "2026-10-19", "links": [{"label": "阅读工程文章 →", "url": "https://vercel.com/blog/making-every-harness-durable"}]},
+      {"title": "Every｜共享 Agent 的团队实验", "summary": "Every 介绍在 Slack 中让同事共享同一 Agent 的做法；这是该团队对自身协作与维护成本的取舍，不代表个人 Agent 在其他场景失效。", "source": "Every", "publishedAt": "2026-10-11", "links": [{"label": "阅读团队说明 →", "url": "https://every.to/context-window/one-agent-for-the-whole-company"}]}
+    ]},
+    {"kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "运行、专精与注意力", "items": [
+      {"title": "Guillermo Rauch｜开放 HTML 产物构建器", "summary": "Vercel CEO 介绍开源 HTML artifact builder，称它由 libfx 驱动，并展示一个悬浮集装箱页面。他强调此前处理服务崩溃、模型不稳定和函数时限的基础设施工作；原帖未提供通用性能基准。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2112247046082363821"}], "media": [{"src": "assets/2026-10-21/rauchg-2112247046082363821-0.jpg", "width": 800, "height": 539, "alt": "Guillermo Rauch 原帖视频画面：HTML 页面中的悬浮集装箱"}, {"src": "assets/2026-10-21/rauchg-2112247046082363821-1.jpg", "width": 800, "height": 419, "alt": "Guillermo Rauch 原帖画面：开源 HTML 产物构建器"}]},
+      {"title": "Aaron Levie｜领域工作流可能更重要", "summary": "Box CEO 认为模型能处理更长任务并使用更多工具后，企业产品的差异可能来自领域数据、路由、流程协调与变更管理。他明确将其作为对应用层的判断，而非已有市场统计。", "links": [{"label": "查看原帖 →", "url": "https://x.com/levie/status/2112404676436222170"}]},
+      {"title": "Thariq｜多 Agent 工作也要确定首要任务", "summary": "Thariq 提醒同时与多个 Agent 工作的人放慢速度，先问当前最重要的任务是什么，以及投入完整注意力会带来什么。观点针对任务选择，并未声称并行本身无效。", "links": [{"label": "查看原帖 →", "url": "https://x.com/trq212/status/2112219173288120531"}]},
+      {"title": "Nikunj Kothari｜体验有期限的专题对话", "summary": "Nikunj 分享使用 Wabi 2.0 预览版的个人体验：主 Agent 按旅行、报税等主题建立可共享、可归档的临时对话。他同时认为产品过于主动、应用体验仍需改进；这些都是用户体验评价。", "links": [{"label": "查看原帖 →", "url": "https://x.com/nikunj/status/2112219327881761008"}], "media": [{"src": "assets/2026-10-21/nikunj-2112219327881761008-0.jpg", "width": 800, "height": 450, "alt": "Nikunj 引用的 Wabi 产品画面：旅行主题倒计时"}]}
+    ]},
+    {"kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今日榜单的四个项目", "footnote": "按 10 月 21 日 GitHub Trending 实时榜单筛选，避开近两期重点；星标、分叉与语言来自当次 GitHub API 快照，随后会变化。功能描述按仓库自述整理。", "items": [
+      {"title": "cloudflare/security-audit-skill", "summary": "面向编码 Agent 的分阶段安全审计 skill，仓库自述强调独立验证和机器可读发现；实际审计结论仍需人工复核。", "url": "https://github.com/cloudflare/security-audit-skill", "owner": "cloudflare", "repoName": "security-audit-skill", "avatar": "https://github.com/cloudflare.png", "stars": 34344, "forks": 2148, "language": "JavaScript", "topics": []},
+      {"title": "Graphify-Labs/graphify", "summary": "使用本地 AST 解析，将代码、文档与配置整理为可查询知识图谱；仓库称每条关系可解释，使用前仍需检查解析范围。", "url": "https://github.com/Graphify-Labs/graphify", "owner": "Graphify-Labs", "repoName": "graphify", "avatar": "https://github.com/Graphify-Labs.png", "stars": 130325, "forks": 12545, "language": "Python", "topics": ["ai-agents", "code-analysis"]},
+      {"title": "anthropics/knowledge-work-plugins", "summary": "Anthropic 开放的知识工作插件集合，主要面向 Claude Cowork；适用工具和权限以各插件说明为准。", "url": "https://github.com/anthropics/knowledge-work-plugins", "owner": "anthropics", "repoName": "knowledge-work-plugins", "avatar": "https://github.com/anthropics.png", "stars": 30815, "forks": 3464, "language": "Python", "topics": []},
+      {"title": "ruvnet/ruflo", "summary": "多 Agent 调度框架，仓库列出记忆、工作流、检索等能力；各集成的成熟度应按项目文档分别核对。", "url": "https://github.com/ruvnet/ruflo", "owner": "ruvnet", "repoName": "ruflo", "avatar": "https://github.com/ruvnet.png", "stars": 77876, "forks": 9160, "language": "TypeScript", "topics": ["agentic-ai", "agentic-workflow"]}
+    ]},
+    {"kind": "analysis", "layout": "prose", "label": "今日思考", "title": "把连续性当成产品能力", "intro": "今天的来源跨越药物研发、编码 Agent 和团队协作，但都指向长期流程：任务要能在中断后恢复，记录要能解释发生了什么，专题对话要在合适时归档，关键决策要回到负责的人。<br><strong>今日一问：</strong>你的 Agent 中断一次后，团队能否说清哪些步骤已完成、哪些动作可能重复、谁来决定继续？", "items": [{"title": "今日一问", "summary": "为长任务记录步骤状态、重试规则、负责人和人工决策点。"}]}
+  ],
+  "sources": [
+    {"title": "OpenAI｜收购 Orchestra Bio", "url": "https://openai.com/index/openai-to-acquire-orchestra-bio/"},
+    {"title": "Vercel｜Making every harness durable", "url": "https://vercel.com/blog/making-every-harness-durable"},
+    {"title": "Every｜共享 Agent 团队说明", "url": "https://every.to/context-window/one-agent-for-the-whole-company"},
+    {"title": "Every｜Willie Williams 访谈视频", "url": "https://www.youtube.com/watch?v=_pcy1_jU27k"},
+    {"title": "Every｜访谈逐字稿", "url": "https://every.to/podcast/transcript-why-every-traded-personal-agents-for-one-company-agent"},
+    {"title": "Guillermo Rauch｜HTML 产物构建器", "url": "https://x.com/rauchg/status/2112247046082363821"},
+    {"title": "Aaron Levie｜企业 Agent 专精", "url": "https://x.com/levie/status/2112404676436222170"},
+    {"title": "Thariq｜Agent 任务优先级", "url": "https://x.com/trq212/status/2112219173288120531"},
+    {"title": "Nikunj Kothari｜Wabi 2.0 体验", "url": "https://x.com/nikunj/status/2112219327881761008"},
+    {"title": "GitHub｜10 月 21 日 Trending", "url": "https://github.com/trending"},
+    {"title": "cloudflare/security-audit-skill", "url": "https://github.com/cloudflare/security-audit-skill"},
+    {"title": "Graphify-Labs/graphify", "url": "https://github.com/Graphify-Labs/graphify"},
+    {"title": "anthropics/knowledge-work-plugins", "url": "https://github.com/anthropics/knowledge-work-plugins"},
+    {"title": "ruvnet/ruflo", "url": "https://github.com/ruvnet/ruflo"}
+  ]
+}
