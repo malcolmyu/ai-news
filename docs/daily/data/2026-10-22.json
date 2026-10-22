@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "title": "AI 基础设施继续下沉：端侧语音、长时缓存与机器人数据",
+  "summary": "Gradium 开放 Phonon 端侧语音模型，OpenAI 文档加入 12 小时提示缓存选项；Sequoia 的机器人数据访谈提醒，物理 AI 仍依赖传感器、采集和质检。Builder 讨论开源语音、工具衔接与早期产品反馈。",
+  "heroLabel": "AI 日报 · 10月22日",
+  "tags": [
+    "端侧语音",
+    "提示缓存",
+    "机器人数据",
+    "产品反馈"
+  ],
+  "stats": [
+    {
+      "num": 5,
+      "label": "Builder 动态"
+    },
+    {
+      "num": 4,
+      "label": "今日上榜项目"
+    },
+    {
+      "num": 2,
+      "label": "技术原文"
+    },
+    {
+      "num": 1,
+      "label": "公开视频"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "让能力进入真实设备与长期任务",
+      "items": [
+        {
+          "title": "Gradium 开放端侧语音模型 Phonon",
+          "summary": "<strong>Phonon 面向本地语音合成</strong><br>Gradium 10 月 20 日开放 31m 与 40m 参数的模型及推理代码。31m 英语版采用 Apache 2.0 许可；40m 有单语及英、法、德、西、葡五语版本。厂商的延迟与质量数字来自其自测，不代表每台设备的实际表现。",
+          "links": [
+            {
+              "label": "阅读 Gradium 技术原文 →",
+              "url": "https://gradium.ai/blog/release-phonon-open-weight"
+            }
+          ]
+        },
+        {
+          "title": "OpenAI API 提供 12 小时提示缓存",
+          "summary": "<strong>长任务可复用稳定上下文</strong><br>OpenAI 文档说明，GPT-5.6 及后续模型的 Responses API 可为共享前缀选择 12 小时最低缓存期，写入按未缓存输入价格的 2.5 倍计费；默认 30 分钟写入是 1.25 倍。是否划算取决于后续复用次数，12 小时也不是删除期限。",
+          "links": [
+            {
+              "label": "阅读 OpenAI 缓存文档 →",
+              "url": "https://developers.openai.com/api/docs/guides/prompt-caching"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "Sequoia：机器人数据工厂怎样运转",
+      "intro": "Sequoia Capital 原频道访谈 Mecka 创始人 Josh Gao，讨论机器人训练数据的来源、传感器和质量控制。以下规模和配比是受访者观察及其公司的说法，不是行业统一标准。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/0idrTKCDhuE",
+      "items": [
+        {
+          "title": "机器人缺少互联网式的现成训练集",
+          "summary": "Gao 解释，第一人称人类动作视频可扩大覆盖范围，但仍需机器人动作数据和特定场景的遥操作示范。他描述的一种当前配比是约百万小时人类数据、数万小时机器人数据，再加少量场景内示范。"
+        },
+        {
+          "title": "触觉需要新的采集硬件",
+          "summary": "仅有画面难以知道手握门把或物体时的施力；团队因此开发可采集力度的手套等设备，并与不同职业和企业合作收集动作。"
+        },
+        {
+          "title": "质检是持续变化的运营工作",
+          "summary": "受访者举例说，公开 POV 视频曾被冒充为现场采集成果。团队因此需要不断调整规则、快速升级异常，并在采集现场核查，而不只是扩大数据量。",
+          "links": [
+            {
+              "label": "观看 Sequoia 原频道视频 →",
+              "url": "https://www.youtube.com/watch?v=0idrTKCDhuE"
+            },
+            {
+              "label": "阅读原节目逐字稿 →",
+              "url": "https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "news",
+      "layout": "rss",
+      "label": "资讯精选",
+      "title": "官方原文与今日线索",
+      "items": [
+        {
+          "title": "Gradium｜Phonon 的开放范围与设备支持",
+          "summary": "技术公告列出 31m、40m 与多语模型，以及 CPU、GPU、NPU 等运行路径。模型权重与推理代码分别从官方页面和仓库获取；部署前应核对具体模型许可。",
+          "source": "Gradium",
+          "publishedAt": "2026-10-20",
+          "links": [
+            {
+              "label": "阅读技术公告 →",
+              "url": "https://gradium.ai/blog/release-phonon-open-weight"
+            }
+          ]
+        },
+        {
+          "title": "OpenAI｜12 小时缓存的费用与边界",
+          "summary": "官方文档区分默认 30 分钟和可选 12 小时的最低缓存期，解释写入费率、重复读取与前缀稳定性的关系。更长缓存不自动保证低延迟或更低总费用。",
+          "source": "OpenAI",
+          "links": [
+            {
+              "label": "阅读 API 文档 →",
+              "url": "https://developers.openai.com/api/docs/guides/prompt-caching"
+            }
+          ]
+        },
+        {
+          "title": "Sequoia｜机器人训练数据的采集和验真",
+          "summary": "访谈逐字稿详述第一人称视频、触觉手套、机器人示范与现场质检；文中的数据配比和规模均为受访者陈述。",
+          "source": "Sequoia Capital",
+          "publishedAt": "2026-10-20",
+          "links": [
+            {
+              "label": "阅读访谈逐字稿 →",
+              "url": "https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "Builder 动态",
+      "title": "能力扩展后，成本和反馈仍要算清",
+      "items": [
+        {
+          "title": "Thibault Sottiaux｜缓存延长到 12 小时",
+          "summary": "OpenAI 的 Thibault 介绍 API 的 12 小时缓存，并称 Codex 与 Work 登录用户重访旧对话时也会保持缓存命中。API 部分可由官方文档核对；Codex 与 Work 的细节是他在原帖中的产品说明。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/thsottiaux/status/2112712984644784534"
+            }
+          ]
+        },
+        {
+          "title": "Matt Turck｜关注开源端侧语音",
+          "summary": "FirstMark 的 Matt Turck 指出小型开源、设备端文字转语音模型的进展。具体规格应以 Gradium 发布的 Phonon 技术公告和模型仓库为准。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/mattturck/status/2112623582098428015"
+            }
+          ]
+        },
+        {
+          "title": "Garry Tan｜GStack 接入 Capy",
+          "summary": "YC 的 Garry Tan 表示 GStack 已适配 Capy 的 Captains 软件工厂功能，并附上变更画面。这是项目集成进展，不构成性能或代码质量的独立评测。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/garrytan/status/2112698243553579485"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-10-22/garrytan-2112698243553579485-0.jpg",
+              "width": 800,
+              "height": 1286,
+              "alt": "Garry Tan 原帖所附 GStack 与 Capy 集成变更截图"
+            }
+          ]
+        },
+        {
+          "title": "Aditya Agarwal｜用分布式系统类比 Agent 群",
+          "summary": "SPC 合伙人 Aditya 将推理时扩展、子 Agent 和 Agent 群，与线程、多核及多节点系统作类比。这是帮助思考协调成本的观点，不是技术性能等价关系。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/adityaag/status/2112579526379401408"
+            }
+          ]
+        },
+        {
+          "title": "Zara Zhang｜早期受众首先提供信号",
+          "summary": "Zara Zhang 认为早期产品自有受众的主要价值是试验不同方向、找到首批用户并收集反馈，而不只是分发。这是产品方法判断，并无统一转化率数据。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/zarazhangrui/status/2112530473994072225"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "今日榜单的四个项目",
+      "footnote": "按 10 月 22 日 GitHub Trending 实时榜单筛选，避开近两期重点；星标、分叉与语言来自当次 GitHub API 快照，随后会变化。功能描述按仓库自述整理。",
+      "items": [
+        {
+          "title": "vllm-project/vllm",
+          "summary": "大语言模型推理与服务引擎，侧重吞吐量和内存使用；实际部署表现取决于模型、硬件与负载。",
+          "url": "https://github.com/vllm-project/vllm",
+          "owner": "vllm-project",
+          "repoName": "vllm",
+          "avatar": "https://github.com/vllm-project.png",
+          "stars": 94909,
+          "forks": 23751,
+          "language": "Python",
+          "topics": [
+            "inference",
+            "llm"
+          ]
+        },
+        {
+          "title": "DietrichGebert/ponytail",
+          "summary": "面向编码 Agent 的简化代码实践插件，以减少不必要的实现为目标；建议按仓库说明检查适用任务。",
+          "url": "https://github.com/DietrichGebert/ponytail",
+          "owner": "DietrichGebert",
+          "repoName": "ponytail",
+          "avatar": "https://github.com/DietrichGebert.png",
+          "stars": 171754,
+          "forks": 9346,
+          "language": "JavaScript",
+          "topics": [
+            "agent-skills",
+            "claude"
+          ]
+        },
+        {
+          "title": "shiyu-coder/Kronos",
+          "summary": "面向金融市场序列的基础模型项目；用途、数据范围与风险应以仓库文档为准，不应把模型输出当投资建议。",
+          "url": "https://github.com/shiyu-coder/Kronos",
+          "owner": "shiyu-coder",
+          "repoName": "Kronos",
+          "avatar": "https://github.com/shiyu-coder.png",
+          "stars": 42860,
+          "forks": 7071,
+          "language": "Python",
+          "topics": []
+        },
+        {
+          "title": "Comfy-Org/ComfyUI",
+          "summary": "节点式生成媒体工作流界面与后端，支持组合模型和处理步骤；部署时需留意所用模型与自定义节点的要求。",
+          "url": "https://github.com/Comfy-Org/ComfyUI",
+          "owner": "Comfy-Org",
+          "repoName": "ComfyUI",
+          "avatar": "https://github.com/Comfy-Org.png",
+          "stars": 141566,
+          "forks": 16732,
+          "language": "Python",
+          "topics": [
+            "generative-ai",
+            "stable-diffusion"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "把基础设施的成本写进产品设计",
+      "intro": "今天的线索横跨设备端、API 和机器人现场：模型要进入产品，还要处理运行环境、重复计算、数据获取与质检。缓存期限、语音延迟和采集小时数都不能脱离计费、设备条件和数据质量单独比较。<br><strong>今日一问：</strong>如果你把同一 Agent 流程从云端搬到设备或长任务中，最先需要重新测量的是哪项成本与质量指标？",
+      "items": [
+        {
+          "title": "今日一问",
+          "summary": "明确一次任务的上下文复用次数、设备端延迟和数据质量验收方式。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Gradium｜Phonon 开源技术公告",
+      "url": "https://gradium.ai/blog/release-phonon-open-weight"
+    },
+    {
+      "title": "Gradium｜Phonon 推理仓库",
+      "url": "https://github.com/gradium-ai/xn-ptts"
+    },
+    {
+      "title": "OpenAI｜提示缓存 API 文档",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching"
+    },
+    {
+      "title": "Sequoia｜Josh Gao 视频",
+      "url": "https://www.youtube.com/watch?v=0idrTKCDhuE"
+    },
+    {
+      "title": "Sequoia｜原节目与逐字稿",
+      "url": "https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots"
+    },
+    {
+      "title": "Thibault Sottiaux｜缓存动态",
+      "url": "https://x.com/thsottiaux/status/2112712984644784534"
+    },
+    {
+      "title": "Matt Turck｜端侧语音",
+      "url": "https://x.com/mattturck/status/2112623582098428015"
+    },
+    {
+      "title": "Garry Tan｜GStack 与 Capy",
+      "url": "https://x.com/garrytan/status/2112698243553579485"
+    },
+    {
+      "title": "Aditya Agarwal｜Agent 群类比",
+      "url": "https://x.com/adityaag/status/2112579526379401408"
+    },
+    {
+      "title": "Zara Zhang｜早期用户信号",
+      "url": "https://x.com/zarazhangrui/status/2112530473994072225"
+    },
+    {
+      "title": "GitHub｜10 月 22 日 Trending",
+      "url": "https://github.com/trending"
+    },
+    {
+      "title": "vllm-project/vllm",
+      "url": "https://github.com/vllm-project/vllm"
+    },
+    {
+      "title": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail"
+    },
+    {
+      "title": "shiyu-coder/Kronos",
+      "url": "https://github.com/shiyu-coder/Kronos"
+    },
+    {
+      "title": "Comfy-Org/ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI"
+    }
+  ]
+}

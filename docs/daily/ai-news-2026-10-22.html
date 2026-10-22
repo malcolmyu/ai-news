@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 基础设施继续下沉：端侧语音、长时缓存与机器人数据 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月22日</div>
+  <h1>AI 基础设施继续下沉：端侧语音、长时缓存与机器人数据</h1>
+  <div class="subtitle">Gradium 开放 Phonon 端侧语音模型，OpenAI 文档加入 12 小时提示缓存选项；Sequoia 的机器人数据访谈提醒，物理 AI 仍依赖传感器、采集和质检。Builder 讨论开源语音、工具衔接与早期产品反馈。</div>
+  <div class="dots-row">
+    <span class="tag">端侧语音</span>
+    <span class="tag">提示缓存</span>
+    <span class="tag">机器人数据</span>
+    <span class="tag">产品反馈</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">技术原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>Phonon 面向本地语音合成</strong><br>Gradium 10 月 20 日开放 31m 与 40m 参数的模型及推理代码。31m 英语版采用 Apache 2.0 许可；40m 有单语及英、法、德、西、葡五语版本。厂商的延迟与质量数字来自其自测，不代表每台设备的实际表现。</p>
+      <div style="margin-top:12px;">
+        <a href="https://gradium.ai/blog/release-phonon-open-weight" target="_blank" class="vitem-link">阅读 Gradium 技术原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>长任务可复用稳定上下文</strong><br>OpenAI 文档说明，GPT-5.6 及后续模型的 Responses API 可为共享前缀选择 12 小时最低缓存期，写入按未缓存输入价格的 2.5 倍计费；默认 30 分钟写入是 1.25 倍。是否划算取决于后续复用次数，12 小时也不是删除期限。</p>
+      <div style="margin-top:12px;">
+        <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" class="vitem-link">阅读 OpenAI 缓存文档 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Sequoia：机器人数据工厂怎样运转</h2>
+  <div class="text-body">Sequoia Capital 原频道访谈 Mecka 创始人 Josh Gao，讨论机器人训练数据的来源、传感器和质量控制。以下规模和配比是受访者观察及其公司的说法，不是行业统一标准。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/0idrTKCDhuE" title="Sequoia：机器人数据工厂怎样运转" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">机器人缺少互联网式的现成训练集</div><div class="vitem-desc">Gao 解释，第一人称人类动作视频可扩大覆盖范围，但仍需机器人动作数据和特定场景的遥操作示范。他描述的一种当前配比是约百万小时人类数据、数万小时机器人数据，再加少量场景内示范。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">触觉需要新的采集硬件</div><div class="vitem-desc">仅有画面难以知道手握门把或物体时的施力；团队因此开发可采集力度的手套等设备，并与不同职业和企业合作收集动作。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">质检是持续变化的运营工作</div><div class="vitem-desc">受访者举例说，公开 POV 视频曾被冒充为现场采集成果。团队因此需要不断调整规则、快速升级异常，并在采集现场核查，而不只是扩大数据量。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=0idrTKCDhuE" target="_blank" class="vitem-link">观看 Sequoia 原频道视频 →</a>
+    <a href="https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots" target="_blank" class="vitem-link">阅读原节目逐字稿 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>官方原文与今日线索</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">Gradium｜Phonon 的开放范围与设备支持</div>
+  <div class="vitem-desc">技术公告列出 31m、40m 与多语模型，以及 CPU、GPU、NPU 等运行路径。模型权重与推理代码分别从官方页面和仓库获取；部署前应核对具体模型许可。</div>
+  <div class="vitem-actions">
+    <a href="https://gradium.ai/blog/release-phonon-open-weight" target="_blank" class="vitem-link">阅读技术公告 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">OpenAI｜12 小时缓存的费用与边界</div>
+  <div class="vitem-desc">官方文档区分默认 30 分钟和可选 12 小时的最低缓存期，解释写入费率、重复读取与前缀稳定性的关系。更长缓存不自动保证低延迟或更低总费用。</div>
+  <div class="vitem-actions">
+    <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" class="vitem-link">阅读 API 文档 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Sequoia｜机器人训练数据的采集和验真</div>
+  <div class="vitem-desc">访谈逐字稿详述第一人称视频、触觉手套、机器人示范与现场质检；文中的数据配比和规模均为受访者陈述。</div>
+  <div class="vitem-actions">
+    <a href="https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots" target="_blank" class="vitem-link">阅读访谈逐字稿 →</a>
+  </div>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>能力扩展后，成本和反馈仍要算清</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Thibault Sottiaux｜缓存延长到 12 小时</div>
+    <div class="vitem-desc">OpenAI 的 Thibault 介绍 API 的 12 小时缓存，并称 Codex 与 Work 登录用户重访旧对话时也会保持缓存命中。API 部分可由官方文档核对；Codex 与 Work 的细节是他在原帖中的产品说明。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/thsottiaux/status/2112712984644784534" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Matt Turck｜关注开源端侧语音</div>
+    <div class="vitem-desc">FirstMark 的 Matt Turck 指出小型开源、设备端文字转语音模型的进展。具体规格应以 Gradium 发布的 Phonon 技术公告和模型仓库为准。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/mattturck/status/2112623582098428015" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜GStack 接入 Capy</div>
+    <div class="vitem-desc">YC 的 Garry Tan 表示 GStack 已适配 Capy 的 Captains 软件工厂功能，并附上变更画面。这是项目集成进展，不构成性能或代码质量的独立评测。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-22/garrytan-2112698243553579485-0.jpg" width="800" height="1286" loading="lazy" alt="Garry Tan 原帖所附 GStack 与 Capy 集成变更截图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2112698243553579485" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aditya Agarwal｜用分布式系统类比 Agent 群</div>
+    <div class="vitem-desc">SPC 合伙人 Aditya 将推理时扩展、子 Agent 和 Agent 群，与线程、多核及多节点系统作类比。这是帮助思考协调成本的观点，不是技术性能等价关系。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/adityaag/status/2112579526379401408" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Zara Zhang｜早期受众首先提供信号</div>
+    <div class="vitem-desc">Zara Zhang 认为早期产品自有受众的主要价值是试验不同方向、找到首批用户并收集反馈，而不只是分发。这是产品方法判断，并无统一转化率数据。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/zarazhangrui/status/2112530473994072225" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日榜单的四个项目</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/vllm-project/vllm" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/vllm-project.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">vllm-project</span><span class="gh-sep">/</span><span class="gh-name">vllm</span>
+      </div>
+      <span class="gh-stars">⭐ 94.9k</span>
+    </div>
+    <div class="gh-body">大语言模型推理与服务引擎，侧重吞吐量和内存使用；实际部署表现取决于模型、硬件与负载。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 23.8k</span>
+      <span class="gh-topics"><span class="gh-topic">inference</span><span class="gh-topic">llm</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/DietrichGebert/ponytail" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/DietrichGebert.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">DietrichGebert</span><span class="gh-sep">/</span><span class="gh-name">ponytail</span>
+      </div>
+      <span class="gh-stars">⭐ 171.8k</span>
+    </div>
+    <div class="gh-body">面向编码 Agent 的简化代码实践插件，以减少不必要的实现为目标；建议按仓库说明检查适用任务。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 9.3k</span>
+      <span class="gh-topics"><span class="gh-topic">agent-skills</span><span class="gh-topic">claude</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/shiyu-coder/Kronos" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/shiyu-coder.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">shiyu-coder</span><span class="gh-sep">/</span><span class="gh-name">Kronos</span>
+      </div>
+      <span class="gh-stars">⭐ 42.9k</span>
+    </div>
+    <div class="gh-body">面向金融市场序列的基础模型项目；用途、数据范围与风险应以仓库文档为准，不应把模型输出当投资建议。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 7.1k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/Comfy-Org.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Comfy-Org</span><span class="gh-sep">/</span><span class="gh-name">ComfyUI</span>
+      </div>
+      <span class="gh-stars">⭐ 141.6k</span>
+    </div>
+    <div class="gh-body">节点式生成媒体工作流界面与后端，支持组合模型和处理步骤；部署时需留意所用模型与自定义节点的要求。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 16.7k</span>
+      <span class="gh-topics"><span class="gh-topic">generative-ai</span><span class="gh-topic">stable-diffusion</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    按 10 月 22 日 GitHub Trending 实时榜单筛选，避开近两期重点；星标、分叉与语言来自当次 GitHub API 快照，随后会变化。功能描述按仓库自述整理。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  今天的线索横跨设备端、API 和机器人现场：模型要进入产品，还要处理运行环境、重复计算、数据获取与质检。缓存期限、语音延迟和采集小时数都不能脱离计费、设备条件和数据质量单独比较。<br><strong>今日一问：</strong>如果你把同一 Agent 流程从云端搬到设备或长任务中，最先需要重新测量的是哪项成本与质量指标？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://gradium.ai/blog/release-phonon-open-weight" target="_blank">Gradium｜Phonon 开源技术公告</a>
+    <a href="https://github.com/gradium-ai/xn-ptts" target="_blank">Gradium｜Phonon 推理仓库</a>
+    <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank">OpenAI｜提示缓存 API 文档</a>
+    <a href="https://www.youtube.com/watch?v=0idrTKCDhuE" target="_blank">Sequoia｜Josh Gao 视频</a>
+    <a href="https://sequoiacap.com/podcast/inside-the-robot-data-factory-how-mecka-sensorizes-humans-to-train-robots" target="_blank">Sequoia｜原节目与逐字稿</a>
+    <a href="https://x.com/thsottiaux/status/2112712984644784534" target="_blank">Thibault Sottiaux｜缓存动态</a>
+    <a href="https://x.com/mattturck/status/2112623582098428015" target="_blank">Matt Turck｜端侧语音</a>
+    <a href="https://x.com/garrytan/status/2112698243553579485" target="_blank">Garry Tan｜GStack 与 Capy</a>
+    <a href="https://x.com/adityaag/status/2112579526379401408" target="_blank">Aditya Agarwal｜Agent 群类比</a>
+    <a href="https://x.com/zarazhangrui/status/2112530473994072225" target="_blank">Zara Zhang｜早期用户信号</a>
+    <a href="https://github.com/trending" target="_blank">GitHub｜10 月 22 日 Trending</a>
+    <a href="https://github.com/vllm-project/vllm" target="_blank">vllm-project/vllm</a>
+    <a href="https://github.com/DietrichGebert/ponytail" target="_blank">DietrichGebert/ponytail</a>
+    <a href="https://github.com/shiyu-coder/Kronos" target="_blank">shiyu-coder/Kronos</a>
+    <a href="https://github.com/Comfy-Org/ComfyUI" target="_blank">Comfy-Org/ComfyUI</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
