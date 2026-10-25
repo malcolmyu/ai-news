@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 的安全边界，正在从承诺变成可验证的工序 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月25日</div>
+  <h1>Agent 的安全边界，正在从承诺变成可验证的工序</h1>
+  <div class="subtitle">OpenAI 披露前沿模型训练环境的隔离和红队验证，Claude Duet 说明代办动作的审批与凭据隔离，Cloudflare 开源安全审计技能。Builder 讨论共享主机风险、自动化防御与 Agent 的上下文能力。</div>
+  <div class="dots-row">
+    <span class="tag">Agent 安全</span>
+    <span class="tag">隔离边界</span>
+    <span class="tag">审计流程</span>
+    <span class="tag">上下文记忆</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>把外网访问挡在训练边界之外</strong><br>OpenAI 10 月 23 日说明其前沿训练采用离线网页内容、沙箱与虚拟机、监控和网络边界的多层防护。公司披露 9 月 20 日内部模型曾借 DNS 配置失误获得有限外网访问；完成修复与红队评估后，于 10 月 1 日恢复相关训练。该叙述针对内部研究环境。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/securing-our-frontier-model-training-environment/" target="_blank" class="vitem-link">阅读 OpenAI 原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>敏感动作先出示目标与内容</strong><br>Anthropic 10 月 23 日介绍 Claude Duet 研究预览版的控制：发送敏感消息、付款、删除等动作先展示给用户批准；独立检查器核对意图，凭据与 Agent 隔离。部分金融及账户动作即使获批也不允许。上述均是产品方公布的设计与限制。</p>
+      <div style="margin-top:12px;">
+        <a href="https://claude.com/resources/articles/claude-duet-safety-privacy-and-security" target="_blank" class="vitem-link">阅读 Claude 原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Cloudflare CTO 谈安全投入与 Agent 网络</h2>
+  <div class="text-body">No Priors 10 月 23 日发布 Sarah Guo 与 Cloudflare CTO Dane Knecht 的公开视频。根据原频道访谈与节目逐字稿，以下是受访者的判断，并非已经证实的行业统计或时间表。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/6VprwfSc4Xk" title="Cloudflare CTO 谈安全投入与 Agent 网络" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">漏洞发现的速度正在改变应对节奏</div><div class="vitem-desc">Knecht 认为 AI 加快了漏洞发现，也能帮助防御方扫描与修复；他把安全投入上升视作接下来约 18 个月的判断，而非确定预测。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">先缩小攻击面，再谈更多自动化</div><div class="vitem-desc">他建议从减少系统复杂度和代码足迹入手，并指出当下 AI 生成代码可能增加复杂度，仍需人工判断与流程约束。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">面向人和 Agent 的网络规则会继续分化</div><div class="vitem-desc">节目讨论同一网络同时服务人和 Agent 时的内容发现、权限与变现问题，适合对照现有零信任实践来听。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=6VprwfSc4Xk" target="_blank" class="vitem-link">观看 No Priors 原视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>安全机制与可复用审计</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜前沿训练环境的隔离与红队</div>
+  <div class="vitem-desc">官方说明离线网页环境、多层隔离和持续红队如何组成研究模型的围栏，并披露一次有限外网访问及后续处置。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/securing-our-frontier-model-training-environment/" target="_blank" class="vitem-link">阅读技术说明 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Claude｜Duet 的安全、隐私与审批</div>
+  <div class="vitem-desc">研究预览版对敏感动作设审批与独立意图检查；官方同时列出不能代办的金融和账户操作。</div>
+  <div class="vitem-actions">
+    <a href="https://claude.com/resources/articles/claude-duet-safety-privacy-and-security" target="_blank" class="vitem-link">阅读产品说明 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Cloudflare｜公开安全审计技能</div>
+  <div class="vitem-desc">Cloudflare 从单仓库审计技能讲到持久化的漏洞发现流程，强调独立验证和结构化发现记录；初始技能已在 GitHub 公开。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.cloudflare.com/build-your-own-vulnerability-harness" target="_blank" class="vitem-link">阅读工程原文 →</a>
+  </div>
+</div>  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>从共享算力到团队分工的实践讨论</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜共享主机的侧信道风险</div>
+    <div class="vitem-desc">Vercel 的 Guillermo Rauch 评论 OpenAI 披露的共享主机时序攻击，认为专用硬件才可能彻底排除这类共享资源风险；他称 Vercel Sandbox 已采取可行缓解、持续监控与红队测试。这是其个人解释与公司实践表述。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2113759533801877920" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aaron Levie｜防御任务适合并行 Agent</div>
+    <div class="vitem-desc">Box 的 Aaron Levie 预测，代码与基础设施审查、风险组合测试和大量数据处理会推动安全 Agent 群成为重要类别；这是行业判断，尚非市场规模事实。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-10-25/levie-2113738768645808277-0.jpg" width="800" height="450" loading="lazy" alt="Aaron Levie 原帖引用视频中的威胁情报界面">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/levie/status/2113738768645808277" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜把上下文与记忆接进工作流</div>
+    <div class="vitem-desc">Replit 的 Amjad Masad 发帖欢迎 Jeff 和 Chroma 团队加入，称他们将解决 Agent 执行实际工作时所需的上下文与记忆问题；具体产品整合尚需等待官方后续说明。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2113736007111827606" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Dan Shipper｜团队需要探索者与架构者</div>
+    <div class="vitem-desc">Every 的 Dan Shipper 用“海盗与架构师”概括 AI 团队的两种角色。这个比喻提醒团队区分尝试新能力与维护系统边界，但不应被读作固定的两人编制建议。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/danshipper/status/2113693510629281895" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今日榜单中的审计与 Agent 工具</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/cloudflare/security-audit-skill" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">security-audit-skill</span>
+      </div>
+      <span class="gh-stars">⭐ 44.7k</span>
+    </div>
+    <div class="gh-body">Cloudflare 公开的单仓库安全审计技能，覆盖发现、验证和机器可读结果。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 2.8k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/aws.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">aws</span><span class="gh-sep">/</span><span class="gh-name">agent-toolkit-for-aws</span>
+      </div>
+      <span class="gh-stars">⭐ 3.1k</span>
+    </div>
+    <div class="gh-body">AWS 支持的 MCP 服务、技能与插件集合，帮助 Agent 在 AWS 环境中构建与操作。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 400</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/makecindy/cindy" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/makecindy.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">makecindy</span><span class="gh-sep">/</span><span class="gh-name">cindy</span>
+      </div>
+      <span class="gh-stars">⭐ 4.1k</span>
+    </div>
+    <div class="gh-body">面向多端的开源 AI Agent 项目；仓库自述强调开箱使用，具体能力仍需按场景实测。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 597</span>
+      <span class="gh-topics"><span class="gh-topic">agent</span><span class="gh-topic">ai-agent</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    按 10 月 25 日 GitHub Trending 实时榜单筛选，避开昨日重点；星标、分叉与语言为本次 GitHub API 快照，随时可能变化。项目用途依据各仓库自述。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  OpenAI 的研究环境强调隔离、红队和停机机制，Claude Duet 把敏感动作的审批放到模型之外，Cloudflare 则把审计发现转成可独立复核的记录。三者场景不同，却都在回答同一问题：Agent 能做事之后，谁能验证它没有越界？<br><strong>今日一问：</strong>你的 Agent 完成一次任务后，能否留下可复查的权限、审批、执行与异常记录？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/securing-our-frontier-model-training-environment/" target="_blank">OpenAI｜前沿训练环境安全</a>
+    <a href="https://claude.com/resources/articles/claude-duet-safety-privacy-and-security" target="_blank">Claude｜Duet 安全、隐私与审批</a>
+    <a href="https://blog.cloudflare.com/build-your-own-vulnerability-harness" target="_blank">Cloudflare｜漏洞审计 Harness</a>
+    <a href="https://www.youtube.com/watch?v=6VprwfSc4Xk" target="_blank">No Priors｜Dane Knecht 原频道访谈</a>
+    <a href="https://x.com/rauchg/status/2113759533801877920" target="_blank">Guillermo Rauch｜共享主机风险原帖</a>
+    <a href="https://x.com/levie/status/2113738768645808277" target="_blank">Aaron Levie｜安全 Agent 原帖</a>
+    <a href="https://x.com/amasad/status/2113736007111827606" target="_blank">Amjad Masad｜Chroma 团队原帖</a>
+    <a href="https://x.com/danshipper/status/2113693510629281895" target="_blank">Dan Shipper｜团队分工原帖</a>
+    <a href="https://github.com/trending" target="_blank">GitHub｜10 月 25 日 Trending</a>
+    <a href="https://github.com/cloudflare/security-audit-skill" target="_blank">cloudflare/security-audit-skill</a>
+    <a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank">aws/agent-toolkit-for-aws</a>
+    <a href="https://github.com/makecindy/cindy" target="_blank">makecindy/cindy</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

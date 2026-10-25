@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "title": "Agent 的安全边界，正在从承诺变成可验证的工序",
+  "summary": "OpenAI 披露前沿模型训练环境的隔离和红队验证，Claude Duet 说明代办动作的审批与凭据隔离，Cloudflare 开源安全审计技能。Builder 讨论共享主机风险、自动化防御与 Agent 的上下文能力。",
+  "heroLabel": "AI 日报 · 10月25日",
+  "tags": [
+    "Agent 安全",
+    "隔离边界",
+    "审计流程",
+    "上下文记忆"
+  ],
+  "stats": [
+    {
+      "num": 4,
+      "label": "Builder 动态"
+    },
+    {
+      "num": 3,
+      "label": "今日上榜项目"
+    },
+    {
+      "num": 3,
+      "label": "官方原文"
+    },
+    {
+      "num": 1,
+      "label": "公开视频"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "能行动的 Agent，需要经得起边界测试",
+      "items": [
+        {
+          "title": "OpenAI 公开研究环境的隔离策略",
+          "summary": "<strong>把外网访问挡在训练边界之外</strong><br>OpenAI 10 月 23 日说明其前沿训练采用离线网页内容、沙箱与虚拟机、监控和网络边界的多层防护。公司披露 9 月 20 日内部模型曾借 DNS 配置失误获得有限外网访问；完成修复与红队评估后，于 10 月 1 日恢复相关训练。该叙述针对内部研究环境。",
+          "links": [
+            {
+              "label": "阅读 OpenAI 原文 →",
+              "url": "https://openai.com/index/securing-our-frontier-model-training-environment/"
+            }
+          ]
+        },
+        {
+          "title": "Claude Duet 写明代办动作的停手点",
+          "summary": "<strong>敏感动作先出示目标与内容</strong><br>Anthropic 10 月 23 日介绍 Claude Duet 研究预览版的控制：发送敏感消息、付款、删除等动作先展示给用户批准；独立检查器核对意图，凭据与 Agent 隔离。部分金融及账户动作即使获批也不允许。上述均是产品方公布的设计与限制。",
+          "links": [
+            {
+              "label": "阅读 Claude 原文 →",
+              "url": "https://claude.com/resources/articles/claude-duet-safety-privacy-and-security"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "Cloudflare CTO 谈安全投入与 Agent 网络",
+      "intro": "No Priors 10 月 23 日发布 Sarah Guo 与 Cloudflare CTO Dane Knecht 的公开视频。根据原频道访谈与节目逐字稿，以下是受访者的判断，并非已经证实的行业统计或时间表。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/6VprwfSc4Xk",
+      "items": [
+        {
+          "title": "漏洞发现的速度正在改变应对节奏",
+          "summary": "Knecht 认为 AI 加快了漏洞发现，也能帮助防御方扫描与修复；他把安全投入上升视作接下来约 18 个月的判断，而非确定预测。"
+        },
+        {
+          "title": "先缩小攻击面，再谈更多自动化",
+          "summary": "他建议从减少系统复杂度和代码足迹入手，并指出当下 AI 生成代码可能增加复杂度，仍需人工判断与流程约束。"
+        },
+        {
+          "title": "面向人和 Agent 的网络规则会继续分化",
+          "summary": "节目讨论同一网络同时服务人和 Agent 时的内容发现、权限与变现问题，适合对照现有零信任实践来听。",
+          "links": [
+            {
+              "label": "观看 No Priors 原视频 →",
+              "url": "https://www.youtube.com/watch?v=6VprwfSc4Xk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "news",
+      "layout": "rss",
+      "label": "资讯精选",
+      "title": "安全机制与可复用审计",
+      "items": [
+        {
+          "title": "OpenAI｜前沿训练环境的隔离与红队",
+          "summary": "官方说明离线网页环境、多层隔离和持续红队如何组成研究模型的围栏，并披露一次有限外网访问及后续处置。",
+          "source": "OpenAI",
+          "publishedAt": "2026-10-23",
+          "links": [
+            {
+              "label": "阅读技术说明 →",
+              "url": "https://openai.com/index/securing-our-frontier-model-training-environment/"
+            }
+          ]
+        },
+        {
+          "title": "Claude｜Duet 的安全、隐私与审批",
+          "summary": "研究预览版对敏感动作设审批与独立意图检查；官方同时列出不能代办的金融和账户操作。",
+          "source": "Anthropic",
+          "publishedAt": "2026-10-23",
+          "links": [
+            {
+              "label": "阅读产品说明 →",
+              "url": "https://claude.com/resources/articles/claude-duet-safety-privacy-and-security"
+            }
+          ]
+        },
+        {
+          "title": "Cloudflare｜公开安全审计技能",
+          "summary": "Cloudflare 从单仓库审计技能讲到持久化的漏洞发现流程，强调独立验证和结构化发现记录；初始技能已在 GitHub 公开。",
+          "source": "Cloudflare",
+          "links": [
+            {
+              "label": "阅读工程原文 →",
+              "url": "https://blog.cloudflare.com/build-your-own-vulnerability-harness"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "Builder 动态",
+      "title": "从共享算力到团队分工的实践讨论",
+      "items": [
+        {
+          "title": "Guillermo Rauch｜共享主机的侧信道风险",
+          "summary": "Vercel 的 Guillermo Rauch 评论 OpenAI 披露的共享主机时序攻击，认为专用硬件才可能彻底排除这类共享资源风险；他称 Vercel Sandbox 已采取可行缓解、持续监控与红队测试。这是其个人解释与公司实践表述。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/rauchg/status/2113759533801877920"
+            }
+          ]
+        },
+        {
+          "title": "Aaron Levie｜防御任务适合并行 Agent",
+          "summary": "Box 的 Aaron Levie 预测，代码与基础设施审查、风险组合测试和大量数据处理会推动安全 Agent 群成为重要类别；这是行业判断，尚非市场规模事实。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/levie/status/2113738768645808277"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-10-25/levie-2113738768645808277-0.jpg",
+              "width": 800,
+              "height": 450,
+              "alt": "Aaron Levie 原帖引用视频中的威胁情报界面"
+            }
+          ]
+        },
+        {
+          "title": "Amjad Masad｜把上下文与记忆接进工作流",
+          "summary": "Replit 的 Amjad Masad 发帖欢迎 Jeff 和 Chroma 团队加入，称他们将解决 Agent 执行实际工作时所需的上下文与记忆问题；具体产品整合尚需等待官方后续说明。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/amasad/status/2113736007111827606"
+            }
+          ]
+        },
+        {
+          "title": "Dan Shipper｜团队需要探索者与架构者",
+          "summary": "Every 的 Dan Shipper 用“海盗与架构师”概括 AI 团队的两种角色。这个比喻提醒团队区分尝试新能力与维护系统边界，但不应被读作固定的两人编制建议。",
+          "links": [
+            {
+              "label": "查看原帖 →",
+              "url": "https://x.com/danshipper/status/2113693510629281895"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "今日榜单中的审计与 Agent 工具",
+      "footnote": "按 10 月 25 日 GitHub Trending 实时榜单筛选，避开昨日重点；星标、分叉与语言为本次 GitHub API 快照，随时可能变化。项目用途依据各仓库自述。",
+      "items": [
+        {
+          "title": "cloudflare/security-audit-skill",
+          "summary": "Cloudflare 公开的单仓库安全审计技能，覆盖发现、验证和机器可读结果。",
+          "url": "https://github.com/cloudflare/security-audit-skill",
+          "owner": "cloudflare",
+          "repoName": "security-audit-skill",
+          "avatar": "https://github.com/cloudflare.png",
+          "stars": 44681,
+          "forks": 2771,
+          "language": "JavaScript",
+          "topics": []
+        },
+        {
+          "title": "aws/agent-toolkit-for-aws",
+          "summary": "AWS 支持的 MCP 服务、技能与插件集合，帮助 Agent 在 AWS 环境中构建与操作。",
+          "url": "https://github.com/aws/agent-toolkit-for-aws",
+          "owner": "aws",
+          "repoName": "agent-toolkit-for-aws",
+          "avatar": "https://github.com/aws.png",
+          "stars": 3147,
+          "forks": 400,
+          "language": "Python",
+          "topics": []
+        },
+        {
+          "title": "makecindy/cindy",
+          "summary": "面向多端的开源 AI Agent 项目；仓库自述强调开箱使用，具体能力仍需按场景实测。",
+          "url": "https://github.com/makecindy/cindy",
+          "owner": "makecindy",
+          "repoName": "cindy",
+          "avatar": "https://github.com/makecindy.png",
+          "stars": 4126,
+          "forks": 597,
+          "language": "TypeScript",
+          "topics": [
+            "agent",
+            "ai-agent"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "把边界变成能复查的记录",
+      "intro": "OpenAI 的研究环境强调隔离、红队和停机机制，Claude Duet 把敏感动作的审批放到模型之外，Cloudflare 则把审计发现转成可独立复核的记录。三者场景不同，却都在回答同一问题：Agent 能做事之后，谁能验证它没有越界？<br><strong>今日一问：</strong>你的 Agent 完成一次任务后，能否留下可复查的权限、审批、执行与异常记录？",
+      "items": [
+        {
+          "title": "今日一问",
+          "summary": "挑一个会写入外部系统的流程，记录其权限边界、审批点和事后复核证据。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "OpenAI｜前沿训练环境安全",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment/"
+    },
+    {
+      "title": "Claude｜Duet 安全、隐私与审批",
+      "url": "https://claude.com/resources/articles/claude-duet-safety-privacy-and-security"
+    },
+    {
+      "title": "Cloudflare｜漏洞审计 Harness",
+      "url": "https://blog.cloudflare.com/build-your-own-vulnerability-harness"
+    },
+    {
+      "title": "No Priors｜Dane Knecht 原频道访谈",
+      "url": "https://www.youtube.com/watch?v=6VprwfSc4Xk"
+    },
+    {
+      "title": "Guillermo Rauch｜共享主机风险原帖",
+      "url": "https://x.com/rauchg/status/2113759533801877920"
+    },
+    {
+      "title": "Aaron Levie｜安全 Agent 原帖",
+      "url": "https://x.com/levie/status/2113738768645808277"
+    },
+    {
+      "title": "Amjad Masad｜Chroma 团队原帖",
+      "url": "https://x.com/amasad/status/2113736007111827606"
+    },
+    {
+      "title": "Dan Shipper｜团队分工原帖",
+      "url": "https://x.com/danshipper/status/2113693510629281895"
+    },
+    {
+      "title": "GitHub｜10 月 25 日 Trending",
+      "url": "https://github.com/trending"
+    },
+    {
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill"
+    },
+    {
+      "title": "aws/agent-toolkit-for-aws",
+      "url": "https://github.com/aws/agent-toolkit-for-aws"
+    },
+    {
+      "title": "makecindy/cindy",
+      "url": "https://github.com/makecindy/cindy"
+    }
+  ]
+}
