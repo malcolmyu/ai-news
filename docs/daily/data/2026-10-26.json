@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "title": "AI 系统长大之后，接口与判断都要重新设计",
+  "summary": "OpenAI 详述海量存储的多租户隔离与缓存，Cloudflare 展示商店如何向 Agent 暴露结构化工具，Modal 访谈讨论弹性算力。Builder 则把注意力放在工程判断、学习过程与内容质量。",
+  "heroLabel": "AI 日报 · 10月26日",
+  "tags": ["基础设施", "结构化接口", "弹性算力", "人的判断"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 3, "label": "精选原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "规模扩张，先暴露抽象的边界",
+      "items": [
+        {"title": "OpenAI 在共享存储与隔离间重新取舍", "summary": "<strong>统一入口还要控制热键和后台流量</strong><br>OpenAI 10 月 23 日回顾 Habitat 的扩容：独立容器缓解了相互干扰，却把容量规划推给各产品团队；随后转回共享容器，结合热键限流、请求优先级和按用量扩展。文中的读请求中位延迟由约 120 毫秒降到约 10 毫秒，是其自身系统改造结果。", "links": [{"label": "阅读 OpenAI 工程原文 →", "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two/"}]},
+        {"title": "Cloudflare 为商店动作提供明确接口", "summary": "<strong>Agent 调工具，比猜页面按钮更可控</strong><br>Cloudflare 10 月 21 日介绍与 Commerce.com 的 WebMCP 试用：桥接层把站点 MCP 服务的工具暴露给浏览器中的 Agent，并支持自定义 MCP 路径；服务或浏览器不支持时，页面回退到常规浏览体验。这是合作方描述的预览实践，尚需在更多站点验证。", "links": [{"label": "阅读 Cloudflare 原文 →", "url": "https://blog.cloudflare.com/webmcp-commerce/"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Modal 创始人谈 GPU 租约与突发负载",
+      "intro": "Latent Space 10 月 22 日发布对 Modal CEO Erik Bernhardsson 的访谈。以下是受访者对算力供需和产品策略的判断；频道逐字稿标明自动转录，数字与未来预测应按原视频语境理解。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/IiZ9yd2Do8I",
+      "items": [
+        {"title": "固定租约与波动需求错位", "summary": "Bernhardsson 指出，市场常按多年固定区块出售 GPU 容量，但推理负载会随时间起伏；Modal 通过汇聚客户需求提供弹性容量。这是其商业模式的解释。"},
+        {"title": "持有硬件也承担价格风险", "summary": "他认为长期锁定容量需要权衡未来硬件价格下跌风险，同时承认近期容量仍紧张；这不是对价格走势的确定预测。"},
+        {"title": "沙箱趋向更短、更易并行", "summary": "节目谈到 Agent 沙箱从长期开发环境向短任务执行扩展，以及启动、暂停和克隆环境的需求。", "links": [{"label": "观看 Latent Space 原视频 →", "url": "https://www.youtube.com/watch?v=IiZ9yd2Do8I"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "从后端容量到客户端入口",
+      "footnote": "检查 feeds.json 中四条 RSS；本栏选用能核对原文的近期更新。发布日期按来源标注，非全部发生于今日。",
+      "items": [
+        {"title": "OpenAI｜Habitat 存储系统扩容复盘", "summary": "工程团队介绍 Cosmos DB 多租户、变更数据捕获缓存和 Rust 服务改造，也说明继续扩容时仍面临跨地域复制难题。", "source": "OpenAI", "publishedAt": "2026-10-23", "links": [{"label": "阅读工程原文 →", "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two/"}]},
+        {"title": "Cloudflare｜商店接入 WebMCP 的试验", "summary": "与 Commerce.com 的合作示例说明如何让 Agent 调用站点工具，并在不支持时保持常规页面可用。", "source": "Cloudflare", "publishedAt": "2026-10-21", "links": [{"label": "阅读合作说明 →", "url": "https://blog.cloudflare.com/webmcp-commerce/"}]},
+        {"title": "Tw93｜多端客户端技术选型", "summary": "作者从自己的跨平台开发经历讨论原生、多端与借助现成能力的取舍；这是个人工程经验，适合作为产品入口设计的补充阅读。", "source": "Tw93", "publishedAt": "2026-10-22", "links": [{"label": "阅读博客原文 →", "url": "https://tw93.fun/2026-10-22/desktop.html"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "工程词汇之外，仍需要人的判断",
+      "items": [
+        {"title": "Guillermo Rauch｜模型偏爱工程取证词汇", "summary": "Vercel 的 Guillermo Rauch 观察，模型常使用 gate、evidence、provenance、contract 等词；他将其与工程中大量调试、追责和理解既有系统的工作联系起来，并提出能否用更少的技术英语完成协作。这是个人观察。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2114164830403989880"}]},
+        {"title": "Nikunj Kothari｜从上下文走到判断", "summary": "Nikunj Kothari 转引一段讨论，称自己所说的 Agent 产品演进可概括为“上下文 → harness → 判断”，并邀请相关产品建设者交流。原帖没有给出可验证的成熟度模型。", "links": [{"label": "查看原帖 →", "url": "https://x.com/nikunj/status/2113994081345126486"}]},
+        {"title": "Ryo Lu｜别让即时答案替代共同学习", "summary": "Ryo Lu 在长文中反思，AI 工具让成果更容易出现，却可能让人跳过犯错、理解和与他人磨合的过程；他希望工具帮助人们更愿意走向现实协作。这是设计者的个人思考。", "links": [{"label": "阅读原帖 →", "url": "https://x.com/ryolu_/status/2114187405251219954"}]},
+        {"title": "Swyx｜为技术内容组建编辑团队", "summary": "Swyx 表示 Latent Space 正在招聘作者、审稿人与记者，并欢迎兼职及单篇投稿。原帖展示了他准备放进新人欢迎材料的写作书籍；这是一则团队建设动态。", "links": [{"label": "查看原帖 →", "url": "https://x.com/swyx/status/2114145315196711194"}], "galleryCols": 2, "media": [{"src": "assets/2026-10-26/swyx-2114145315196711194-0.jpg", "width": 800, "height": 1067, "alt": "Swyx 原帖拍摄的《On Writing Well》书籍封面"}, {"src": "assets/2026-10-26/swyx-2114145315196711194-1.jpg", "width": 800, "height": 1067, "alt": "Swyx 原帖拍摄的《On Writing Well》目录页"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "今天上榜的设计与部署工具",
+      "footnote": "按 10 月 26 日 GitHub Trending 实时榜单筛选，避开近期日报重复介绍的项目；星标、分叉和语言取自本次 GitHub API 快照，会随时变化。用途依据仓库自述。",
+      "items": [
+        {"title": "Nutlope/hallmark", "summary": "面向 Claude Code、Cursor 和 Codex 的设计技能，仓库自述旨在减少模板化 AI 页面风格。", "url": "https://github.com/Nutlope/hallmark", "owner": "Nutlope", "repoName": "hallmark", "avatar": "https://github.com/Nutlope.png", "stars": 33921, "forks": 1771, "language": "CSS", "topics": []},
+        {"title": "JetBrains/thinkrail", "summary": "JetBrains 的轻量 IDE 项目，仓库自述支持围绕 pi Agent 调整编码工作流；功能成熟度仍需实测。", "url": "https://github.com/JetBrains/thinkrail", "owner": "JetBrains", "repoName": "thinkrail", "avatar": "https://github.com/JetBrains.png", "stars": 1813, "forks": 105, "language": "TypeScript", "topics": ["ai-coding", "pi-agent"]},
+        {"title": "coollabsio/coolify", "summary": "自托管应用部署平台，仓库列出静态站、数据库和全栈应用的部署方式；具体服务支持以项目文档为准。", "url": "https://github.com/coollabsio/coolify", "owner": "coollabsio", "repoName": "coolify", "avatar": "https://github.com/coollabsio.png", "stars": 64451, "forks": 5791, "language": "PHP", "topics": ["self-hosted", "deployment"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "让抽象替你吸收复杂度，也要留下复核点",
+      "intro": "Habitat 把分片、缓存与限流藏在窄接口之后；WebMCP 把可执行动作显式交给 Agent；Modal 试图把不规则算力需求汇聚起来。三者都在替应用开发者吸收底层复杂度。与此同时，Builder 的讨论提醒：抽象越顺手，越需要让人知道何时该追问、实测和协作。<br><strong>今日一问：</strong>你的系统里，哪个“自动完成”的步骤最需要一个可读的证据或人工复核点？",
+      "items": [{"title": "今天可做", "summary": "挑一个 Agent 常用动作，写清输入、可执行边界、失败回退和人需要检查的结果。"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜Habitat 存储扩容复盘", "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two/"},
+    {"title": "Cloudflare｜Commerce.com WebMCP 试用", "url": "https://blog.cloudflare.com/webmcp-commerce/"},
+    {"title": "Tw93｜客户端技术选型", "url": "https://tw93.fun/2026-10-22/desktop.html"},
+    {"title": "Latent Space｜Modal 创始人访谈与逐字稿", "url": "https://latent.space/p/modal-d/"},
+    {"title": "Latent Space｜Modal 原频道视频", "url": "https://www.youtube.com/watch?v=IiZ9yd2Do8I"},
+    {"title": "Guillermo Rauch｜工程词汇原帖", "url": "https://x.com/rauchg/status/2114164830403989880"},
+    {"title": "Nikunj Kothari｜判断原帖", "url": "https://x.com/nikunj/status/2113994081345126486"},
+    {"title": "Ryo Lu｜共同学习原帖", "url": "https://x.com/ryolu_/status/2114187405251219954"},
+    {"title": "Swyx｜编辑团队原帖", "url": "https://x.com/swyx/status/2114145315196711194"},
+    {"title": "GitHub｜10 月 26 日 Trending", "url": "https://github.com/trending"},
+    {"title": "Nutlope/hallmark", "url": "https://github.com/Nutlope/hallmark"},
+    {"title": "JetBrains/thinkrail", "url": "https://github.com/JetBrains/thinkrail"},
+    {"title": "coollabsio/coolify", "url": "https://github.com/coollabsio/coolify"}
+  ]
+}

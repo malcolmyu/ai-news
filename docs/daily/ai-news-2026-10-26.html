@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 系统长大之后，接口与判断都要重新设计 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月26日</div>
+  <h1>AI 系统长大之后，接口与判断都要重新设计</h1>
+  <div class="subtitle">OpenAI 详述海量存储的多租户隔离与缓存，Cloudflare 展示商店如何向 Agent 暴露结构化工具，Modal 访谈讨论弹性算力。Builder 则把注意力放在工程判断、学习过程与内容质量。</div>
+  <div class="dots-row">
+    <span class="tag">基础设施</span>
+    <span class="tag">结构化接口</span>
+    <span class="tag">弹性算力</span>
+    <span class="tag">人的判断</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">精选原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>统一入口还要控制热键和后台流量</strong><br>OpenAI 10 月 23 日回顾 Habitat 的扩容：独立容器缓解了相互干扰，却把容量规划推给各产品团队；随后转回共享容器，结合热键限流、请求优先级和按用量扩展。文中的读请求中位延迟由约 120 毫秒降到约 10 毫秒，是其自身系统改造结果。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/scaling-storage-one-billion-users-part-two/" target="_blank" class="vitem-link">阅读 OpenAI 工程原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Agent 调工具，比猜页面按钮更可控</strong><br>Cloudflare 10 月 21 日介绍与 Commerce.com 的 WebMCP 试用：桥接层把站点 MCP 服务的工具暴露给浏览器中的 Agent，并支持自定义 MCP 路径；服务或浏览器不支持时，页面回退到常规浏览体验。这是合作方描述的预览实践，尚需在更多站点验证。</p>
+      <div style="margin-top:12px;">
+        <a href="https://blog.cloudflare.com/webmcp-commerce/" target="_blank" class="vitem-link">阅读 Cloudflare 原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Modal 创始人谈 GPU 租约与突发负载</h2>
+  <div class="text-body">Latent Space 10 月 22 日发布对 Modal CEO Erik Bernhardsson 的访谈。以下是受访者对算力供需和产品策略的判断；频道逐字稿标明自动转录，数字与未来预测应按原视频语境理解。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/IiZ9yd2Do8I" title="Modal 创始人谈 GPU 租约与突发负载" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">固定租约与波动需求错位</div><div class="vitem-desc">Bernhardsson 指出，市场常按多年固定区块出售 GPU 容量，但推理负载会随时间起伏；Modal 通过汇聚客户需求提供弹性容量。这是其商业模式的解释。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">持有硬件也承担价格风险</div><div class="vitem-desc">他认为长期锁定容量需要权衡未来硬件价格下跌风险，同时承认近期容量仍紧张；这不是对价格走势的确定预测。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">沙箱趋向更短、更易并行</div><div class="vitem-desc">节目谈到 Agent 沙箱从长期开发环境向短任务执行扩展，以及启动、暂停和克隆环境的需求。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=IiZ9yd2Do8I" target="_blank" class="vitem-link">观看 Latent Space 原视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>从后端容量到客户端入口</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜Habitat 存储系统扩容复盘</div>
+  <div class="vitem-desc">工程团队介绍 Cosmos DB 多租户、变更数据捕获缓存和 Rust 服务改造，也说明继续扩容时仍面临跨地域复制难题。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/scaling-storage-one-billion-users-part-two/" target="_blank" class="vitem-link">阅读工程原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Cloudflare｜商店接入 WebMCP 的试验</div>
+  <div class="vitem-desc">与 Commerce.com 的合作示例说明如何让 Agent 调用站点工具，并在不支持时保持常规页面可用。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.cloudflare.com/webmcp-commerce/" target="_blank" class="vitem-link">阅读合作说明 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Tw93｜多端客户端技术选型</div>
+  <div class="vitem-desc">作者从自己的跨平台开发经历讨论原生、多端与借助现成能力的取舍；这是个人工程经验，适合作为产品入口设计的补充阅读。</div>
+  <div class="vitem-actions">
+    <a href="https://tw93.fun/2026-10-22/desktop.html" target="_blank" class="vitem-link">阅读博客原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    检查 feeds.json 中四条 RSS；本栏选用能核对原文的近期更新。发布日期按来源标注，非全部发生于今日。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>工程词汇之外，仍需要人的判断</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜模型偏爱工程取证词汇</div>
+    <div class="vitem-desc">Vercel 的 Guillermo Rauch 观察，模型常使用 gate、evidence、provenance、contract 等词；他将其与工程中大量调试、追责和理解既有系统的工作联系起来，并提出能否用更少的技术英语完成协作。这是个人观察。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2114164830403989880" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Nikunj Kothari｜从上下文走到判断</div>
+    <div class="vitem-desc">Nikunj Kothari 转引一段讨论，称自己所说的 Agent 产品演进可概括为“上下文 → harness → 判断”，并邀请相关产品建设者交流。原帖没有给出可验证的成熟度模型。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/nikunj/status/2113994081345126486" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Ryo Lu｜别让即时答案替代共同学习</div>
+    <div class="vitem-desc">Ryo Lu 在长文中反思，AI 工具让成果更容易出现，却可能让人跳过犯错、理解和与他人磨合的过程；他希望工具帮助人们更愿意走向现实协作。这是设计者的个人思考。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/ryolu_/status/2114187405251219954" target="_blank" class="vitem-link">阅读原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Swyx｜为技术内容组建编辑团队</div>
+    <div class="vitem-desc">Swyx 表示 Latent Space 正在招聘作者、审稿人与记者，并欢迎兼职及单篇投稿。原帖展示了他准备放进新人欢迎材料的写作书籍；这是一则团队建设动态。</div>
+  </div>
+  <div class="vitem-gallery cols-2">
+    <img src="assets/2026-10-26/swyx-2114145315196711194-0.jpg" width="800" height="1067" loading="lazy" alt="Swyx 原帖拍摄的《On Writing Well》书籍封面">
+    <img src="assets/2026-10-26/swyx-2114145315196711194-1.jpg" width="800" height="1067" loading="lazy" alt="Swyx 原帖拍摄的《On Writing Well》目录页">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/swyx/status/2114145315196711194" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>今天上榜的设计与部署工具</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/Nutlope/hallmark" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/Nutlope.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">Nutlope</span><span class="gh-sep">/</span><span class="gh-name">hallmark</span>
+      </div>
+      <span class="gh-stars">⭐ 33.9k</span>
+    </div>
+    <div class="gh-body">面向 Claude Code、Cursor 和 Codex 的设计技能，仓库自述旨在减少模板化 AI 页面风格。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● CSS</span>
+      <span class="gh-forks">🍴 1.8k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/JetBrains/thinkrail" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/JetBrains.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">JetBrains</span><span class="gh-sep">/</span><span class="gh-name">thinkrail</span>
+      </div>
+      <span class="gh-stars">⭐ 1.8k</span>
+    </div>
+    <div class="gh-body">JetBrains 的轻量 IDE 项目，仓库自述支持围绕 pi Agent 调整编码工作流；功能成熟度仍需实测。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 105</span>
+      <span class="gh-topics"><span class="gh-topic">ai-coding</span><span class="gh-topic">pi-agent</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/coollabsio/coolify" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/coollabsio.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">coollabsio</span><span class="gh-sep">/</span><span class="gh-name">coolify</span>
+      </div>
+      <span class="gh-stars">⭐ 64.5k</span>
+    </div>
+    <div class="gh-body">自托管应用部署平台，仓库列出静态站、数据库和全栈应用的部署方式；具体服务支持以项目文档为准。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● PHP</span>
+      <span class="gh-forks">🍴 5.8k</span>
+      <span class="gh-topics"><span class="gh-topic">self-hosted</span><span class="gh-topic">deployment</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    按 10 月 26 日 GitHub Trending 实时榜单筛选，避开近期日报重复介绍的项目；星标、分叉和语言取自本次 GitHub API 快照，会随时变化。用途依据仓库自述。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  Habitat 把分片、缓存与限流藏在窄接口之后；WebMCP 把可执行动作显式交给 Agent；Modal 试图把不规则算力需求汇聚起来。三者都在替应用开发者吸收底层复杂度。与此同时，Builder 的讨论提醒：抽象越顺手，越需要让人知道何时该追问、实测和协作。<br><strong>今日一问：</strong>你的系统里，哪个“自动完成”的步骤最需要一个可读的证据或人工复核点？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/scaling-storage-one-billion-users-part-two/" target="_blank">OpenAI｜Habitat 存储扩容复盘</a>
+    <a href="https://blog.cloudflare.com/webmcp-commerce/" target="_blank">Cloudflare｜Commerce.com WebMCP 试用</a>
+    <a href="https://tw93.fun/2026-10-22/desktop.html" target="_blank">Tw93｜客户端技术选型</a>
+    <a href="https://latent.space/p/modal-d/" target="_blank">Latent Space｜Modal 创始人访谈与逐字稿</a>
+    <a href="https://www.youtube.com/watch?v=IiZ9yd2Do8I" target="_blank">Latent Space｜Modal 原频道视频</a>
+    <a href="https://x.com/rauchg/status/2114164830403989880" target="_blank">Guillermo Rauch｜工程词汇原帖</a>
+    <a href="https://x.com/nikunj/status/2113994081345126486" target="_blank">Nikunj Kothari｜判断原帖</a>
+    <a href="https://x.com/ryolu_/status/2114187405251219954" target="_blank">Ryo Lu｜共同学习原帖</a>
+    <a href="https://x.com/swyx/status/2114145315196711194" target="_blank">Swyx｜编辑团队原帖</a>
+    <a href="https://github.com/trending" target="_blank">GitHub｜10 月 26 日 Trending</a>
+    <a href="https://github.com/Nutlope/hallmark" target="_blank">Nutlope/hallmark</a>
+    <a href="https://github.com/JetBrains/thinkrail" target="_blank">JetBrains/thinkrail</a>
+    <a href="https://github.com/coollabsio/coolify" target="_blank">coollabsio/coolify</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
