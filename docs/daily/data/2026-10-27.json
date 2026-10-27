@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "title": "AI 发现走向公开复核，推理系统守住隔离边界",
+  "summary": "OpenAI 发布三项由模型生成的数学、计算机科学和物理成果，邀请学界独立理解与检验；Cloudflare 复盘一次跨请求 KV 缓存暴露。Raschka 用代码课程拆解推理模型，Tw93 提醒产品细节仍需亲手验证。",
+  "heroLabel": "AI 日报 · 10月27日",
+  "tags": ["科研复核", "推理安全", "模型训练", "产品细节"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 3, "label": "精选原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "从提出结果到证明确实可靠",
+      "items": [
+        {"title": "OpenAI 让学界参与解释三项模型成果", "summary": "<strong>论文与形式化材料只是复核的起点</strong><br>OpenAI 10 月 26 日公布涉及局部平滑、指数时间假设和量子场论的三项模型生成结果。数学与计算机科学材料已公开；物理合作组暂缓发布材料，先自行整理。文章明确把这些稿件视为原始研究数据，邀请外部专家组织理解与检验；重大结论仍应等待独立学术审查。", "links": [{"label": "阅读 OpenAI 原文 →", "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/"}]},
+        {"title": "Cloudflare 披露跨请求缓存暴露", "summary": "<strong>成功响应并不保证隔离正确</strong><br>Cloudflare 10 月 26 日披露：GLM-5.3 的长提示词超过预填充节点 KV 池容量时，SGLang 的拒绝路径未在分离式推理中及时终止请求，可能读到前一请求留下的缓存。公司确认 155 个响应受影响，称没有发现蓄意利用，并已调整容量及修补拒绝流程。", "links": [{"label": "阅读 Cloudflare 事件复盘 →", "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/"}]}
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "把推理模型训练过程拆成可运行步骤",
+      "intro": "Sebastian Raschka 10 月 24 日发布八段、合计超过 11 小时的公开视频课程。这里嵌入第六讲：用 PyTorch 实现可验证奖励强化学习的简化 GRPO。下面是作者课程目录所列的讲授内容，并非对实验效果的独立测评。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/237Hf7Q3lgg",
+      "items": [
+        {"title": "从回答到可比较的奖励", "summary": "课程先生成一组推理轨迹，再用验证器评分，把组内相对奖励转为训练信号。"},
+        {"title": "实现训练循环", "summary": "作者列出序列对数概率、简化的 GRPO 损失、日志与检查点等实现环节。"},
+        {"title": "观察训练是否稳定", "summary": "课程最后比较检查点表现与训练稳定性；完整系列还覆盖测试时采样、自我一致性和蒸馏。", "links": [{"label": "观看原频道第六讲 →", "url": "https://www.youtube.com/watch?v=237Hf7Q3lgg"}, {"label": "阅读作者课程目录 →", "url": "https://magazine.sebastianraschka.com/p/building-reasoning-models"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "原始材料与工程复盘",
+      "footnote": "已检查 feeds.json 的四条 RSS；近期 Tw93 原文入选。其余内容取自可核对的官方发布。发布日期按来源标注，非全部发生于今日。",
+      "items": [
+        {"title": "OpenAI｜三项科研成果的公开复核安排", "summary": "数学证明和计算机科学自然语言稿及 Lean 形式化材料已公开；不同领域采用不同的专家协作与披露方式。", "source": "OpenAI", "publishedAt": "2026-10-26", "links": [{"label": "阅读发布原文 →", "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/"}]},
+        {"title": "Cloudflare｜GLM-5.3 缓存隔离事件", "summary": "预填充 KV 池小于对外声明的上下文长度，叠加拒绝路径缺陷，导致极长请求可能混入前一请求内容；文中列出修复与测试改进。", "source": "Cloudflare", "publishedAt": "2026-10-26", "links": [{"label": "阅读事件原文 →", "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/"}]},
+        {"title": "Tw93｜把 AI 省下的时间用在产品细节", "summary": "作者回顾 Mole 的软件卸载、AI 工具清理和客户激活流程，主张用真实安装与用户反馈校正自动化规则。", "source": "Tw93", "publishedAt": "2026-10-26", "links": [{"label": "阅读作者原文 →", "url": "https://tw93.fun/2026-10-26/mole-product.html"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "发布、复盘与动手教学",
+      "footnote": "follow-builders 今日返回的是 Hacker News 链接线索，并非 X 原帖；本栏追溯到原始作者和原文，不把转贴账号当作作者。Tw93 来自其 RSS。",
+      "items": [
+        {"title": "OpenAI 研究团队｜让学科专家组织复核", "summary": "团队公布三项模型生成结果，并为不同学科安排不同披露方式：计算机科学合作组公开自然语言证明和 Lean 形式化；物理合作组先整理材料。OpenAI 明确表示自己不寻求这些发现的学术署名。", "links": [{"label": "阅读原始公告 →", "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/"}]},
+        {"title": "Cloudflare 工程团队｜承认边界测试遗漏", "summary": "Kevin Flansburg 与 Michelle Chen 的事件复盘指出，长上下文测试当时只核对 HTTP 成功码和性能，未检查模型输出是否连贯；现在部署前会直接比较运行中 KV 池容量与上下文长度。", "links": [{"label": "阅读工程复盘 →", "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/"}]},
+        {"title": "Sebastian Raschka｜公开从零实现推理模型课程", "summary": "Raschka 分享八段 Python 与 PyTorch 编程视频，依次讲生成、评估、测试时扩展、可验证奖励训练和蒸馏。他强调通过实现理解方法，课程代码与公开视频均可访问。", "links": [{"label": "阅读作者课程页 →", "url": "https://magazine.sebastianraschka.com/p/building-reasoning-models"}]},
+        {"title": "Tw93｜用真实使用修正清理规则", "summary": "Tw93 记录 Mole 的迭代：逐个安装卸载软件、实用 AI 工具后观察系统写入，并把用户文件和旧会话等高风险项目留给人确认。他将这视为 AI 降低编码成本后更值得投入的产品细节。", "links": [{"label": "阅读作者原文 →", "url": "https://tw93.fun/2026-10-26/mole-product.html"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "安全扫描、桌面协作与设计语言",
+      "footnote": "按 10 月 27 日 GitHub Trending 实时榜单筛选，避开最近两期重点；星标、分叉和语言来自本次 GitHub API 快照，会继续变化。功能描述取自仓库自述，未作独立测评。",
+      "items": [
+        {"title": "NVIDIA/SkillSpector", "summary": "NVIDIA 发布的 Agent skill 安全扫描器，仓库自述可检查恶意模式、提示注入、数据外传与供应链风险。", "url": "https://github.com/NVIDIA/SkillSpector", "owner": "NVIDIA", "repoName": "SkillSpector", "avatar": "https://github.com/NVIDIA.png", "stars": 22251, "forks": 1940, "language": "Python", "topics": ["agent-security", "prompt-injection"]},
+        {"title": "nightly-labs/openbot", "summary": "本地优先的桌面工作区，仓库自述为持续运行的 AI 队友提供独立空间、任务队列、文件共享及浏览器控制。", "url": "https://github.com/nightly-labs/openbot", "owner": "nightly-labs", "repoName": "openbot", "avatar": "https://github.com/nightly-labs.png", "stars": 1518, "forks": 188, "language": "TypeScript", "topics": ["ai-agents", "local-first"]},
+        {"title": "pbakaus/impeccable", "summary": "面向 AI 编码 harness 的设计语言项目，仓库自述希望改善生成界面的设计质量。", "url": "https://github.com/pbakaus/impeccable", "owner": "pbakaus", "repoName": "impeccable", "avatar": "https://github.com/pbakaus.png", "stars": 89277, "forks": 5313, "language": "Rust", "topics": []}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "让结果可见，也让错误路径可检验",
+      "intro": "OpenAI 把模型生成的研究材料交给学界复核；Cloudflare 则把一次推理缓存隔离失败拆到容量配置、拒绝流程和验收方法。两者共同提醒我们：看似成功的输出，不等于过程已经被验证。Raschka 的代码课程和 Tw93 的实地测试把同一原则带回日常实践。<br><strong>今日一问：</strong>你现在的 Agent 或推理服务，哪些“成功”只检查了返回码，还没有检查结果、隔离或回退路径？",
+      "items": [{"title": "今天可做", "summary": "挑一条极限输入与一条拒绝路径，记录预期状态、实际输出和跨请求隔离证据。"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜与学界共同理解科研成果", "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/"},
+    {"title": "OpenAI｜指数时间假设稿件", "url": "https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf"},
+    {"title": "Cloudflare｜KV 缓存暴露复盘", "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/"},
+    {"title": "Sebastian Raschka｜推理模型公开视频课程", "url": "https://magazine.sebastianraschka.com/p/building-reasoning-models"},
+    {"title": "Sebastian Raschka｜第六讲原频道视频", "url": "https://www.youtube.com/watch?v=237Hf7Q3lgg"},
+    {"title": "Tw93｜AI 时代产品细节", "url": "https://tw93.fun/2026-10-26/mole-product.html"},
+    {"title": "GitHub｜10 月 27 日 Trending", "url": "https://github.com/trending"},
+    {"title": "NVIDIA/SkillSpector", "url": "https://github.com/NVIDIA/SkillSpector"},
+    {"title": "nightly-labs/openbot", "url": "https://github.com/nightly-labs/openbot"},
+    {"title": "pbakaus/impeccable", "url": "https://github.com/pbakaus/impeccable"}
+  ]
+}

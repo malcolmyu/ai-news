@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 发现走向公开复核，推理系统守住隔离边界 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 10月27日</div>
+  <h1>AI 发现走向公开复核，推理系统守住隔离边界</h1>
+  <div class="subtitle">OpenAI 发布三项由模型生成的数学、计算机科学和物理成果，邀请学界独立理解与检验；Cloudflare 复盘一次跨请求 KV 缓存暴露。Raschka 用代码课程拆解推理模型，Tw93 提醒产品细节仍需亲手验证。</div>
+  <div class="dots-row">
+    <span class="tag">科研复核</span>
+    <span class="tag">推理安全</span>
+    <span class="tag">模型训练</span>
+    <span class="tag">产品细节</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">精选原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>论文与形式化材料只是复核的起点</strong><br>OpenAI 10 月 26 日公布涉及局部平滑、指数时间假设和量子场论的三项模型生成结果。数学与计算机科学材料已公开；物理合作组暂缓发布材料，先自行整理。文章明确把这些稿件视为原始研究数据，邀请外部专家组织理解与检验；重大结论仍应等待独立学术审查。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank" class="vitem-link">阅读 OpenAI 原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>成功响应并不保证隔离正确</strong><br>Cloudflare 10 月 26 日披露：GLM-5.3 的长提示词超过预填充节点 KV 池容量时，SGLang 的拒绝路径未在分离式推理中及时终止请求，可能读到前一请求留下的缓存。公司确认 155 个响应受影响，称没有发现蓄意利用，并已调整容量及修补拒绝流程。</p>
+      <div style="margin-top:12px;">
+        <a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" target="_blank" class="vitem-link">阅读 Cloudflare 事件复盘 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>把推理模型训练过程拆成可运行步骤</h2>
+  <div class="text-body">Sebastian Raschka 10 月 24 日发布八段、合计超过 11 小时的公开视频课程。这里嵌入第六讲：用 PyTorch 实现可验证奖励强化学习的简化 GRPO。下面是作者课程目录所列的讲授内容，并非对实验效果的独立测评。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/237Hf7Q3lgg" title="把推理模型训练过程拆成可运行步骤" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">从回答到可比较的奖励</div><div class="vitem-desc">课程先生成一组推理轨迹，再用验证器评分，把组内相对奖励转为训练信号。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">实现训练循环</div><div class="vitem-desc">作者列出序列对数概率、简化的 GRPO 损失、日志与检查点等实现环节。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">观察训练是否稳定</div><div class="vitem-desc">课程最后比较检查点表现与训练稳定性；完整系列还覆盖测试时采样、自我一致性和蒸馏。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=237Hf7Q3lgg" target="_blank" class="vitem-link">观看原频道第六讲 →</a>
+    <a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank" class="vitem-link">阅读作者课程目录 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>原始材料与工程复盘</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜三项科研成果的公开复核安排</div>
+  <div class="vitem-desc">数学证明和计算机科学自然语言稿及 Lean 形式化材料已公开；不同领域采用不同的专家协作与披露方式。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank" class="vitem-link">阅读发布原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Cloudflare｜GLM-5.3 缓存隔离事件</div>
+  <div class="vitem-desc">预填充 KV 池小于对外声明的上下文长度，叠加拒绝路径缺陷，导致极长请求可能混入前一请求内容；文中列出修复与测试改进。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" target="_blank" class="vitem-link">阅读事件原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Tw93｜把 AI 省下的时间用在产品细节</div>
+  <div class="vitem-desc">作者回顾 Mole 的软件卸载、AI 工具清理和客户激活流程，主张用真实安装与用户反馈校正自动化规则。</div>
+  <div class="vitem-actions">
+    <a href="https://tw93.fun/2026-10-26/mole-product.html" target="_blank" class="vitem-link">阅读作者原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 的四条 RSS；近期 Tw93 原文入选。其余内容取自可核对的官方发布。发布日期按来源标注，非全部发生于今日。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>发布、复盘与动手教学</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">OpenAI 研究团队｜让学科专家组织复核</div>
+    <div class="vitem-desc">团队公布三项模型生成结果，并为不同学科安排不同披露方式：计算机科学合作组公开自然语言证明和 Lean 形式化；物理合作组先整理材料。OpenAI 明确表示自己不寻求这些发现的学术署名。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank" class="vitem-link">阅读原始公告 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Cloudflare 工程团队｜承认边界测试遗漏</div>
+    <div class="vitem-desc">Kevin Flansburg 与 Michelle Chen 的事件复盘指出，长上下文测试当时只核对 HTTP 成功码和性能，未检查模型输出是否连贯；现在部署前会直接比较运行中 KV 池容量与上下文长度。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" target="_blank" class="vitem-link">阅读工程复盘 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Sebastian Raschka｜公开从零实现推理模型课程</div>
+    <div class="vitem-desc">Raschka 分享八段 Python 与 PyTorch 编程视频，依次讲生成、评估、测试时扩展、可验证奖励训练和蒸馏。他强调通过实现理解方法，课程代码与公开视频均可访问。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank" class="vitem-link">阅读作者课程页 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Tw93｜用真实使用修正清理规则</div>
+    <div class="vitem-desc">Tw93 记录 Mole 的迭代：逐个安装卸载软件、实用 AI 工具后观察系统写入，并把用户文件和旧会话等高风险项目留给人确认。他将这视为 AI 降低编码成本后更值得投入的产品细节。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://tw93.fun/2026-10-26/mole-product.html" target="_blank" class="vitem-link">阅读作者原文 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>安全扫描、桌面协作与设计语言</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/NVIDIA/SkillSpector" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/NVIDIA.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">NVIDIA</span><span class="gh-sep">/</span><span class="gh-name">SkillSpector</span>
+      </div>
+      <span class="gh-stars">⭐ 22.3k</span>
+    </div>
+    <div class="gh-body">NVIDIA 发布的 Agent skill 安全扫描器，仓库自述可检查恶意模式、提示注入、数据外传与供应链风险。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1.9k</span>
+      <span class="gh-topics"><span class="gh-topic">agent-security</span><span class="gh-topic">prompt-injection</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/nightly-labs/openbot" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/nightly-labs.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">nightly-labs</span><span class="gh-sep">/</span><span class="gh-name">openbot</span>
+      </div>
+      <span class="gh-stars">⭐ 1.5k</span>
+    </div>
+    <div class="gh-body">本地优先的桌面工作区，仓库自述为持续运行的 AI 队友提供独立空间、任务队列、文件共享及浏览器控制。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 188</span>
+      <span class="gh-topics"><span class="gh-topic">ai-agents</span><span class="gh-topic">local-first</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/pbakaus/impeccable" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/pbakaus.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">pbakaus</span><span class="gh-sep">/</span><span class="gh-name">impeccable</span>
+      </div>
+      <span class="gh-stars">⭐ 89.3k</span>
+    </div>
+    <div class="gh-body">面向 AI 编码 harness 的设计语言项目，仓库自述希望改善生成界面的设计质量。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 5.3k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    按 10 月 27 日 GitHub Trending 实时榜单筛选，避开最近两期重点；星标、分叉和语言来自本次 GitHub API 快照，会继续变化。功能描述取自仓库自述，未作独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  OpenAI 把模型生成的研究材料交给学界复核；Cloudflare 则把一次推理缓存隔离失败拆到容量配置、拒绝流程和验收方法。两者共同提醒我们：看似成功的输出，不等于过程已经被验证。Raschka 的代码课程和 Tw93 的实地测试把同一原则带回日常实践。<br><strong>今日一问：</strong>你现在的 Agent 或推理服务，哪些“成功”只检查了返回码，还没有检查结果、隔离或回退路径？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank">OpenAI｜与学界共同理解科研成果</a>
+    <a href="https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf" target="_blank">OpenAI｜指数时间假设稿件</a>
+    <a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" target="_blank">Cloudflare｜KV 缓存暴露复盘</a>
+    <a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank">Sebastian Raschka｜推理模型公开视频课程</a>
+    <a href="https://www.youtube.com/watch?v=237Hf7Q3lgg" target="_blank">Sebastian Raschka｜第六讲原频道视频</a>
+    <a href="https://tw93.fun/2026-10-26/mole-product.html" target="_blank">Tw93｜AI 时代产品细节</a>
+    <a href="https://github.com/trending" target="_blank">GitHub｜10 月 27 日 Trending</a>
+    <a href="https://github.com/NVIDIA/SkillSpector" target="_blank">NVIDIA/SkillSpector</a>
+    <a href="https://github.com/nightly-labs/openbot" target="_blank">nightly-labs/openbot</a>
+    <a href="https://github.com/pbakaus/impeccable" target="_blank">pbakaus/impeccable</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
