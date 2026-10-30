@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "title": "前沿模型加速，验证与边界同步前移",
+  "summary": "Google 将 Gemini 4 Carbon 先交给少数网络防御者测试，Mistral 发布 Large 4 的更新权重；OpenAI 更新 Model Spec 与模型行为监测说明。Builder 的讨论把注意力从榜单拉回部署、验证和人的判断。",
+  "heroLabel": "AI 日报 · 10月30日",
+  "tags": ["模型发布", "网络防御", "开放权重", "Agent 治理"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 4, "label": "重点原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "能力竞赛进入可部署性检验",
+      "items": [
+        {
+          "title": "Gemini 4 Carbon 先向网络防御者限量开放",
+          "summary": "<strong>性能数字来自 Google 发布，开放范围仍有限</strong><br>Google 10 月 28 日公布 Gemini 4 Carbon，称其在漏洞发现、验证和修补任务上取得进展。官方列出的 SEC-bench Pro、ExploitGym、CWE-bench 成绩分别为 88.2%、54.8%、71.0%；这些是指定评测设置下的结果。模型本周先向少数网络防御者开放，面向普通开发者与消费者的推出时间尚未确定。",
+          "links": [{"label": "阅读 Google 原文 →", "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"}]
+        },
+        {
+          "title": "Mistral Large 4 更新权重正式发布",
+          "summary": "<strong>从公开预览走到可获取权重</strong><br>Mistral 10 月 29 日发布继续训练后的 Large 4 权重，并称编码和防御安全能力较预览版提升，同时提供低、中、高三档推理模式。文中的领先排名与效率数字来自厂商和其引用的评测，应结合任务、授权和实际运行成本自行复核。",
+          "links": [{"label": "阅读 Mistral 原文 →", "url": "https://mistral.ai/news/mistral-large-4-oss/"}]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "AI 能否做出好作品？先写清自己的观点",
+      "intro": "Every 的《AI & I》10 月 29 日发布 Natalia Quintero 对 Fred Graver 的访谈。以下依据 follow-builders 提供的节目逐字稿和 Every 原频道视频概括，不把嘉宾的创作判断当作行业定论。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/lE-a6pNmTso",
+      "items": [
+        {"title": "先定义创作者身份", "summary": "Graver 建议写一份“我是谁、我想写什么”的材料，再让 AI 参与讨论；创作方向应先由人提出。"},
+        {"title": "把模型当作编剧室成员", "summary": "他描述用 AI 帮助构思、质疑和组织制作流程，而非把整件作品一次性交给模型生成。"},
+        {"title": "发行仍是难题", "summary": "访谈把创意、制作、传播视作相互反馈的循环，并讨论独立创作者如何找到受众。", "links": [{"label": "观看 Every 原频道视频 →", "url": "https://www.youtube.com/watch?v=lE-a6pNmTso"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "模型之外，规则与路由也在更新",
+      "footnote": "已检查 feeds.json 的四条中文 RSS：10 月 30 日上午均无当日新文；AI 前线 10 月 29 日报道 Carbon。以下采用厂商一手发布，标明原始日期。",
+      "items": [
+        {"title": "OpenAI｜Model Spec 改以五项价值组织", "summary": "10 月 29 日更新把忠于人的意图、减少伤害、诚实透明、人的自主性和关怀列为核心价值；原文明确说这是希望模型达到的行为目标，现有模型尚未完全实现。", "source": "OpenAI", "publishedAt": "2026-10-29", "links": [{"label": "阅读规范更新 →", "url": "https://openai.com/index/updated-model-spec/"}]},
+        {"title": "OpenAI｜披露前沿模型行为监测流程", "summary": "官方介绍从轻量筛查、模型复核到调查 Agent 和人工响应的多层监测，并承认覆盖范围、漏报与监测诱发规避行为仍需持续评估。", "source": "OpenAI", "publishedAt": "2026-10-28", "links": [{"label": "阅读监测说明 →", "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment/"}]},
+        {"title": "Vercel｜AI Gateway 支持虚拟模型", "summary": "10 月 28 日推出的自定义模型标识可集中保存底层模型、路由、回退和合规选项，应用可继续使用同一标识而无需因模型切换重新部署。", "source": "Vercel", "publishedAt": "2026-10-28", "links": [{"label": "阅读 Vercel 发布 →", "url": "https://vercel.com/changelog/virtual-models-now-available-on-ai-gateway"}]},
+        {"title": "Mistral｜Large 4 权重发布", "summary": "厂商称新版改善编码、推理效率与防御安全，并提供三档推理模式；榜单成绩需要放回具体测试方法中看。", "source": "Mistral", "publishedAt": "2026-10-29", "links": [{"label": "阅读 Mistral 发布 →", "url": "https://mistral.ai/news/mistral-large-4-oss/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "模型发布之后，开发者在问什么",
+      "footnote": "以下原帖来自 follow-builders 中央 feed（10 月 29 日 06:32 UTC 更新），均以 vxtwitter 接口复核。试点数据与产品判断属于发帖人所述，未当作独立统计。",
+      "items": [
+        {"title": "Josh Woodward｜Carbon 先给网络防御者", "summary": "Google 产品负责人指出 Argon 与 Carbon 相隔约两周，并强调 Carbon 先面向网络防御者，之后才逐步扩大范围。配图为原帖附带的基准表；分数仍以官方方法和后续独立复测为准。", "links": [{"label": "查看 Josh 原帖 →", "url": "https://x.com/joshwoodward/status/2115495943948902517"}], "media": [{"src": "assets/2026-10-30/joshwoodward-2115495943948902517-0.jpg", "width": 800, "height": 673, "alt": "Josh Woodward 原帖附带的 Gemini 4 Carbon 基准表"}]},
+        {"title": "Guillermo Rauch｜模型别名可集中切换路由", "summary": "Vercel CEO 把虚拟模型比作模型的 DNS：应用调用稳定别名，团队在网关侧调整底层模型和流量路由。具体能力以 Vercel 发布说明为准。", "links": [{"label": "查看 Guillermo 原帖 →", "url": "https://x.com/rauchg/status/2115573969369845855"}, {"label": "阅读产品说明 →", "url": "https://vercel.com/changelog/virtual-models-now-available-on-ai-gateway"}]},
+        {"title": "Boris Cherny｜分享 Utah 开发者试点", "summary": "Boris 转述 Utah 州跨机构 Claude Code 试点的环境搭建和节省时间反馈。原帖给出参与者自报比例；它说明试点经验，不能外推成所有政府开发团队的效果。", "links": [{"label": "查看 Boris 原帖 →", "url": "https://x.com/bcherny/status/2115491259381072269"}]},
+        {"title": "Thariq｜创作者需要表达草图的语言", "summary": "Thariq 说自己希望能先勾画动画和角色概念，再交给 Agent 细化；他的困难是找不到足够准确的描述语言。这与今日访谈里“人先提出观点”的讨论相呼应。", "links": [{"label": "查看 Thariq 原帖 →", "url": "https://x.com/trq212/status/2115641110710419752"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "学习、创作与可审计的 Agent 工作台",
+      "footnote": "取 10 月 30 日 GitHub Trending 实时榜单，避开近两期重复项目。星标、分叉、语言和主题为本次 GitHub API 快照；功能描述来自仓库自述，尚未独立测评。",
+      "items": [
+        {"title": "HKUDS/DeepTutor", "summary": "项目自述为长期个性化辅导工具；具体教学质量需要按实际课程与学习者验证。", "url": "https://github.com/HKUDS/DeepTutor", "owner": "HKUDS", "repoName": "DeepTutor", "avatar": "https://github.com/HKUDS.png", "stars": 50225, "forks": 6184, "language": "Python", "topics": ["ai-agents", "ai-tutor"]},
+        {"title": "Donchitos/Claude-Code-Game-Studios", "summary": "仓库将游戏开发流程组织成多 Agent、技能与协调规则；规模数字来自项目自述，不代表产出质量。", "url": "https://github.com/Donchitos/Claude-Code-Game-Studios", "owner": "Donchitos", "repoName": "Claude-Code-Game-Studios", "avatar": "https://github.com/Donchitos.png", "stars": 29284, "forks": 4051, "language": "Shell", "topics": ["ai-agents", "claude-code"]},
+        {"title": "CopilotKit/OpenBot", "summary": "项目自述给每个 AI 同事独立的浏览器、文件和工具，并记录行动过程；与昨日的 nightly-labs/openbot 是不同仓库。", "url": "https://github.com/CopilotKit/OpenBot", "owner": "CopilotKit", "repoName": "OpenBot", "avatar": "https://github.com/CopilotKit.png", "stars": 8192, "forks": 1049, "language": "TypeScript", "topics": ["agent-governance", "browser-automation"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "把评测、权限和人的意图放在同一张清单上",
+      "intro": "Carbon 与 Large 4 都给出了更强能力的厂商证据，但一个仍限量开放，一个刚发布更新权重；OpenAI 的 Model Spec 和监测文章则提醒我们，模型行为需要可解释的边界和可观察的行动。创作访谈给出另一条线索：工具能扩展产能，目标和判断仍要有人提出。<br><strong>今日一问：</strong>如果明天换上更强的模型，你的任务验收、权限范围和回退步骤会随之改变吗？",
+      "items": [{"title": "今天可做", "summary": "为一个真实 Agent 流程写下三件事：成功证据、允许执行的动作，以及发现偏差时由谁停止或回退。再用新模型做一次对照。"}]
+    }
+  ],
+  "sources": [
+    {"title": "Google｜Gemini 4 Carbon 发布", "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"},
+    {"title": "Mistral｜Large 4 更新权重发布", "url": "https://mistral.ai/news/mistral-large-4-oss/"},
+    {"title": "OpenAI｜Model Spec 更新", "url": "https://openai.com/index/updated-model-spec/"},
+    {"title": "OpenAI｜前沿模型行为监测", "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment/"},
+    {"title": "Vercel｜虚拟模型发布", "url": "https://vercel.com/changelog/virtual-models-now-available-on-ai-gateway"},
+    {"title": "Every｜Fred Graver 原频道访谈", "url": "https://www.youtube.com/watch?v=lE-a6pNmTso"},
+    {"title": "Josh Woodward｜Carbon 原帖", "url": "https://x.com/joshwoodward/status/2115495943948902517"},
+    {"title": "Guillermo Rauch｜虚拟模型原帖", "url": "https://x.com/rauchg/status/2115573969369845855"},
+    {"title": "Boris Cherny｜Utah 试点原帖", "url": "https://x.com/bcherny/status/2115491259381072269"},
+    {"title": "Thariq｜创作表达原帖", "url": "https://x.com/trq212/status/2115641110710419752"},
+    {"title": "GitHub｜10 月 30 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "HKUDS/DeepTutor", "url": "https://github.com/HKUDS/DeepTutor"},
+    {"title": "Donchitos/Claude-Code-Game-Studios", "url": "https://github.com/Donchitos/Claude-Code-Game-Studios"},
+    {"title": "CopilotKit/OpenBot", "url": "https://github.com/CopilotKit/OpenBot"}
+  ]
+}
