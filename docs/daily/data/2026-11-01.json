@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-01",
+  "title": "Agent 开始自己修复问题，验收和权限要跟上",
+  "summary": "Replit 展示自动排障与修复，Serval 把模拟测试用于企业服务 Agent；No Priors 访谈提醒，自主执行需要审批、审计和逐步授权。",
+  "heroLabel": "AI 日报 · 11月1日",
+  "tags": [
+    "Agent 运维",
+    "模拟测试",
+    "企业权限",
+    "开源工具"
+  ],
+  "stats": [
+    {
+      "num": 4,
+      "label": "Builder 动态"
+    },
+    {
+      "num": 3,
+      "label": "今日上榜项目"
+    },
+    {
+      "num": 3,
+      "label": "重点原文"
+    },
+    {
+      "num": 1,
+      "label": "公开视频"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "自动修复进入产品，发布前的验证更重要",
+      "items": [
+        {
+          "title": "Replit：发现问题后让 Agent 提出修复",
+          "summary": "<strong>自动修复与自动发布是两项独立选择</strong><br>Replit 的 Monitoring Agent 可根据监控告警检查日志和代码，尝试修复并验证。用户可以只启用自动修复，保留人工审查；自动重新发布需另行开启，官方帮助页将其标为实验性功能。",
+          "links": [
+            {
+              "label": "阅读 Replit 原文 →",
+              "url": "https://replit.com/blog/replit-monitoring-agent"
+            },
+            {
+              "label": "查看设置说明 →",
+              "url": "https://replit.com/help/answers/what-is-monitoring-agent"
+            }
+          ]
+        },
+        {
+          "title": "Serval：在真实权限之外先模拟请求",
+          "summary": "<strong>先测试，再让企业服务 Agent 接触真实系统</strong><br>Serval 10 月 29 日推出 Simulations，让 IT 团队用接近真实的请求测试帮助台 Agent，并在修改技能后检查既有场景是否退化。这是厂商描述的产品能力，实际覆盖率仍取决于测试场景。",
+          "links": [
+            {
+              "label": "阅读 Serval 原文 →",
+              "url": "https://www.serval.com/blog/simulations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "No Priors：企业 Agent 需要审批、日志与渐进授权",
+      "intro": "Sarah Guo 和 Elad Gil 访谈 Serval 联合创始人 Jake Stauch。以下依据节目逐字稿和原频道视频整理；关于市场格局的说法是嘉宾判断。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/EZcWEsMuLb4",
+      "items": [
+        {
+          "title": "把代码审查的安全边界带给 IT 团队",
+          "summary": "Stauch 认为，编码 Agent 能让非工程团队创建自动化，但上线前仍需分阶段、审批和审计记录；代码生成本身不等于获准执行。"
+        },
+        {
+          "title": "高权限动作采用明确的访问申请",
+          "summary": "访谈举例说明：个人 Agent 在大型企业通常只有有限权限。涉及服务账号或管理员能力时，应让具体动作通过确定性的审批流程，并记录一次性授权和执行结果。"
+        },
+        {
+          "title": "后台自主 Agent 仍是未解问题",
+          "summary": "Stauch 称能够自行发现并处理企业问题的后台 Agent 仍是长期目标。他设想让 Agent 对每项新增能力逐步申请批准，而非一次获得无限权限。",
+          "links": [
+            {
+              "label": "观看 No Priors 原视频 →",
+              "url": "https://www.youtube.com/watch?v=EZcWEsMuLb4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "news",
+      "layout": "rss",
+      "label": "资讯精选",
+      "title": "测试、修复与开源世界模型",
+      "footnote": "已检查 feeds.json 的四条中文 RSS：11 月 1 日上午均无当日新文。AI 前线 10 月 31 日报道的 Hy-Nomas 已追溯至腾讯混元仓库；以下保留原始发布的日期。",
+      "items": [
+        {
+          "title": "Serval｜帮助台 Agent 加入模拟测试",
+          "summary": "团队可构造员工请求场景，检查 Agent 的答复和动作，减少技能更新后出现的回归；测试结果仍应结合真实权限边界审阅。",
+          "source": "Serval",
+          "publishedAt": "2026-10-29",
+          "links": [
+            {
+              "label": "阅读官方发布 →",
+              "url": "https://www.serval.com/blog/simulations"
+            }
+          ]
+        },
+        {
+          "title": "Replit｜监控 Agent 可排查并修复线上故障",
+          "summary": "官方说明将告警、自动修复、自动重新发布分开配置；后者仍属实验性功能，涉及数据库等变更时需要格外审查。",
+          "source": "Replit",
+          "publishedAt": "2026-10-22",
+          "links": [
+            {
+              "label": "阅读官方说明 →",
+              "url": "https://replit.com/blog/replit-monitoring-agent"
+            }
+          ]
+        },
+        {
+          "title": "腾讯混元｜Hy-Nomas 开源交互式世界生成",
+          "summary": "仓库提供权重、推理代码与演示，并在 10 月 29 日加入与 Genie 4 样例的对照视频。对照是项目方展示，不等于独立性能评测。",
+          "source": "腾讯混元",
+          "publishedAt": "2026-10-29",
+          "links": [
+            {
+              "label": "查看项目仓库 →",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Nomas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "Builder 动态",
+      "title": "产品边界、使用入口与跨工具上下文",
+      "footnote": "来自 follow-builders 中央 feed（10 月 31 日 06:25 UTC 更新），入选原帖均以 fxtwitter 接口复核；个人判断和产品自述按原说法记录。",
+      "items": [
+        {
+          "title": "Amjad Masad｜开启自动修复的应用可自行维护",
+          "summary": "Replit CEO 将启用 autofix 的托管应用称为“自维护软件”。官方说明显示自动修复可调查并验证问题，但自动重新发布需要另行选择；配图是原帖对监控和发布开关的说明。",
+          "links": [
+            {
+              "label": "查看 Amjad 原帖 →",
+              "url": "https://x.com/amasad/status/2116343923925041462"
+            },
+            {
+              "label": "阅读 Replit 帮助页 →",
+              "url": "https://replit.com/help/answers/what-is-monitoring-agent"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-11-01/amasad-2116343923925041462-0.jpg",
+              "width": 800,
+              "height": 825,
+              "alt": "Amjad 原帖中的 Replit 监控 Agent 自动修复与自动发布说明"
+            }
+          ]
+        },
+        {
+          "title": "Boris Cherny｜已验证 Ultra 账户移除五小时限额",
+          "summary": "Boris 发帖称，已验证的 Ultra 账户不再受五小时使用限额约束。具体生效状态应以账户页面为准，不能推及所有套餐。",
+          "links": [
+            {
+              "label": "查看 Boris 原帖 →",
+              "url": "https://x.com/bcherny/status/2116222842413142111"
+            }
+          ]
+        },
+        {
+          "title": "Thibault Sottiaux｜移动端可切换多个账户",
+          "summary": "OpenAI 的 Thibault 表示移动端现可方便地切换多个账户，桌面端随后支持；这是入口更新，未给出桌面端具体日期。",
+          "links": [
+            {
+              "label": "查看 Thibault 原帖 →",
+              "url": "https://x.com/thsottiaux/status/2116405414921384099"
+            }
+          ]
+        },
+        {
+          "title": "Garry Tan｜让上下文跨 Agent 工具复用",
+          "summary": "Garry 介绍 GBrain Cloud，希望同一份上下文供多个 Agent 工具使用。这是其产品定位；不同工具的权限和执行结果仍要分别核对。",
+          "links": [
+            {
+              "label": "查看 Garry 原帖 →",
+              "url": "https://x.com/garrytan/status/2116303457774899251"
+            },
+            {
+              "label": "阅读产品设置说明 →",
+              "url": "https://gbrain.io/notes/set-up-gbrain-cloud-from-claude-code"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "记忆、设计语言与本地 Agent 团队",
+      "footnote": "取 11 月 1 日 GitHub Trending 当前榜单，避开近两期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；功能按仓库自述，未独立测评。",
+      "items": [
+        {
+          "title": "thedotmack/claude-mem",
+          "summary": "跨会话保留 Agent 工作上下文的项目，自述支持 Claude Code、Codex 等多种工具。",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "owner": "thedotmack",
+          "repoName": "claude-mem",
+          "avatar": "https://github.com/thedotmack.png",
+          "stars": 107938,
+          "forks": 9476,
+          "language": "TypeScript",
+          "topics": [
+            "ai-memory",
+            "claude-code"
+          ]
+        },
+        {
+          "title": "pbakaus/impeccable",
+          "summary": "面向编码 Agent 的设计词汇与评审方法，帮助描述界面品质和检查常见生成痕迹。",
+          "url": "https://github.com/pbakaus/impeccable",
+          "owner": "pbakaus",
+          "repoName": "impeccable",
+          "avatar": "https://github.com/pbakaus.png",
+          "stars": 98332,
+          "forks": 5800,
+          "language": "Rust",
+          "topics": [
+            "agent-skills",
+            "design"
+          ]
+        },
+        {
+          "title": "Orkas-AI/Orkas",
+          "summary": "本地优先的桌面 Agent 协作应用，自述可分派任务并连接多种编码工具。",
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "owner": "Orkas-AI",
+          "repoName": "Orkas",
+          "avatar": "https://github.com/Orkas-AI.png",
+          "stars": 6367,
+          "forks": 385,
+          "language": "JavaScript",
+          "topics": [
+            "agent-collaboration",
+            "local-first"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "给 Agent 自主权之前，先写清验收条件",
+      "intro": "今天的产品更新展示了两个方向：让 Agent 更快修复问题，也让团队更早发现错误。Serval 的模拟测试、Replit 的独立发布开关和访谈中的逐步授权，指向同一个操作问题：谁允许执行，怎样证明没有破坏原有流程。<br><strong>今日一问：</strong>如果你的 Agent 今晚自行修复线上故障，明早你会查看哪三份证据来决定是否保留这次改动？",
+      "items": [
+        {
+          "title": "今天可做",
+          "summary": "为一个自动化任务列出触发条件、允许的动作、模拟测试、上线审批和回滚办法；把每次运行的验证结果留在可追溯日志里。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Serval｜模拟测试",
+      "url": "https://www.serval.com/blog/simulations"
+    },
+    {
+      "title": "Replit｜Monitoring Agent",
+      "url": "https://replit.com/blog/replit-monitoring-agent"
+    },
+    {
+      "title": "Replit｜Monitoring Agent 设置",
+      "url": "https://replit.com/help/answers/what-is-monitoring-agent"
+    },
+    {
+      "title": "腾讯混元｜Hy-Nomas 仓库",
+      "url": "https://github.com/Tencent-Hunyuan/Hy-Nomas"
+    },
+    {
+      "title": "No Priors｜Jake Stauch 访谈",
+      "url": "https://www.youtube.com/watch?v=EZcWEsMuLb4"
+    },
+    {
+      "title": "Amjad Masad｜自动修复原帖",
+      "url": "https://x.com/amasad/status/2116343923925041462"
+    },
+    {
+      "title": "Boris Cherny｜Ultra 限额原帖",
+      "url": "https://x.com/bcherny/status/2116222842413142111"
+    },
+    {
+      "title": "Thibault Sottiaux｜账户切换原帖",
+      "url": "https://x.com/thsottiaux/status/2116405414921384099"
+    },
+    {
+      "title": "Garry Tan｜GBrain 原帖",
+      "url": "https://x.com/garrytan/status/2116303457774899251"
+    },
+    {
+      "title": "GBrain Cloud 设置说明",
+      "url": "https://gbrain.io/notes/set-up-gbrain-cloud-from-claude-code"
+    },
+    {
+      "title": "GitHub｜11 月 1 日 Trending",
+      "url": "https://github.com/trending?since=daily"
+    },
+    {
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem"
+    },
+    {
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable"
+    },
+    {
+      "title": "Orkas-AI/Orkas",
+      "url": "https://github.com/Orkas-AI/Orkas"
+    }
+  ]
+}
