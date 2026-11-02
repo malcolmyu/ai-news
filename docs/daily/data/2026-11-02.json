@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-02",
+  "title": "长周期 Agent 靠记忆接力，关键动作仍由人拍板",
+  "summary": "Latent Space 访谈展示财富管理 Agent 如何跨日交接、保留审计记录；Karpathy 的 HackerTube 和 Builder 讨论则把注意力放到交付结果与推理强度的取舍。",
+  "heroLabel": "AI 日报 · 11月2日",
+  "tags": ["长周期 Agent", "人类审批", "工作记忆", "开源工具"],
+  "stats": [
+    {"num": 3, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 3, "label": "重点原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "长周期工作的关键是交接与边界",
+      "items": [
+        {
+          "title": "Arca：Agent 跨日推进，人类顾问负责交易",
+          "summary": "<strong>任务可以跨十天，但不需要连续运行十天</strong><br>Arca 的 Aman Singh 在 Latent Space 访谈中介绍：客户状态、待办和责任人由内部记忆系统持续记录；Agent 做分析与跟进，交易和资金移动仍由人类顾问处理。这是受访团队的实践描述，并非独立效果评测。",
+          "links": [{"label": "阅读 Latent Space 原文 →", "url": "https://latent.space/p/arca/"}]
+        },
+        {
+          "title": "Karpathy：用 Agent 做出自己的视频入口",
+          "summary": "<strong>交付一个可用产品，比单次生成代码更能检验能力</strong><br>Karpathy 在 10 月 31 日的原文中称，他用 Claude Code 与 Opus 5.5 构建 HackerTube，整理 Hacker News 评论里的视频推荐，并亲自处理 API key、服务器与域名等环节。文中的用时和视频数量均为作者自述。",
+          "links": [{"label": "阅读 Karpathy 原文 →", "url": "https://karpathy.bearblog.dev/hacker-tube/"}]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话", "title": "Latent Space：让 Agent 接力，让顾问把关",
+      "intro": "Latent Space 在 AI Engineer New York 访谈 Arca 的 Aman Singh。以下依据原频道视频、节目原文和中央 feed 逐字稿整理；产品流程与效果为受访者陈述。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/KM3VQZKjpiY",
+      "items": [
+        {"title": "保存业务状态，而不只是对话历史", "summary": "Arca 记录每位客户当前事项、下一步、长期目标和责任人，让新一轮 Agent 工作能接住上一轮的进展。"},
+        {"title": "模型按内部任务评测选择", "summary": "团队自建运行框架，用自己的基准判断模型是否适合具体工作，并保留切换供应商的空间；公开榜单不是唯一依据。"},
+        {"title": "高风险动作交由人处理", "summary": "受访者说，Agent 可以分析税务和资产配置方案，但交易及资金移动由顾问执行；安全限制采用确定性规则，数据写入另有验证。"},
+        {"title": "把审计记录变成默认能力", "summary": "Agent 与人工在系统中的每次变更都留下操作、责任主体和时间记录；外部邮件与文件还会经过提示注入检查。", "links": [{"label": "观看 Latent Space 原视频 →", "url": "https://www.youtube.com/watch?v=KM3VQZKjpiY"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "资讯精选", "title": "安全披露与检索基础设施",
+      "footnote": "已检查 feeds.json 的四条中文 RSS。AI 前线 11 月 1 日简讯中的多项说法尚未找到对应原始公告，故未据此入稿；以下采用已核验的官方原文，并标注原始发布时间。",
+      "items": [
+        {"title": "OpenAI｜计划定期发布社区安全报告", "summary": "10 月 30 日公告承诺于 2027 年初发布首份报告，覆盖 2026 年下半年，并拟每六个月更新一次。当前是披露计划，不应表述为报告已经发布。", "source": "OpenAI", "publishedAt": "2026-10-30", "links": [{"label": "阅读 OpenAI 公告 →", "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens/"}]},
+        {"title": "Cloudflare｜AI Search 开始按量计费", "summary": "Cloudflare 10 月 1 日的更新说明将于 11 月 1 日开始计费，并列有每月包含用量；新建实例默认使用混合检索。实际费用应按官方价格页和账户用量核对。", "source": "Cloudflare", "publishedAt": "2026-10-01", "links": [{"label": "查看官方变更记录 →", "url": "https://developers.cloudflare.com/changelog/post/2026-10-01-ai-search-generally-available/"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "交付结果、反馈循环与推理强度",
+      "footnote": "来自 follow-builders 中央 feed（11 月 1 日 06:26 UTC 更新）；三条原帖均经 fxtwitter 接口核对，个人观点按原说法记录。配图取自 Swyx 原帖媒体。",
+      "items": [
+        {"title": "Swyx｜HackerTube 使用中等推理强度", "summary": "Swyx 指向 Karpathy 的 HackerTube，并指出作者在项目中使用 Opus 5.5 的 Medium 档。他认为推理强度更像可按任务调整的偏好，不能从单个项目推出统一最佳设置。", "links": [{"label": "查看 Swyx 原帖 →", "url": "https://x.com/swyx/status/2116773135668404286"}, {"label": "阅读 Karpathy 项目记述 →", "url": "https://karpathy.bearblog.dev/hacker-tube/"}], "media": [{"src": "assets/2026-11-02/swyx-2116773135668404286-0.jpg", "width": 800, "height": 709, "alt": "Swyx 原帖附带的 HackerTube 项目页面截图"}]},
+        {"title": "Swyx｜低推理强度配合批评循环", "summary": "在另一条原帖中，他主张对吞吐受限的工作用低推理强度加批评循环。这是工作流偏好，不是对所有任务的性能比较。", "links": [{"label": "查看 Swyx 原帖 →", "url": "https://x.com/swyx/status/2116642586387730593"}]},
+        {"title": "Aaron Levie｜用过去做不到的结果衡量 AI", "summary": "Box CEO 认为，AI 应帮助团队做出以前难以完成的原型、架构与业务流程，而不只是把原有任务做快。他强调这是对使用深度的判断，未给出可复现的量化对照。", "links": [{"label": "查看 Aaron 原帖 →", "url": "https://x.com/levie/status/2116652002830963114"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending", "title": "金融建模、审计记录与离线语音",
+      "footnote": "取 11 月 2 日 GitHub Trending 当前榜单，避开近三期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；功能按仓库自述，未独立测评。",
+      "items": [
+        {"title": "shiyu-coder/Kronos", "summary": "金融 K 线基础模型项目，仓库提供模型、训练与示例代码；预测效果应按具体数据和回测方式评估。", "url": "https://github.com/shiyu-coder/Kronos", "owner": "shiyu-coder", "repoName": "Kronos", "avatar": "https://github.com/shiyu-coder.png", "stars": 45434, "forks": 7505, "language": "Python", "topics": []},
+        {"title": "beenuar/AiSOC", "summary": "开源安全运营中心，项目自述结合告警归并、Agent 分诊和可重放的决策记录。", "url": "https://github.com/beenuar/AiSOC", "owner": "beenuar", "repoName": "AiSOC", "avatar": "https://github.com/beenuar.png", "stars": 6263, "forks": 646, "language": "Python", "topics": ["agentic-ai", "security-operations"]},
+        {"title": "cjpais/Handy", "summary": "本地离线语音转文字应用，仓库提供跨平台客户端与扩展能力；隐私和识别质量仍需按使用场景核验。", "url": "https://github.com/cjpais/Handy", "owner": "cjpais", "repoName": "Handy", "avatar": "https://github.com/cjpais.png", "stars": 36612, "forks": 3455, "language": "Rust", "topics": ["speech-to-text", "cross-platform"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考", "title": "跨日执行要交接状态，也要交接责任",
+      "intro": "Arca 的实践说明，长周期任务不等于让模型连续运行数日；关键是记录状态、归属和下一步，同时把不可逆动作留给有权负责的人。Swyx 与 Aaron 的帖子则提醒，推理档位和产出质量要围绕实际任务验证。<br><strong>今日一问：</strong>你的 Agent 明天重新接手今天的工作时，能否说清它已做什么、下一步由谁决定、哪些动作仍需人工批准？",
+      "items": [{"title": "今天可做", "summary": "为一个跨日任务建立四栏记录：当前状态、下一步、责任人、需要审批的动作。再用一次真实任务检验交接是否完整。"}]
+    }
+  ],
+  "sources": [
+    {"title": "Latent Space｜Arca 访谈原文", "url": "https://latent.space/p/arca/"},
+    {"title": "Latent Space｜Arca 原视频", "url": "https://www.youtube.com/watch?v=KM3VQZKjpiY"},
+    {"title": "Karpathy｜HackerTube 原文", "url": "https://karpathy.bearblog.dev/hacker-tube/"},
+    {"title": "OpenAI｜社区安全报告计划", "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens/"},
+    {"title": "Cloudflare｜AI Search 变更记录", "url": "https://developers.cloudflare.com/changelog/post/2026-10-01-ai-search-generally-available/"},
+    {"title": "Swyx｜HackerTube 与推理强度", "url": "https://x.com/swyx/status/2116773135668404286"},
+    {"title": "Swyx｜低推理强度与反馈循环", "url": "https://x.com/swyx/status/2116642586387730593"},
+    {"title": "Aaron Levie｜AI 产出观点", "url": "https://x.com/levie/status/2116652002830963114"},
+    {"title": "GitHub｜11 月 2 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "shiyu-coder/Kronos", "url": "https://github.com/shiyu-coder/Kronos"},
+    {"title": "beenuar/AiSOC", "url": "https://github.com/beenuar/AiSOC"},
+    {"title": "cjpais/Handy", "url": "https://github.com/cjpais/Handy"}
+  ]
+}
