@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 走向规模化，代码底座与真实任务评测同时承压 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月3日</div>
+  <h1>Agent 走向规模化，代码底座与真实任务评测同时承压</h1>
+  <div class="subtitle">OpenAI 披露为并行 Agent 开发构建的 Git 后端 Pando，并推出面向日常任务的 LifeVal；Builder 动态和 Modal 访谈则把反馈、运行时与算力约束接到同一条工作流上。</div>
+  <div class="dots-row">
+    <span class="tag">Agent 基础设施</span>
+    <span class="tag">任务评测</span>
+    <span class="tag">产品反馈</span>
+    <span class="tag">开源运行时</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>Agent 并行开发放大了 Git 服务的读写压力</strong><br>OpenAI 11 月 2 日介绍其内部 Git 后端 Pando：分支更新独立协调、复用 packfile 服务读取，并保持 Git 客户端兼容。其生产环境推送延迟中位数降低近 5 倍，是 OpenAI 对自身工作负载的披露。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/scaling-git-at-openai/" target="_blank" class="vitem-link">阅读 OpenAI 工程原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>会答题不等于能完成生活中的具体事务</strong><br>OpenAI 同日发布 LifeVal，基于时间使用研究及 3,995 人问卷选取照护、教育、家务管理和财务等任务，用来跟踪模型在实际工作流中的表现。页面示例分数并不代表所有任务的总体成功率。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/lifeval/" target="_blank" class="vitem-link">阅读 LifeVal 研究介绍 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Modal CEO：Agent 需要隔离执行环境，也受算力形态约束</h2>
+  <div class="text-body">Unsupervised Learning 10 月 28 日访谈 Modal 联合创始人兼 CEO Erik Bernhardsson。以下依据原频道视频、节目页及 follow-builders 提供的逐字稿整理；商业规模和产品表现均为受访者自述。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/HJDekXH-h5c" title="Modal CEO：Agent 需要隔离执行环境，也受算力形态约束" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">算力不是可任意互换的商品</div><div class="vitem-desc">Erik 认为 GPU 容量采购仍依赖具体芯片、合约和供应商关系，不能像标准化商品那样简单撮合。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">沙箱先于 Agent 热潮布局</div><div class="vitem-desc">Modal 于 2023 年推出 Sandbox，最初瞄准模型生成代码的隔离运行；受访者称到 2025 年相关需求明显增长。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">推理成本先看模型能否放入显存</div><div class="vitem-desc">他给出的常用启发式是先满足模型的显存需求，再比较能承载它的芯片成本；不同负载仍需实测。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">基础设施继续向多产品扩展</div><div class="vitem-desc">访谈讨论了推理优化、沙箱和训练能力如何组成开发者工作流，而非只提供单一模型调用接口。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://unsupervised-learning.simplecast.com/episodes/ep-95-modal-ceo-on-the-future-of-inference-the-chaos-of-the-gpu-market-origins-of-the-sandbox-bet-7BVMndlI" target="_blank" class="vitem-link">阅读节目原文 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">资讯精选</div>
+  <h2>官方更新：代码基础设施、任务评测与模型进展</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜Pando 支撑高并发 Git 工作负载</div>
+  <div class="vitem-desc">Pando 将 packfile 存入对象存储，以每个分支的引用版本协调更新，并复用数据服务下载。OpenAI 表示内部单仓库推送延迟中位数降低近 5 倍，同时说明跨分支读取不保证同一时点的全局快照。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/scaling-git-at-openai/" target="_blank" class="vitem-link">阅读工程文章 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">OpenAI｜LifeVal 评测真实生活任务</div>
+  <div class="vitem-desc">研究从时间使用调查和 3,995 人问卷构建任务集，覆盖照护、健康、教育、家庭管理、购物及公共服务。官方展示的是具体案例，解读模型能力仍需看完整评测范围。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/lifeval/" target="_blank" class="vitem-link">阅读研究介绍 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Google｜回顾十月 AI 更新</div>
+  <div class="vitem-desc">Google 的 11 月 2 日月度回顾梳理 Gemini 4 Argon、Carbon 与 Genie 4 等十月进展；文中说明 Carbon 仍处预发布测试阶段，不应视为全面开放。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/" target="_blank" class="vitem-link">阅读 Google 回顾 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 的四条中文 RSS，11 月 3 日上午未见当日新文。以下采用 11 月 2 日官方原文；Google 条目是对 10 月进展的回顾，不是当天新模型发布。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>从用户反馈到 Agent 执行与管理</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜让用户反馈进入构建流程</div>
+    <div class="vitem-desc">Replit CEO 称，网站开启 feedback widget 后，用户反馈可成为 Agent 构建工作的提示。帖子说明了入口与方向，未给出自动上线或质量保证的承诺。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2116998155925360965" target="_blank" class="vitem-link">查看 Amjad 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜保有自己的 Agent 运行环境</div>
+    <div class="vitem-desc">Vercel CEO 主张保有 harness、数据、连接和运行时，并保持模型选择空间；他将本地模型和开源视为减少依赖的方向。这是个人观点。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2117000819623243925" target="_blank" class="vitem-link">查看 Guillermo 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aaron Levie｜知识工作转向管理 Agent</div>
+    <div class="vitem-desc">Box CEO 认为，信息密集型岗位会更多地组织并行 Agent 工作，人的角色从单人执行转向目标、协调与验收；生产率变化仍需具体场景检验。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/levie/status/2117134917847093491" target="_blank" class="vitem-link">查看 Aaron 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Yang｜哪些产品界面仍值得人亲自使用</div>
+    <div class="vitem-desc">Peter 分享与 Google Labs 产品负责人 Jaclyn Konzelmann 的对话片段：创作、学习和娱乐可能仍需人与界面直接互动，其他流程可重新思考由谁操作。这是访谈观点，不是统一产品设计准则。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-03/petergyang-2116987415319740756-0.jpg" width="800" height="450" loading="lazy" alt="Peter Yang 访谈视频画面，受访者在书架前谈产品界面">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/petergyang/status/2116987415319740756" target="_blank" class="vitem-link">查看 Peter 原帖 →</a>
+    <a href="https://www.youtube.com/watch?v=eJ2XC9-9-rU" target="_blank" class="vitem-link">观看完整访谈 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>桌面操作、Agent 管理与本地模型</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/vercel-labs/agent-desktop" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/vercel-labs.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">vercel-labs</span><span class="gh-sep">/</span><span class="gh-name">agent-desktop</span>
+      </div>
+      <span class="gh-stars">⭐ 9.9k</span>
+    </div>
+    <div class="gh-body">面向 AI Agent 的桌面操作 CLI，仓库自述提供计算机使用与无障碍接口相关能力。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 664</span>
+      <span class="gh-topics"><span class="gh-topic">computer-use</span><span class="gh-topic">accessibility</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/paperclipai/paperclip" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/paperclipai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">paperclipai</span><span class="gh-sep">/</span><span class="gh-name">paperclip</span>
+      </div>
+      <span class="gh-stars">⭐ 110.4k</span>
+    </div>
+    <div class="gh-body">开源的工作场景 Agent 管理应用，仓库将编排、治理与工作流自动化列为主要方向。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 18.3k</span>
+      <span class="gh-topics"><span class="gh-topic">agent-orchestration</span><span class="gh-topic">ai-governance</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/JustVugg/colibri" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/JustVugg.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">JustVugg</span><span class="gh-sep">/</span><span class="gh-name">colibri</span>
+      </div>
+      <span class="gh-stars">⭐ 46.6k</span>
+    </div>
+    <div class="gh-body">纯 C、零依赖的本地 MoE 模型运行项目，仓库自述通过从磁盘流式加载专家参数利用现有硬件。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● C</span>
+      <span class="gh-forks">🍴 5.4k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    取 11 月 3 日 GitHub Trending 当时榜单，避开近三期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；项目能力按仓库自述，未独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  Pando 说明并行 Agent 会放大版本控制的基础设施压力，LifeVal 则提醒评测要覆盖人真正想完成的事务。Replit 的反馈入口和 Modal 的沙箱把需求与执行串起来，但每一步都需要可追溯的任务、权限和验收标准。<br><strong>今日一问：</strong>你的 Agent 从用户反馈到提交代码之间，哪一步最容易失去上下文或缺少人工验收？<br><strong>今天可做：</strong>选一条真实用户反馈，记录它进入 Agent 的方式、隔离执行环境、代码审查节点和最终验收结果；再找出最脆弱的一环。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/scaling-git-at-openai/" target="_blank">OpenAI｜Scaling Git at OpenAI</a>
+    <a href="https://openai.com/index/lifeval/" target="_blank">OpenAI｜LifeVal</a>
+    <a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/" target="_blank">Google｜十月 AI 更新回顾</a>
+    <a href="https://unsupervised-learning.simplecast.com/episodes/ep-95-modal-ceo-on-the-future-of-inference-the-chaos-of-the-gpu-market-origins-of-the-sandbox-bet-7BVMndlI" target="_blank">Unsupervised Learning｜Modal 访谈节目页</a>
+    <a href="https://www.youtube.com/watch?v=HJDekXH-h5c" target="_blank">Unsupervised Learning｜Modal 原视频</a>
+    <a href="https://x.com/amasad/status/2116998155925360965" target="_blank">Amjad Masad｜Replit 反馈入口</a>
+    <a href="https://x.com/rauchg/status/2117000819623243925" target="_blank">Guillermo Rauch｜Agent 运行时观点</a>
+    <a href="https://x.com/levie/status/2117134917847093491" target="_blank">Aaron Levie｜知识工作与 Agent</a>
+    <a href="https://x.com/petergyang/status/2116987415319740756" target="_blank">Peter Yang｜产品界面访谈片段</a>
+    <a href="https://www.youtube.com/watch?v=eJ2XC9-9-rU" target="_blank">Peter Yang｜完整视频</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜11 月 3 日 Trending</a>
+    <a href="https://github.com/vercel-labs/agent-desktop" target="_blank">vercel-labs/agent-desktop</a>
+    <a href="https://github.com/paperclipai/paperclip" target="_blank">paperclipai/paperclip</a>
+    <a href="https://github.com/JustVugg/colibri" target="_blank">JustVugg/colibri</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

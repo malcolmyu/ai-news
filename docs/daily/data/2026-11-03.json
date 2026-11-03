@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-03",
+  "title": "Agent 走向规模化，代码底座与真实任务评测同时承压",
+  "summary": "OpenAI 披露为并行 Agent 开发构建的 Git 后端 Pando，并推出面向日常任务的 LifeVal；Builder 动态和 Modal 访谈则把反馈、运行时与算力约束接到同一条工作流上。",
+  "heroLabel": "AI 日报 · 11月3日",
+  "tags": [
+    "Agent 基础设施",
+    "任务评测",
+    "产品反馈",
+    "开源运行时"
+  ],
+  "stats": [
+    {
+      "num": 4,
+      "label": "Builder 动态"
+    },
+    {
+      "num": 3,
+      "label": "今日上榜项目"
+    },
+    {
+      "num": 3,
+      "label": "官方原文"
+    },
+    {
+      "num": 1,
+      "label": "公开视频"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "analysis",
+      "layout": "highlights",
+      "label": "今日要点",
+      "title": "并行工作需要新底座，实际价值需要新量尺",
+      "items": [
+        {
+          "title": "Pando：按分支扩展并发写入",
+          "summary": "<strong>Agent 并行开发放大了 Git 服务的读写压力</strong><br>OpenAI 11 月 2 日介绍其内部 Git 后端 Pando：分支更新独立协调、复用 packfile 服务读取，并保持 Git 客户端兼容。其生产环境推送延迟中位数降低近 5 倍，是 OpenAI 对自身工作负载的披露。",
+          "links": [
+            {
+              "label": "阅读 OpenAI 工程原文 →",
+              "url": "https://openai.com/index/scaling-git-at-openai/"
+            }
+          ]
+        },
+        {
+          "title": "LifeVal：把评测放回日常任务",
+          "summary": "<strong>会答题不等于能完成生活中的具体事务</strong><br>OpenAI 同日发布 LifeVal，基于时间使用研究及 3,995 人问卷选取照护、教育、家务管理和财务等任务，用来跟踪模型在实际工作流中的表现。页面示例分数并不代表所有任务的总体成功率。",
+          "links": [
+            {
+              "label": "阅读 LifeVal 研究介绍 →",
+              "url": "https://openai.com/index/lifeval/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts",
+      "layout": "embed",
+      "label": "深度对话",
+      "title": "Modal CEO：Agent 需要隔离执行环境，也受算力形态约束",
+      "intro": "Unsupervised Learning 10 月 28 日访谈 Modal 联合创始人兼 CEO Erik Bernhardsson。以下依据原频道视频、节目页及 follow-builders 提供的逐字稿整理；商业规模和产品表现均为受访者自述。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/HJDekXH-h5c",
+      "items": [
+        {
+          "title": "算力不是可任意互换的商品",
+          "summary": "Erik 认为 GPU 容量采购仍依赖具体芯片、合约和供应商关系，不能像标准化商品那样简单撮合。"
+        },
+        {
+          "title": "沙箱先于 Agent 热潮布局",
+          "summary": "Modal 于 2023 年推出 Sandbox，最初瞄准模型生成代码的隔离运行；受访者称到 2025 年相关需求明显增长。"
+        },
+        {
+          "title": "推理成本先看模型能否放入显存",
+          "summary": "他给出的常用启发式是先满足模型的显存需求，再比较能承载它的芯片成本；不同负载仍需实测。"
+        },
+        {
+          "title": "基础设施继续向多产品扩展",
+          "summary": "访谈讨论了推理优化、沙箱和训练能力如何组成开发者工作流，而非只提供单一模型调用接口。",
+          "links": [
+            {
+              "label": "阅读节目原文 →",
+              "url": "https://unsupervised-learning.simplecast.com/episodes/ep-95-modal-ceo-on-the-future-of-inference-the-chaos-of-the-gpu-market-origins-of-the-sandbox-bet-7BVMndlI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "news",
+      "layout": "rss",
+      "label": "资讯精选",
+      "title": "官方更新：代码基础设施、任务评测与模型进展",
+      "footnote": "已检查 feeds.json 的四条中文 RSS，11 月 3 日上午未见当日新文。以下采用 11 月 2 日官方原文；Google 条目是对 10 月进展的回顾，不是当天新模型发布。",
+      "items": [
+        {
+          "title": "OpenAI｜Pando 支撑高并发 Git 工作负载",
+          "summary": "Pando 将 packfile 存入对象存储，以每个分支的引用版本协调更新，并复用数据服务下载。OpenAI 表示内部单仓库推送延迟中位数降低近 5 倍，同时说明跨分支读取不保证同一时点的全局快照。",
+          "source": "OpenAI",
+          "publishedAt": "2026-11-02",
+          "links": [
+            {
+              "label": "阅读工程文章 →",
+              "url": "https://openai.com/index/scaling-git-at-openai/"
+            }
+          ]
+        },
+        {
+          "title": "OpenAI｜LifeVal 评测真实生活任务",
+          "summary": "研究从时间使用调查和 3,995 人问卷构建任务集，覆盖照护、健康、教育、家庭管理、购物及公共服务。官方展示的是具体案例，解读模型能力仍需看完整评测范围。",
+          "source": "OpenAI",
+          "publishedAt": "2026-11-02",
+          "links": [
+            {
+              "label": "阅读研究介绍 →",
+              "url": "https://openai.com/index/lifeval/"
+            }
+          ]
+        },
+        {
+          "title": "Google｜回顾十月 AI 更新",
+          "summary": "Google 的 11 月 2 日月度回顾梳理 Gemini 4 Argon、Carbon 与 Genie 4 等十月进展；文中说明 Carbon 仍处预发布测试阶段，不应视为全面开放。",
+          "source": "Google",
+          "publishedAt": "2026-11-02",
+          "links": [
+            {
+              "label": "阅读 Google 回顾 →",
+              "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "builders",
+      "layout": "vitem",
+      "label": "Builder 动态",
+      "title": "从用户反馈到 Agent 执行与管理",
+      "footnote": "来自 follow-builders 中央 feed（11 月 2 日 06:35 UTC 更新）；四条原帖经 fxtwitter 核对。观点与产品能力均按发帖者表述，配图取自 Peter Yang 原帖视频画面。",
+      "items": [
+        {
+          "title": "Amjad Masad｜让用户反馈进入构建流程",
+          "summary": "Replit CEO 称，网站开启 feedback widget 后，用户反馈可成为 Agent 构建工作的提示。帖子说明了入口与方向，未给出自动上线或质量保证的承诺。",
+          "links": [
+            {
+              "label": "查看 Amjad 原帖 →",
+              "url": "https://x.com/amasad/status/2116998155925360965"
+            }
+          ]
+        },
+        {
+          "title": "Guillermo Rauch｜保有自己的 Agent 运行环境",
+          "summary": "Vercel CEO 主张保有 harness、数据、连接和运行时，并保持模型选择空间；他将本地模型和开源视为减少依赖的方向。这是个人观点。",
+          "links": [
+            {
+              "label": "查看 Guillermo 原帖 →",
+              "url": "https://x.com/rauchg/status/2117000819623243925"
+            }
+          ]
+        },
+        {
+          "title": "Aaron Levie｜知识工作转向管理 Agent",
+          "summary": "Box CEO 认为，信息密集型岗位会更多地组织并行 Agent 工作，人的角色从单人执行转向目标、协调与验收；生产率变化仍需具体场景检验。",
+          "links": [
+            {
+              "label": "查看 Aaron 原帖 →",
+              "url": "https://x.com/levie/status/2117134917847093491"
+            }
+          ]
+        },
+        {
+          "title": "Peter Yang｜哪些产品界面仍值得人亲自使用",
+          "summary": "Peter 分享与 Google Labs 产品负责人 Jaclyn Konzelmann 的对话片段：创作、学习和娱乐可能仍需人与界面直接互动，其他流程可重新思考由谁操作。这是访谈观点，不是统一产品设计准则。",
+          "links": [
+            {
+              "label": "查看 Peter 原帖 →",
+              "url": "https://x.com/petergyang/status/2116987415319740756"
+            },
+            {
+              "label": "观看完整访谈 →",
+              "url": "https://www.youtube.com/watch?v=eJ2XC9-9-rU"
+            }
+          ],
+          "media": [
+            {
+              "src": "assets/2026-11-03/petergyang-2116987415319740756-0.jpg",
+              "width": 800,
+              "height": 450,
+              "alt": "Peter Yang 访谈视频画面，受访者在书架前谈产品界面"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "github",
+      "layout": "card",
+      "label": "GitHub Trending",
+      "title": "桌面操作、Agent 管理与本地模型",
+      "footnote": "取 11 月 3 日 GitHub Trending 当时榜单，避开近三期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；项目能力按仓库自述，未独立测评。",
+      "items": [
+        {
+          "title": "vercel-labs/agent-desktop",
+          "summary": "面向 AI Agent 的桌面操作 CLI，仓库自述提供计算机使用与无障碍接口相关能力。",
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "owner": "vercel-labs",
+          "repoName": "agent-desktop",
+          "avatar": "https://github.com/vercel-labs.png",
+          "stars": 9913,
+          "forks": 664,
+          "language": "Rust",
+          "topics": [
+            "computer-use",
+            "accessibility"
+          ]
+        },
+        {
+          "title": "paperclipai/paperclip",
+          "summary": "开源的工作场景 Agent 管理应用，仓库将编排、治理与工作流自动化列为主要方向。",
+          "url": "https://github.com/paperclipai/paperclip",
+          "owner": "paperclipai",
+          "repoName": "paperclip",
+          "avatar": "https://github.com/paperclipai.png",
+          "stars": 110423,
+          "forks": 18281,
+          "language": "TypeScript",
+          "topics": [
+            "agent-orchestration",
+            "ai-governance"
+          ]
+        },
+        {
+          "title": "JustVugg/colibri",
+          "summary": "纯 C、零依赖的本地 MoE 模型运行项目，仓库自述通过从磁盘流式加载专家参数利用现有硬件。",
+          "url": "https://github.com/JustVugg/colibri",
+          "owner": "JustVugg",
+          "repoName": "colibri",
+          "avatar": "https://github.com/JustVugg.png",
+          "stars": 46598,
+          "forks": 5387,
+          "language": "C",
+          "topics": []
+        }
+      ]
+    },
+    {
+      "kind": "analysis",
+      "layout": "prose",
+      "label": "今日思考",
+      "title": "把 Agent 工作流当作完整系统来检验",
+      "intro": "Pando 说明并行 Agent 会放大版本控制的基础设施压力，LifeVal 则提醒评测要覆盖人真正想完成的事务。Replit 的反馈入口和 Modal 的沙箱把需求与执行串起来，但每一步都需要可追溯的任务、权限和验收标准。<br><strong>今日一问：</strong>你的 Agent 从用户反馈到提交代码之间，哪一步最容易失去上下文或缺少人工验收？<br><strong>今天可做：</strong>选一条真实用户反馈，记录它进入 Agent 的方式、隔离执行环境、代码审查节点和最终验收结果；再找出最脆弱的一环。",
+      "items": [
+        {
+          "title": "今天可做",
+          "summary": "选一条真实用户反馈，记录它进入 Agent 的方式、隔离执行环境、代码审查节点和最终验收结果；再找出最脆弱的一环。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "OpenAI｜Scaling Git at OpenAI",
+      "url": "https://openai.com/index/scaling-git-at-openai/"
+    },
+    {
+      "title": "OpenAI｜LifeVal",
+      "url": "https://openai.com/index/lifeval/"
+    },
+    {
+      "title": "Google｜十月 AI 更新回顾",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/"
+    },
+    {
+      "title": "Unsupervised Learning｜Modal 访谈节目页",
+      "url": "https://unsupervised-learning.simplecast.com/episodes/ep-95-modal-ceo-on-the-future-of-inference-the-chaos-of-the-gpu-market-origins-of-the-sandbox-bet-7BVMndlI"
+    },
+    {
+      "title": "Unsupervised Learning｜Modal 原视频",
+      "url": "https://www.youtube.com/watch?v=HJDekXH-h5c"
+    },
+    {
+      "title": "Amjad Masad｜Replit 反馈入口",
+      "url": "https://x.com/amasad/status/2116998155925360965"
+    },
+    {
+      "title": "Guillermo Rauch｜Agent 运行时观点",
+      "url": "https://x.com/rauchg/status/2117000819623243925"
+    },
+    {
+      "title": "Aaron Levie｜知识工作与 Agent",
+      "url": "https://x.com/levie/status/2117134917847093491"
+    },
+    {
+      "title": "Peter Yang｜产品界面访谈片段",
+      "url": "https://x.com/petergyang/status/2116987415319740756"
+    },
+    {
+      "title": "Peter Yang｜完整视频",
+      "url": "https://www.youtube.com/watch?v=eJ2XC9-9-rU"
+    },
+    {
+      "title": "GitHub｜11 月 3 日 Trending",
+      "url": "https://github.com/trending?since=daily"
+    },
+    {
+      "title": "vercel-labs/agent-desktop",
+      "url": "https://github.com/vercel-labs/agent-desktop"
+    },
+    {
+      "title": "paperclipai/paperclip",
+      "url": "https://github.com/paperclipai/paperclip"
+    },
+    {
+      "title": "JustVugg/colibri",
+      "url": "https://github.com/JustVugg/colibri"
+    }
+  ]
+}
