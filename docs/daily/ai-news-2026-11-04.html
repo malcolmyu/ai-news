@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 进入真实工作流，权限、证据与验收决定能走多远 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月4日</div>
+  <h1>Agent 进入真实工作流，权限、证据与验收决定能走多远</h1>
+  <div class="subtitle">OpenAI 展示模型参与硬件设计与仿真，同时承认制造约束仍需人工审查；Legora 访谈揭示法律 Agent 在无法查看客户数据时如何建立评测。GrapesJS 与 Builder 动态聚焦结构化工具和受控执行环境。</div>
+  <div class="dots-row">
+    <span class="tag">工程设计</span>
+    <span class="tag">法律 Agent</span>
+    <span class="tag">受控环境</span>
+    <span class="tag">浏览器工具</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>OpenAI 把模型带进机械、电路和仿真流程</strong><br>11 月 3 日的研究文章展示 Astra 参与设备外壳、PCB 与软件设计，并与 Mazda 探索车身气动方案。但官方也说明，试制设备在制造公差、装配细节上仍需多轮人工审查；BenchCAD 2.0 分数只是内部任务指标。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" class="vitem-link">阅读 OpenAI 原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Legora CTO 谈保密约束下的 Agent 改进</strong><br>法律材料属于律所客户，产品团队不能随意查看实际工作轨迹。Jacob Lauritzen 在 Latent Space 访谈中介绍用模拟任务、律师参与评测及匿名化反馈重现问题；引用准确率的改善是其访谈案例，不代表整体法律工作的成功率。</p>
+      <div style="margin-top:12px;">
+        <a href="https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/" target="_blank" class="vitem-link">阅读原节目页 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Legora CTO：保密数据之外，怎样测试法律 Agent</h2>
+  <div class="text-body">Latent Space 11 月 2 日发布对 Legora CTO Jacob Lauritzen 的访谈。以下依据原频道视频、节目页与 follow-builders 逐字稿整理；团队规模、准确率及产品能力为受访者自述。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/bJBEFzlKPoQ" title="Legora CTO：保密数据之外，怎样测试法律 Agent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">用模拟案件替代真实客户轨迹</div><div class="vitem-desc">受访者称，客户文件的保密要求使团队无法直接读取完整使用轨迹；工程师与律师共同构造接近实际工作的评测环境。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">把证据链当作产品能力</div><div class="vitem-desc">团队持续测试引文准确性。受访者举例称，一次模型更新使某项引用正确率从约 70% 提高到 99%；这是具体问题的经验，不能外推到所有案件。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">模型选择服从任务和治理</div><div class="vitem-desc">Legora 为不同子任务选择不同模型，同时把搜索、文档编辑和表格审阅组合进律师的工作流。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">律师仍负责判断与复核</div><div class="vitem-desc">访谈讨论初级岗位和计费方式的变化；受访者没有把法律专业人员的审查视为可以取消的步骤。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=bJBEFzlKPoQ" target="_blank" class="vitem-link">观看原视频 →</a>
+    <a href="https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/" target="_blank" class="vitem-link">阅读节目与章节 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">官方原文</div>
+  <h2>官方原文：工程与网页编辑的 Agent 接口</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜模型进入物理工程设计</div>
+  <div class="vitem-desc">文章介绍 CAD、PCB、仿真与制造图纸的试验性工作。两名成员在不到一周内完成测试设备设计，但可制造性仍需人工反复修订；与 Mazda 的合作仍处探索阶段。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank" class="vitem-link">阅读研究原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">GrapesJS｜用 WebMCP 暴露编辑器工具</div>
+  <div class="vitem-desc">GrapesJS 发布开源插件，让兼容的浏览器 Agent 以结构化工具检查和修改组件、样式及页面。官方强调 WebMCP 仍是实验性能力，浏览器支持有限，工具权限可由接入方筛选。</div>
+  <div class="vitem-actions">
+    <a href="https://grapesjs.com/blog/webmcp-ai-browser-agents" target="_blank" class="vitem-link">阅读发布原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 的四条 RSS；截至 11 月 4 日上午未见可核验的新文章。此处选用 11 月 3 日发布的官方原文，不把旧 RSS 条目冒充今日更新。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>让 Agent 有工具，也要给它权限边界</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜任务级权限与组织控制</div>
+    <div class="vitem-desc">Replit CEO 主张把 Agent 放在组织控制的专用环境，只授予当前任务所需的资源。原帖配图把沙箱、凭据代理、审批与审计放在 Agent 控制范围之外；这是一种架构主张。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-04/amasad-2117499074496872882-0.jpg" width="800" height="320" loading="lazy" alt="Amjad 原帖引用图：受控环境内的 Agent 与独立权限、审批和审计边界">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2117499074496872882" target="_blank" class="vitem-link">查看 Amjad 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜多线程协作的个人体验</div>
+    <div class="vitem-desc">Y Combinator CEO 称 Capy Captains 让他修复 issue 的吞吐量一夜提升约五倍，并强调跨 Captain 与子线程协调。五倍是个人自述，未给出独立测量；原帖引用了 Capy 0.7.0 的 Issues 界面。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-04/garrytan-2117410016730964358-0.jpg" width="800" height="419" loading="lazy" alt="Garry 原帖引用的 Capy Issues 界面截图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2117410016730964358" target="_blank" class="vitem-link">查看 Garry 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Yang｜好模型仍会被操作环境卡住</div>
+    <div class="vitem-desc">Peter 以自己修改文章为例，称 Gemini 的建议更合适，却需要手工粘贴到另一个能操作浏览器的工具里。他指出的是一次具体体验中的模型与执行环境脱节。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/petergyang/status/2117333424403042330" target="_blank" class="vitem-link">查看 Peter 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜关注网页里的结构化工具</div>
+    <div class="vitem-desc">Vercel CEO 转发 wterm 支持 WebMCP 的演示并表达看好。被引用的发布帖称，终端可选择暴露读取、输入和按键等工具，且支持只读模式；这不等于所有浏览器已原生支持。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2117419661654720671" target="_blank" class="vitem-link">查看 Guillermo 原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>并行开发、服务目录与本地测试</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/max-sixty/worktrunk" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/max-sixty.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">max-sixty</span><span class="gh-sep">/</span><span class="gh-name">worktrunk</span>
+      </div>
+      <span class="gh-stars">⭐ 10.5k</span>
+    </div>
+    <div class="gh-body">面向并行 AI Agent 工作流的 Git worktree 命令行工具，仓库自述提供分支切换、钩子和构建缓存相关能力。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 381</span>
+      <span class="gh-topics"><span class="gh-topic">agents</span><span class="gh-topic">worktrees</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/spotify/portal-ai-plugins" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/spotify.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">spotify</span><span class="gh-sep">/</span><span class="gh-name">portal-ai-plugins</span>
+      </div>
+      <span class="gh-stars">⭐ 3.1k</span>
+    </div>
+    <div class="gh-body">Spotify Portal 的 Agent 插件集合，README 列出服务目录检索、诊断、服务简报及受保护的操作流程。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 239</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/floci-io/floci" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/floci-io.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">floci-io</span><span class="gh-sep">/</span><span class="gh-name">floci</span>
+      </div>
+      <span class="gh-stars">⭐ 28.9k</span>
+    </div>
+    <div class="gh-body">用于本地开发与测试的 AWS 服务模拟器，仓库列出 S3、SQS、EC2 等能力；其上榜不代表已验证所有兼容性。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Java</span>
+      <span class="gh-forks">🍴 3.2k</span>
+      <span class="gh-topics"><span class="gh-topic">aws-emulation</span><span class="gh-topic">testcontainers</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    取 11 月 4 日 GitHub Trending 当时榜单，避开近三期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；项目能力按仓库自述，未独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  OpenAI 的硬件试验说明模型能加快设计迭代，但制造公差和装配仍要由工程师核验；Legora 的法律案例则把保密数据、证据引用与模拟评测连在一起。浏览器结构化工具和专用沙箱让 Agent 更容易执行，也更需要限定权限、记录依据与保留人工验收。<br><strong>今日一问：</strong>在你的工作流里，Agent 的输出从“看起来完成”到“可以交付”，还缺哪一项证据？<br><strong>今天可做：</strong>选一个真实任务，列出 Agent 可调用的工具、可读取的数据、必须留存的结果和最终签字人；用一例失败任务试跑这些边界。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/" target="_blank">OpenAI｜物理工程设计研究</a>
+    <a href="https://grapesjs.com/blog/webmcp-ai-browser-agents" target="_blank">GrapesJS｜WebMCP 插件发布</a>
+    <a href="https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/" target="_blank">Latent Space｜Legora 访谈节目页</a>
+    <a href="https://www.youtube.com/watch?v=bJBEFzlKPoQ" target="_blank">Latent Space｜Legora 原频道视频</a>
+    <a href="https://x.com/amasad/status/2117499074496872882" target="_blank">Amjad Masad｜受控 Agent 环境</a>
+    <a href="https://x.com/garrytan/status/2117410016730964358" target="_blank">Garry Tan｜Capy Captains 使用体验</a>
+    <a href="https://x.com/petergyang/status/2117333424403042330" target="_blank">Peter Yang｜模型与操作环境</a>
+    <a href="https://x.com/rauchg/status/2117419661654720671" target="_blank">Guillermo Rauch｜WebMCP 观点</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜11 月 4 日 Trending</a>
+    <a href="https://github.com/max-sixty/worktrunk" target="_blank">max-sixty/worktrunk</a>
+    <a href="https://github.com/spotify/portal-ai-plugins" target="_blank">spotify/portal-ai-plugins</a>
+    <a href="https://github.com/floci-io/floci" target="_blank">floci-io/floci</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

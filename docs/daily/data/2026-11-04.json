@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "title": "Agent 进入真实工作流，权限、证据与验收决定能走多远",
+  "summary": "OpenAI 展示模型参与硬件设计与仿真，同时承认制造约束仍需人工审查；Legora 访谈揭示法律 Agent 在无法查看客户数据时如何建立评测。GrapesJS 与 Builder 动态聚焦结构化工具和受控执行环境。",
+  "heroLabel": "AI 日报 · 11月4日",
+  "tags": ["工程设计", "法律 Agent", "受控环境", "浏览器工具"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 2, "label": "官方原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点",
+      "title": "模型开始动手，真实场景要求更清楚的边界",
+      "items": [
+        {
+          "title": "工程设计：从 CAD 到可制造仍有距离",
+          "summary": "<strong>OpenAI 把模型带进机械、电路和仿真流程</strong><br>11 月 3 日的研究文章展示 Astra 参与设备外壳、PCB 与软件设计，并与 Mazda 探索车身气动方案。但官方也说明，试制设备在制造公差、装配细节上仍需多轮人工审查；BenchCAD 2.0 分数只是内部任务指标。",
+          "links": [{"label": "阅读 OpenAI 原文 →", "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world/"}]
+        },
+        {
+          "title": "法律工作：看不到客户数据，仍要评测",
+          "summary": "<strong>Legora CTO 谈保密约束下的 Agent 改进</strong><br>法律材料属于律所客户，产品团队不能随意查看实际工作轨迹。Jacob Lauritzen 在 Latent Space 访谈中介绍用模拟任务、律师参与评测及匿名化反馈重现问题；引用准确率的改善是其访谈案例，不代表整体法律工作的成功率。",
+          "links": [{"label": "阅读原节目页 →", "url": "https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/"}]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话",
+      "title": "Legora CTO：保密数据之外，怎样测试法律 Agent",
+      "intro": "Latent Space 11 月 2 日发布对 Legora CTO Jacob Lauritzen 的访谈。以下依据原频道视频、节目页与 follow-builders 逐字稿整理；团队规模、准确率及产品能力为受访者自述。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/bJBEFzlKPoQ",
+      "items": [
+        {"title": "用模拟案件替代真实客户轨迹", "summary": "受访者称，客户文件的保密要求使团队无法直接读取完整使用轨迹；工程师与律师共同构造接近实际工作的评测环境。"},
+        {"title": "把证据链当作产品能力", "summary": "团队持续测试引文准确性。受访者举例称，一次模型更新使某项引用正确率从约 70% 提高到 99%；这是具体问题的经验，不能外推到所有案件。"},
+        {"title": "模型选择服从任务和治理", "summary": "Legora 为不同子任务选择不同模型，同时把搜索、文档编辑和表格审阅组合进律师的工作流。"},
+        {"title": "律师仍负责判断与复核", "summary": "访谈讨论初级岗位和计费方式的变化；受访者没有把法律专业人员的审查视为可以取消的步骤。", "links": [{"label": "观看原视频 →", "url": "https://www.youtube.com/watch?v=bJBEFzlKPoQ"}, {"label": "阅读节目与章节 →", "url": "https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "官方原文",
+      "title": "官方原文：工程与网页编辑的 Agent 接口",
+      "footnote": "已检查 feeds.json 的四条 RSS；截至 11 月 4 日上午未见可核验的新文章。此处选用 11 月 3 日发布的官方原文，不把旧 RSS 条目冒充今日更新。",
+      "items": [
+        {"title": "OpenAI｜模型进入物理工程设计", "summary": "文章介绍 CAD、PCB、仿真与制造图纸的试验性工作。两名成员在不到一周内完成测试设备设计，但可制造性仍需人工反复修订；与 Mazda 的合作仍处探索阶段。", "source": "OpenAI", "publishedAt": "2026-11-03", "links": [{"label": "阅读研究原文 →", "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world/"}]},
+        {"title": "GrapesJS｜用 WebMCP 暴露编辑器工具", "summary": "GrapesJS 发布开源插件，让兼容的浏览器 Agent 以结构化工具检查和修改组件、样式及页面。官方强调 WebMCP 仍是实验性能力，浏览器支持有限，工具权限可由接入方筛选。", "source": "GrapesJS", "publishedAt": "2026-11-03", "links": [{"label": "阅读发布原文 →", "url": "https://grapesjs.com/blog/webmcp-ai-browser-agents"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态",
+      "title": "让 Agent 有工具，也要给它权限边界",
+      "footnote": "来自 follow-builders 中央 feed（11 月 3 日 06:27 UTC 更新）；四条原帖经 fxtwitter 核对。配图来自 Amjad 与 Garry 的原帖或其引用帖，观点与增长数字按发帖者自述。",
+      "items": [
+        {"title": "Amjad Masad｜任务级权限与组织控制", "summary": "Replit CEO 主张把 Agent 放在组织控制的专用环境，只授予当前任务所需的资源。原帖配图把沙箱、凭据代理、审批与审计放在 Agent 控制范围之外；这是一种架构主张。", "links": [{"label": "查看 Amjad 原帖 →", "url": "https://x.com/amasad/status/2117499074496872882"}], "media": [{"src": "assets/2026-11-04/amasad-2117499074496872882-0.jpg", "width": 800, "height": 320, "alt": "Amjad 原帖引用图：受控环境内的 Agent 与独立权限、审批和审计边界"}]},
+        {"title": "Garry Tan｜多线程协作的个人体验", "summary": "Y Combinator CEO 称 Capy Captains 让他修复 issue 的吞吐量一夜提升约五倍，并强调跨 Captain 与子线程协调。五倍是个人自述，未给出独立测量；原帖引用了 Capy 0.7.0 的 Issues 界面。", "links": [{"label": "查看 Garry 原帖 →", "url": "https://x.com/garrytan/status/2117410016730964358"}], "media": [{"src": "assets/2026-11-04/garrytan-2117410016730964358-0.jpg", "width": 800, "height": 419, "alt": "Garry 原帖引用的 Capy Issues 界面截图"}]},
+        {"title": "Peter Yang｜好模型仍会被操作环境卡住", "summary": "Peter 以自己修改文章为例，称 Gemini 的建议更合适，却需要手工粘贴到另一个能操作浏览器的工具里。他指出的是一次具体体验中的模型与执行环境脱节。", "links": [{"label": "查看 Peter 原帖 →", "url": "https://x.com/petergyang/status/2117333424403042330"}]},
+        {"title": "Guillermo Rauch｜关注网页里的结构化工具", "summary": "Vercel CEO 转发 wterm 支持 WebMCP 的演示并表达看好。被引用的发布帖称，终端可选择暴露读取、输入和按键等工具，且支持只读模式；这不等于所有浏览器已原生支持。", "links": [{"label": "查看 Guillermo 原帖 →", "url": "https://x.com/rauchg/status/2117419661654720671"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending",
+      "title": "并行开发、服务目录与本地测试",
+      "footnote": "取 11 月 4 日 GitHub Trending 当时榜单，避开近三期重点项目。星标、分叉、语言和主题为本次 GitHub API 快照；项目能力按仓库自述，未独立测评。",
+      "items": [
+        {"title": "max-sixty/worktrunk", "summary": "面向并行 AI Agent 工作流的 Git worktree 命令行工具，仓库自述提供分支切换、钩子和构建缓存相关能力。", "url": "https://github.com/max-sixty/worktrunk", "owner": "max-sixty", "repoName": "worktrunk", "avatar": "https://github.com/max-sixty.png", "stars": 10533, "forks": 381, "language": "Rust", "topics": ["agents", "worktrees"]},
+        {"title": "spotify/portal-ai-plugins", "summary": "Spotify Portal 的 Agent 插件集合，README 列出服务目录检索、诊断、服务简报及受保护的操作流程。", "url": "https://github.com/spotify/portal-ai-plugins", "owner": "spotify", "repoName": "portal-ai-plugins", "avatar": "https://github.com/spotify.png", "stars": 3060, "forks": 239, "language": "TypeScript", "topics": []},
+        {"title": "floci-io/floci", "summary": "用于本地开发与测试的 AWS 服务模拟器，仓库列出 S3、SQS、EC2 等能力；其上榜不代表已验证所有兼容性。", "url": "https://github.com/floci-io/floci", "owner": "floci-io", "repoName": "floci", "avatar": "https://github.com/floci-io.png", "stars": 28850, "forks": 3208, "language": "Java", "topics": ["aws-emulation", "testcontainers"]}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考",
+      "title": "可操作的 Agent，需要可检验的交接点",
+      "intro": "OpenAI 的硬件试验说明模型能加快设计迭代，但制造公差和装配仍要由工程师核验；Legora 的法律案例则把保密数据、证据引用与模拟评测连在一起。浏览器结构化工具和专用沙箱让 Agent 更容易执行，也更需要限定权限、记录依据与保留人工验收。<br><strong>今日一问：</strong>在你的工作流里，Agent 的输出从“看起来完成”到“可以交付”，还缺哪一项证据？<br><strong>今天可做：</strong>选一个真实任务，列出 Agent 可调用的工具、可读取的数据、必须留存的结果和最终签字人；用一例失败任务试跑这些边界。",
+      "items": [{"title": "今天可做", "summary": "选一个真实任务，列出 Agent 可调用的工具、可读取的数据、必须留存的结果和最终签字人；用一例失败任务试跑这些边界。"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜物理工程设计研究", "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world/"},
+    {"title": "GrapesJS｜WebMCP 插件发布", "url": "https://grapesjs.com/blog/webmcp-ai-browser-agents"},
+    {"title": "Latent Space｜Legora 访谈节目页", "url": "https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/"},
+    {"title": "Latent Space｜Legora 原频道视频", "url": "https://www.youtube.com/watch?v=bJBEFzlKPoQ"},
+    {"title": "Amjad Masad｜受控 Agent 环境", "url": "https://x.com/amasad/status/2117499074496872882"},
+    {"title": "Garry Tan｜Capy Captains 使用体验", "url": "https://x.com/garrytan/status/2117410016730964358"},
+    {"title": "Peter Yang｜模型与操作环境", "url": "https://x.com/petergyang/status/2117333424403042330"},
+    {"title": "Guillermo Rauch｜WebMCP 观点", "url": "https://x.com/rauchg/status/2117419661654720671"},
+    {"title": "GitHub｜11 月 4 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "max-sixty/worktrunk", "url": "https://github.com/max-sixty/worktrunk"},
+    {"title": "spotify/portal-ai-plugins", "url": "https://github.com/spotify/portal-ai-plugins"},
+    {"title": "floci-io/floci", "url": "https://github.com/floci-io/floci"}
+  ]
+}
