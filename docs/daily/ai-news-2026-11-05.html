@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码 Agent 扩张后，验证、安全和权限成为交付主线 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月5日</div>
+  <h1>代码 Agent 扩张后，验证、安全和权限成为交付主线</h1>
+  <div class="subtitle">OpenAI 披露 Linux 内核安全研究的分阶段验证结果，并宣布拟收购 Pierre 强化 Codex 的代码审阅工具。Claude 的组织级连接授权与 Builder 讨论把权限边界带回日常工作；Nebius CTO 访谈提醒基础设施仍受存储、电力与工程执行约束。</div>
+  <div class="dots-row">
+    <span class="tag">安全验证</span>
+    <span class="tag">代码审阅</span>
+    <span class="tag">组织授权</span>
+    <span class="tag">AI 基础设施</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>OpenAI 公布一条自动发现、验证和补丁生成流水线</strong><br>官方称，2026 年 10 月的一次受控研究得到 2,308 个候选发现、动态复现 1,724 个问题，并围绕 948 个不同的本地提权漏洞形成利用证据与候选补丁，API 费用约 121 万美元。数字来自其研究环境，补丁仍须研究人员及维护者审查。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank" class="vitem-link">阅读 OpenAI 研究 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>OpenAI 宣布拟收购 Pierre Computer Company</strong><br>Pierre 的 Trees 与 Diffs 库已用于 Codex 应用中的文件导航和差异审阅。OpenAI 计划在交易完成后继续拓展代码存储和审阅工作流；交易仍受常规交割条件及监管批准约束。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/openai-to-acquire-pierre/" target="_blank" class="vitem-link">阅读收购公告 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Nebius CTO：AI 云的瓶颈不只是 GPU</h2>
+  <div class="text-body">Unsupervised Learning 于 11 月 2 日发布对 Nebius CTO Danila Shtan 的访谈。以下依据原频道视频与 follow-builders 逐字稿整理；客户比例和市场判断均为受访者自述。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/qJkcjURcAe8" title="Nebius CTO：AI 云的瓶颈不只是 GPU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">存储吞吐会与算力一起成为约束</div><div class="vitem-desc">Shtan 回顾，团队早期低估了训练负载对共享存储吞吐和延迟的要求；提供 AI 云服务还需处理虚拟化、网络和机架协同。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">开放模型推理仍有优化空间</div><div class="vitem-desc">他称约 95% 的 Nebius 客户运行的是修改、微调或压缩过的开放模型，而非直接使用原版。该比例只反映其客户群，不代表整个市场。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">预填充与解码分离取决于负载</div><div class="vitem-desc">他认为相关架构讨论很多，实际部署要看客户流量、机架互联与成本，不能当作对所有推理任务都有效的固定答案。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">落地还受电力与项目执行限制</div><div class="vitem-desc">访谈提到变压器交付周期、数据中心建设和复杂基础设施项目管理；硬件供给之外，执行能力也影响扩张速度。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=qJkcjURcAe8" target="_blank" class="vitem-link">观看原频道视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">官方原文</div>
+  <h2>官方原文：审阅、补丁与组织连接</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜Linux 内核安全流水线研究</div>
+  <div class="vitem-desc">研究流程依次筛选审计目标、静态发现、隔离环境动态复现、测试可利用性和生成补丁，最后由人类安全研究员复核。文中 948 指去重后的本地提权漏洞，不能等同于已被内核维护者接受的补丁数。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank" class="vitem-link">阅读研究原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">OpenAI｜拟收购 Pierre 扩展 Codex 工具</div>
+  <div class="vitem-desc">官方表示 Pierre 的开源项目将继续开源，Code Storage 客户在交易完成后可继续使用服务。收购尚未交割，产品整合是未来计划。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/openai-to-acquire-pierre/" target="_blank" class="vitem-link">阅读公告原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Claude｜组织级连接授权说明</div>
+  <div class="vitem-desc">Team 和 Enterprise 管理员可为连接器配置受管授权，成员首次登录时继承组织授予的访问。文档区分已普遍可用的 IdP 方式和仍在测试的 Claude 签发方式；访问范围仍受角色、连接服务和令牌管理约束。</div>
+  <div class="vitem-actions">
+    <a href="https://support.claude.com/en/articles/15537633-auto-connect-your-organization-s-apps-to-claude" target="_blank" class="vitem-link">阅读官方说明 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 的四条 RSS；截至 11 月 5 日上午未见当天新条目。下列官方信息按原文发布日期与更新状态标注，不把旧 RSS 条目冒充今日新闻。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>从自动批准到持续审阅，控制点向系统移动</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Boris Cherny｜连接器由组织预先授权</div>
+    <div class="vitem-desc">Anthropic 的 Boris Cherny 称，Team 和 Enterprise 管理员可预设公司插件，成员首次使用时自动连接。官方帮助文档进一步说明角色权限、身份来源和撤销方式，自动连接并不意味着无范围限制。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/bcherny/status/2117693181651542387" target="_blank" class="vitem-link">查看 Boris 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜每次提交进入安全审阅</div>
+    <div class="vitem-desc">Vercel CEO 推介其安全 Agent，称已在内部自动审阅代码。Vercel 官方产品说明写明 Security Review 在启用后扫描连接仓库的每次推送，修复仍需用户许可；效果评价是发帖者自述。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-05/rauchg-2117734833824948373-0.jpg" width="800" height="450" loading="lazy" alt="Guillermo 原帖展示的 Vercel 团队漏洞列表界面">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2117734833824948373" target="_blank" class="vitem-link">查看 Guillermo 原帖 →</a>
+    <a href="https://vercel.com/blog/vercel-security-review" target="_blank" class="vitem-link">阅读 Vercel 产品原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Cat Wu｜回看 Claude Code 权限变化</div>
+    <div class="vitem-desc">离开 Anthropic 的 Cat Wu 回忆，Claude Code 早期用户逐项批准权限，后来越来越多工作交由自动批准处理，并能承担大型迁移。她描述的是产品与使用方式的变化，并非对所有任务安全性的证明。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/_catwu/status/2117731934340337676" target="_blank" class="vitem-link">查看 Cat 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Sam Altman｜强调人类保留控制权</div>
+    <div class="vitem-desc">OpenAI CEO 在原帖中主张，人不应把未来控制权交给超级智能，并认为这一要求应约束 AI 进展。这是其价值立场，不是已经实现的技术保证。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/sama/status/2117794005165748448" target="_blank" class="vitem-link">查看 Sam 原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>语义上下文、审阅工具与工程技能</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/NVIDIA/auto-ontology" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/NVIDIA.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">NVIDIA</span><span class="gh-sep">/</span><span class="gh-name">auto-ontology</span>
+      </div>
+      <span class="gh-stars">⭐ 5.2k</span>
+    </div>
+    <div class="gh-body">从企业元数据构建语义与图谱上下文，项目 README 提供 MCP、CLI 和 API 接口，目标是让 Agent 查询有可追溯定义。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 409</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/The-PR-Agent/pr-agent" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/The-PR-Agent.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">The-PR-Agent</span><span class="gh-sep">/</span><span class="gh-name">pr-agent</span>
+      </div>
+      <span class="gh-stars">⭐ 14.8k</span>
+    </div>
+    <div class="gh-body">开源 PR 审阅工具，仓库介绍用 AI 辅助代码评审、描述和改进建议；实际接入仍需按仓库说明配置。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 2.1k</span>
+      <span class="gh-topics"><span class="gh-topic">code-review</span><span class="gh-topic">pull-request</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/mattpocock/skills" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/mattpocock.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">mattpocock</span><span class="gh-sep">/</span><span class="gh-name">skills</span>
+      </div>
+      <span class="gh-stars">⭐ 313.4k</span>
+    </div>
+    <div class="gh-body">Matt Pocock 公开的工程 Agent skills 集合，README 侧重把实际开发经验写成可复用工作流。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Shell</span>
+      <span class="gh-forks">🍴 26.3k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    取 11 月 5 日 GitHub Trending 当时榜单，避开近三期重点项目；星标、分叉及语言为本次 GitHub API 快照。功能按仓库 README 描述，未独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  OpenAI 的安全研究把候选发现、复现、可利用性和补丁分开报告，说明每一步需要不同证据。代码审阅工具和组织级连接授权扩大了 Agent 的操作范围，也让权限范围、审计记录与最终复核更重要。Nebius 的访谈提醒，软件层面的自动化最终仍要落在存储、电力和工程执行之上。<br><strong>今日一问：</strong>你的 Agent 完成任务时，除了结果，还会留下什么可独立复核的证据？<br><strong>今天可做：</strong>为一类高风险任务定义三道交接：最小权限、可复现的验证记录、明确的人工签字；再用一例失败结果检查这些交接是否真的起作用。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank">OpenAI｜Linux 内核安全研究</a>
+    <a href="https://openai.com/index/openai-to-acquire-pierre/" target="_blank">OpenAI｜拟收购 Pierre 公告</a>
+    <a href="https://support.claude.com/en/articles/15537633-auto-connect-your-organization-s-apps-to-claude" target="_blank">Claude｜组织级连接授权</a>
+    <a href="https://vercel.com/blog/vercel-security-review" target="_blank">Vercel｜Security Review 原文</a>
+    <a href="https://www.youtube.com/watch?v=qJkcjURcAe8" target="_blank">Unsupervised Learning｜Nebius CTO 原频道视频</a>
+    <a href="https://x.com/bcherny/status/2117693181651542387" target="_blank">Boris Cherny｜组织连接原帖</a>
+    <a href="https://x.com/rauchg/status/2117734833824948373" target="_blank">Guillermo Rauch｜安全审阅原帖</a>
+    <a href="https://x.com/_catwu/status/2117731934340337676" target="_blank">Cat Wu｜Claude Code 回顾原帖</a>
+    <a href="https://x.com/sama/status/2117794005165748448" target="_blank">Sam Altman｜人类控制原帖</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜11 月 5 日 Trending</a>
+    <a href="https://github.com/NVIDIA/auto-ontology" target="_blank">NVIDIA/auto-ontology</a>
+    <a href="https://github.com/The-PR-Agent/pr-agent" target="_blank">The-PR-Agent/pr-agent</a>
+    <a href="https://github.com/mattpocock/skills" target="_blank">mattpocock/skills</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

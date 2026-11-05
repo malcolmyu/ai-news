@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "title": "代码 Agent 扩张后，验证、安全和权限成为交付主线",
+  "summary": "OpenAI 披露 Linux 内核安全研究的分阶段验证结果，并宣布拟收购 Pierre 强化 Codex 的代码审阅工具。Claude 的组织级连接授权与 Builder 讨论把权限边界带回日常工作；Nebius CTO 访谈提醒基础设施仍受存储、电力与工程执行约束。",
+  "heroLabel": "AI 日报 · 11月5日",
+  "tags": ["安全验证", "代码审阅", "组织授权", "AI 基础设施"],
+  "stats": [
+    {"num": 4, "label": "Builder 动态"},
+    {"num": 3, "label": "今日上榜项目"},
+    {"num": 3, "label": "官方原文"},
+    {"num": 1, "label": "公开视频"}
+  ],
+  "sections": [
+    {
+      "kind": "analysis", "layout": "highlights", "label": "今日要点",
+      "title": "安全发现能规模化，交付仍需证据与复核",
+      "items": [
+        {
+          "title": "Linux 安全研究：候选、复现、利用分开计算",
+          "summary": "<strong>OpenAI 公布一条自动发现、验证和补丁生成流水线</strong><br>官方称，2026 年 10 月的一次受控研究得到 2,308 个候选发现、动态复现 1,724 个问题，并围绕 948 个不同的本地提权漏洞形成利用证据与候选补丁，API 费用约 121 万美元。数字来自其研究环境，补丁仍须研究人员及维护者审查。",
+          "links": [{"label": "阅读 OpenAI 研究 →", "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/"}]
+        },
+        {
+          "title": "Codex 审阅工具：拟收购 Pierre",
+          "summary": "<strong>OpenAI 宣布拟收购 Pierre Computer Company</strong><br>Pierre 的 Trees 与 Diffs 库已用于 Codex 应用中的文件导航和差异审阅。OpenAI 计划在交易完成后继续拓展代码存储和审阅工作流；交易仍受常规交割条件及监管批准约束。",
+          "links": [{"label": "阅读收购公告 →", "url": "https://openai.com/index/openai-to-acquire-pierre/"}]
+        }
+      ]
+    },
+    {
+      "kind": "podcasts", "layout": "embed", "label": "深度对话",
+      "title": "Nebius CTO：AI 云的瓶颈不只是 GPU",
+      "intro": "Unsupervised Learning 于 11 月 2 日发布对 Nebius CTO Danila Shtan 的访谈。以下依据原频道视频与 follow-builders 逐字稿整理；客户比例和市场判断均为受访者自述。",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/qJkcjURcAe8",
+      "items": [
+        {"title": "存储吞吐会与算力一起成为约束", "summary": "Shtan 回顾，团队早期低估了训练负载对共享存储吞吐和延迟的要求；提供 AI 云服务还需处理虚拟化、网络和机架协同。"},
+        {"title": "开放模型推理仍有优化空间", "summary": "他称约 95% 的 Nebius 客户运行的是修改、微调或压缩过的开放模型，而非直接使用原版。该比例只反映其客户群，不代表整个市场。"},
+        {"title": "预填充与解码分离取决于负载", "summary": "他认为相关架构讨论很多，实际部署要看客户流量、机架互联与成本，不能当作对所有推理任务都有效的固定答案。"},
+        {"title": "落地还受电力与项目执行限制", "summary": "访谈提到变压器交付周期、数据中心建设和复杂基础设施项目管理；硬件供给之外，执行能力也影响扩张速度。", "links": [{"label": "观看原频道视频 →", "url": "https://www.youtube.com/watch?v=qJkcjURcAe8"}]}
+      ]
+    },
+    {
+      "kind": "news", "layout": "rss", "label": "官方原文",
+      "title": "官方原文：审阅、补丁与组织连接",
+      "footnote": "已检查 feeds.json 的四条 RSS；截至 11 月 5 日上午未见当天新条目。下列官方信息按原文发布日期与更新状态标注，不把旧 RSS 条目冒充今日新闻。",
+      "items": [
+        {"title": "OpenAI｜Linux 内核安全流水线研究", "summary": "研究流程依次筛选审计目标、静态发现、隔离环境动态复现、测试可利用性和生成补丁，最后由人类安全研究员复核。文中 948 指去重后的本地提权漏洞，不能等同于已被内核维护者接受的补丁数。", "source": "OpenAI", "publishedAt": "2026-11-04", "links": [{"label": "阅读研究原文 →", "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/"}]},
+        {"title": "OpenAI｜拟收购 Pierre 扩展 Codex 工具", "summary": "官方表示 Pierre 的开源项目将继续开源，Code Storage 客户在交易完成后可继续使用服务。收购尚未交割，产品整合是未来计划。", "source": "OpenAI", "publishedAt": "2026-11-04", "links": [{"label": "阅读公告原文 →", "url": "https://openai.com/index/openai-to-acquire-pierre/"}]},
+        {"title": "Claude｜组织级连接授权说明", "summary": "Team 和 Enterprise 管理员可为连接器配置受管授权，成员首次登录时继承组织授予的访问。文档区分已普遍可用的 IdP 方式和仍在测试的 Claude 签发方式；访问范围仍受角色、连接服务和令牌管理约束。", "source": "Claude 帮助中心", "publishedAt": "2026-11-05 更新", "links": [{"label": "阅读官方说明 →", "url": "https://support.claude.com/en/articles/15537633-auto-connect-your-organization-s-apps-to-claude"}]}
+      ]
+    },
+    {
+      "kind": "builders", "layout": "vitem", "label": "Builder 动态",
+      "title": "从自动批准到持续审阅，控制点向系统移动",
+      "footnote": "来自 follow-builders 中央 feed（11 月 4 日 06:28 UTC 更新）；四条原帖经 fxtwitter 核对。图片来自 Guillermo 原帖，产品效果与个人体验按发帖者自述。",
+      "items": [
+        {"title": "Boris Cherny｜连接器由组织预先授权", "summary": "Anthropic 的 Boris Cherny 称，Team 和 Enterprise 管理员可预设公司插件，成员首次使用时自动连接。官方帮助文档进一步说明角色权限、身份来源和撤销方式，自动连接并不意味着无范围限制。", "links": [{"label": "查看 Boris 原帖 →", "url": "https://x.com/bcherny/status/2117693181651542387"}]},
+        {"title": "Guillermo Rauch｜每次提交进入安全审阅", "summary": "Vercel CEO 推介其安全 Agent，称已在内部自动审阅代码。Vercel 官方产品说明写明 Security Review 在启用后扫描连接仓库的每次推送，修复仍需用户许可；效果评价是发帖者自述。", "links": [{"label": "查看 Guillermo 原帖 →", "url": "https://x.com/rauchg/status/2117734833824948373"}, {"label": "阅读 Vercel 产品原文 →", "url": "https://vercel.com/blog/vercel-security-review"}], "media": [{"src": "assets/2026-11-05/rauchg-2117734833824948373-0.jpg", "width": 800, "height": 450, "alt": "Guillermo 原帖展示的 Vercel 团队漏洞列表界面"}]},
+        {"title": "Cat Wu｜回看 Claude Code 权限变化", "summary": "离开 Anthropic 的 Cat Wu 回忆，Claude Code 早期用户逐项批准权限，后来越来越多工作交由自动批准处理，并能承担大型迁移。她描述的是产品与使用方式的变化，并非对所有任务安全性的证明。", "links": [{"label": "查看 Cat 原帖 →", "url": "https://x.com/_catwu/status/2117731934340337676"}]},
+        {"title": "Sam Altman｜强调人类保留控制权", "summary": "OpenAI CEO 在原帖中主张，人不应把未来控制权交给超级智能，并认为这一要求应约束 AI 进展。这是其价值立场，不是已经实现的技术保证。", "links": [{"label": "查看 Sam 原帖 →", "url": "https://x.com/sama/status/2117794005165748448"}]}
+      ]
+    },
+    {
+      "kind": "github", "layout": "card", "label": "GitHub Trending",
+      "title": "语义上下文、审阅工具与工程技能",
+      "footnote": "取 11 月 5 日 GitHub Trending 当时榜单，避开近三期重点项目；星标、分叉及语言为本次 GitHub API 快照。功能按仓库 README 描述，未独立测评。",
+      "items": [
+        {"title": "NVIDIA/auto-ontology", "summary": "从企业元数据构建语义与图谱上下文，项目 README 提供 MCP、CLI 和 API 接口，目标是让 Agent 查询有可追溯定义。", "url": "https://github.com/NVIDIA/auto-ontology", "owner": "NVIDIA", "repoName": "auto-ontology", "avatar": "https://github.com/NVIDIA.png", "stars": 5169, "forks": 409, "language": "Python", "topics": []},
+        {"title": "The-PR-Agent/pr-agent", "summary": "开源 PR 审阅工具，仓库介绍用 AI 辅助代码评审、描述和改进建议；实际接入仍需按仓库说明配置。", "url": "https://github.com/The-PR-Agent/pr-agent", "owner": "The-PR-Agent", "repoName": "pr-agent", "avatar": "https://github.com/The-PR-Agent.png", "stars": 14790, "forks": 2096, "language": "Python", "topics": ["code-review", "pull-request"]},
+        {"title": "mattpocock/skills", "summary": "Matt Pocock 公开的工程 Agent skills 集合，README 侧重把实际开发经验写成可复用工作流。", "url": "https://github.com/mattpocock/skills", "owner": "mattpocock", "repoName": "skills", "avatar": "https://github.com/mattpocock.png", "stars": 313388, "forks": 26290, "language": "Shell", "topics": []}
+      ]
+    },
+    {
+      "kind": "analysis", "layout": "prose", "label": "今日思考",
+      "title": "把“自动完成”拆成能交接的证据",
+      "intro": "OpenAI 的安全研究把候选发现、复现、可利用性和补丁分开报告，说明每一步需要不同证据。代码审阅工具和组织级连接授权扩大了 Agent 的操作范围，也让权限范围、审计记录与最终复核更重要。Nebius 的访谈提醒，软件层面的自动化最终仍要落在存储、电力和工程执行之上。<br><strong>今日一问：</strong>你的 Agent 完成任务时，除了结果，还会留下什么可独立复核的证据？<br><strong>今天可做：</strong>为一类高风险任务定义三道交接：最小权限、可复现的验证记录、明确的人工签字；再用一例失败结果检查这些交接是否真的起作用。",
+      "items": [{"title": "今天可做", "summary": "为一类高风险任务定义最小权限、可复现的验证记录和明确的人工签字，并用失败案例试跑。"}]
+    }
+  ],
+  "sources": [
+    {"title": "OpenAI｜Linux 内核安全研究", "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/"},
+    {"title": "OpenAI｜拟收购 Pierre 公告", "url": "https://openai.com/index/openai-to-acquire-pierre/"},
+    {"title": "Claude｜组织级连接授权", "url": "https://support.claude.com/en/articles/15537633-auto-connect-your-organization-s-apps-to-claude"},
+    {"title": "Vercel｜Security Review 原文", "url": "https://vercel.com/blog/vercel-security-review"},
+    {"title": "Unsupervised Learning｜Nebius CTO 原频道视频", "url": "https://www.youtube.com/watch?v=qJkcjURcAe8"},
+    {"title": "Boris Cherny｜组织连接原帖", "url": "https://x.com/bcherny/status/2117693181651542387"},
+    {"title": "Guillermo Rauch｜安全审阅原帖", "url": "https://x.com/rauchg/status/2117734833824948373"},
+    {"title": "Cat Wu｜Claude Code 回顾原帖", "url": "https://x.com/_catwu/status/2117731934340337676"},
+    {"title": "Sam Altman｜人类控制原帖", "url": "https://x.com/sama/status/2117794005165748448"},
+    {"title": "GitHub｜11 月 5 日 Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "NVIDIA/auto-ontology", "url": "https://github.com/NVIDIA/auto-ontology"},
+    {"title": "The-PR-Agent/pr-agent", "url": "https://github.com/The-PR-Agent/pr-agent"},
+    {"title": "mattpocock/skills", "url": "https://github.com/mattpocock/skills"}
+  ]
+}
