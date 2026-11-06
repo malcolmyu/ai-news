@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安全 Agent 更强，模型与人的边界也要更清楚 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月6日</div>
+  <h1>安全 Agent 更强，模型与人的边界也要更清楚</h1>
+  <div class="subtitle">OpenAI 发布 GPT‑6 Cyber，并给出能力与授权范围测试；Thinking Machines 推出 Inkling 2 Small，承诺完成外部安全测试后再开放权重。Builder 讨论从企业落地延伸到工具如何保留人的判断，Every 访谈也把“哪些任务该交给 AI”摆上桌面。</div>
+  <div class="dots-row">
+    <span class="tag">安全 Agent</span>
+    <span class="tag">模型发布</span>
+    <span class="tag">企业应用</span>
+    <span class="tag">人机协作</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>OpenAI 于 11 月 5 日发布专用于获授权安全研究的 GPT‑6 Cyber。</strong><br>官方报告 ExploitGym 成绩为 48.5%，上一代 GPT‑5.6 Cyber 为 32.1%；在其越界诱饵测试中，不带部署提示时有 99.93% 的测试未攻击范围外服务。均为厂商设定的评测，不代表开放环境下的保证；初期访问限定获批的 Daybreak Red 用户。</p>
+      <div style="margin-top:12px;">
+        <a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank" class="vitem-link">阅读 OpenAI 原文 →</a>
+        <a href="https://deploymentsafety.openai.com/gpt-6-cyber" target="_blank" class="vitem-link">查看系统卡 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Thinking Machines 发布 Inkling 2 Small。</strong><br>官方称该 MoE 模型总参数 5940 亿、激活参数 170 亿，支持图像输入与可变推理强度。目前先在 Tinker 提供闭源使用；完整权重计划在外部安全测试与红队工作完成后于下周以 Apache 2.0 许可发布，尚未兑现。</p>
+      <div style="margin-top:12px;">
+        <a href="https://thinkingmachines.ai/news/inkling-2-small/" target="_blank" class="vitem-link">阅读模型发布原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Kevin Roose：资料核查与判断，哪些交给 AI？</h2>
+  <div class="text-body">Every 于 11 月 4 日发布对科技记者 Kevin Roose 的访谈。以下依据原频道视频与 follow-builders 逐字稿整理；受访者对研究方法和工具效果的描述属于个人经验。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/IOp5N4GxE6E" title="Kevin Roose：资料核查与判断，哪些交给 AI？" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">先留下可追溯的资料库</div><div class="vitem-desc">Roose 说写作期间用 NotebookLM 检索大量采访材料、寻找线索与受访者；工具帮助定位证据，书稿仍由他本人撰写。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">让多个 Agent 检查草稿</div><div class="vitem-desc">他描述用 Claude Code 中不同视角的 Agent 审看章节、指出事实和叙事问题；这是一种辅助核查流程，并不替代作者对引用的最终复核。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">区分“举重”与“叉车”任务</div><div class="vitem-desc">Roose 将通过努力本身获得成长的事比作举重，将只需搬运结果的事比作叉车任务：前者值得亲自做，后者适合借助工具。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">公开讨论安全测试</div><div class="vitem-desc">他在访谈中主张模型发布前应有更严格的安全测试。这是受访者的政策观点，而非现行通用规则。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=IOp5N4GxE6E" target="_blank" class="vitem-link">观看 Every 原频道视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">官方原文</div>
+  <h2>官方原文：安全模型与新一代小模型</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">OpenAI｜GPT‑6 Cyber 发布及系统卡</div>
+  <div class="vitem-desc">OpenAI 将模型定位为获授权的漏洞研究与修复工具，并在系统卡说明身份验证、组织安全要求与访问限制。文章中的 Firefox、Linux 案例是其研究项目结果，不应外推为任意代码库的成功率。</div>
+  <div class="vitem-actions">
+    <a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank" class="vitem-link">阅读发布原文 →</a>
+    <a href="https://deploymentsafety.openai.com/gpt-6-cyber" target="_blank" class="vitem-link">阅读系统卡 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Thinking Machines｜Inkling 2 Small</div>
+  <div class="vitem-desc">官方披露模型架构、Tinker 初期可用范围和多项代码、视觉评测；表格中的结果为其选定设置下的报告值。开放权重是未来计划，仍以外部测试完成为前提。</div>
+  <div class="vitem-actions">
+    <a href="https://thinkingmachines.ai/news/inkling-2-small/" target="_blank" class="vitem-link">阅读发布原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 四条 RSS，截至 11 月 6 日上午未见当天新条目；同时查看 OpenAI、Anthropic、Google 官方发布页。以下按原文发布日期呈现，不将旧 RSS 条目冒充今日更新。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>企业效率、产品控制与人的判断</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜Replit 与日本金融机构合作</div>
+    <div class="vitem-desc">Replit CEO 宣布与三井住友金融租赁合作，称该机构曾把一项原本需六人六个月的开发工作缩至一人一周。Replit 的官方博文也引述客户主管的同一案例；数字属于单个项目的客户自述，不能当作普遍效率倍数。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2118180254300688857" target="_blank" class="vitem-link">查看 Amjad 原帖 →</a>
+    <a href="https://replit.com/blog/rise-of-self-driving-company" target="_blank" class="vitem-link">阅读 Replit 原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Cat Wu｜加入 OpenAI 核心产品团队</div>
+    <div class="vitem-desc">Cat Wu 在原帖宣布加入 OpenAI，负责核心产品的产品管理。她提到希望构建能够协助个人与团队、同时让用户保有控制权的 Agent；这是新岗位的产品方向陈述。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/_catwu/status/2118137612577968402" target="_blank" class="vitem-link">查看 Cat 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Ryo Lu｜工具应给人更多思考空间</div>
+    <div class="vitem-desc">Ryo Lu 回顾在上海 AI Engineer 活动上的发言：当制作软件变得容易，工具仍应帮助人形成自己的答案，而非跳过思考过程。完整演讲尚未由原帖提供，本文只转述他的公开摘要。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/ryolu_/status/2118207967728451760" target="_blank" class="vitem-link">查看 Ryo 原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Garry Tan｜继续使用 GStack 审阅技能</div>
+    <div class="vitem-desc">Garry Tan 称 GStack 的 /review 技能仍有助于防止错误。这是作者对自家工具的使用反馈，仓库 README 列出其工作流，实际效果需要按项目验证。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/garrytan/status/2118221083233206736" target="_blank" class="vitem-link">查看 Garry 原帖 →</a>
+    <a href="https://github.com/garrytan/gstack" target="_blank" class="vitem-link">查看 GStack 仓库 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Swyx｜关注小模型蒸馏与成本</div>
+    <div class="vitem-desc">Swyx 对一项代码模型速度、成本和评测对比表达惊讶，并看好 Inkling 底座的后续蒸馏应用。帖中的“快 3 倍、便宜 5 倍”是他对另一产品的评论，不应误读为 Inkling 2 Small 官方指标。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/swyx/status/2118208851506036989" target="_blank" class="vitem-link">查看 Swyx 原帖 →</a>
+    <a href="https://thinkingmachines.ai/news/inkling-2-small/" target="_blank" class="vitem-link">阅读 Inkling 官方原文 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>代码审阅、网页提取与产品技能</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/garrytan/gstack" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/garrytan.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">garrytan</span><span class="gh-sep">/</span><span class="gh-name">gstack</span>
+      </div>
+      <span class="gh-stars">⭐ 140k</span>
+    </div>
+    <div class="gh-body">Garry Tan 的 Claude Code 工作流合集，仓库描述包含审阅、设计、发布等角色化工具；今日 Builder 帖提及其中的 /review。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 20.7k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/D4Vinci/Scrapling" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/D4Vinci.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">D4Vinci</span><span class="gh-sep">/</span><span class="gh-name">Scrapling</span>
+      </div>
+      <span class="gh-stars">⭐ 98k</span>
+    </div>
+    <div class="gh-body">Python 网页抓取与数据提取框架，项目描述覆盖单次请求到较大规模爬取，并提供与浏览器自动化相关的能力。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 10.3k</span>
+      <span class="gh-topics"><span class="gh-topic">web-scraping</span><span class="gh-topic">mcp</span></span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/google/skills" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/google.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">google</span><span class="gh-sep">/</span><span class="gh-name">skills</span>
+      </div>
+      <span class="gh-stars">⭐ 22.4k</span>
+    </div>
+    <div class="gh-body">Google 产品与技术相关的 Agent Skills 集合；具体适用范围和安装方式以仓库说明为准。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 1.9k</span>
+      <span class="gh-topics"><span class="gh-topic">google</span><span class="gh-topic">skills</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    取 11 月 6 日 GitHub Trending 当时榜单，避开近三期已重点介绍的项目；星标、分叉及语言是本次 GitHub API 快照。功能依据仓库描述，未独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  GPT‑6 Cyber 的发布把“能发现问题”与“能否守住授权范围”并列评估；Inkling 2 Small 则把开放权重安排在外部测试之后。企业案例展示了更快的开发节奏，而 Kevin Roose 的访谈和 Ryo Lu 的发言提醒，哪些判断必须由人形成，仍要在任务开始前说清。<br><strong>今日一问：</strong>你的 Agent 知道哪些系统可以碰、哪些动作必须停下来请人决定吗？<br><strong>今天可做：</strong>挑一条真实工作流，分别列出允许访问的资源、必须人工批准的动作，以及交付时能复核的证据；再用越界情形试跑一次。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank">OpenAI｜GPT‑6 Cyber 发布</a>
+    <a href="https://deploymentsafety.openai.com/gpt-6-cyber" target="_blank">OpenAI｜GPT‑6 Cyber 系统卡</a>
+    <a href="https://thinkingmachines.ai/news/inkling-2-small/" target="_blank">Thinking Machines｜Inkling 2 Small</a>
+    <a href="https://www.youtube.com/watch?v=IOp5N4GxE6E" target="_blank">Every｜Kevin Roose 访谈视频</a>
+    <a href="https://replit.com/blog/rise-of-self-driving-company" target="_blank">Replit｜企业 Agent 官方原文</a>
+    <a href="https://x.com/amasad/status/2118180254300688857" target="_blank">Amjad Masad｜合作原帖</a>
+    <a href="https://x.com/_catwu/status/2118137612577968402" target="_blank">Cat Wu｜入职原帖</a>
+    <a href="https://x.com/ryolu_/status/2118207967728451760" target="_blank">Ryo Lu｜上海活动原帖</a>
+    <a href="https://x.com/garrytan/status/2118221083233206736" target="_blank">Garry Tan｜审阅技能原帖</a>
+    <a href="https://x.com/swyx/status/2118208851506036989" target="_blank">Swyx｜模型评论原帖</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜11 月 6 日 Trending</a>
+    <a href="https://github.com/garrytan/gstack" target="_blank">garrytan/gstack</a>
+    <a href="https://github.com/D4Vinci/Scrapling" target="_blank">D4Vinci/Scrapling</a>
+    <a href="https://github.com/google/skills" target="_blank">google/skills</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
