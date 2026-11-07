@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>让 Agent 真正可用：可靠决策、授权上下文与隔离执行 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月7日</div>
+  <h1>让 Agent 真正可用：可靠决策、授权上下文与隔离执行</h1>
+  <div class="subtitle">Jev 创始人谈决策模型的可靠性，Box 与 NVIDIA 宣布按权限检索企业内容，Replit 详解微型虚拟机沙箱。Builder 讨论形式化证明与长期运行的 Agent；今日上榜项目覆盖安全审计和企业上下文。</div>
+  <div class="dots-row">
+    <span class="tag">Agent 可靠性</span>
+    <span class="tag">企业上下文</span>
+    <span class="tag">沙箱安全</span>
+    <span class="tag">工程实践</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">今日上榜项目</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">官方原文</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p><strong>Box 与 NVIDIA 于 11 月 5 日宣布 Context Retrieval。</strong><br>方案结合关键词和语义检索，并按请求者权限返回企业文件中的相关片段。Box 称该检索引擎计划于明年初向 Enterprise Advanced 客户正式提供；其宣传的检索与成本改进是预期值，尚非普遍实测结果。</p>
+      <div style="margin-top:12px;">
+        <a href="https://blog.box.com/box-partners-nvidia-deliver-trusted-content-layer-enterprise-ai" target="_blank" class="vitem-link">阅读 Box 公告 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p><strong>Replit 于 11 月 4 日详解新版沙箱架构。</strong><br>每个微型虚拟机有独立 Linux 内核，虚拟化层隔开客户负载和宿主机；网络出口策略在客户虚拟机之外执行。Replit 自述，在审计的 6,211 个 Linux-CNA CVE 中，5,969 个因提前修复或排除受影响代码而避开；这不是所有漏洞的免疫率。</p>
+      <div style="margin-top:12px;">
+        <a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/" target="_blank" class="vitem-link">阅读 Replit 工程原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>Jev 创始人：让模型服务软件的决策环节</h2>
+  <div class="text-body">Unsupervised Learning 于 11 月 5 日发布对 Jev 创始人 Diogo Almeida 的访谈。以下依据原频道视频及 follow-builders 提供的逐字稿整理，观点属于受访者判断。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/ham8dROHCrc" title="Jev 创始人：让模型服务软件的决策环节" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">把输出对象改成软件可消费的决定</div><div class="vitem-desc">Almeida 认为，很多模型调用最终是供软件继续处理，而不是给人阅读；因此应研究能稳定返回小型结构化决定的模型。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">可靠性由应用场景决定</div><div class="vitem-desc">他强调开发者最清楚下游任务需要怎样的稳定性。Jev 仍有局限，团队应清楚说明能力边界，给开发者选择和验证的空间。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">警惕只优化榜单</div><div class="vitem-desc">他批评只追逐基准分数会误导缺少时间自行测试的开发者。模型形态容易复制，真实工作流中的效用和可靠性更难建立。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">重新审视代码 Agent 的成本约束</div><div class="vitem-desc">他认为许多代码 Agent 的交互设计受 KV cache 效率约束，值得探索不同模型与软件架构的组合；这是未来方向，不是已交付功能。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=ham8dROHCrc" target="_blank" class="vitem-link">观看原频道视频 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">官方原文</div>
+  <h2>企业检索与执行隔离的两篇原文</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">Box｜企业内容检索与 NVIDIA 合作</div>
+  <div class="vitem-desc">Box 说明混合检索、按权限返回片段和 OpenShell 安全运行环境的合作方向。Context Retrieval 计划明年初正式提供；Nemotron 3 Ultra 已向指定套餐客户开放。</div>
+  <div class="vitem-actions">
+    <a href="https://blog.box.com/box-partners-nvidia-deliver-trusted-content-layer-enterprise-ai" target="_blank" class="vitem-link">阅读 Box 原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-title">Replit｜新版沙箱从容器走向微型虚拟机</div>
+  <div class="vitem-desc">工程团队介绍 Cloud Hypervisor、独立客体内核、宿主侧出口代理与凭据代理。文中披露的 CVE 覆盖数字来自 Replit 自行审计的指定时间窗与数据集。</div>
+  <div class="vitem-actions">
+    <a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/" target="_blank" class="vitem-link">阅读 Replit 原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    已检查 feeds.json 四条 RSS，截至 11 月 7 日上午未见当天新条目；同时检查 OpenAI、Anthropic、Google 官方发布页。以下按原文发布日期列出，不将旧内容标成今日新发。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>安全证明、长期任务与授权数据</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Thibault Sottiaux｜重新考虑大规模形式化证明</div>
+    <div class="vitem-desc">OpenAI 的 Thibault Sottiaux 认为，在新系统设计中考虑对数千万行代码做形式化证明，已不再荒谬。这是他对工程方向的判断，并非已完成的证明规模。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/thsottiaux/status/2118569441860723112" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜介绍 Replit 沙箱设计</div>
+    <div class="vitem-desc">Replit CEO 援引自家工程文章，强调定制内核规避了审计样本中约 96% 的 CVE。原文精确数字为 5,969 / 6,211，包含及时引入上游修复和排除受影响代码；不能理解为对所有 Linux 零日漏洞的阻断率。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-07/amasad-2118503241390665776-1.jpg" width="800" height="419" loading="lazy" alt="Replit 微型虚拟机为不同工作负载提供独立 Linux 内核的示意图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2118503241390665776" target="_blank" class="vitem-link">查看 Amjad 原帖 →</a>
+    <a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/" target="_blank" class="vitem-link">阅读技术细节 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aaron Levie｜企业 Agent 需要授权上下文</div>
+    <div class="vitem-desc">Box CEO 认为企业 Agent 的成败取决于能否取得关键资料，并介绍与 NVIDIA 合作的检索方案。他提到的“企业数据九成为非结构化”属于其原帖估计；Box 公告给出了产品范围与上线计划。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/levie/status/2118498574497665316" target="_blank" class="vitem-link">查看 Aaron 原帖 →</a>
+    <a href="https://blog.box.com/box-partners-nvidia-deliver-trusted-content-layer-enterprise-ai" target="_blank" class="vitem-link">阅读 Box 公告 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜Agent 的长期任务与调度</div>
+    <div class="vitem-desc">Vercel CEO 认为，跨时间持续替用户完成任务是 Agent 的重要用法，并举夜间整理记忆、日后提醒的例子。他称 Vercel Schedules 可在运行时定义并在沙箱外触发计算；这是其产品观点，具体能力仍应按文档验证。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2118440831355068671" target="_blank" class="vitem-link">查看 Guillermo 原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>可核验的安全审计与企业检索工具</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/cloudflare/security-audit-skill" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/cloudflare.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cloudflare</span><span class="gh-sep">/</span><span class="gh-name">security-audit-skill</span>
+      </div>
+      <span class="gh-stars">⭐ 64.1k</span>
+    </div>
+    <div class="gh-body">Cloudflare 发布的代码 Agent 安全审计 skill，README 将流程分为架构勘察、覆盖记录、候选问题复核及结构化报告；强调对发现项独立验证。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● JavaScript</span>
+      <span class="gh-forks">🍴 4.2k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/pipeshub-ai/pipeshub-ai" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="https://github.com/pipeshub-ai.png" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">pipeshub-ai</span><span class="gh-sep">/</span><span class="gh-name">pipeshub-ai</span>
+      </div>
+      <span class="gh-stars">⭐ 4k</span>
+    </div>
+    <div class="gh-body">开源企业上下文层，README 描述连接多个业务系统、按用户权限过滤检索结果，并提供带出处的回答和 MCP 接口。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 649</span>
+      <span class="gh-topics"><span class="gh-topic">agentic-rag</span><span class="gh-topic">enterprise-search</span></span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    项目取自 11 月 7 日 GitHub Trending（含 Python 分类），并避开近三期已重点介绍的仓库。星标、分叉及语言为本次 GitHub API 快照；功能按 README 描述，未独立测评。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  Jev 访谈把可靠性落实到软件中的微小决策；Box 让检索遵循已有权限；Replit 把执行环境放进独立内核。三者对应的是同一条工作流里的三个问题：决定是否可信、资料是否有权访问、代码是否被限制在许可范围。<br><strong>今日一问：</strong>你的 Agent 在做出决定时，能指出依据、权限和执行边界吗？<br><strong>今天可做：</strong>选一个跨日任务，记录它读取的资料、每一步决定的证据和沙箱允许的网络目标；让一个故意越权的测试任务验证拦截是否生效。
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://blog.box.com/box-partners-nvidia-deliver-trusted-content-layer-enterprise-ai" target="_blank">Box｜Context Retrieval 与 NVIDIA 合作</a>
+    <a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/" target="_blank">Replit Frontier｜新版沙箱引擎</a>
+    <a href="https://www.youtube.com/watch?v=ham8dROHCrc" target="_blank">Unsupervised Learning｜Jev 创始人访谈</a>
+    <a href="https://x.com/thsottiaux/status/2118569441860723112" target="_blank">Thibault Sottiaux｜形式化证明原帖</a>
+    <a href="https://x.com/amasad/status/2118503241390665776" target="_blank">Amjad Masad｜沙箱设计原帖</a>
+    <a href="https://x.com/levie/status/2118498574497665316" target="_blank">Aaron Levie｜企业上下文原帖</a>
+    <a href="https://x.com/rauchg/status/2118440831355068671" target="_blank">Guillermo Rauch｜长期任务原帖</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub｜今日 Trending</a>
+    <a href="https://github.com/cloudflare/security-audit-skill" target="_blank">cloudflare/security-audit-skill</a>
+    <a href="https://github.com/pipeshub-ai/pipeshub-ai" target="_blank">pipeshub-ai/pipeshub-ai</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
