@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码代理的产出条件：工具、额度与可复查的实践 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月9日</div>
+  <h1>代码代理的产出条件：工具、额度与可复查的实践</h1>
+  <div class="subtitle">Karpathy 展示用 Claude Code 快速制作视频站；Aaron Levie 讨论高产出需要领域理解与顺畅的测试部署；Thibault 澄清 Pro 套餐额度。另看 No Priors 对 Agent 交易的公开访谈及 GitHub Trending。</div>
+  <div class="dots-row">
+    <span class="tag">代码代理</span>
+    <span class="tag">工具链</span>
+    <span class="tag">使用额度</span>
+    <span class="tag">公开访谈</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">上榜仓库</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">公开视频</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p>Karpathy 称，他用 Claude Code 在三分钟内制作了 TristanTube，整理约 4.7 万条视频，并加入电视模式。这是原帖自述的制作时间和规模，尚未独立测量。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/karpathy/status/2119114537442189652" target="_blank" class="vitem-link">查看原文 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p>Levie 认为，领域理解、较新的代码库、多代理协作，以及低摩擦的测试和部署流程，往往与显著的产出提升一起出现。这是他的观察，并非通用评测结果。</p>
+      <div style="margin-top:12px;">
+        <a href="https://x.com/levie/status/2119111328099168409" target="_blank" class="vitem-link">查看原文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+<!-- DAILY-RENDER:podcasts:embed:深度对话:START -->
+<section class="card span-4">
+  <div class="label-sm">深度对话</div>
+  <h2>No Priors：代理交易与金融基础设施</h2>
+  <div class="text-body">No Priors 对 Robinhood CEO Vlad Tenev 的公开视频讨论代币化、Agent 交易与 Harmonic。以下仅提炼节目议题，不将嘉宾观点当作已证实的市场结论。</div>
+  <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e6;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/yULk8eNa2mg" title="No Priors：代理交易与金融基础设施" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+  </div>
+  <div class="vlist" style="margin-top:12px;">
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">Agent 交易可能改变服务形态</div><div class="vitem-desc">访谈围绕个人投资者使用 Agent 的可能性，以及交易基础设施如何承受新的自动化负载展开。</div></div></div>
+    <div class="vitem"><div class="vitem-content"><div class="vitem-title">代币化与数学研究</div><div class="vitem-desc">节目还讨论代币化资产和 Harmonic 的数学研究方向。</div></div></div>
+  </div>
+  <div style="margin-top:12px;">
+    <a href="https://www.youtube.com/watch?v=yULk8eNa2mg" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:podcasts:embed:深度对话:END -->
+<!-- DAILY-RENDER:news:rss:START -->
+<section class="card span-4">
+  <div class="label-sm">RSS 精选</div>
+  <h2>中文信源的近期更新</h2>
+  <div class="vlist-2col" style="margin-top:12px;">
+<div class="vitem">
+  <div class="vitem-title">AI前线｜11 月 8 日 AI 周报</div>
+  <div class="vitem-desc">AI前线发布新一期周报，覆盖 AI 短剧、机器人与 Agent 等话题；这里仅记录其选题，不复述未经原始来源验证的数字。</div>
+  <div class="vitem-actions">
+    <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247669290&amp;idx=1&amp;sn=01a7fefe618216059fb6f908cd092139" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div>  </div>
+  <div class="quote" style="margin-top:12px;font-size:12px;color:#8b8b8b;">
+    检查 feeds.json 四条 RSS；仅列出最新且有明确发布日期的条目，周报中的数字与说法须回到原文核对。
+  </div>
+</section>
+<!-- DAILY-RENDER:news:rss:END -->
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>从个人实验到产品使用边界</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Andrej Karpathy｜三分钟原型实验</div>
+    <div class="vitem-desc">他展示了把他人整理的频道清单做成 TristanTube 的个人实验；原帖称收录约 4.7 万条视频。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-09/karpathy-2119114537442189652-0.jpg" width="800" height="465" loading="lazy" alt="Karpathy 原帖配图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/karpathy/status/2119114537442189652" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Aaron Levie｜高产出依赖工作环境</div>
+    <div class="vitem-desc">他强调领域知识、多 Agent 协作、测试与部署条件，对代码代理的效果有明显影响。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/levie/status/2119111328099168409" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Thibault Sottiaux｜澄清 Pro 套餐额度</div>
+    <div class="vitem-desc">他表示 Pro 套餐无五小时限制；相对 Plus，Pro 100、200、500 分别给出 10、20、50 倍用量。此为其公开说明，实际条款以产品页面为准。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/thsottiaux/status/2119296267545419987" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Zara Zhang｜创业结果来自执行</div>
+    <div class="vitem-desc">她认为相同点子能有许多执行路径，创业的结果并非由想法预先决定；这是个人观点。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/zarazhangrui/status/2118968862557475298" target="_blank" class="vitem-link">查看原文 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>工具与基础设施项目上榜</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/anthropics/claude-quickstarts" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">anthropics</span><span class="gh-sep">/</span><span class="gh-name">claude-quickstarts</span>
+      </div>
+      <span class="gh-stars">⭐ 19.5k</span>
+    </div>
+    <div class="gh-body">Claude API 的可部署应用入门项目合集，展示常见集成方式。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 3.3k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/vercel-labs/agent-browser" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">vercel-labs</span><span class="gh-sep">/</span><span class="gh-name">agent-browser</span>
+      </div>
+      <span class="gh-stars">⭐ 47.7k</span>
+    </div>
+    <div class="gh-body">面向 AI Agent 的浏览器自动化命令行工具。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Rust</span>
+      <span class="gh-forks">🍴 3.3k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/google-deepmind/mujoco" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">google-deepmind</span><span class="gh-sep">/</span><span class="gh-name">mujoco</span>
+      </div>
+      <span class="gh-stars">⭐ 16.4k</span>
+    </div>
+    <div class="gh-body">通用物理模拟器，覆盖多关节动力学与接触模拟。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● C++</span>
+      <span class="gh-forks">🍴 2k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    取自 11 月 9 日 GitHub Trending 页面；星标、分叉与描述为同次 GitHub API 快照，非质量评测。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  快速原型证明工具可以缩短起步时间；长期价值还取决于内容来源、授权、测试与部署是否能持续复查。<br><strong>今日一问：</strong>你的下一次 Agent 实验，能否同时记录完成时间与验收证据？
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://x.com/karpathy/status/2119114537442189652" target="_blank">Karpathy 原帖</a>
+    <a href="https://x.com/levie/status/2119111328099168409" target="_blank">Aaron Levie 原帖</a>
+    <a href="https://x.com/thsottiaux/status/2119296267545419987" target="_blank">Thibault Sottiaux 原帖</a>
+    <a href="https://x.com/zarazhangrui/status/2118968862557475298" target="_blank">Zara Zhang 原帖</a>
+    <a href="https://www.youtube.com/watch?v=yULk8eNa2mg" target="_blank">No Priors 访谈</a>
+    <a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&amp;mid=2247669290&amp;idx=1&amp;sn=01a7fefe618216059fb6f908cd092139" target="_blank">AI前线周报</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+    <a href="https://github.com/anthropics/claude-quickstarts" target="_blank">anthropics/claude-quickstarts</a>
+    <a href="https://github.com/vercel-labs/agent-browser" target="_blank">vercel-labs/agent-browser</a>
+    <a href="https://github.com/google-deepmind/mujoco" target="_blank">google-deepmind/mujoco</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>
