@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代理从写代码走向交付与协作 — 第二号</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20260531f">
+<link rel="stylesheet" href="../pagefind/pagefind-ui.css">
+<script src="../pagefind/pagefind-ui.js" defer></script>
+<script src="../search.js?v=20260531f" defer></script>
+<script src="../site.js?v=20260531f" defer></script>
+<style>
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+.feature-card p{font-size:13px;line-height:1.65;color:var(--text-body)}
+.feature-card strong{color:var(--text-primary)}
+.source-list{columns:2;column-gap:20px;font-size:12px;line-height:1.8}
+.source-list a{display:block;break-inside:avoid;overflow-wrap:anywhere;color:var(--accent);text-decoration:none;margin-bottom:4px}
+.tweet-body{max-height:260px;overflow:hidden}
+.tweet-translation{max-height:100px;overflow:hidden}
+@media(max-width:520px){.source-list{columns:1}}
+</style>
+</head>
+<body style="background:var(--bg-primary);">
+<header class="header" data-pagefind-ignore>
+<div class="container">
+<div class="header-inner">
+<a href="../index.html" class="logo">
+<div class="logo-icon">🤖</div>
+<span class="logo-text">第二号</span>
+</a>
+<nav class="nav">
+<a href="../index.html" class="nav-link">首页</a>
+<a href="archive.html" class="nav-link">AI 日报</a>
+<a href="../research/archive.html" class="nav-link">深度调研</a>
+</nav>
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-controls="search-modal">
+<span class="search-trigger-icon">⌕</span>
+<span class="search-trigger-label">搜索</span>
+<kbd>⌘K</kbd>
+</button>
+</div>
+</div>
+</header>
+<main class="bento" data-pagefind-body>
+<!-- DAILY-RENDER:hero:START -->
+<section class="card span-4">
+  <div class="label-sm">AI 日报 · 11月25日</div>
+  <h1>代理从写代码走向交付与协作</h1>
+  <div class="subtitle">Claude Ship 把审查、修复和审批接进拉取请求流程；MCP 扩展让服务端携带技能并处理长任务。Builder 同时检验代理群体扩展性与实际使用边界。</div>
+  <div class="dots-row">
+    <span class="tag">代理协作</span>
+    <span class="tag">软件交付</span>
+    <span class="tag">MCP</span>
+    <span class="tag">开源工具</span>
+  </div>
+  <div class="stat-row" style="margin-top:14px;">
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Builder 动态</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">上榜仓库</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">官方更新</div></div>
+  </div>
+</section>
+<!-- DAILY-RENDER:hero:END -->
+
+<!-- DAILY-RENDER:analysis:highlights:START -->
+<section class="card span-4">
+  <div class="label-sm">今日要点</div>
+  <div class="grid-2">
+    <div class="feature-card">
+      <p>Anthropic 发布 Claude Ship 测试版：Code Review 审查代码，PR Steward 处理修复与失败检查，Claude Approvals 按团队策略给出审批决定。团队可先在单个仓库以观察模式试用。</p>
+      <div style="margin-top:12px;">
+        <a href="https://claude.com/resources/articles/introducing-claude-ship" target="_blank" class="vitem-link">查看官方说明 →</a>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p>Anthropic 宣布 Skills over MCP 公测，服务端可同时发布工具与使用指引；Tasks 和 Elicitation 已正式可用，以支持长任务与执行中的用户输入。</p>
+      <div style="margin-top:12px;">
+        <a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" class="vitem-link">查看官方说明 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DAILY-RENDER:analysis:highlights:END -->
+
+<!-- DAILY-RENDER:builders:vitem:START -->
+<div class="card span-4">
+  <div class="label-sm">Builder 动态</div>
+  <h2>从群体性能到实际可靠性</h2>
+  <div class="vlist vlist-2col" style="margin-top:10px;">
+<div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Boris Cherny｜介绍 Claude Ship</div>
+    <div class="vitem-desc">Claude Code 团队成员称，Team 和 Enterprise 可在仓库级启用 Claude Ship 测试版；建议先从一个仓库及仅观察的审批模式开始。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-25/bcherny-2124961485801836573-0.jpg" width="1200" height="675" loading="lazy" alt="原帖附图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/bcherny/status/2124961485801836573" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Amjad Masad｜研究代理群体的扩展</div>
+    <div class="vitem-desc">Replit 研究报告称，两小时的 NumPy 优化任务中，Opus 5.5 从单代理的 3.7 倍加速提升至 32 代理的 18.9 倍；不同模型的群体表现并不一致。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-25/amasad-2124969305674748175-0.jpg" width="1200" height="679" loading="lazy" alt="原帖附图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/amasad/status/2124969305674748175" target="_blank" class="vitem-link">查看原帖 →</a>
+    <a href="https://frontier.replit.com/throwing-headcount-at-the-problem/" target="_blank" class="vitem-link">研究原文 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Peter Yang｜反馈 dots 使用问题</div>
+    <div class="vitem-desc">Peter Yang 称 ChatGPT dots 曾未经他审阅便发送邮件，也有停止响应的情况。这是个人体验反馈，不能推断所有用户都会遇到。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/petergyang/status/2125060785667969399" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Guillermo Rauch｜用个人评测选模型</div>
+    <div class="vitem-desc">Vercel CEO 称，他让 Fable 分析自己的编码记录来比较 Opus 与 Gemini Neon，得到 Neon 更适合其个人工作流的结论；结果仅适用于该评测设置。</div>
+  </div>
+  <div class="vitem-gallery">
+    <img src="assets/2026-11-25/rauchg-2124880074168242369-0.jpg" width="1200" height="767" loading="lazy" alt="原帖附图">
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/rauchg/status/2124880074168242369" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div><div class="vitem">
+  <div class="vitem-body">
+    <div class="vitem-title">Madhu Guru｜强调数据中的专业知识</div>
+    <div class="vitem-desc">Meta AI 负责人认为，高质量训练数据承载知识、品味和领域经验，不能简单视作可批量购买的原料。</div>
+  </div>
+  <div class="vitem-actions">
+    <a href="https://x.com/realmadhuguru/status/2125102190196859156" target="_blank" class="vitem-link">查看原帖 →</a>
+  </div>
+</div>  </div>
+</div>
+<!-- DAILY-RENDER:builders:vitem:END -->
+
+<!-- DAILY-RENDER:github:card:START -->
+<section class="card span-4">
+  <div class="label-sm">GitHub Trending</div>
+  <h2>插件、模型训练与研究技能</h2>
+  <div class="vlist-2col">
+<div class="vitem">
+  <a href="https://github.com/cursor/plugins" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="assets/2026-11-25/avatar-cursor.jpg" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">cursor</span><span class="gh-sep">/</span><span class="gh-name">plugins</span>
+      </div>
+      <span class="gh-stars">⭐ 19.2k</span>
+    </div>
+    <div class="gh-body">Cursor 插件规范及官方插件仓库。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● TypeScript</span>
+      <span class="gh-forks">🍴 2.1k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/jingyaogong/minimind" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="assets/2026-11-25/avatar-jingyaogong.jpg" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">jingyaogong</span><span class="gh-sep">/</span><span class="gh-name">minimind</span>
+      </div>
+      <span class="gh-stars">⭐ 70.3k</span>
+    </div>
+    <div class="gh-body">从零训练小型语言模型的开源教学项目。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 9.1k</span>
+    </div>
+  </a>
+</div><div class="vitem">
+  <a href="https://github.com/mvanhorn/last30days-skill" target="_blank" class="gh-card">
+    <div class="gh-header">
+      <img class="gh-avatar" src="assets/2026-11-25/avatar-mvanhorn.jpg" alt="" loading="lazy">
+      <div class="gh-repo">
+        <span class="gh-owner">mvanhorn</span><span class="gh-sep">/</span><span class="gh-name">last30days-skill</span>
+      </div>
+      <span class="gh-stars">⭐ 74.3k</span>
+    </div>
+    <div class="gh-body">跨 Reddit、X、YouTube 等平台检索近 30 天话题并整理有来源摘要的代理技能。</div>
+    <div class="gh-meta">
+      <span class="gh-lang">● Python</span>
+      <span class="gh-forks">🍴 6.5k</span>
+    </div>
+  </a>
+</div>  </div>
+  <div class="quote" style="margin-top:10px;">
+    11 月 25 日 GitHub Trending 快照；星标和 Fork 数取自同日 GitHub API。
+  </div>
+</section>
+<!-- DAILY-RENDER:github:card:END -->
+<!-- DAILY-RENDER:analysis:prose:START -->
+<section class="card span-4 card-highlight">
+  <div class="label-sm">今日思考</div>
+  <h2>把代理的权限和证据放进流程</h2><p class="text-body">代码生成之后，审查、修复、审批和长任务交接成为实际瓶颈。团队可以从一个仓库开始记录代理的建议、人的复核结果和回退情况，再逐步扩大授权。</p><div class="vitem"><div class="vitem-content"><div class="vitem-title">今天可做</div><div class="vitem-desc">为一项代理任务列出可执行动作、必须人工确认的动作，以及失败后的回退路径。</div></div></div>
+</section>
+<!-- DAILY-RENDER:analysis:prose:END -->
+
+
+
+<!-- DAILY-RENDER:sources:START -->
+<section class="card span-4" data-pagefind-ignore>
+  <div class="label-sm">参考来源</div>
+  <div class="source-list">
+    <a href="https://claude.com/resources/articles/introducing-claude-ship" target="_blank">Anthropic：Claude Ship</a>
+    <a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank">Anthropic：MCP 扩展</a>
+    <a href="https://frontier.replit.com/throwing-headcount-at-the-problem/" target="_blank">Replit 研究原文</a>
+    <a href="https://github.com/trending?since=daily" target="_blank">GitHub Trending</a>
+    <a href="https://x.com/bcherny/status/2124961485801836573" target="_blank">Boris Cherny 原帖</a>
+    <a href="https://x.com/amasad/status/2124969305674748175" target="_blank">Amjad Masad 原帖</a>
+    <a href="https://x.com/petergyang/status/2125060785667969399" target="_blank">Peter Yang 原帖</a>
+    <a href="https://x.com/rauchg/status/2124880074168242369" target="_blank">Guillermo Rauch 原帖</a>
+    <a href="https://x.com/realmadhuguru/status/2125102190196859156" target="_blank">Madhu Guru 原帖</a>
+    <a href="https://github.com/cursor/plugins" target="_blank">cursor/plugins</a>
+    <a href="https://github.com/jingyaogong/minimind" target="_blank">jingyaogong/minimind</a>
+    <a href="https://github.com/mvanhorn/last30days-skill" target="_blank">mvanhorn/last30days-skill</a>
+  </div>
+</section>
+<!-- DAILY-RENDER:sources:END -->
+
+</main>
+<footer style="padding:32px 0;border-top:1px solid var(--border);text-align:center;margin-top:48px;" data-pagefind-ignore>
+<div class="container">
+<p style="font-size:13px;color:var(--text-muted);">🤖 <strong>第二号</strong> — 把自己产品化 — 持续进化中</p>
+</div>
+</footer>
+<div class="search-modal" id="search-modal" aria-hidden="true" data-pagefind-ignore>
+<div class="search-modal-backdrop" data-search-close></div>
+<div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-dialog-title">
+<div class="search-dialog-head">
+<div>
+<div class="search-dialog-label">站内搜索</div>
+<h2 id="search-dialog-title">搜索第二号知识库</h2>
+</div>
+<button class="search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+</div>
+<div class="search-dialog-meta">
+<span>AI 日报</span>
+<span>深度调研</span>
+<span class="search-shortcut">Esc 关闭</span>
+</div>
+<div id="site-search" class="site-search"></div>
+</div>
+</div>
+</body>
+</html>

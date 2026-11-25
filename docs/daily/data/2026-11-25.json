@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-25",
+  "title": "代理从写代码走向交付与协作",
+  "summary": "Claude Ship 把审查、修复和审批接进拉取请求流程；MCP 扩展让服务端携带技能并处理长任务。Builder 同时检验代理群体扩展性与实际使用边界。",
+  "heroLabel": "AI 日报 · 11月25日",
+  "tags": ["代理协作", "软件交付", "MCP", "开源工具"],
+  "stats": [{"num": 5, "label": "Builder 动态"}, {"num": 3, "label": "上榜仓库"}, {"num": 2, "label": "官方更新"}],
+  "sections": [
+    {"kind": "analysis", "layout": "highlights", "label": "今日要点", "title": "代理能力进入工作流程", "items": [
+      {"title": "Claude Ship 接管拉取请求后续工作", "summary": "Anthropic 发布 Claude Ship 测试版：Code Review 审查代码，PR Steward 处理修复与失败检查，Claude Approvals 按团队策略给出审批决定。团队可先在单个仓库以观察模式试用。", "links": [{"label": "查看官方说明 →", "url": "https://claude.com/resources/articles/introducing-claude-ship"}]},
+      {"title": "MCP 服务端开始随工具提供技能", "summary": "Anthropic 宣布 Skills over MCP 公测，服务端可同时发布工具与使用指引；Tasks 和 Elicitation 已正式可用，以支持长任务与执行中的用户输入。", "links": [{"label": "查看官方说明 →", "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"}]}
+    ]},
+    {"kind": "builders", "layout": "vitem", "label": "Builder 动态", "title": "从群体性能到实际可靠性", "footnote": "来自 follow-builders 中央 feed（11 月 24 日 06:30 UTC 更新）；观点归于原帖作者。", "items": [
+      {"title": "Boris Cherny｜介绍 Claude Ship", "summary": "Claude Code 团队成员称，Team 和 Enterprise 可在仓库级启用 Claude Ship 测试版；建议先从一个仓库及仅观察的审批模式开始。", "links": [{"label": "查看原帖 →", "url": "https://x.com/bcherny/status/2124961485801836573"}], "media": [{"src": "assets/2026-11-25/bcherny-2124961485801836573-0.jpg", "width": 1200, "height": 675, "alt": "原帖附图"}]},
+      {"title": "Amjad Masad｜研究代理群体的扩展", "summary": "Replit 研究报告称，两小时的 NumPy 优化任务中，Opus 5.5 从单代理的 3.7 倍加速提升至 32 代理的 18.9 倍；不同模型的群体表现并不一致。", "links": [{"label": "查看原帖 →", "url": "https://x.com/amasad/status/2124969305674748175"}, {"label": "研究原文 →", "url": "https://frontier.replit.com/throwing-headcount-at-the-problem/"}], "media": [{"src": "assets/2026-11-25/amasad-2124969305674748175-0.jpg", "width": 1200, "height": 679, "alt": "原帖附图"}]},
+      {"title": "Peter Yang｜反馈 dots 使用问题", "summary": "Peter Yang 称 ChatGPT dots 曾未经他审阅便发送邮件，也有停止响应的情况。这是个人体验反馈，不能推断所有用户都会遇到。", "links": [{"label": "查看原帖 →", "url": "https://x.com/petergyang/status/2125060785667969399"}]},
+      {"title": "Guillermo Rauch｜用个人评测选模型", "summary": "Vercel CEO 称，他让 Fable 分析自己的编码记录来比较 Opus 与 Gemini Neon，得到 Neon 更适合其个人工作流的结论；结果仅适用于该评测设置。", "links": [{"label": "查看原帖 →", "url": "https://x.com/rauchg/status/2124880074168242369"}], "media": [{"src": "assets/2026-11-25/rauchg-2124880074168242369-0.jpg", "width": 1200, "height": 767, "alt": "原帖附图"}]},
+      {"title": "Madhu Guru｜强调数据中的专业知识", "summary": "Meta AI 负责人认为，高质量训练数据承载知识、品味和领域经验，不能简单视作可批量购买的原料。", "links": [{"label": "查看原帖 →", "url": "https://x.com/realmadhuguru/status/2125102190196859156"}]}
+    ]},
+    {"kind": "github", "layout": "card", "label": "GitHub Trending", "title": "插件、模型训练与研究技能", "footnote": "11 月 25 日 GitHub Trending 快照；星标和 Fork 数取自同日 GitHub API。", "items": [
+      {"title": "cursor/plugins", "summary": "Cursor 插件规范及官方插件仓库。", "url": "https://github.com/cursor/plugins", "owner": "cursor", "repoName": "plugins", "stars": 19236, "forks": 2079, "language": "TypeScript", "avatar": "assets/2026-11-25/avatar-cursor.jpg"},
+      {"title": "jingyaogong/minimind", "summary": "从零训练小型语言模型的开源教学项目。", "url": "https://github.com/jingyaogong/minimind", "owner": "jingyaogong", "repoName": "minimind", "stars": 70259, "forks": 9143, "language": "Python", "avatar": "assets/2026-11-25/avatar-jingyaogong.jpg"},
+      {"title": "mvanhorn/last30days-skill", "summary": "跨 Reddit、X、YouTube 等平台检索近 30 天话题并整理有来源摘要的代理技能。", "url": "https://github.com/mvanhorn/last30days-skill", "owner": "mvanhorn", "repoName": "last30days-skill", "stars": 74258, "forks": 6545, "language": "Python", "avatar": "assets/2026-11-25/avatar-mvanhorn.jpg"}
+    ]},
+    {"kind": "analysis", "layout": "prose", "label": "今日思考", "title": "把代理的权限和证据放进流程", "intro": "<h2>把代理的权限和证据放进流程</h2><p class=\"text-body\">代码生成之后，审查、修复、审批和长任务交接成为实际瓶颈。团队可以从一个仓库开始记录代理的建议、人的复核结果和回退情况，再逐步扩大授权。</p><div class=\"vitem\"><div class=\"vitem-content\"><div class=\"vitem-title\">今天可做</div><div class=\"vitem-desc\">为一项代理任务列出可执行动作、必须人工确认的动作，以及失败后的回退路径。</div></div></div>", "items": [{"title": "今天可做", "summary": "记录代理权限、人工复核点和回退路径。"}]}
+  ],
+  "sources": [
+    {"title": "Anthropic：Claude Ship", "url": "https://claude.com/resources/articles/introducing-claude-ship"},
+    {"title": "Anthropic：MCP 扩展", "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"},
+    {"title": "Replit 研究原文", "url": "https://frontier.replit.com/throwing-headcount-at-the-problem/"},
+    {"title": "GitHub Trending", "url": "https://github.com/trending?since=daily"},
+    {"title": "Boris Cherny 原帖", "url": "https://x.com/bcherny/status/2124961485801836573"},
+    {"title": "Amjad Masad 原帖", "url": "https://x.com/amasad/status/2124969305674748175"},
+    {"title": "Peter Yang 原帖", "url": "https://x.com/petergyang/status/2125060785667969399"},
+    {"title": "Guillermo Rauch 原帖", "url": "https://x.com/rauchg/status/2124880074168242369"},
+    {"title": "Madhu Guru 原帖", "url": "https://x.com/realmadhuguru/status/2125102190196859156"},
+    {"title": "cursor/plugins", "url": "https://github.com/cursor/plugins"},
+    {"title": "jingyaogong/minimind", "url": "https://github.com/jingyaogong/minimind"},
+    {"title": "mvanhorn/last30days-skill", "url": "https://github.com/mvanhorn/last30days-skill"}
+  ]
+}
